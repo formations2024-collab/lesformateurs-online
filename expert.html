@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Espace Expert - lesformateurs.online</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<style>
+.dash-layout{display:flex;min-height:calc(100vh - 64px);}
+.sidebar{width:240px;background:#0f3460;color:#fff;padding:24px 0;flex-shrink:0;}
+.sidebar a{display:block;padding:10px 24px;font-size:13px;color:rgba(255,255,255,.7);transition:all .2s;cursor:pointer;}
+.sidebar a:hover,.sidebar a.active{background:rgba(255,255,255,.08);color:#fff;}
+.sidebar .sidebar-title{padding:10px 24px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:16px;}
+.sidebar .user-info{padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:8px;}
+.sidebar .user-info .name{font-size:14px;font-weight:700;color:#fff;}
+.sidebar .user-info .role{font-size:11px;color:rgba(255,255,255,.5);}
+.main-content{flex:1;padding:32px;background:var(--light);overflow-y:auto;}
+
+.mobile-nav{display:none;overflow-x:auto;white-space:nowrap;background:#0f3460;padding:8px 12px;gap:6px;}
+.mobile-nav a{display:inline-block;padding:8px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:rgba(255,255,255,.08);border-radius:20px;cursor:pointer;white-space:nowrap;}
+.mobile-nav a.active{background:var(--accent);color:#fff;}
+
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+.dossier-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;transition:all .2s;}
+.dossier-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.dossier-card h4{font-size:14px;font-weight:700;margin-bottom:4px;}
+.dossier-card p{font-size:12px;color:var(--muted);}
+
+.doc-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--light);border-radius:8px;margin-bottom:6px;font-size:13px;}
+.doc-item .doc-name{font-weight:600;}
+.doc-item .doc-status{font-size:11px;}
+
+.status-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;}
+.status-new{background:rgba(233,69,96,.1);color:var(--accent);}
+.status-progress{background:rgba(200,169,110,.15);color:#b8860b;}
+.status-done{background:rgba(16,185,129,.1);color:var(--success);}
+.status-review{background:rgba(99,102,241,.1);color:#6366f1;}
+
+.action-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.action-btn{padding:5px 12px;border-radius:6px;font-size:11px;font-weight:600;border:1px solid var(--border);background:#fff;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;}
+.action-btn:hover{border-color:var(--accent);color:var(--accent);}
+.action-btn.validate{background:var(--success);color:#fff;border-color:var(--success);}
+.action-btn.validate:hover{opacity:.9;}
+.action-btn.reject{background:var(--accent);color:#fff;border-color:var(--accent);}
+.action-btn.reject:hover{opacity:.9;}
+
+.detail-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:12px;}
+.detail-tag{padding:3px 8px;background:var(--light);border-radius:6px;font-size:11px;}
+
+.progress-bar{width:100%;height:8px;background:var(--border);border-radius:4px;margin-top:8px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:4px;}
+
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:24px;}
+.stat-card{background:#fff;border-radius:10px;padding:16px;border:1px solid var(--border);cursor:pointer;transition:all .2s;}
+.stat-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.stat-card .stat-value{font-size:24px;font-weight:900;color:var(--primary);margin-bottom:2px;}
+.stat-card .stat-label{font-size:11px;color:var(--muted);}
+
+.comment-box{margin-top:10px;display:none;}
+.comment-box textarea{width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:'Inter',sans-serif;resize:vertical;min-height:60px;}
+.comment-box button{margin-top:6px;}
+
+@media(max-width:768px){
+  .sidebar{display:none;}
+  .mobile-nav{display:flex;}
+  .main-content{padding:16px;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="nav-links">
+    <a href="expert.html" style="color:#fff;background:rgba(255,255,255,.1);">👨‍💼 Expert</a>
+    <a href="index.html" class="nav-cta">Retour au site</a>
+  </div>
+</nav>
+
+<div class="mobile-nav">
+  <a class="active" onclick="showTab('dashboard')">📊 Résumé</a>
+  <a onclick="showTab('conformites')">📄 Conformités</a>
+  <a onclick="showTab('creations')">🏛 Créations OF</a>
+  <a onclick="showTab('historique')">✅ Historique</a>
+  <a onclick="showTab('parrainage')">🎁 Parrainage</a>
+</div>
+
+<div class="dash-layout">
+  <div class="sidebar">
+    <div class="user-info">
+      <div class="name">Maître Dupont</div>
+      <div class="role">Expert conformité</div>
+    </div>
+    <div class="sidebar-title">Vérifications</div>
+    <a class="active" onclick="showTab('dashboard')">📊 Résumé</a>
+    <a onclick="showTab('conformites')">📄 Conformités à vérifier</a>
+    <a onclick="showTab('creations')">🏛 Créations OF à vérifier</a>
+    <a onclick="showTab('historique')">✅ Historique validations</a>
+    <div class="sidebar-title" style="margin-top:24px;">Revenus</div>
+    <a onclick="showTab('parrainage')">🎁 Parrainage (10%)</a>
+    <div class="sidebar-title" style="margin-top:12px;">Compte</div>
+    <a onclick="showTab('profil')">👤 Mon profil</a>
+    <a href="index.html">🚪 Déconnexion</a>
+  </div>
+
+  <div class="main-content">
+
+    <!-- ========== DASHBOARD ========== -->
+    <div class="tab-content active" id="tab-dashboard">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">Bonjour Maître Dupont 👋</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Voici les dossiers en attente de votre vérification.</p>
+      <div class="stat-grid">
+        <div class="stat-card" onclick="showTab('conformites')">
+          <div class="stat-value" style="color:var(--accent);">7</div>
+          <div class="stat-label">Conformités à vérifier</div>
+        </div>
+        <div class="stat-card" onclick="showTab('creations')">
+          <div class="stat-value" style="color:var(--accent);">3</div>
+          <div class="stat-label">Créations OF à vérifier</div>
+        </div>
+        <div class="stat-card" onclick="showTab('historique')">
+          <div class="stat-value" style="color:var(--success);">42</div>
+          <div class="stat-label">Dossiers validés (total)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">98%</div>
+          <div class="stat-label">Taux de conformité</div>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">🔔 Dossiers urgents</h3>
+      <div class="dossier-card" style="border-left:3px solid var(--accent);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Sophie Martin — Qualiopi</h4>
+            <p>Documents reçus il y a 3 jours · En attente de vérification</p>
+          </div>
+          <span class="status-badge status-review">🔍 À vérifier</span>
+        </div>
+        <div class="action-btns">
+          <button class="action-btn" onclick="showTab('conformites')">📄 Ouvrir le dossier</button>
+        </div>
+      </div>
+      <div class="dossier-card" style="border-left:3px solid var(--accent);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Ahmed Benali — Création OF (Action de formation)</h4>
+            <p>Statuts rédigés, KBIS en cours · Documents à vérifier</p>
+          </div>
+          <span class="status-badge status-review">🔍 À vérifier</span>
+        </div>
+        <div class="action-btns">
+          <button class="action-btn" onclick="showTab('creations')">🏛 Ouvrir le dossier</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== CONFORMITÉS ========== -->
+    <div class="tab-content" id="tab-conformites">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">📄 Conformités à vérifier (7)</h2>
+
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+        <button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);">Tous (7)</button>
+        <button class="action-btn">NDA (2)</button>
+        <button class="action-btn">Qualiopi (1)</button>
+        <button class="action-btn">EDOF (1)</button>
+        <button class="action-btn">RS/RNCP (1)</button>
+        <button class="action-btn">OPCO (1)</button>
+        <button class="action-btn">France Travail (1)</button>
+      </div>
+
+      <!-- Dossier 1 : Qualiopi -->
+      <div class="dossier-card" id="dossier-1">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Sophie Martin — ✦ Qualiopi</h4>
+            <p>📧 sophie@monof.fr · Commandé le 18/03/2026 · 490€</p>
+          </div>
+          <span class="status-badge status-review">🔍 À vérifier</span>
+        </div>
+        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:40%;background:#6366f1;"></div></div>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Étape 2/5 : Vérification des documents par un expert (vous)</p>
+
+        <h5 style="font-size:13px;font-weight:700;margin:12px 0 8px;">📎 Documents du dossier :</h5>
+        <div class="doc-item">
+          <div>
+            <span class="doc-name">📄 KBIS.pdf</span>
+            <span style="font-size:11px;color:var(--muted);margin-left:8px;">Téléchargé le 18/03</span>
+          </div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn" onclick="alert('Aperçu KBIS.pdf')">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div>
+            <span class="doc-name">📄 Manuel_qualite.pdf</span>
+            <span style="font-size:11px;color:var(--muted);margin-left:8px;">Téléchargé le 18/03</span>
+          </div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn" onclick="alert('Aperçu Manuel_qualite.pdf')">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div>
+            <span class="doc-name">⏳ Processus_RH.pdf</span>
+            <span style="font-size:11px;color:var(--accent);margin-left:8px;">Non reçu</span>
+          </div>
+          <div><button class="action-btn" onclick="alert('Relance envoyée au client')">💬 Relancer</button></div>
+        </div>
+        <div class="doc-item">
+          <div>
+            <span class="doc-name">📄 CGV_formation.pdf</span>
+            <span style="font-size:11px;color:var(--muted);margin-left:8px;">Téléchargé le 19/03</span>
+          </div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn" onclick="alert('Aperçu CGV_formation.pdf')">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div>
+            <span class="doc-name">📄 Livret_accueil.pdf</span>
+            <span style="font-size:11px;color:var(--muted);margin-left:8px;">Téléchargé le 19/03</span>
+          </div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn" onclick="alert('Aperçu Livret_accueil.pdf')">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+
+        <div class="comment-box" id="comment-1">
+          <textarea placeholder="Ajoutez un commentaire pour le client ou l'admin..."></textarea>
+          <button class="action-btn">💬 Envoyer le commentaire</button>
+        </div>
+
+        <div class="action-btns" style="margin-top:12px;">
+          <button class="action-btn validate" onclick="validerDossier(1)">✅ Valider le dossier — Passer à l'étape 3</button>
+          <button class="action-btn reject" onclick="refuserDossier(1)">❌ Refuser — Demander corrections</button>
+          <button class="action-btn" onclick="document.getElementById('comment-1').style.display='block'">💬 Commenter</button>
+        </div>
+      </div>
+
+      <!-- Dossier 2 : NDA -->
+      <div class="dossier-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Marie Leroy — NDA</h4>
+            <p>📧 marie@leroy.fr · Commandé le 16/03/2026 · 199€</p>
+          </div>
+          <span class="status-badge status-review">🔍 À vérifier</span>
+        </div>
+        <h5 style="font-size:13px;font-weight:700;margin:12px 0 8px;">📎 Documents :</h5>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Convention_formation.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Programme_pedagogique.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Casier_judiciaire_B3.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 SIREN.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Piece_identite.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="action-btns" style="margin-top:12px;">
+          <button class="action-btn validate">✅ Valider — Conforme</button>
+          <button class="action-btn reject">❌ Refuser — Corrections nécessaires</button>
+          <button class="action-btn">💬 Commenter</button>
+        </div>
+      </div>
+
+      <!-- Dossier 3 : EDOF -->
+      <div class="dossier-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Karim Hadj — EDOF</h4>
+            <p>📧 karim@hadj.fr · Commandé le 17/03/2026 · 290€</p>
+          </div>
+          <span class="status-badge status-review">🔍 À vérifier</span>
+        </div>
+        <h5 style="font-size:13px;font-weight:700;margin:12px 0 8px;">📎 Documents :</h5>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Certificat_Qualiopi.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Fiches_formation_x3.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="action-btns" style="margin-top:12px;">
+          <button class="action-btn validate">✅ Valider</button>
+          <button class="action-btn reject">❌ Refuser</button>
+          <button class="action-btn">💬 Commenter</button>
+        </div>
+      </div>
+
+      <!-- Dossier 4 : RS/RNCP -->
+      <div class="dossier-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Paul Bernard — RS/RNCP</h4>
+            <p>📧 paul@bernard.com · Commandé le 15/03/2026 · 390€</p>
+          </div>
+          <span class="status-badge status-review">🔍 À vérifier</span>
+        </div>
+        <h5 style="font-size:13px;font-weight:700;margin:12px 0 8px;">📎 Documents :</h5>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Referentiel_competences.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Dossier_depot_RNCP.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="action-btns" style="margin-top:12px;">
+          <button class="action-btn validate">✅ Valider</button>
+          <button class="action-btn reject">❌ Refuser</button>
+          <button class="action-btn">💬 Commenter</button>
+        </div>
+      </div>
+
+      <!-- NDA 2 -->
+      <div class="dossier-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Fatima El Amrani — NDA</h4>
+            <p>📧 fatima@elamrani.fr · Commandé le 19/03/2026 · 199€</p>
+          </div>
+          <span class="status-badge status-new">🆕 Nouveau</span>
+        </div>
+        <h5 style="font-size:13px;font-weight:700;margin:12px 0 8px;">📎 Documents :</h5>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Convention_formation.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Programme_pedagogique.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">⏳ Casier_judiciaire</span> <span style="font-size:11px;color:var(--accent);">Non reçu</span></div>
+          <div><button class="action-btn">💬 Relancer</button></div>
+        </div>
+        <div class="action-btns" style="margin-top:12px;">
+          <button class="action-btn validate">✅ Valider</button>
+          <button class="action-btn reject">❌ Refuser</button>
+          <button class="action-btn">💬 Commenter</button>
+        </div>
+      </div>
+
+      <!-- OPCO -->
+      <div class="dossier-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Thomas Roux — OPCO (5 OPCO)</h4>
+            <p>📧 thomas@email.fr · Commandé le 18/03/2026 · 1 995€</p>
+          </div>
+          <span class="status-badge status-review">🔍 À vérifier</span>
+        </div>
+        <div class="detail-meta" style="margin:8px 0;">
+          <span class="detail-tag">AKTO</span><span class="detail-tag">ATLAS</span><span class="detail-tag">OPCO EP</span><span class="detail-tag">OPCO 2i</span><span class="detail-tag">CONSTRUCTYS</span>
+        </div>
+        <h5 style="font-size:13px;font-weight:700;margin:8px 0;">📎 Documents :</h5>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Dossier_AKTO.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Dossier_ATLAS.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Dossier_OPCO_EP.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="action-btns" style="margin-top:12px;">
+          <button class="action-btn validate">✅ Valider tous les dossiers OPCO</button>
+          <button class="action-btn reject">❌ Refuser</button>
+          <button class="action-btn">💬 Commenter</button>
+        </div>
+      </div>
+
+      <!-- France Travail -->
+      <div class="dossier-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Julie Lambert — France Travail</h4>
+            <p>📧 julie@email.fr · Commandé le 17/03/2026 · 129€</p>
+          </div>
+          <span class="status-badge status-review">🔍 À vérifier</span>
+        </div>
+        <h5 style="font-size:13px;font-weight:700;margin:12px 0 8px;">📎 Documents :</h5>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Catalogue_formations.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Dossier_reference_FT.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="action-btns" style="margin-top:12px;">
+          <button class="action-btn validate">✅ Valider</button>
+          <button class="action-btn reject">❌ Refuser</button>
+          <button class="action-btn">💬 Commenter</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== CRÉATIONS OF ========== -->
+    <div class="tab-content" id="tab-creations">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🏛 Créations d'OF à vérifier (3)</h2>
+
+      <div class="dossier-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Ahmed Benali — Action de formation</h4>
+            <p>📧 ahmed@benali.com · 1 480€ · Options : Qualiopi, EDOF</p>
+          </div>
+          <span class="status-badge status-review">🔍 À vérifier</span>
+        </div>
+        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:40%;background:#6366f1;"></div></div>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Étape 2/5 : Vérification des statuts et documents constitutifs</p>
+
+        <h5 style="font-size:13px;font-weight:700;margin:12px 0 8px;">📎 Documents constitutifs :</h5>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Statuts_societe.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Piece_identite_gerant.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Justificatif_domicile.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Declaration_beneficiaires.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="action-btns" style="margin-top:12px;">
+          <button class="action-btn validate">✅ Conforme — Passer à l'étape 3 (Greffe)</button>
+          <button class="action-btn reject">❌ Non conforme — Corrections nécessaires</button>
+          <button class="action-btn">💬 Commenter</button>
+        </div>
+      </div>
+
+      <div class="dossier-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Lucie Fontaine — CFA</h4>
+            <p>📧 lucie@fontaine.fr · 3 490€ · Options : Qualiopi</p>
+          </div>
+          <span class="status-badge status-new">🆕 Nouveau</span>
+        </div>
+        <h5 style="font-size:13px;font-weight:700;margin:12px 0 8px;">📎 Documents :</h5>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Projet_pedagogique_CFA.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Convention_OPCO.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">⏳ Habilitation_RNCP</span> <span style="font-size:11px;color:var(--accent);">Non reçu</span></div>
+          <div><button class="action-btn">💬 Relancer</button></div>
+        </div>
+        <div class="action-btns" style="margin-top:12px;">
+          <button class="action-btn validate">✅ Conforme</button>
+          <button class="action-btn reject">❌ Non conforme</button>
+          <button class="action-btn">💬 Commenter</button>
+        </div>
+      </div>
+
+      <div class="dossier-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Emma Petit — VAE</h4>
+            <p>📧 emma@email.fr · 990€</p>
+          </div>
+          <span class="status-badge status-review">🔍 À vérifier</span>
+        </div>
+        <h5 style="font-size:13px;font-weight:700;margin:12px 0 8px;">📎 Documents :</h5>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Statuts_societe.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div><span class="doc-name">📄 Piece_identite.pdf</span></div>
+          <div style="display:flex;gap:4px;">
+            <button class="action-btn">👁 Voir</button>
+            <button class="action-btn validate" onclick="markDoc(this,'ok')">✅</button>
+            <button class="action-btn reject" onclick="markDoc(this,'ko')">❌</button>
+          </div>
+        </div>
+        <div class="action-btns" style="margin-top:12px;">
+          <button class="action-btn validate">✅ Conforme</button>
+          <button class="action-btn reject">❌ Non conforme</button>
+          <button class="action-btn">💬 Commenter</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== HISTORIQUE ========== -->
+    <div class="tab-content" id="tab-historique">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">✅ Historique des validations (42)</h2>
+
+      <div class="dossier-card" style="border-left:3px solid var(--success);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Jean Dupont — NDA</h4>
+            <p>Validé le 17/03/2026 · NDA obtenu : 11 22 33 44 55</p>
+          </div>
+          <span class="status-badge status-done">✅ Validé</span>
+        </div>
+      </div>
+
+      <div class="dossier-card" style="border-left:3px solid var(--success);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Claire Moreau — BPF</h4>
+            <p>Validé le 15/03/2026 · BPF déposé avec succès</p>
+          </div>
+          <span class="status-badge status-done">✅ Validé</span>
+        </div>
+      </div>
+
+      <div class="dossier-card" style="border-left:3px solid var(--success);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Marc Girard — Création OF (Bilan)</h4>
+            <p>Validé le 14/03/2026 · OF opérationnel</p>
+          </div>
+          <span class="status-badge status-done">✅ Validé</span>
+        </div>
+      </div>
+
+      <div class="dossier-card" style="border-left:3px solid var(--accent);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Laura Sanchez — EDOF</h4>
+            <p>Refusé le 13/03/2026 · Motif : Qualiopi non valide</p>
+          </div>
+          <span class="status-badge status-new">❌ Refusé</span>
+        </div>
+      </div>
+
+      <div class="dossier-card" style="border-left:3px solid var(--success);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Sophie Martin — EDOF</h4>
+            <p>Validé le 12/03/2026 · Formations en ligne sur EDOF</p>
+          </div>
+          <span class="status-badge status-done">✅ Validé</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== PARRAINAGE ========== -->
+    <div class="tab-content" id="tab-parrainage">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">🎁 Programme de parrainage</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Partagez vos liens et gagnez <strong style="color:var(--accent);">10% de commission</strong> sur chaque vente.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:32px;">
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-size:24px;font-weight:900;color:var(--success);">1 230€</div>
+          <div style="font-size:11px;color:var(--muted);">Gains totaux</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-size:24px;font-weight:900;color:var(--accent);">299€</div>
+          <div style="font-size:11px;color:var(--muted);">En attente</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-size:24px;font-weight:900;color:var(--primary);">18</div>
+          <div style="font-size:11px;color:var(--muted);">Filleuls convertis</div>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#0f3460,var(--primary));border-radius:12px;padding:24px;color:#fff;margin-bottom:24px;">
+        <h3 style="font-size:16px;font-weight:800;margin-bottom:8px;">💰 10% sur chaque vente via votre lien</h3>
+        <p style="font-size:13px;color:rgba(255,255,255,.8);">En tant qu'expert, recommandez nos services à vos clients. Vous touchez 10% sur chaque paiement effectué via votre lien personnalisé.</p>
+      </div>
+
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">🔗 Vos liens</h3>
+
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div><strong style="font-size:13px;">NDA — 199€</strong> <span style="color:var(--success);font-size:12px;font-weight:700;">→ 19,90€</span></div>
+        <div style="display:flex;gap:6px;align-items:center;"><input type="text" readonly value="https://lesformateurs.online/r/EXP01?p=nda" style="font-size:11px;padding:5px 8px;border:1px solid var(--border);border-radius:4px;width:260px;"><button class="action-btn" onclick="this.previousElementSibling.select();document.execCommand('copy');this.textContent='✅';setTimeout(()=>this.textContent='📋',1500)">📋</button></div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div><strong style="font-size:13px;">Qualiopi — 490€</strong> <span style="color:var(--success);font-size:12px;font-weight:700;">→ 49€</span></div>
+        <div style="display:flex;gap:6px;align-items:center;"><input type="text" readonly value="https://lesformateurs.online/r/EXP01?p=qualiopi" style="font-size:11px;padding:5px 8px;border:1px solid var(--border);border-radius:4px;width:260px;"><button class="action-btn" onclick="this.previousElementSibling.select();document.execCommand('copy');this.textContent='✅';setTimeout(()=>this.textContent='📋',1500)">📋</button></div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div><strong style="font-size:13px;">OF Action — 990€</strong> <span style="color:var(--success);font-size:12px;font-weight:700;">→ 99€</span></div>
+        <div style="display:flex;gap:6px;align-items:center;"><input type="text" readonly value="https://lesformateurs.online/r/EXP01?p=of-action" style="font-size:11px;padding:5px 8px;border:1px solid var(--border);border-radius:4px;width:260px;"><button class="action-btn" onclick="this.previousElementSibling.select();document.execCommand('copy');this.textContent='✅';setTimeout(()=>this.textContent='📋',1500)">📋</button></div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div><strong style="font-size:13px;">CFA — 2 990€</strong> <span style="color:var(--success);font-size:12px;font-weight:700;">→ 299€</span></div>
+        <div style="display:flex;gap:6px;align-items:center;"><input type="text" readonly value="https://lesformateurs.online/r/EXP01?p=of-cfa" style="font-size:11px;padding:5px 8px;border:1px solid var(--border);border-radius:4px;width:260px;"><button class="action-btn" onclick="this.previousElementSibling.select();document.execCommand('copy');this.textContent='✅';setTimeout(()=>this.textContent='📋',1500)">📋</button></div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div><strong style="font-size:13px;">Formation — 1 490€</strong> <span style="color:var(--success);font-size:12px;font-weight:700;">→ 149€</span></div>
+        <div style="display:flex;gap:6px;align-items:center;"><input type="text" readonly value="https://lesformateurs.online/r/EXP01?p=formation" style="font-size:11px;padding:5px 8px;border:1px solid var(--border);border-radius:4px;width:260px;"><button class="action-btn" onclick="this.previousElementSibling.select();document.execCommand('copy');this.textContent='✅';setTimeout(()=>this.textContent='📋',1500)">📋</button></div>
+      </div>
+
+      <p style="font-size:12px;color:var(--muted);margin-top:16px;text-align:center;">Tous les produits sont disponibles en parrainage. <a href="#" style="color:var(--accent);">Voir la liste complète →</a></p>
+    </div>
+
+    <!-- ========== PROFIL ========== -->
+    <div class="tab-content" id="tab-profil">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">👤 Mon profil expert</h2>
+      <div style="max-width:500px;">
+        <div class="form-group"><label>Nom complet</label><input type="text" value="Maître Jean-Pierre Dupont"></div>
+        <div class="form-group"><label>Email</label><input type="email" value="jp.dupont@cabinet-expert.fr"></div>
+        <div class="form-group"><label>Téléphone</label><input type="tel" value="01 23 45 67 89"></div>
+        <div class="form-group"><label>Spécialité</label>
+          <select>
+            <option selected>Conformité OF — Toutes démarches</option>
+            <option>Qualiopi uniquement</option>
+            <option>Création d'OF uniquement</option>
+          </select>
+        </div>
+        <button class="btn btn-primary">Enregistrer</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showTab(name){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.sidebar a, .mobile-nav a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.querySelectorAll('.sidebar a, .mobile-nav a').forEach(a=>{
+    if(a.getAttribute('onclick') && a.getAttribute('onclick').includes("'"+name+"'")) a.classList.add('active');
+  });
+  window.scrollTo(0,0);
+}
+
+function markDoc(btn, status){
+  var item = btn.closest('.doc-item');
+  if(status === 'ok'){
+    item.style.background = 'rgba(16,185,129,.08)';
+    item.style.borderColor = 'var(--success)';
+  } else {
+    item.style.background = 'rgba(233,69,96,.08)';
+    item.style.borderColor = 'var(--accent)';
+  }
+}
+
+function validerDossier(id){
+  if(confirm('Confirmer la validation de ce dossier ? Le client sera notifié et le dossier passera à l\'étape suivante.')){
+    alert('✅ Dossier validé ! Le client a été notifié.');
+  }
+}
+
+function refuserDossier(id){
+  var motif = prompt('Motif du refus (sera envoyé au client) :');
+  if(motif){
+    alert('❌ Dossier refusé. Le client a été notifié avec le motif : "' + motif + '"');
+  }
+}
+</script>
+</body>
+</html>

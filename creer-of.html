@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Créer mon OF - lesformateurs.online</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<style>
+.of-type-card{
+  background:#fff;border:2px solid var(--border);border-radius:12px;
+  padding:24px;cursor:pointer;transition:all .2s;text-align:center;
+}
+.of-type-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.of-type-card.selected{border-color:var(--accent);background:rgba(233,69,96,.03);}
+.of-type-card h4{font-size:16px;font-weight:700;margin:12px 0 6px;}
+.of-type-card p{font-size:12px;color:var(--muted);margin-bottom:12px;}
+.of-type-card .type-price{font-size:24px;font-weight:900;color:var(--accent);}
+.of-type-card .type-emoji{font-size:32px;display:block;margin-bottom:8px;}
+
+.option-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 16px;background:#fff;border:1px solid var(--border);border-radius:8px;
+  margin-bottom:8px;cursor:pointer;transition:all .2s;
+}
+.option-item:hover{border-color:var(--accent);}
+.option-item.checked{border-color:var(--accent);background:rgba(233,69,96,.03);}
+.option-item input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px;}
+.option-left h4{font-size:14px;font-weight:600;margin-bottom:2px;}
+.option-left p{font-size:12px;color:var(--muted);}
+.option-price{font-size:16px;font-weight:800;color:var(--accent);white-space:nowrap;}
+
+.total-bar{
+  background:var(--primary);border-radius:12px;padding:24px;color:#fff;
+  display:flex;justify-content:space-between;align-items:center;margin-top:32px;
+  flex-wrap:wrap;gap:16px;
+}
+.total-bar .total-label{font-size:14px;color:rgba(255,255,255,.6);}
+.total-bar .total-amount{font-size:32px;font-weight:900;color:var(--accent);}
+
+.payment-options{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+.payment-option{
+  flex:1;min-width:140px;padding:14px;border:2px solid var(--border);border-radius:8px;
+  text-align:center;cursor:pointer;transition:all .2s;background:#fff;
+}
+.payment-option:hover,.payment-option.selected{border-color:var(--accent);}
+.payment-option h5{font-size:14px;font-weight:700;margin-bottom:4px;}
+.payment-option p{font-size:11px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="nav-links" id="navLinks">
+    <a href="missions.html">Missions</a>
+    <a href="conformite.html">Conformité</a>
+    <a href="creer-of.html" style="color:#fff;background:rgba(255,255,255,.1);">Créer mon OF</a>
+    <a href="se-former.html">Se former</a>
+    <a href="missions.html" class="nav-cta">Connexion</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <h1>Créez votre organisme de formation</h1>
+  <p>De A à Z, à partir de 990€. On s'occupe de tout — vous fournissez les documents, on fait le reste.</p>
+</div>
+
+<div class="trust-bar">
+  <div class="trust-item">⚡ Le plus rapide du marché</div>
+  <div class="trust-item">🔓 Capacité à débloquer toute situation</div>
+  <div class="trust-item">🤖 IA + expert dédié sur chaque dossier</div>
+</div>
+
+<!-- ETAPE 1 : TYPE D'OF -->
+<section>
+  <div class="container">
+    <span class="section-label">Étape 1</span>
+    <h2 class="section-title">Choisissez le type d'organisme</h2>
+    <p class="section-sub">Sélectionnez le type de centre que vous souhaitez créer.</p>
+
+    <div class="grid-3" id="typeGrid">
+      <div class="of-type-card" onclick="selectType(this,'action',990)">
+        <span class="type-emoji">📚</span>
+        <h4>Action de formation</h4>
+        <p>OF classique : vente de formations à des entreprises ou particuliers.</p>
+        <div class="type-price">990€</div>
+      </div>
+      <div class="of-type-card" onclick="selectType(this,'cfa',2990)">
+        <span class="type-emoji">🎓</span>
+        <h4>CFA (Apprentissage)</h4>
+        <p>Centre de formation d'apprentis — contrats d'apprentissage.</p>
+        <div class="type-price">2 990€</div>
+      </div>
+      <div class="of-type-card" onclick="selectType(this,'bilan',990)">
+        <span class="type-emoji">📋</span>
+        <h4>Bilan de compétences</h4>
+        <p>Accompagnement des salariés dans leur évolution professionnelle.</p>
+        <div class="type-price">990€</div>
+      </div>
+      <div class="of-type-card" onclick="selectType(this,'vae',990)">
+        <span class="type-emoji">🏆</span>
+        <h4>VAE</h4>
+        <p>Validation des acquis de l'expérience — accompagnement candidats.</p>
+        <div class="type-price">990€</div>
+      </div>
+      <div class="of-type-card" onclick="selectType(this,'elus',1490)">
+        <span class="type-emoji">🏛</span>
+        <h4>Formation des élus</h4>
+        <p>Formation des élus locaux — cadre réglementaire spécifique.</p>
+        <div class="type-price">1 490€</div>
+      </div>
+      <div class="of-type-card" onclick="selectType(this,'agent',2790)">
+        <span class="type-emoji">🤖</span>
+        <h4>OF géré par agents IA</h4>
+        <p>Centre entièrement piloté par des agents IA : docs, clients, gestion.</p>
+        <div class="type-price">2 790€</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ETAPE 2 : CABIS -->
+<section class="bg-light" id="step2" style="display:none;">
+  <div class="container">
+    <span class="section-label">Étape 2</span>
+    <h2 class="section-title">Avez-vous déjà votre KBIS ?</h2>
+    <p class="section-sub">Si vous avez déjà immatriculé votre société, vous bénéficiez d'une réduction de 100€.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+      <div class="payment-option" id="kbis-oui" onclick="selectKbis(true)">
+        <h5>✅ Oui, j'ai mon KBIS</h5>
+        <p>Réduction de 100€ appliquée</p>
+      </div>
+      <div class="payment-option selected" id="kbis-non" onclick="selectKbis(false)">
+        <h5>📝 Non, je n'ai pas encore de KBIS</h5>
+        <p>Nous créons votre société (inclus dans le prix)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ETAPE 3 : OPTIONS -->
+<section id="step3" style="display:none;">
+  <div class="container">
+    <span class="section-label">Étape 3</span>
+    <h2 class="section-title">Options supplémentaires</h2>
+    <p class="section-sub">Personnalisez votre offre avec des services additionnels.</p>
+
+    <div class="option-item" onclick="toggleOption(this,'qualiopi',490)">
+      <div class="option-left">
+        <h4>Préparation Qualiopi</h4>
+        <p>Accompagnement complet pour obtenir la certification qualité.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="option-price">+490€</span>
+        <input type="checkbox">
+      </div>
+    </div>
+
+    <div class="option-item" onclick="toggleOption(this,'agents',500)">
+      <div class="option-left">
+        <h4>Pack Agents IA — Gestion du centre</h4>
+        <p>Agents IA pour gérer vos documents, recherche clients, facturation.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="option-price">+500€</span>
+        <input type="checkbox">
+      </div>
+    </div>
+
+    <div class="option-item" onclick="toggleOption(this,'edof',290)">
+      <div class="option-left">
+        <h4>Inscription EDOF / CPF</h4>
+        <p>Mise en ligne de vos formations sur Mon Compte Formation.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="option-price">+290€</span>
+        <input type="checkbox">
+      </div>
+    </div>
+
+    <div class="option-item" onclick="toggleOption(this,'domiciliation',200)">
+      <div class="option-left">
+        <h4>Domiciliation spécialisée formation</h4>
+        <p>Adresse dans un centre spécialisé — assistance en cas de contrôle.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="option-price">+200€/an</span>
+        <input type="checkbox">
+      </div>
+    </div>
+
+    <div class="option-item" onclick="toggleOption(this,'opco_pack',2990)">
+      <div class="option-left">
+        <h4>Connexion aux 11 OPCO — Pack complet</h4>
+        <p>Référencement auprès des 11 OPCO. Prix unitaire : 399€/OPCO.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="option-price">+2 990€</span>
+        <input type="checkbox">
+      </div>
+    </div>
+
+    <div class="option-item" onclick="toggleOption(this,'site',390)">
+      <div class="option-left">
+        <h4>Site web vitrine pour votre OF</h4>
+        <p>Site professionnel clé en main pour présenter vos formations.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="option-price">+390€</span>
+        <input type="checkbox">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ETAPE 4 : COORDONNÉES + PAIEMENT -->
+<section class="bg-light" id="step4" style="display:none;">
+  <div class="container">
+    <span class="section-label">Étape 4</span>
+    <h2 class="section-title">Vos coordonnées</h2>
+
+    <div style="max-width:500px;">
+      <div class="form-group"><label>Prénom et nom</label><input type="text" placeholder="Sophie Martin"></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="sophie@monof.fr"></div>
+      <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="06 12 34 56 78"></div>
+      <div class="form-group"><label>Adresse</label><input type="text" placeholder="12 rue de la Formation, 75001 Paris"></div>
+    </div>
+
+    <div class="total-bar">
+      <div>
+        <div class="total-label">Total à payer</div>
+        <div class="total-amount" id="totalDisplay">990€</div>
+      </div>
+      <div>
+        <p style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:12px;">Choisissez votre mode de paiement :</p>
+        <div class="payment-options">
+          <div class="payment-option selected" onclick="selectPayment(this,1)" style="background:var(--primary);border-color:rgba(255,255,255,.2);color:#fff;">
+            <h5 style="color:#fff;">En 1 fois</h5>
+            <p style="color:rgba(255,255,255,.5);" id="pay1x">990€</p>
+          </div>
+          <div class="payment-option" onclick="selectPayment(this,2)" style="background:var(--primary);border-color:rgba(255,255,255,.2);color:#fff;">
+            <h5 style="color:#fff;">En 2 fois</h5>
+            <p style="color:rgba(255,255,255,.5);" id="pay2x">495€ x2</p>
+          </div>
+          <div class="payment-option" onclick="selectPayment(this,3)" style="background:var(--primary);border-color:rgba(255,255,255,.2);color:#fff;">
+            <h5 style="color:#fff;">En 3 fois</h5>
+            <p style="color:rgba(255,255,255,.5);" id="pay3x">330€ x3</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:24px;">
+      <button class="btn btn-primary btn-lg" onclick="payerCreation()">Payer et créer mon OF →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">lesformateurs.online</div><div>La plateforme des professionnels de la formation</div></div>
+    <div class="footer-links">
+      <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
+      <a href="creer-of.html">Créer mon OF</a><a href="se-former.html">Se former</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+var selectedType = null;
+var basePrice = 0;
+var hasKbis = false;
+var options = {};
+
+function selectType(el, type, price){
+  document.querySelectorAll('.of-type-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedType = type;
+  basePrice = price;
+  document.getElementById('step2').style.display='';
+  document.getElementById('step3').style.display='';
+  document.getElementById('step4').style.display='';
+  updateTotal();
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function selectKbis(has){
+  hasKbis = has;
+  document.getElementById('kbis-oui').classList.toggle('selected', has);
+  document.getElementById('kbis-non').classList.toggle('selected', !has);
+  updateTotal();
+}
+
+function toggleOption(el, name, price){
+  var cb = el.querySelector('input[type=checkbox]');
+  cb.checked = !cb.checked;
+  el.classList.toggle('checked', cb.checked);
+  if(cb.checked) options[name]=price; else delete options[name];
+  updateTotal();
+}
+
+function updateTotal(){
+  var total = basePrice;
+  if(hasKbis) total -= 100;
+  Object.values(options).forEach(p=>total+=p);
+  if(total<0) total=0;
+  document.getElementById('totalDisplay').textContent = total+'€';
+  document.getElementById('pay1x').textContent = total+'€';
+  document.getElementById('pay2x').textContent = Math.ceil(total/2)+'€ x2';
+  document.getElementById('pay3x').textContent = Math.ceil(total/3)+'€ x3';
+}
+
+function selectPayment(el, times){
+  el.parentNode.querySelectorAll('.payment-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+var ofLinks = {
+  action: 'https://buy.stripe.com/bJe4gz7vs9vffiKgIOffy0M',
+  cfa: 'https://buy.stripe.com/5kQeVd5nk5eZ1rU3W2ffy1e',
+  bilan: 'https://buy.stripe.com/cNi4gz2b86j39Yq506ffy0O',
+  vae: 'https://buy.stripe.com/dRm8wPdTQ0YJ2vY2RYffy0P',
+  elus: 'https://buy.stripe.com/8x28wP4jgePzgmO2RYffy1f',
+  agent: 'https://buy.stripe.com/7sY6oHcPMgXH6Me1NUffy1g'
+};
+function payerCreation(){
+  if(selectedType && ofLinks[selectedType]){
+    window.location.href = ofLinks[selectedType];
+  }
+}
+</script>
+</body>
+</html>

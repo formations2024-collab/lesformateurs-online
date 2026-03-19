@@ -1,0 +1,47 @@
+{
+  "conformite": {
+    "nda": "https://buy.stripe.com/fZu7sL8zw5eZ5Ia2RYffy0E",
+    "uai": "https://buy.stripe.com/00weVd3fc7n76Me64affy0F",
+    "qualiopi": "https://buy.stripe.com/6oU9AT5nkePz7Qibouffy0G",
+    "edof": "https://buy.stripe.com/14AfZh6ro9vfdaC1NUffy0H",
+    "francetravail": "https://buy.stripe.com/28EbJ14jggXH9Yqakqffy0I",
+    "rs": "https://buy.stripe.com/bJe6oHdTQ4aV9YqgIOffy0J"
+  },
+  "opco": {
+    "unit": "https://buy.stripe.com/8x2cN53fcdLv7Qi9gmffy0K",
+    "pack11": "https://buy.stripe.com/28E4gz030cHrfiKbouffy0L"
+  },
+  "creer_of": {
+    "action": "https://buy.stripe.com/bJe4gz7vs9vffiKgIOffy0M",
+    "cfa": "https://buy.stripe.com/00wbJ1aHEazjgmO9gmffy0N",
+    "bilan": "https://buy.stripe.com/cNi4gz2b86j39Yq506ffy0O",
+    "vae": "https://buy.stripe.com/dRm8wPdTQ0YJ2vY2RYffy0P",
+    "elus": "https://buy.stripe.com/fZu4gz030dLvgmO3W2ffy0Q",
+    "agents_ia": "https://buy.stripe.com/8x29ATeXU5eZgmO3W2ffy0R"
+  },
+  "options_of": {
+    "qualiopi": "https://buy.stripe.com/00w8wP3fcgXH3A2csyffy0S",
+    "agents_ia": "https://buy.stripe.com/9B68wP6roePz9Yq78effy0T",
+    "edof": "https://buy.stripe.com/9B6cN57vs22N3A2eAGffy0U",
+    "opco": "https://buy.stripe.com/fZu8wP9DA7n7eeG0JQffy0V",
+    "site_web": "https://buy.stripe.com/8x2aEX17422NgmOakqffy0W"
+  },
+  "annonces": {
+    "premium": "https://buy.stripe.com/9B628r6rogXHfiK506ffy0X"
+  },
+  "formation": {
+    "formateur": "https://buy.stripe.com/8x2eVd3fc6j3c6y0JQffy0Y"
+  },
+  "agent_ia": {
+    "creation_formations": "https://buy.stripe.com/00w3cvcPM22N9Yqbouffy0Z",
+    "depots_dossiers": "https://buy.stripe.com/dRm4gz5nkazj5Ia506ffy10",
+    "gestion_stagiaires": "https://buy.stripe.com/5kQ7sLdTQ6j38Umcsyffy11",
+    "facturation": "https://buy.stripe.com/00w7sL6ro0YJ5Ia8ciffy12",
+    "prospection": "https://buy.stripe.com/4gMcN53fc5eZ1rU8ciffy13",
+    "cpf_edof": "https://buy.stripe.com/dRmbJ19DAgXH1rU9gmffy14",
+    "veille": "https://buy.stripe.com/cNicN52b89vf9Yq2RYffy15",
+    "community": "https://buy.stripe.com/00w4gz8zwgXHfiK0JQffy16",
+    "reporting": "https://buy.stripe.com/5kQ5kD6rodLvgmO8ciffy17",
+    "planification": "https://buy.stripe.com/8x2aEX6ro4aV5IaeAGffy18"
+  }
+}

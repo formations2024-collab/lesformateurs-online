@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formation Formateur Professionnel — lesformateurs.online</title>
+  <style>
+    :root {
+      --primary:#1a1a2e; --accent:#e94560; --accent2:#0f3460;
+      --success:#27ae60; --warning:#f39c12;
+      --light:#f4f5f7; --border:#e0e0e0; --text:#333; --muted:#666;
+      --sidebar-w:320px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--light);color:var(--text);display:flex;min-height:100vh;}
+
+    /* SIDEBAR MODULES */
+    .sidebar{width:var(--sidebar-w);background:#fff;border-right:1px solid var(--border);position:fixed;height:100vh;overflow-y:auto;z-index:10;display:flex;flex-direction:column;}
+    .sidebar-header{padding:20px;background:var(--primary);color:#fff;}
+    .sidebar-header .logo{font-size:16px;font-weight:800;margin-bottom:4px;}
+    .sidebar-header .logo span{color:var(--accent);}
+    .sidebar-header .course-title{font-size:13px;color:rgba(255,255,255,.6);}
+    .progress-section{padding:16px 20px;border-bottom:1px solid var(--border);}
+    .progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px;}
+    .progress-bar{background:var(--light);border-radius:10px;height:8px;overflow:hidden;}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#ff6b88);border-radius:10px;transition:width .4s;}
+    .module-group{border-bottom:1px solid var(--border);}
+    .module-title-btn{width:100%;padding:14px 20px;background:none;border:none;text-align:left;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--primary);}
+    .module-title-btn:hover{background:var(--light);}
+    .module-title-btn.active{background:#fef0f3;color:var(--accent);}
+    .module-badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;}
+    .mb-done{background:#e8f8f0;color:var(--success);}
+    .mb-active{background:#fef0f3;color:var(--accent);}
+    .mb-locked{background:var(--light);color:var(--muted);}
+    .module-arrow{margin-left:auto;color:var(--muted);transition:transform .2s;}
+    .module-arrow.open{transform:rotate(180deg);}
+    .lessons-sub{display:none;background:var(--light);}
+    .lessons-sub.open{display:block;}
+    .lesson-btn{width:100%;padding:10px 20px 10px 52px;background:none;border:none;text-align:left;cursor:pointer;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px;transition:all .15s;}
+    .lesson-btn:hover{background:rgba(0,0,0,.03);color:var(--text);}
+    .lesson-btn.active{background:#fff;color:var(--accent);font-weight:700;border-left:3px solid var(--accent);}
+    .lesson-btn.done{color:var(--success);}
+    .lesson-icon{width:18px;text-align:center;font-size:12px;flex-shrink:0;}
+    .lesson-dur{margin-left:auto;font-size:11px;color:var(--muted);}
+
+    /* MAIN */
+    .main{margin-left:var(--sidebar-w);flex:1;display:flex;flex-direction:column;}
+    .topbar{background:#fff;padding:14px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+    .breadcrumb{font-size:13px;color:var(--muted);}
+    .breadcrumb strong{color:var(--primary);}
+    .topbar-actions{display:flex;gap:10px;align-items:center;}
+    .btn-back{text-decoration:none;color:var(--muted);font-size:13px;padding:7px 14px;border:1px solid var(--border);border-radius:6px;}
+    .btn-next{background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:6px;font-weight:700;font-size:13px;cursor:pointer;}
+
+    .lesson-content{padding:40px 48px;max-width:860px;flex:1;}
+    @media(max-width:900px){.sidebar{display:none;}.main{margin-left:0;}.lesson-content{padding:24px;}}
+
+    /* CONTENT STYLES */
+    .lesson-header{margin-bottom:32px;}
+    .lesson-tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:4px 12px;border-radius:4px;margin-bottom:12px;}
+    .tag-video{background:#e3f2fd;color:#1565c0;}
+    .tag-lecture{background:#f3e5f5;color:#7b1fa2;}
+    .tag-atelier{background:#fff3e0;color:#e67e22;}
+    .tag-quiz{background:#fce4ec;color:#c62828;}
+    .lesson-title{font-size:30px;font-weight:800;color:var(--primary);margin-bottom:10px;line-height:1.3;}
+    .lesson-meta{font-size:13px;color:var(--muted);display:flex;gap:20px;flex-wrap:wrap;}
+
+    .content-body h2{font-size:22px;font-weight:800;color:var(--primary);margin:32px 0 16px;}
+    .content-body h3{font-size:17px;font-weight:700;color:var(--primary);margin:24px 0 12px;}
+    .content-body p{font-size:15px;line-height:1.8;color:var(--text);margin-bottom:16px;}
+    .content-body ul,.content-body ol{padding-left:20px;margin-bottom:16px;}
+    .content-body li{font-size:15px;line-height:1.8;margin-bottom:6px;}
+    .content-body strong{color:var(--primary);}
+
+    .highlight-box{border-left:4px solid var(--accent);background:#fef0f3;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;font-size:15px;line-height:1.7;}
+    .info-box{background:#e3f2fd;border-left:4px solid #1565c0;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;font-size:14px;line-height:1.7;}
+    .success-box{background:#e8f8f0;border-left:4px solid var(--success);padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;font-size:14px;line-height:1.7;}
+    .example-box{background:#fffde7;border:1px solid #f9a825;border-radius:8px;padding:18px 22px;margin:20px 0;}
+    .example-box .ex-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#f9a825;margin-bottom:8px;}
+    .example-box p{margin-bottom:0;font-size:14px;}
+
+    .schema-box{background:var(--light);border:1px solid var(--border);border-radius:10px;padding:24px;margin:24px 0;text-align:center;}
+    .schema-box .schema-title{font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+    .schema-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+    .schema-box .box{background:#fff;border:2px solid var(--accent);border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;color:var(--accent);}
+    .schema-box .arrow{color:var(--muted);font-size:20px;}
+
+    .key-points{background:var(--primary);color:#fff;border-radius:12px;padding:28px;margin:32px 0;}
+    .key-points h3{font-size:16px;font-weight:800;margin-bottom:16px;color:var(--accent);}
+    .key-points li{font-size:14px;line-height:1.8;color:rgba(255,255,255,.85);margin-bottom:4px;}
+
+    .video-placeholder{background:linear-gradient(135deg,var(--primary),var(--accent2));border-radius:12px;padding:60px;text-align:center;color:#fff;margin:24px 0;}
+    .video-placeholder .play{font-size:64px;margin-bottom:16px;}
+    .video-placeholder p{color:rgba(255,255,255,.75);font-size:15px;}
+
+    .nav-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap;gap:16px;}
+    .btn-prev-lesson{padding:12px 24px;border:1px solid var(--border);background:#fff;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;color:var(--text);}
+    .btn-next-lesson{padding:12px 24px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;}
+    .btn-mark-done{padding:12px 24px;background:var(--success);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;}
+
+    /* QUIZ INLINE */
+    .quiz-section{margin-top:32px;}
+    .quiz-section h2{font-size:22px;font-weight:800;color:var(--primary);margin-bottom:24px;}
+    .quiz-q{background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px;}
+    .quiz-q .q-num{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+    .quiz-q .q-text{font-size:16px;font-weight:700;color:var(--primary);margin-bottom:16px;line-height:1.5;}
+    .quiz-opt{width:100%;padding:12px 16px;border:2px solid var(--border);background:#fff;border-radius:8px;text-align:left;font-size:14px;cursor:pointer;margin-bottom:8px;transition:all .15s;display:block;}
+    .quiz-opt:hover{border-color:var(--accent);background:#fef0f3;}
+    .quiz-opt.selected{border-color:var(--accent);background:#fef0f3;font-weight:700;color:var(--accent);}
+    .quiz-opt.correct{border-color:var(--success);background:#e8f8f0;color:var(--success);font-weight:700;}
+    .quiz-opt.wrong{border-color:var(--accent);background:#fef0f3;color:var(--accent);}
+    .btn-submit-quiz{background:var(--accent);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;margin-top:8px;}
+    .quiz-result{background:#fff;border:2px solid var(--success);border-radius:12px;padding:28px;text-align:center;margin-top:20px;display:none;}
+    .quiz-result .score{font-size:48px;font-weight:900;color:var(--success);margin:12px 0;}
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">lesformateurs<span>.online</span></div>
+    <div class="course-title">Formation Formateur Professionnel</div>
+  </div>
+  <div class="progress-section">
+    <div class="progress-label"><span>Progression</span><span id="pct-label">40%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:40%"></div></div>
+  </div>
+  <div id="sidebar-nav"></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="breadcrumb" id="breadcrumb">Module 1 · Leçon 1</div>
+    <div class="topbar-actions">
+      <a href="dashboard.html" class="btn-back">← Tableau de bord</a>
+      <button class="btn-next" onclick="nextLesson()">Suivant →</button>
+    </div>
+  </div>
+  <div class="lesson-content" id="lesson-content"></div>
+</div>
+
+<script>
+const CONTENT = {
+  // ══════════════════════════════════════════
+  // MODULE 1 — L'ADULTE APPRENANT
+  // ══════════════════════════════════════════
+  '1-1': {
+    type:'video', title:"Les spécificités de l'adulte apprenant", dur:'35 min',
+    module:"Module 1 — L'adulte apprenant",
+    body:`
+      <div class="video-placeholder">
+        <div class="play">▶</div>
+        <p>Vidéo : Les spécificités de l'adulte apprenant — 35 min</p>
+      </div>
+      <h2>L'adulte apprenant : qui est-il ?</h2>
+      <p>Former un adulte, ce n'est pas enseigner à un élève de collège. L'adulte arrive en formation avec un bagage, des habitudes, des croyances — et surtout, des attentes très précises sur <strong>l'utilité immédiate</strong> de ce qu'il apprend.</p>
+      <p>La discipline qui étudie l'apprentissage adulte s'appelle l'<strong>andragogie</strong>, un terme forgé par le pédagogue américain Malcolm Knowles dans les années 1970.</p>
+
+      <h2>Les 6 principes de Knowles</h2>
+      <div class="info-box">📚 <strong>Malcolm Knowles (1913–1997)</strong> est le père de l'andragogie. Il a formalisé les différences fondamentales entre l'apprentissage des enfants (pédagogie) et celui des adultes.</div>
+      <ol>
+        <li><strong>Le besoin de savoir :</strong> L'adulte veut comprendre <em>pourquoi</em> il apprend avant d'apprendre. Expliquez toujours l'utilité de chaque contenu.</li>
+        <li><strong>Le concept de soi :</strong> L'adulte est autonome. Il veut être responsable de ses apprentissages, pas infantilisé.</li>
+        <li><strong>L'expérience antérieure :</strong> C'est une ressource précieuse. S'appuyer dessus accélère l'apprentissage et renforce l'engagement.</li>
+        <li><strong>La disposition à apprendre :</strong> L'adulte apprend ce dont il a besoin maintenant, dans sa vie professionnelle ou personnelle.</li>
+        <li><strong>L'orientation vers l'apprentissage :</strong> Il préfère les apprentissages concrets et applicables immédiatement.</li>
+        <li><strong>La motivation :</strong> Elle est principalement intrinsèque — progression de carrière, satisfaction personnelle, résolution de problèmes.</li>
+      </ol>
+
+      <div class="highlight-box">💡 <strong>En pratique :</strong> Avant chaque module, expliquez toujours "à quoi ça va servir concrètement". C'est ce qu'on appelle le <em>contrat pédagogique</em>.</div>
+
+      <h2>Adulte vs Enfant : les différences clés</h2>
+      <div class="schema-box">
+        <div class="schema-title">Pédagogie vs Andragogie</div>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <tr style="background:var(--light)">
+            <th style="padding:10px;text-align:left;border-bottom:2px solid var(--border)">Dimension</th>
+            <th style="padding:10px;text-align:left;border-bottom:2px solid var(--border)">Enfant (Pédagogie)</th>
+            <th style="padding:10px;text-align:left;border-bottom:2px solid var(--border)">Adulte (Andragogie)</th>
+          </tr>
+          <tr><td style="padding:10px;border-bottom:1px solid var(--border)">Motivation</td><td style="padding:10px;border-bottom:1px solid var(--border)">Externe (notes, parents)</td><td style="padding:10px;border-bottom:1px solid var(--border)">Interne (utilité, sens)</td></tr>
+          <tr><td style="padding:10px;border-bottom:1px solid var(--border)">Expérience</td><td style="padding:10px;border-bottom:1px solid var(--border)">Limitée</td><td style="padding:10px;border-bottom:1px solid var(--border)">Riche et valorisable</td></tr>
+          <tr><td style="padding:10px;border-bottom:1px solid var(--border)">Orientation</td><td style="padding:10px;border-bottom:1px solid var(--border)">Par sujet</td><td style="padding:10px;border-bottom:1px solid var(--border)">Par problème à résoudre</td></tr>
+          <tr><td style="padding:10px">Autonomie</td><td style="padding:10px">Faible</td><td style="padding:10px">Forte</td></tr>
+        </table>
+      </div>
+
+      <div class="key-points">
+        <h3>🎯 Points clés à retenir</h3>
+        <ul>
+          <li>L'adulte apprend mieux quand il comprend l'utilité immédiate</li>
+          <li>Son expérience est une ressource, pas un obstacle</li>
+          <li>Il est autonome et veut être traité comme tel</li>
+          <li>La motivation intrinsèque est le principal levier</li>
+          <li>Le formateur doit être un facilitateur, pas un professeur autoritaire</li>
+        </ul>
+      </div>`
+  },
+  '1-2': {
+    type:'lecture', title:"Les styles d'apprentissage (Kolb, VAK)", dur:'30 min',
+    module:"Module 1 — L'adulte apprenant",
+    body:`
+      <h2>Pourquoi les styles d'apprentissage ?</h2>
+      <p>Chaque personne absorbe l'information différemment. En tant que formateur, <strong>varier les modalités</strong> d'enseignement vous permet de toucher tous les profils présents dans votre salle.</p>
+
+      <h2>Le modèle VAK</h2>
+      <div class="info-box">Le modèle VAK (Visuel, Auditif, Kinesthésique) identifie trois canaux sensoriels dominants utilisés dans l'apprentissage.</div>
+      <h3>👁 Visuel (env. 65% des apprenants)</h3>
+      <p>Apprend en <strong>voyant</strong> : schémas, graphiques, couleurs, listes, supports visuels. S'ennuie avec des exposés oraux trop longs sans support visuel.</p>
+      <p><em>Ce qu'il dit :</em> "Je vois ce que tu veux dire", "Montre-moi un exemple".</p>
+      <h3>👂 Auditif (env. 20% des apprenants)</h3>
+      <p>Apprend en <strong>entendant</strong> : explications orales, discussions, podcasts, rythme et intonation. Mémorise facilement les explications verbales.</p>
+      <p><em>Ce qu'il dit :</em> "J'entends ce que tu me dis", "Explique-moi".</p>
+      <h3>🖐 Kinesthésique (env. 15% des apprenants)</h3>
+      <p>Apprend en <strong>faisant</strong> : exercices pratiques, mises en situation, manipulation. A du mal à rester assis sans pratiquer.</p>
+      <p><em>Ce qu'il dit :</em> "Je sens que ça va marcher", "On peut essayer ?".</p>
+
+      <div class="highlight-box">💡 <strong>En pratique :</strong> Structurez chaque séquence avec les 3 canaux : un schéma (V) + une explication (A) + un exercice (K).</div>
+
+      <h2>Le cycle d'apprentissage de Kolb</h2>
+      <p>David Kolb (1984) propose un modèle en 4 phases qui décrit comment un adulte intègre une nouvelle compétence :</p>
+      <div class="schema-box">
+        <div class="schema-title">Le cycle de Kolb</div>
+        <div class="schema-row">
+          <div class="box">1. Expérience<br>concrète</div>
+          <div class="arrow">→</div>
+          <div class="box">2. Observation<br>réflexive</div>
+          <div class="arrow">→</div>
+          <div class="box">3. Conceptualisation<br>abstraite</div>
+          <div class="arrow">→</div>
+          <div class="box">4. Expérimentation<br>active</div>
+        </div>
+      </div>
+      <ol>
+        <li><strong>Expérience concrète :</strong> L'apprenant vit une situation (jeu de rôle, cas pratique).</li>
+        <li><strong>Observation réflexive :</strong> Il réfléchit à ce qui s'est passé, identifie les leçons.</li>
+        <li><strong>Conceptualisation :</strong> Il construit une règle générale, un modèle.</li>
+        <li><strong>Expérimentation active :</strong> Il teste la règle dans de nouvelles situations.</li>
+      </ol>
+
+      <div class="example-box">
+        <div class="ex-title">Exemple concret</div>
+        <p>Pour former à la "gestion des objections commerciales" :<br>
+        1. Jeu de rôle : simulation d'un client difficile (expérience)<br>
+        2. Débriefing en groupe : qu'est-ce qui a marché / pas marché ? (réflexion)<br>
+        3. Présentation des 5 techniques anti-objections (conceptualisation)<br>
+        4. Nouvel exercice avec les techniques apprises (expérimentation)</p>
+      </div>
+
+      <div class="key-points">
+        <h3>🎯 Points clés à retenir</h3>
+        <ul>
+          <li>VAK : varier les canaux (visuel, auditif, kinesthésique) dans chaque séquence</li>
+          <li>Kolb : expérience → réflexion → théorie → pratique</li>
+          <li>Ne restez jamais en mode "exposé magistral" plus de 20 min</li>
+          <li>Le kinesthésique est souvent le plus sous-servi en formation classique</li>
+        </ul>
+      </div>`
+  },
+  '1-3': {
+    type:'video', title:"Motivation et engagement en formation", dur:'25 min',
+    module:"Module 1 — L'adulte apprenant",
+    body:`
+      <div class="video-placeholder"><div class="play">▶</div><p>Vidéo : Motivation et engagement — 25 min</p></div>
+      <h2>Comprendre la motivation adulte</h2>
+      <p>Un participant démotivé n'apprend pas. La motivation est <strong>le carburant de l'apprentissage</strong>. En tant que formateur, vous devez savoir l'allumer et l'entretenir.</p>
+      <h2>Motivation intrinsèque vs extrinsèque</h2>
+      <ul>
+        <li><strong>Extrinsèque :</strong> L'apprenant est là parce qu'il y a été envoyé par son employeur. Risque de résistance.</li>
+        <li><strong>Intrinsèque :</strong> Il veut apprendre pour progresser, résoudre un problème, évoluer. Moteur puissant.</li>
+      </ul>
+      <div class="highlight-box">💡 Votre rôle : transformer la motivation extrinsèque en intrinsèque. Comment ? En montrant dès le début ce que l'apprenant va <em>gagner personnellement</em> à suivre cette formation.</div>
+      <h2>Le modèle ARCS de Keller</h2>
+      <p>John Keller (1987) identifie 4 facteurs clés de la motivation en formation :</p>
+      <ul>
+        <li><strong>A — Attention :</strong> Capter et maintenir l'intérêt (anecdotes, problèmes, humour, variété).</li>
+        <li><strong>R — Relevance :</strong> Montrer que c'est pertinent pour eux personnellement.</li>
+        <li><strong>C — Confidence :</strong> Les faire sentir capables. Commencer par des succès faciles.</li>
+        <li><strong>S — Satisfaction :</strong> Récompenser les progrès. Feedback positif régulier.</li>
+      </ul>
+      <div class="key-points">
+        <h3>🎯 Points clés à retenir</h3>
+        <ul>
+          <li>Transformez "je dois" en "je veux" dès les premières minutes</li>
+          <li>Le modèle ARCS : Attention, Relevance, Confidence, Satisfaction</li>
+          <li>Célébrez les petits progrès — ils alimentent la motivation</li>
+          <li>Un participant qui réussit veut continuer à réussir</li>
+        </ul>
+      </div>`
+  },
+  '1-4': {
+    type:'lecture', title:"Créer un environnement apprenant", dur:'20 min',
+    module:"Module 1 — L'adulte apprenant",
+    body:`
+      <h2>L'environnement, un facteur souvent négligé</h2>
+      <p>La salle, la disposition des tables, la température, la lumière, la qualité du café — tout cela influence l'apprentissage. Un apprenant mal à l'aise physiquement ou psychologiquement apprend moins.</p>
+      <h2>La sécurité psychologique</h2>
+      <p>Amy Edmondson (Harvard) a démontré que la <strong>sécurité psychologique</strong> est le premier facteur de performance d'un groupe. Dans une salle de formation, cela signifie : tout participant doit se sentir <em>libre de poser des questions</em>, <em>de faire des erreurs</em>, <em>d'exprimer son désaccord</em> sans crainte du jugement.</p>
+      <div class="highlight-box">💡 <strong>Comment créer cet espace :</strong> Dès le démarrage, établissez des règles de respect mutuel. Valorisez les questions "naïves". Ne ridiculisez jamais une erreur.</div>
+      <h2>Disposition physique</h2>
+      <ul>
+        <li><strong>En U :</strong> Favorise les échanges et la visibilité de tous. Idéal pour les groupes jusqu'à 20 personnes.</li>
+        <li><strong>En îlots :</strong> Favorise le travail en sous-groupes. Idéal pour les ateliers collaboratifs.</li>
+        <li><strong>En rang :</strong> À éviter en formation adulte — trop scolaire, inhibe la participation.</li>
+      </ul>
+      <div class="key-points">
+        <h3>🎯 Points clés à retenir</h3>
+        <ul>
+          <li>Sécurité psychologique = condition sine qua non de l'apprentissage</li>
+          <li>L'espace physique envoie un message : U ou îlots, pas de rang</li>
+          <li>Établissez dès le début les règles du "droit à l'erreur"</li>
+          <li>Le confort physique influence directement la capacité d'attention</li>
+        </ul>
+      </div>`
+  },
+  '1-5': {
+    type:'atelier', title:"Atelier : Analyse de votre public cible", dur:'40 min',
+    module:"Module 1 — L'adulte apprenant",
+    body:`
+      <h2>Atelier pratique — Connaître son public</h2>
+      <p>Avant de concevoir une formation, vous devez <strong>profiler vos apprenants</strong>. Cet atelier vous guide dans la construction de vos personas apprenants.</p>
+      <div class="info-box">🛠 <strong>Durée estimée :</strong> 40 min | Travail individuel puis mise en commun optionnelle</div>
+      <h3>Exercice 1 — Le profil type (15 min)</h3>
+      <p>Décrivez votre apprenant type en répondant à ces questions :</p>
+      <ul>
+        <li>Quel est son niveau de formation initial ?</li>
+        <li>Quel est son expérience professionnelle dans votre domaine ?</li>
+        <li>Pourquoi est-il là ? (envoi employeur, initiative personnelle, obligation)</li>
+        <li>Quelles sont ses craintes vis-à-vis de la formation ?</li>
+        <li>Qu'espère-t-il concrètement obtenir ?</li>
+      </ul>
+      <h3>Exercice 2 — Les freins potentiels (10 min)</h3>
+      <p>Listez 3 freins que vos apprenants pourraient avoir et comment vous comptez les lever :</p>
+      <div class="example-box">
+        <div class="ex-title">Exemple de frein et réponse pédagogique</div>
+        <p><strong>Frein :</strong> "Je suis trop âgé pour apprendre l'informatique"<br>
+        <strong>Réponse :</strong> Démarrer par des exercices où ils réussissent facilement. Valoriser leur expérience métier que les jeunes n'ont pas.</p>
+      </div>
+      <h3>Exercice 3 — Le contrat pédagogique (15 min)</h3>
+      <p>Rédigez l'introduction que vous feriez en début de formation pour :</p>
+      <ul>
+        <li>Expliquer les objectifs et leur utilité concrète</li>
+        <li>Rassurer sur le droit à l'erreur</li>
+        <li>Collecter les attentes du groupe</li>
+      </ul>
+      <div class="success-box">✅ <strong>Livrable :</strong> À l'issue de cet atelier, vous disposez du profil de votre apprenant type et d'une introduction de formation adaptée.</div>`
+  },
+  '1-6': {
+    type:'quiz', title:"Quiz — Module 1", dur:'15 min',
+    module:"Module 1 — L'adulte apprenant",
+    quiz: [
+      {q:"Selon Knowles, le terme désignant la science de l'apprentissage adulte est :", opts:["Pédagogie","Andragogie","Didactique","Cognitivisme"], ans:1},
+      {q:"Dans le modèle VAK, quel pourcentage représente approximativement les apprenants visuels ?", opts:["35%","50%","65%","80%"], ans:2},
+      {q:"Quelle est la première phase du cycle d'apprentissage de Kolb ?", opts:["Observation réflexive","Expérimentation active","Expérience concrète","Conceptualisation abstraite"], ans:2},
+      {q:"Le modèle ARCS de Keller comprend : Attention, Relevance, Confidence et :", opts:["Skill","Satisfaction","Success","Support"], ans:1},
+      {q:"Dans l'andragogie, la motivation principale de l'adulte est :", opts:["Extrinsèque (pression externe)","Intrinsèque (utilité personnelle)","Sociale (regard des autres)","Financière"], ans:1},
+    ]
+  },
+
+  // ══════════════════════════════════════════
+  // MODULE 2 — CONCEVOIR UNE FORMATION
+  // ══════════════════════════════════════════
+  '2-1': {
+    type:'video', title:"L'analyse des besoins de formation", dur:'30 min',
+    module:"Module 2 — Concevoir une formation",
+    body:`
+      <div class="video-placeholder"><div class="play">▶</div><p>Vidéo : L'analyse des besoins — 30 min</p></div>
+      <h2>Pourquoi analyser les besoins avant de concevoir ?</h2>
+      <p>La pire erreur d'un formateur débutant : <strong>concevoir sans avoir analysé</strong>. Résultat : une formation parfaitement construite... mais qui ne répond pas aux vrais besoins.</p>
+      <div class="highlight-box">💡 L'analyse des besoins est une <em>enquête</em>. Vous êtes détective : vous cherchez le vrai problème que la formation doit résoudre.</div>
+      <h2>Les 3 types de besoins</h2>
+      <ul>
+        <li><strong>Besoin prescrit :</strong> Ce que le commanditaire (entreprise, RH) dit vouloir.</li>
+        <li><strong>Besoin réel :</strong> Ce que les futurs participants font ou ne font pas actuellement.</li>
+        <li><strong>Besoin ressenti :</strong> Ce que les participants pensent avoir besoin.</li>
+      </ul>
+      <div class="example-box">
+        <div class="ex-title">Exemple</div>
+        <p>Une DRH vous commande une "formation Excel". C'est le besoin prescrit.<br>En interrogeant les managers, vous découvrez que le vrai problème est la création de tableaux de bord (besoin réel).<br>Les participants, eux, veulent "faire de beaux graphiques" (besoin ressenti).<br>→ Votre formation doit répondre aux 3, avec le réel comme priorité.</p>
+      </div>
+      <h2>Les outils de recueil des besoins</h2>
+      <ul>
+        <li>Entretiens individuels avec commanditaire et futurs participants</li>
+        <li>Questionnaire préformation</li>
+        <li>Observation de poste</li>
+        <li>Analyse des résultats / indicateurs (erreurs, incidents, performances)</li>
+      </ul>
+      <div class="key-points">
+        <h3>🎯 Points clés à retenir</h3>
+        <ul>
+          <li>Analyser avant de concevoir — toujours</li>
+          <li>Distinguer besoin prescrit, réel et ressenti</li>
+          <li>Interroger à la fois commanditaires et futurs participants</li>
+          <li>Une bonne analyse évite de concevoir une formation inutile</li>
+        </ul>
+      </div>`
+  },
+  '2-2': {
+    type:'lecture', title:"Définir des objectifs pédagogiques SMART", dur:'35 min',
+    module:"Module 2 — Concevoir une formation",
+    body:`
+      <h2>L'objectif pédagogique : la boussole du formateur</h2>
+      <p>Un objectif pédagogique décrit ce que <strong>l'apprenant sera capable de faire</strong> à l'issue de la formation. Ce n'est pas ce que le formateur va enseigner — c'est ce que l'apprenant va pouvoir accomplir.</p>
+      <div class="info-box">🔑 La formule magique : "À l'issue de cette formation, le stagiaire sera capable de <em>[verbe d'action observable]</em> + <em>[contenu]</em> + <em>[condition]</em> + <em>[critère de performance]</em>"</div>
+      <h2>Les critères SMART</h2>
+      <ul>
+        <li><strong>S — Spécifique :</strong> L'objectif décrit une compétence précise, pas vague. ❌ "Comprendre Excel" → ✅ "Créer un tableau croisé dynamique"</li>
+        <li><strong>M — Mesurable :</strong> On peut observer et évaluer si l'objectif est atteint.</li>
+        <li><strong>A — Atteignable :</strong> Réaliste par rapport au niveau de départ et à la durée.</li>
+        <li><strong>R — Réaliste :</strong> Adapté au contexte et aux ressources disponibles.</li>
+        <li><strong>T — Temporel :</strong> Atteint à l'issue de la formation (ou d'un module précis).</li>
+      </ul>
+      <h2>La taxonomie de Bloom</h2>
+      <p>Benjamin Bloom a classé les objectifs cognitifs en 6 niveaux croissants :</p>
+      <div class="schema-box">
+        <div class="schema-title">Pyramide de Bloom</div>
+        <div style="display:flex;flex-direction:column;gap:6px;max-width:400px;margin:0 auto">
+          ${['Créer (synthèse)','Évaluer (jugement)','Analyser (décomposition)','Appliquer (utilisation)','Comprendre (sens)','Se rappeler (mémoriser)'].map((l,i) => `<div style="background:hsl(${220+i*15},60%,${60-i*5}%);color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;font-weight:700;text-align:center">${l}</div>`).join('')}
+        </div>
+      </div>
+      <div class="key-points">
+        <h3>🎯 Points clés à retenir</h3>
+        <ul>
+          <li>Un objectif = ce que l'apprenant fait, pas ce que le formateur enseigne</li>
+          <li>Utilisez des verbes d'action observables : "rédiger", "calculer", "construire", "identifier"</li>
+          <li>Évitez les verbes flous : "comprendre", "savoir", "appréhender"</li>
+          <li>La taxonomie de Bloom vous aide à calibrer le niveau de difficulté</li>
+        </ul>
+      </div>`
+  },
+  '2-3': {
+    type:'video', title:"Construire un plan de formation", dur:'40 min',
+    module:"Module 2 — Concevoir une formation",
+    body:`
+      <div class="video-placeholder"><div class="play">▶</div><p>Vidéo : Construire le plan de formation — 40 min</p></div>
+      <h2>Le plan de formation : le squelette de votre formation</h2>
+      <p>Le plan de formation est votre document de référence. Il décrit la structure complète de la formation : les modules, les objectifs, les contenus, les méthodes, le timing et les modalités d'évaluation.</p>
+      <div class="example-box">
+        <div class="ex-title">Structure type d'un plan de formation</div>
+        <p><strong>1. Informations générales :</strong> Titre, durée, public cible, prérequis<br>
+        <strong>2. Objectif général :</strong> La compétence visée en une phrase<br>
+        <strong>3. Modules / séquences :</strong> Découpés par objectifs spécifiques<br>
+        <strong>4. Pour chaque module :</strong> Objectif | Contenu | Méthode | Durée | Évaluation<br>
+        <strong>5. Évaluation finale :</strong> Modalités et critères de réussite</p>
+      </div>
+      <h2>Le séquençage pédagogique</h2>
+      <p>Chaque séquence doit suivre une progression logique :</p>
+      <div class="schema-box">
+        <div class="schema-row">
+          <div class="box">Accroche</div><div class="arrow">→</div>
+          <div class="box">Exploration</div><div class="arrow">→</div>
+          <div class="box">Structuration</div><div class="arrow">→</div>
+          <div class="box">Pratique</div><div class="arrow">→</div>
+          <div class="box">Évaluation</div>
+        </div>
+      </div>
+      <div class="key-points">
+        <h3>🎯 Points clés à retenir</h3>
+        <ul>
+          <li>Le plan est votre contrat avec le commanditaire — soyez précis</li>
+          <li>Découpez en séquences de 25-45 minutes maximum</li>
+          <li>Alternez toujours théorie et pratique</li>
+          <li>Prévoyez 20% de marge temporelle pour les questions et imprévus</li>
+        </ul>
+      </div>`
+  },
+  '2-4': {
+    type:'lecture', title:"Choisir les méthodes pédagogiques", dur:'30 min',
+    module:"Module 2 — Concevoir une formation",
+    body:`
+      <h2>Les 4 grandes méthodes pédagogiques</h2>
+      <h3>1. Méthode expositive (affirmative)</h3>
+      <p>Le formateur transmet le savoir. L'apprenant reçoit.</p>
+      <ul><li>✅ Rapide, structurée, efficace pour les contenus complexes</li><li>❌ Passive, faible rétention si seule méthode</li></ul>
+      <h3>2. Méthode interrogative (maïeutique)</h3>
+      <p>Le formateur guide par des questions. L'apprenant construit sa réponse.</p>
+      <ul><li>✅ Active, stimule la réflexion, renforce la mémorisation</li><li>❌ Chronophage si mal gérée</li></ul>
+      <h3>3. Méthode démonstrative</h3>
+      <p>"Je fais, tu regardes, tu fais, je corrige."</p>
+      <ul><li>✅ Très efficace pour les savoir-faire techniques</li><li>❌ Nécessite du matériel et de l'espace</li></ul>
+      <h3>4. Méthode active / expérientielle</h3>
+      <p>L'apprenant est au centre : jeux de rôle, études de cas, simulations.</p>
+      <ul><li>✅ Rétention maximale (70-90% selon le cône d'apprentissage)</li><li>❌ Demande plus de préparation et de temps</li></ul>
+      <div class="highlight-box">💡 <strong>La règle d'or :</strong> Ne jamais utiliser une seule méthode pendant toute une journée. Alternez toutes les 20-30 minutes pour maintenir l'attention.</div>
+      <div class="key-points">
+        <h3>🎯 Points clés à retenir</h3>
+        <ul>
+          <li>4 méthodes : expositive, interrogative, démonstrative, active</li>
+          <li>Les méthodes actives = meilleure rétention</li>
+          <li>Adaptez la méthode au contenu ET au public</li>
+          <li>Variez les méthodes toutes les 20-30 min</li>
+        </ul>
+      </div>`
+  },
+  '2-5': {
+    type:'atelier', title:"Créer des supports de formation", dur:'45 min',
+    module:"Module 2 — Concevoir une formation",
+    body:`
+      <h2>Atelier — Créer un support efficace</h2>
+      <div class="info-box">🛠 Durée : 45 min | Objectif : Créer un diaporama de 10 slides pour une séquence de votre formation</div>
+      <h3>Les principes d'un bon support visuel</h3>
+      <ul>
+        <li><strong>1 idée par slide :</strong> Ne jamais surcharger. Si vous avez du mal à résumer en un titre, vous avez trop de contenu.</li>
+        <li><strong>Règle des 6×6 :</strong> Maximum 6 lignes par slide, 6 mots par ligne.</li>
+        <li><strong>Visuel > texte :</strong> Un schéma ou une image parlent plus vite que 3 paragraphes.</li>
+        <li><strong>Contraste :</strong> Le texte doit être lisible depuis le fond de la salle.</li>
+      </ul>
+      <h3>Les erreurs à éviter</h3>
+      <ul>
+        <li>❌ Lire ses slides mot à mot (le participant peut lire seul)</li>
+        <li>❌ Trop d'animations qui distraient</li>
+        <li>❌ Police trop petite (jamais en dessous de 24pt)</li>
+        <li>❌ Fond surchargé qui noie le contenu</li>
+      </ul>
+      <div class="success-box">✅ <strong>Exercice :</strong> Prenez une formation que vous connaissez et créez un plan de 10 slides en respectant les règles ci-dessus. Durée estimée : 30 min.</div>`
+  },
+  '2-6': {
+    type:'lecture', title:"Le séquençage pédagogique", dur:'25 min',
+    module:"Module 2 — Concevoir une formation",
+    body:`
+      <h2>Séquencer : découper pour mieux apprendre</h2>
+      <p>Une journée de formation de 7h en continu est une erreur. Le cerveau humain ne peut se concentrer activement que <strong>20-25 minutes</strong> avant d'avoir besoin d'une pause cognitive.</p>
+      <h2>La règle des séquences</h2>
+      <ul>
+        <li>Séquences de <strong>20-45 min</strong> maximum</li>
+        <li>Toujours alterner : théorie → pratique → débrief</li>
+        <li>Pauses : 10 min toutes les 90 min, déjeuner de 1h minimum</li>
+      </ul>
+      <h2>L'architecture d'une journée type</h2>
+      <div class="example-box">
+        <div class="ex-title">Structure journée de formation</div>
+        <p>09:00 — Accueil & tour de table (30 min)<br>
+        09:30 — Séquence 1 : Apport théorique (35 min)<br>
+        10:05 — Exercice pratique (25 min)<br>
+        10:30 — Débrief + pause (20 min)<br>
+        10:50 — Séquence 2 : Apport (30 min)<br>
+        11:20 — Mise en situation (40 min)<br>
+        12:00 — Déjeuner (1h15)<br>
+        13:15 — Reprise, récap matin (15 min)<br>
+        13:30 — Séquences de l'après-midi (×3)<br>
+        17:00 — Évaluation + clôture (30 min)</p>
+      </div>
+      <div class="key-points">
+        <h3>🎯 Points clés à retenir</h3>
+        <ul>
+          <li>Max 20-45 min par séquence</li>
+          <li>Courbe d'attention : pic le matin, creux après déjeuner (14h-15h)</li>
+          <li>Prévoyez des activités dynamiques après 14h</li>
+          <li>Toujours clôturer par un récapitulatif et une ouverture vers la pratique</li>
+        </ul>
+      </div>`
+  },
+  '2-7': {
+    type:'quiz', title:"Quiz — Module 2", dur:'15 min',
+    module:"Module 2 — Concevoir une formation",
+    quiz:[
+      {q:"Un objectif pédagogique décrit :", opts:["Ce que le formateur va enseigner","Ce que l'apprenant sera capable de faire à l'issue","Le contenu du programme","La durée de la formation"], ans:1},
+      {q:"Lequel de ces verbes est adapté à un objectif pédagogique observable ?", opts:["Comprendre","Savoir","Construire","Appréhender"], ans:2},
+      {q:"Selon la taxonomie de Bloom, quel est le niveau cognitif le plus élevé ?", opts:["Analyser","Évaluer","Comprendre","Créer"], ans:3},
+      {q:"La règle de séquençage recommande des durées de :", opts:["5-10 min","20-45 min","1h-2h","Plus de 2h"], ans:1},
+      {q:"Parmi les méthodes pédagogiques, laquelle offre la meilleure rétention ?", opts:["Expositive","Interrogative","Active / expérientielle","Démonstrative"], ans:2},
+    ]
+  },
+
+  // ══════════════════════════════════════════
+  // MODULE 3 — ANIMER
+  // ══════════════════════════════════════════
+  '3-1': {
+    type:'video', title:"Le rôle et la posture du formateur", dur:'30 min',
+    module:"Module 3 — Animer une formation",
+    body:`
+      <div class="video-placeholder"><div class="play">▶</div><p>Vidéo : Posture formateur — 30 min</p></div>
+      <h2>Formateur ≠ Professeur</h2>
+      <p>Le formateur n'est pas là pour montrer ce qu'il sait. Il est là pour <strong>faciliter l'apprentissage</strong> d'adultes qui ont déjà de l'expérience.</p>
+      <h2>Les 3 postures du formateur</h2>
+      <ul>
+        <li><strong>Expert :</strong> Il apporte du contenu, de la structure, de la méthode. Nécessaire, mais insuffisant seul.</li>
+        <li><strong>Facilitateur :</strong> Il aide le groupe à construire ses propres réponses. Questionne plus qu'il n'affirme.</li>
+        <li><strong>Coach :</strong> Il accompagne individuellement. Utile en petits groupes ou sur des compétences comportementales.</li>
+      </ul>
+      <div class="highlight-box">💡 <strong>La posture idéale</strong> alterne selon le moment : expert pour les apports théoriques, facilitateur pour les exercices, coach pour les debriefs individuels.</div>
+      <h2>Communication non-verbale</h2>
+      <p>55% de la communication passe par le corps (Mehrabian). En tant que formateur :</p>
+      <ul>
+        <li>Circulez dans la salle — ne restez pas collé au tableau</li>
+        <li>Établissez un contact visuel avec chaque participant régulièrement</li>
+        <li>Votre voix : variez le rythme, les intonations, les silences</li>
+        <li>Évitez les gestes parasites (stylo, cheveux, poches)</li>
+      </ul>
+      <div class="key-points">
+        <h3>🎯 Points clés à retenir</h3>
+        <ul>
+          <li>Formateur = facilitateur, pas professeur</li>
+          <li>3 postures à alterner : expert, facilitateur, coach</li>
+          <li>Le non-verbal compte pour 55% de l'impact</li>
+          <li>Circulez, regardez, variez votre voix</li>
+        </ul>
+      </div>`
+  },
+  '3-2': {
+    type:'lecture', title:"Démarrer une formation : le lancement", dur:'25 min',
+    module:"Module 3 — Animer une formation",
+    body:`
+      <h2>Les 30 premières minutes sont cruciales</h2>
+      <p>Les participants se forgent une opinion sur vous et sur la formation dans les premières minutes. Un bon démarrage crée l'engagement. Un mauvais démarrage crée de la résistance difficile à surmonter.</p>
+      <h2>La checklist du lancement</h2>
+      <ol>
+        <li><strong>Accueil physique :</strong> Être là avant les participants. Accueillez chacun à l'entrée.</li>
+        <li><strong>Tour de table :</strong> Prénom, poste, expérience dans le domaine, attentes. Max 2 min par personne.</li>
+        <li><strong>Présentation de la formation :</strong> Objectifs, programme du jour, règles de fonctionnement.</li>
+        <li><strong>Ice-breaker :</strong> Activité courte qui détend l'atmosphère et crée de la cohésion.</li>
+        <li><strong>Recueil des attentes :</strong> Sur paperboard — vous y reviendrez en fin de formation.</li>
+      </ol>
+      <div class="example-box">
+        <div class="ex-title">Ice-breaker efficace (5 min)</div>
+        <p>"En binôme, interviewez votre voisin pendant 2 min. Trouvez 3 choses que vous avez en commun (hors travail). Ensuite, chaque binôme présente au groupe."</p>
+      </div>
+      <div class="key-points">
+        <h3>🎯 Points clés à retenir</h3>
+        <ul>
+          <li>Arrivez 30 min avant — la salle prête = confiance dégagée</li>
+          <li>Tour de table systématique — vous collectez des infos précieuses</li>
+          <li>L'ice-breaker n'est pas une perte de temps — c'est un investissement</li>
+          <li>Affichez le programme et les objectifs — ça rassure</li>
+        </ul>
+      </div>`
+  },
+  '3-3': {
+    type:'video', title:"Techniques d'animation participative", dur:'40 min',
+    module:"Module 3 — Animer une formation",
+    body:`
+      <div class="video-placeholder"><div class="play">▶</div><p>Vidéo : Techniques participatives — 40 min</p></div>
+      <h2>Rendre les participants acteurs</h2>
+      <p>Un participant actif mémorise 5× mieux qu'un participant passif. Votre rôle : créer des occasions de participer à chaque séquence.</p>
+      <h2>Techniques clés</h2>
+      <h3>1. Brainstorming</h3>
+      <p>Toutes les idées sont accueillies sans jugement. Phase de divergence. Puis on trie. Idéal en début de séquence pour activer les connaissances préalables.</p>
+      <h3>2. Études de cas</h3>
+      <p>Un scénario réel ou fictif que le groupe analyse et résout. Connecte théorie et pratique. Favorise le transfert.</p>
+      <h3>3. Jeux de rôle</h3>
+      <p>Simulation d'une situation professionnelle. Powerful pour les compétences relationnelles (vente, management, communication). Toujours suivis d'un débrief structuré.</p>
+      <h3>4. Travail en sous-groupes</h3>
+      <p>Diviser en groupes de 3-4 pour traiter une question, puis restitution en plénière. Permet plus d'expression individuelle.</p>
+      <h3>5. Quiz & questions flash</h3>
+      <p>Questions rapides pour vérifier la compréhension. Crée de l'engagement et aide le formateur à ajuster le rythme.</p>
+      <div class="key-points">
+        <h3>🎯 Points clés à retenir</h3>
+        <ul>
+          <li>Alternez technique participative toutes les 25-30 min</li>
+          <li>Jeux de rôle = toujours un débrief structuré ensuite</li>
+          <li>Sous-groupes : max 4 personnes pour éviter les parasites</li>
+          <li>La question "qu'en pensez-vous ?" vaut mieux qu'un exposé de 10 min</li>
+        </ul>
+      </div>`
+  },
+};
+
+// ===== STRUCTURE DES MODULES =====
+const MODULES = [
+  {id:1, title:"L'adulte apprenant", state:'done',
+   lessons:[
+     {id:'1-1', title:"Spécificités de l'adulte apprenant", type:'video', dur:'35', state:'done'},
+     {id:'1-2', title:"Styles d'apprentissage (Kolb, VAK)", type:'lecture', dur:'30', state:'done'},
+     {id:'1-3', title:"Motivation et engagement", type:'video', dur:'25', state:'done'},
+     {id:'1-4', title:"Créer un environnement apprenant", type:'lecture', dur:'20', state:'done'},
+     {id:'1-5', title:"Atelier : Analyse du public", type:'atelier', dur:'40', state:'done'},
+     {id:'1-6', title:"Quiz — Module 1", type:'quiz', dur:'15', state:'done'},
+   ]},
+  {id:2, title:"Concevoir une formation", state:'done',
+   lessons:[
+     {id:'2-1', title:"Analyse des besoins", type:'video', dur:'30', state:'done'},
+     {id:'2-2', title:"Objectifs pédagogiques SMART", type:'lecture', dur:'35', state:'done'},
+     {id:'2-3', title:"Construire un plan de formation", type:'video', dur:'40', state:'done'},
+     {id:'2-4', title:"Choisir les méthodes pédagogiques", type:'lecture', dur:'30', state:'done'},
+     {id:'2-5', title:"Créer des supports", type:'atelier', dur:'45', state:'done'},
+     {id:'2-6', title:"Séquençage pédagogique", type:'lecture', dur:'25', state:'done'},
+     {id:'2-7', title:"Quiz — Module 2", type:'quiz', dur:'15', state:'done'},
+   ]},
+  {id:3, title:"Animer une formation", state:'active',
+   lessons:[
+     {id:'3-1', title:"Rôle et posture du formateur", type:'video', dur:'30', state:'done'},
+     {id:'3-2', title:"Démarrer une formation", type:'lecture', dur:'25', state:'done'},
+     {id:'3-3', title:"Techniques d'animation participative", type:'video', dur:'40', state:'active'},
+     {id:'3-4', title:"Gérer la dynamique de groupe", type:'lecture', dur:'35', state:'locked'},
+     {id:'3-5', title:"Gérer les situations difficiles", type:'video', dur:'30', state:'locked'},
+     {id:'3-6', title:"Jeu et gamification", type:'lecture', dur:'25', state:'locked'},
+     {id:'3-7', title:"Atelier : Simulation d'animation", type:'atelier', dur:'50', state:'locked'},
+     {id:'3-8', title:"Quiz — Module 3", type:'quiz', dur:'20', state:'locked'},
+   ]},
+  {id:4, title:"Évaluer les apprentissages", state:'locked',
+   lessons:[
+     {id:'4-1', title:"Types d'évaluation", type:'video', dur:'30', state:'locked'},
+     {id:'4-2', title:"Concevoir un quiz efficace", type:'lecture', dur:'25', state:'locked'},
+     {id:'4-3', title:"Évaluation à chaud et à froid", type:'video', dur:'30', state:'locked'},
+     {id:'4-4', title:"Mesurer le transfert", type:'lecture', dur:'35', state:'locked'},
+     {id:'4-5', title:"Quiz — Module 4", type:'quiz', dur:'15', state:'locked'},
+   ]},
+  {id:5, title:"Cadre légal & administratif", state:'locked',
+   lessons:[
+     {id:'5-1', title:"Le marché de la formation", type:'video', dur:'25', state:'locked'},
+     {id:'5-2', title:"La certification Qualiopi", type:'lecture', dur:'30', state:'locked'},
+     {id:'5-3', title:"NDA, conventions, facturation", type:'video', dur:'35', state:'locked'},
+     {id:'5-4', title:"Les financements", type:'lecture', dur:'30', state:'locked'},
+     {id:'5-5', title:"Quiz final — Certification", type:'quiz', dur:'30', state:'locked'},
+   ]},
+];
+
+let openMods = {1:true, 2:false, 3:true};
+let currentLesson = '3-3';
+let quizState = {};
+
+function renderSidebar() {
+  const nav = document.getElementById('sidebar-nav');
+  nav.innerHTML = MODULES.map(m => {
+    const stateClass = m.state==='done'?'mb-done':m.state==='active'?'mb-active':'mb-locked';
+    const stateIcon = m.state==='done'?'✓':m.state==='active'?'▶':'🔒';
+    const isOpen = openMods[m.id];
+    return `
+    <div class="module-group">
+      <button class="module-title-btn ${currentLesson.startsWith(m.id+'')?' active':''}" onclick="toggleMod(${m.id})">
+        <span class="module-badge ${stateClass}">${stateIcon}</span>
+        Module ${m.id} — ${m.title}
+        <span class="module-arrow ${isOpen?'open':''}">▾</span>
+      </button>
+      <div class="lessons-sub ${isOpen?'open':''}">
+        ${m.lessons.map(l => {
+          const typeIcon = l.type==='video'?'▶':l.type==='quiz'?'✏️':l.type==='atelier'?'🛠':'📄';
+          const stCl = l.state==='done'?'done':l.state==='active'?'active':'';
+          return `<button class="lesson-btn ${stCl} ${l.id===currentLesson?'active':''}" onclick="loadLesson('${l.id}')">
+            <span class="lesson-icon">${l.state==='locked'?'🔒':typeIcon}</span>
+            ${l.title}
+            <span class="lesson-dur">${l.dur}min</span>
+          </button>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleMod(id) { openMods[id] = !openMods[id]; renderSidebar(); }
+
+function loadLesson(id) {
+  currentLesson = id;
+  const data = CONTENT[id];
+  if (!data) { renderLocked(); renderSidebar(); return; }
+
+  document.getElementById('breadcrumb').innerHTML = `<strong>${data.module}</strong> · ${data.title}`;
+  const tagClass = {video:'tag-video',lecture:'tag-lecture',atelier:'tag-atelier',quiz:'tag-quiz'}[data.type]||'tag-lecture';
+  const tagLabel = {video:'📹 Vidéo',lecture:'📄 Lecture',atelier:'🛠 Atelier',quiz:'✏️ Quiz'}[data.type]||'Leçon';
+
+  let bodyHtml = '';
+  if (data.quiz) {
+    bodyHtml = renderQuizHtml(id, data.quiz);
+  } else {
+    bodyHtml = `<div class="content-body">${data.body}</div>`;
+  }
+
+  document.getElementById('lesson-content').innerHTML = `
+    <div class="lesson-header">
+      <span class="lesson-tag ${tagClass}">${tagLabel}</span>
+      <h1 class="lesson-title">${data.title}</h1>
+      <div class="lesson-meta">
+        <span>⏱ ${data.dur}</span>
+        <span>📂 ${data.module}</span>
+      </div>
+    </div>
+    ${bodyHtml}
+    <div class="nav-bottom">
+      <button class="btn-prev-lesson" onclick="prevLesson()">← Précédente</button>
+      <button class="btn-mark-done" onclick="markDone()">✓ Marquer comme terminé</button>
+      <button class="btn-next-lesson" onclick="nextLesson()">Suivante →</button>
+    </div>`;
+
+  renderSidebar();
+  window.scrollTo(0,0);
+}
+
+function renderQuizHtml(id, questions) {
+  return `<div class="quiz-section">
+    <h2>✏️ Quiz d'évaluation</h2>
+    <p style="color:var(--muted);margin-bottom:24px;font-size:15px">Répondez à toutes les questions. Score minimum requis : 70%.</p>
+    ${questions.map((q,qi) => `
+    <div class="quiz-q" id="q-${id}-${qi}">
+      <div class="q-num">Question ${qi+1}/${questions.length}</div>
+      <div class="q-text">${q.q}</div>
+      ${q.opts.map((opt,oi) => `
+      <button class="quiz-opt" id="opt-${id}-${qi}-${oi}" onclick="selectOpt('${id}',${qi},${oi},${q.ans})">${String.fromCharCode(65+oi)}. ${opt}</button>
+      `).join('')}
+    </div>`).join('')}
+    <button class="btn-submit-quiz" onclick="submitInlineQuiz('${id}',${questions.length})">Valider le quiz →</button>
+    <div class="quiz-result" id="result-${id}">
+      <div style="font-size:48px">🎉</div>
+      <div class="score" id="score-${id}">0%</div>
+      <p id="score-msg-${id}"></p>
+    </div>
+  </div>`;
+}
+
+function selectOpt(qid, qi, oi, correct) {
+  const opts = document.querySelectorAll(`[id^="opt-${qid}-${qi}-"]`);
+  opts.forEach(o => o.classList.remove('selected'));
+  document.getElementById(`opt-${qid}-${qi}-${oi}`).classList.add('selected');
+  if (!quizState[qid]) quizState[qid] = {};
+  quizState[qid][qi] = {selected:oi, correct};
+}
+
+function submitInlineQuiz(qid, total) {
+  const answers = quizState[qid] || {};
+  let score = 0;
+  Object.entries(answers).forEach(([qi, a]) => {
+    const btn = document.getElementById(`opt-${qid}-${qi}-${a.selected}`);
+    if (a.selected === a.correct) { score++; btn.classList.add('correct'); }
+    else { btn.classList.add('wrong'); document.getElementById(`opt-${qid}-${qi}-${a.correct}`).classList.add('correct'); }
+    btn.classList.remove('selected');
+  });
+  const pct = Math.round(score/total*100);
+  const res = document.getElementById(`result-${qid}`);
+  res.style.display = 'block';
+  document.getElementById(`score-${qid}`).textContent = pct + '%';
+  document.getElementById(`score-msg-${qid}`).textContent = pct >= 70
+    ? `Bravo ! ${score}/${total} bonnes réponses. Module validé !`
+    : `${score}/${total} bonnes réponses. Score minimum 70% — révisez et réessayez.`;
+  res.style.borderColor = pct>=70?'var(--success)':'var(--warning)';
+  document.getElementById(`score-${qid}`).style.color = pct>=70?'var(--success)':'var(--warning)';
+}
+
+function renderLocked() {
+  document.getElementById('lesson-content').innerHTML = `
+    <div style="text-align:center;padding:80px 20px">
+      <div style="font-size:64px;margin-bottom:20px">🔒</div>
+      <h2 style="font-size:24px;font-weight:800;color:var(--primary);margin-bottom:12px">Leçon verrouillée</h2>
+      <p style="color:var(--muted)">Terminez les leçons précédentes pour débloquer cette section.</p>
+    </div>`;
+}
+
+function getAllLessons() {
+  return MODULES.flatMap(m => m.lessons.map(l => l.id));
+}
+function nextLesson() {
+  const all = getAllLessons();
+  const idx = all.indexOf(currentLesson);
+  if (idx < all.length-1) loadLesson(all[idx+1]);
+}
+function prevLesson() {
+  const all = getAllLessons();
+  const idx = all.indexOf(currentLesson);
+  if (idx > 0) loadLesson(all[idx-1]);
+}
+function markDone() {
+  const btn = event.target;
+  btn.textContent = '✓ Terminé !';
+  btn.style.background = '#27ae60';
+  btn.disabled = true;
+}
+
+// Init
+renderSidebar();
+loadLesson(currentLesson);
+</script>
+</body>
+</html>

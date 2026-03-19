@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Devenir Formateur - lesformateurs.online</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<style>
+.guarantee-box{
+  background:linear-gradient(135deg,var(--primary),var(--accent2));
+  border-radius:14px;padding:40px;color:#fff;text-align:center;margin:48px 0;
+}
+.guarantee-box h2{font-size:28px;font-weight:900;margin-bottom:12px;}
+.guarantee-box p{font-size:15px;color:rgba(255,255,255,.7);max-width:500px;margin:0 auto;}
+
+.comparison{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:48px 0;}
+@media(max-width:600px){.comparison{grid-template-columns:1fr;gap:16px;}}
+.compare-card{
+  border-radius:14px;padding:32px;text-align:center;
+}
+.compare-card.without{background:var(--light);border:2px solid var(--border);}
+.compare-card.with{background:var(--primary);color:#fff;border:2px solid var(--accent);}
+.compare-card h3{font-size:18px;font-weight:800;margin-bottom:16px;}
+.compare-stat{font-size:48px;font-weight:900;margin:16px 0 8px;}
+.compare-card.with .compare-stat{color:var(--accent);}
+.compare-card.without .compare-stat{color:var(--muted);}
+.compare-label{font-size:13px;color:var(--muted);}
+.compare-card.with .compare-label{color:rgba(255,255,255,.6);}
+
+.timeline{max-width:600px;margin:0 auto;}
+.timeline-item{
+  display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border);
+}
+.timeline-num{
+  width:44px;height:44px;min-width:44px;border-radius:50%;
+  background:var(--accent);color:#fff;display:flex;align-items:center;
+  justify-content:center;font-size:18px;font-weight:900;
+}
+.timeline-content h4{font-size:16px;font-weight:700;margin-bottom:4px;}
+.timeline-content p{font-size:13px;color:var(--muted);}
+
+.big-price{
+  text-align:center;margin:48px 0;
+}
+.big-price .old{font-size:20px;color:var(--muted);text-decoration:line-through;margin-bottom:4px;}
+.big-price .new{font-size:56px;font-weight:900;color:var(--accent);}
+.big-price .sub{font-size:15px;color:var(--muted);margin-top:4px;}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="nav-links" id="navLinks">
+    <a href="missions.html">Missions</a>
+    <a href="conformite.html">Conformité</a>
+    <a href="creer-of.html">Créer mon OF</a>
+    <a href="se-former.html" style="color:#fff;background:rgba(255,255,255,.1);">Se former</a>
+    <a href="missions.html" class="nav-cta">Connexion</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header" style="padding-bottom:32px;">
+  <div style="display:inline-block;background:var(--accent);color:#fff;font-size:14px;font-weight:800;padding:6px 20px;border-radius:20px;margin-bottom:20px;">100% REMBOURSÉ</div>
+  <h1>Devenez formateur professionnel</h1>
+  <p>Formation complète + placement garanti + agents IA pour trouver vos missions.</p>
+</div>
+
+<div class="trust-bar">
+  <div class="trust-item">🎓 Formation certifiante 21h</div>
+  <div class="trust-item">🤖 Agents IA pour vos missions</div>
+  <div class="trust-item">💰 100% remboursé via FIF PL</div>
+  <div class="trust-item">✅ Satisfait ou remboursé 3 mois</div>
+</div>
+
+<!-- COMMENT CA MARCHE -->
+<section>
+  <div class="container">
+    <span class="section-label">Comment ça marche</span>
+    <h2 class="section-title">3 étapes pour devenir formateur</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-num">1</div>
+        <div class="timeline-content">
+          <h4>On vous forme</h4>
+          <p>Formation "Formateur Professionnel" — 21h en ligne, à votre rythme. Conception pédagogique, animation, gestion administrative, techniques de vente. Certification à la clé.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">2</div>
+        <div class="timeline-content">
+          <h4>On vous fait passer des entretiens</h4>
+          <p>Notre équipe vous met en relation avec des centres de formation et des entreprises qui recherchent des formateurs. Entretiens organisés pour vous.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">3</div>
+        <div class="timeline-content">
+          <h4>Agents IA — 1 mission par jour</h4>
+          <p>Nos agents IA recherchent des missions pour vous chaque jour. Vous recevez des opportunités ciblées directement dans votre espace — sans effort.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARAISON -->
+<section class="bg-light">
+  <div class="container">
+    <span class="section-label">Résultats</span>
+    <h2 class="section-title" style="text-align:center;">Avec ou sans lesformateurs.online</h2>
+
+    <div class="comparison">
+      <div class="compare-card without">
+        <h3>Sans notre accompagnement</h3>
+        <div class="compare-stat">2</div>
+        <div class="compare-label">rendez-vous / mois en moyenne</div>
+        <div class="compare-stat" style="font-size:32px;margin-top:24px;">18 000€</div>
+        <div class="compare-label">CA annuel moyen</div>
+      </div>
+      <div class="compare-card with">
+        <h3>Avec lesformateurs.online</h3>
+        <div class="compare-stat">8</div>
+        <div class="compare-label">rendez-vous / mois en moyenne</div>
+        <div class="compare-stat" style="font-size:32px;margin-top:24px;">42 000€</div>
+        <div class="compare-label">CA annuel moyen</div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--muted);">Données basées sur les formateurs membres de notre réseau.</p>
+  </div>
+</section>
+
+<!-- GARANTIE -->
+<section>
+  <div class="container">
+    <div class="guarantee-box">
+      <h2>✅ Satisfait ou 100% remboursé</h2>
+      <p>Si vous ne trouvez pas de mission dans les 3 mois suivant votre formation, nous vous remboursons intégralement. Sans condition.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRIX -->
+<section class="bg-light">
+  <div class="container">
+    <span class="section-label">Tarif</span>
+    <h2 class="section-title" style="text-align:center;">Investissez dans votre carrière</h2>
+
+    <div class="big-price">
+      <div class="old">1 490€ prix habituel</div>
+      <div class="new">100% remboursé</div>
+      <div class="sub">via FIF PL pour les travailleurs indépendants *</div>
+    </div>
+
+    <div style="max-width:500px;margin:0 auto;">
+      <ul style="list-style:none;margin-bottom:32px;">
+        <li style="padding:10px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--success);font-weight:700;">✓</span> Formation certifiante 21h
+        </li>
+        <li style="padding:10px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--success);font-weight:700;">✓</span> Accès au réseau de missions
+        </li>
+        <li style="padding:10px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--success);font-weight:700;">✓</span> Entretiens organisés pour vous
+        </li>
+        <li style="padding:10px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--success);font-weight:700;">✓</span> Agents IA — recherche quotidienne de missions
+        </li>
+        <li style="padding:10px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--success);font-weight:700;">✓</span> Garantie satisfait ou remboursé 3 mois
+        </li>
+        <li style="padding:10px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--success);font-weight:700;">✓</span> Dossier FIF PL constitué à votre place
+        </li>
+      </ul>
+    </div>
+
+    <!-- FORMULAIRE INSCRIPTION -->
+    <div style="max-width:500px;margin:0 auto;background:#fff;padding:32px;border-radius:14px;border:2px solid var(--accent);">
+      <h3 style="font-size:20px;font-weight:800;margin-bottom:16px;text-align:center;">Je m'inscris</h3>
+
+      <!-- SÉLECTEUR POUR QUI -->
+      <div style="background:var(--light);padding:14px;border-radius:8px;margin-bottom:16px;">
+        <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette formation est pour :</label>
+        <select id="f-pour" onchange="toggleFormationFields()">
+          <option value="moi">Moi-même</option>
+          <option value="autre">Quelqu'un d'autre</option>
+        </select>
+      </div>
+
+      <!-- INFOS POUR MOI (pré-remplies, masquées si connecté) -->
+      <div id="f-fields-moi">
+        <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:12px;margin-bottom:16px;font-size:13px;color:var(--success);text-align:center;">
+          ✅ Vos informations de profil seront utilisées automatiquement.
+        </div>
+      </div>
+
+      <!-- INFOS POUR QUELQU'UN D'AUTRE -->
+      <div id="f-fields-autre" style="display:none;">
+        <div class="form-group"><label>Prénom et nom du candidat</label><input type="text" id="f-nom" placeholder="Jean Dupont"></div>
+        <div class="form-group"><label>Email du candidat</label><input type="email" id="f-email" placeholder="jean@email.fr"></div>
+        <div class="form-group"><label>Téléphone du candidat</label><input type="tel" id="f-phone" placeholder="06 12 34 56 78"></div>
+        <div class="form-group"><label>Statut actuel du candidat</label>
+          <select id="f-statut">
+            <option value="">Choisissez...</option>
+            <option>Travailleur indépendant (éligible FIF PL)</option>
+            <option>Salarié en reconversion</option>
+            <option>Demandeur d'emploi</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div style="background:rgba(233,69,96,.05);border:1px solid rgba(233,69,96,.15);border-radius:8px;padding:12px;margin-bottom:16px;font-size:12px;">
+          📩 <strong>Un lien de paiement sera envoyé au candidat</strong> pour qu'il règle directement. Vous serez notifié dès son inscription.
+        </div>
+      </div>
+
+      <!-- BOUTON PAIEMENT -->
+      <div id="btn-moi">
+        <button class="btn btn-primary btn-block btn-lg" onclick="payerFormationMoi()">Payer et commencer ma formation →</button>
+      </div>
+      <div id="btn-autre" style="display:none;">
+        <button class="btn btn-primary btn-block btn-lg" onclick="envoyerLienFormation()">Envoyer le lien de paiement au candidat →</button>
+      </div>
+
+      <!-- GARANTIES -->
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;">
+          <span style="font-size:18px;">💰</span>
+          <div>
+            <strong style="font-size:13px;">100% remboursé par le FIF PL</strong>
+            <p style="font-size:11px;color:var(--muted);margin-top:2px;">Le Fonds Interprofessionnel de Formation des Professionnels Libéraux prend en charge l'intégralité de la formation. Vous ne payez rien au final.</p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;">
+          <span style="font-size:18px;">✅</span>
+          <div>
+            <strong style="font-size:13px;">Satisfait ou remboursé</strong>
+            <p style="font-size:11px;color:var(--muted);margin-top:2px;">Si vous ne trouvez pas de mission dans les 3 mois, nous vous remboursons intégralement. Sans condition.</p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:8px;">
+          <span style="font-size:18px;">🎁</span>
+          <div>
+            <strong style="font-size:13px;">Double remboursement</strong>
+            <p style="font-size:11px;color:var(--muted);margin-top:2px;">Même si vous êtes satisfait, le FIF PL rembourse votre formation. Vous êtes gagnant dans tous les cas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">lesformateurs.online</div><div>La plateforme des professionnels de la formation</div></div>
+    <div class="footer-links">
+      <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
+      <a href="creer-of.html">Créer mon OF</a><a href="se-former.html">Se former</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleFormationFields(){
+  var pour = document.getElementById('f-pour').value;
+  document.getElementById('f-fields-moi').style.display = pour === 'moi' ? '' : 'none';
+  document.getElementById('f-fields-autre').style.display = pour === 'autre' ? '' : 'none';
+  document.getElementById('btn-moi').style.display = pour === 'moi' ? '' : 'none';
+  document.getElementById('btn-autre').style.display = pour === 'autre' ? '' : 'none';
+}
+
+function payerFormationMoi(){
+  window.location.href = 'https://buy.stripe.com/8x2eVd3fc6j3c6y0JQffy0Y';
+}
+
+function envoyerLienFormation(){
+  var email = document.getElementById('f-email').value.trim();
+  var nom = document.getElementById('f-nom').value.trim();
+  if(!nom || !email){ alert('Veuillez remplir le nom et l\'email du candidat.'); return; }
+  alert('✅ Lien de paiement envoyé à ' + email + ' !\n\nLe candidat recevra un email avec le lien pour s\'inscrire et payer.\nVous serez notifié dès son inscription.\n\n💰 Rappel : la formation est 100% remboursée par le FIF PL.');
+}
+</script>
+</body>
+</html>

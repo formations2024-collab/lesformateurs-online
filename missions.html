@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Missions de formation - lesformateurs.online</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="nav-links" id="navLinks">
+    <a href="missions.html" style="color:#fff;background:rgba(255,255,255,.1);">Missions</a>
+    <a href="conformite.html">Conformité</a>
+    <a href="creer-of.html">Créer mon OF</a>
+    <a href="se-former.html">Se former</a>
+    <a href="#" onclick="openModal('signup');return false;" class="nav-cta">Connexion</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="page-header">
+  <h1>110+ missions disponibles</h1>
+  <p>Formations en entreprise, en centre, en distanciel — partout en France.</p>
+</div>
+
+<div class="trust-bar">
+  <div class="trust-item">🎯 110+ missions actives</div>
+  <div class="trust-item">⭐ Annonces mises en avant disponibles</div>
+  <div class="trust-item">📍 Toutes régions de France</div>
+</div>
+
+<section>
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
+      <h2 style="font-size:20px;font-weight:800;">Toutes les missions</h2>
+      <a href="#" onclick="openModal('deposer');return false;" class="btn btn-outline" style="padding:8px 20px;font-size:13px;">+ Déposer une annonce</a>
+    </div>
+    <div class="filter-bar">
+      <input type="text" id="filterSearch" placeholder="🔍 Rechercher une mission..." onkeyup="filterMissions()">
+      <select id="filterRegion" onchange="filterMissions()">
+        <option value="">📍 Toutes les régions</option>
+        <option>Paris</option><option>Lyon</option><option>Marseille</option><option>Bordeaux</option>
+        <option>Toulouse</option><option>Lille</option><option>Nantes</option><option>Strasbourg</option>
+        <option>Distanciel</option><option>Île-de-France</option><option>PACA</option>
+        <option>Auvergne-Rhône-Alpes</option><option>Occitanie</option>
+      </select>
+      <select id="filterCat" onchange="filterMissions()">
+        <option value="">📂 Toutes catégories</option>
+        <option>Bureautique</option><option>Communication</option><option>Digital</option>
+        <option>Management</option><option>Langues</option><option>Sécurité</option>
+        <option>RH</option><option>Comptabilité</option><option>Informatique</option>
+        <option>Gestion de projets</option><option>Vente</option><option>Qualité</option>
+        <option>Logistique</option><option>Santé</option><option>Immobilier</option>
+        <option>BTP</option><option>Restauration</option><option>Coaching</option>
+        <option>Droit</option><option>Esthétique</option>
+      </select>
+    </div>
+    <div class="grid-3" id="missionsGrid">
+    <div class="mission-card featured">
+      <span class="mission-tag">Bureautique</span>
+      <h4>Formateur Bureautique — Distanciel</h4>
+      <p>Excel, Word, PowerPoint — sessions en entreprise.</p>
+      <div class="mission-meta">
+        <span>📍 Paris</span><span>💶 380€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card featured">
+      <span class="mission-tag">Communication</span>
+      <h4>Formateur Communication</h4>
+      <p>Prise de parole, communication interpersonnelle.</p>
+      <div class="mission-meta">
+        <span>📍 Lyon</span><span>💶 600€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card featured">
+      <span class="mission-tag">Digital</span>
+      <h4>Formateur Digital — Débutants</h4>
+      <p>Marketing digital, réseaux sociaux, SEO, e-commerce.</p>
+      <div class="mission-meta">
+        <span>📍 Marseille</span><span>💶 420€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card featured">
+      <span class="mission-tag">Management</span>
+      <h4>Formateur Management — Avancé</h4>
+      <p>Management d'équipe, leadership, gestion de conflits.</p>
+      <div class="mission-meta">
+        <span>📍 Bordeaux</span><span>💶 400€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card featured">
+      <span class="mission-tag">Langues</span>
+      <h4>Formateur Langues — Distanciel</h4>
+      <p>Anglais, espagnol, FLE — présentiel ou distanciel.</p>
+      <div class="mission-meta">
+        <span>📍 Toulouse</span><span>💶 380€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card featured">
+      <span class="mission-tag">Sécurité</span>
+      <h4>Formateur Sécurité — Distanciel</h4>
+      <p>SST, SSIAP, habilitation électrique, incendie.</p>
+      <div class="mission-meta">
+        <span>📍 Lille</span><span>💶 600€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">RH</span>
+      <h4>Formateur RH — Centre</h4>
+      <p>Recrutement, GPEC, droit social, paie.</p>
+      <div class="mission-meta">
+        <span>📍 Nantes</span><span>💶 380€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Comptabilité</span>
+      <h4>Formateur Comptabilité — Centre</h4>
+      <p>Comptabilité générale, fiscalité, gestion budgétaire.</p>
+      <div class="mission-meta">
+        <span>📍 Strasbourg</span><span>💶 480€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Informatique</span>
+      <h4>Formateur Informatique</h4>
+      <p>Développement web, bases de données, cybersécurité.</p>
+      <div class="mission-meta">
+        <span>📍 Montpellier</span><span>💶 350€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Gestion de projets</span>
+      <h4>Formateur Gestion de projets</h4>
+      <p>Méthodes agiles, PMP, planification.</p>
+      <div class="mission-meta">
+        <span>📍 Nice</span><span>💶 420€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Vente</span>
+      <h4>Formateur Vente — Avancé</h4>
+      <p>Techniques de vente, négociation commerciale.</p>
+      <div class="mission-meta">
+        <span>📍 Rennes</span><span>💶 520€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Qualité</span>
+      <h4>Formateur Qualité — Centre</h4>
+      <p>ISO 9001, Lean Six Sigma, amélioration continue.</p>
+      <div class="mission-meta">
+        <span>📍 Grenoble</span><span>💶 350€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Logistique</span>
+      <h4>Formateur Logistique — Centre</h4>
+      <p>Supply chain, transport, gestion des stocks.</p>
+      <div class="mission-meta">
+        <span>📍 Distanciel</span><span>💶 420€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Santé</span>
+      <h4>Formateur Santé — Distanciel</h4>
+      <p>Soins infirmiers, hygiène, AFGSU.</p>
+      <div class="mission-meta">
+        <span>📍 Île-de-France</span><span>💶 580€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Immobilier</span>
+      <h4>Formateur Immobilier — Distanciel</h4>
+      <p>Loi ALUR, transaction, gestion locative.</p>
+      <div class="mission-meta">
+        <span>📍 PACA</span><span>💶 520€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">BTP</span>
+      <h4>Formateur BTP — Entreprise</h4>
+      <p>Sécurité chantier, CACES, coordination SPS.</p>
+      <div class="mission-meta">
+        <span>📍 Auvergne-Rhône-Alpes</span><span>💶 420€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Restauration</span>
+      <h4>Formateur Restauration — Entreprise</h4>
+      <p>HACCP, hygiène alimentaire, gestion restaurant.</p>
+      <div class="mission-meta">
+        <span>📍 Occitanie</span><span>💶 550€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Coaching</span>
+      <h4>Formateur Coaching — Débutants</h4>
+      <p>Coaching professionnel, développement personnel.</p>
+      <div class="mission-meta">
+        <span>📍 Grand Est</span><span>💶 350€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Droit</span>
+      <h4>Formateur Droit — Avancé</h4>
+      <p>Droit du travail, RGPD, conformité juridique.</p>
+      <div class="mission-meta">
+        <span>📍 Nouvelle-Aquitaine</span><span>💶 600€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Esthétique</span>
+      <h4>Formateur Esthétique — Entreprise</h4>
+      <p>Prothésiste ongulaire, extensions cils, maquillage.</p>
+      <div class="mission-meta">
+        <span>📍 Hauts-de-France</span><span>💶 470€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Bureautique</span>
+      <h4>Formateur Bureautique — Débutants</h4>
+      <p>Excel, Word, PowerPoint — sessions en entreprise.</p>
+      <div class="mission-meta">
+        <span>📍 Paris</span><span>💶 400€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Communication</span>
+      <h4>Formateur Communication — Avancé</h4>
+      <p>Prise de parole, communication interpersonnelle.</p>
+      <div class="mission-meta">
+        <span>📍 Lyon</span><span>💶 470€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Digital</span>
+      <h4>Formateur Digital</h4>
+      <p>Marketing digital, réseaux sociaux, SEO, e-commerce.</p>
+      <div class="mission-meta">
+        <span>📍 Marseille</span><span>💶 380€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Management</span>
+      <h4>Formateur Management — Entreprise</h4>
+      <p>Management d'équipe, leadership, gestion de conflits.</p>
+      <div class="mission-meta">
+        <span>📍 Bordeaux</span><span>💶 380€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Langues</span>
+      <h4>Formateur Langues — Débutants</h4>
+      <p>Anglais, espagnol, FLE — présentiel ou distanciel.</p>
+      <div class="mission-meta">
+        <span>📍 Toulouse</span><span>💶 470€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Sécurité</span>
+      <h4>Formateur Sécurité — Centre</h4>
+      <p>SST, SSIAP, habilitation électrique, incendie.</p>
+      <div class="mission-meta">
+        <span>📍 Lille</span><span>💶 450€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">RH</span>
+      <h4>Formateur RH</h4>
+      <p>Recrutement, GPEC, droit social, paie.</p>
+      <div class="mission-meta">
+        <span>📍 Nantes</span><span>💶 600€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Comptabilité</span>
+      <h4>Formateur Comptabilité — Entreprise</h4>
+      <p>Comptabilité générale, fiscalité, gestion budgétaire.</p>
+      <div class="mission-meta">
+        <span>📍 Strasbourg</span><span>💶 520€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Informatique</span>
+      <h4>Formateur Informatique</h4>
+      <p>Développement web, bases de données, cybersécurité.</p>
+      <div class="mission-meta">
+        <span>📍 Montpellier</span><span>💶 480€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Gestion de projets</span>
+      <h4>Formateur Gestion de projets</h4>
+      <p>Méthodes agiles, PMP, planification.</p>
+      <div class="mission-meta">
+        <span>📍 Nice</span><span>💶 520€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Vente</span>
+      <h4>Formateur Vente — Débutants</h4>
+      <p>Techniques de vente, négociation commerciale.</p>
+      <div class="mission-meta">
+        <span>📍 Rennes</span><span>💶 580€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Qualité</span>
+      <h4>Formateur Qualité — Centre</h4>
+      <p>ISO 9001, Lean Six Sigma, amélioration continue.</p>
+      <div class="mission-meta">
+        <span>📍 Grenoble</span><span>💶 470€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Logistique</span>
+      <h4>Formateur Logistique — Centre</h4>
+      <p>Supply chain, transport, gestion des stocks.</p>
+      <div class="mission-meta">
+        <span>📍 Distanciel</span><span>💶 420€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Santé</span>
+      <h4>Formateur Santé — Distanciel</h4>
+      <p>Soins infirmiers, hygiène, AFGSU.</p>
+      <div class="mission-meta">
+        <span>📍 Île-de-France</span><span>💶 380€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Immobilier</span>
+      <h4>Formateur Immobilier</h4>
+      <p>Loi ALUR, transaction, gestion locative.</p>
+      <div class="mission-meta">
+        <span>📍 PACA</span><span>💶 580€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">BTP</span>
+      <h4>Formateur BTP — Avancé</h4>
+      <p>Sécurité chantier, CACES, coordination SPS.</p>
+      <div class="mission-meta">
+        <span>📍 Auvergne-Rhône-Alpes</span><span>💶 450€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Restauration</span>
+      <h4>Formateur Restauration</h4>
+      <p>HACCP, hygiène alimentaire, gestion restaurant.</p>
+      <div class="mission-meta">
+        <span>📍 Occitanie</span><span>💶 420€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Coaching</span>
+      <h4>Formateur Coaching</h4>
+      <p>Coaching professionnel, développement personnel.</p>
+      <div class="mission-meta">
+        <span>📍 Grand Est</span><span>💶 480€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Droit</span>
+      <h4>Formateur Droit — Débutants</h4>
+      <p>Droit du travail, RGPD, conformité juridique.</p>
+      <div class="mission-meta">
+        <span>📍 Nouvelle-Aquitaine</span><span>💶 500€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Esthétique</span>
+      <h4>Formateur Esthétique — Distanciel</h4>
+      <p>Prothésiste ongulaire, extensions cils, maquillage.</p>
+      <div class="mission-meta">
+        <span>📍 Hauts-de-France</span><span>💶 470€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Bureautique</span>
+      <h4>Formateur Bureautique — Avancé</h4>
+      <p>Excel, Word, PowerPoint — sessions en entreprise.</p>
+      <div class="mission-meta">
+        <span>📍 Paris</span><span>💶 470€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Communication</span>
+      <h4>Formateur Communication — Débutants</h4>
+      <p>Prise de parole, communication interpersonnelle.</p>
+      <div class="mission-meta">
+        <span>📍 Lyon</span><span>💶 420€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Digital</span>
+      <h4>Formateur Digital — Distanciel</h4>
+      <p>Marketing digital, réseaux sociaux, SEO, e-commerce.</p>
+      <div class="mission-meta">
+        <span>📍 Marseille</span><span>💶 450€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Management</span>
+      <h4>Formateur Management — Distanciel</h4>
+      <p>Management d'équipe, leadership, gestion de conflits.</p>
+      <div class="mission-meta">
+        <span>📍 Bordeaux</span><span>💶 580€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Langues</span>
+      <h4>Formateur Langues — Distanciel</h4>
+      <p>Anglais, espagnol, FLE — présentiel ou distanciel.</p>
+      <div class="mission-meta">
+        <span>📍 Toulouse</span><span>💶 380€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Sécurité</span>
+      <h4>Formateur Sécurité — Centre</h4>
+      <p>SST, SSIAP, habilitation électrique, incendie.</p>
+      <div class="mission-meta">
+        <span>📍 Lille</span><span>💶 580€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">RH</span>
+      <h4>Formateur RH — Avancé</h4>
+      <p>Recrutement, GPEC, droit social, paie.</p>
+      <div class="mission-meta">
+        <span>📍 Nantes</span><span>💶 520€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Comptabilité</span>
+      <h4>Formateur Comptabilité — Distanciel</h4>
+      <p>Comptabilité générale, fiscalité, gestion budgétaire.</p>
+      <div class="mission-meta">
+        <span>📍 Strasbourg</span><span>💶 420€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Informatique</span>
+      <h4>Formateur Informatique — Avancé</h4>
+      <p>Développement web, bases de données, cybersécurité.</p>
+      <div class="mission-meta">
+        <span>📍 Montpellier</span><span>💶 500€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Gestion de projets</span>
+      <h4>Formateur Gestion de projets — Entreprise</h4>
+      <p>Méthodes agiles, PMP, planification.</p>
+      <div class="mission-meta">
+        <span>📍 Nice</span><span>💶 450€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Vente</span>
+      <h4>Formateur Vente — Distanciel</h4>
+      <p>Techniques de vente, négociation commerciale.</p>
+      <div class="mission-meta">
+        <span>📍 Rennes</span><span>💶 600€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Qualité</span>
+      <h4>Formateur Qualité — Centre</h4>
+      <p>ISO 9001, Lean Six Sigma, amélioration continue.</p>
+      <div class="mission-meta">
+        <span>📍 Grenoble</span><span>💶 420€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Logistique</span>
+      <h4>Formateur Logistique — Distanciel</h4>
+      <p>Supply chain, transport, gestion des stocks.</p>
+      <div class="mission-meta">
+        <span>📍 Distanciel</span><span>💶 470€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Santé</span>
+      <h4>Formateur Santé</h4>
+      <p>Soins infirmiers, hygiène, AFGSU.</p>
+      <div class="mission-meta">
+        <span>📍 Île-de-France</span><span>💶 420€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Immobilier</span>
+      <h4>Formateur Immobilier</h4>
+      <p>Loi ALUR, transaction, gestion locative.</p>
+      <div class="mission-meta">
+        <span>📍 PACA</span><span>💶 470€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">BTP</span>
+      <h4>Formateur BTP — Entreprise</h4>
+      <p>Sécurité chantier, CACES, coordination SPS.</p>
+      <div class="mission-meta">
+        <span>📍 Auvergne-Rhône-Alpes</span><span>💶 450€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Restauration</span>
+      <h4>Formateur Restauration</h4>
+      <p>HACCP, hygiène alimentaire, gestion restaurant.</p>
+      <div class="mission-meta">
+        <span>📍 Occitanie</span><span>💶 420€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Coaching</span>
+      <h4>Formateur Coaching — Centre</h4>
+      <p>Coaching professionnel, développement personnel.</p>
+      <div class="mission-meta">
+        <span>📍 Grand Est</span><span>💶 600€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Droit</span>
+      <h4>Formateur Droit — Débutants</h4>
+      <p>Droit du travail, RGPD, conformité juridique.</p>
+      <div class="mission-meta">
+        <span>📍 Nouvelle-Aquitaine</span><span>💶 420€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Esthétique</span>
+      <h4>Formateur Esthétique — Distanciel</h4>
+      <p>Prothésiste ongulaire, extensions cils, maquillage.</p>
+      <div class="mission-meta">
+        <span>📍 Hauts-de-France</span><span>💶 500€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Bureautique</span>
+      <h4>Formateur Bureautique — Entreprise</h4>
+      <p>Excel, Word, PowerPoint — sessions en entreprise.</p>
+      <div class="mission-meta">
+        <span>📍 Paris</span><span>💶 580€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Communication</span>
+      <h4>Formateur Communication — Entreprise</h4>
+      <p>Prise de parole, communication interpersonnelle.</p>
+      <div class="mission-meta">
+        <span>📍 Lyon</span><span>💶 400€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Digital</span>
+      <h4>Formateur Digital — Débutants</h4>
+      <p>Marketing digital, réseaux sociaux, SEO, e-commerce.</p>
+      <div class="mission-meta">
+        <span>📍 Marseille</span><span>💶 400€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Management</span>
+      <h4>Formateur Management — Avancé</h4>
+      <p>Management d'équipe, leadership, gestion de conflits.</p>
+      <div class="mission-meta">
+        <span>📍 Bordeaux</span><span>💶 600€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Langues</span>
+      <h4>Formateur Langues — Centre</h4>
+      <p>Anglais, espagnol, FLE — présentiel ou distanciel.</p>
+      <div class="mission-meta">
+        <span>📍 Toulouse</span><span>💶 520€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Sécurité</span>
+      <h4>Formateur Sécurité — Débutants</h4>
+      <p>SST, SSIAP, habilitation électrique, incendie.</p>
+      <div class="mission-meta">
+        <span>📍 Lille</span><span>💶 600€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">RH</span>
+      <h4>Formateur RH — Centre</h4>
+      <p>Recrutement, GPEC, droit social, paie.</p>
+      <div class="mission-meta">
+        <span>📍 Nantes</span><span>💶 480€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Comptabilité</span>
+      <h4>Formateur Comptabilité — Centre</h4>
+      <p>Comptabilité générale, fiscalité, gestion budgétaire.</p>
+      <div class="mission-meta">
+        <span>📍 Strasbourg</span><span>💶 480€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Informatique</span>
+      <h4>Formateur Informatique — Débutants</h4>
+      <p>Développement web, bases de données, cybersécurité.</p>
+      <div class="mission-meta">
+        <span>📍 Montpellier</span><span>💶 420€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Gestion de projets</span>
+      <h4>Formateur Gestion de projets — Avancé</h4>
+      <p>Méthodes agiles, PMP, planification.</p>
+      <div class="mission-meta">
+        <span>📍 Nice</span><span>💶 520€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Vente</span>
+      <h4>Formateur Vente — Entreprise</h4>
+      <p>Techniques de vente, négociation commerciale.</p>
+      <div class="mission-meta">
+        <span>📍 Rennes</span><span>💶 380€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Qualité</span>
+      <h4>Formateur Qualité</h4>
+      <p>ISO 9001, Lean Six Sigma, amélioration continue.</p>
+      <div class="mission-meta">
+        <span>📍 Grenoble</span><span>💶 380€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Logistique</span>
+      <h4>Formateur Logistique — Avancé</h4>
+      <p>Supply chain, transport, gestion des stocks.</p>
+      <div class="mission-meta">
+        <span>📍 Distanciel</span><span>💶 580€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Santé</span>
+      <h4>Formateur Santé — Avancé</h4>
+      <p>Soins infirmiers, hygiène, AFGSU.</p>
+      <div class="mission-meta">
+        <span>📍 Île-de-France</span><span>💶 580€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Immobilier</span>
+      <h4>Formateur Immobilier — Entreprise</h4>
+      <p>Loi ALUR, transaction, gestion locative.</p>
+      <div class="mission-meta">
+        <span>📍 PACA</span><span>💶 550€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">BTP</span>
+      <h4>Formateur BTP</h4>
+      <p>Sécurité chantier, CACES, coordination SPS.</p>
+      <div class="mission-meta">
+        <span>📍 Auvergne-Rhône-Alpes</span><span>💶 480€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Restauration</span>
+      <h4>Formateur Restauration — Entreprise</h4>
+      <p>HACCP, hygiène alimentaire, gestion restaurant.</p>
+      <div class="mission-meta">
+        <span>📍 Occitanie</span><span>💶 550€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Coaching</span>
+      <h4>Formateur Coaching — Entreprise</h4>
+      <p>Coaching professionnel, développement personnel.</p>
+      <div class="mission-meta">
+        <span>📍 Grand Est</span><span>💶 520€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Droit</span>
+      <h4>Formateur Droit — Débutants</h4>
+      <p>Droit du travail, RGPD, conformité juridique.</p>
+      <div class="mission-meta">
+        <span>📍 Nouvelle-Aquitaine</span><span>💶 520€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Esthétique</span>
+      <h4>Formateur Esthétique</h4>
+      <p>Prothésiste ongulaire, extensions cils, maquillage.</p>
+      <div class="mission-meta">
+        <span>📍 Hauts-de-France</span><span>💶 580€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Bureautique</span>
+      <h4>Formateur Bureautique — Distanciel</h4>
+      <p>Excel, Word, PowerPoint — sessions en entreprise.</p>
+      <div class="mission-meta">
+        <span>📍 Paris</span><span>💶 380€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Communication</span>
+      <h4>Formateur Communication — Distanciel</h4>
+      <p>Prise de parole, communication interpersonnelle.</p>
+      <div class="mission-meta">
+        <span>📍 Lyon</span><span>💶 520€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Digital</span>
+      <h4>Formateur Digital — Débutants</h4>
+      <p>Marketing digital, réseaux sociaux, SEO, e-commerce.</p>
+      <div class="mission-meta">
+        <span>📍 Marseille</span><span>💶 580€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Management</span>
+      <h4>Formateur Management — Débutants</h4>
+      <p>Management d'équipe, leadership, gestion de conflits.</p>
+      <div class="mission-meta">
+        <span>📍 Bordeaux</span><span>💶 380€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Langues</span>
+      <h4>Formateur Langues — Débutants</h4>
+      <p>Anglais, espagnol, FLE — présentiel ou distanciel.</p>
+      <div class="mission-meta">
+        <span>📍 Toulouse</span><span>💶 480€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Sécurité</span>
+      <h4>Formateur Sécurité — Avancé</h4>
+      <p>SST, SSIAP, habilitation électrique, incendie.</p>
+      <div class="mission-meta">
+        <span>📍 Lille</span><span>💶 500€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">RH</span>
+      <h4>Formateur RH</h4>
+      <p>Recrutement, GPEC, droit social, paie.</p>
+      <div class="mission-meta">
+        <span>📍 Nantes</span><span>💶 600€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Comptabilité</span>
+      <h4>Formateur Comptabilité — Distanciel</h4>
+      <p>Comptabilité générale, fiscalité, gestion budgétaire.</p>
+      <div class="mission-meta">
+        <span>📍 Strasbourg</span><span>💶 450€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Informatique</span>
+      <h4>Formateur Informatique — Centre</h4>
+      <p>Développement web, bases de données, cybersécurité.</p>
+      <div class="mission-meta">
+        <span>📍 Montpellier</span><span>💶 400€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Gestion de projets</span>
+      <h4>Formateur Gestion de projets — Centre</h4>
+      <p>Méthodes agiles, PMP, planification.</p>
+      <div class="mission-meta">
+        <span>📍 Nice</span><span>💶 380€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Vente</span>
+      <h4>Formateur Vente — Distanciel</h4>
+      <p>Techniques de vente, négociation commerciale.</p>
+      <div class="mission-meta">
+        <span>📍 Rennes</span><span>💶 450€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Qualité</span>
+      <h4>Formateur Qualité — Distanciel</h4>
+      <p>ISO 9001, Lean Six Sigma, amélioration continue.</p>
+      <div class="mission-meta">
+        <span>📍 Grenoble</span><span>💶 520€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Logistique</span>
+      <h4>Formateur Logistique — Centre</h4>
+      <p>Supply chain, transport, gestion des stocks.</p>
+      <div class="mission-meta">
+        <span>📍 Distanciel</span><span>💶 420€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Santé</span>
+      <h4>Formateur Santé — Avancé</h4>
+      <p>Soins infirmiers, hygiène, AFGSU.</p>
+      <div class="mission-meta">
+        <span>📍 Île-de-France</span><span>💶 470€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Immobilier</span>
+      <h4>Formateur Immobilier — Avancé</h4>
+      <p>Loi ALUR, transaction, gestion locative.</p>
+      <div class="mission-meta">
+        <span>📍 PACA</span><span>💶 520€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">BTP</span>
+      <h4>Formateur BTP — Centre</h4>
+      <p>Sécurité chantier, CACES, coordination SPS.</p>
+      <div class="mission-meta">
+        <span>📍 Auvergne-Rhône-Alpes</span><span>💶 350€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Restauration</span>
+      <h4>Formateur Restauration — Centre</h4>
+      <p>HACCP, hygiène alimentaire, gestion restaurant.</p>
+      <div class="mission-meta">
+        <span>📍 Occitanie</span><span>💶 470€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Coaching</span>
+      <h4>Formateur Coaching — Entreprise</h4>
+      <p>Coaching professionnel, développement personnel.</p>
+      <div class="mission-meta">
+        <span>📍 Grand Est</span><span>💶 350€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Droit</span>
+      <h4>Formateur Droit</h4>
+      <p>Droit du travail, RGPD, conformité juridique.</p>
+      <div class="mission-meta">
+        <span>📍 Nouvelle-Aquitaine</span><span>💶 470€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Esthétique</span>
+      <h4>Formateur Esthétique — Débutants</h4>
+      <p>Prothésiste ongulaire, extensions cils, maquillage.</p>
+      <div class="mission-meta">
+        <span>📍 Hauts-de-France</span><span>💶 420€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Bureautique</span>
+      <h4>Formateur Bureautique</h4>
+      <p>Excel, Word, PowerPoint — sessions en entreprise.</p>
+      <div class="mission-meta">
+        <span>📍 Paris</span><span>💶 420€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Communication</span>
+      <h4>Formateur Communication — Centre</h4>
+      <p>Prise de parole, communication interpersonnelle.</p>
+      <div class="mission-meta">
+        <span>📍 Lyon</span><span>💶 380€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Digital</span>
+      <h4>Formateur Digital</h4>
+      <p>Marketing digital, réseaux sociaux, SEO, e-commerce.</p>
+      <div class="mission-meta">
+        <span>📍 Marseille</span><span>💶 600€/j</span><span>🗓 Oct. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Management</span>
+      <h4>Formateur Management — Entreprise</h4>
+      <p>Management d'équipe, leadership, gestion de conflits.</p>
+      <div class="mission-meta">
+        <span>📍 Bordeaux</span><span>💶 380€/j</span><span>🗓 Nov. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Langues</span>
+      <h4>Formateur Langues — Centre</h4>
+      <p>Anglais, espagnol, FLE — présentiel ou distanciel.</p>
+      <div class="mission-meta">
+        <span>📍 Toulouse</span><span>💶 400€/j</span><span>🗓 Avril 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Sécurité</span>
+      <h4>Formateur Sécurité — Avancé</h4>
+      <p>SST, SSIAP, habilitation électrique, incendie.</p>
+      <div class="mission-meta">
+        <span>📍 Lille</span><span>💶 580€/j</span><span>🗓 Mai 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">RH</span>
+      <h4>Formateur RH — Entreprise</h4>
+      <p>Recrutement, GPEC, droit social, paie.</p>
+      <div class="mission-meta">
+        <span>📍 Nantes</span><span>💶 520€/j</span><span>🗓 Juin 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Comptabilité</span>
+      <h4>Formateur Comptabilité — Avancé</h4>
+      <p>Comptabilité générale, fiscalité, gestion budgétaire.</p>
+      <div class="mission-meta">
+        <span>📍 Strasbourg</span><span>💶 450€/j</span><span>🗓 Juillet 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Informatique</span>
+      <h4>Formateur Informatique — Centre</h4>
+      <p>Développement web, bases de données, cybersécurité.</p>
+      <div class="mission-meta">
+        <span>📍 Montpellier</span><span>💶 550€/j</span><span>🗓 Août 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    <div class="mission-card">
+      <span class="mission-tag">Gestion de projets</span>
+      <h4>Formateur Gestion de projets — Entreprise</h4>
+      <p>Méthodes agiles, PMP, planification.</p>
+      <div class="mission-meta">
+        <span>📍 Nice</span><span>💶 420€/j</span><span>🗓 Sept. 2026</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>
+    </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">lesformateurs.online</div><div>La plateforme des professionnels de la formation</div></div>
+    <div class="footer-links">
+      <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
+      <a href="creer-of.html">Créer mon OF</a><a href="se-former.html">Se former</a>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL CONNEXION -->
+<div class="modal" id="modal-login">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h3>Connectez-vous</h3>
+    <p>Accédez aux missions et postulez en un clic.</p>
+    <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="sophie@monof.fr"></div>
+    <div class="form-group"><label>Mot de passe</label><input type="password" id="login-pass" placeholder="••••••••"></div>
+    <button class="btn btn-primary btn-block" onclick="doLogin()">Se connecter</button>
+    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--muted);">Pas encore de compte ? <a href="#" onclick="openModal('signup');return false;" style="color:var(--accent);font-weight:600;">Créer un compte</a></p>
+  </div>
+</div>
+
+<!-- MODAL INSCRIPTION -->
+<div class="modal" id="modal-signup">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h3>Créer mon compte gratuit</h3>
+    <p>Accès immédiat aux missions et à toutes les ressources.</p>
+    <div class="form-group"><label>Prénom et nom</label><input type="text" id="s-nom" placeholder="Sophie Martin"></div>
+    <div class="form-group"><label>Email</label><input type="email" id="s-email" placeholder="sophie@monof.fr"></div>
+    <div class="form-group"><label>Téléphone</label><input type="tel" id="s-phone" placeholder="06 12 34 56 78"></div>
+    <div class="form-group"><label>Mot de passe</label><input type="password" id="s-pass" placeholder="Minimum 8 caractères"></div>
+    <div class="form-group"><label>Je suis...</label>
+      <select id="s-profil"><option value="">Choisissez...</option><option>Formateur indépendant</option><option>Gérant d'OF</option><option>Je veux créer un OF</option><option>Autre</option></select>
+    </div>
+    <button class="btn btn-primary btn-block" onclick="doSignup()">Créer mon compte →</button>
+    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--muted);">Déjà inscrit ? <a href="#" onclick="openModal('login');return false;" style="color:var(--accent);font-weight:600;">Se connecter</a></p>
+  </div>
+</div>
+
+<!-- MODAL DEPOSER ANNONCE -->
+<div class="modal" id="modal-deposer">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h3>Déposer une annonce</h3>
+    <p>Publiez votre offre de mission — gratuite ou mise en avant.</p>
+    <div class="form-group"><label>Titre de la mission</label><input type="text" placeholder="Ex: Formateur Excel"></div>
+    <div class="form-group"><label>Catégorie</label>
+      <select><option>Bureautique</option><option>Communication</option><option>Digital</option><option>Management</option><option>Langues</option><option>Sécurité</option><option>RH</option><option>Comptabilité</option><option>Informatique</option><option>Autre</option></select>
+    </div>
+    <div class="form-group"><label>Lieu</label><input type="text" placeholder="Ex: Paris, Distanciel..."></div>
+    <div class="form-group"><label>Tarif journalier (€)</label><input type="number" placeholder="450"></div>
+    <div class="form-group"><label>Description</label><textarea rows="3" placeholder="Décrivez la mission..."></textarea></div>
+    <div class="form-group"><label>Type d'annonce</label>
+      <select>
+        <option value="gratuite">Gratuite — annonce standard</option>
+        <option value="premium">Premium — mise en avant ⭐ (29€)</option>
+      </select>
+    </div>
+    <button class="btn btn-primary btn-block">Publier l'annonce →</button>
+  </div>
+</div>
+
+<script>
+function openModal(type){
+  closeAllModals();
+  document.getElementById('modal-'+type).classList.add('open');
+}
+function closeAllModals(){
+  document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));
+}
+document.querySelectorAll('.modal').forEach(m=>{
+  m.addEventListener('click',function(e){if(e.target===this)closeAllModals();});
+});
+
+function postuler(btn){
+  openModal('login');
+}
+function doLogin(){
+  closeAllModals();
+  alert('Connexion réussie ! Vous pouvez maintenant postuler.');
+}
+function doSignup(){
+  closeAllModals();
+  alert('Compte créé ! Bienvenue sur lesformateurs.online');
+}
+
+function filterMissions(){
+  var search=document.getElementById('filterSearch').value.toLowerCase();
+  var region=document.getElementById('filterRegion').value;
+  var cat=document.getElementById('filterCat').value;
+  var cards=document.querySelectorAll('.mission-card');
+  cards.forEach(function(c){
+    var text=c.textContent.toLowerCase();
+    var show=true;
+    if(search && !text.includes(search)) show=false;
+    if(region && !text.includes(region.toLowerCase())) show=false;
+    if(cat && !text.includes(cat.toLowerCase())) show=false;
+    c.style.display=show?'':'none';
+  });
+}
+</script>
+</body>
+</html>

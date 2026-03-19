@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conformité OF - lesformateurs.online</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+.agent-option{
+  display:flex;align-items:center;gap:12px;padding:12px 14px;
+  background:#fff;border:1px solid var(--border);border-radius:8px;
+  cursor:pointer;transition:all .2s;margin-bottom:6px;
+}
+.agent-option:hover{border-color:var(--accent);}
+.agent-option.checked{border-color:var(--accent);background:rgba(233,69,96,.03);}
+.agent-option input{accent-color:var(--accent);width:18px;height:18px;flex-shrink:0;}
+.agent-opt-info{flex:1;}
+.agent-opt-info h5{font-size:13px;font-weight:700;margin-bottom:2px;}
+.agent-opt-info p{font-size:11px;color:var(--muted);line-height:1.4;}
+.agent-opt-price{font-size:16px;font-weight:800;color:var(--accent);white-space:nowrap;}
+
+.toggle-switch{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;}
+.toggle-switch input{accent-color:var(--accent);width:16px;height:16px;}
+.toggle-label-yes{color:var(--success);font-weight:600;}
+.toggle-label-no{color:var(--muted);font-weight:600;}
+.doc-later-msg p{margin:0;}
+
+.client-selector{background:var(--light);padding:14px;border-radius:8px;margin-bottom:16px;}
+.client-selector select{width:100%;padding:10px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:'Inter',sans-serif;margin-bottom:8px;}
+.client-fields{transition:all .3s;}
+.client-fields.hidden{display:none;}
+
+.opco-item{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:#fff;border:1px solid var(--border);border-radius:8px;
+  cursor:pointer;transition:all .2s;font-size:13px;
+}
+.opco-item:hover{border-color:var(--accent);}
+.opco-item input:checked ~ span{font-weight:700;color:var(--accent);}
+.opco-item input{accent-color:var(--accent);width:16px;height:16px;}
+.opco-item span{font-weight:600;flex-shrink:0;}
+.opco-item small{color:var(--muted);font-size:11px;margin-left:auto;}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="nav-links" id="navLinks">
+    <a href="missions.html">Missions</a>
+    <a href="conformite.html" style="color:#fff;background:rgba(255,255,255,.1);">Conformité</a>
+    <a href="creer-of.html">Créer mon OF</a>
+    <a href="se-former.html">Se former</a>
+    <a href="missions.html" class="nav-cta">Connexion</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <h1>Rendez votre OF éligible</h1>
+  <p>Le site n°1 pour vos démarches de conformité — qualité maximale, prix imbattables.</p>
+</div>
+
+<div class="trust-bar">
+  <div class="trust-item">🤖 Documents traités par IA pour aller plus vite</div>
+  <div class="trust-item">👨‍💼 Vérifié par un professionnel avant soumission</div>
+  <div class="trust-item">💰 Jusqu'à 4x moins cher que le marché</div>
+</div>
+
+<section>
+  <div class="container">
+    <span class="section-label">Choisissez votre démarche</span>
+    <h2 class="section-title">8 démarches, 1 seule plateforme</h2>
+    <p class="section-sub">Cliquez sur la démarche souhaitée pour commencer immédiatement.</p>
+
+    <div class="grid-4" id="servicesGrid">
+
+      <div class="service-card" onclick="openDemarche('nda')">
+        <div class="service-icon">NDA</div>
+        <h4>Numéro de Déclaration d'Activité</h4>
+        <p>Dossier complet pour la DREETS. Convention, programme, casier judiciaire — on gère tout.</p>
+        <div class="price-display">
+          <span class="price-old">800€</span>
+          <span class="price-new">199€</span>
+        </div>
+        <p class="price-reason">🤖 L'IA prépare et structure votre dossier en quelques heures — un expert contrôle chaque document avant envoi. Des résultats plus performants, plus rapides, et 75% moins cher que le marché.</p>
+      </div>
+
+      <div class="service-card" onclick="openDemarche('uai')">
+        <div class="service-icon">UAI</div>
+        <h4>Numéro UAI</h4>
+        <p>Immatriculation auprès du Ministère de l'Éducation Nationale. Choix formation RS/RNCP inclus.</p>
+        <div class="price-display">
+          <span class="price-old">600€</span>
+          <span class="price-new">149€</span>
+        </div>
+        <p class="price-reason">🤖 L'IA génère votre dossier complet, un expert le valide. Résultat : un dossier plus solide, un traitement plus rapide, et 75% d'économie.</p>
+      </div>
+
+      <div class="service-card" onclick="openDemarche('qualiopi')">
+        <div class="service-icon">✦</div>
+        <h4>Qualiopi</h4>
+        <p>Préparation complète au référentiel qualité, audit blanc, accompagnement certification.</p>
+        <div class="price-display">
+          <span class="price-old">2 000€</span>
+          <span class="price-new">490€</span>
+        </div>
+        <p class="price-reason">🤖 Nos agents IA construisent l'intégralité de votre dossier Qualiopi — un expert certifié vérifie chaque indicateur. Dossiers plus complets, taux de réussite supérieur, et 4x moins cher.</p>
+      </div>
+
+      <div class="service-card" onclick="openDemarche('edof')">
+        <div class="service-icon">€</div>
+        <h4>EDOF / Mon Compte Formation</h4>
+        <p>Inscription sur EDOF. Vos formations visibles par 40 millions d'actifs.</p>
+        <div class="price-display">
+          <span class="price-old">1 200€</span>
+          <span class="price-new">290€</span>
+        </div>
+        <p class="price-reason">🤖 L'IA prépare vos fiches formation et configure votre espace EDOF — un expert valide avant mise en ligne. Plus performant, plus rapide, 76% moins cher.</p>
+      </div>
+
+      <div class="service-card" onclick="openDemarche('francetravail')">
+        <div class="service-icon">FT</div>
+        <h4>France Travail</h4>
+        <p>Référencement comme prestataire de formation pour les demandeurs d'emploi.</p>
+        <div class="price-display">
+          <span class="price-old">500€</span>
+          <span class="price-new">129€</span>
+        </div>
+        <p class="price-reason">🤖 Dossier monté par IA et contrôlé par un spécialiste. Référencement plus fiable, délais réduits, et 74% d'économie.</p>
+      </div>
+
+      <div class="service-card" onclick="openDemarche('rs')">
+        <div class="service-icon">RS</div>
+        <h4>RS / RNCP</h4>
+        <p>Dépôt de vos certifications au RNCP ou au Répertoire Spécifique.</p>
+        <div class="price-display">
+          <span class="price-old">1 500€</span>
+          <span class="price-new">390€</span>
+        </div>
+        <p class="price-reason">🤖 Agents IA + expert dédié : référentiel de compétences et dossier complet générés avec précision. Meilleur taux d'acceptation, 74% moins cher.</p>
+      </div>
+
+      <div class="service-card" onclick="openDemarche('opco')">
+        <div class="service-icon">11</div>
+        <h4>Connexion OPCO</h4>
+        <p>Référencement auprès des OPCO pour prise en charge des formations. 399€/OPCO ou pack 11 OPCO à 3 000€.</p>
+        <div class="price-display">
+          <span class="price-new">399€ <span style="font-size:12px;font-weight:400;color:var(--muted);">/ OPCO</span></span>
+        </div>
+        <p class="price-reason">🤖 Nos agents traitent chaque OPCO avec précision — un expert vérifie chaque dossier. Pack 11 OPCO à 3 000€ au lieu de 4 389€. Plus efficace, plus rapide.</p>
+      </div>
+
+      <div class="service-card" onclick="openDemarche('agent')">
+        <div class="service-icon">🤖</div>
+        <h4>Agent IA pour votre centre</h4>
+        <p>Un agent intelligent qui gère votre OF au quotidien. Créez, gérez, automatisez — à partir de 399€.</p>
+        <div class="price-display">
+          <span class="price-new">à partir de 399€</span>
+        </div>
+        <p class="price-reason">🤖 Un agent formé spécifiquement pour votre centre. Il travaille 24h/24, ne fait pas d'erreur, et vous fait gagner des heures chaque semaine.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MODALS FOR EACH DEMARCHE -->
+
+<!-- NDA -->
+<div class="modal" id="modal-nda">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h3>Numéro de Déclaration d'Activité (NDA)</h3>
+    <p>Remplissez vos informations — nous constituons votre dossier complet pour la DREETS.</p>
+    <div class="client-selector">
+      <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
+      <select onchange="toggleClientFields(this)">
+        <option value="moi">Moi-même (mes infos pré-remplies)</option>
+        <option value="autre">Un autre client</option>
+      </select>
+      <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
+    </div>
+<div class="form-group"><label>Nom de l'organisme</label><input type="text" placeholder="Mon OF"></div>
+    <div class="form-group"><label>N° SIREN</label><input type="text" placeholder="123 456 789"></div>
+    <div class="form-group"><label>Adresse du siège</label><input type="text" placeholder="12 rue de la Formation, 75001 Paris"></div>
+    <div class="form-group"><label>Nom du dirigeant</label><input type="text" placeholder="Sophie Martin"></div>
+    <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
+    <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="06 12 34 56 78"></div>
+    <div class="form-group doc-toggle-group">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <label style="margin-bottom:0;">Casier judiciaire (bulletin n°3)</label>
+        <label class="toggle-switch">
+          <input type="checkbox" checked onchange="toggleDocUpload(this,'casier_judiciaire__bulletin_n_')">
+          <span class="toggle-label-yes">✅ J'ai ce document</span>
+          <span class="toggle-label-no" style="display:none;">⏳ Je ne l'ai pas encore</span>
+        </label>
+      </div>
+      <div class="doc-upload-area" id="doc_casier_judiciaire__bulletin_n_">
+        <input type="file" accept=".pdf,.jpg,.png,.zip">
+      </div>
+      <div class="doc-later-msg" id="later_casier_judiciaire__bulletin_n_" style="display:none;">
+        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
+      </div>
+    </div>
+    <div class="form-group doc-toggle-group">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <label style="margin-bottom:0;">Première convention de formation signée</label>
+        <label class="toggle-switch">
+          <input type="checkbox" checked onchange="toggleDocUpload(this,'premi_re_convention_de_formati')">
+          <span class="toggle-label-yes">✅ J'ai ce document</span>
+          <span class="toggle-label-no" style="display:none;">⏳ Je ne l'ai pas encore</span>
+        </label>
+      </div>
+      <div class="doc-upload-area" id="doc_premi_re_convention_de_formati">
+        <input type="file" accept=".pdf,.jpg,.png,.zip">
+      </div>
+      <div class="doc-later-msg" id="later_premi_re_convention_de_formati" style="display:none;">
+        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
+      </div>
+    </div>
+    <div class="form-group doc-toggle-group">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <label style="margin-bottom:0;">Programme de formation</label>
+        <label class="toggle-switch">
+          <input type="checkbox" checked onchange="toggleDocUpload(this,'programme_de_formation')">
+          <span class="toggle-label-yes">✅ J'ai ce document</span>
+          <span class="toggle-label-no" style="display:none;">⏳ Je ne l'ai pas encore</span>
+        </label>
+      </div>
+      <div class="doc-upload-area" id="doc_programme_de_formation">
+        <input type="file" accept=".pdf,.jpg,.png,.zip">
+      </div>
+      <div class="doc-later-msg" id="later_programme_de_formation" style="display:none;">
+        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
+      </div>
+    </div>
+    <div style="background:var(--light);padding:16px;border-radius:8px;margin:20px 0;">
+      <p style="font-size:13px;font-weight:600;margin-bottom:4px;">🤖 Traitement IA + vérification pro</p>
+      <p style="font-size:12px;color:var(--muted);">Vos documents sont analysés par IA pour accélérer le traitement, puis vérifiés par un professionnel avant soumission à la DREETS.</p>
+    </div>
+    <div class="price-display" style="justify-content:center;margin:16px 0;">
+      <span class="price-old" style="font-size:18px;">800€</span>
+      <span class="price-new" style="font-size:28px;">199€</span>
+    </div>
+    <button class="btn btn-primary btn-block btn-lg" onclick="payer('nda',199)">Payer 199€ et démarrer →</button>
+  </div>
+</div>
+
+<!-- UAI -->
+<div class="modal" id="modal-uai">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h3>Numéro UAI</h3>
+    <p>Choisissez une formation RS ou RNCP — nous créons le document à soumettre au rectorat.</p>
+        <div class="client-selector">
+      <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
+      <select onchange="toggleClientFields(this)">
+        <option value="moi">Moi-même (mes infos pré-remplies)</option>
+        <option value="autre">Un autre client</option>
+      </select>
+      <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
+    </div>
+<div class="form-group"><label>Nom de l'organisme</label><input type="text" placeholder="Mon OF"></div>
+    <div class="form-group"><label>N° SIREN</label><input type="text" placeholder="123 456 789"></div>
+    <div class="form-group"><label>N° NDA</label><input type="text" placeholder="Votre numéro de déclaration d'activité"></div>
+    <div class="form-group"><label>Formation visée (RS ou RNCP)</label>
+      <select><option>Sélectionnez...</option><option>RS — Répertoire Spécifique</option><option>RNCP — Répertoire National</option></select>
+    </div>
+    <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
+    <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="06 12 34 56 78"></div>
+    <div style="background:var(--light);padding:16px;border-radius:8px;margin:20px 0;">
+      <p style="font-size:13px;font-weight:600;margin-bottom:4px;">📄 Document prêt à soumettre au rectorat</p>
+      <p style="font-size:12px;color:var(--muted);">Nous générons un dossier complet que vous pouvez envoyer directement.</p>
+    </div>
+    <div class="price-display" style="justify-content:center;margin:16px 0;">
+      <span class="price-old" style="font-size:18px;">600€</span>
+      <span class="price-new" style="font-size:28px;">149€</span>
+    </div>
+    <button class="btn btn-primary btn-block btn-lg" onclick="payer('uai',149)">Payer 149€ et démarrer →</button>
+  </div>
+</div>
+
+<!-- QUALIOPI -->
+<div class="modal" id="modal-qualiopi">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h3>Préparation Qualiopi</h3>
+    <p>Dossier complet de préparation à la certification Qualiopi — 7 critères, 32 indicateurs.</p>
+        <div class="client-selector">
+      <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
+      <select onchange="toggleClientFields(this)">
+        <option value="moi">Moi-même (mes infos pré-remplies)</option>
+        <option value="autre">Un autre client</option>
+      </select>
+      <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
+    </div>
+<div class="form-group"><label>Nom de l'organisme</label><input type="text" placeholder="Mon OF"></div>
+    <div class="form-group"><label>N° SIREN</label><input type="text" placeholder="123 456 789"></div>
+    <div class="form-group"><label>N° NDA</label><input type="text" placeholder="Votre NDA"></div>
+    <div class="form-group"><label>Types d'actions</label>
+      <select><option>Actions de formation</option><option>Bilan de compétences</option><option>VAE</option><option>Apprentissage (CFA)</option></select>
+    </div>
+    <div class="form-group"><label>Nombre de formations actives</label><input type="number" placeholder="5"></div>
+    <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
+    <div class="form-group doc-toggle-group">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <label style="margin-bottom:0;">Documents existants (livret d'accueil, CGV, etc.)</label>
+        <label class="toggle-switch">
+          <input type="checkbox" checked onchange="toggleDocUpload(this,'documents_existants__livret_d_')">
+          <span class="toggle-label-yes">✅ J'ai ce document</span>
+          <span class="toggle-label-no" style="display:none;">⏳ Je ne l'ai pas encore</span>
+        </label>
+      </div>
+      <div class="doc-upload-area" id="doc_documents_existants__livret_d_">
+        <input type="file" accept=".pdf,.jpg,.png,.zip">
+      </div>
+      <div class="doc-later-msg" id="later_documents_existants__livret_d_" style="display:none;">
+        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
+      </div>
+    </div>
+    <div style="background:var(--light);padding:16px;border-radius:8px;margin:20px 0;">
+      <p style="font-size:13px;font-weight:600;margin-bottom:4px;">✦ Pourquoi nous sommes les meilleurs pour Qualiopi</p>
+      <p style="font-size:12px;color:var(--muted);">IA + expert dédié. Audit blanc inclus. Taux de réussite 98%. Le tout à un prix 4x inférieur au marché.</p>
+    </div>
+    <div class="price-display" style="justify-content:center;margin:16px 0;">
+      <span class="price-old" style="font-size:18px;">2 000€</span>
+      <span class="price-new" style="font-size:28px;">490€</span>
+    </div>
+    <button class="btn btn-primary btn-block btn-lg" onclick="payer('qualiopi',490)">Payer 490€ et démarrer →</button>
+  </div>
+</div>
+
+<!-- EDOF -->
+<div class="modal" id="modal-edof">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h3>Inscription EDOF / Mon Compte Formation</h3>
+    <p>Rendez vos formations visibles sur Mon Compte Formation (CPF).</p>
+        <div class="client-selector">
+      <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
+      <select onchange="toggleClientFields(this)">
+        <option value="moi">Moi-même (mes infos pré-remplies)</option>
+        <option value="autre">Un autre client</option>
+      </select>
+      <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
+    </div>
+<div class="form-group"><label>Nom de l'organisme</label><input type="text" placeholder="Mon OF"></div>
+    <div class="form-group"><label>N° SIREN</label><input type="text" placeholder="123 456 789"></div>
+    <div class="form-group"><label>N° NDA</label><input type="text" placeholder="Votre NDA"></div>
+    <div class="form-group"><label>Certification Qualiopi</label>
+      <select><option>Oui, j'ai Qualiopi</option><option>Non, pas encore</option></select>
+    </div>
+    <div class="form-group"><label>Formations à inscrire (intitulés)</label><textarea rows="3" placeholder="Ex: Formation Excel avancé, Formation management..."></textarea></div>
+    <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
+    <div style="background:var(--light);padding:16px;border-radius:8px;margin:20px 0;">
+      <p style="font-size:13px;font-weight:600;margin-bottom:4px;">€ 40 millions d'actifs potentiels</p>
+      <p style="font-size:12px;color:var(--muted);">Nous créons vos fiches formation, configurons votre espace EDOF et assurons la mise en ligne.</p>
+    </div>
+    <div class="price-display" style="justify-content:center;margin:16px 0;">
+      <span class="price-old" style="font-size:18px;">1 200€</span>
+      <span class="price-new" style="font-size:28px;">290€</span>
+    </div>
+    <button class="btn btn-primary btn-block btn-lg" onclick="payer('edof',290)">Payer 290€ et démarrer →</button>
+  </div>
+</div>
+
+<!-- FRANCE TRAVAIL -->
+<div class="modal" id="modal-francetravail">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h3>Référencement France Travail</h3>
+    <p>Devenez prestataire de formation référencé pour les demandeurs d'emploi.</p>
+        <div class="client-selector">
+      <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
+      <select onchange="toggleClientFields(this)">
+        <option value="moi">Moi-même (mes infos pré-remplies)</option>
+        <option value="autre">Un autre client</option>
+      </select>
+      <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
+    </div>
+<div class="form-group"><label>Nom de l'organisme</label><input type="text" placeholder="Mon OF"></div>
+    <div class="form-group"><label>N° SIREN</label><input type="text" placeholder="123 456 789"></div>
+    <div class="form-group"><label>N° NDA</label><input type="text" placeholder="Votre NDA"></div>
+    <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
+    <div class="form-group doc-toggle-group">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <label style="margin-bottom:0;">Catalogue de formations (PDF)</label>
+        <label class="toggle-switch">
+          <input type="checkbox" checked onchange="toggleDocUpload(this,'catalogue_de_formations__pdf_')">
+          <span class="toggle-label-yes">✅ J'ai ce document</span>
+          <span class="toggle-label-no" style="display:none;">⏳ Je ne l'ai pas encore</span>
+        </label>
+      </div>
+      <div class="doc-upload-area" id="doc_catalogue_de_formations__pdf_">
+        <input type="file" accept=".pdf,.jpg,.png,.zip">
+      </div>
+      <div class="doc-later-msg" id="later_catalogue_de_formations__pdf_" style="display:none;">
+        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
+      </div>
+    </div>
+    <div class="price-display" style="justify-content:center;margin:16px 0;">
+      <span class="price-old" style="font-size:18px;">500€</span>
+      <span class="price-new" style="font-size:28px;">129€</span>
+    </div>
+    <button class="btn btn-primary btn-block btn-lg" onclick="payer('francetravail',129)">Payer 129€ et démarrer →</button>
+  </div>
+</div>
+
+<!-- RS/RNCP -->
+<div class="modal" id="modal-rs">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h3>Dépôt RS / RNCP</h3>
+    <p>Enregistrement de vos certifications au Répertoire Spécifique ou au RNCP.</p>
+        <div class="client-selector">
+      <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
+      <select onchange="toggleClientFields(this)">
+        <option value="moi">Moi-même (mes infos pré-remplies)</option>
+        <option value="autre">Un autre client</option>
+      </select>
+      <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
+    </div>
+<div class="form-group"><label>Nom de l'organisme</label><input type="text" placeholder="Mon OF"></div>
+    <div class="form-group"><label>N° SIREN</label><input type="text" placeholder="123 456 789"></div>
+    <div class="form-group"><label>Type de dépôt</label>
+      <select><option>RS — Répertoire Spécifique</option><option>RNCP — Répertoire National</option></select>
+    </div>
+    <div class="form-group"><label>Intitulé de la certification</label><input type="text" placeholder="Ex: Certification en management"></div>
+    <div class="form-group doc-toggle-group">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <label style="margin-bottom:0;">Référentiel de compétences (PDF)</label>
+        <label class="toggle-switch">
+          <input type="checkbox" checked onchange="toggleDocUpload(this,'r_f_rentiel_de_comp_tences__pd')">
+          <span class="toggle-label-yes">✅ J'ai ce document</span>
+          <span class="toggle-label-no" style="display:none;">⏳ Je ne l'ai pas encore</span>
+        </label>
+      </div>
+      <div class="doc-upload-area" id="doc_r_f_rentiel_de_comp_tences__pd">
+        <input type="file" accept=".pdf,.jpg,.png,.zip">
+      </div>
+      <div class="doc-later-msg" id="later_r_f_rentiel_de_comp_tences__pd" style="display:none;">
+        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
+      </div>
+    </div>
+    <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
+    <div class="price-display" style="justify-content:center;margin:16px 0;">
+      <span class="price-old" style="font-size:18px;">1 500€</span>
+      <span class="price-new" style="font-size:28px;">390€</span>
+    </div>
+    <button class="btn btn-primary btn-block btn-lg" onclick="payer('rs',390)">Payer 390€ et démarrer →</button>
+  </div>
+</div>
+
+<!-- OPCO -->
+<div class="modal" id="modal-opco">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h3>Connexion aux OPCO</h3>
+    <p>Sélectionnez les OPCO que vous souhaitez — 399€ par OPCO, ou le pack complet (11) à 3 000€.</p>
+        <div class="client-selector">
+      <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
+      <select onchange="toggleClientFields(this)">
+        <option value="moi">Moi-même (mes infos pré-remplies)</option>
+        <option value="autre">Un autre client</option>
+      </select>
+      <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
+    </div>
+<div class="form-group"><label>Nom de l'organisme</label><input type="text" placeholder="Mon OF"></div>
+    <div class="form-group"><label>N° SIREN</label><input type="text" placeholder="123 456 789"></div>
+    <div class="form-group"><label>N° NDA</label><input type="text" placeholder="Votre NDA"></div>
+    <div class="form-group"><label>Certification Qualiopi</label>
+      <select><option>Oui</option><option>Non</option></select>
+    </div>
+    <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
+
+    <div style="margin:20px 0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <label style="font-weight:700;font-size:14px;">Choisissez vos OPCO :</label>
+        <button type="button" onclick="toggleAllOpco()" style="background:var(--accent);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;">✅ Sélectionner les 11 (3 000€)</button>
+      </div>
+      <div id="opcoList" style="display:grid;grid-template-columns:1fr;gap:6px;">
+        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="afdas"> <span>AFDAS</span> <small>Culture, médias, loisirs</small></label>
+        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="atlas"> <span>ATLAS</span> <small>Services financiers, conseil</small></label>
+        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="uniformation"> <span>UNIFORMATION</span> <small>Cohésion sociale</small></label>
+        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="akto"> <span>AKTO</span> <small>Services à forte intensité de main-d'œuvre</small></label>
+        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="ocapiat"> <span>OCAPIAT</span> <small>Agriculture, pêche, agroalimentaire</small></label>
+        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="opco2i"> <span>OPCO 2i</span> <small>Interindustriel</small></label>
+        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="constructys"> <span>CONSTRUCTYS</span> <small>Construction</small></label>
+        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="loperateur"> <span>L'OPCOMMERCE</span> <small>Commerce</small></label>
+        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="opcomobilites"> <span>OPCO Mobilités</span> <small>Transport, logistique</small></label>
+        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="opcoep"> <span>OPCO EP</span> <small>Entreprises de proximité</small></label>
+        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="opcosante"> <span>OPCO Santé</span> <small>Santé, médico-social</small></label>
+      </div>
+    </div>
+
+    <div style="background:var(--light);padding:16px;border-radius:8px;margin:16px 0;text-align:center;">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:4px;" id="opcoCount">0 OPCO sélectionné(s)</p>
+      <p style="font-size:28px;font-weight:900;color:var(--accent);" id="opcoTotalDisplay">0€</p>
+      <p style="font-size:11px;color:var(--success);display:none;" id="opcoSavings"></p>
+    </div>
+    <button class="btn btn-primary btn-block btn-lg" id="opcoPayBtn" onclick="payerOpco()" disabled style="opacity:.5;">Sélectionnez au moins 1 OPCO</button>
+  </div>
+</div>
+
+<!-- AGENT IA -->
+<div class="modal" id="modal-agent">
+  <div class="modal-box" style="max-width:620px;">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h3>🤖 Configurez votre Agent IA</h3>
+    <p>Choisissez les compétences de votre agent. Il sera formé spécifiquement pour votre centre de formation et opérationnel sous 48h.</p>
+
+        <div class="client-selector">
+      <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
+      <select onchange="toggleClientFields(this)">
+        <option value="moi">Moi-même (mes infos pré-remplies)</option>
+        <option value="autre">Un autre client</option>
+      </select>
+      <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
+    </div>
+<div class="form-group"><label>Nom de l'organisme</label><input type="text" placeholder="Mon OF"></div>
+    <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
+    <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="06 12 34 56 78"></div>
+
+    <div style="margin:20px 0;">
+      <label style="font-weight:700;font-size:14px;display:block;margin-bottom:12px;">Choisissez les capacités de votre agent :</label>
+
+      <div class="agent-option" onclick="toggleAgentOpt(this,'creation_formations',399,event)">
+        <input type="checkbox"><div class="agent-opt-info"><h5>📚 Création de formations</h5><p>Génère programmes pédagogiques, supports de cours, évaluations, fiches modules. Adapté à votre domaine.</p></div><span class="agent-opt-price">399€</span>
+      </div>
+
+      <div class="agent-option" onclick="toggleAgentOpt(this,'depots_dossiers',399,event)">
+        <input type="checkbox"><div class="agent-opt-info"><h5>📄 Dépôts de dossiers & démarches</h5><p>BPF, dossiers stagiaires, déclarations DREETS, dépôts de capital, toutes démarches administratives.</p></div><span class="agent-opt-price">399€</span>
+      </div>
+
+      <div class="agent-option" onclick="toggleAgentOpt(this,'gestion_stagiaires',349,event)">
+        <input type="checkbox"><div class="agent-opt-info"><h5>👥 Gestion des stagiaires</h5><p>Inscriptions, émargement numérique, suivi de présence, évaluations à chaud/froid, attestations de fin.</p></div><span class="agent-opt-price">349€</span>
+      </div>
+
+      <div class="agent-option" onclick="toggleAgentOpt(this,'facturation',349,event)">
+        <input type="checkbox"><div class="agent-opt-info"><h5>🧾 Facturation & devis automatiques</h5><p>Conventions de formation, devis, factures, relances de paiement, suivi de trésorerie.</p></div><span class="agent-opt-price">349€</span>
+      </div>
+
+      <div class="agent-option" onclick="toggleAgentOpt(this,'prospection',499,event)">
+        <input type="checkbox"><div class="agent-opt-info"><h5>🎯 Recherche de clients & prospection</h5><p>Réponse aux appels d'offres, prospection email, détection d'opportunités, relances automatiques.</p></div><span class="agent-opt-price">499€</span>
+      </div>
+
+      <div class="agent-option" onclick="toggleAgentOpt(this,'cpf_edof',299,event)">
+        <input type="checkbox"><div class="agent-opt-info"><h5>💰 Gestion CPF / EDOF</h5><p>Suivi des inscriptions Mon Compte Formation, gestion des sessions, validation des dossiers CPF.</p></div><span class="agent-opt-price">299€</span>
+      </div>
+
+      <div class="agent-option" onclick="toggleAgentOpt(this,'veille',249,event)">
+        <input type="checkbox"><div class="agent-opt-info"><h5>📡 Veille réglementaire</h5><p>Alertes en temps réel sur les évolutions légales, Qualiopi, CPF, OPCO. Plus jamais pris au dépourvu.</p></div><span class="agent-opt-price">249€</span>
+      </div>
+
+      <div class="agent-option" onclick="toggleAgentOpt(this,'community',299,event)">
+        <input type="checkbox"><div class="agent-opt-info"><h5>📱 Community management</h5><p>Posts LinkedIn/réseaux sociaux, rédaction d'articles, gestion de votre image en ligne.</p></div><span class="agent-opt-price">299€</span>
+      </div>
+
+      <div class="agent-option" onclick="toggleAgentOpt(this,'reporting',199,event)">
+        <input type="checkbox"><div class="agent-opt-info"><h5>📊 Reporting & tableaux de bord</h5><p>Statistiques de votre activité, taux de remplissage, satisfaction, CA prévisionnel. Rapports automatiques.</p></div><span class="agent-opt-price">199€</span>
+      </div>
+
+      <div class="agent-option" onclick="toggleAgentOpt(this,'planification',299,event)">
+        <input type="checkbox"><div class="agent-opt-info"><h5>📅 Planification & logistique</h5><p>Planning des sessions, réservation de salles, envoi des convocations, gestion des intervenants.</p></div><span class="agent-opt-price">299€</span>
+      </div>
+    </div>
+
+    <div style="background:var(--light);padding:16px;border-radius:8px;margin:16px 0;text-align:center;">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:4px;" id="agentCount">0 capacité(s) sélectionnée(s)</p>
+      <p style="font-size:32px;font-weight:900;color:var(--accent);" id="agentTotal">0€</p>
+      <p style="font-size:11px;color:var(--success);display:none;" id="agentSavings"></p>
+    </div>
+
+    <button class="btn btn-primary btn-block btn-lg" id="agentPayBtn" onclick="payerAgent()" disabled style="opacity:.5;">Sélectionnez au moins 1 capacité</button>
+    <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px;">Agent opérationnel sous 48h. Formation personnalisée sur vos données.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">lesformateurs.online</div><div>La plateforme des professionnels de la formation</div></div>
+    <div class="footer-links">
+      <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
+      <a href="creer-of.html">Créer mon OF</a><a href="se-former.html">Se former</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function openDemarche(type){
+  closeAllModals();
+  document.getElementById('modal-'+type).classList.add('open');
+}
+function closeAllModals(){
+  document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));
+}
+document.querySelectorAll('.modal').forEach(m=>{
+  m.addEventListener('click',function(e){if(e.target===this)closeAllModals();});
+});
+
+var stripe = Stripe('pk_live_51O4OcqDnwFniOSFLMJfrTkVDs0IaqRrat11UMlvePU7mHdgilCzSfXvrPN7E4g2f6YcizXmaXHdX9qYrV1WYeS5g00I8IOVplN');
+
+// === DOC TOGGLES ===
+function toggleDocUpload(cb, id){
+  var upload = document.getElementById('doc_'+id);
+  var later = document.getElementById('later_'+id);
+  var yes = cb.parentNode.querySelector('.toggle-label-yes');
+  var no = cb.parentNode.querySelector('.toggle-label-no');
+  if(cb.checked){
+    upload.style.display = '';
+    later.style.display = 'none';
+    yes.style.display = '';
+    no.style.display = 'none';
+  } else {
+    upload.style.display = 'none';
+    later.style.display = '';
+    yes.style.display = 'none';
+    no.style.display = '';
+  }
+}
+
+// === CLIENT SELECTOR ===
+function toggleClientFields(select){
+  var modal = select.closest('.modal-box');
+  var hint = modal.querySelector('.client-hint');
+  var fields = modal.querySelectorAll('.form-group');
+  if(select.value === 'moi'){
+    // Hide personal info fields (first few), show rest
+    hint.textContent = '✅ Connecté — vos informations de profil seront utilisées automatiquement.';
+    hint.style.color = 'var(--success)';
+    fields.forEach(function(f, i){
+      var label = f.querySelector('label');
+      if(label){
+        var t = label.textContent.toLowerCase();
+        if(t.includes('nom') || t.includes('email') || t.includes('téléphone') || t.includes('adresse') || t.includes('siren') || t.includes('nda')){
+          // Pre-fill with demo data
+          var input = f.querySelector('input');
+          if(input){
+            if(t.includes('nom')) input.value = 'Sophie Martin';
+            else if(t.includes('email')) input.value = 'sophie@monof.fr';
+            else if(t.includes('téléphone')) input.value = '06 12 34 56 78';
+            else if(t.includes('siren')) input.value = '123 456 789';
+            input.style.background = 'rgba(16,185,129,.05)';
+            input.style.borderColor = 'var(--success)';
+          }
+        }
+      }
+    });
+  } else {
+    hint.textContent = 'Remplissez les informations du client.';
+    hint.style.color = 'var(--muted)';
+    fields.forEach(function(f){
+      var input = f.querySelector('input');
+      if(input){
+        input.value = '';
+        input.style.background = '';
+        input.style.borderColor = '';
+      }
+    });
+  }
+}
+
+var stripeLinks = {
+  nda: 'https://buy.stripe.com/fZu7sL8zw5eZ5Ia2RYffy0E',
+  uai: 'https://buy.stripe.com/00weVd3fc7n76Me64affy0F',
+  qualiopi: 'https://buy.stripe.com/6oU9AT5nkePz7Qibouffy0G',
+  edof: 'https://buy.stripe.com/14AfZh6ro9vfdaC1NUffy0H',
+  francetravail: 'https://buy.stripe.com/28EbJ14jggXH9Yqakqffy0I',
+  rs: 'https://buy.stripe.com/bJe6oHdTQ4aV9YqgIOffy0J'
+};
+function payer(type, amount){
+  if(stripeLinks[type]){
+    window.location.href = stripeLinks[type];
+  } else {
+    alert('Redirection vers le paiement Stripe — '+amount+'€');
+  }
+}
+
+function updateOpcoTotal(evt){
+  if(evt) evt.preventDefault();
+  var target = evt ? evt.target : null;
+  if(target && target.closest && target.closest('.opco-item')){
+    var cb = target.closest('.opco-item').querySelector('input');
+    if(target !== cb) cb.checked = !cb.checked;
+  }
+  setTimeout(function(){
+    var checked = document.querySelectorAll('#opcoList input:checked').length;
+    var total = (checked === 11) ? 3000 : checked * 399;
+    var fullPrice = checked * 399;
+    document.getElementById('opcoCount').textContent = checked + ' OPCO sélectionné' + (checked > 1 ? 's' : '');
+    document.getElementById('opcoTotalDisplay').textContent = total + '€';
+    var savings = document.getElementById('opcoSavings');
+    if(checked === 11){
+      savings.style.display = 'block';
+      savings.textContent = '🎉 Pack 11 OPCO ! Vous économisez ' + (fullPrice - 3000) + '€';
+    } else if(checked > 1){
+      savings.style.display = 'block';
+      savings.textContent = '💡 Prenez les 11 OPCO pour 3 000€ au lieu de ' + (11*399) + '€';
+    } else {
+      savings.style.display = 'none';
+    }
+    var btn = document.getElementById('opcoPayBtn');
+    if(checked > 0){
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.textContent = 'Payer ' + total + '€ et démarrer →';
+    } else {
+      btn.disabled = true;
+      btn.style.opacity = '.5';
+      btn.textContent = 'Sélectionnez au moins 1 OPCO';
+    }
+  }, 50);
+}
+
+function toggleAllOpco(){
+  var boxes = document.querySelectorAll('#opcoList input');
+  var allChecked = document.querySelectorAll('#opcoList input:checked').length === 11;
+  boxes.forEach(function(b){ b.checked = !allChecked; });
+  updateOpcoTotal();
+}
+
+// === AGENT IA ===
+var agentOpts = {};
+function toggleAgentOpt(el, name, price, evt){
+  if(evt) evt.preventDefault();
+  var cb = el.querySelector('input[type=checkbox]');
+  cb.checked = !cb.checked;
+  el.classList.toggle('checked', cb.checked);
+  if(cb.checked) agentOpts[name]=price; else delete agentOpts[name];
+  updateAgentTotal();
+}
+function updateAgentTotal(){
+  var count = Object.keys(agentOpts).length;
+  var total = 0;
+  Object.values(agentOpts).forEach(function(p){ total += p; });
+  // Réduction si 5+ options
+  var savings = 0;
+  if(count >= 8){ savings = Math.round(total * 0.20); }
+  else if(count >= 5){ savings = Math.round(total * 0.10); }
+  var finalTotal = total - savings;
+
+  document.getElementById('agentCount').textContent = count + ' capacité(s) sélectionnée(s)';
+  document.getElementById('agentTotal').textContent = finalTotal + '€';
+
+  var savEl = document.getElementById('agentSavings');
+  if(savings > 0){
+    savEl.style.display = 'block';
+    savEl.textContent = '🎉 Réduction pack ' + (count >= 8 ? '-20%' : '-10%') + ' ! Vous économisez ' + savings + '€';
+  } else if(count >= 3){
+    savEl.style.display = 'block';
+    savEl.textContent = '💡 Ajoutez ' + (5 - count) + ' capacité(s) pour -10% sur le total';
+  } else {
+    savEl.style.display = 'none';
+  }
+
+  var btn = document.getElementById('agentPayBtn');
+  if(count > 0){
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.textContent = 'Payer ' + finalTotal + '€ et configurer mon agent →';
+  } else {
+    btn.disabled = true;
+    btn.style.opacity = '.5';
+    btn.textContent = 'Sélectionnez au moins 1 capacité';
+  }
+}
+var agentLinks = {
+  creation_formations: 'https://buy.stripe.com/00w3cvcPM22N9Yqbouffy0Z',
+  depots_dossiers: 'https://buy.stripe.com/dRm4gz5nkazj5Ia506ffy10',
+  gestion_stagiaires: 'https://buy.stripe.com/5kQ7sLdTQ6j38Umcsyffy11',
+  facturation: 'https://buy.stripe.com/00w7sL6ro0YJ5Ia8ciffy12',
+  prospection: 'https://buy.stripe.com/4gMcN53fc5eZ1rU8ciffy13',
+  cpf_edof: 'https://buy.stripe.com/dRmbJ19DAgXH1rU9gmffy14',
+  veille: 'https://buy.stripe.com/cNicN52b89vf9Yq2RYffy15',
+  community: 'https://buy.stripe.com/00w4gz8zwgXHfiK0JQffy16',
+  reporting: 'https://buy.stripe.com/5kQ5kD6rodLvgmO8ciffy17',
+  planification: 'https://buy.stripe.com/8x2aEX6ro4aV5IaeAGffy18'
+};
+var agentPacks = {
+  3: 'https://buy.stripe.com/00w8wP5nk9vfc6yeAGffy1a',
+  5: 'https://buy.stripe.com/eVq8wPeXUbDngmOakqffy1b',
+  8: 'https://buy.stripe.com/9B600jg1Y9vfgmO3W2ffy1c',
+  10: 'https://buy.stripe.com/9B6aEX0306j31rU506ffy1d'
+};
+function payerAgent(){
+  var selected = Object.keys(agentOpts);
+  var count = selected.length;
+  if(count === 1){
+    window.location.href = agentLinks[selected[0]];
+  } else if(count >= 10){
+    window.location.href = agentPacks[10];
+  } else if(count >= 8){
+    window.location.href = agentPacks[8];
+  } else if(count >= 5){
+    window.location.href = agentPacks[5];
+  } else if(count >= 3){
+    window.location.href = agentPacks[3];
+  } else if(count === 2){
+    // 2 agents — pay for both individually (redirect to first, second handled later)
+    window.location.href = agentLinks[selected[0]];
+  }
+}
+
+function payerOpco(){
+  var checked = document.querySelectorAll('#opcoList input:checked').length;
+  if(checked === 11){
+    window.location.href = 'https://buy.stripe.com/28E4gz030cHrfiKbouffy0L';
+  } else if(checked > 0){
+    window.location.href = 'https://buy.stripe.com/8x2cN53fcdLv7Qi9gmffy0K';
+  }
+}
+</script>
+</body>
+</html>

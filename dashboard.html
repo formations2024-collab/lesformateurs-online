@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mon espace - lesformateurs.online</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<style>
+.dash-layout{display:flex;min-height:calc(100vh - 64px);}
+.sidebar{width:240px;background:var(--primary);color:#fff;padding:24px 0;flex-shrink:0;}
+.sidebar a{display:block;padding:10px 24px;font-size:13px;color:rgba(255,255,255,.7);transition:all .2s;cursor:pointer;}
+.sidebar a:hover,.sidebar a.active{background:rgba(255,255,255,.08);color:#fff;}
+.sidebar .sidebar-title{padding:10px 24px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:16px;}
+.sidebar .user-info{padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:8px;}
+.sidebar .user-info .name{font-size:14px;font-weight:700;color:#fff;}
+.sidebar .user-info .email{font-size:11px;color:rgba(255,255,255,.5);}
+.main-content{flex:1;padding:32px;background:var(--light);overflow-y:auto;}
+
+.mobile-nav{display:none;overflow-x:auto;white-space:nowrap;background:var(--primary);padding:8px 12px;gap:6px;}
+.mobile-nav a{display:inline-block;padding:8px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:rgba(255,255,255,.08);border-radius:20px;cursor:pointer;white-space:nowrap;}
+.mobile-nav a.active{background:var(--accent);color:#fff;}
+
+.detail-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;}
+.detail-card h4{font-size:14px;font-weight:700;margin-bottom:6px;}
+.detail-card p{font-size:12px;color:var(--muted);}
+.detail-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:12px;}
+.detail-tag{padding:3px 8px;background:var(--light);border-radius:6px;font-size:11px;}
+
+.status-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;}
+.status-new{background:rgba(233,69,96,.1);color:var(--accent);}
+.status-progress{background:rgba(200,169,110,.15);color:#b8860b;}
+.status-done{background:rgba(16,185,129,.1);color:var(--success);}
+
+.progress-bar{width:100%;height:8px;background:var(--border);border-radius:4px;margin-top:8px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--accent);border-radius:4px;}
+
+.action-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.action-btn{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;border:1px solid var(--border);background:#fff;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;}
+.action-btn:hover{border-color:var(--accent);color:var(--accent);}
+.action-btn.danger{color:var(--accent);border-color:rgba(233,69,96,.3);}
+.action-btn.danger:hover{background:var(--accent);color:#fff;}
+
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:24px;}
+.stat-card{background:#fff;border-radius:10px;padding:16px;border:1px solid var(--border);cursor:pointer;transition:all .2s;}
+.stat-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.stat-card .stat-value{font-size:24px;font-weight:900;color:var(--primary);margin-bottom:2px;}
+.stat-card .stat-label{font-size:11px;color:var(--muted);}
+.stat-card .stat-link{font-size:10px;color:var(--accent);margin-top:4px;display:block;}
+
+.ref-link-item{background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px;}
+.ref-link-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:4px;}
+.ref-link-info strong{font-size:13px;}
+.ref-commission{font-size:12px;color:var(--success);font-weight:700;}
+.ref-link-actions{display:flex;gap:6px;align-items:center;}
+.ref-link-input{flex:1;font-size:11px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--light);color:var(--primary);font-family:'Inter',sans-serif;min-width:0;}
+.ref-link-actions .action-btn{white-space:nowrap;}
+
+@media(max-width:768px){
+  .sidebar{display:none;}
+  .mobile-nav{display:flex;}
+  .main-content{padding:16px;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="nav-links" id="navLinks">
+    <a href="missions.html">Missions</a>
+    <a href="conformite.html">Conformité</a>
+    <a href="creer-of.html">Créer mon OF</a>
+    <a href="se-former.html">Se former</a>
+    <a href="dashboard.html" style="color:#fff;background:rgba(255,255,255,.1);">Mon espace</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a class="active" onclick="showTab('resume')">📊 Résumé</a>
+  <a onclick="showTab('annonces')">📋 Annonces</a>
+  <a onclick="showTab('candidatures')">🎯 Candidatures</a>
+  <a onclick="showTab('demarches')">📄 Démarches</a>
+  <a onclick="showTab('of')">🏛 Mes OF</a>
+  <a onclick="showTab('formation')">🎓 Formation</a>
+  <a onclick="showTab('parrainage')">🎁 Parrainage</a>
+  <a onclick="showTab('profil')">👤 Profil</a>
+</div>
+
+<div class="dash-layout">
+  <div class="sidebar">
+    <div class="user-info">
+      <div class="name">Sophie Martin</div>
+      <div class="email">sophie@monof.fr</div>
+    </div>
+    <div class="sidebar-title">Mon espace</div>
+    <a class="active" onclick="showTab('resume')">📊 Résumé</a>
+    <a onclick="showTab('annonces')">📋 Mes annonces</a>
+    <a onclick="showTab('candidatures')">🎯 Mes candidatures</a>
+    <a onclick="showTab('demarches')">📄 Mes démarches</a>
+    <a onclick="showTab('of')">🏛 Mes créations d'OF</a>
+    <a onclick="showTab('formation')">🎓 Ma formation</a>
+    <div class="sidebar-title" style="margin-top:24px;">Compte</div>
+    <a onclick="showTab('parrainage')">🎁 Parrainage (10%)</a>
+    <a onclick="showTab('profil')">👤 Mon profil</a>
+    <a href="index.html">🚪 Déconnexion</a>
+  </div>
+
+  <div class="main-content">
+
+    <!-- ========== RESUME ========== -->
+    <div class="tab-content active" id="tab-resume">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">Bonjour Sophie 👋</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Voici un résumé de votre activité.</p>
+      <div class="stat-grid">
+        <div class="stat-card" onclick="showTab('annonces')">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Mes annonces</div>
+          <span class="stat-link">Voir →</span>
+        </div>
+        <div class="stat-card" onclick="showTab('candidatures')">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Candidatures</div>
+          <span class="stat-link">Voir →</span>
+        </div>
+        <div class="stat-card" onclick="showTab('demarches')">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Démarches</div>
+          <span class="stat-link">Voir →</span>
+        </div>
+        <div class="stat-card" onclick="showTab('of')">
+          <div class="stat-value">2</div>
+          <div class="stat-label">Organismes créés</div>
+          <span class="stat-link">Voir →</span>
+        </div>
+        <div class="stat-card" onclick="showTab('formation')">
+          <div class="stat-value" style="color:var(--accent);">75%</div>
+          <div class="stat-label">Formation</div>
+          <span class="stat-link">Voir →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== MES ANNONCES ========== -->
+    <div class="tab-content" id="tab-annonces">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
+        <h2 style="font-size:20px;font-weight:800;">📋 Mes annonces (3)</h2>
+        <button class="btn btn-primary" style="padding:8px 16px;font-size:12px;">+ Déposer une annonce</button>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>⭐ Formateur Gestion de projet</h4>
+            <p>Paris · 400€/jour · En entreprise, sessions de 2 jours</p>
+          </div>
+          <span class="status-badge status-done">Active</span>
+        </div>
+        <div class="detail-meta">
+          <span class="detail-tag">⭐ Premium (29€)</span>
+          <span class="detail-tag">👥 6 candidatures reçues</span>
+          <span class="detail-tag">👁 124 vues</span>
+          <span class="detail-tag">📅 Publiée le 14/03</span>
+        </div>
+        <div class="action-btns">
+          <button class="action-btn">✏️ Modifier</button>
+          <button class="action-btn">👁 Voir les candidatures</button>
+          <button class="action-btn">⏸ Mettre en pause</button>
+          <button class="action-btn danger">🗑 Supprimer</button>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Formateur Excel/VBA</h4>
+            <p>Distanciel · 300€/jour · Niveau intermédiaire à avancé</p>
+          </div>
+          <span class="status-badge status-done">Active</span>
+        </div>
+        <div class="detail-meta">
+          <span class="detail-tag">Gratuite</span>
+          <span class="detail-tag">👥 3 candidatures reçues</span>
+          <span class="detail-tag">👁 67 vues</span>
+          <span class="detail-tag">📅 Publiée le 16/03</span>
+        </div>
+        <div class="action-btns">
+          <button class="action-btn">✏️ Modifier</button>
+          <button class="action-btn">👁 Voir les candidatures</button>
+          <button class="action-btn">⭐ Passer en Premium</button>
+          <button class="action-btn danger">🗑 Supprimer</button>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Formateur Soft skills — Communication</h4>
+            <p>Lyon · 350€/jour · Formations en intra-entreprise</p>
+          </div>
+          <span class="status-badge status-new">Expirée</span>
+        </div>
+        <div class="detail-meta">
+          <span class="detail-tag">Gratuite</span>
+          <span class="detail-tag">👥 9 candidatures reçues</span>
+          <span class="detail-tag">👁 203 vues</span>
+          <span class="detail-tag">📅 Publiée le 01/03</span>
+        </div>
+        <div class="action-btns">
+          <button class="action-btn">🔄 Republier</button>
+          <button class="action-btn">✏️ Modifier et republier</button>
+          <button class="action-btn danger">🗑 Supprimer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== CANDIDATURES ========== -->
+    <div class="tab-content" id="tab-candidatures">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🎯 Mes candidatures (5)</h2>
+
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+        <button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);">Toutes (5)</button>
+        <button class="action-btn">⏳ En attente (2)</button>
+        <button class="action-btn">✅ Acceptées (2)</button>
+        <button class="action-btn">❌ Refusées (1)</button>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Formateur Marketing Digital</h4>
+            <p>Distanciel · 300€/jour · Réseaux sociaux, SEO</p>
+          </div>
+          <span class="status-badge status-done">✅ Retour positif</span>
+        </div>
+        <div class="detail-meta">
+          <span class="detail-tag">📅 Postulé le 15/03</span>
+          <span class="detail-tag">📩 Message du recruteur reçu</span>
+        </div>
+        <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">
+          <strong>💬 Message du recruteur :</strong> "Bonjour Sophie, votre profil nous intéresse beaucoup. Pouvez-vous nous contacter au 01 23 45 67 89 pour un entretien ?"
+        </div>
+        <div class="action-btns">
+          <button class="action-btn">📞 Voir les coordonnées</button>
+          <button class="action-btn">💬 Répondre</button>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Formateur Sécurité au travail — SST</h4>
+            <p>Nantes · 280€/jour · Habilitation, SST</p>
+          </div>
+          <span class="status-badge status-done">✅ Mission acceptée</span>
+        </div>
+        <div class="detail-meta">
+          <span class="detail-tag">📅 Postulé le 10/03</span>
+          <span class="detail-tag">🎉 Démarrage prévu : 25/03/2026</span>
+        </div>
+        <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">
+          <strong>💬 Message :</strong> "Mission confirmée ! Début le 25/03, centre de formation Nantes Nord. Convention envoyée par email."
+        </div>
+        <div class="action-btns">
+          <button class="action-btn">📄 Voir la convention</button>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Formateur Excel — Bureautique</h4>
+            <p>Paris · 350€/jour · Sessions en entreprise</p>
+          </div>
+          <span class="status-badge status-progress">⏳ En attente de retour</span>
+        </div>
+        <div class="detail-meta">
+          <span class="detail-tag">📅 Postulé le 17/03</span>
+          <span class="detail-tag">Pas encore de retour</span>
+        </div>
+        <div class="action-btns">
+          <button class="action-btn">💬 Relancer</button>
+          <button class="action-btn danger">❌ Retirer ma candidature</button>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Formateur Management — Avancé</h4>
+            <p>Bordeaux · 450€/jour · Leadership, gestion d'équipe</p>
+          </div>
+          <span class="status-badge status-progress">⏳ En attente</span>
+        </div>
+        <div class="detail-meta">
+          <span class="detail-tag">📅 Postulé le 12/03</span>
+        </div>
+        <div class="action-btns">
+          <button class="action-btn">💬 Relancer</button>
+          <button class="action-btn danger">❌ Retirer ma candidature</button>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Formateur Prise de parole</h4>
+            <p>Lyon · 400€/jour · Formations managers</p>
+          </div>
+          <span class="status-badge status-new">❌ Non retenu</span>
+        </div>
+        <div class="detail-meta">
+          <span class="detail-tag">📅 Postulé le 14/03</span>
+          <span class="detail-tag">Refusé le 16/03</span>
+        </div>
+        <div style="background:rgba(233,69,96,.05);border:1px solid rgba(233,69,96,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">
+          <strong>💬 Motif :</strong> "Poste pourvu. Nous gardons votre profil pour de futures opportunités."
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:24px;">
+        <a href="missions.html" class="btn btn-outline">Voir toutes les missions →</a>
+      </div>
+    </div>
+
+    <!-- ========== DEMARCHES ========== -->
+    <div class="tab-content" id="tab-demarches">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
+        <h2 style="font-size:20px;font-weight:800;">📄 Mes démarches (3)</h2>
+        <a href="conformite.html" class="btn btn-primary" style="padding:8px 16px;font-size:12px;">+ Nouvelle démarche</a>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>✦ Qualiopi — Préparation certification</h4>
+            <p>Commandé le 18/03/2026</p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:18px;font-weight:800;color:var(--accent);">490€</div>
+            <span class="status-badge status-progress">En cours</span>
+          </div>
+        </div>
+        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:40%;"></div></div>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Étape 2/5 : Vérification des documents par un expert</p>
+        <div style="font-size:12px;margin-bottom:8px;">
+          <strong>Documents envoyés :</strong><br>
+          ✅ KBIS · ✅ Manuel qualité · ⏳ <span style="color:var(--accent);">Processus RH en attente</span>
+        </div>
+        <div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:8px;padding:10px 14px;font-size:12px;">
+          💡 <strong>Prochaine étape :</strong> Envoyez votre processus de gestion RH pour passer à l'étape 3.
+        </div>
+        <div class="action-btns">
+          <button class="action-btn">📤 Envoyer un document</button>
+          <button class="action-btn">💬 Contacter mon expert</button>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>NDA — Numéro de Déclaration d'Activité</h4>
+            <p>Commandé le 10/03/2026</p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:18px;font-weight:800;color:var(--accent);">199€</div>
+            <span class="status-badge status-progress">En cours</span>
+          </div>
+        </div>
+        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:80%;background:var(--success);"></div></div>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Étape 4/5 : Dossier envoyé à la DREETS, en attente de réponse</p>
+        <div style="font-size:12px;">
+          <strong>Documents envoyés :</strong><br>
+          ✅ Convention de formation · ✅ Programme pédagogique · ✅ SIREN · ✅ Pièce d'identité · ✅ Casier judiciaire
+        </div>
+        <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">
+          💡 <strong>Info :</strong> La DREETS traite votre dossier. Délai habituel : 30 jours. Nous vous tenons informé.
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>€ EDOF — Mon Compte Formation</h4>
+            <p>Commandé le 05/03/2026</p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:18px;font-weight:800;color:var(--accent);">290€</div>
+            <span class="status-badge status-done">Terminé</span>
+          </div>
+        </div>
+        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:100%;background:var(--success);"></div></div>
+        <p style="font-size:11px;color:var(--success);">✅ Terminé le 12/03/2026 — Vos formations sont en ligne sur EDOF</p>
+        <div class="action-btns">
+          <button class="action-btn">📄 Voir le récapitulatif</button>
+          <button class="action-btn">🔗 Accéder à mon espace EDOF</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== MES OF ========== -->
+    <div class="tab-content" id="tab-of">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
+        <h2 style="font-size:20px;font-weight:800;">🏛 Mes organismes de formation (2)</h2>
+        <a href="creer-of.html" class="btn btn-primary" style="padding:8px 16px;font-size:12px;">+ Créer un nouvel OF</a>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>📚 Action de formation — "FormaPro Paris"</h4>
+            <p>Commandé le 12/03/2026</p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:18px;font-weight:800;color:var(--accent);">2 270€</div>
+            <span class="status-badge status-progress">En cours</span>
+          </div>
+        </div>
+        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:60%;"></div></div>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Étape 3/5 : Création KBIS en cours chez le greffe</p>
+        <div style="font-size:12px;margin-bottom:8px;">
+          <strong>Type :</strong> Action de formation<br>
+          <strong>Options :</strong> + Qualiopi (490€) · + EDOF (290€) · + Agents IA (500€)<br>
+          <strong>Réduction KBIS :</strong> Non (pas de KBIS existant)<br>
+          <strong>Paiement :</strong> 2x — 1 135€ payé le 12/03, 1 135€ le 12/04
+        </div>
+        <div style="font-size:12px;">
+          <strong>Avancement détaillé :</strong><br>
+          ✅ Étape 1 : Documents collectés<br>
+          ✅ Étape 2 : Statuts rédigés et signés<br>
+          ⏳ Étape 3 : Création KBIS au greffe (en cours)<br>
+          🔒 Étape 4 : Demande NDA à la DREETS<br>
+          🔒 Étape 5 : Activation Qualiopi + EDOF + Agents IA
+        </div>
+        <div class="action-btns">
+          <button class="action-btn">📄 Voir les documents</button>
+          <button class="action-btn">💬 Contacter mon expert</button>
+          <button class="action-btn">🧾 Voir mes factures</button>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>📋 Bilan de compétences — "Bilan Expert"</h4>
+            <p>Commandé le 28/02/2026</p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:18px;font-weight:800;color:var(--accent);">890€</div>
+            <span class="status-badge status-done">Terminé</span>
+          </div>
+        </div>
+        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:100%;background:var(--success);"></div></div>
+        <p style="font-size:11px;color:var(--success);margin-bottom:8px;">✅ Terminé le 10/03/2026 — OF opérationnel</p>
+        <div style="font-size:12px;margin-bottom:8px;">
+          <strong>Type :</strong> Bilan de compétences<br>
+          <strong>Options :</strong> Aucune<br>
+          <strong>Réduction KBIS :</strong> Oui (-100€)<br>
+          <strong>NDA obtenu :</strong> 11 22 33 44 55<br>
+          <strong>SIRET :</strong> 123 456 789 00010
+        </div>
+        <div style="font-size:12px;">
+          ✅ Étape 1 : Documents collectés<br>
+          ✅ Étape 2 : KBIS existant validé<br>
+          ✅ Étape 3 : NDA obtenu auprès de la DREETS<br>
+          ✅ Étape 4 : BPF initial déposé<br>
+          ✅ Étape 5 : OF activé et opérationnel
+        </div>
+        <div class="action-btns">
+          <button class="action-btn">📄 Voir les documents</button>
+          <button class="action-btn">🧾 Voir mes factures</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== FORMATION ========== -->
+    <div class="tab-content" id="tab-formation">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🎓 Ma formation formateur</h2>
+
+      <div style="background:#fff;border:2px solid var(--accent);border-radius:14px;padding:24px;margin-bottom:24px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px;">
+          <div>
+            <h3 style="font-size:16px;font-weight:800;">Formation "Formateur Professionnel"</h3>
+            <p style="font-size:12px;color:var(--muted);">21h en ligne · Inscrite le 05/03/2026</p>
+          </div>
+          <span class="status-badge status-progress" style="font-size:12px;padding:6px 14px;">En cours — 75%</span>
+        </div>
+        <div class="progress-bar" style="height:12px;"><div class="progress-fill" style="width:75%;"></div></div>
+      </div>
+
+      <h3 style="font-size:15px;font-weight:700;margin-bottom:12px;">Modules de formation</h3>
+
+      <div class="detail-card" style="border-left:3px solid var(--success);">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Module 1 : Conception pédagogique</h4>
+            <p>Créer des programmes de formation efficaces, objectifs pédagogiques, ingénierie</p>
+          </div>
+          <span class="status-badge status-done">✅ Terminé</span>
+        </div>
+        <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Terminé le 08/03</span><span class="detail-tag">Score : 92%</span></div>
+      </div>
+
+      <div class="detail-card" style="border-left:3px solid var(--success);">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Module 2 : Animation de formation</h4>
+            <p>Techniques d'animation, gestion de groupe, outils pédagogiques</p>
+          </div>
+          <span class="status-badge status-done">✅ Terminé</span>
+        </div>
+        <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Terminé le 12/03</span><span class="detail-tag">Score : 88%</span></div>
+      </div>
+
+      <div class="detail-card" style="border-left:3px solid var(--accent);">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Module 3 : Gestion administrative</h4>
+            <p>Contrats, conventions, émargement, BPF, obligations légales</p>
+          </div>
+          <span class="status-badge status-progress">⏳ En cours — 60%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
+        <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Commencé le 15/03</span></div>
+        <div class="action-btns">
+          <button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);">▶️ Reprendre</button>
+        </div>
+      </div>
+
+      <div class="detail-card" style="border-left:3px solid var(--border);">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Module 4 : Techniques de vente</h4>
+            <p>Prospecter, vendre ses formations, négocier, fidéliser</p>
+          </div>
+          <span style="font-size:12px;color:var(--muted);">🔒 À débloquer</span>
+        </div>
+        <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Disponible après Module 3</span></div>
+      </div>
+
+      <div class="detail-card" style="border-left:3px solid var(--border);">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Module 5 : Certification finale</h4>
+            <p>Examen final, mise en situation, obtention du certificat</p>
+          </div>
+          <span style="font-size:12px;color:var(--muted);">🔒 À débloquer</span>
+        </div>
+        <div class="detail-meta"><span class="detail-tag">3h</span><span class="detail-tag">Disponible après Module 4</span></div>
+      </div>
+
+      <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:10px;padding:16px;margin-top:20px;">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">💰 Remboursement FIF PL</h4>
+        <p style="font-size:12px;color:var(--muted);">Statut : <strong style="color:var(--success);">Dossier déposé</strong></p>
+        <p style="font-size:12px;color:var(--muted);">Remboursement estimé sous 4-6 semaines après certification.</p>
+      </div>
+
+      <div style="background:rgba(233,69,96,.05);border:1px solid rgba(233,69,96,.15);border-radius:10px;padding:16px;margin-top:12px;">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">🤖 Agents IA — Recherche de missions</h4>
+        <p style="font-size:12px;color:var(--muted);">Activé après certification. Nos agents chercheront des missions adaptées à votre profil chaque jour.</p>
+      </div>
+    </div>
+
+    <!-- ========== PARRAINAGE ========== -->
+    <div class="tab-content" id="tab-parrainage">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">🎁 Programme de parrainage</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Partagez vos liens et gagnez <strong style="color:var(--accent);">10% de commission</strong> sur chaque vente.</p>
+
+      <!-- STATS PARRAINAGE -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:32px;">
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-size:24px;font-weight:900;color:var(--success);">347€</div>
+          <div style="font-size:11px;color:var(--muted);">Gains totaux</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-size:24px;font-weight:900;color:var(--accent);">148€</div>
+          <div style="font-size:11px;color:var(--muted);">En attente de versement</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-size:24px;font-weight:900;color:var(--primary);">7</div>
+          <div style="font-size:11px;color:var(--muted);">Filleuls convertis</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-size:24px;font-weight:900;color:var(--primary);">23</div>
+          <div style="font-size:11px;color:var(--muted);">Clics sur vos liens</div>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,var(--primary),#0f3460);border-radius:12px;padding:24px;color:#fff;margin-bottom:24px;">
+        <h3 style="font-size:16px;font-weight:800;margin-bottom:8px;">💰 Comment ça marche ?</h3>
+        <div style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.6;">
+          1. Copiez un lien de parrainage ci-dessous<br>
+          2. Envoyez-le à un collègue ou un contact<br>
+          3. Quand il paye, vous touchez <strong>10% de commission</strong> automatiquement<br>
+          4. Vos gains sont versés chaque mois sur votre compte
+        </div>
+      </div>
+
+      <!-- LIENS DE PARRAINAGE -->
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">🔗 Vos liens de parrainage</h3>
+
+      <div style="margin-bottom:24px;">
+        <h4 style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">📄 Conformité</h4>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>NDA — 199€</strong>
+            <span class="ref-commission">→ 19,90€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=nda" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>UAI — 149€</strong>
+            <span class="ref-commission">→ 14,90€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=uai" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>Qualiopi — 490€</strong>
+            <span class="ref-commission">→ 49€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=qualiopi" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>EDOF — 290€</strong>
+            <span class="ref-commission">→ 29€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=edof" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>France Travail — 129€</strong>
+            <span class="ref-commission">→ 12,90€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=ft" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>RS/RNCP — 390€</strong>
+            <span class="ref-commission">→ 39€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=rs" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>OPCO (par OPCO) — 399€</strong>
+            <span class="ref-commission">→ 39,90€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=opco" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>Agent IA (à partir de) — 399€</strong>
+            <span class="ref-commission">→ 39,90€+ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=agent" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:24px;">
+        <h4 style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🏛 Créer un OF</h4>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>Action de formation — 990€</strong>
+            <span class="ref-commission">→ 99€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=of-action" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>CFA — 2 990€</strong>
+            <span class="ref-commission">→ 299€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=of-cfa" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>Bilan de compétences — 990€</strong>
+            <span class="ref-commission">→ 99€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=of-bilan" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>VAE — 990€</strong>
+            <span class="ref-commission">→ 99€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=of-vae" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>Formation des élus — 1 490€</strong>
+            <span class="ref-commission">→ 149€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=of-elus" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>OF agents IA — 2 790€</strong>
+            <span class="ref-commission">→ 279€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=of-ia" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:24px;">
+        <h4 style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🎓 Se former</h4>
+
+        <div class="ref-link-item">
+          <div class="ref-link-info">
+            <strong>Formation Formateur Pro — 1 490€</strong>
+            <span class="ref-commission">→ 149€ pour vous</span>
+          </div>
+          <div class="ref-link-actions">
+            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=formation" class="ref-link-input">
+            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORIQUE COMMISSIONS -->
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">📊 Historique des commissions</h3>
+
+      <div class="detail-card" style="border-left:3px solid var(--success);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Jean-Marc T. a payé Qualiopi (490€)</h4>
+            <p>Via votre lien · 15/03/2026</p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:18px;font-weight:800;color:var(--success);">+49€</div>
+            <span class="status-badge status-done">Versé</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-card" style="border-left:3px solid var(--success);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Fatima E. a payé NDA (199€)</h4>
+            <p>Via votre lien · 14/03/2026</p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:18px;font-weight:800;color:var(--success);">+19,90€</div>
+            <span class="status-badge status-done">Versé</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-card" style="border-left:3px solid var(--success);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Pierre L. a payé OF Action (990€)</h4>
+            <p>Via votre lien · 12/03/2026</p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:18px;font-weight:800;color:var(--success);">+99€</div>
+            <span class="status-badge status-done">Versé</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-card" style="border-left:3px solid rgba(200,169,110,.3);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+          <div>
+            <h4>Sarah M. a payé Formation (1 490€)</h4>
+            <p>Via votre lien · 18/03/2026</p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:18px;font-weight:800;color:#b8860b;">+149€</div>
+            <span class="status-badge status-progress">En attente</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--light);border-radius:10px;padding:16px;margin-top:20px;">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">💳 Versement des commissions</h4>
+        <p style="font-size:12px;color:var(--muted);">Les commissions sont versées le 1er de chaque mois par virement bancaire. Minimum de versement : 50€.</p>
+        <div style="margin-top:10px;">
+          <div class="form-group"><label>IBAN pour les versements</label><input type="text" placeholder="FR76 XXXX XXXX XXXX XXXX XXXX XXX" value="FR76 3000 4028 3700 0100 0466 354"></div>
+          <button class="action-btn">💾 Mettre à jour mon IBAN</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== PROFIL ========== -->
+    <div class="tab-content" id="tab-profil">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">👤 Mon profil</h2>
+      <div style="max-width:500px;">
+        <div class="form-group"><label>Prénom et nom</label><input type="text" value="Sophie Martin"></div>
+        <div class="form-group"><label>Email</label><input type="email" value="sophie@monof.fr"></div>
+        <div class="form-group"><label>Téléphone</label><input type="tel" value="06 12 34 56 78"></div>
+        <div class="form-group"><label>Adresse</label><input type="text" value="12 rue de la Formation, 75001 Paris"></div>
+        <div class="form-group"><label>Profil</label>
+          <select><option selected>Gérant d'OF</option><option>Formateur indépendant</option><option>En création d'OF</option><option>Demandeur d'emploi</option></select>
+        </div>
+        <div class="form-group"><label>SIREN / SIRET</label><input type="text" value="123 456 789 00010"></div>
+        <button class="btn btn-primary" style="margin-right:8px;">Enregistrer</button>
+        <button class="btn btn-outline" style="color:var(--accent);border-color:var(--accent);">Changer mon mot de passe</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function copyLink(btn){
+  var input = btn.parentNode.querySelector('input');
+  input.select();
+  document.execCommand('copy');
+  btn.textContent = '✅ Copié !';
+  btn.style.background = 'var(--success)';
+  btn.style.color = '#fff';
+  btn.style.borderColor = 'var(--success)';
+  setTimeout(function(){ btn.textContent = '📋 Copier'; btn.style.background=''; btn.style.color=''; btn.style.borderColor=''; }, 2000);
+}
+
+function showTab(name){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.sidebar a, .mobile-nav a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.querySelectorAll('.sidebar a, .mobile-nav a').forEach(a=>{
+    if(a.getAttribute('onclick') && a.getAttribute('onclick').includes("'"+name+"'")) a.classList.add('active');
+  });
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
