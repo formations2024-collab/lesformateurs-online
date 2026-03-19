@@ -16,7 +16,8 @@
     <a href="conformite.html">Conformité</a>
     <a href="creer-of.html">Créer mon OF</a>
     <a href="se-former.html">Se former</a>
-    <a href="#" onclick="openModal('signup');return false;" class="nav-cta">Connexion</a>
+    <a href="#" onclick="openModal('signup');return false;" class="nav-cta btn-login">Connexion</a>
+    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon espace</a>
   </div>
   <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
     <span></span><span></span><span></span>
@@ -1071,6 +1072,7 @@
     <button class="modal-close" onclick="closeAllModals()">✕</button>
     <h3>Connectez-vous</h3>
     <p>Accédez aux missions et postulez en un clic.</p>
+    <div id="auth-error" style="display:none;background:rgba(233,69,96,.1);border:1px solid rgba(233,69,96,.3);color:#e94560;padding:10px;border-radius:6px;font-size:13px;margin-bottom:12px;"></div>
     <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="sophie@monof.fr"></div>
     <div class="form-group"><label>Mot de passe</label><input type="password" id="login-pass" placeholder="••••••••"></div>
     <button class="btn btn-primary btn-block" onclick="doLogin()">Se connecter</button>
@@ -1131,16 +1133,45 @@ document.querySelectorAll('.modal').forEach(m=>{
   m.addEventListener('click',function(e){if(e.target===this)closeAllModals();});
 });
 
-function postuler(btn){
-  openModal('login');
+async function postuler(btn){
+  var user = await getUser();
+  if(!user){ openModal('login'); return; }
+  alert('✅ Candidature envoyée !');
 }
-function doLogin(){
-  closeAllModals();
-  alert('Connexion réussie ! Vous pouvez maintenant postuler.');
+
+async function doLogin(){
+  var email = document.getElementById('login-email').value.trim();
+  var pass = document.getElementById('login-pass').value;
+  if(!email||!pass){showAuthError('Remplissez email et mot de passe.');return;}
+  try {
+    await signIn(email, pass);
+    closeAllModals();
+    updateAuthUI();
+    alert('✅ Connexion réussie !');
+  } catch(e) {
+    showAuthError(e.message === 'Invalid login credentials' ? 'Email ou mot de passe incorrect.' : e.message);
+  }
 }
-function doSignup(){
-  closeAllModals();
-  alert('Compte créé ! Bienvenue sur lesformateurs.online');
+
+async function doSignup(){
+  var nom = document.getElementById('s-nom').value.trim();
+  var email = document.getElementById('s-email').value.trim();
+  var phone = document.getElementById('s-phone').value.trim();
+  var pass = document.getElementById('s-pass').value;
+  var profil = document.getElementById('s-profil').value;
+  if(!nom||!email||!pass){showAuthError('Remplissez tous les champs obligatoires.');return;}
+  if(pass.length < 6){showAuthError('Mot de passe trop court (min. 6 caractères).');return;}
+  var profileType = 'formateur';
+  if(profil.includes('Gérant')) profileType = 'gerant_of';
+  else if(profil.includes('créer')) profileType = 'creation_of';
+  try {
+    await signUp(email, pass, nom, phone, profileType);
+    closeAllModals();
+    updateAuthUI();
+    alert('✅ Compte créé ! Vérifiez votre email pour confirmer votre inscription.');
+  } catch(e) {
+    showAuthError(e.message.includes('already registered') ? 'Cet email est déjà utilisé.' : e.message);
+  }
 }
 
 function filterMissions(){
@@ -1158,5 +1189,7 @@ function filterMissions(){
   });
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
 </body>
 </html>

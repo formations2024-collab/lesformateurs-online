@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LFO — SQL Setup Supabase</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',system-ui,sans-serif;background:#0a0a1a;color:#e0e0e0;padding:20px;}
+h1{font-size:24px;font-weight:900;color:#e94560;margin-bottom:8px;}
+.subtitle{color:#888;font-size:14px;margin-bottom:24px;}
+.steps{background:#1a1a2e;border-radius:12px;padding:20px;margin-bottom:24px;border:1px solid #333;}
+.steps h2{font-size:16px;font-weight:700;color:#fff;margin-bottom:12px;}
+.steps ol{padding-left:20px;font-size:14px;line-height:2;}
+.steps a{color:#e94560;}
+.copy-wrap{position:relative;margin-bottom:24px;}
+.copy-btn{position:sticky;top:10px;float:right;background:#e94560;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;z-index:10;margin:10px;}
+.copy-btn:hover{background:#ff6b81;}
+.copy-btn.copied{background:#10b981;}
+pre{background:#111;border:1px solid #333;border-radius:10px;padding:20px;overflow-x:auto;font-size:12px;line-height:1.6;white-space:pre;font-family:'Fira Code','Courier New',monospace;color:#a0e0a0;max-height:70vh;overflow-y:auto;}
+.warning{background:rgba(233,69,96,.1);border:1px solid rgba(233,69,96,.3);border-radius:8px;padding:14px;margin-bottom:20px;font-size:13px;color:#e94560;}
+.success{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:8px;padding:14px;margin-top:20px;font-size:13px;color:#10b981;}
+</style>
+</head>
+<body>
+
+<h1>🔧 SQL Setup — lesformateurs.online</h1>
+<p class="subtitle">Colle ce SQL dans l'éditeur Supabase pour créer toutes les tables.</p>
+
+<div class="steps">
+  <h2>📋 Comment faire :</h2>
+  <ol>
+    <li>Va dans ton <a href="https://supabase.com/dashboard/project/bxijjjbxsevnudienvbv/sql/new" target="_blank">SQL Editor Supabase →</a></li>
+    <li>Clique le bouton <strong>"📋 Copier tout le SQL"</strong> ci-dessous</li>
+    <li>Colle dans l'éditeur SQL (<strong>Ctrl+V</strong>)</li>
+    <li>Clique <strong>"Run"</strong> (ou Ctrl+Enter)</li>
+    <li>Vérifie que tout est vert ✅</li>
+  </ol>
+</div>
+
+<div class="warning">⚠️ Ce script crée 11 tables, les index de performance, les policies RLS et les buckets Storage. Exécute-le <strong>une seule fois</strong>.</div>
+
+<div class="copy-wrap">
+  <button class="copy-btn" onclick="copySQL(this)">📋 Copier tout le SQL</button>
+  <pre id="sql-code">-- ============================================
+-- lesformateurs.online — Schéma base de données
+-- Supabase (PostgreSQL)
+-- ============================================
+
+-- ====== UTILISATEURS ======
+CREATE TABLE profiles (
+  id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  full_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT,
+  address TEXT,
+  siren TEXT,
+  profile_type TEXT CHECK (profile_type IN ('formateur', 'gerant_of', 'creation_of', 'demandeur_emploi', 'expert', 'admin')),
+  referral_code TEXT UNIQUE,
+  referral_iban TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ====== DÉMARCHES CONFORMITÉ ======
+CREATE TABLE demarches (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
+  type TEXT NOT NULL CHECK (type IN ('nda', 'uai', 'qualiopi', 'edof', 'francetravail', 'rs_rncp', 'opco', 'agent_ia')),
+  status TEXT DEFAULT 'nouveau' CHECK (status IN ('nouveau', 'en_cours', 'verification_expert', 'soumis', 'termine', 'refuse')),
+  current_step INT DEFAULT 1,
+  amount_cents INT NOT NULL,
+  stripe_payment_id TEXT,
+  stripe_checkout_session TEXT,
+  paid BOOLEAN DEFAULT FALSE,
+  expert_id UUID REFERENCES profiles(id),
+  expert_comment TEXT,
+  for_self BOOLEAN DEFAULT TRUE,
+  client_name TEXT,
+  client_email TEXT,
+  client_phone TEXT,
+  client_siren TEXT,
+  org_name TEXT,
+  siren TEXT,
+  nda_number TEXT,
+  metadata JSONB DEFAULT '{}',
+  referred_by UUID REFERENCES profiles(id),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ====== OPCO sélectionnés ======
+CREATE TABLE demarche_opco (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  demarche_id UUID REFERENCES demarches(id) ON DELETE CASCADE,
+  opco_name TEXT NOT NULL,
+  status TEXT DEFAULT 'en_attente' CHECK (status IN ('en_attente', 'en_cours', 'valide', 'refuse')),
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ====== DOCUMENTS ======
+CREATE TABLE documents (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  demarche_id UUID REFERENCES demarches(id) ON DELETE CASCADE,
+  creation_of_id UUID,
+  name TEXT NOT NULL,
+  file_path TEXT NOT NULL,
+  file_size INT,
+  mime_type TEXT,
+  status TEXT DEFAULT 'en_attente' CHECK (status IN ('en_attente', 'valide', 'refuse')),
+  expert_comment TEXT,
+  uploaded_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ====== CRÉATIONS D'OF ======
+CREATE TABLE creations_of (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
+  of_type TEXT NOT NULL CHECK (of_type IN ('action_formation', 'cfa', 'bilan', 'vae', 'elus', 'agents_ia')),
+  status TEXT DEFAULT 'nouveau' CHECK (status IN ('nouveau', 'en_cours', 'verification_expert', 'greffe', 'nda_dreets', 'termine', 'refuse')),
+  current_step INT DEFAULT 1,
+  base_price_cents INT NOT NULL,
+  total_price_cents INT NOT NULL,
+  has_kbis BOOLEAN DEFAULT FALSE,
+  payment_mode TEXT DEFAULT '1x' CHECK (payment_mode IN ('1x', '2x', '3x')),
+  stripe_payment_id TEXT,
+  stripe_checkout_session TEXT,
+  paid BOOLEAN DEFAULT FALSE,
+  expert_id UUID REFERENCES profiles(id),
+  expert_comment TEXT,
+  for_self BOOLEAN DEFAULT TRUE,
+  client_name TEXT,
+  client_email TEXT,
+  kbis_number TEXT,
+  nda_number TEXT,
+  siret TEXT,
+  of_name TEXT,
+  metadata JSONB DEFAULT '{}',
+  referred_by UUID REFERENCES profiles(id),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ====== OPTIONS CHOISIES POUR CRÉATION OF ======
+CREATE TABLE creation_of_options (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  creation_of_id UUID REFERENCES creations_of(id) ON DELETE CASCADE,
+  option_type TEXT NOT NULL CHECK (option_type IN ('qualiopi', 'agents_ia', 'edof', 'domiciliation', 'opco_pack', 'site_web')),
+  price_cents INT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ====== ANNONCES / MISSIONS ======
+CREATE TABLE annonces (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  author_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  category TEXT NOT NULL,
+  city TEXT NOT NULL,
+  region TEXT,
+  description TEXT,
+  daily_rate TEXT,
+  duration TEXT,
+  is_premium BOOLEAN DEFAULT FALSE,
+  stripe_payment_id TEXT,
+  status TEXT DEFAULT 'active' CHECK (status IN ('active', 'en_attente', 'expiree', 'supprimee')),
+  views_count INT DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  expires_at TIMESTAMPTZ DEFAULT (NOW() + INTERVAL '30 days'),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ====== CANDIDATURES ======
+CREATE TABLE candidatures (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  annonce_id UUID REFERENCES annonces(id) ON DELETE CASCADE,
+  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
+  status TEXT DEFAULT 'en_attente' CHECK (status IN ('en_attente', 'acceptee', 'refusee', 'retiree')),
+  message TEXT,
+  recruiter_reply TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(annonce_id, user_id)
+);
+
+-- ====== FORMATION FORMATEUR ======
+CREATE TABLE formations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
+  status TEXT DEFAULT 'inscrit' CHECK (status IN ('inscrit', 'en_cours', 'certifie', 'abandonne')),
+  progress_percent INT DEFAULT 0,
+  current_module INT DEFAULT 1,
+  amount_cents INT DEFAULT 149000,
+  stripe_payment_id TEXT,
+  stripe_checkout_session TEXT,
+  paid BOOLEAN DEFAULT FALSE,
+  fifpl_status TEXT DEFAULT 'non_demande' CHECK (fifpl_status IN ('non_demande', 'depose', 'accepte', 'refuse', 'rembourse')),
+  professional_status TEXT,
+  for_self BOOLEAN DEFAULT TRUE,
+  client_name TEXT,
+  client_email TEXT,
+  certified_at TIMESTAMPTZ,
+  referred_by UUID REFERENCES profiles(id),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ====== MODULES DE FORMATION ======
+CREATE TABLE formation_modules (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  formation_id UUID REFERENCES formations(id) ON DELETE CASCADE,
+  module_number INT NOT NULL,
+  title TEXT NOT NULL,
+  duration_hours DECIMAL(4,1),
+  status TEXT DEFAULT 'verrouille' CHECK (status IN ('verrouille', 'en_cours', 'termine')),
+  score INT,
+  started_at TIMESTAMPTZ,
+  completed_at TIMESTAMPTZ
+);
+
+-- ====== PAIEMENTS ======
+CREATE TABLE payments (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES profiles(id),
+  stripe_session_id TEXT UNIQUE,
+  stripe_payment_intent TEXT,
+  amount_cents INT NOT NULL,
+  currency TEXT DEFAULT 'eur',
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'completed', 'failed', 'refunded')),
+  payment_type TEXT NOT NULL,
+  reference_id UUID,
+  metadata JSONB DEFAULT '{}',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ====== PARRAINAGE / COMMISSIONS ======
+CREATE TABLE referrals (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  referrer_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
+  referred_user_id UUID REFERENCES profiles(id),
+  payment_id UUID REFERENCES payments(id),
+  product_type TEXT NOT NULL,
+  product_label TEXT,
+  sale_amount_cents INT NOT NULL,
+  commission_cents INT NOT NULL,
+  commission_rate DECIMAL(4,2) DEFAULT 0.10,
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'confirmed', 'paid', 'cancelled')),
+  paid_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ====== INDEX POUR PERFORMANCE ======
+CREATE INDEX idx_demarches_user ON demarches(user_id);
+CREATE INDEX idx_demarches_status ON demarches(status);
+CREATE INDEX idx_demarches_expert ON demarches(expert_id);
+CREATE INDEX idx_creations_user ON creations_of(user_id);
+CREATE INDEX idx_creations_status ON creations_of(status);
+CREATE INDEX idx_documents_demarche ON documents(demarche_id);
+CREATE INDEX idx_documents_creation ON documents(creation_of_id);
+CREATE INDEX idx_annonces_status ON annonces(status);
+CREATE INDEX idx_annonces_author ON annonces(author_id);
+CREATE INDEX idx_candidatures_annonce ON candidatures(annonce_id);
+CREATE INDEX idx_candidatures_user ON candidatures(user_id);
+CREATE INDEX idx_formations_user ON formations(user_id);
+CREATE INDEX idx_payments_user ON payments(user_id);
+CREATE INDEX idx_payments_stripe ON payments(stripe_session_id);
+CREATE INDEX idx_referrals_referrer ON referrals(referrer_id);
+CREATE INDEX idx_referrals_status ON referrals(status);
+CREATE INDEX idx_profiles_referral_code ON profiles(referral_code);
+
+-- ====== ROW LEVEL SECURITY (RLS) ======
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE demarches ENABLE ROW LEVEL SECURITY;
+ALTER TABLE demarche_opco ENABLE ROW LEVEL SECURITY;
+ALTER TABLE documents ENABLE ROW LEVEL SECURITY;
+ALTER TABLE creations_of ENABLE ROW LEVEL SECURITY;
+ALTER TABLE creation_of_options ENABLE ROW LEVEL SECURITY;
+ALTER TABLE annonces ENABLE ROW LEVEL SECURITY;
+ALTER TABLE candidatures ENABLE ROW LEVEL SECURITY;
+ALTER TABLE formations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE formation_modules ENABLE ROW LEVEL SECURITY;
+ALTER TABLE payments ENABLE ROW LEVEL SECURITY;
+ALTER TABLE referrals ENABLE ROW LEVEL SECURITY;
+
+-- Policies utilisateurs
+CREATE POLICY "Users see own profile" ON profiles FOR ALL USING (auth.uid() = id);
+CREATE POLICY "Users see own demarches" ON demarches FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "Users see own creations" ON creations_of FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "Users see own candidatures" ON candidatures FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "Users see own formations" ON formations FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "Users see own payments" ON payments FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "Users see own referrals" ON referrals FOR ALL USING (auth.uid() = referrer_id);
+
+-- Annonces publiques
+CREATE POLICY "Annonces public read" ON annonces FOR SELECT USING (status = 'active');
+CREATE POLICY "Annonces author write" ON annonces FOR ALL USING (auth.uid() = author_id);
+
+-- Experts
+CREATE POLICY "Expert see assigned demarches" ON demarches FOR SELECT USING (auth.uid() = expert_id);
+CREATE POLICY "Expert see assigned creations" ON creations_of FOR SELECT USING (auth.uid() = expert_id);
+
+-- Documents
+CREATE POLICY "Docs owner access" ON documents FOR ALL USING (
+  EXISTS (SELECT 1 FROM demarches WHERE demarches.id = documents.demarche_id AND demarches.user_id = auth.uid())
+  OR EXISTS (SELECT 1 FROM creations_of WHERE creations_of.id = documents.creation_of_id AND creations_of.user_id = auth.uid())
+);
+
+-- ====== STORAGE BUCKETS ======
+-- Créer dans Supabase Dashboard > Storage :
+-- 1. Bucket "documents" (privé) → fichiers clients
+-- 2. Bucket "avatars" (public) → photos de profil
+
+-- ====== FONCTION : Générer code parrainage à l'inscription ======
+CREATE OR REPLACE FUNCTION generate_referral_code()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.referral_code := UPPER(SUBSTRING(MD5(NEW.id::TEXT || NOW()::TEXT) FROM 1 FOR 6));
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_referral_code
+  BEFORE INSERT ON profiles
+  FOR EACH ROW
+  WHEN (NEW.referral_code IS NULL)
+  EXECUTE FUNCTION generate_referral_code();
+
+-- ✅ TERMINÉ — 12 tables, index, RLS, parrainage</pre>
+</div>
+
+<div class="success">
+  ✅ <strong>Après exécution</strong>, crée les 2 buckets Storage :<br>
+  → Supabase Dashboard > Storage > New bucket > <strong>"documents"</strong> (privé)<br>
+  → Supabase Dashboard > Storage > New bucket > <strong>"avatars"</strong> (public)
+</div>
+
+<script>
+function copySQL(btn) {
+  var sql = document.getElementById('sql-code').textContent;
+  navigator.clipboard.writeText(sql).then(function() {
+    btn.textContent = '✅ Copié !';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = '📋 Copier tout le SQL';
+      btn.classList.remove('copied');
+    }, 3000);
+  });
+}
+</script>
+
+</body>
+</html>

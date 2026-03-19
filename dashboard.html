@@ -889,5 +889,21 @@ function showTab(name){
   window.scrollTo(0,0);
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script>
+// Auth guard + profile loading
+(async function(){
+  var user = await getUser();
+  if(!user){ window.location.href='missions.html'; return; }
+  var profile = await getProfile();
+  if(profile){
+    var nameEls = document.querySelectorAll('.user-name, .sidebar h3');
+    nameEls.forEach(function(el){ if(el.textContent.includes('Sophie')) el.textContent = profile.full_name; });
+    var emailEls = document.querySelectorAll('.sidebar p');
+    emailEls.forEach(function(el){ if(el.textContent.includes('@')) el.textContent = profile.email; });
+  }
+})();
+</script>
 </body>
 </html>

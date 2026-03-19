@@ -57,7 +57,8 @@
     <a href="conformite.html">Conformité</a>
     <a href="creer-of.html" style="color:#fff;background:rgba(255,255,255,.1);">Créer mon OF</a>
     <a href="se-former.html">Se former</a>
-    <a href="missions.html" class="nav-cta">Connexion</a>
+    <a href="missions.html" class="nav-cta btn-login">Connexion</a>
+    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon espace</a>
   </div>
   <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
@@ -331,5 +332,7 @@ function payerCreation(){
   }
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
 </body>
 </html>
