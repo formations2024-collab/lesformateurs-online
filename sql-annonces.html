@@ -1,0 +1,27 @@
+<!DOCTYPE html><html><head><title>SQL Annonces</title><style>body{font-family:Inter,sans-serif;max-width:800px;margin:40px auto;padding:20px;background:#1a1a2e;color:#eee;}textarea{width:100%;height:300px;background:#16213e;color:#eee;border:1px solid #444;border-radius:8px;padding:12px;font-family:monospace;font-size:13px;}button{background:#e94560;color:#fff;border:none;padding:12px 24px;border-radius:8px;font-size:14px;cursor:pointer;margin-top:12px;}</style></head><body>
+<h2>SQL — Mise à jour table annonces</h2>
+<p>Copiez et collez dans Supabase SQL Editor :</p>
+<textarea id="sql" readonly>
+-- Ajouter colonnes manquantes à la table annonces
+ALTER TABLE annonces ADD COLUMN IF NOT EXISTS tarif_type TEXT DEFAULT 'jour' CHECK (tarif_type IN ('jour', 'heure'));
+ALTER TABLE annonces ADD COLUMN IF NOT EXISTS tarif_montant INT;
+ALTER TABLE annonces ADD COLUMN IF NOT EXISTS paused BOOLEAN DEFAULT FALSE;
+
+-- Permettre insertion via anon key (pour users connectés)
+DROP POLICY IF EXISTS "Annonces author insert" ON annonces;
+CREATE POLICY "Annonces author insert" ON annonces FOR INSERT WITH CHECK (auth.uid() = author_id);
+
+-- Permettre update par l'auteur
+DROP POLICY IF EXISTS "Annonces author update" ON annonces;
+CREATE POLICY "Annonces author update" ON annonces FOR UPDATE USING (auth.uid() = author_id);
+
+-- Permettre delete par l'auteur
+DROP POLICY IF EXISTS "Annonces author delete" ON annonces;
+CREATE POLICY "Annonces author delete" ON annonces FOR DELETE USING (auth.uid() = author_id);
+
+-- Lecture publique des annonces actives
+DROP POLICY IF EXISTS "Annonces public read" ON annonces;
+CREATE POLICY "Annonces public read" ON annonces FOR SELECT USING (status = 'active' OR auth.uid() = author_id);
+</textarea>
+<button onclick="navigator.clipboard.writeText(document.getElementById('sql').value);this.textContent='✅ Copié !'">📋 Copier le SQL</button>
+</body></html>

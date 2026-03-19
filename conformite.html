@@ -22,8 +22,9 @@
 .agent-opt-price{font-size:16px;font-weight:800;color:var(--accent);white-space:nowrap;}
 
 .toggle-switch{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;}
-.toggle-switch input{accent-color:var(--accent);width:16px;height:16px;}
-.toggle-label-yes{color:var(--success);font-weight:600;}
+.toggle-switch input{accent-color:#444;width:16px;height:16px;filter:grayscale(1);}
+.toggle-switch input:checked{filter:none;accent-color:#444;}
+.toggle-label-yes{color:#333;font-weight:600;}
 .toggle-label-no{color:var(--muted);font-weight:600;}
 .doc-later-msg p{margin:0;}
 
@@ -49,12 +50,13 @@
 <nav class="navbar">
   <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
   <div class="nav-links" id="navLinks">
+    <a href="index.html">Accueil</a>
     <a href="missions.html">Missions</a>
     <a href="conformite.html" style="color:#fff;background:rgba(255,255,255,.1);">Conformité</a>
     <a href="creer-of.html">Créer mon OF</a>
     <a href="se-former.html">Se former</a>
-    <a href="missions.html" class="nav-cta btn-login">Connexion</a>
-    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon espace</a>
+    <a href="#" class="nav-cta btn-login" onclick="openAuthModal();return false;">Connexion</a>
+    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon compte</a>
   </div>
   <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
@@ -176,11 +178,11 @@
     <button class="modal-close" onclick="closeAllModals()">✕</button>
     <h3>Numéro de Déclaration d'Activité (NDA)</h3>
     <p>Remplissez vos informations — nous constituons votre dossier complet pour la DREETS.</p>
-    <div class="client-selector">
+    <div class="client-selector parrain-dropdown" style="display:none;">
       <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
       <select onchange="toggleClientFields(this)">
+        <option value="autre" selected>Un autre client</option>
         <option value="moi">Moi-même (mes infos pré-remplies)</option>
-        <option value="autre">Un autre client</option>
       </select>
       <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
     </div>
@@ -194,15 +196,14 @@
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
         <label style="margin-bottom:0;">Casier judiciaire (bulletin n°3)</label>
         <label class="toggle-switch">
-          <input type="checkbox" checked onchange="toggleDocUpload(this,'casier_judiciaire__bulletin_n_')">
-          <span class="toggle-label-yes">✅ J'ai ce document</span>
-          <span class="toggle-label-no" style="display:none;">⏳ Je ne l'ai pas encore</span>
+          <input type="checkbox" onchange="toggleDocUpload(this,'casier_judiciaire__bulletin_n_')">
+          <span class="toggle-label-no">☐ Je ne l'ai pas encore</span>
         </label>
       </div>
       <div class="doc-upload-area" id="doc_casier_judiciaire__bulletin_n_">
         <input type="file" accept=".pdf,.jpg,.png,.zip">
       </div>
-      <div class="doc-later-msg" id="later_casier_judiciaire__bulletin_n_" style="display:none;">
+      <div class="doc-later-msg" style="display:none;" id="later_casier_judiciaire__bulletin_n_">
         <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
       </div>
     </div>
@@ -210,15 +211,14 @@
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
         <label style="margin-bottom:0;">Première convention de formation signée</label>
         <label class="toggle-switch">
-          <input type="checkbox" checked onchange="toggleDocUpload(this,'premi_re_convention_de_formati')">
-          <span class="toggle-label-yes">✅ J'ai ce document</span>
-          <span class="toggle-label-no" style="display:none;">⏳ Je ne l'ai pas encore</span>
+          <input type="checkbox" onchange="toggleDocUpload(this,'premi_re_convention_de_formati')">
+          <span class="toggle-label-no">☐ Je ne l'ai pas encore</span>
         </label>
       </div>
       <div class="doc-upload-area" id="doc_premi_re_convention_de_formati">
         <input type="file" accept=".pdf,.jpg,.png,.zip">
       </div>
-      <div class="doc-later-msg" id="later_premi_re_convention_de_formati" style="display:none;">
+      <div class="doc-later-msg" style="display:none;" id="later_premi_re_convention_de_formati">
         <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
       </div>
     </div>
@@ -226,16 +226,30 @@
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
         <label style="margin-bottom:0;">Programme de formation</label>
         <label class="toggle-switch">
-          <input type="checkbox" checked onchange="toggleDocUpload(this,'programme_de_formation')">
-          <span class="toggle-label-yes">✅ J'ai ce document</span>
-          <span class="toggle-label-no" style="display:none;">⏳ Je ne l'ai pas encore</span>
+          <input type="checkbox" onchange="toggleDocUpload(this,'programme_de_formation')">
+          <span class="toggle-label-no">☐ Je ne l'ai pas encore</span>
         </label>
       </div>
       <div class="doc-upload-area" id="doc_programme_de_formation">
         <input type="file" accept=".pdf,.jpg,.png,.zip">
       </div>
-      <div class="doc-later-msg" id="later_programme_de_formation" style="display:none;">
+      <div class="doc-later-msg" style="display:none;" id="later_programme_de_formation">
         <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
+      </div>
+    </div>
+    <div class="form-group doc-toggle-group">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <label style="margin-bottom:0;">NDA avec mention CFA</label>
+        <label class="toggle-switch">
+          <input type="checkbox" onchange="toggleDocUpload(this,'nda_mention_cfa')">
+          <span class="toggle-label-no">☐ Je ne l'ai pas encore</span>
+        </label>
+      </div>
+      <div class="doc-upload-area" id="doc_nda_mention_cfa">
+        <input type="file" accept=".pdf,.jpg,.png,.zip">
+      </div>
+      <div class="doc-later-msg" style="display:none;" id="later_nda_mention_cfa">
+        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Nous vous recontacterons pour récupérer ce document.</p>
       </div>
     </div>
     <div style="background:var(--light);padding:16px;border-radius:8px;margin:20px 0;">
@@ -256,19 +270,19 @@
     <button class="modal-close" onclick="closeAllModals()">✕</button>
     <h3>Numéro UAI</h3>
     <p>Choisissez une formation RS ou RNCP — nous créons le document à soumettre au rectorat.</p>
-        <div class="client-selector">
+        <div class="client-selector parrain-dropdown" style="display:none;">
       <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
       <select onchange="toggleClientFields(this)">
+        <option value="autre" selected>Un autre client</option>
         <option value="moi">Moi-même (mes infos pré-remplies)</option>
-        <option value="autre">Un autre client</option>
       </select>
       <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
     </div>
 <div class="form-group"><label>Nom de l'organisme</label><input type="text" placeholder="Mon OF"></div>
     <div class="form-group"><label>N° SIREN</label><input type="text" placeholder="123 456 789"></div>
     <div class="form-group"><label>N° NDA</label><input type="text" placeholder="Votre numéro de déclaration d'activité"></div>
-    <div class="form-group"><label>Formation visée (RS ou RNCP)</label>
-      <select><option>Sélectionnez...</option><option>RS — Répertoire Spécifique</option><option>RNCP — Répertoire National</option></select>
+    <div class="form-group"><label>Formation visée</label>
+      <input type="text" placeholder="Ex: Titre professionnel, certification RS/RNCP, intitulé de la formation...">
     </div>
     <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
     <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="06 12 34 56 78"></div>
@@ -290,11 +304,11 @@
     <button class="modal-close" onclick="closeAllModals()">✕</button>
     <h3>Préparation Qualiopi</h3>
     <p>Dossier complet de préparation à la certification Qualiopi — 7 critères, 32 indicateurs.</p>
-        <div class="client-selector">
+        <div class="client-selector parrain-dropdown" style="display:none;">
       <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
       <select onchange="toggleClientFields(this)">
+        <option value="autre" selected>Un autre client</option>
         <option value="moi">Moi-même (mes infos pré-remplies)</option>
-        <option value="autre">Un autre client</option>
       </select>
       <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
     </div>
@@ -306,21 +320,18 @@
     </div>
     <div class="form-group"><label>Nombre de formations actives</label><input type="number" placeholder="5"></div>
     <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
-    <div class="form-group doc-toggle-group">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-        <label style="margin-bottom:0;">Documents existants (livret d'accueil, CGV, etc.)</label>
-        <label class="toggle-switch">
-          <input type="checkbox" checked onchange="toggleDocUpload(this,'documents_existants__livret_d_')">
-          <span class="toggle-label-yes">✅ J'ai ce document</span>
-          <span class="toggle-label-no" style="display:none;">⏳ Je ne l'ai pas encore</span>
-        </label>
+    <div class="form-group">
+      <label>Commentaire — précisez le type de Qualiopi souhaité</label>
+      <textarea rows="3" placeholder="Ex: Qualiopi actions de formation + bilan de compétences, audit initial prévu en septembre..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>Documents existants <span style="font-weight:400;color:var(--muted);font-size:11px;">(facultatif — livret d'accueil, CGV, programmes, etc.)</span></label>
+      <div id="qualiopi-docs-list">
+        <div class="doc-upload-area" style="margin-bottom:8px;">
+          <input type="file" accept=".pdf,.jpg,.png,.zip">
+        </div>
       </div>
-      <div class="doc-upload-area" id="doc_documents_existants__livret_d_">
-        <input type="file" accept=".pdf,.jpg,.png,.zip">
-      </div>
-      <div class="doc-later-msg" id="later_documents_existants__livret_d_" style="display:none;">
-        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
-      </div>
+      <button type="button" class="action-btn" style="font-size:12px;margin-top:4px;" onclick="addQualiopiDoc()">+ Ajouter un document</button>
     </div>
     <div style="background:var(--light);padding:16px;border-radius:8px;margin:20px 0;">
       <p style="font-size:13px;font-weight:600;margin-bottom:4px;">✦ Pourquoi nous sommes les meilleurs pour Qualiopi</p>
@@ -340,11 +351,11 @@
     <button class="modal-close" onclick="closeAllModals()">✕</button>
     <h3>Inscription EDOF / Mon Compte Formation</h3>
     <p>Rendez vos formations visibles sur Mon Compte Formation (CPF).</p>
-        <div class="client-selector">
+        <div class="client-selector parrain-dropdown" style="display:none;">
       <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
       <select onchange="toggleClientFields(this)">
+        <option value="autre" selected>Un autre client</option>
         <option value="moi">Moi-même (mes infos pré-remplies)</option>
-        <option value="autre">Un autre client</option>
       </select>
       <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
     </div>
@@ -352,7 +363,14 @@
     <div class="form-group"><label>N° SIREN</label><input type="text" placeholder="123 456 789"></div>
     <div class="form-group"><label>N° NDA</label><input type="text" placeholder="Votre NDA"></div>
     <div class="form-group"><label>Certification Qualiopi</label>
-      <select><option>Oui, j'ai Qualiopi</option><option>Non, pas encore</option></select>
+      <select id="edof-qualiopi" onchange="checkEdofQualiopi()">
+        <option value="oui">Oui, j'ai Qualiopi</option>
+        <option value="non">Non, pas encore</option>
+      </select>
+    </div>
+    <div id="edof-no-qualiopi" style="display:none;background:rgba(233,69,96,.08);border:1px solid var(--accent);padding:14px;border-radius:8px;margin-bottom:16px;">
+      <p style="font-size:13px;font-weight:700;color:var(--accent);margin-bottom:4px;">⚠️ Qualiopi obligatoire</p>
+      <p style="font-size:12px;color:var(--muted);">Désolé, pour réaliser cette démarche il vous faut absolument la certification Qualiopi. <a href="#" onclick="closeAllModals();document.getElementById('modal-qualiopi').classList.add('open');return false;" style="color:var(--accent);font-weight:600;">Obtenir Qualiopi →</a></p>
     </div>
     <div class="form-group"><label>Formations à inscrire (intitulés)</label><textarea rows="3" placeholder="Ex: Formation Excel avancé, Formation management..."></textarea></div>
     <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
@@ -364,7 +382,7 @@
       <span class="price-old" style="font-size:18px;">1 200€</span>
       <span class="price-new" style="font-size:28px;">290€</span>
     </div>
-    <button class="btn btn-primary btn-block btn-lg" onclick="payer('edof',290)">Payer 290€ et démarrer →</button>
+    <button class="btn btn-primary btn-block btn-lg" id="edof-pay-btn" onclick="payer('edof',290)">Payer 290€ et démarrer →</button>
   </div>
 </div>
 
@@ -374,11 +392,11 @@
     <button class="modal-close" onclick="closeAllModals()">✕</button>
     <h3>Référencement France Travail</h3>
     <p>Devenez prestataire de formation référencé pour les demandeurs d'emploi.</p>
-        <div class="client-selector">
+        <div class="client-selector parrain-dropdown" style="display:none;">
       <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
       <select onchange="toggleClientFields(this)">
+        <option value="autre" selected>Un autre client</option>
         <option value="moi">Moi-même (mes infos pré-remplies)</option>
-        <option value="autre">Un autre client</option>
       </select>
       <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
     </div>
@@ -390,15 +408,14 @@
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
         <label style="margin-bottom:0;">Catalogue de formations (PDF)</label>
         <label class="toggle-switch">
-          <input type="checkbox" checked onchange="toggleDocUpload(this,'catalogue_de_formations__pdf_')">
-          <span class="toggle-label-yes">✅ J'ai ce document</span>
-          <span class="toggle-label-no" style="display:none;">⏳ Je ne l'ai pas encore</span>
+          <input type="checkbox" onchange="toggleDocUpload(this,'catalogue_de_formations__pdf_')">
+          <span class="toggle-label-no">☐ Je ne l'ai pas encore</span>
         </label>
       </div>
       <div class="doc-upload-area" id="doc_catalogue_de_formations__pdf_">
         <input type="file" accept=".pdf,.jpg,.png,.zip">
       </div>
-      <div class="doc-later-msg" id="later_catalogue_de_formations__pdf_" style="display:none;">
+      <div class="doc-later-msg" style="display:none;" id="later_catalogue_de_formations__pdf_">
         <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
       </div>
     </div>
@@ -416,33 +433,34 @@
     <button class="modal-close" onclick="closeAllModals()">✕</button>
     <h3>Dépôt RS / RNCP</h3>
     <p>Enregistrement de vos certifications au Répertoire Spécifique ou au RNCP.</p>
-        <div class="client-selector">
+        <div class="client-selector parrain-dropdown" style="display:none;">
       <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
       <select onchange="toggleClientFields(this)">
+        <option value="autre" selected>Un autre client</option>
         <option value="moi">Moi-même (mes infos pré-remplies)</option>
-        <option value="autre">Un autre client</option>
       </select>
       <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
     </div>
 <div class="form-group"><label>Nom de l'organisme</label><input type="text" placeholder="Mon OF"></div>
     <div class="form-group"><label>N° SIREN</label><input type="text" placeholder="123 456 789"></div>
-    <div class="form-group"><label>Type de dépôt</label>
-      <select><option>RS — Répertoire Spécifique</option><option>RNCP — Répertoire National</option></select>
+    <div class="form-group"><label>Type de formation que vous désirez</label>
+      <input type="text" placeholder="Décrivez la formation que vous souhaitez obtenir (RS, RNCP, intitulé...)">
     </div>
-    <div class="form-group"><label>Intitulé de la certification</label><input type="text" placeholder="Ex: Certification en management"></div>
+    <div class="form-group"><label>Commentaire</label>
+      <textarea rows="3" placeholder="Précisez vos besoins : public visé, objectifs, durée envisagée..."></textarea>
+    </div>
     <div class="form-group doc-toggle-group">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
         <label style="margin-bottom:0;">Référentiel de compétences (PDF)</label>
         <label class="toggle-switch">
-          <input type="checkbox" checked onchange="toggleDocUpload(this,'r_f_rentiel_de_comp_tences__pd')">
-          <span class="toggle-label-yes">✅ J'ai ce document</span>
-          <span class="toggle-label-no" style="display:none;">⏳ Je ne l'ai pas encore</span>
+          <input type="checkbox" onchange="toggleDocUpload(this,'r_f_rentiel_de_comp_tences__pd')">
+          <span class="toggle-label-no">☐ Je ne l'ai pas encore</span>
         </label>
       </div>
       <div class="doc-upload-area" id="doc_r_f_rentiel_de_comp_tences__pd">
         <input type="file" accept=".pdf,.jpg,.png,.zip">
       </div>
-      <div class="doc-later-msg" id="later_r_f_rentiel_de_comp_tences__pd" style="display:none;">
+      <div class="doc-later-msg" style="display:none;" id="later_r_f_rentiel_de_comp_tences__pd">
         <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
       </div>
     </div>
@@ -461,11 +479,11 @@
     <button class="modal-close" onclick="closeAllModals()">✕</button>
     <h3>Connexion aux OPCO</h3>
     <p>Sélectionnez les OPCO que vous souhaitez — 399€ par OPCO, ou le pack complet (11) à 3 000€.</p>
-        <div class="client-selector">
+        <div class="client-selector parrain-dropdown" style="display:none;">
       <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
       <select onchange="toggleClientFields(this)">
+        <option value="autre" selected>Un autre client</option>
         <option value="moi">Moi-même (mes infos pré-remplies)</option>
-        <option value="autre">Un autre client</option>
       </select>
       <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
     </div>
@@ -513,11 +531,11 @@
     <h3>🤖 Configurez votre Agent IA</h3>
     <p>Choisissez les compétences de votre agent. Il sera formé spécifiquement pour votre centre de formation et opérationnel sous 48h.</p>
 
-        <div class="client-selector">
+        <div class="client-selector parrain-dropdown" style="display:none;">
       <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
       <select onchange="toggleClientFields(this)">
+        <option value="autre" selected>Un autre client</option>
         <option value="moi">Moi-même (mes infos pré-remplies)</option>
-        <option value="autre">Un autre client</option>
       </select>
       <p style="font-size:11px;color:var(--muted);" class="client-hint">✅ Connecté — vos informations de profil seront utilisées automatiquement.</p>
     </div>
@@ -584,7 +602,7 @@
   <div class="footer-inner">
     <div><div class="footer-brand">lesformateurs.online</div><div>La plateforme des professionnels de la formation</div></div>
     <div class="footer-links">
-      <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
+    <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
       <a href="creer-of.html">Créer mon OF</a><a href="se-former.html">Se former</a>
     </div>
   </div>
@@ -605,21 +623,43 @@ document.querySelectorAll('.modal').forEach(m=>{
 var stripe = Stripe('pk_live_51O4OcqDnwFniOSFLMJfrTkVDs0IaqRrat11UMlvePU7mHdgilCzSfXvrPN7E4g2f6YcizXmaXHdX9qYrV1WYeS5g00I8IOVplN');
 
 // === DOC TOGGLES ===
+function checkEdofQualiopi(){
+  var val = document.getElementById('edof-qualiopi').value;
+  var msg = document.getElementById('edof-no-qualiopi');
+  var btn = document.getElementById('edof-pay-btn');
+  if(val === 'non'){
+    msg.style.display = '';
+    btn.disabled = true;
+    btn.style.opacity = '0.4';
+    btn.style.cursor = 'not-allowed';
+  } else {
+    msg.style.display = 'none';
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.style.cursor = 'pointer';
+  }
+}
+
+function addQualiopiDoc(){
+  var list = document.getElementById('qualiopi-docs-list');
+  var div = document.createElement('div');
+  div.className = 'doc-upload-area';
+  div.style.marginBottom = '8px';
+  div.innerHTML = '<input type="file" accept=".pdf,.jpg,.png,.zip">';
+  list.appendChild(div);
+}
+
 function toggleDocUpload(cb, id){
   var upload = document.getElementById('doc_'+id);
   var later = document.getElementById('later_'+id);
-  var yes = cb.parentNode.querySelector('.toggle-label-yes');
-  var no = cb.parentNode.querySelector('.toggle-label-no');
   if(cb.checked){
-    upload.style.display = '';
-    later.style.display = 'none';
-    yes.style.display = '';
-    no.style.display = 'none';
-  } else {
+    // "Je ne l'ai pas encore" is checked → show later message, hide upload
     upload.style.display = 'none';
     later.style.display = '';
-    yes.style.display = 'none';
-    no.style.display = '';
+  } else {
+    // Unchecked → user has the doc → show upload
+    upload.style.display = '';
+    later.style.display = 'none';
   }
 }
 
@@ -814,7 +854,19 @@ function payerOpco(){
   }
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src="js/auth-modal.js"></script>
+<script>
+// Show parrain dropdown only when connected
+(async function(){
+  var user = await getUser();
+  if(user){
+    document.querySelectorAll('.parrain-dropdown').forEach(function(el){
+      el.style.display = '';
+    });
+  }
+})();
+</script>
 </body>
 </html>

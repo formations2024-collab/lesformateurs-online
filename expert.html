@@ -104,7 +104,7 @@
     <a onclick="showTab('parrainage')">🎁 Parrainage (10%)</a>
     <div class="sidebar-title" style="margin-top:12px;">Compte</div>
     <a onclick="showTab('profil')">👤 Mon profil</a>
-    <a href="index.html">🚪 Déconnexion</a>
+    <a href="#" onclick="openLogoutModal();return false;">🚪 Déconnexion</a>
   </div>
 
   <div class="main-content">
@@ -774,9 +774,28 @@ function refuserDossier(id){
   }
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- MODAL DÉCONNEXION -->
+<div class="modal" id="modal-logout">
+  <div class="modal-box" style="max-width:420px;text-align:center;">
+    <button class="modal-close" onclick="document.getElementById('modal-logout').classList.remove('open')">✕</button>
+    <div style="font-size:48px;margin-bottom:12px;">🚪</div>
+    <h3>Se déconnecter ?</h3>
+    <p style="font-size:13px;color:var(--muted);margin:12px 0;">Êtes-vous sûr de vouloir vous déconnecter ?</p>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;">
+      <button class="btn" style="background:var(--light);color:var(--primary);border:1px solid var(--border);padding:10px 24px;" onclick="document.getElementById('modal-logout').classList.remove('open')">Annuler</button>
+      <button class="btn" style="background:var(--accent);color:#fff;padding:10px 24px;" onclick="confirmLogout()">🚪 Oui, me déconnecter</button>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script>
+function openLogoutModal(){
+  document.getElementById('modal-logout').classList.add('open');
+}
+async function confirmLogout(){
+  await signOut();
+}
 (async function(){
   var user = await getUser();
   if(!user){ window.location.href='missions.html'; return; }

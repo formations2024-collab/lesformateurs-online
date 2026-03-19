@@ -19,8 +19,8 @@
     <a href="conformite.html">Conformité</a>
     <a href="creer-of.html">Créer mon OF</a>
     <a href="se-former.html">Se former</a>
-    <a href="missions.html" class="nav-cta btn-login">Connexion</a>
-    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon espace</a>
+    <a href="#" class="nav-cta btn-login" onclick="openAuthModal();return false;">Connexion</a>
+    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon compte</a>
   </div>
   <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
     <span></span><span></span><span></span>
@@ -72,7 +72,9 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src="js/auth-modal.js"></script>
+
 </body>
 </html>

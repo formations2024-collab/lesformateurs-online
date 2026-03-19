@@ -6,64 +6,67 @@ const SUPABASE_URL = 'https://bxijjjbxsevnudienvbv.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ4aWpqamJ4c2V2bnVkaWVudmJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MjU0MjcsImV4cCI6MjA4OTUwMTQyN30.9YNffsFuGv7at2nUviuCUMA469z0FuskYHJtkOAaTn8';
 
 // Init Supabase client
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ====== AUTH HELPERS ======
 
 async function getUser() {
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await sb.auth.getUser();
   return user;
 }
 
 async function getProfile() {
   const user = await getUser();
   if (!user) return null;
-  const { data } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+  const { data } = await sb.from('profiles').select('*').eq('id', user.id).single();
   return data;
 }
 
-async function signUp(email, password, fullName, phone, profileType) {
-  const { data, error } = await supabase.auth.signUp({
+async function signUp(email, password, meta) {
+  // meta can be an object {first_name, last_name, full_name, phone, profile_type}
+  // or individual params (legacy): signUp(email, pass, firstName, lastName, phone, type)
+  var userData = {};
+  if(typeof meta === 'object' && meta !== null){
+    userData = meta;
+  } else {
+    // Legacy call: signUp(email, pass, firstName, lastName, phone, profileType)
+    userData = {
+      first_name: meta || '',
+      last_name: arguments[3] || '',
+      full_name: (meta || '') + ' ' + (arguments[3] || ''),
+      phone: arguments[4] || '',
+      profile_type: arguments[5] || ''
+    };
+  }
+  const { data, error } = await sb.auth.signUp({
     email,
     password,
-    options: { data: { full_name: fullName } }
+    options: { data: userData }
   });
-  if (error) throw error;
-
-  // Create profile
-  if (data.user) {
-    await supabase.from('profiles').insert({
-      id: data.user.id,
-      full_name: fullName,
-      email: email,
-      phone: phone || null,
-      profile_type: profileType || 'formateur'
-    });
-  }
-  return data;
+  return { data, error };
 }
 
 async function signIn(email, password) {
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) throw error;
-  return data;
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  return { data, error };
 }
 
 async function signOut() {
-  await supabase.auth.signOut();
+  await sb.auth.signOut();
   window.location.href = 'index.html';
 }
 
 // ====== UI HELPERS ======
 
 function showAuthError(msg) {
-  const el = document.getElementById('auth-error');
-  if (el) {
-    el.textContent = msg;
-    el.style.display = 'block';
-  } else {
-    alert(msg);
-  }
+  // Show on both error divs (login + signup)
+  ['auth-error', 'signup-error'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+  });
 }
 
 // Update nav buttons based on auth state
@@ -98,7 +101,7 @@ async function uploadDocument(file, folder) {
   const ext = file.name.split('.').pop();
   const path = `${folder}/${user.id}/${Date.now()}.${ext}`;
 
-  const { data, error } = await supabase.storage
+  const { data, error } = await sb.storage
     .from('documents')
     .upload(path, file, { contentType: file.type });
 
@@ -107,7 +110,7 @@ async function uploadDocument(file, folder) {
 }
 
 async function getDocumentUrl(path) {
-  const { data } = await supabase.storage
+  const { data } = await sb.storage
     .from('documents')
     .createSignedUrl(path, 3600); // 1h
   return data?.signedUrl;
@@ -117,7 +120,7 @@ async function getDocumentUrl(path) {
 
 async function recordPayment(amountCents, paymentType, referenceId, metadata) {
   const user = await getUser();
-  const { data, error } = await supabase.from('payments').insert({
+  const { data, error } = await sb.from('payments').insert({
     user_id: user?.id,
     amount_cents: amountCents,
     payment_type: paymentType,
@@ -159,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Listen for auth changes
-supabase.auth.onAuthStateChange(function(event, session) {
+sb.auth.onAuthStateChange(function(event, session) {
   if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
     updateAuthUI();
   }

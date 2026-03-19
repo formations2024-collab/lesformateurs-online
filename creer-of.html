@@ -53,12 +53,13 @@
 <nav class="navbar">
   <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
   <div class="nav-links" id="navLinks">
+    <a href="index.html">Accueil</a>
     <a href="missions.html">Missions</a>
     <a href="conformite.html">Conformité</a>
     <a href="creer-of.html" style="color:#fff;background:rgba(255,255,255,.1);">Créer mon OF</a>
     <a href="se-former.html">Se former</a>
-    <a href="missions.html" class="nav-cta btn-login">Connexion</a>
-    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon espace</a>
+    <a href="#" class="nav-cta btn-login" onclick="openAuthModal();return false;">Connexion</a>
+    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon compte</a>
   </div>
   <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
@@ -83,40 +84,119 @@
 
     <div class="grid-3" id="typeGrid">
       <div class="of-type-card" onclick="selectType(this,'action',990)">
+        <span class="info-icon" onclick="event.stopPropagation();toggleInfo('info-action')">ℹ️</span>
         <span class="type-emoji">📚</span>
         <h4>Action de formation</h4>
         <p>OF classique : vente de formations à des entreprises ou particuliers.</p>
         <div class="type-price">990€</div>
+        <div class="info-detail" id="info-action">
+          <strong>Ce qui est inclus :</strong>
+          <ul>
+            <li>✅ Création des statuts juridiques de votre OF</li>
+            <li>✅ Dépôt du dossier au greffe du tribunal</li>
+            <li>✅ Obtention du numéro SIRET</li>
+            <li>✅ Dépôt du dossier NDA auprès de la DREETS</li>
+            <li>✅ Préparation complète du dossier Qualiopi</li>
+            <li>✅ Accompagnement jusqu'à l'obtention Qualiopi</li>
+          </ul>
+        </div>
       </div>
       <div class="of-type-card" onclick="selectType(this,'cfa',2990)">
+        <span class="info-icon" onclick="event.stopPropagation();toggleInfo('info-cfa')">ℹ️</span>
         <span class="type-emoji">🎓</span>
         <h4>CFA (Apprentissage)</h4>
         <p>Centre de formation d'apprentis — contrats d'apprentissage.</p>
         <div class="type-price">2 990€</div>
+        <div class="info-detail" id="info-cfa">
+          <strong>Ce qui est inclus :</strong>
+          <ul>
+            <li>✅ Création des statuts juridiques (CFA)</li>
+            <li>✅ Dépôt du dossier au greffe du tribunal</li>
+            <li>✅ Obtention du numéro SIRET</li>
+            <li>✅ Dépôt du dossier NDA auprès de la DREETS</li>
+            <li>✅ Préparation et obtention Qualiopi</li>
+            <li>✅ Obtention du numéro UAI</li>
+            <li>✅ Convention avec les OPCO pour l'apprentissage</li>
+            <li>✅ Mise en conformité réglementaire CFA</li>
+          </ul>
+        </div>
       </div>
       <div class="of-type-card" onclick="selectType(this,'bilan',990)">
+        <span class="info-icon" onclick="event.stopPropagation();toggleInfo('info-bilan')">ℹ️</span>
         <span class="type-emoji">📋</span>
         <h4>Bilan de compétences</h4>
         <p>Accompagnement des salariés dans leur évolution professionnelle.</p>
         <div class="type-price">990€</div>
+        <div class="info-detail" id="info-bilan">
+          <strong>Ce qui est inclus :</strong>
+          <ul>
+            <li>✅ Création des statuts juridiques de votre OF</li>
+            <li>✅ Dépôt du dossier au greffe du tribunal</li>
+            <li>✅ Obtention du numéro SIRET</li>
+            <li>✅ Dépôt du dossier NDA auprès de la DREETS</li>
+            <li>✅ Préparation et obtention Qualiopi</li>
+            <li>✅ Méthodologie et outils pour le bilan de compétences</li>
+          </ul>
+        </div>
       </div>
       <div class="of-type-card" onclick="selectType(this,'vae',990)">
+        <span class="info-icon" onclick="event.stopPropagation();toggleInfo('info-vae')">ℹ️</span>
         <span class="type-emoji">🏆</span>
         <h4>VAE</h4>
         <p>Validation des acquis de l'expérience — accompagnement candidats.</p>
         <div class="type-price">990€</div>
+        <div class="info-detail" id="info-vae">
+          <strong>Ce qui est inclus :</strong>
+          <ul>
+            <li>✅ Création des statuts juridiques de votre OF</li>
+            <li>✅ Dépôt du dossier au greffe du tribunal</li>
+            <li>✅ Obtention du numéro SIRET</li>
+            <li>✅ Dépôt du dossier NDA auprès de la DREETS</li>
+            <li>✅ Préparation et obtention Qualiopi</li>
+            <li>✅ Processus VAE et accompagnement candidats</li>
+          </ul>
+        </div>
       </div>
       <div class="of-type-card" onclick="selectType(this,'elus',1490)">
+        <span class="info-icon" onclick="event.stopPropagation();toggleInfo('info-elus')">ℹ️</span>
         <span class="type-emoji">🏛</span>
         <h4>Formation des élus</h4>
         <p>Formation des élus locaux — cadre réglementaire spécifique.</p>
         <div class="type-price">1 490€</div>
+        <div class="info-detail" id="info-elus">
+          <strong>Ce qui est inclus :</strong>
+          <ul>
+            <li>✅ Création des statuts juridiques de votre OF</li>
+            <li>✅ Dépôt du dossier au greffe du tribunal</li>
+            <li>✅ Obtention du numéro SIRET</li>
+            <li>✅ Dépôt du dossier NDA auprès de la DREETS</li>
+            <li>✅ Préparation et obtention Qualiopi</li>
+            <li>✅ Agrément spécifique formation des élus</li>
+            <li>✅ Mise en conformité cadre réglementaire élus</li>
+          </ul>
+        </div>
       </div>
       <div class="of-type-card" onclick="selectType(this,'agent',2790)">
+        <span class="info-icon" onclick="event.stopPropagation();toggleInfo('info-agent')">ℹ️</span>
         <span class="type-emoji">🤖</span>
         <h4>OF géré par agents IA</h4>
         <p>Centre entièrement piloté par des agents IA : docs, clients, gestion.</p>
         <div class="type-price">2 790€</div>
+        <div class="info-detail" id="info-agent">
+          <strong>Ce qui est inclus :</strong>
+          <ul>
+            <li>✅ Création de l'entreprise (statuts + greffe + SIRET)</li>
+            <li>✅ Dépôt NDA + préparation et obtention Qualiopi</li>
+            <li>✅ Système complet d'agents IA 360° :</li>
+            <li>🤖 Prospection et recherche de candidats automatisée</li>
+            <li>🤖 Création de formations sur mesure par IA</li>
+            <li>🤖 Gestion des stagiaires et suivi pédagogique</li>
+            <li>🤖 Facturation et gestion administrative</li>
+            <li>🤖 Dépôts de dossiers OPCO / EDOF / France Travail</li>
+            <li>🤖 Reporting et tableaux de bord automatisés</li>
+            <li>🔥 Mise en place d'un tunnel de vente — <em>sur demande</em></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -148,16 +228,7 @@
     <h2 class="section-title">Options supplémentaires</h2>
     <p class="section-sub">Personnalisez votre offre avec des services additionnels.</p>
 
-    <div class="option-item" onclick="toggleOption(this,'qualiopi',490)">
-      <div class="option-left">
-        <h4>Préparation Qualiopi</h4>
-        <p>Accompagnement complet pour obtenir la certification qualité.</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <span class="option-price">+490€</span>
-        <input type="checkbox">
-      </div>
-    </div>
+    
 
     <div class="option-item" onclick="toggleOption(this,'agents',500)">
       <div class="option-left">
@@ -263,7 +334,7 @@
   <div class="footer-inner">
     <div><div class="footer-brand">lesformateurs.online</div><div>La plateforme des professionnels de la formation</div></div>
     <div class="footer-links">
-      <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
+    <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
       <a href="creer-of.html">Créer mon OF</a><a href="se-former.html">Se former</a>
     </div>
   </div>
@@ -274,6 +345,15 @@ var selectedType = null;
 var basePrice = 0;
 var hasKbis = false;
 var options = {};
+
+function toggleInfo(id){
+  var el = document.getElementById(id);
+  var allInfos = document.querySelectorAll('.info-detail');
+  allInfos.forEach(function(info){
+    if(info.id !== id) info.classList.remove('open');
+  });
+  el.classList.toggle('open');
+}
 
 function selectType(el, type, price){
   document.querySelectorAll('.of-type-card').forEach(c=>c.classList.remove('selected'));
@@ -313,26 +393,58 @@ function updateTotal(){
   document.getElementById('pay3x').textContent = Math.ceil(total/3)+'€ x3';
 }
 
+var selectedPaymentTimes = 1;
+
 function selectPayment(el, times){
   el.parentNode.querySelectorAll('.payment-option').forEach(o=>o.classList.remove('selected'));
   el.classList.add('selected');
+  selectedPaymentTimes = times;
 }
 
 var ofLinks = {
-  action: 'https://buy.stripe.com/bJe4gz7vs9vffiKgIOffy0M',
-  cfa: 'https://buy.stripe.com/5kQeVd5nk5eZ1rU3W2ffy1e',
-  bilan: 'https://buy.stripe.com/cNi4gz2b86j39Yq506ffy0O',
-  vae: 'https://buy.stripe.com/dRm8wPdTQ0YJ2vY2RYffy0P',
-  elus: 'https://buy.stripe.com/8x28wP4jgePzgmO2RYffy1f',
-  agent: 'https://buy.stripe.com/7sY6oHcPMgXH6Me1NUffy1g'
+  action: {
+    1: 'https://buy.stripe.com/bJe4gz7vs9vffiKgIOffy0M',
+    2: 'https://buy.stripe.com/4gM6oHcPMazjb2u64affy1h',
+    3: 'https://buy.stripe.com/7sY4gz4jggXH3A2gIOffy1i'
+  },
+  cfa: {
+    1: 'https://buy.stripe.com/5kQeVd5nk5eZ1rU3W2ffy1e',
+    2: 'https://buy.stripe.com/fZu9ATbLIbDn9YqfEKffy1j',
+    3: 'https://buy.stripe.com/bJe6oH3fcdLvdaC1NUffy1k'
+  },
+  bilan: {
+    1: 'https://buy.stripe.com/cNi4gz2b86j39Yq506ffy0O',
+    2: 'https://buy.stripe.com/14AbJ17vsbDn9YqgIOffy1l',
+    3: 'https://buy.stripe.com/bJeaEX2b8gXHgmOcsyffy1m'
+  },
+  vae: {
+    1: 'https://buy.stripe.com/dRm8wPdTQ0YJ2vY2RYffy0P',
+    2: 'https://buy.stripe.com/00wbJ18zw4aVc6yakqffy1n',
+    3: 'https://buy.stripe.com/fZu28rg1YgXHb2uakqffy1o'
+  },
+  elus: {
+    1: 'https://buy.stripe.com/8x28wP4jgePzgmO2RYffy1f',
+    2: 'https://buy.stripe.com/dRm5kDg1YbDndaCbouffy1p',
+    3: 'https://buy.stripe.com/6oU28rdTQ4aVdaCcsyffy1q'
+  },
+  agent: {
+    1: 'https://buy.stripe.com/7sY6oHcPMgXH6Me1NUffy1g',
+    2: 'https://buy.stripe.com/14A28r030dLv1rUdwCffy1r',
+    3: 'https://buy.stripe.com/cNibJ14jg5eZ5IagIOffy1s'
+  }
 };
+
 function payerCreation(){
   if(selectedType && ofLinks[selectedType]){
-    window.location.href = ofLinks[selectedType];
+    var link = ofLinks[selectedType][selectedPaymentTimes];
+    if(link){
+      window.location.href = link;
+    }
   }
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src="js/auth-modal.js"></script>
 </body>
 </html>

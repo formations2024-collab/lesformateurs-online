@@ -53,12 +53,13 @@
 <nav class="navbar">
   <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
   <div class="nav-links" id="navLinks">
+    <a href="index.html">Accueil</a>
     <a href="missions.html">Missions</a>
     <a href="conformite.html">Conformité</a>
     <a href="creer-of.html">Créer mon OF</a>
     <a href="se-former.html" style="color:#fff;background:rgba(255,255,255,.1);">Se former</a>
-    <a href="missions.html" class="nav-cta btn-login">Connexion</a>
-    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon espace</a>
+    <a href="#" class="nav-cta btn-login" onclick="openAuthModal();return false;">Connexion</a>
+    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon compte</a>
   </div>
   <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
@@ -258,7 +259,7 @@
   <div class="footer-inner">
     <div><div class="footer-brand">lesformateurs.online</div><div>La plateforme des professionnels de la formation</div></div>
     <div class="footer-links">
-      <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
+    <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
       <a href="creer-of.html">Créer mon OF</a><a href="se-former.html">Se former</a>
     </div>
   </div>
@@ -284,7 +285,8 @@ function envoyerLienFormation(){
   alert('✅ Lien de paiement envoyé à ' + email + ' !\n\nLe candidat recevra un email avec le lien pour s\'inscrire et payer.\nVous serez notifié dès son inscription.\n\n💰 Rappel : la formation est 100% remboursée par le FIF PL.');
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src="js/auth-modal.js"></script>
 </body>
 </html>

@@ -12,12 +12,13 @@
 <nav class="navbar">
   <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
   <div class="nav-links" id="navLinks">
+    <a href="index.html">Accueil</a>
     <a href="missions.html" style="color:#fff;background:rgba(255,255,255,.1);">Missions</a>
     <a href="conformite.html">Conformité</a>
     <a href="creer-of.html">Créer mon OF</a>
     <a href="se-former.html">Se former</a>
-    <a href="#" onclick="openModal('signup');return false;" class="nav-cta btn-login">Connexion</a>
-    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon espace</a>
+    <a href="#" class="nav-cta btn-login" onclick="openAuthModal();return false;">Connexion</a>
+    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon compte</a>
   </div>
   <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
     <span></span><span></span><span></span>
@@ -45,10 +46,52 @@
       <input type="text" id="filterSearch" placeholder="🔍 Rechercher une mission..." onkeyup="filterMissions()">
       <select id="filterRegion" onchange="filterMissions()">
         <option value="">📍 Toutes les régions</option>
-        <option>Paris</option><option>Lyon</option><option>Marseille</option><option>Bordeaux</option>
-        <option>Toulouse</option><option>Lille</option><option>Nantes</option><option>Strasbourg</option>
-        <option>Distanciel</option><option>Île-de-France</option><option>PACA</option>
-        <option>Auvergne-Rhône-Alpes</option><option>Occitanie</option>
+        <option>Distanciel</option>
+        <optgroup label="── Régions métropolitaines ──">
+        <option>Auvergne-Rhône-Alpes</option>
+        <option>Bourgogne-Franche-Comté</option>
+        <option>Bretagne</option>
+        <option>Centre-Val de Loire</option>
+        <option>Corse</option>
+        <option>Grand Est</option>
+        <option>Hauts-de-France</option>
+        <option>Île-de-France</option>
+        <option>Normandie</option>
+        <option>Nouvelle-Aquitaine</option>
+        <option>Occitanie</option>
+        <option>Pays de la Loire</option>
+        <option>Provence-Alpes-Côte d'Azur</option>
+        </optgroup>
+        <optgroup label="── DOM-TOM ──">
+        <option>Guadeloupe</option>
+        <option>Martinique</option>
+        <option>Guyane</option>
+        <option>La Réunion</option>
+        <option>Mayotte</option>
+        <option>Saint-Pierre-et-Miquelon</option>
+        <option>Saint-Barthélemy</option>
+        <option>Saint-Martin</option>
+        <option>Wallis-et-Futuna</option>
+        <option>Polynésie française</option>
+        <option>Nouvelle-Calédonie</option>
+        </optgroup>
+        <optgroup label="── Grandes villes ──">
+        <option>Paris</option>
+        <option>Lyon</option>
+        <option>Marseille</option>
+        <option>Toulouse</option>
+        <option>Bordeaux</option>
+        <option>Lille</option>
+        <option>Nantes</option>
+        <option>Strasbourg</option>
+        <option>Nice</option>
+        <option>Montpellier</option>
+        <option>Rennes</option>
+        <option>Rouen</option>
+        <option>Grenoble</option>
+        <option>Toulon</option>
+        <option>Dijon</option>
+        </optgroup>
       </select>
       <select id="filterCat" onchange="filterMissions()">
         <option value="">📂 Toutes catégories</option>
@@ -1060,7 +1103,7 @@
   <div class="footer-inner">
     <div><div class="footer-brand">lesformateurs.online</div><div>La plateforme des professionnels de la formation</div></div>
     <div class="footer-links">
-      <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
+    <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
       <a href="creer-of.html">Créer mon OF</a><a href="se-former.html">Se former</a>
     </div>
   </div>
@@ -1074,7 +1117,7 @@
     <p>Accédez aux missions et postulez en un clic.</p>
     <div id="auth-error" style="display:none;background:rgba(233,69,96,.1);border:1px solid rgba(233,69,96,.3);color:#e94560;padding:10px;border-radius:6px;font-size:13px;margin-bottom:12px;"></div>
     <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="sophie@monof.fr"></div>
-    <div class="form-group"><label>Mot de passe</label><input type="password" id="login-pass" placeholder="••••••••"></div>
+    <div class="form-group"><label>Mot de passe</label><div class="pass-wrap"><input type="password" id="login-pass" placeholder="••••••••"><span class="pass-eye" onclick="togglePass(this)">👁️</span></div></div>
     <button class="btn btn-primary btn-block" onclick="doLogin()">Se connecter</button>
     <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--muted);">Pas encore de compte ? <a href="#" onclick="openModal('signup');return false;" style="color:var(--accent);font-weight:600;">Créer un compte</a></p>
   </div>
@@ -1086,10 +1129,12 @@
     <button class="modal-close" onclick="closeAllModals()">✕</button>
     <h3>Créer mon compte gratuit</h3>
     <p>Accès immédiat aux missions et à toutes les ressources.</p>
-    <div class="form-group"><label>Prénom et nom</label><input type="text" id="s-nom" placeholder="Sophie Martin"></div>
+    <div id="signup-error" style="display:none;background:rgba(233,69,96,.1);border:1px solid rgba(233,69,96,.3);color:#e94560;padding:10px;border-radius:6px;font-size:13px;margin-bottom:12px;"></div>
+    <div class="form-group"><label>Prénom</label><input type="text" id="s-prenom" placeholder="Sophie"></div>
+    <div class="form-group"><label>Nom</label><input type="text" id="s-nom" placeholder="Martin"></div>
     <div class="form-group"><label>Email</label><input type="email" id="s-email" placeholder="sophie@monof.fr"></div>
     <div class="form-group"><label>Téléphone</label><input type="tel" id="s-phone" placeholder="06 12 34 56 78"></div>
-    <div class="form-group"><label>Mot de passe</label><input type="password" id="s-pass" placeholder="Minimum 8 caractères"></div>
+    <div class="form-group"><label>Mot de passe</label><div class="pass-wrap"><input type="password" id="s-pass" placeholder="Minimum 8 caractères"><span class="pass-eye" onclick="togglePass(this)">👁️</span></div></div>
     <div class="form-group"><label>Je suis...</label>
       <select id="s-profil"><option value="">Choisissez...</option><option>Formateur indépendant</option><option>Gérant d'OF</option><option>Je veux créer un OF</option><option>Autre</option></select>
     </div>
@@ -1099,31 +1144,243 @@
 </div>
 
 <!-- MODAL DEPOSER ANNONCE -->
-<div class="modal" id="modal-deposer">
-  <div class="modal-box">
+<!-- MODAL POSTULER -->
+<div class="modal" id="modal-postuler">
+  <div class="modal-box" style="max-width:500px;">
     <button class="modal-close" onclick="closeAllModals()">✕</button>
-    <h3>Déposer une annonce</h3>
-    <p>Publiez votre offre de mission — gratuite ou mise en avant.</p>
-    <div class="form-group"><label>Titre de la mission</label><input type="text" placeholder="Ex: Formateur Excel"></div>
-    <div class="form-group"><label>Catégorie</label>
-      <select><option>Bureautique</option><option>Communication</option><option>Digital</option><option>Management</option><option>Langues</option><option>Sécurité</option><option>RH</option><option>Comptabilité</option><option>Informatique</option><option>Autre</option></select>
+    <h3 style="font-size:22px;font-weight:800;">Postuler</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:6px;">Candidature pour :</p>
+    <p style="font-size:15px;font-weight:700;margin-bottom:20px;color:var(--accent);" id="postuler-title"></p>
+
+    <div class="form-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Message de motivation *</label>
+      <textarea id="postuler-msg" rows="4" maxlength="2000" placeholder="Présentez-vous, décrivez votre expérience et pourquoi cette mission vous intéresse..." required></textarea>
     </div>
-    <div class="form-group"><label>Lieu</label><input type="text" placeholder="Ex: Paris, Distanciel..."></div>
-    <div class="form-group"><label>Tarif journalier (€)</label><input type="number" placeholder="450"></div>
-    <div class="form-group"><label>Description</label><textarea rows="3" placeholder="Décrivez la mission..."></textarea></div>
-    <div class="form-group"><label>Type d'annonce</label>
-      <select>
-        <option value="gratuite">Gratuite — annonce standard</option>
-        <option value="premium">Premium — mise en avant ⭐ (29€)</option>
+
+    <div class="form-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Disponibilités *</label>
+      <select id="postuler-dispo">
+        <option value="immediat">🟢 Immédiatement</option>
+        <option value="moins_1_mois">🟡 Moins d'un mois</option>
+        <option value="plus_1_mois">🔴 Plus d'un mois</option>
       </select>
     </div>
-    <button class="btn btn-primary btn-block">Publier l'annonce →</button>
+
+    <div class="form-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Profil LinkedIn <span style="font-weight:400;color:var(--muted);font-size:10px;">(facultatif)</span></label>
+      <input type="url" id="postuler-linkedin" placeholder="https://linkedin.com/in/votre-profil">
+    </div>
+
+    <div class="form-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">CV <span style="font-weight:400;color:var(--muted);font-size:10px;">(facultatif — PDF recommandé)</span></label>
+      <input type="file" id="postuler-cv" accept=".pdf,.doc,.docx">
+    </div>
+
+    <div id="postuler-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;font-weight:600;"></div>
+
+    <button class="btn btn-primary btn-block" id="postuler-submit-btn" onclick="submitCandidature()" style="padding:14px;font-size:15px;font-weight:700;">Envoyer ma candidature →</button>
+
+    <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:12px;">📌 Votre candidature sera visible par le recruteur. Il pourra accepter, refuser ou vous contacter.</p>
   </div>
 </div>
 
+<div class="modal" id="modal-deposer">
+  <div class="modal-box" style="max-width:540px;">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h3 style="font-size:22px;font-weight:800;">Déposer une annonce</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Publiez votre offre de mission — gratuite ou mise en avant.</p>
+
+    <div class="form-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Titre de la mission *</label>
+      <input type="text" id="dep-titre" placeholder="Ex: Formateur Excel" required>
+    </div>
+
+    <div class="form-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Catégorie *</label>
+      <select id="dep-categorie" required>
+        <option value="">Choisissez une catégorie...</option>
+        <option>Bureautique</option><option>Communication</option><option>Digital / Web</option>
+        <option>Management</option><option>Langues</option><option>Sécurité</option>
+        <option>RH / Formation</option><option>Comptabilité / Gestion</option>
+        <option>Informatique / Dev</option><option>Soft Skills</option><option>Autre</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Lieu *</label>
+      <select id="dep-lieu" required>
+        <option value="">Choisissez un lieu...</option>
+        <option>Distanciel</option>
+        <optgroup label="── Régions métropolitaines ──">
+        <option>Auvergne-Rhône-Alpes</option>
+        <option>Bourgogne-Franche-Comté</option>
+        <option>Bretagne</option>
+        <option>Centre-Val de Loire</option>
+        <option>Corse</option>
+        <option>Grand Est</option>
+        <option>Hauts-de-France</option>
+        <option>Île-de-France</option>
+        <option>Normandie</option>
+        <option>Nouvelle-Aquitaine</option>
+        <option>Occitanie</option>
+        <option>Pays de la Loire</option>
+        <option>Provence-Alpes-Côte d'Azur</option>
+        </optgroup>
+        <optgroup label="── DOM-TOM ──">
+        <option>Guadeloupe</option>
+        <option>Martinique</option>
+        <option>Guyane</option>
+        <option>La Réunion</option>
+        <option>Mayotte</option>
+        <option>Saint-Pierre-et-Miquelon</option>
+        <option>Saint-Barthélemy</option>
+        <option>Saint-Martin</option>
+        <option>Wallis-et-Futuna</option>
+        <option>Polynésie française</option>
+        <option>Nouvelle-Calédonie</option>
+        </optgroup>
+        <optgroup label="── Grandes villes ──">
+        <option>Paris</option>
+        <option>Lyon</option>
+        <option>Marseille</option>
+        <option>Toulouse</option>
+        <option>Bordeaux</option>
+        <option>Lille</option>
+        <option>Nantes</option>
+        <option>Strasbourg</option>
+        <option>Nice</option>
+        <option>Montpellier</option>
+        <option>Rennes</option>
+        <option>Rouen</option>
+        <option>Grenoble</option>
+        <option>Toulon</option>
+        <option>Dijon</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="form-group">
+        <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Type de tarif *</label>
+        <select id="dep-tarif-type" onchange="updateTarifLabel()">
+          <option value="jour">Tarif journalier (€/jour)</option>
+          <option value="heure">Tarif horaire (€/heure)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;" id="dep-tarif-label">Montant (€/jour) *</label>
+        <input type="number" id="dep-tarif" placeholder="450" min="1" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Description *</label>
+      <textarea id="dep-desc" rows="4" maxlength="3000" placeholder="Décrivez la mission, le public visé, les prérequis..." required oninput="updateCharCount()"></textarea>
+      <p style="font-size:11px;color:var(--muted);text-align:right;margin-top:4px;"><span id="dep-char-count">0</span> / 3 000 caractères</p>
+    </div>
+
+    <div class="form-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Date d'expiration *</label>
+      <input type="date" id="dep-expiration" required>
+    </div>
+
+    <div class="form-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Type d'annonce</label>
+      <select id="dep-type">
+        <option value="gratuite">Gratuite — annonce standard</option>
+        <option value="premium">⭐ Premium — mise en avant (29€)</option>
+      </select>
+      <p id="dep-premium-hint" style="display:none;font-size:11px;color:var(--accent);margin-top:4px;">💳 Vous serez redirigé vers Stripe pour payer 29€ (paiement unique).</p>
+    </div>
+
+    <div id="dep-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;font-weight:600;"></div>
+    <button class="btn btn-primary btn-block" onclick="submitDeposer()" id="dep-submit-btn">Publier l'annonce →</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/auth-modal.js"></script>
 <script>
+if(typeof window.supabase === 'undefined'){
+  document.addEventListener('DOMContentLoaded',function(){
+    var err = document.getElementById('auth-error');
+    if(err){err.textContent='Erreur chargement. Rechargez la page.';err.style.display='block';}
+  });
+}
+function togglePass(el){
+  var input = el.parentNode.querySelector('input');
+  if(input.type === 'password'){
+    input.type = 'text';
+    el.textContent = '🙈';
+    el.classList.add('active');
+  } else {
+    input.type = 'password';
+    el.textContent = '👁️';
+    el.classList.remove('active');
+  }
+}
+
+// === DEPOSER ANNONCE ===
+function updateTarifLabel(){
+  var type = document.getElementById('dep-tarif-type').value;
+  document.getElementById('dep-tarif-label').textContent = type === 'jour' ? 'Montant (€/jour) *' : 'Montant (€/heure) *';
+}
+function updateCharCount(){
+  var desc = document.getElementById('dep-desc').value;
+  document.getElementById('dep-char-count').textContent = desc.length;
+}
+// Show premium hint
+document.addEventListener('DOMContentLoaded', function(){
+  var depType = document.getElementById('dep-type');
+  if(depType) depType.addEventListener('change', function(){
+    document.getElementById('dep-premium-hint').style.display = this.value === 'premium' ? '' : 'none';
+  });
+  // Set min date to today
+  var expInput = document.getElementById('dep-expiration');
+  if(expInput){
+    var today = new Date().toISOString().split('T')[0];
+    expInput.setAttribute('min', today);
+  }
+});
+
+function submitDeposer(){
+  var titre = document.getElementById('dep-titre').value.trim();
+  var categorie = document.getElementById('dep-categorie').value;
+  var lieu = document.getElementById('dep-lieu').value;
+  var tarifType = document.getElementById('dep-tarif-type').value;
+  var tarif = document.getElementById('dep-tarif').value;
+  var desc = document.getElementById('dep-desc').value.trim();
+  var expiration = document.getElementById('dep-expiration').value;
+  var type = document.getElementById('dep-type').value;
+  var errDiv = document.getElementById('dep-error');
+
+  // Validation
+  if(!titre || !categorie || !lieu || !tarif || !desc || !expiration){
+    errDiv.textContent = '⚠️ Tous les champs sont obligatoires.';
+    errDiv.style.display = '';
+    return;
+  }
+  if(desc.length > 3000){
+    errDiv.textContent = '⚠️ La description ne doit pas dépasser 3 000 caractères.';
+    errDiv.style.display = '';
+    return;
+  }
+  errDiv.style.display = 'none';
+
+  if(type === 'premium'){
+    // Redirect to Stripe payment
+    window.open('https://buy.stripe.com/3cs28r6ro5eZ6Me2RYffy0Z','_blank');
+  }
+
+  alert('✅ Annonce publiée avec succès !');
+  closeAllModals();
+}
+
 function openModal(type){
   closeAllModals();
+  var ae = document.getElementById('auth-error'); if(ae) ae.style.display='none';
+  var se = document.getElementById('signup-error'); if(se) se.style.display='none';
   document.getElementById('modal-'+type).classList.add('open');
 }
 function closeAllModals(){
@@ -1133,44 +1390,103 @@ document.querySelectorAll('.modal').forEach(m=>{
   m.addEventListener('click',function(e){if(e.target===this)closeAllModals();});
 });
 
+var postulerAnnonceTitle = '';
+
 async function postuler(btn){
   var user = await getUser();
-  if(!user){ openModal('login'); return; }
-  alert('✅ Candidature envoyée !');
+  if(!user){ openAuthModal(); return; }
+  
+  // Get annonce title from the card
+  var card = btn.closest('.mission-card');
+  postulerAnnonceTitle = card ? card.querySelector('h3').textContent : 'Cette mission';
+  
+  document.getElementById('postuler-title').textContent = postulerAnnonceTitle;
+  document.getElementById('postuler-msg').value = '';
+  document.getElementById('postuler-linkedin').value = '';
+  document.getElementById('postuler-cv').value = '';
+  document.getElementById('postuler-dispo').value = 'immediat';
+  document.getElementById('postuler-error').style.display = 'none';
+  document.getElementById('postuler-submit-btn').textContent = 'Envoyer ma candidature →';
+  document.getElementById('postuler-submit-btn').disabled = false;
+  document.getElementById('modal-postuler').classList.add('open');
+}
+
+async function submitCandidature(){
+  var msg = document.getElementById('postuler-msg').value.trim();
+  var dispo = document.getElementById('postuler-dispo').value;
+  var linkedin = document.getElementById('postuler-linkedin').value.trim();
+  var cvFile = document.getElementById('postuler-cv').files[0];
+  var errDiv = document.getElementById('postuler-error');
+  var btn = document.getElementById('postuler-submit-btn');
+  
+  if(!msg){
+    errDiv.textContent = '⚠️ Veuillez écrire un message de motivation.';
+    errDiv.style.display = '';
+    return;
+  }
+  
+  errDiv.style.display = 'none';
+  btn.textContent = 'Envoi en cours...';
+  btn.disabled = true;
+  
+  // Upload CV if provided
+  var cvPath = null;
+  if(cvFile){
+    try {
+      cvPath = await uploadDocument(cvFile, 'cv');
+    } catch(e){
+      console.log('CV upload error:', e);
+    }
+  }
+  
+  // TODO: Save candidature to Supabase candidatures table
+  
+  closeAllModals();
+  alert('✅ Candidature envoyée pour "' + postulerAnnonceTitle + '" !\n\nVotre candidature est en attente de réponse du recruteur.');
 }
 
 async function doLogin(){
+  console.log("doLogin called");
   var email = document.getElementById('login-email').value.trim();
   var pass = document.getElementById('login-pass').value;
   if(!email||!pass){showAuthError('Remplissez email et mot de passe.');return;}
   try {
     await signIn(email, pass);
     closeAllModals();
-    updateAuthUI();
-    alert('✅ Connexion réussie !');
+    window.location.href = 'dashboard.html';
   } catch(e) {
     showAuthError(e.message === 'Invalid login credentials' ? 'Email ou mot de passe incorrect.' : e.message);
   }
 }
 
 async function doSignup(){
+  console.log("doSignup called");
+  var prenom = document.getElementById('s-prenom').value.trim();
   var nom = document.getElementById('s-nom').value.trim();
   var email = document.getElementById('s-email').value.trim();
   var phone = document.getElementById('s-phone').value.trim();
   var pass = document.getElementById('s-pass').value;
   var profil = document.getElementById('s-profil').value;
-  if(!nom||!email||!pass){showAuthError('Remplissez tous les champs obligatoires.');return;}
-  if(pass.length < 6){showAuthError('Mot de passe trop court (min. 6 caractères).');return;}
+  if(!prenom||!nom||!email||!pass){showAuthError('Remplissez tous les champs obligatoires.');return;}
+  if(pass.length < 8){showAuthError('Mot de passe trop court (min. 8 caractères).');return;}
   var profileType = 'formateur';
   if(profil.includes('Gérant')) profileType = 'gerant_of';
   else if(profil.includes('créer')) profileType = 'creation_of';
+  var btn = document.querySelector('#modal-signup .btn-primary');
+  btn.textContent = 'Création en cours...';
+  btn.disabled = true;
   try {
-    await signUp(email, pass, nom, phone, profileType);
+    await signUp(email, pass, prenom, nom, phone, profileType);
     closeAllModals();
-    updateAuthUI();
-    alert('✅ Compte créé ! Vérifiez votre email pour confirmer votre inscription.');
+    window.location.href = 'dashboard.html';
   } catch(e) {
-    showAuthError(e.message.includes('already registered') ? 'Cet email est déjà utilisé.' : e.message);
+    btn.textContent = 'Créer mon compte →';
+    btn.disabled = false;
+    var msg = e.message;
+    if(msg.includes('already registered')) msg = 'Cet email est déjà utilisé.';
+    else if(msg.includes('valid email')) msg = 'Email invalide.';
+    else if(msg.includes('at least')) msg = 'Mot de passe trop court (min. 8 caractères).';
+    showAuthError(msg);
   }
 }
 
@@ -1189,7 +1505,5 @@ function filterMissions(){
   });
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase-config.js"></script>
 </body>
 </html>

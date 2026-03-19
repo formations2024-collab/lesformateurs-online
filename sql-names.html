@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LFO — SQL #3 Prénom/Nom séparés</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',system-ui,sans-serif;background:#0a0a1a;color:#e0e0e0;padding:20px;}
+h1{font-size:22px;font-weight:900;color:#e94560;margin-bottom:8px;}
+.sub{color:#888;font-size:14px;margin-bottom:20px;}
+.steps{background:#1a1a2e;border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid #333;font-size:14px;line-height:2;}
+.steps a{color:#e94560;}
+.copy-btn{background:#e94560;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:12px;}
+.copy-btn:hover{background:#ff6b81;}
+.copy-btn.ok{background:#10b981;}
+pre{background:#111;border:1px solid #333;border-radius:10px;padding:20px;overflow-x:auto;font-size:13px;line-height:1.7;color:#a0e0a0;font-family:'Fira Code',monospace;}
+</style>
+</head>
+<body>
+<h1>🔧 SQL #3 — Prénom et Nom séparés</h1>
+<p class="sub">Ajoute les colonnes first_name / last_name et met à jour le trigger.</p>
+<div class="steps">
+  📋 <a href="https://supabase.com/dashboard/project/bxijjjbxsevnudienvbv/sql/new" target="_blank">Ouvre le SQL Editor</a> → Colle → Run
+</div>
+<button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('sql').textContent);this.textContent='✅ Copié !';this.classList.add('ok');setTimeout(()=>{this.textContent='📋 Copier le SQL';this.classList.remove('ok');},2000)">📋 Copier le SQL</button>
+<pre id="sql">-- Ajouter colonnes prénom et nom séparés
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS first_name TEXT;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS last_name TEXT;
+
+-- Mettre à jour le trigger pour séparer prénom/nom
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS TRIGGER
+SECURITY DEFINER
+SET search_path = public
+AS $$
+BEGIN
+  INSERT INTO public.profiles (id, first_name, last_name, full_name, email, phone, profile_type)
+  VALUES (
+    NEW.id,
+    COALESCE(NEW.raw_user_meta_data->>'first_name', ''),
+    COALESCE(NEW.raw_user_meta_data->>'last_name', ''),
+    COALESCE(NEW.raw_user_meta_data->>'full_name', ''),
+    NEW.email,
+    COALESCE(NEW.raw_user_meta_data->>'phone', NULL),
+    COALESCE(NEW.raw_user_meta_data->>'profile_type', 'formateur')
+  );
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;</pre>
+</body>
+</html>

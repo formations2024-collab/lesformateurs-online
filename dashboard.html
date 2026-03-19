@@ -96,8 +96,8 @@
 <div class="dash-layout">
   <div class="sidebar">
     <div class="user-info">
-      <div class="name">Sophie Martin</div>
-      <div class="email">sophie@monof.fr</div>
+      <div class="name" id="sidebar-name">Chargement...</div>
+      <div class="email" id="sidebar-email">...</div>
     </div>
     <div class="sidebar-title">Mon espace</div>
     <a class="active" onclick="showTab('resume')">📊 Résumé</a>
@@ -109,14 +109,14 @@
     <div class="sidebar-title" style="margin-top:24px;">Compte</div>
     <a onclick="showTab('parrainage')">🎁 Parrainage (10%)</a>
     <a onclick="showTab('profil')">👤 Mon profil</a>
-    <a href="index.html">🚪 Déconnexion</a>
+    <a href="#" onclick="openLogoutModal();return false;">🚪 Déconnexion</a>
   </div>
 
   <div class="main-content">
 
     <!-- ========== RESUME ========== -->
     <div class="tab-content active" id="tab-resume">
-      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">Bonjour Sophie 👋</h2>
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">Bonjour <span id="welcome-name">...</span> 👋</h2>
       <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Voici un résumé de votre activité.</p>
       <div class="stat-grid">
         <div class="stat-card" onclick="showTab('annonces')">
@@ -150,72 +150,192 @@
     <!-- ========== MES ANNONCES ========== -->
     <div class="tab-content" id="tab-annonces">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
-        <h2 style="font-size:20px;font-weight:800;">📋 Mes annonces (3)</h2>
-        <button class="btn btn-primary" style="padding:8px 16px;font-size:12px;">+ Déposer une annonce</button>
+        <h2 style="font-size:20px;font-weight:800;">📋 Mes annonces (<span id="annonces-count">3</span>)</h2>
+        <button class="btn btn-primary" style="padding:8px 16px;font-size:12px;" onclick="openAnnonceModal()">+ Déposer une annonce</button>
       </div>
 
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>⭐ Formateur Gestion de projet</h4>
-            <p>Paris · 400€/jour · En entreprise, sessions de 2 jours</p>
+      <div id="annonces-list">
+        <div class="detail-card" id="annonce-1">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+            <div>
+              <h4>⭐ Formateur Gestion de projet</h4>
+              <p>Paris · 400€/jour · En entreprise, sessions de 2 jours</p>
+            </div>
+            <span class="status-badge status-done">Active</span>
           </div>
-          <span class="status-badge status-done">Active</span>
+          <div class="detail-meta">
+            <span class="detail-tag">⭐ Premium (29€)</span>
+            <span class="detail-tag">👥 6 candidatures reçues</span>
+            <span class="detail-tag">👁 124 vues</span>
+            <span class="detail-tag">📅 Publiée le 14/03</span>
+          </div>
+          <div class="action-btns">
+            <button class="action-btn" onclick="editAnnonce('annonce-1')">✏️ Modifier</button>
+            <button class="action-btn" onclick="voirCandidatures(this)">👁 Voir les candidatures</button>
+            <button class="action-btn" onclick="pauseAnnonce('annonce-1')">⏸ Mettre en pause</button>
+            <button class="action-btn danger" onclick="deleteAnnonce('annonce-1')">🗑 Supprimer</button>
+          </div>
         </div>
-        <div class="detail-meta">
-          <span class="detail-tag">⭐ Premium (29€)</span>
-          <span class="detail-tag">👥 6 candidatures reçues</span>
-          <span class="detail-tag">👁 124 vues</span>
-          <span class="detail-tag">📅 Publiée le 14/03</span>
+
+        <div class="detail-card" id="annonce-2">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+            <div>
+              <h4>Formateur Excel/VBA</h4>
+              <p>Distanciel · 300€/jour · Niveau intermédiaire à avancé</p>
+            </div>
+            <span class="status-badge status-done">Active</span>
+          </div>
+          <div class="detail-meta">
+            <span class="detail-tag">Gratuite</span>
+            <span class="detail-tag">👥 3 candidatures reçues</span>
+            <span class="detail-tag">👁 67 vues</span>
+            <span class="detail-tag">📅 Publiée le 16/03</span>
+          </div>
+          <div class="action-btns">
+            <button class="action-btn" onclick="editAnnonce('annonce-2')">✏️ Modifier</button>
+            <button class="action-btn" onclick="voirCandidatures(this)">👁 Voir les candidatures</button>
+            <button class="action-btn" onclick="window.open('https://buy.stripe.com/3cs28r6ro5eZ6Me2RYffy0Z','_blank')">⭐ Passer en Premium</button>
+            <button class="action-btn" onclick="pauseAnnonce('annonce-2')">⏸ Mettre en pause</button>
+            <button class="action-btn danger" onclick="deleteAnnonce('annonce-2')">🗑 Supprimer</button>
+          </div>
         </div>
-        <div class="action-btns">
-          <button class="action-btn">✏️ Modifier</button>
-          <button class="action-btn">👁 Voir les candidatures</button>
-          <button class="action-btn">⏸ Mettre en pause</button>
-          <button class="action-btn danger">🗑 Supprimer</button>
+
+        <div class="detail-card" id="annonce-3">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+            <div>
+              <h4>Formateur Soft skills — Communication</h4>
+              <p>Lyon · 350€/jour · Formations en intra-entreprise</p>
+            </div>
+            <span class="status-badge status-new">Expirée</span>
+          </div>
+          <div class="detail-meta">
+            <span class="detail-tag">Gratuite</span>
+            <span class="detail-tag">👥 9 candidatures reçues</span>
+            <span class="detail-tag">👁 203 vues</span>
+            <span class="detail-tag">📅 Publiée le 01/03</span>
+          </div>
+          <div class="action-btns">
+            <button class="action-btn">🔄 Republier</button>
+            <button class="action-btn" onclick="editAnnonce('annonce-3')">✏️ Modifier et republier</button>
+            <button class="action-btn danger" onclick="deleteAnnonce('annonce-3')">🗑 Supprimer</button>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Formateur Excel/VBA</h4>
-            <p>Distanciel · 300€/jour · Niveau intermédiaire à avancé</p>
+    <!-- MODAL DEPOSER / MODIFIER ANNONCE -->
+    <div class="modal" id="modal-annonce">
+      <div class="modal-box" style="max-width:540px;">
+        <button class="modal-close" onclick="closeAnnonceModal()">✕</button>
+        <h3 id="annonce-modal-title" style="font-size:22px;font-weight:800;">Déposer une annonce</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Publiez votre offre de mission sur la plateforme.</p>
+
+        <div class="form-group">
+          <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Titre de la mission *</label>
+          <input type="text" id="a-titre" placeholder="Ex: Formateur Excel/VBA" required>
+        </div>
+
+        <div class="form-group">
+          <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Catégorie *</label>
+          <select id="a-categorie" required>
+            <option value="">Choisissez une catégorie...</option>
+            <option>Bureautique</option><option>Communication</option><option>Digital / Web</option>
+            <option>Management</option><option>Langues</option><option>Sécurité</option>
+            <option>RH / Formation</option><option>Comptabilité / Gestion</option>
+            <option>Informatique / Dev</option><option>Soft Skills</option><option>Autre</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Lieu *</label>
+          <select id="a-lieu" required>
+            <option value="">Choisissez un lieu...</option>
+            <option>Distanciel</option>
+            <optgroup label="── Régions métropolitaines ──">
+            <option>Auvergne-Rhône-Alpes</option><option>Bourgogne-Franche-Comté</option>
+            <option>Bretagne</option><option>Centre-Val de Loire</option><option>Corse</option>
+            <option>Grand Est</option><option>Hauts-de-France</option><option>Île-de-France</option>
+            <option>Normandie</option><option>Nouvelle-Aquitaine</option><option>Occitanie</option>
+            <option>Pays de la Loire</option><option>Provence-Alpes-Côte d'Azur</option>
+            </optgroup>
+            <optgroup label="── DOM-TOM ──">
+            <option>Guadeloupe</option><option>Martinique</option><option>Guyane</option>
+            <option>La Réunion</option><option>Mayotte</option><option>Saint-Pierre-et-Miquelon</option>
+            <option>Saint-Barthélemy</option><option>Saint-Martin</option><option>Wallis-et-Futuna</option>
+            <option>Polynésie française</option><option>Nouvelle-Calédonie</option>
+            </optgroup>
+            <optgroup label="── Grandes villes ──">
+            <option>Paris</option><option>Lyon</option><option>Marseille</option><option>Toulouse</option>
+            <option>Bordeaux</option><option>Lille</option><option>Nantes</option><option>Strasbourg</option>
+            <option>Nice</option><option>Montpellier</option><option>Rennes</option><option>Rouen</option>
+            <option>Grenoble</option><option>Toulon</option><option>Dijon</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="form-group">
+            <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Type de tarif *</label>
+            <select id="a-unite" onchange="document.getElementById('a-tarif-label').textContent=this.value==='jour'?'Montant (€/jour) *':'Montant (€/heure) *'">
+              <option value="jour">Tarif journalier (€/jour)</option>
+              <option value="heure">Tarif horaire (€/heure)</option>
+            </select>
           </div>
-          <span class="status-badge status-done">Active</span>
+          <div class="form-group">
+            <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;" id="a-tarif-label">Montant (€/jour) *</label>
+            <input type="number" id="a-tarif" placeholder="450" min="1" required>
+          </div>
         </div>
-        <div class="detail-meta">
-          <span class="detail-tag">Gratuite</span>
-          <span class="detail-tag">👥 3 candidatures reçues</span>
-          <span class="detail-tag">👁 67 vues</span>
-          <span class="detail-tag">📅 Publiée le 16/03</span>
+
+        <div class="form-group">
+          <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Description *</label>
+          <textarea id="a-desc" rows="4" maxlength="3000" placeholder="Décrivez la mission, le public, les prérequis..." required oninput="document.getElementById('a-char-count').textContent=this.value.length"></textarea>
+          <p style="font-size:11px;color:var(--muted);text-align:right;margin-top:4px;"><span id="a-char-count">0</span> / 3 000 caractères</p>
         </div>
-        <div class="action-btns">
-          <button class="action-btn">✏️ Modifier</button>
-          <button class="action-btn">👁 Voir les candidatures</button>
-          <button class="action-btn">⭐ Passer en Premium</button>
-          <button class="action-btn danger">🗑 Supprimer</button>
+
+        <div class="form-group">
+          <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Date d'expiration *</label>
+          <input type="date" id="a-expiration" required>
+        </div>
+
+        <div class="form-group" id="a-type-group">
+          <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Type d'annonce</label>
+          <select id="a-type" onchange="document.getElementById('a-premium-hint').style.display=this.value==='premium'?'':'none'">
+            <option value="gratuite">Gratuite — annonce standard</option>
+            <option value="premium">⭐ Premium — mise en avant (29€)</option>
+          </select>
+          <p id="a-premium-hint" style="display:none;font-size:11px;color:var(--accent);margin-top:4px;">💳 Vous serez redirigé vers Stripe pour payer 29€ (paiement unique).</p>
+        </div>
+
+        <div id="a-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;font-weight:600;"></div>
+        <button class="btn btn-primary btn-block" id="btn-annonce-submit" onclick="submitAnnonce()">Publier l'annonce →</button>
+      </div>
+    </div>
+
+    <!-- MODAL PAUSE -->
+    <div class="modal" id="modal-pause">
+      <div class="modal-box" style="max-width:420px;text-align:center;">
+        <button class="modal-close" onclick="closePauseModal()">✕</button>
+        <div style="font-size:48px;margin-bottom:12px;">⏸</div>
+        <h3>Mettre en pause cette annonce ?</h3>
+        <p style="font-size:13px;color:var(--muted);margin:12px 0;">L'annonce ne sera plus visible par les candidats. Vous pourrez la réactiver à tout moment.</p>
+        <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;">
+          <button class="btn" style="background:var(--light);color:var(--primary);border:1px solid var(--border);padding:10px 24px;" onclick="closePauseModal()">Annuler</button>
+          <button class="btn" style="background:#f59e0b;color:#fff;padding:10px 24px;" onclick="confirmPause()">⏸ Oui, mettre en pause</button>
         </div>
       </div>
+    </div>
 
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Formateur Soft skills — Communication</h4>
-            <p>Lyon · 350€/jour · Formations en intra-entreprise</p>
-          </div>
-          <span class="status-badge status-new">Expirée</span>
-        </div>
-        <div class="detail-meta">
-          <span class="detail-tag">Gratuite</span>
-          <span class="detail-tag">👥 9 candidatures reçues</span>
-          <span class="detail-tag">👁 203 vues</span>
-          <span class="detail-tag">📅 Publiée le 01/03</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">🔄 Republier</button>
-          <button class="action-btn">✏️ Modifier et republier</button>
-          <button class="action-btn danger">🗑 Supprimer</button>
+    <!-- MODAL SUPPRIMER -->
+    <div class="modal" id="modal-delete">
+      <div class="modal-box" style="max-width:420px;text-align:center;">
+        <button class="modal-close" onclick="closeDeleteModal()">✕</button>
+        <div style="font-size:48px;margin-bottom:12px;">🗑</div>
+        <h3>Supprimer cette annonce ?</h3>
+        <p style="font-size:13px;color:var(--muted);margin:12px 0;">Cette action est irréversible. L'annonce et toutes les candidatures associées seront définitivement supprimées.</p>
+        <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;">
+          <button class="btn" style="background:var(--light);color:var(--primary);border:1px solid var(--border);padding:10px 24px;" onclick="closeDeleteModal()">Annuler</button>
+          <button class="btn" style="background:var(--accent);color:#fff;padding:10px 24px;" onclick="confirmDelete()">🗑 Oui, supprimer</button>
         </div>
       </div>
     </div>
@@ -224,14 +344,14 @@
     <div class="tab-content" id="tab-candidatures">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🎯 Mes candidatures (5)</h2>
 
-      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
-        <button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);">Toutes (5)</button>
-        <button class="action-btn">⏳ En attente (2)</button>
-        <button class="action-btn">✅ Acceptées (2)</button>
-        <button class="action-btn">❌ Refusées (1)</button>
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;" id="candidature-filters">
+        <button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="filterCandidatures('toutes', this)">Toutes (5)</button>
+        <button class="action-btn" onclick="filterCandidatures('attente', this)">⏳ En attente (2)</button>
+        <button class="action-btn" onclick="filterCandidatures('acceptee', this)">✅ Acceptées (2)</button>
+        <button class="action-btn" onclick="filterCandidatures('refusee', this)">❌ Refusées (1)</button>
       </div>
 
-      <div class="detail-card">
+      <div class="detail-card candidature-card" data-status="acceptee">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
           <div>
             <h4>Formateur Marketing Digital</h4>
@@ -247,12 +367,11 @@
           <strong>💬 Message du recruteur :</strong> "Bonjour Sophie, votre profil nous intéresse beaucoup. Pouvez-vous nous contacter au 01 23 45 67 89 pour un entretien ?"
         </div>
         <div class="action-btns">
-          <button class="action-btn">📞 Voir les coordonnées</button>
-          <button class="action-btn">💬 Répondre</button>
+          <button class="action-btn" onclick="voirCoordonnees(this, 'contact@digitalacademy.fr', '01 23 45 67 89')">📞 Voir les coordonnées</button>
         </div>
       </div>
 
-      <div class="detail-card">
+      <div class="detail-card candidature-card" data-status="acceptee">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
           <div>
             <h4>Formateur Sécurité au travail — SST</h4>
@@ -268,11 +387,12 @@
           <strong>💬 Message :</strong> "Mission confirmée ! Début le 25/03, centre de formation Nantes Nord. Convention envoyée par email."
         </div>
         <div class="action-btns">
-          <button class="action-btn">📄 Voir la convention</button>
+          <button class="action-btn" onclick="voirCoordonnees(this, 'rh@formation-nantes.fr', '02 40 12 34 56')">📞 Voir les coordonnées</button>
+          <button class="action-btn" onclick="alert('📄 Convention envoyée par email le 18/03.')">📄 Voir la convention</button>
         </div>
       </div>
 
-      <div class="detail-card">
+      <div class="detail-card candidature-card" data-status="attente">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
           <div>
             <h4>Formateur Excel — Bureautique</h4>
@@ -290,7 +410,7 @@
         </div>
       </div>
 
-      <div class="detail-card">
+      <div class="detail-card candidature-card" data-status="attente">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
           <div>
             <h4>Formateur Management — Avancé</h4>
@@ -307,7 +427,7 @@
         </div>
       </div>
 
-      <div class="detail-card">
+      <div class="detail-card candidature-card" data-status="refusee">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
           <div>
             <h4>Formateur Prise de parole</h4>
@@ -483,87 +603,119 @@
     <div class="tab-content" id="tab-formation">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🎓 Ma formation formateur</h2>
 
-      <div style="background:#fff;border:2px solid var(--accent);border-radius:14px;padding:24px;margin-bottom:24px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px;">
-          <div>
-            <h3 style="font-size:16px;font-weight:800;">Formation "Formateur Professionnel"</h3>
-            <p style="font-size:12px;color:var(--muted);">21h en ligne · Inscrite le 05/03/2026</p>
+      <!-- ÉTAT : PAS ENCORE ACHETÉE -->
+      <div id="formation-not-purchased">
+        <div style="background:#fff;border:2px dashed var(--border);border-radius:14px;padding:32px;text-align:center;margin-bottom:24px;">
+          <div style="font-size:48px;margin-bottom:12px;">🎓</div>
+          <h3 style="font-size:18px;font-weight:800;margin-bottom:8px;">Vous n'avez pas encore acheté la formation</h3>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:16px;max-width:500px;margin-left:auto;margin-right:auto;">
+            Devenez formateur professionnel certifié. Cette formation vous donne accès aux <strong>Agents IA</strong> qui trouvent des missions pour vous automatiquement.
+          </p>
+          <div style="display:flex;justify-content:center;margin-bottom:12px;">
+            <div class="progress-bar" style="height:12px;max-width:400px;width:100%;"><div class="progress-fill" style="width:0%;"></div></div>
           </div>
-          <span class="status-badge status-progress" style="font-size:12px;padding:6px 14px;">En cours — 75%</span>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:20px;">Progression : <strong>0%</strong></p>
         </div>
-        <div class="progress-bar" style="height:12px;"><div class="progress-fill" style="width:75%;"></div></div>
-      </div>
 
-      <h3 style="font-size:15px;font-weight:700;margin-bottom:12px;">Modules de formation</h3>
+        <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:10px;padding:20px;margin-bottom:16px;">
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:8px;">💰 100% remboursée pour les indépendants</h4>
+          <p style="font-size:13px;color:var(--muted);">Si vous êtes auto-entrepreneur, consultant ou formateur indépendant, cette formation est <strong style="color:var(--success);">intégralement prise en charge par le FIF PL</strong>. Vous ne payez rien au final.</p>
+        </div>
 
-      <div class="detail-card" style="border-left:3px solid var(--success);">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Module 1 : Conception pédagogique</h4>
-            <p>Créer des programmes de formation efficaces, objectifs pédagogiques, ingénierie</p>
+        <div style="background:rgba(233,69,96,.05);border:1px solid rgba(233,69,96,.15);border-radius:10px;padding:20px;margin-bottom:16px;">
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:8px;">🤖 Accès aux Agents IA après certification</h4>
+          <p style="font-size:13px;color:var(--muted);">Une fois certifié, nos agents IA travaillent pour vous : <strong>recherche de missions</strong>, <strong>prospection automatique</strong>, <strong>création de formations</strong>. C'est comme avoir un assistant commercial 24h/24.</p>
+        </div>
+
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:24px;">
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:10px;">📋 Ce que contient la formation (21h)</h4>
+          <div style="display:grid;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span>🔒</span> Module 1 : Conception pédagogique (4h30)</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span>🔒</span> Module 2 : Animation de formation (4h30)</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span>🔒</span> Module 3 : Gestion administrative (4h30)</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span>🔒</span> Module 4 : Techniques de vente (4h30)</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span>🔒</span> Module 5 : Certification finale (3h)</div>
           </div>
-          <span class="status-badge status-done">✅ Terminé</span>
         </div>
-        <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Terminé le 08/03</span><span class="detail-tag">Score : 92%</span></div>
-      </div>
 
-      <div class="detail-card" style="border-left:3px solid var(--success);">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Module 2 : Animation de formation</h4>
-            <p>Techniques d'animation, gestion de groupe, outils pédagogiques</p>
+        <div style="text-align:center;">
+          <div style="margin-bottom:8px;">
+            <span style="font-size:16px;text-decoration:line-through;color:var(--muted);">2 980€</span>
+            <span style="font-size:28px;font-weight:900;color:var(--accent);margin-left:12px;">1 490€</span>
           </div>
-          <span class="status-badge status-done">✅ Terminé</span>
+          <p style="font-size:12px;color:var(--success);font-weight:600;margin-bottom:16px;">💰 Remboursé à 100% pour les indépendants (FIF PL)</p>
+          <a href="se-former.html" class="btn btn-primary" style="padding:14px 40px;font-size:16px;font-weight:700;">Acheter la formation →</a>
+          <p style="font-size:11px;color:var(--muted);margin-top:10px;">✅ Satisfait ou remboursé pendant 3 mois · 🤖 Agents IA inclus après certification</p>
         </div>
-        <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Terminé le 12/03</span><span class="detail-tag">Score : 88%</span></div>
       </div>
 
-      <div class="detail-card" style="border-left:3px solid var(--accent);">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Module 3 : Gestion administrative</h4>
-            <p>Contrats, conventions, émargement, BPF, obligations légales</p>
+      <!-- ÉTAT : FORMATION EN COURS (masqué par défaut, affiché si achetée) -->
+      <div id="formation-purchased" style="display:none;">
+        <div style="background:#fff;border:2px solid var(--accent);border-radius:14px;padding:24px;margin-bottom:24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px;">
+            <div>
+              <h3 style="font-size:16px;font-weight:800;">Formation "Formateur Professionnel"</h3>
+              <p style="font-size:12px;color:var(--muted);">21h en ligne · Inscrite le 05/03/2026</p>
+            </div>
+            <span class="status-badge status-progress" style="font-size:12px;padding:6px 14px;">En cours — 75%</span>
           </div>
-          <span class="status-badge status-progress">⏳ En cours — 60%</span>
+          <div class="progress-bar" style="height:12px;"><div class="progress-fill" style="width:75%;"></div></div>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
-        <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Commencé le 15/03</span></div>
-        <div class="action-btns">
-          <button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);">▶️ Reprendre</button>
-        </div>
-      </div>
 
-      <div class="detail-card" style="border-left:3px solid var(--border);">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Module 4 : Techniques de vente</h4>
-            <p>Prospecter, vendre ses formations, négocier, fidéliser</p>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:12px;">Modules de formation</h3>
+
+        <div class="detail-card" style="border-left:3px solid var(--success);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div><h4>Module 1 : Conception pédagogique</h4><p>Créer des programmes de formation efficaces, objectifs pédagogiques, ingénierie</p></div>
+            <span class="status-badge status-done">✅ Terminé</span>
           </div>
-          <span style="font-size:12px;color:var(--muted);">🔒 À débloquer</span>
+          <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Terminé le 08/03</span><span class="detail-tag">Score : 92%</span></div>
         </div>
-        <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Disponible après Module 3</span></div>
-      </div>
 
-      <div class="detail-card" style="border-left:3px solid var(--border);">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Module 5 : Certification finale</h4>
-            <p>Examen final, mise en situation, obtention du certificat</p>
+        <div class="detail-card" style="border-left:3px solid var(--success);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div><h4>Module 2 : Animation de formation</h4><p>Techniques d'animation, gestion de groupe, outils pédagogiques</p></div>
+            <span class="status-badge status-done">✅ Terminé</span>
           </div>
-          <span style="font-size:12px;color:var(--muted);">🔒 À débloquer</span>
+          <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Terminé le 12/03</span><span class="detail-tag">Score : 88%</span></div>
         </div>
-        <div class="detail-meta"><span class="detail-tag">3h</span><span class="detail-tag">Disponible après Module 4</span></div>
-      </div>
 
-      <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:10px;padding:16px;margin-top:20px;">
-        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">💰 Remboursement FIF PL</h4>
-        <p style="font-size:12px;color:var(--muted);">Statut : <strong style="color:var(--success);">Dossier déposé</strong></p>
-        <p style="font-size:12px;color:var(--muted);">Remboursement estimé sous 4-6 semaines après certification.</p>
-      </div>
+        <div class="detail-card" style="border-left:3px solid var(--accent);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div><h4>Module 3 : Gestion administrative</h4><p>Contrats, conventions, émargement, BPF, obligations légales</p></div>
+            <span class="status-badge status-progress">⏳ En cours — 60%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
+          <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Commencé le 15/03</span></div>
+          <div class="action-btns"><button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);">▶️ Reprendre</button></div>
+        </div>
 
-      <div style="background:rgba(233,69,96,.05);border:1px solid rgba(233,69,96,.15);border-radius:10px;padding:16px;margin-top:12px;">
-        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">🤖 Agents IA — Recherche de missions</h4>
-        <p style="font-size:12px;color:var(--muted);">Activé après certification. Nos agents chercheront des missions adaptées à votre profil chaque jour.</p>
+        <div class="detail-card" style="border-left:3px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div><h4>Module 4 : Techniques de vente</h4><p>Prospecter, vendre ses formations, négocier, fidéliser</p></div>
+            <span style="font-size:12px;color:var(--muted);">🔒 À débloquer</span>
+          </div>
+          <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Disponible après Module 3</span></div>
+        </div>
+
+        <div class="detail-card" style="border-left:3px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div><h4>Module 5 : Certification finale</h4><p>Examen final, mise en situation, obtention du certificat</p></div>
+            <span style="font-size:12px;color:var(--muted);">🔒 À débloquer</span>
+          </div>
+          <div class="detail-meta"><span class="detail-tag">3h</span><span class="detail-tag">Disponible après Module 4</span></div>
+        </div>
+
+        <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:10px;padding:16px;margin-top:20px;">
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">💰 Remboursement FIF PL</h4>
+          <p style="font-size:12px;color:var(--muted);">Statut : <strong style="color:var(--success);">Dossier déposé</strong></p>
+          <p style="font-size:12px;color:var(--muted);">Remboursement estimé sous 4-6 semaines après certification.</p>
+        </div>
+
+        <div style="background:rgba(233,69,96,.05);border:1px solid rgba(233,69,96,.15);border-radius:10px;padding:16px;margin-top:12px;">
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">🤖 Agents IA — Recherche de missions</h4>
+          <p style="font-size:12px;color:var(--muted);">Activé après certification. Nos agents chercheront des missions adaptées à votre profil chaque jour.</p>
+        </div>
       </div>
     </div>
 
@@ -614,7 +766,7 @@
             <span class="ref-commission">→ 19,90€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=nda" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/conformite.html?ref=CODE&p=nda" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -625,7 +777,7 @@
             <span class="ref-commission">→ 14,90€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=uai" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/conformite.html?ref=CODE&p=uai" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -636,7 +788,7 @@
             <span class="ref-commission">→ 49€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=qualiopi" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/conformite.html?ref=CODE&p=qualiopi" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -647,7 +799,7 @@
             <span class="ref-commission">→ 29€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=edof" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/conformite.html?ref=CODE&p=edof" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -658,7 +810,7 @@
             <span class="ref-commission">→ 12,90€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=ft" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/conformite.html?ref=CODE&p=ft" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -669,7 +821,7 @@
             <span class="ref-commission">→ 39€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=rs" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/conformite.html?ref=CODE&p=rs" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -680,7 +832,7 @@
             <span class="ref-commission">→ 39,90€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=opco" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/conformite.html?ref=CODE&p=opco" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -691,7 +843,7 @@
             <span class="ref-commission">→ 39,90€+ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=agent" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/conformite.html?ref=CODE&p=agent" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -706,7 +858,7 @@
             <span class="ref-commission">→ 99€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=of-action" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/creer-of.html?ref=CODE&p=of-action" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -717,7 +869,7 @@
             <span class="ref-commission">→ 299€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=of-cfa" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/creer-of.html?ref=CODE&p=of-cfa" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -728,7 +880,7 @@
             <span class="ref-commission">→ 99€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=of-bilan" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/creer-of.html?ref=CODE&p=of-bilan" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -739,7 +891,7 @@
             <span class="ref-commission">→ 99€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=of-vae" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/creer-of.html?ref=CODE&p=of-vae" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -750,7 +902,7 @@
             <span class="ref-commission">→ 149€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=of-elus" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/creer-of.html?ref=CODE&p=of-elus" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -761,7 +913,7 @@
             <span class="ref-commission">→ 279€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=of-ia" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/creer-of.html?ref=CODE&p=of-ia" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -776,7 +928,7 @@
             <span class="ref-commission">→ 149€ pour vous</span>
           </div>
           <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/r/SM7K2?p=formation" class="ref-link-input">
+            <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/se-former.html?ref=CODE&p=formation" class="ref-link-input">
             <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
           </div>
         </div>
@@ -851,16 +1003,22 @@
     <div class="tab-content" id="tab-profil">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">👤 Mon profil</h2>
       <div style="max-width:500px;">
-        <div class="form-group"><label>Prénom et nom</label><input type="text" value="Sophie Martin"></div>
-        <div class="form-group"><label>Email</label><input type="email" value="sophie@monof.fr"></div>
-        <div class="form-group"><label>Téléphone</label><input type="tel" value="06 12 34 56 78"></div>
-        <div class="form-group"><label>Adresse</label><input type="text" value="12 rue de la Formation, 75001 Paris"></div>
+        <div class="form-group"><label>Prénom</label><input type="text" id="profil-prenom" value=""></div>
+        <div class="form-group"><label>Nom</label><input type="text" id="profil-nom" value=""></div>
+        <div class="form-group"><label>Email</label><input type="email" id="profil-email" value="" readonly style="opacity:.6;"></div>
+        <div class="form-group"><label>Téléphone</label><input type="tel" id="profil-tel" value=""></div>
+        <div class="form-group"><label>Adresse</label><input type="text" id="profil-adresse" value=""></div>
         <div class="form-group"><label>Profil</label>
-          <select><option selected>Gérant d'OF</option><option>Formateur indépendant</option><option>En création d'OF</option><option>Demandeur d'emploi</option></select>
+          <select id="profil-type">
+            <option value="formateur">Formateur indépendant</option>
+            <option value="of">Gérant d'OF</option>
+            <option value="porteur">Porteur de projet</option>
+          </select>
         </div>
-        <div class="form-group"><label>SIREN / SIRET</label><input type="text" value="123 456 789 00010"></div>
-        <button class="btn btn-primary" style="margin-right:8px;">Enregistrer</button>
-        <button class="btn btn-outline" style="color:var(--accent);border-color:var(--accent);">Changer mon mot de passe</button>
+        <div class="form-group"><label>SIREN / SIRET</label><input type="text" id="profil-siren" value=""></div>
+        <div id="profil-success" style="display:none;color:#10b981;font-size:13px;font-weight:600;margin-bottom:10px;">✅ Profil enregistré avec succès !</div>
+        <button class="btn btn-primary" style="margin-right:8px;" id="profil-save-btn" onclick="sauvegarderProfil()">Enregistrer</button>
+        <button class="btn btn-outline" style="color:var(--accent);border-color:var(--accent);" onclick="changerMotDePasse()">Changer mon mot de passe</button>
       </div>
     </div>
 
@@ -868,6 +1026,239 @@
 </div>
 
 <script>
+// ====== ANNONCES ======
+var currentAnnonceId = null;
+var editingAnnonce = null;
+
+function openAnnonceModal(annonceId){
+  editingAnnonce = annonceId || null;
+  document.getElementById('annonce-modal-title').textContent = annonceId ? 'Modifier l\'annonce' : 'Déposer une annonce';
+  document.getElementById('btn-annonce-submit').textContent = annonceId ? 'Enregistrer les modifications' : 'Publier l\'annonce →';
+  // Hide type selector when editing (premium upgrade is done via button on card)
+  var typeGroup = document.getElementById('a-type-group');
+  if(typeGroup) typeGroup.style.display = annonceId ? 'none' : '';
+  
+  if(annonceId){
+    // Pre-fill from existing card
+    var card = document.getElementById(annonceId);
+    var h4 = card.querySelector('h4').textContent.replace('⭐ ','');
+    var p = card.querySelector('p').textContent;
+    document.getElementById('a-titre').value = h4;
+    var parts = p.split(' · ');
+    document.getElementById('a-lieu').value = parts[0] || '';
+    var tarifMatch = p.match(/(\d+)€\/(jour|heure)/);
+    if(tarifMatch){
+      document.getElementById('a-tarif').value = tarifMatch[1];
+      document.getElementById('a-unite').value = tarifMatch[2];
+    }
+  } else {
+    document.getElementById('a-titre').value = '';
+    document.getElementById('a-lieu').value = '';
+    document.getElementById('a-tarif').value = '';
+    document.getElementById('a-desc').value = '';
+    document.getElementById('a-categorie').value = '';
+    document.getElementById('a-type').value = 'gratuite';
+    document.getElementById('a-unite').value = 'jour';
+    document.getElementById('a-expiration').value = '';
+    document.getElementById('a-char-count').textContent = '0';
+    var errDiv = document.getElementById('a-error'); if(errDiv) errDiv.style.display = 'none';
+    var hint = document.getElementById('a-premium-hint'); if(hint) hint.style.display = 'none';
+  }
+  // Set min date to today
+  var expInput = document.getElementById('a-expiration');
+  if(expInput){ expInput.setAttribute('min', new Date().toISOString().split('T')[0]); }
+  document.getElementById('modal-annonce').classList.add('open');
+}
+
+function closeAnnonceModal(){
+  document.getElementById('modal-annonce').classList.remove('open');
+  editingAnnonce = null;
+}
+
+async function submitAnnonce(){
+  var titre = document.getElementById('a-titre').value.trim();
+  var lieu = document.getElementById('a-lieu').value;
+  var tarif = document.getElementById('a-tarif').value;
+  var unite = document.getElementById('a-unite').value;
+  var categorie = document.getElementById('a-categorie').value;
+  var desc = document.getElementById('a-desc').value.trim();
+  var expiration = document.getElementById('a-expiration').value;
+  var errDiv = document.getElementById('a-error');
+  var btn = document.getElementById('btn-annonce-submit');
+
+  if(!titre || !categorie || !lieu || !tarif || !desc || !expiration){
+    errDiv.textContent = '⚠️ Tous les champs sont obligatoires.';
+    errDiv.style.display = '';
+    return;
+  }
+  if(desc.length > 3000){
+    errDiv.textContent = '⚠️ La description ne doit pas dépasser 3 000 caractères.';
+    errDiv.style.display = '';
+    return;
+  }
+  errDiv.style.display = 'none';
+  btn.textContent = 'Publication en cours...';
+  btn.disabled = true;
+
+  var user = await getUser();
+  
+  if(editingAnnonce){
+    // Update in Supabase
+    var annonceDbId = document.getElementById(editingAnnonce).dataset.dbId;
+    if(annonceDbId){
+      await sb.from('annonces').update({
+        title: titre, category: categorie, city: lieu, description: desc,
+        tarif_type: unite, tarif_montant: parseInt(tarif), expires_at: expiration
+      }).eq('id', annonceDbId);
+    }
+    // Update card in DOM
+    var card = document.getElementById(editingAnnonce);
+    card.querySelector('h4').textContent = titre;
+    card.querySelector('p').textContent = lieu + ' · ' + tarif + '€/' + unite + ' · ' + categorie;
+    closeAnnonceModal();
+    btn.textContent = 'Publier l\'annonce →';
+    btn.disabled = false;
+    alert('✅ Annonce modifiée avec succès !');
+  } else {
+    var type = document.getElementById('a-type').value;
+    var isPremium = type === 'premium';
+
+    // Save to Supabase
+    var { data: newAnnonce, error } = await sb.from('annonces').insert({
+      author_id: user.id,
+      title: titre,
+      category: categorie,
+      city: lieu,
+      description: desc,
+      tarif_type: unite,
+      tarif_montant: parseInt(tarif),
+      daily_rate: tarif + '€/' + unite,
+      is_premium: isPremium,
+      status: 'active',
+      expires_at: expiration
+    }).select().single();
+
+    if(error){
+      errDiv.textContent = '❌ Erreur : ' + (error.message || 'Impossible de publier.');
+      errDiv.style.display = '';
+      btn.textContent = 'Publier l\'annonce →';
+      btn.disabled = false;
+      return;
+    }
+
+    // Add card to DOM
+    var newId = 'annonce-' + newAnnonce.id;
+    var html = '<div class="detail-card" id="'+newId+'" data-db-id="'+newAnnonce.id+'">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>'+(isPremium?'⭐ ':'')+titre+'</h4>' +
+      '<p>'+lieu+' · '+tarif+'€/'+unite+' · '+categorie+'</p></div>' +
+      '<span class="status-badge status-done">Active</span></div>' +
+      '<div class="detail-meta">' +
+      '<span class="detail-tag">'+(isPremium?'⭐ Premium (29€)':'Gratuite')+'</span>' +
+      '<span class="detail-tag">👥 0 candidatures</span>' +
+      '<span class="detail-tag">👁 0 vues</span>' +
+      '<span class="detail-tag">📅 Publiée aujourd\'hui</span></div>' +
+      '<div class="action-btns">' +
+      '<button class="action-btn" onclick="editAnnonce(\''+newId+'\')">✏️ Modifier</button>' +
+      '<button class="action-btn" onclick="voirCandidatures(this)">👁 Voir les candidatures</button>' +
+      '<button class="action-btn" onclick="pauseAnnonce(\''+newId+'\')">⏸ Mettre en pause</button>' +
+      '<button class="action-btn danger" onclick="deleteAnnonce(\''+newId+'\')">🗑 Supprimer</button></div></div>';
+    document.getElementById('annonces-list').insertAdjacentHTML('afterbegin', html);
+    updateAnnonceCount();
+    closeAnnonceModal();
+    btn.textContent = 'Publier l\'annonce →';
+    btn.disabled = false;
+    if(isPremium){
+      window.open('https://buy.stripe.com/3cs28r6ro5eZ6Me2RYffy0Z','_blank');
+    }
+    alert('✅ Annonce publiée avec succès !');
+  }
+}
+
+function editAnnonce(id){
+  openAnnonceModal(id);
+}
+
+function pauseAnnonce(id){
+  currentAnnonceId = id;
+  document.getElementById('modal-pause').classList.add('open');
+}
+function closePauseModal(){
+  document.getElementById('modal-pause').classList.remove('open');
+  currentAnnonceId = null;
+}
+async function confirmPause(){
+  if(currentAnnonceId){
+    var card = document.getElementById(currentAnnonceId);
+    var dbId = card.dataset.dbId;
+    if(dbId) await sb.from('annonces').update({ paused: true, status: 'en_attente' }).eq('id', dbId);
+    var badge = card.querySelector('.status-badge');
+    if(badge.textContent === 'Active'){
+      badge.textContent = 'En pause';
+      badge.className = 'status-badge status-progress';
+      var btns = card.querySelectorAll('.action-btn');
+      btns.forEach(function(b){
+        if(b.textContent.includes('Mettre en pause')){
+          b.textContent = '▶️ Réactiver';
+          b.onclick = function(){ resumeAnnonce(currentAnnonceId); };
+        }
+      });
+    }
+  }
+  closePauseModal();
+  alert('⏸ Annonce mise en pause.');
+}
+
+async function resumeAnnonce(id){
+  var card = document.getElementById(id);
+  var dbId = card.dataset.dbId;
+  if(dbId) await sb.from('annonces').update({ paused: false, status: 'active' }).eq('id', dbId);
+  var badge = card.querySelector('.status-badge');
+  badge.textContent = 'Active';
+  badge.className = 'status-badge status-done';
+  var btns = card.querySelectorAll('.action-btn');
+  btns.forEach(function(b){
+    if(b.textContent.includes('Réactiver')){
+      b.textContent = '⏸ Mettre en pause';
+      b.onclick = function(){ pauseAnnonce(id); };
+    }
+  });
+  alert('▶️ Annonce réactivée !');
+}
+
+function deleteAnnonce(id){
+  currentAnnonceId = id;
+  document.getElementById('modal-delete').classList.add('open');
+}
+function closeDeleteModal(){
+  document.getElementById('modal-delete').classList.remove('open');
+  currentAnnonceId = null;
+}
+async function confirmDelete(){
+  if(currentAnnonceId){
+    var card = document.getElementById(currentAnnonceId);
+    var dbId = card.dataset.dbId;
+    if(dbId) await sb.from('annonces').delete().eq('id', dbId);
+    card.style.transition = 'opacity .3s, transform .3s';
+    card.style.opacity = '0';
+    card.style.transform = 'translateX(30px)';
+    setTimeout(function(){ card.remove(); updateAnnonceCount(); }, 300);
+  }
+  closeDeleteModal();
+}
+
+function updateAnnonceCount(){
+  var count = document.querySelectorAll('#annonces-list .detail-card').length;
+  document.getElementById('annonces-count').textContent = count;
+}
+
+// Close modals on backdrop click
+document.addEventListener('click', function(e){
+  if(e.target.classList.contains('modal')){
+    e.target.classList.remove('open');
+  }
+});
+
 function copyLink(btn){
   var input = btn.parentNode.querySelector('input');
   input.select();
@@ -889,21 +1280,256 @@ function showTab(name){
   window.scrollTo(0,0);
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- MODAL CANDIDATURES -->
+<div class="modal" id="modal-candidatures">
+  <div class="modal-box" style="max-width:620px;">
+    <button class="modal-close" onclick="document.getElementById('modal-candidatures').classList.remove('open')">✕</button>
+    <h3 style="font-size:22px;font-weight:800;" id="candidatures-title">Candidatures reçues</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;" id="candidatures-subtitle"></p>
+    <div id="candidatures-list"></div>
+  </div>
+</div>
+
+<!-- MODAL DÉCONNEXION -->
+<div class="modal" id="modal-logout">
+  <div class="modal-box" style="max-width:420px;text-align:center;">
+    <button class="modal-close" onclick="document.getElementById('modal-logout').classList.remove('open')">✕</button>
+    <div style="font-size:48px;margin-bottom:12px;">🚪</div>
+    <h3>Se déconnecter ?</h3>
+    <p style="font-size:13px;color:var(--muted);margin:12px 0;">Êtes-vous sûr de vouloir vous déconnecter ?</p>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;">
+      <button class="btn" style="background:var(--light);color:var(--primary);border:1px solid var(--border);padding:10px 24px;" onclick="document.getElementById('modal-logout').classList.remove('open')">Annuler</button>
+      <button class="btn" style="background:var(--accent);color:#fff;padding:10px 24px;" onclick="confirmLogout()">🚪 Oui, me déconnecter</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script>
+// === SAUVEGARDER PROFIL ===
+async function sauvegarderProfil(){
+  var btn = document.getElementById('profil-save-btn');
+  var successDiv = document.getElementById('profil-success');
+  btn.textContent = 'Enregistrement...';
+  btn.disabled = true;
+  successDiv.style.display = 'none';
+  
+  var user = await getUser();
+  var prenom = document.getElementById('profil-prenom').value.trim();
+  var nom = document.getElementById('profil-nom').value.trim();
+  var tel = document.getElementById('profil-tel').value.trim();
+  var adresse = document.getElementById('profil-adresse').value.trim();
+  var siren = document.getElementById('profil-siren').value.trim();
+  var type = document.getElementById('profil-type').value;
+  
+  var { error } = await sb.from('profiles').update({
+    first_name: prenom,
+    last_name: nom,
+    full_name: prenom + ' ' + nom,
+    phone: tel,
+    address: adresse,
+    siren: siren,
+    profile_type: type
+  }).eq('id', user.id);
+  
+  btn.textContent = 'Enregistrer';
+  btn.disabled = false;
+  
+  if(error){
+    alert('❌ Erreur : ' + error.message);
+    return;
+  }
+  
+  // Update sidebar + welcome
+  document.getElementById('sidebar-name').textContent = prenom + ' ' + nom;
+  document.getElementById('welcome-name').textContent = prenom;
+  
+  successDiv.style.display = '';
+  setTimeout(function(){ successDiv.style.display = 'none'; }, 3000);
+}
+
+async function changerMotDePasse(){
+  var newPwd = prompt('Entrez votre nouveau mot de passe (minimum 8 caractères) :');
+  if(!newPwd || newPwd.length < 8){ alert('⚠️ Le mot de passe doit contenir au moins 8 caractères.'); return; }
+  var { error } = await sb.auth.updateUser({ password: newPwd });
+  if(error) alert('❌ Erreur : ' + error.message);
+  else alert('✅ Mot de passe modifié avec succès !');
+}
+
+// === VOIR COORDONNEES ===
+function voirCoordonnees(btn, email, tel){
+  var parent = btn.closest('.action-btns');
+  // Replace button with contact info
+  var html = '<div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:12px;margin-top:8px;">' +
+    '<p style="font-size:13px;font-weight:700;margin-bottom:8px;">📇 Coordonnées du recruteur</p>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:8px;">' +
+    '<a href="mailto:'+email+'" style="font-size:12px;background:#fff;padding:6px 12px;border-radius:20px;border:1px solid #e0e0e0;text-decoration:none;color:var(--primary);">📧 '+email+'</a>' +
+    '<a href="tel:'+tel.replace(/\s/g,'')+'" style="font-size:12px;background:#fff;padding:6px 12px;border-radius:20px;border:1px solid #e0e0e0;text-decoration:none;color:var(--primary);">📱 '+tel+'</a>' +
+    '</div></div>';
+  btn.outerHTML = html;
+}
+
+// === FILTER CANDIDATURES ===
+function filterCandidatures(status, btn){
+  // Update active button
+  document.querySelectorAll('#candidature-filters .action-btn').forEach(function(b){
+    b.style.background = '';
+    b.style.color = '';
+    b.style.borderColor = '';
+  });
+  btn.style.background = 'var(--accent)';
+  btn.style.color = '#fff';
+  btn.style.borderColor = 'var(--accent)';
+  
+  // Filter cards
+  document.querySelectorAll('.candidature-card').forEach(function(card){
+    if(status === 'toutes'){
+      card.style.display = '';
+    } else {
+      card.style.display = card.dataset.status === status ? '' : 'none';
+    }
+  });
+}
+
+// === CANDIDATURES ===
+var fakeCandidatures = {
+  'annonce-1': [
+    {nom:'Marie Dupont',email:'marie.dupont@gmail.com',tel:'06 12 34 56 78',ville:'Paris',experience:'8 ans',date:'17/03/2026',linkedin:'https://linkedin.com/in/marie-dupont',cv:true,message:'Bonjour, je suis très intéressée par cette mission. J\'ai 8 ans d\'expérience en gestion de projet.'},
+    {nom:'Thomas Bernard',email:'t.bernard@outlook.fr',tel:'07 98 76 54 32',ville:'Lyon',experience:'5 ans',date:'16/03/2026',linkedin:'https://linkedin.com/in/thomas-bernard',cv:true,message:'Disponible immédiatement pour cette mission.'},
+    {nom:'Sophie Chen',email:'sophie.chen@yahoo.fr',tel:'06 45 67 89 01',ville:'Distanciel',experience:'12 ans',date:'15/03/2026',linkedin:null,cv:true,message:'Senior PM avec certifications PMP et Prince2.'},
+    {nom:'Karim Ouali',email:'karim.o@gmail.com',tel:'06 78 90 12 34',ville:'Marseille',experience:'3 ans',date:'15/03/2026',linkedin:'https://linkedin.com/in/karim-ouali',cv:false,message:'Jeune formateur motivé, spécialisé en méthodes agiles.'},
+    {nom:'Isabelle Martin',email:'isa.martin@free.fr',tel:'07 23 45 67 89',ville:'Bordeaux',experience:'15 ans',date:'14/03/2026',linkedin:'https://linkedin.com/in/isabelle-martin',cv:true,message:null},
+    {nom:'Jean-Pierre Roux',email:'jp.roux@gmail.com',tel:'06 56 78 90 12',ville:'Toulouse',experience:'10 ans',date:'14/03/2026',linkedin:null,cv:false,message:'Expert en gestion de projet avec double compétence technique et managériale.'}
+  ],
+  'annonce-2': [
+    {nom:'Claire Moreau',email:'claire.m@gmail.com',tel:'06 34 56 78 90',ville:'Distanciel',experience:'6 ans',date:'18/03/2026',linkedin:'https://linkedin.com/in/claire-moreau',cv:true,message:'Formatrice Excel certifiée Microsoft, VBA niveau expert.'},
+    {nom:'Paul Lefebvre',email:'paul.lef@outlook.fr',tel:'07 12 34 56 78',ville:'Paris',experience:'4 ans',date:'17/03/2026',linkedin:'https://linkedin.com/in/paul-lefebvre',cv:true,message:'Spécialiste automatisation Excel/VBA en entreprise.'},
+    {nom:'Nadia Benzema',email:'nadia.b@gmail.com',tel:'06 90 12 34 56',ville:'Lyon',experience:'9 ans',date:'16/03/2026',linkedin:null,cv:true,message:null}
+  ]
+};
+
+function voirCandidatures(btn){
+  var card = btn.closest('.detail-card');
+  var id = card ? card.id : null;
+  var titre = card ? card.querySelector('h4').textContent.replace('⭐ ','') : 'Annonce';
+  var candidats = fakeCandidatures[id] || fakeCandidatures['annonce-1'];
+  
+  document.getElementById('candidatures-title').textContent = 'Candidatures reçues (' + candidats.length + ')';
+  document.getElementById('candidatures-subtitle').textContent = titre;
+  
+  var html = '';
+  candidats.forEach(function(c, i){
+    html += '<div style="background:var(--light);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">';
+    html += '<div><strong style="font-size:15px;">'+c.nom+'</strong>';
+    html += '<p style="font-size:12px;color:var(--muted);margin-top:2px;">📍 '+c.ville+' · '+c.experience+' d\'expérience · Candidature le '+c.date+'</p></div>';
+    html += '</div>';
+    
+    // Contact info
+    html += '<div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;">';
+    html += '<span style="font-size:12px;background:rgba(233,69,96,.08);padding:4px 10px;border-radius:20px;">📧 '+c.email+'</span>';
+    html += '<span style="font-size:12px;background:rgba(233,69,96,.08);padding:4px 10px;border-radius:20px;">📱 '+c.tel+'</span>';
+    if(c.linkedin) html += '<a href="'+c.linkedin+'" target="_blank" style="font-size:12px;background:#0077b5;color:#fff;padding:4px 10px;border-radius:20px;text-decoration:none;">🔗 LinkedIn</a>';
+    html += '</div>';
+    
+    // Message
+    if(c.message) html += '<p style="font-size:13px;color:var(--muted);background:#fff;padding:10px;border-radius:8px;border:1px solid var(--border);margin:8px 0;font-style:italic;">"'+c.message+'"</p>';
+    
+    // Actions
+    html += '<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">';
+    if(c.cv) html += '<button class="action-btn" style="font-size:12px;" onclick="alert(\'📄 Téléchargement du CV de '+c.nom+'...\')">📄 Télécharger CV</button>';
+    else html += '<span style="font-size:11px;color:var(--muted);padding:6px 0;">Pas de CV fourni</span>';
+    html += '<button class="action-btn" style="font-size:12px;" onclick="window.location.href=\'mailto:'+c.email+'\'">✉️ Contacter</button>';
+    html += '</div></div>';
+  });
+  
+  document.getElementById('candidatures-list').innerHTML = html;
+  document.getElementById('modal-candidatures').classList.add('open');
+}
+
+function openLogoutModal(){
+  document.getElementById('modal-logout').classList.add('open');
+}
+async function confirmLogout(){
+  await signOut();
+}
+
 // Auth guard + profile loading
 (async function(){
   var user = await getUser();
   if(!user){ window.location.href='missions.html'; return; }
   var profile = await getProfile();
   if(profile){
-    var nameEls = document.querySelectorAll('.user-name, .sidebar h3');
-    nameEls.forEach(function(el){ if(el.textContent.includes('Sophie')) el.textContent = profile.full_name; });
-    var emailEls = document.querySelectorAll('.sidebar p');
-    emailEls.forEach(function(el){ if(el.textContent.includes('@')) el.textContent = profile.email; });
+    var prenom = profile.first_name || '';
+    var nom = profile.last_name || '';
+    // Safety: if first_name contains JSON (old bug), parse it
+    if(prenom.indexOf('{') === 0){ try { var parsed = JSON.parse(prenom); prenom = parsed.first_name || ''; nom = parsed.last_name || ''; } catch(e){} }
+    var fullName = profile.full_name || (prenom + (nom ? ' ' + nom : ''));
+    document.getElementById('sidebar-name').textContent = fullName;
+    document.getElementById('sidebar-email').textContent = profile.email;
+    document.getElementById('welcome-name').textContent = prenom || fullName;
+    var pe = document.getElementById('profil-prenom'); if(pe) pe.value = prenom;
+    var ne = document.getElementById('profil-nom'); if(ne) ne.value = nom;
+    var ee = document.getElementById('profil-email'); if(ee) ee.value = profile.email;
+    var te = document.getElementById('profil-tel'); if(te) te.value = profile.phone || '';
+    var ae = document.getElementById('profil-adresse'); if(ae) ae.value = profile.address || '';
+    var se = document.getElementById('profil-siren'); if(se) se.value = profile.siren || '';
+    var pt = document.getElementById('profil-type'); if(pt && profile.profile_type) pt.value = profile.profile_type;
+    // Update referral links with real code
+    if(profile.referral_code){
+      document.querySelectorAll('.ref-link-input').forEach(function(input){
+        input.value = input.value.replace('ref=CODE', 'ref=' + profile.referral_code);
+      });
+    }
   }
+  // Load user's annonces from Supabase
+  await loadMesAnnonces(user.id);
 })();
+
+async function loadMesAnnonces(userId){
+  var { data: annonces, error } = await sb.from('annonces')
+    .select('*')
+    .eq('author_id', userId)
+    .order('created_at', { ascending: false });
+  
+  if(error || !annonces || annonces.length === 0) return;
+  
+  var list = document.getElementById('annonces-list');
+  // Keep fake demo cards but add real ones on top
+  annonces.forEach(function(a){
+    var id = 'annonce-' + a.id;
+    // Skip if already in DOM
+    if(document.getElementById(id)) return;
+    var isPremium = a.is_premium;
+    var isPaused = a.paused;
+    var isExpired = a.status === 'expiree';
+    var statusClass = isPaused ? 'status-progress' : isExpired ? 'status-new' : 'status-done';
+    var statusText = isPaused ? 'En pause' : isExpired ? 'Expirée' : 'Active';
+    var date = new Date(a.created_at);
+    var dateStr = date.toLocaleDateString('fr-FR', {day:'2-digit',month:'2-digit'});
+    
+    var html = '<div class="detail-card" id="'+id+'" data-db-id="'+a.id+'">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>'+(isPremium?'⭐ ':'')+a.title+'</h4>' +
+      '<p>'+a.city+' · '+(a.tarif_montant||'')+('€/'+(a.tarif_type||'jour'))+' · '+a.category+'</p></div>' +
+      '<span class="status-badge '+statusClass+'">'+statusText+'</span></div>' +
+      '<div class="detail-meta">' +
+      '<span class="detail-tag">'+(isPremium?'⭐ Premium (29€)':'Gratuite')+'</span>' +
+      '<span class="detail-tag">👥 0 candidatures</span>' +
+      '<span class="detail-tag">👁 '+(a.views_count||0)+' vues</span>' +
+      '<span class="detail-tag">📅 Publiée le '+dateStr+'</span></div>' +
+      '<div class="action-btns">' +
+      '<button class="action-btn" onclick="editAnnonce(\''+id+'\')">✏️ Modifier</button>' +
+      '<button class="action-btn" onclick="voirCandidatures(this)">👁 Voir les candidatures</button>' +
+      (isPaused ? '<button class="action-btn" onclick="resumeAnnonce(\''+id+'\')">▶️ Réactiver</button>' :
+       '<button class="action-btn" onclick="pauseAnnonce(\''+id+'\')">⏸ Mettre en pause</button>') +
+      (!isPremium ? '<button class="action-btn" onclick="window.open(\'https://buy.stripe.com/3cs28r6ro5eZ6Me2RYffy0Z\',\'_blank\')">⭐ Passer en Premium</button>' : '') +
+      '<button class="action-btn danger" onclick="deleteAnnonce(\''+id+'\')">🗑 Supprimer</button></div></div>';
+    list.insertAdjacentHTML('afterbegin', html);
+  });
+  updateAnnonceCount();
+}
 </script>
 </body>
 </html>
