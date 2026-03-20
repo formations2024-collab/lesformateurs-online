@@ -1,34 +1,123 @@
 {
   "conformite": {
-    "nda":          { "product": "prod_UAxoKvZe3ldbL6", "price": "price_1TCbsUDnwFniOSFLuyo4zmK6", "amount": 199 },
-    "uai":          { "product": "prod_UAxoMCWh22BoQR", "price": "price_1TCbsUDnwFniOSFLoKper0ek", "amount": 149 },
-    "qualiopi":     { "product": "prod_UAxoUf4258GNMa", "price": "price_1TCbsVDnwFniOSFLvwijgV3a", "amount": 490 },
-    "edof":         { "product": "prod_UAxokXo5uoDf68", "price": "price_1TCbsWDnwFniOSFLnqAMbPnU", "amount": 290 },
-    "francetravail":{ "product": "prod_UAxouPYQFIUmP2", "price": "price_1TCbsXDnwFniOSFLTka447ss", "amount": 129 },
-    "rs_rncp":      { "product": "prod_UAxovqLaWGoJaC", "price": "price_1TCbsXDnwFniOSFLwBsceurD", "amount": 390 },
-    "opco":         { "product": "prod_UAxolCiqTNfz6E", "price": "price_1TCbsYDnwFniOSFLkd9ZcHCh", "amount": 199 },
-    "bpf":          { "product": "prod_UAxoBde8dyOatd", "price": "price_1TCbsZDnwFniOSFL3tXWBXDX", "amount": 99 }
+    "nda": {
+      "product": "prod_UAxoKvZe3ldbL6",
+      "price": "price_1TCbsUDnwFniOSFLuyo4zmK6",
+      "amount": 199
+    },
+    "uai": {
+      "product": "prod_UAxoMCWh22BoQR",
+      "price": "price_1TCbsUDnwFniOSFLoKper0ek",
+      "amount": 149
+    },
+    "qualiopi": {
+      "product": "prod_UAxoUf4258GNMa",
+      "price": "price_1TCbsVDnwFniOSFLvwijgV3a",
+      "amount": 490
+    },
+    "edof": {
+      "product": "prod_UAxokXo5uoDf68",
+      "price": "price_1TCbsWDnwFniOSFLnqAMbPnU",
+      "amount": 290
+    },
+    "francetravail": {
+      "product": "prod_UAxouPYQFIUmP2",
+      "price": "price_1TCbsXDnwFniOSFLTka447ss",
+      "amount": 129
+    },
+    "rs_rncp": {
+      "product": "prod_UAxovqLaWGoJaC",
+      "price": "price_1TCbsXDnwFniOSFLwBsceurD",
+      "amount": 390
+    },
+    "opco": {
+      "product": "prod_UAxolCiqTNfz6E",
+      "price": "price_1TDCZhDnwFniOSFLv3uREZiI",
+      "amount": 290
+    },
+    "bpf": {
+      "product": "prod_UAxoBde8dyOatd",
+      "price": "price_1TCbsZDnwFniOSFL3tXWBXDX",
+      "amount": 99
+    }
   },
   "creer_of": {
-    "action_formation": { "product": "prod_UAxoT0gXTyFbEO", "price": "price_1TCbswDnwFniOSFLEANvfgNL", "amount": 990 },
-    "cfa":              { "product": "prod_UAxo6BkwexR9B8", "price": "price_1TCbsxDnwFniOSFL2e2RJCdt", "amount": 3000 },
-    "bilan":            { "product": "prod_UAxoBGvWqU02hG", "price": "price_1TCbsyDnwFniOSFLdoIXJYdb", "amount": 990 },
-    "vae":              { "product": "prod_UAxoPtKZUEr6Sk", "price": "price_1TCbsyDnwFniOSFLn3Id83FB", "amount": 990 },
-    "elus":             { "product": "prod_UAxodKUxk6C52p", "price": "price_1TCbszDnwFniOSFLFeh997UR", "amount": 1500 },
-    "agents_ia":        { "product": "prod_UAxoSvRrrH86uS", "price": "price_1TCbt0DnwFniOSFLPFR2uriC", "amount": 2800 }
+    "action_formation": {
+      "product": "prod_UAxoT0gXTyFbEO",
+      "price": "price_1TCbswDnwFniOSFLEANvfgNL",
+      "amount": 990
+    },
+    "cfa": {
+      "product": "prod_UAxo6BkwexR9B8",
+      "price": "price_1TCbsxDnwFniOSFL2e2RJCdt",
+      "amount": 3000
+    },
+    "bilan": {
+      "product": "prod_UAxoBGvWqU02hG",
+      "price": "price_1TCbsyDnwFniOSFLdoIXJYdb",
+      "amount": 990
+    },
+    "vae": {
+      "product": "prod_UAxoPtKZUEr6Sk",
+      "price": "price_1TCbsyDnwFniOSFLn3Id83FB",
+      "amount": 990
+    },
+    "elus": {
+      "product": "prod_UAxodKUxk6C52p",
+      "price": "price_1TCbszDnwFniOSFLFeh997UR",
+      "amount": 1500
+    },
+    "agents_ia": {
+      "product": "prod_UAxoSvRrrH86uS",
+      "price": "price_1TCbt0DnwFniOSFLPFR2uriC",
+      "amount": 2800
+    }
   },
   "options_of": {
-    "qualiopi":      { "product": "prod_UAxoMdWRZR70PH", "price": "price_1TCbt1DnwFniOSFLCD89nS2C", "amount": 490 },
-    "agents_ia":     { "product": "prod_UAxoBh2wU5J9C8", "price": "price_1TCbt1DnwFniOSFLUZihRj4l", "amount": 500 },
-    "edof":          { "product": "prod_UAxoDS3SeMsGa3", "price": "price_1TCbt2DnwFniOSFLDXbaLV8n", "amount": 290 },
-    "domiciliation": { "product": "prod_UAxocAZ4TWV29X", "price": "price_1TCbt3DnwFniOSFLE4IUjIeH", "amount": 190, "recurring": "month" },
-    "opco":          { "product": "prod_UAxoxM49BEcViP", "price": "price_1TCbt4DnwFniOSFLGKWbcMup", "amount": 199 },
-    "site_web":      { "product": "prod_UAxosOTVgXGYUg", "price": "price_1TCbt4DnwFniOSFLQttCCfyY", "amount": 390 }
+    "qualiopi": {
+      "product": "prod_UAxoMdWRZR70PH",
+      "price": "price_1TCbt1DnwFniOSFLCD89nS2C",
+      "amount": 490
+    },
+    "agents_ia": {
+      "product": "prod_UAxoBh2wU5J9C8",
+      "price": "price_1TCbt1DnwFniOSFLUZihRj4l",
+      "amount": 500
+    },
+    "edof": {
+      "product": "prod_UAxoDS3SeMsGa3",
+      "price": "price_1TCbt2DnwFniOSFLDXbaLV8n",
+      "amount": 290
+    },
+    "domiciliation": {
+      "product": "prod_UAxocAZ4TWV29X",
+      "price": "price_1TCbt3DnwFniOSFLE4IUjIeH",
+      "amount": 190,
+      "recurring": "month"
+    },
+    "opco": {
+      "product": "prod_UAxoxM49BEcViP",
+      "price": "price_1TCbt4DnwFniOSFLGKWbcMup",
+      "amount": 199
+    },
+    "site_web": {
+      "product": "prod_UAxosOTVgXGYUg",
+      "price": "price_1TCbt4DnwFniOSFLQttCCfyY",
+      "amount": 390
+    }
   },
   "annonces": {
-    "premium": { "product": "prod_UAxoobpzUF9QA2", "price": "price_1TCbtEDnwFniOSFLYN2aC3Jd", "amount": 29 }
+    "premium": {
+      "product": "prod_UAxoobpzUF9QA2",
+      "price": "price_1TCbtEDnwFniOSFLYN2aC3Jd",
+      "amount": 29
+    }
   },
   "formation": {
-    "formateur_pro": { "product": "prod_UAxptdgGDGwuwW", "price": "price_1TCbtMDnwFniOSFLaDRkOFKv", "amount": 1490 }
+    "formateur_pro": {
+      "product": "prod_UAxptdgGDGwuwW",
+      "price": "price_1TCbtMDnwFniOSFLaDRkOFKv",
+      "amount": 1490
+    }
   }
 }
