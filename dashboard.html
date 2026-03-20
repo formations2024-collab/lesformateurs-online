@@ -111,6 +111,7 @@
     <a onclick="showTab('profil')">👤 Mon profil</a>
     <a href="#" onclick="openLogoutModal();return false;">🚪 Déconnexion</a>
     <a href="expert.html" id="sidebar-pro-btn" style="display:none;margin-top:16px;background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;text-align:center;font-weight:700;font-size:13px;text-decoration:none;">⚡ Espace Pro</a>
+    <a href="admin.html" id="sidebar-admin-btn" style="display:none;margin-top:8px;background:#7c3aed;color:#fff;padding:10px 14px;border-radius:8px;text-align:center;font-weight:700;font-size:13px;text-decoration:none;">🛡 Espace Admin</a>
   </div>
 
   <div class="main-content">
@@ -808,9 +809,9 @@ async function submitAnnonce(){
     alert('✅ Annonce modifiée avec succès !');
   } else {
     var type = document.getElementById('a-type').value;
-    var isPremium = type === 'premium';
+    var wantsPremium = type === 'premium';
 
-    // Save to Supabase
+    // ALWAYS save as free first — premium only after payment
     var { data: newAnnonce, error } = await sb.from('annonces').insert({
       author_id: user.id,
       title: titre,
@@ -820,7 +821,7 @@ async function submitAnnonce(){
       tarif_type: unite,
       tarif_montant: parseInt(tarif),
       daily_rate: tarif + '€/' + unite,
-      is_premium: isPremium,
+      is_premium: false,
       status: 'active',
       expires_at: expiration
     }).select().single();
@@ -833,15 +834,15 @@ async function submitAnnonce(){
       return;
     }
 
-    // Add card to DOM
+    // Add card to DOM — always as Gratuite with "Passer en Premium" button
     var newId = 'annonce-' + newAnnonce.id;
     var html = '<div class="detail-card" id="'+newId+'" data-db-id="'+newAnnonce.id+'">' +
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
-      '<div><h4>'+(isPremium?'⭐ ':'')+titre+'</h4>' +
+      '<div><h4>'+titre+'</h4>' +
       '<p>'+lieu+' · '+tarif+'€/'+unite+' · '+categorie+'</p></div>' +
       '<span class="status-badge status-done">Active</span></div>' +
       '<div class="detail-meta">' +
-      '<span class="detail-tag">'+(isPremium?'⭐ Premium (29€)':'Gratuite')+'</span>' +
+      '<span class="detail-tag">Gratuite</span>' +
       '<span class="detail-tag">👥 0 candidatures</span>' +
       '<span class="detail-tag">👁 0 vues</span>' +
       '<span class="detail-tag">📅 Publiée aujourd\'hui</span></div>' +
@@ -849,16 +850,22 @@ async function submitAnnonce(){
       '<button class="action-btn" onclick="editAnnonce(\''+newId+'\')">✏️ Modifier</button>' +
       '<button class="action-btn" onclick="voirCandidatures(this)">👁 Voir les candidatures</button>' +
       '<button class="action-btn" onclick="pauseAnnonce(\''+newId+'\')">⏸ Mettre en pause</button>' +
+      '<button class="action-btn" onclick="passerPremium(\''+newAnnonce.id+'\',this)">⭐ Passer en Premium (29€)</button>' +
       '<button class="action-btn danger" onclick="deleteAnnonce(\''+newId+'\')">🗑 Supprimer</button></div></div>';
     document.getElementById('annonces-list').insertAdjacentHTML('afterbegin', html);
     updateAnnonceCount();
     closeAnnonceModal();
     btn.textContent = 'Publier l\'annonce →';
     btn.disabled = false;
-    if(isPremium){
-      window.open('https://buy.stripe.com/3cs28r6ro5eZ6Me2RYffy0Z','_blank');
+
+    if(wantsPremium){
+      // Auto-trigger the premium payment flow (same as clicking "Passer en Premium")
+      alert('✅ Annonce publiée ! Vous allez être redirigé vers le paiement pour la mise en avant.');
+      var premBtn = document.querySelector('#'+newId+' .action-btn[onclick*="passerPremium"]');
+      passerPremium(newAnnonce.id, premBtn);
+    } else {
+      alert('✅ Annonce publiée avec succès !');
     }
-    alert('✅ Annonce publiée avec succès !');
   }
 }
 
@@ -1098,8 +1105,10 @@ async function passerPremium(annonceId, btn){
   window.open(stripeUrl, '_blank');
   
   // Mark as premium in DB (optimistic — in production, use Stripe webhook)
-  btn.textContent = '⏳ En attente de paiement...';
-  btn.disabled = true;
+  if(btn){
+    btn.textContent = '⏳ En attente de paiement...';
+    btn.disabled = true;
+  }
   
   // Wait a moment then ask if payment was completed
   setTimeout(async function(){
@@ -1107,8 +1116,7 @@ async function passerPremium(annonceId, btn){
       var { error } = await sb.from('annonces').update({ is_premium: true }).eq('id', annonceId);
       if(error){
         alert('❌ Erreur : ' + error.message);
-        btn.textContent = '⭐ Passer en Premium (29€)';
-        btn.disabled = false;
+        if(btn){ btn.textContent = '⭐ Passer en Premium (29€)'; btn.disabled = false; }
         return;
       }
       alert('✅ Annonce passée en Premium ! Elle sera mise en avant.');
@@ -1116,8 +1124,7 @@ async function passerPremium(annonceId, btn){
       var user = await getUser();
       if(user) loadMesAnnonces(user.id);
     } else {
-      btn.textContent = '⭐ Passer en Premium (29€)';
-      btn.disabled = false;
+      if(btn){ btn.textContent = '⭐ Passer en Premium (29€)'; btn.disabled = false; }
     }
   }, 3000);
 }
@@ -1388,6 +1395,11 @@ async function confirmLogout(){
     var ae = document.getElementById('profil-adresse'); if(ae) ae.value = profile.address || '';
     var se = document.getElementById('profil-siren'); if(se) se.value = profile.siren || '';
     var pt = document.getElementById('profil-type'); if(pt && profile.profile_type) pt.value = profile.profile_type;
+    // Show admin button if profile_type is admin
+    if(profile.profile_type === 'admin'){
+      var adminBtn = document.getElementById('sidebar-admin-btn');
+      if(adminBtn) adminBtn.style.display = '';
+    }
     // Show pro button if is_pro flag is true
     if(profile.is_pro){
       var proBtn = document.getElementById('sidebar-pro-btn');

@@ -152,340 +152,29 @@
     <!-- ========== OFFRES ========== -->
     <div class="tab-content" id="tab-offres">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
-        <h2 style="font-size:20px;font-weight:800;">📋 Offres de missions (110)</h2>
-        <button class="btn btn-primary" style="padding:8px 16px;font-size:12px;">+ Nouvelle offre</button>
+        <h2 style="font-size:20px;font-weight:800;" id="offres-title">📋 Offres de missions</h2>
       </div>
-
       <div style="margin-bottom:16px;">
-        <input type="text" placeholder="🔍 Rechercher une offre..." style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;">
+        <input type="text" id="admin-offre-search" placeholder="🔍 Rechercher une offre..." oninput="filterAdminOffres()" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;">
       </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>⭐ Formateur Excel — Bureautique</h4>
-            <p>Paris · 350€/jour · Sessions en entreprise · 2j/semaine</p>
-          </div>
-          <span class="status-badge status-done">Active</span>
-        </div>
-        <div class="detail-meta">
-          <span class="detail-tag">⭐ Premium (29€)</span>
-          <span class="detail-tag">👥 8 candidatures</span>
-          <span class="detail-tag">📅 Publiée le 15/03</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">✏️ Modifier</button>
-          <button class="action-btn">👁 Voir candidatures</button>
-          <button class="action-btn danger">🗑 Retirer</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>⭐ Formateur Prise de parole</h4>
-            <p>Lyon · 400€/jour · Formations managers</p>
-          </div>
-          <span class="status-badge status-done">Active</span>
-        </div>
-        <div class="detail-meta">
-          <span class="detail-tag">⭐ Premium (29€)</span>
-          <span class="detail-tag">👥 5 candidatures</span>
-          <span class="detail-tag">📅 Publiée le 14/03</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">✏️ Modifier</button>
-          <button class="action-btn">👁 Voir candidatures</button>
-          <button class="action-btn danger">🗑 Retirer</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Formateur Marketing Digital</h4>
-            <p>Distanciel · 300€/jour · Réseaux sociaux, SEO</p>
-          </div>
-          <span class="status-badge status-done">Active</span>
-        </div>
-        <div class="detail-meta">
-          <span class="detail-tag">Gratuite</span>
-          <span class="detail-tag">👥 12 candidatures</span>
-          <span class="detail-tag">📅 Publiée le 12/03</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">✏️ Modifier</button>
-          <button class="action-btn">👁 Voir candidatures</button>
-          <button class="action-btn danger">🗑 Retirer</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>⭐ Formateur Management — Avancé</h4>
-            <p>Bordeaux · 450€/jour · Leadership, gestion d'équipe</p>
-          </div>
-          <span class="status-badge status-progress">En attente validation</span>
-        </div>
-        <div class="detail-meta">
-          <span class="detail-tag">⭐ Premium (29€)</span>
-          <span class="detail-tag">👥 3 candidatures</span>
-          <span class="detail-tag">📅 Publiée le 17/03</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn" style="background:var(--success);color:#fff;border-color:var(--success);">✅ Valider</button>
-          <button class="action-btn">✏️ Modifier</button>
-          <button class="action-btn danger">🗑 Retirer</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Formateur SST / Sécurité</h4>
-            <p>Lille · 280€/jour · Habilitation, SST</p>
-          </div>
-          <span class="status-badge status-done">Active</span>
-        </div>
-        <div class="detail-meta">
-          <span class="detail-tag">Gratuite</span>
-          <span class="detail-tag">👥 6 candidatures</span>
-          <span class="detail-tag">📅 Publiée le 10/03</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">✏️ Modifier</button>
-          <button class="action-btn">👁 Voir candidatures</button>
-          <button class="action-btn danger">🗑 Retirer</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Formateur Anglais professionnel</h4>
-            <p>Distanciel · 250€/jour · Business English</p>
-          </div>
-          <span class="status-badge status-new">Expirée</span>
-        </div>
-        <div class="detail-meta">
-          <span class="detail-tag">Gratuite</span>
-          <span class="detail-tag">👥 9 candidatures</span>
-          <span class="detail-tag">📅 Publiée le 01/03</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">🔄 Republier</button>
-          <button class="action-btn danger">🗑 Supprimer</button>
-        </div>
-      </div>
+      <div id="admin-offres-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
 
     <!-- ========== DEMARCHES ========== -->
     <div class="tab-content" id="tab-demarches">
-      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">📄 Commandes démarches (47)</h2>
-
-      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
-        <button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);">Toutes (47)</button>
-        <button class="action-btn">🆕 Nouvelles (8)</button>
-        <button class="action-btn">⏳ En cours (23)</button>
-        <button class="action-btn">✅ Terminées (16)</button>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
+        <h2 style="font-size:20px;font-weight:800;" id="admin-dem-title">📄 Commandes démarches</h2>
       </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Sophie Martin — Qualiopi</h4>
-            <p>📧 sophie@monof.fr · 📞 06 12 34 56 78</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">490€</div>
-            <span class="status-badge status-progress">En cours</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:40%;"></div></div>
-        <p style="font-size:11px;color:var(--muted);">Étape 2/5 : Vérification documents par expert · Commandé le 18/03/2026</p>
-        <div style="margin-top:8px;font-size:12px;">
-          <strong>Documents reçus :</strong> ✅ KBIS · ✅ Manuel qualité · ⏳ Processus RH en attente
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir dossier</button>
-          <button class="action-btn">➡️ Passer à l'étape 3</button>
-          <button class="action-btn">💬 Contacter client</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Jean Dupont — NDA</h4>
-            <p>📧 jean@formation.fr · 📞 06 98 76 54 32</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">199€</div>
-            <span class="status-badge status-done">Terminé</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:100%;background:var(--success);"></div></div>
-        <p style="font-size:11px;color:var(--success);">✅ NDA obtenu : 11 22 33 44 55 · Terminé le 17/03/2026</p>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir dossier</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Marie Leroy — EDOF</h4>
-            <p>📧 marie@leroy.fr · 📞 07 11 22 33 44</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">290€</div>
-            <span class="status-badge status-new">Nouveau</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:10%;"></div></div>
-        <p style="font-size:11px;color:var(--muted);">Étape 1/5 : En attente des documents · Commandé le 16/03/2026</p>
-        <div style="margin-top:8px;font-size:12px;">
-          <strong>Documents reçus :</strong> ⏳ Aucun document reçu
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir dossier</button>
-          <button class="action-btn">💬 Relancer client</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Paul Bernard — RS/RNCP</h4>
-            <p>📧 paul@bernard.com · 📞 06 55 44 33 22</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">390€</div>
-            <span class="status-badge status-progress">En cours</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:60%;"></div></div>
-        <p style="font-size:11px;color:var(--muted);">Étape 3/5 : Rédaction référentiel de compétences · Commandé le 15/03/2026</p>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir dossier</button>
-          <button class="action-btn">➡️ Passer à l'étape 4</button>
-          <button class="action-btn">💬 Contacter client</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Claire Moreau — BPF</h4>
-            <p>📧 claire@moreau.fr · 📞 06 77 88 99 00</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">99€</div>
-            <span class="status-badge status-done">Terminé</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:100%;background:var(--success);"></div></div>
-        <p style="font-size:11px;color:var(--success);">✅ BPF déposé avec succès · Terminé le 15/03/2026</p>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir dossier</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Karim Hadj — France Travail</h4>
-            <p>📧 karim@hadj.fr · 📞 06 33 22 11 00</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">129€</div>
-            <span class="status-badge status-progress">En cours</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:50%;"></div></div>
-        <p style="font-size:11px;color:var(--muted);">Étape 3/5 : Dossier en cours de soumission · Commandé le 14/03/2026</p>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir dossier</button>
-          <button class="action-btn">➡️ Passer à l'étape 4</button>
-        </div>
-      </div>
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;" id="admin-dem-filters"></div>
+      <div id="admin-dem-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
 
     <!-- ========== CREATIONS OF ========== -->
     <div class="tab-content" id="tab-of">
-      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🏛 Créations d'OF (12)</h2>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Ahmed Benali — Action de formation</h4>
-            <p>📧 ahmed@benali.com · 📞 06 44 55 66 77</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">1 480€</div>
-            <span class="status-badge status-progress">En cours</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:40%;"></div></div>
-        <p style="font-size:11px;color:var(--muted);">Étape 2/5 : Création société en cours</p>
-        <div class="detail-meta">
-          <span class="detail-tag">📋 Action de formation</span>
-          <span class="detail-tag">+ Qualiopi</span>
-          <span class="detail-tag">+ EDOF</span>
-          <span class="detail-tag">💳 Payé en 2x</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir dossier</button>
-          <button class="action-btn">➡️ Étape suivante</button>
-          <button class="action-btn">💬 Contacter</button>
-          <button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">⚡ Promouvoir Pro</button>
-        </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
+        <h2 style="font-size:20px;font-weight:800;" id="admin-of-title">🏛 Créations d'OF</h2>
       </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Lucie Fontaine — CFA</h4>
-            <p>📧 lucie@fontaine.fr · 📞 07 88 99 00 11</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">3 490€</div>
-            <span class="status-badge status-new">Nouveau</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:10%;"></div></div>
-        <p style="font-size:11px;color:var(--muted);">Étape 1/5 : Attente documents · Commandé le 16/03/2026</p>
-        <div class="detail-meta">
-          <span class="detail-tag">🎓 CFA</span>
-          <span class="detail-tag">+ Qualiopi</span>
-          <span class="detail-tag">💳 Payé en 3x</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir dossier</button>
-          <button class="action-btn">💬 Relancer</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Marc Girard — Bilan de compétences</h4>
-            <p>📧 marc@girard.com · 📞 06 11 22 33 44</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">990€</div>
-            <span class="status-badge status-done">Terminé</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:100%;background:var(--success);"></div></div>
-        <p style="font-size:11px;color:var(--success);">✅ OF créé avec succès · NDA obtenu · Terminé le 14/03/2026</p>
-        <div class="detail-meta">
-          <span class="detail-tag">📋 Bilan de compétences</span>
-          <span class="detail-tag">💳 Payé en 1x</span>
-          <span class="detail-tag">🔖 KBIS existant (-100€)</span>
-        </div>
-      </div>
+      <div id="admin-of-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
 
     <!-- ========== FORMATIONS ========== -->
@@ -800,6 +489,11 @@ function showTab(name){
   }
   // Load course content
   await loadCourseContent();
+  // Load offres
+  await loadAdminOffres();
+  // Load demarches + OF
+  await loadAdminDemarches();
+  await loadAdminOF();
 })();
 
 // ============================
@@ -1176,6 +870,346 @@ async function seedFromHardcoded(){
 
 // Close modals on backdrop
 document.addEventListener('click',function(e){if(e.target.classList.contains('modal'))e.target.classList.remove('open');});
+
+// ============================
+// ADMIN OFFRES MANAGEMENT
+// ============================
+
+var allAdminOffres = [];
+
+async function loadAdminOffres(){
+  var { data: offres } = await sb.from('annonces')
+    .select('*, candidatures(count)')
+    .order('created_at',{ascending:false});
+  allAdminOffres = offres || [];
+  renderAdminOffres(allAdminOffres);
+}
+
+function renderAdminOffres(offres){
+  document.getElementById('offres-title').textContent = '📋 Offres de missions (' + offres.length + ')';
+  var container = document.getElementById('admin-offres-list');
+  if(offres.length === 0){
+    container.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucune annonce.</p>';
+    return;
+  }
+  var html = '';
+  offres.forEach(function(a){
+    var isPremium = a.is_premium;
+    var nbCands = a.candidatures && a.candidatures[0] ? a.candidatures[0].count : 0;
+    var date = new Date(a.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'});
+    var statusCls = a.status === 'active' ? 'status-done' : a.status === 'expired' ? 'status-new' : 'status-progress';
+    var statusTxt = a.status === 'active' ? 'Active' : a.status === 'expired' ? 'Expirée' : a.paused ? 'En pause' : 'Active';
+    if(a.paused){ statusCls = 'status-progress'; statusTxt = 'En pause'; }
+
+    html += '<div class="detail-card" id="admin-a-'+a.id+'">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>'+(isPremium?'⭐ ':'')+a.title+' — '+a.category+'</h4>' +
+      '<p>'+a.city+' · '+(a.tarif_montant||'—')+'€/'+(a.tarif_type||'jour')+' · '+a.description.substring(0,60)+'</p></div>' +
+      '<span class="status-badge '+statusCls+'">'+statusTxt+'</span></div>' +
+      '<div class="detail-meta">' +
+      '<span class="detail-tag">'+(isPremium?'⭐ Premium (29€)':'Gratuite')+'</span>' +
+      '<span class="detail-tag">👥 '+nbCands+' candidature'+(nbCands>1?'s':'')+'</span>' +
+      '<span class="detail-tag">📅 '+date+'</span></div>' +
+      '<div class="action-btns">' +
+      '<button class="action-btn" onclick="adminVoirCandidatures(\''+a.id+'\',\''+a.title.replace(/'/g,"\\'")+'\')">👁 Voir candidatures ('+nbCands+')</button>' +
+      '<button class="action-btn danger" onclick="adminRetirerAnnonce(\''+a.id+'\')">🗑 Retirer</button>' +
+      '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+function filterAdminOffres(){
+  var q = document.getElementById('admin-offre-search').value.toLowerCase();
+  if(!q){ renderAdminOffres(allAdminOffres); return; }
+  var filtered = allAdminOffres.filter(function(a){
+    return (a.title||'').toLowerCase().includes(q) || (a.category||'').toLowerCase().includes(q) || (a.city||'').toLowerCase().includes(q);
+  });
+  renderAdminOffres(filtered);
+}
+
+async function adminVoirCandidatures(annonceId, titre){
+  document.getElementById('admin-cand-title').textContent = 'Candidatures — ' + titre;
+  document.getElementById('admin-cand-list').innerHTML = '<p style="text-align:center;padding:20px;color:var(--muted);">Chargement...</p>';
+  document.getElementById('modal-admin-candidatures').classList.add('open');
+
+  var { data: cands } = await sb.from('candidatures')
+    .select('*, profiles:user_id(full_name, email, phone, address, first_name, last_name)')
+    .eq('annonce_id', annonceId)
+    .order('created_at',{ascending:false});
+
+  if(!cands || cands.length === 0){
+    document.getElementById('admin-cand-list').innerHTML = '<p style="text-align:center;padding:30px;color:var(--muted);">Aucune candidature pour cette annonce.</p>';
+    return;
+  }
+
+  var html = '<p style="font-size:13px;color:var(--muted);margin-bottom:16px;">'+cands.length+' candidature'+(cands.length>1?'s':'')+'</p>';
+  cands.forEach(function(c){
+    var p = c.profiles || {};
+    var stBadge = c.status === 'acceptee' ? '<span class="status-badge status-done">Acceptée</span>' :
+                  c.status === 'refusee' ? '<span class="status-badge status-new">Refusée</span>' :
+                  c.status === 'bloquee' ? '<span class="status-badge" style="background:#333;color:#fff;">Bloquée</span>' :
+                  '<span class="status-badge status-progress">En attente</span>';
+    var date = new Date(c.created_at).toLocaleDateString('fr-FR');
+
+    html += '<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:10px;padding:16px;margin-bottom:12px;">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:8px;">' +
+      '<div>' +
+      '<h4 style="font-size:15px;font-weight:700;margin-bottom:4px;">'+(p.full_name||'Candidat inconnu')+'</h4>' +
+      '<div style="font-size:12px;color:var(--muted);">' +
+      '📧 '+(p.email||'—')+' · 📞 '+(p.phone||'—')+'</div>' +
+      (p.address ? '<div style="font-size:11px;color:var(--muted);margin-top:2px;">📍 '+p.address+'</div>' : '') +
+      '</div>' +
+      stBadge +
+      '</div>' +
+      (c.disponibilite ? '<div style="font-size:12px;margin-bottom:6px;"><strong>Disponibilité :</strong> '+c.disponibilite+'</div>' : '') +
+      (c.linkedin ? '<div style="font-size:12px;margin-bottom:6px;"><a href="'+c.linkedin+'" target="_blank" style="color:var(--accent);">🔗 Profil LinkedIn</a></div>' : '') +
+      (c.message ? '<div style="font-size:13px;line-height:1.5;background:#fff;border-radius:8px;padding:10px;margin-top:8px;border:1px solid #eee;">💬 '+c.message+'</div>' : '') +
+      '<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">' +
+      '<span style="font-size:11px;color:var(--muted);">Reçue le '+date+'</span>' +
+      (c.status === 'en_attente' ? 
+        '<button class="action-btn" style="font-size:11px;padding:4px 10px;background:var(--success);color:#fff;border-color:var(--success);" onclick="adminUpdateCandStatus(\''+c.id+'\',\'acceptee\',this)">✅ Accepter</button>' +
+        '<button class="action-btn" style="font-size:11px;padding:4px 10px;" onclick="adminUpdateCandStatus(\''+c.id+'\',\'refusee\',this)">❌ Refuser</button>'
+        : '') +
+      '</div></div>';
+  });
+  document.getElementById('admin-cand-list').innerHTML = html;
+}
+
+async function adminUpdateCandStatus(candId, status, btn){
+  var { error } = await sb.from('candidatures').update({ status: status }).eq('id', candId);
+  if(error){ alert('❌ ' + error.message); return; }
+  // Refresh — find parent card and reload
+  var card = btn.closest('[style*="background:#f8f9fa"]');
+  if(card){
+    var badge = card.querySelector('.status-badge');
+    if(status === 'acceptee'){
+      badge.className = 'status-badge status-done';
+      badge.textContent = 'Acceptée';
+    } else {
+      badge.className = 'status-badge status-new';
+      badge.textContent = 'Refusée';
+    }
+    var btns = card.querySelectorAll('button');
+    btns.forEach(function(b){ b.remove(); });
+  }
+}
+
+async function adminRetirerAnnonce(id){
+  if(!confirm('Retirer cette annonce ? Elle ne sera plus visible sur le site.')) return;
+  var { error } = await sb.from('annonces').update({ status: 'expired', paused: true }).eq('id', id);
+  if(error){ alert('❌ ' + error.message); return; }
+  var card = document.getElementById('admin-a-' + id);
+  if(card) card.style.opacity = '0.4';
+  alert('✅ Annonce retirée.');
+  await loadAdminOffres();
+}
+
+// ============================
+// ADMIN — DEMARCHES
+// ============================
+
+var allAdminDem = [];
+var adminDemFilter = 'all';
+
+var STEP_LABELS = {
+  nda:['Réception dossier','Vérification documents','Rédaction statuts','Dépôt DREETS','NDA obtenu'],
+  uai:['Réception dossier','Vérification documents','Dépôt rectorat','Suivi demande','UAI obtenu'],
+  qualiopi:['Réception dossier','Vérification documents','Préparation audit','Audit initial','Certification obtenue'],
+  edof:['Réception dossier','Vérification Qualiopi','Création fiches EDOF','Validation plateforme','Accès EDOF actif'],
+  francetravail:['Réception dossier','Vérification documents','Dépôt dossier','Validation France Travail','Référencement actif'],
+  rs:['Réception dossier','Rédaction référentiel','Montage dossier','Dépôt France Compétences','Enregistrement RS/RNCP'],
+  rs_rncp:['Réception dossier','Rédaction référentiel','Montage dossier','Dépôt France Compétences','Enregistrement RS/RNCP'],
+  opco:['Réception dossier','Vérification NDA','Dépôt dossiers OPCO','Suivi référencement','Référencement complet'],
+  bpf:['Réception dossier','Collecte données','Rédaction BPF','Vérification','BPF déposé'],
+  agent:['Configuration IA','Intégration données','Tests & ajustements','Formation utilisateur','Agent opérationnel']
+};
+
+async function loadAdminDemarches(){
+  var { data: dems } = await sb.from('demarches')
+    .select('*, profiles:user_id(full_name, email, phone)')
+    .eq('paid', true)
+    .order('created_at',{ascending:false});
+  allAdminDem = dems || [];
+  renderAdminDemFilters();
+  renderAdminDem(allAdminDem);
+}
+
+function renderAdminDemFilters(){
+  var all = allAdminDem.length;
+  var news = allAdminDem.filter(function(d){ return (d.current_step||1)<=1; }).length;
+  var encours = allAdminDem.filter(function(d){ return (d.current_step||1)>1 && d.status!=='terminee'; }).length;
+  var done = allAdminDem.filter(function(d){ return d.status==='terminee'; }).length;
+
+  document.getElementById('admin-dem-title').textContent = '📄 Commandes démarches ('+all+')';
+  document.getElementById('admin-dem-filters').innerHTML =
+    '<button class="action-btn'+(adminDemFilter==='all'?' style="background:var(--accent);color:#fff;border-color:var(--accent);"':'')+'" onclick="filterAdminDem(\'all\')">Toutes ('+all+')</button>' +
+    '<button class="action-btn'+(adminDemFilter==='new'?' style="background:var(--accent);color:#fff;border-color:var(--accent);"':'')+'" onclick="filterAdminDem(\'new\')">🆕 Nouvelles ('+news+')</button>' +
+    '<button class="action-btn'+(adminDemFilter==='progress'?' style="background:var(--accent);color:#fff;border-color:var(--accent);"':'')+'" onclick="filterAdminDem(\'progress\')">⏳ En cours ('+encours+')</button>' +
+    '<button class="action-btn'+(adminDemFilter==='done'?' style="background:var(--accent);color:#fff;border-color:var(--accent);"':'')+'" onclick="filterAdminDem(\'done\')">✅ Terminées ('+done+')</button>';
+}
+
+function filterAdminDem(f){
+  adminDemFilter = f;
+  var filtered = allAdminDem;
+  if(f==='new') filtered = allAdminDem.filter(function(d){ return (d.current_step||1)<=1; });
+  if(f==='progress') filtered = allAdminDem.filter(function(d){ return (d.current_step||1)>1 && d.status!=='terminee'; });
+  if(f==='done') filtered = allAdminDem.filter(function(d){ return d.status==='terminee'; });
+  renderAdminDemFilters();
+  renderAdminDem(filtered);
+}
+
+function renderAdminDem(dems){
+  var container = document.getElementById('admin-dem-list');
+  if(dems.length===0){ container.innerHTML='<p style="text-align:center;padding:40px;color:var(--muted);">Aucune démarche.</p>'; return; }
+
+  var html='';
+  dems.forEach(function(d){
+    var p = d.profiles || {};
+    var steps = STEP_LABELS[d.type] || STEP_LABELS['nda'];
+    var cur = d.current_step || 1;
+    var total = steps.length;
+    var pct = Math.round((cur/total)*100);
+    var isDone = d.status === 'terminee' || cur >= total;
+    var amount = d.amount_cents ? (d.amount_cents/100) : '—';
+    var date = new Date(d.created_at).toLocaleDateString('fr-FR');
+    var stCls = isDone ? 'status-done' : cur<=1 ? 'status-new' : 'status-progress';
+    var stTxt = isDone ? 'Terminé' : cur<=1 ? 'Nouveau' : 'En cours';
+    var typeName = (d.type||'').toUpperCase().replace('_',' ').replace('FRANCETRAVAIL','France Travail').replace('RS RNCP','RS/RNCP');
+
+    html += '<div class="detail-card" id="admin-dem-'+d.id+'">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>'+(p.full_name||'Client')+ ' — '+ typeName +'</h4>' +
+      '<p>📧 '+(p.email||'—')+' · 📞 '+(p.phone||'—')+'</p></div>' +
+      '<div style="text-align:right;"><div style="font-size:18px;font-weight:800;color:var(--accent);">'+amount+'€</div>' +
+      '<span class="status-badge '+stCls+'">'+stTxt+'</span></div></div>' +
+      '<div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:'+pct+'%;'+(isDone?'background:var(--success);':'')+'"></div></div>' +
+      '<p style="font-size:11px;color:'+(isDone?'var(--success)':'var(--muted)')+';">'+(isDone?'✅ '+steps[total-1]+' · Terminé':'Étape '+cur+'/'+total+' : '+steps[cur-1])+' · Commandé le '+date+'</p>' +
+      '<div class="action-btns">' +
+      '<button class="action-btn" onclick="adminVoirDossier(\''+d.id+'\',\'demarche\')">📄 Voir dossier</button>';
+
+    if(!isDone){
+      html += '<button class="action-btn" onclick="adminAdvanceStep(\''+d.id+'\',\'demarches\','+cur+','+total+')">➡️ Passer à l\'étape '+(cur+1)+'</button>';
+      html += '<button class="action-btn" onclick="adminContactClient(\''+((p.email||''))+'\',\''+(p.full_name||'Client').replace(/'/g,"\\'")+'\')">💬 Contacter client</button>';
+    }
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+// ============================
+// ADMIN — CREATIONS OF
+// ============================
+
+async function loadAdminOF(){
+  var { data: ofs } = await sb.from('creations_of')
+    .select('*, profiles:user_id(full_name, email, phone), creation_of_options(*)')
+    .eq('paid', true)
+    .order('created_at',{ascending:false});
+  ofs = ofs || [];
+  document.getElementById('admin-of-title').textContent = '🏛 Créations d\'OF ('+ofs.length+')';
+
+  var container = document.getElementById('admin-of-list');
+  if(ofs.length===0){ container.innerHTML='<p style="text-align:center;padding:40px;color:var(--muted);">Aucune création d\'OF.</p>'; return; }
+
+  var OF_STEPS = {
+    action:['Réception dossier','Création société','Obtention NDA','Préparation Qualiopi','OF opérationnel'],
+    cfa:['Réception dossier','Création société','Obtention NDA','Demande UAI','Préparation Qualiopi','CFA opérationnel'],
+    bilan:['Réception dossier','Création société','Obtention NDA','Agrément bilan','OF opérationnel'],
+    vae:['Réception dossier','Création société','Obtention NDA','Habilitation VAE','OF opérationnel'],
+    elus:['Réception dossier','Création société','Agrément préfectoral','Obtention NDA','OF opérationnel'],
+    agent:['Configuration','Intégration données','OF opérationnel']
+  };
+
+  var html='';
+  ofs.forEach(function(c){
+    var p = c.profiles || {};
+    var steps = OF_STEPS[c.of_type] || OF_STEPS['action'];
+    var cur = c.current_step || 1;
+    var total = steps.length;
+    var pct = Math.round((cur/total)*100);
+    var isDone = c.status === 'terminee' || cur >= total;
+    var amount = c.total_price_cents ? (c.total_price_cents/100) : (c.base_price_cents ? c.base_price_cents/100 : '—');
+    var date = new Date(c.created_at).toLocaleDateString('fr-FR');
+    var stCls = isDone ? 'status-done' : cur<=1 ? 'status-new' : 'status-progress';
+    var stTxt = isDone ? 'Terminé' : cur<=1 ? 'Nouveau' : 'En cours';
+    var typeNames = {action:'Action de formation',cfa:'CFA',bilan:'Bilan de compétences',vae:'VAE',elus:'Formation élus',agent:'OF Agents IA'};
+    var typeName = typeNames[c.of_type] || c.of_type;
+
+    // Options
+    var opts = (c.creation_of_options||[]).map(function(o){ return o.option_type; });
+
+    html += '<div class="detail-card">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>'+(p.full_name||'Client')+' — '+typeName+'</h4>' +
+      '<p>📧 '+(p.email||'—')+' · 📞 '+(p.phone||'—')+'</p></div>' +
+      '<div style="text-align:right;"><div style="font-size:18px;font-weight:800;color:var(--accent);">'+amount+'€</div>' +
+      '<span class="status-badge '+stCls+'">'+stTxt+'</span></div></div>' +
+      '<div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:'+pct+'%;'+(isDone?'background:var(--success);':'')+'"></div></div>' +
+      '<p style="font-size:11px;color:'+(isDone?'var(--success)':'var(--muted)')+';">'+(isDone?'✅ '+steps[total-1]:'Étape '+cur+'/'+total+' : '+steps[cur-1])+' · Commandé le '+date+'</p>' +
+      '<div class="detail-meta">' +
+      '<span class="detail-tag">📋 '+typeName+'</span>' +
+      (opts.length ? opts.map(function(o){ return '<span class="detail-tag">+ '+o+'</span>'; }).join('') : '') +
+      '<span class="detail-tag">💳 Payé en '+(c.payment_mode||1)+'x</span>' +
+      (c.has_kbis ? '<span class="detail-tag">🔖 KBIS existant (-100€)</span>' : '') +
+      '</div>' +
+      '<div class="action-btns">' +
+      '<button class="action-btn" onclick="adminVoirDossier(\''+c.id+'\',\'creation\')">📄 Voir dossier</button>';
+
+    if(!isDone){
+      html += '<button class="action-btn" onclick="adminAdvanceStep(\''+c.id+'\',\'creations_of\','+cur+','+total+')">➡️ Étape suivante</button>';
+      html += '<button class="action-btn" onclick="adminContactClient(\''+((p.email||''))+'\',\''+(p.full_name||'Client').replace(/'/g,"\\'")+'\')">💬 Contacter</button>';
+    }
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+// ============================
+// ADMIN — SHARED ACTIONS
+// ============================
+
+async function adminAdvanceStep(id, table, currentStep, totalSteps){
+  var next = currentStep + 1;
+  if(next > totalSteps){
+    alert('Ce dossier est déjà à la dernière étape.');
+    return;
+  }
+  var isLast = next >= totalSteps;
+  var updateData = { current_step: next };
+  if(isLast) updateData.status = 'terminee';
+
+  var { error } = await sb.from(table).update(updateData).eq('id', id);
+  if(error){ alert('❌ ' + error.message); return; }
+
+  alert('✅ Dossier passé à l\'étape ' + next + (isLast ? ' — Terminé !' : ''));
+
+  // Reload the relevant list
+  if(table === 'demarches') await loadAdminDemarches();
+  else await loadAdminOF();
+}
+
+function adminContactClient(email, name){
+  if(!email){ alert('Pas d\'email pour ce client.'); return; }
+  var subject = encodeURIComponent('Votre dossier — lesformateurs.online');
+  var body = encodeURIComponent('Bonjour ' + name + ',\n\nConcernant votre dossier sur lesformateurs.online, ...\n\nCordialement,\nL\'équipe LFO');
+  window.open('mailto:' + email + '?subject=' + subject + '&body=' + body, '_blank');
+}
+
+function adminVoirDossier(id, type){
+  // Redirect to expert panel with this dossier pre-opened
+  var source = type === 'creation' ? 'creation' : 'demarche';
+  window.open('expert.html#dossier-' + id + '-' + source, '_blank');
+}
 </script>
+
+<!-- MODAL CANDIDATURES ADMIN -->
+<div class="modal" id="modal-admin-candidatures">
+  <div class="modal-box" style="max-width:700px;max-height:85vh;overflow-y:auto;">
+    <button class="modal-close" onclick="document.getElementById('modal-admin-candidatures').classList.remove('open')">✕</button>
+    <h3 style="font-size:20px;font-weight:800;margin-bottom:4px;" id="admin-cand-title">Candidatures</h3>
+    <div id="admin-cand-list"></div>
+  </div>
+</div>
+
 </body>
 </html>

@@ -353,7 +353,7 @@ async function saveExpertProfile(){
   expertId=user.id;
   var fn=profile.full_name||(profile.first_name||'')+' '+(profile.last_name||'');
   document.getElementById('expert-name').textContent=fn;
-  document.getElementById('expert-role').textContent=profile.profile_type==='admin'?'Administrateur':'Expert conformité';
+  document.getElementById('expert-role').textContent=profile.profile_type==='admin'?'⚡ Super Admin':'Expert conformité';
   document.getElementById('expert-welcome').textContent=profile.first_name||fn;
   document.getElementById('exp-prenom').value=profile.first_name||'';
   document.getElementById('exp-nom').value=profile.last_name||'';

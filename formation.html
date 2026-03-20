@@ -28,6 +28,7 @@
     .module-title-btn{width:100%;padding:14px 20px;background:none;border:none;text-align:left;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--primary);}
     .module-title-btn:hover{background:var(--light);}
     .module-title-btn.active{background:#fef0f3;color:var(--accent);}
+    .module-title-btn.mod-done{color:var(--success);}
     .module-badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;}
     .mb-done{background:#e8f8f0;color:var(--success);}
     .mb-active{background:#fef0f3;color:var(--accent);}
@@ -39,7 +40,8 @@
     .lesson-btn{width:100%;padding:10px 20px 10px 52px;background:none;border:none;text-align:left;cursor:pointer;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px;transition:all .15s;}
     .lesson-btn:hover{background:rgba(0,0,0,.03);color:var(--text);}
     .lesson-btn.active{background:#fff;color:var(--accent);font-weight:700;border-left:3px solid var(--accent);}
-    .lesson-btn.done{color:var(--success);}
+    .lesson-btn.done{color:var(--success);font-weight:600;}
+    .lesson-btn.done .lesson-icon{color:var(--success);font-weight:800;}
     .lesson-icon{width:18px;text-align:center;font-size:12px;flex-shrink:0;}
     .lesson-dur{margin-left:auto;font-size:11px;color:var(--muted);}
 
@@ -121,6 +123,9 @@
   <div class="sidebar-header">
     <div class="logo">lesformateurs<span>.online</span></div>
     <div class="course-title">Formation Formateur Professionnel</div>
+    <div id="admin-badge" style="display:none;margin-top:8px;">
+      <span style="background:var(--accent);color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:12px;letter-spacing:1px;">⚡ SUPER ADMIN</span>
+    </div>
   </div>
   <div class="progress-section">
     <div class="progress-label"><span>Progression</span><span id="pct-label">40%</span></div>
@@ -139,6 +144,60 @@
     </div>
   </div>
   <div class="lesson-content" id="lesson-content"></div>
+</div>
+
+<!-- MODAL EDIT LEÇON (admin only) -->
+<div id="modal-edit-lesson" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;border-radius:14px;padding:32px;max-width:800px;width:100%;max-height:90vh;overflow-y:auto;position:relative;">
+    <button onclick="closeEditModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;">✕</button>
+    <h3 style="font-size:20px;font-weight:800;margin-bottom:4px;">✏️ Modifier la leçon</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:20px;" id="edit-lesson-id"></p>
+
+    <div style="margin-bottom:14px;">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Titre de la leçon</label>
+      <input type="text" id="edit-title" style="width:100%;padding:10px 14px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;font-family:inherit;">
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Type</label>
+      <select id="edit-type" style="width:100%;padding:10px 14px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;">
+        <option value="video">📹 Vidéo</option>
+        <option value="lecture">📄 Lecture</option>
+        <option value="atelier">🛠 Atelier</option>
+        <option value="quiz">✏️ Quiz</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Durée (minutes)</label>
+      <input type="number" id="edit-duration" style="width:100%;padding:10px 14px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;" value="30">
+    </div>
+
+    <div style="margin-bottom:14px;" id="edit-video-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">URL Vidéo <span style="font-weight:400;color:#999;">(YouTube, Vimeo, ou lien direct MP4)</span></label>
+      <input type="url" id="edit-video-url" placeholder="https://youtube.com/embed/... ou https://vimeo.com/..." style="width:100%;padding:10px 14px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;">
+      <p style="font-size:11px;color:var(--muted);margin-top:4px;">Pour YouTube : utilise le lien embed (ex: https://www.youtube.com/embed/XXXX)</p>
+    </div>
+
+    <div style="margin-bottom:14px;" id="edit-body-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Contenu HTML de la leçon</label>
+      <textarea id="edit-body" rows="18" style="width:100%;padding:12px 14px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;font-family:'Courier New',monospace;line-height:1.5;resize:vertical;"></textarea>
+      <p style="font-size:11px;color:var(--muted);margin-top:4px;">HTML supporté : &lt;h2&gt;, &lt;h3&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;, &lt;strong&gt;, &lt;em&gt;, classes: highlight-box, info-box, success-box, example-box, key-points, schema-box</p>
+    </div>
+
+    <div style="margin-bottom:14px;" id="edit-quiz-group" style="display:none;">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Questions du quiz (JSON)</label>
+      <textarea id="edit-quiz-json" rows="10" style="width:100%;padding:12px 14px;border:1px solid #e0e0e0;border-radius:8px;font-size:12px;font-family:'Courier New',monospace;line-height:1.5;resize:vertical;" placeholder='[{"q":"Question?","opts":["A","B","C","D"],"ans":0}]'></textarea>
+    </div>
+
+    <div id="edit-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;font-weight:600;"></div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button onclick="saveLesson()" id="edit-save-btn" style="background:var(--accent);color:#fff;border:none;padding:12px 28px;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;">💾 Enregistrer</button>
+      <button onclick="previewLesson()" style="background:var(--primary);color:#fff;border:none;padding:12px 28px;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;">👁 Prévisualiser</button>
+      <button onclick="closeEditModal()" style="background:#f4f5f7;color:#333;border:1px solid #e0e0e0;padding:12px 28px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;">Annuler</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -1873,6 +1932,7 @@ const MODULES = [
 let openMods = {1:true, 2:false, 3:true};
 let currentLesson = '3-3';
 let quizState = {};
+let isAdmin = false;
 
 function renderSidebar() {
   const nav = document.getElementById('sidebar-nav');
@@ -1882,7 +1942,7 @@ function renderSidebar() {
     const isOpen = openMods[m.id];
     return `
     <div class="module-group">
-      <button class="module-title-btn ${currentLesson.startsWith(m.id+'')?' active':''}" onclick="toggleMod(${m.id})">
+      <button class="module-title-btn ${currentLesson.startsWith(m.id+'')?' active':''} ${m.state==='done'?'mod-done':''}" onclick="toggleMod(${m.id})">
         <span class="module-badge ${stateClass}">${stateIcon}</span>
         Module ${m.id} — ${m.title}
         <span class="module-arrow ${isOpen?'open':''}">▾</span>
@@ -1891,8 +1951,9 @@ function renderSidebar() {
         ${m.lessons.map(l => {
           const typeIcon = l.type==='video'?'▶':l.type==='quiz'?'✏️':l.type==='atelier'?'🛠':'📄';
           const stCl = l.state==='done'?'done':l.state==='active'?'active':'';
+          const icon = l.state==='locked'?'🔒':l.state==='done'?'✓':typeIcon;
           return `<button class="lesson-btn ${stCl} ${l.id===currentLesson?'active':''}" onclick="loadLesson('${l.id}')">
-            <span class="lesson-icon">${l.state==='locked'?'🔒':typeIcon}</span>
+            <span class="lesson-icon">${icon}</span>
             ${l.title}
             <span class="lesson-dur">${l.dur}min</span>
           </button>`;
@@ -1920,19 +1981,27 @@ function loadLesson(id) {
     bodyHtml = `<div class="content-body">${data.body}</div>`;
   }
 
+  // Check if this lesson is already done
+  var lessonDone = false;
+  MODULES.forEach(function(m){ m.lessons.forEach(function(l){ if(l.id===id && l.state==='done') lessonDone=true; }); });
+
   document.getElementById('lesson-content').innerHTML = `
     <div class="lesson-header">
       <span class="lesson-tag ${tagClass}">${tagLabel}</span>
+      ${isAdmin ? '<button onclick="openEditModal(\''+id+'\')" style="float:right;background:var(--accent);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:700;font-size:12px;cursor:pointer;">✏️ Modifier cette leçon</button>' : ''}
       <h1 class="lesson-title">${data.title}</h1>
       <div class="lesson-meta">
         <span>⏱ ${data.dur}</span>
         <span>📂 ${data.module}</span>
+        ${isAdmin ? '<span style="background:var(--accent);color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;">ADMIN MODE</span>' : ''}
       </div>
     </div>
     ${bodyHtml}
     <div class="nav-bottom">
       <button class="btn-prev-lesson" onclick="prevLesson()">← Précédente</button>
-      <button class="btn-mark-done" onclick="markDone()">✓ Marquer comme terminé</button>
+      <button class="btn-mark-done" onclick="markDone()" ${lessonDone ? 'disabled style="background:#27ae60;cursor:default;"' : ''}>
+        ${lessonDone ? '✓ Terminé !' : '✓ Marquer comme terminé'}
+      </button>
       <button class="btn-next-lesson" onclick="nextLesson()">Suivante →</button>
     </div>`;
 
@@ -2013,27 +2082,111 @@ function prevLesson() {
 }
 function markDone() {
   const btn = event.target;
+  
+  // 1. Update the lesson state in MODULES
+  var parts = currentLesson.split('-');
+  var modIdx = parseInt(parts[0]);
+  var lesIdx = parseInt(parts[1]);
+  
+  MODULES.forEach(function(m){
+    if(m.id === modIdx){
+      m.lessons.forEach(function(l){
+        if(l.id === currentLesson){
+          l.state = 'done';
+        }
+      });
+      // Check if ALL lessons in this module are done
+      var allDone = m.lessons.every(function(l){ return l.state === 'done'; });
+      if(allDone){
+        m.state = 'done';
+      }
+      // Unlock next lesson in same module
+      for(var i = 0; i < m.lessons.length; i++){
+        if(m.lessons[i].id === currentLesson && i + 1 < m.lessons.length){
+          if(m.lessons[i+1].state === 'locked'){
+            m.lessons[i+1].state = 'active';
+          }
+          break;
+        }
+      }
+    }
+  });
+  
+  // 2. If module just completed, unlock first lesson of next module
+  var currentModDone = MODULES.find(function(m){ return m.id === modIdx; });
+  if(currentModDone && currentModDone.state === 'done'){
+    var nextMod = MODULES.find(function(m){ return m.id === modIdx + 1; });
+    if(nextMod && nextMod.state === 'locked'){
+      nextMod.state = 'active';
+      if(nextMod.lessons.length > 0 && nextMod.lessons[0].state === 'locked'){
+        nextMod.lessons[0].state = 'active';
+      }
+    }
+  }
+  
+  // 3. Update progress bar
+  updateProgressBar();
+  
+  // 4. Re-render sidebar (colors update)
+  renderSidebar();
+  
+  // 5. Update button
   btn.textContent = '✓ Terminé !';
   btn.style.background = '#27ae60';
   btn.disabled = true;
   
-  // Save progress to Supabase if available
+  // 6. Save to Supabase
   if(typeof sb !== 'undefined') saveProgress();
+  
+  // 7. Save state to localStorage for persistence
+  saveStateLocal();
+}
+
+function updateProgressBar(){
+  var totalLessons = 0;
+  var doneLessons = 0;
+  MODULES.forEach(function(m){
+    m.lessons.forEach(function(l){
+      totalLessons++;
+      if(l.state === 'done') doneLessons++;
+    });
+  });
+  var pct = totalLessons > 0 ? Math.round((doneLessons / totalLessons) * 100) : 0;
+  document.getElementById('pct-label').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+  return pct;
+}
+
+function saveStateLocal(){
+  try {
+    var stateMap = {};
+    MODULES.forEach(function(m){
+      m.lessons.forEach(function(l){
+        stateMap[l.id] = l.state;
+      });
+      stateMap['mod-' + m.id] = m.state;
+    });
+    localStorage.setItem('lfo_formation_state', JSON.stringify(stateMap));
+  } catch(e){}
+}
+
+function loadStateLocal(){
+  try {
+    var raw = localStorage.getItem('lfo_formation_state');
+    if(!raw) return;
+    var stateMap = JSON.parse(raw);
+    MODULES.forEach(function(m){
+      if(stateMap['mod-' + m.id]) m.state = stateMap['mod-' + m.id];
+      m.lessons.forEach(function(l){
+        if(stateMap[l.id]) l.state = stateMap[l.id];
+      });
+    });
+  } catch(e){}
 }
 
 async function saveProgress(){
   try {
-    const all = getAllLessons();
-    const totalLessons = all.length;
-    // Count done lessons + current
-    let doneLessons = 0;
-    MODULES.forEach(function(m){
-      m.lessons.forEach(function(l){
-        if(l.state === 'done') doneLessons++;
-      });
-    });
-    const pct = Math.round((doneLessons / totalLessons) * 100);
-    
+    var pct = updateProgressBar();
     const user = await getUser();
     if(user){
       await sb.from('profiles').update({
@@ -2043,14 +2196,16 @@ async function saveProgress(){
   } catch(e){ console.log('Progress save error:', e); }
 }
 
-// Init
+// Init — load saved state, render, update progress
+loadStateLocal();
+updateProgressBar();
 renderSidebar();
 loadLesson(currentLesson);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script>
-// Auth guard — must have purchased formation
+// Auth guard — admin can always access, others need formation_purchased
 (async function(){
   var user = await getUser();
   if(!user){
@@ -2058,13 +2213,25 @@ loadLesson(currentLesson);
     return;
   }
   var profile = await getProfile();
-  if(!profile || !profile.formation_purchased){
+
+  // Admin/superadmin → full access + edit mode
+  if(profile && (profile.profile_type === 'admin' || profile.email === 'LFOadmin@gmail.com')){
+    isAdmin = true;
+    document.getElementById('admin-badge').style.display = '';
+    // Unlock all modules for admin
+    MODULES.forEach(function(m){
+      m.state = 'active';
+      m.lessons.forEach(function(l){ if(l.state === 'locked') l.state = 'active'; });
+    });
+    renderSidebar();
+    loadLesson(currentLesson);
+  } else if(!profile || !profile.formation_purchased){
     alert('⚠️ Vous devez acheter la formation pour y accéder.');
     window.location.href = 'se-former.html';
     return;
   }
-  
-  // Try to load dynamic content from Supabase (overrides hardcoded)
+
+  // Load dynamic content overrides from Supabase
   try {
     var { data: dbLessons } = await sb.from('course_lessons')
       .select('*, course_modules!inner(module_number, title)')
@@ -2072,7 +2239,6 @@ loadLesson(currentLesson);
       .order('sort_order', {ascending:true});
     
     if(dbLessons && dbLessons.length > 0){
-      // Override CONTENT with DB values
       dbLessons.forEach(function(l){
         var key = l.lesson_key;
         var moduleName = 'Module '+l.course_modules.module_number+' — '+l.course_modules.title;
@@ -2085,7 +2251,6 @@ loadLesson(currentLesson);
           };
         } else {
           var bodyHtml = l.body_html || '';
-          // Inject video if available
           if(l.type === 'video' && l.video_url){
             var videoEmbed = '';
             if(l.video_url.includes('youtube.com') || l.video_url.includes('youtu.be')){
@@ -2105,15 +2270,187 @@ loadLesson(currentLesson);
         }
       });
       
-      console.log('✅ Contenu dynamique chargé ('+dbLessons.length+' leçons depuis Supabase)');
-      // Re-render with fresh content
+      console.log('✅ Contenu dynamique chargé ('+dbLessons.length+' leçons)');
       renderSidebar();
       loadLesson(currentLesson);
     }
   } catch(e){
-    console.log('ℹ️ Pas de contenu dynamique — utilisation du contenu hardcodé.', e);
+    console.log('ℹ️ Pas de contenu dynamique — contenu par défaut.', e);
   }
 })();
+
+// ============================
+// ADMIN — EDIT FUNCTIONS
+// ============================
+
+var editingLessonKey = null;
+
+function openEditModal(lessonKey){
+  if(!isAdmin) return;
+  editingLessonKey = lessonKey;
+  var data = CONTENT[lessonKey];
+  if(!data) return;
+
+  document.getElementById('edit-lesson-id').textContent = 'Leçon : ' + lessonKey + ' — ' + data.module;
+  document.getElementById('edit-title').value = data.title || '';
+  document.getElementById('edit-type').value = data.type || 'lecture';
+  document.getElementById('edit-duration').value = parseInt(data.dur) || 30;
+
+  // Video URL — extract from body if embedded
+  var videoUrl = '';
+  if(data.body){
+    var iframeMatch = data.body.match(/src="(https?:\/\/[^"]+)"/);
+    if(iframeMatch) videoUrl = iframeMatch[1];
+    var videoMatch = data.body.match(/<video[^>]+src="([^"]+)"/);
+    if(videoMatch) videoUrl = videoMatch[1];
+  }
+  document.getElementById('edit-video-url').value = videoUrl;
+
+  // Body HTML — strip video embed to get pure content
+  var cleanBody = (data.body || '').replace(/<div style="position:relative;padding-bottom:56\.25%.*?<\/div><\/div>/gs, '').replace(/<div style="border-radius:12px.*?<\/div><\/div>/gs, '').replace(/<div class="video-placeholder">.*?<\/div>/gs, '').trim();
+  document.getElementById('edit-body').value = cleanBody;
+
+  // Quiz JSON
+  if(data.quiz){
+    document.getElementById('edit-quiz-json').value = JSON.stringify(data.quiz, null, 2);
+  } else {
+    document.getElementById('edit-quiz-json').value = '';
+  }
+
+  // Show/hide fields based on type
+  updateEditFields();
+  document.getElementById('edit-type').onchange = updateEditFields;
+
+  document.getElementById('edit-error').style.display = 'none';
+  document.getElementById('modal-edit-lesson').style.display = 'flex';
+}
+
+function updateEditFields(){
+  var type = document.getElementById('edit-type').value;
+  document.getElementById('edit-video-group').style.display = (type === 'video') ? '' : 'none';
+  document.getElementById('edit-body-group').style.display = (type !== 'quiz') ? '' : 'none';
+  document.getElementById('edit-quiz-group').style.display = (type === 'quiz') ? '' : 'none';
+}
+
+function closeEditModal(){
+  document.getElementById('modal-edit-lesson').style.display = 'none';
+  editingLessonKey = null;
+}
+
+function previewLesson(){
+  // Temporarily update CONTENT and reload
+  var title = document.getElementById('edit-title').value.trim();
+  var type = document.getElementById('edit-type').value;
+  var body = document.getElementById('edit-body').value;
+  var videoUrl = document.getElementById('edit-video-url').value.trim();
+  var dur = document.getElementById('edit-duration').value;
+  var data = CONTENT[editingLessonKey];
+
+  if(type === 'quiz'){
+    try {
+      var quizData = JSON.parse(document.getElementById('edit-quiz-json').value);
+      CONTENT[editingLessonKey] = { type:'quiz', title:title, dur:dur+' min', module:data.module, quiz:quizData };
+    } catch(e){ alert('❌ JSON du quiz invalide.'); return; }
+  } else {
+    var fullBody = '';
+    if(type === 'video' && videoUrl){
+      if(videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')){
+        fullBody = '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin:24px 0;"><iframe src="'+videoUrl+'" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe></div>';
+      } else {
+        fullBody = '<div style="border-radius:12px;overflow:hidden;margin:24px 0;"><video controls style="width:100%;display:block;" src="'+videoUrl+'"></video></div>';
+      }
+    }
+    fullBody += body;
+    CONTENT[editingLessonKey] = { type:type, title:title, dur:dur+' min', module:data.module, body:fullBody };
+  }
+
+  closeEditModal();
+  loadLesson(editingLessonKey);
+}
+
+async function saveLesson(){
+  if(!isAdmin || !editingLessonKey) return;
+
+  var title = document.getElementById('edit-title').value.trim();
+  var type = document.getElementById('edit-type').value;
+  var body = document.getElementById('edit-body').value;
+  var videoUrl = document.getElementById('edit-video-url').value.trim();
+  var dur = parseInt(document.getElementById('edit-duration').value) || 30;
+  var errDiv = document.getElementById('edit-error');
+  var btn = document.getElementById('edit-save-btn');
+
+  if(!title){ errDiv.textContent = '⚠️ Le titre est obligatoire.'; errDiv.style.display = ''; return; }
+
+  errDiv.style.display = 'none';
+  btn.textContent = '💾 Enregistrement...';
+  btn.disabled = true;
+
+  // Find or create the module in course_modules
+  var parts = editingLessonKey.split('-');
+  var modNum = parseInt(parts[0]);
+  var lessonNum = parseInt(parts[1]);
+  var modTitle = CONTENT[editingLessonKey] ? CONTENT[editingLessonKey].module.replace(/^Module \d+ — /, '').replace(/^🎁 Bonus — /, '') : 'Module ' + modNum;
+  var isBonus = modNum >= 6;
+
+  try {
+    // Upsert module
+    var { data: modData, error: modErr } = await sb.from('course_modules')
+      .upsert({ module_number: modNum, title: modTitle, is_bonus: isBonus, sort_order: modNum }, { onConflict: 'module_number' })
+      .select().single();
+
+    if(modErr) throw modErr;
+
+    // Build lesson data
+    var lessonData = {
+      module_id: modData.id,
+      lesson_key: editingLessonKey,
+      title: title,
+      type: type,
+      duration_minutes: dur,
+      sort_order: lessonNum,
+      is_published: true,
+      updated_at: new Date().toISOString()
+    };
+
+    if(type === 'quiz'){
+      try {
+        lessonData.quiz_json = JSON.parse(document.getElementById('edit-quiz-json').value);
+      } catch(e){
+        errDiv.textContent = '❌ JSON du quiz invalide.'; errDiv.style.display = '';
+        btn.textContent = '💾 Enregistrer'; btn.disabled = false;
+        return;
+      }
+      lessonData.body_html = null;
+      lessonData.video_url = null;
+    } else {
+      lessonData.body_html = body;
+      lessonData.video_url = (type === 'video' && videoUrl) ? videoUrl : null;
+      lessonData.quiz_json = null;
+    }
+
+    // Upsert lesson
+    var { error: lesErr } = await sb.from('course_lessons')
+      .upsert(lessonData, { onConflict: 'lesson_key' });
+
+    if(lesErr) throw lesErr;
+
+    // Update local CONTENT
+    previewLesson();
+    alert('✅ Leçon enregistrée ! Les modifications sont visibles immédiatement.');
+
+  } catch(e){
+    errDiv.textContent = '❌ Erreur : ' + (e.message || 'Impossible de sauvegarder.');
+    errDiv.style.display = '';
+  }
+
+  btn.textContent = '💾 Enregistrer';
+  btn.disabled = false;
+}
+
+// Close modal on backdrop click
+document.getElementById('modal-edit-lesson').addEventListener('click', function(e){
+  if(e.target === this) closeEditModal();
+});
 </script>
 </body>
 </html>
