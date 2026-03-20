@@ -26,6 +26,27 @@ var modalHTML = `
       <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--muted);">
         Pas encore de compte ? <a href="#" onclick="showAuthSignup();return false;" style="color:var(--accent);font-weight:700;">Créer un compte</a>
       </p>
+      <p style="text-align:center;margin-top:8px;font-size:12px;">
+        <a href="#" onclick="showAuthForgot();return false;" style="color:var(--muted);">Mot de passe oublié ?</a>
+      </p>
+    </div>
+
+    <!-- FORGOT PASSWORD VIEW -->
+    <div id="auth-forgot-view" style="display:none;">
+      <h3 style="font-size:22px;font-weight:800;margin-bottom:4px;">Mot de passe oublié</h3>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Entrez votre email, nous vous enverrons un lien de réinitialisation.</p>
+      <form onsubmit="doAuthForgot();return false;">
+        <div class="form-group">
+          <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Email</label>
+          <input type="email" id="auth-forgot-email" placeholder="votre@email.fr" required style="padding:14px;border-radius:10px;border:1px solid #e0e0e0;font-size:14px;width:100%;box-sizing:border-box;">
+        </div>
+        <div id="auth-forgot-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;"></div>
+        <div id="auth-forgot-success" style="display:none;color:#10b981;font-size:13px;margin-bottom:10px;font-weight:600;"></div>
+        <button type="submit" id="auth-forgot-btn" class="btn btn-primary" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:10px;margin-top:4px;">Envoyer le lien</button>
+      </form>
+      <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--muted);">
+        <a href="#" onclick="showAuthLogin();return false;" style="color:var(--accent);font-weight:700;">← Retour à la connexion</a>
+      </p>
     </div>
 
     <!-- SIGNUP VIEW -->
@@ -90,12 +111,49 @@ window.closeAuthModal = function(){
 window.showAuthLogin = function(){
   document.getElementById('auth-login-view').style.display = '';
   document.getElementById('auth-signup-view').style.display = 'none';
+  document.getElementById('auth-forgot-view').style.display = 'none';
   document.getElementById('auth-login-error').style.display = 'none';
 };
 window.showAuthSignup = function(){
   document.getElementById('auth-login-view').style.display = 'none';
   document.getElementById('auth-signup-view').style.display = '';
+  document.getElementById('auth-forgot-view').style.display = 'none';
   document.getElementById('auth-signup-error').style.display = 'none';
+};
+window.showAuthForgot = function(){
+  document.getElementById('auth-login-view').style.display = 'none';
+  document.getElementById('auth-signup-view').style.display = 'none';
+  document.getElementById('auth-forgot-view').style.display = '';
+  document.getElementById('auth-forgot-error').style.display = 'none';
+  document.getElementById('auth-forgot-success').style.display = 'none';
+};
+
+// Forgot password
+window.doAuthForgot = async function(){
+  var email = document.getElementById('auth-forgot-email').value.trim();
+  var errDiv = document.getElementById('auth-forgot-error');
+  var successDiv = document.getElementById('auth-forgot-success');
+  var btn = document.getElementById('auth-forgot-btn');
+  errDiv.style.display = 'none';
+  successDiv.style.display = 'none';
+  
+  if(!email){ errDiv.textContent = 'Veuillez entrer votre email.'; errDiv.style.display = ''; return; }
+  btn.textContent = 'Envoi...';
+  btn.disabled = true;
+  
+  var { error } = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: window.location.origin + '/dashboard.html'
+  });
+  
+  if(error){
+    errDiv.textContent = 'Erreur : ' + error.message;
+    errDiv.style.display = '';
+  } else {
+    successDiv.textContent = '✅ Un email de réinitialisation a été envoyé à ' + email + '. Vérifiez votre boîte de réception.';
+    successDiv.style.display = '';
+  }
+  btn.textContent = 'Envoyer le lien';
+  btn.disabled = false;
 };
 
 // Toggle password visibility

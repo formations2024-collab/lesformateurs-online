@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
 <title>Espace Expert - lesformateurs.online</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
@@ -80,6 +81,7 @@
     <a onclick="showTab('mes-dossiers')">📂 Mes dossiers</a>
     <a onclick="showTab('historique')">✅ Historique</a>
     <div class="sidebar-title" style="margin-top:24px;">Compte</div>
+    <a onclick="showTab('messagerie')">💬 Messagerie</a>
     <a onclick="showTab('profil')">👤 Mon profil</a>
     <a href="#" onclick="openLogoutModal();return false;">🚪 Déconnexion</a>
   </div>
@@ -113,6 +115,13 @@
     <div class="tab-content" id="tab-historique">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">✅ Dossiers terminés</h2>
       <div id="historique-list"><p style="text-align:center;padding:40px 0;color:var(--muted);">Chargement...</p></div>
+    </div>
+    <!-- MESSAGERIE -->
+    <div class="tab-content" id="tab-messagerie">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">💬 Messagerie</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Échangez avec l'administration et les clients.</p>
+      <button class="btn btn-primary" style="margin-bottom:16px;padding:8px 16px;font-size:13px;" onclick="openExpertComposeMsg()">✉️ Nouveau message</button>
+      <div id="expert-msg-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
     <!-- PROFIL -->
     <div class="tab-content" id="tab-profil">
@@ -360,7 +369,117 @@ async function saveExpertProfile(){
   document.getElementById('exp-email').value=profile.email||'';
   document.getElementById('exp-tel').value=profile.phone||'';
   await loadAllDossiers();renderPool();renderMesDossiers();renderHistorique();
+  await loadExpertMessages();
 })();
+
+// ============================
+// EXPERT — MESSAGERIE
+// ============================
+
+var expertMessages = [];
+
+async function loadExpertMessages(){
+  var { data: msgs } = await sb.from('admin_messages')
+    .select('*, sender:sender_id(full_name, email), recipient:recipient_id(full_name, email)')
+    .or('sender_id.eq.' + expertId + ',recipient_id.eq.' + expertId)
+    .order('created_at',{ascending:false});
+  expertMessages = msgs || [];
+
+  var container = document.getElementById('expert-msg-list');
+  if(!container) return;
+  if(expertMessages.length === 0){
+    container.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucun message.</p>';
+    return;
+  }
+
+  var html = '';
+  expertMessages.forEach(function(m){
+    var isReceived = m.recipient_id === expertId;
+    var otherName = isReceived ? (m.sender ? m.sender.full_name || m.sender.email : 'Admin') : (m.recipient ? m.recipient.full_name || m.recipient.email : 'Admin');
+    var date = new Date(m.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    var unread = isReceived && !m.is_read;
+
+    html += '<div class="detail-card" style="cursor:pointer;' + (unread ? 'border-left:3px solid var(--accent);background:#fef0f3;' : '') + '" onclick="openExpertMsgDetail(\'' + m.id + '\')">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4 style="font-size:14px;">' + (isReceived ? '📩 De : ' : '📤 À : ') + otherName + (unread ? ' <span style="background:var(--accent);color:#fff;font-size:10px;padding:1px 6px;border-radius:8px;">Nouveau</span>' : '') + '</h4>' +
+      '<p style="font-size:13px;">' + (m.subject || 'Sans objet') + '</p></div>' +
+      '<span style="font-size:11px;color:var(--muted);">' + date + '</span></div>' +
+      '<p style="font-size:12px;color:var(--muted);margin-top:4px;">' + (m.content || '').substring(0, 80) + '...</p></div>';
+  });
+  container.innerHTML = html;
+}
+
+async function openExpertMsgDetail(msgId){
+  var msg = expertMessages.find(function(m){ return m.id === msgId; });
+  if(!msg) return;
+  if(msg.recipient_id === expertId && !msg.is_read){
+    await sb.from('admin_messages').update({ is_read: true }).eq('id', msgId);
+    msg.is_read = true;
+  }
+  var isReceived = msg.recipient_id === expertId;
+  var otherName = isReceived ? (msg.sender ? msg.sender.full_name || msg.sender.email : 'Admin') : (msg.recipient ? msg.recipient.full_name || msg.recipient.email : 'Admin');
+  var date = new Date(msg.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+
+  document.getElementById('expert-msg-detail-body').innerHTML =
+    '<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #e0e0e0;">' +
+    '<p style="font-size:12px;color:var(--muted);">' + (isReceived ? 'De' : 'À') + ' : <strong>' + otherName + '</strong> · ' + date + '</p>' +
+    '<h3 style="font-size:18px;font-weight:700;margin-top:8px;">' + (msg.subject || 'Sans objet') + '</h3></div>' +
+    '<div style="font-size:14px;line-height:1.8;white-space:pre-wrap;">' + (msg.content || '') + '</div>' +
+    (isReceived ? '<div style="margin-top:20px;"><button class="btn btn-primary" style="padding:8px 20px;font-size:13px;" onclick="expertReplyTo(\'' + msg.sender_id + '\',\'' + (msg.subject||'').replace(/'/g,"\\'") + '\')">↩️ Répondre</button></div>' : '');
+
+  document.getElementById('modal-expert-msg-detail').classList.add('open');
+}
+
+function openExpertComposeMsg(){
+  document.getElementById('expert-compose-subject').value = '';
+  document.getElementById('expert-compose-body').value = '';
+  document.getElementById('expert-compose-error').style.display = 'none';
+  document.getElementById('modal-expert-compose').dataset.replyTo = '';
+  document.getElementById('modal-expert-compose').classList.add('open');
+}
+
+function expertReplyTo(senderId, subject){
+  document.getElementById('modal-expert-msg-detail').classList.remove('open');
+  openExpertComposeMsg();
+  document.getElementById('expert-compose-subject').value = 'Re: ' + subject;
+  document.getElementById('modal-expert-compose').dataset.replyTo = senderId;
+  document.getElementById('expert-compose-body').focus();
+}
+
+async function sendExpertCompose(){
+  var subject = document.getElementById('expert-compose-subject').value.trim();
+  var body = document.getElementById('expert-compose-body').value.trim();
+  var errDiv = document.getElementById('expert-compose-error');
+  var replyTo = document.getElementById('modal-expert-compose').dataset.replyTo;
+
+  if(!body){ errDiv.textContent = '⚠️ Le message ne peut pas être vide.'; errDiv.style.display = ''; return; }
+  errDiv.style.display = 'none';
+
+  var recipientId = replyTo || null;
+  if(!recipientId){
+    var { data: admin } = await sb.from('profiles').select('id').eq('profile_type', 'admin').limit(1).single();
+    if(admin) recipientId = admin.id;
+  }
+  if(!recipientId){ errDiv.textContent = '❌ Impossible de trouver l\'administrateur.'; errDiv.style.display = ''; return; }
+
+  var { error } = await sb.from('admin_messages').insert({
+    sender_id: expertId,
+    recipient_id: recipientId,
+    subject: subject || 'Message d\'un expert',
+    content: body
+  });
+  if(error){ errDiv.textContent = '❌ ' + error.message; errDiv.style.display = ''; return; }
+
+  document.getElementById('modal-expert-compose').classList.remove('open');
+  alert('✅ Message envoyé !');
+  await loadExpertMessages();
+}
 </script>
+
+<!-- MODAL MESSAGE DETAIL EXPERT -->
+<div class="modal" id="modal-expert-msg-detail"><div class="modal-box" style="max-width:600px;"><button class="modal-close" onclick="document.getElementById('modal-expert-msg-detail').classList.remove('open')">✕</button><div id="expert-msg-detail-body"></div></div></div>
+<!-- MODAL COMPOSE EXPERT -->
+<div class="modal" id="modal-expert-compose"><div class="modal-box" style="max-width:560px;"><button class="modal-close" onclick="document.getElementById('modal-expert-compose').classList.remove('open')">✕</button><h3 style="font-size:18px;font-weight:800;margin-bottom:16px;">✉️ Nouveau message</h3><div style="margin-bottom:12px;"><label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px;">Objet</label><input type="text" id="expert-compose-subject" placeholder="Objet du message" style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;"></div><div style="margin-bottom:12px;"><label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px;">Message</label><textarea id="expert-compose-body" rows="5" placeholder="Votre message..." style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;resize:vertical;"></textarea></div><div id="expert-compose-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;"></div><button class="btn btn-primary" onclick="sendExpertCompose()" style="padding:10px 24px;">📤 Envoyer</button></div></div>
+
 </body>
 </html>

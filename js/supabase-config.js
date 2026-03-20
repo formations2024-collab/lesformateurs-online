@@ -26,7 +26,29 @@ async function getProfile() {
   const user = await getUser();
   if (!user) return null;
   const { data } = await sb.from('profiles').select('*').eq('id', user.id).single();
+  
+  // Check if account is blocked
+  if(data && data.is_blocked){
+    showBlockedModal();
+    return data; // Still return data but the modal blocks interaction
+  }
   return data;
+}
+
+function showBlockedModal(){
+  // Only show once
+  if(document.getElementById('blocked-overlay')) return;
+  
+  var overlay = document.createElement('div');
+  overlay.id = 'blocked-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  overlay.innerHTML = '<div style="background:#fff;border-radius:16px;padding:40px;max-width:480px;width:100%;text-align:center;">' +
+    '<div style="font-size:64px;margin-bottom:16px;">🚫</div>' +
+    '<h2 style="font-size:22px;font-weight:800;color:#1a1a2e;margin-bottom:12px;">Compte bloqué</h2>' +
+    '<p style="font-size:15px;color:#666;line-height:1.6;margin-bottom:24px;">Ce compte a été bloqué par les services administratifs de lesformateurs.online.<br><br>Si vous pensez qu\'il s\'agit d\'une erreur, veuillez nous contacter à <a href="mailto:contact@lesformateurs.online" style="color:#e94560;">contact@lesformateurs.online</a></p>' +
+    '<button onclick="signOut()" style="background:#e94560;color:#fff;border:none;padding:14px 32px;border-radius:10px;font-weight:700;font-size:16px;cursor:pointer;width:100%;">Se déconnecter</button>' +
+    '</div>';
+  document.body.appendChild(overlay);
 }
 
 async function signUp(email, password, meta) {
