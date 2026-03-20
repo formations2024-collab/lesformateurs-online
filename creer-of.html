@@ -25,7 +25,7 @@
 }
 .option-item:hover{border-color:var(--accent);}
 .option-item.checked{border-color:var(--accent);background:rgba(233,69,96,.03);}
-.option-item input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px;}
+.option-item input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px;pointer-events:none;}
 .option-left h4{font-size:14px;font-weight:600;margin-bottom:2px;}
 .option-left p{font-size:12px;color:var(--muted);}
 .option-price{font-size:16px;font-weight:800;color:var(--accent);white-space:nowrap;}
@@ -252,13 +252,13 @@
       </div>
     </div>
 
-    <div class="option-item" onclick="toggleOption(this,'domiciliation',200)">
+    <div class="option-item" onclick="toggleOption(this,'domiciliation',190)">
       <div class="option-left">
         <h4>Domiciliation spécialisée formation</h4>
         <p>Adresse dans un centre spécialisé — assistance en cas de contrôle.</p>
       </div>
       <div style="display:flex;align-items:center;gap:12px;">
-        <span class="option-price">+200€/an</span>
+        <span class="option-price">+190€/mois</span>
         <input type="checkbox">
       </div>
     </div>
@@ -266,7 +266,7 @@
     <div class="option-item" onclick="toggleOption(this,'opco_pack',2990)">
       <div class="option-left">
         <h4>Connexion aux 11 OPCO — Pack complet</h4>
-        <p>Référencement auprès des 11 OPCO. Prix unitaire : 399€/OPCO.</p>
+        <p>Référencement auprès des 11 OPCO. Prix unitaire : 290€/OPCO.</p>
       </div>
       <div style="display:flex;align-items:center;gap:12px;">
         <span class="option-price">+2 990€</span>
@@ -434,12 +434,98 @@ var ofLinks = {
   }
 };
 
-function payerCreation(){
-  if(selectedType && ofLinks[selectedType]){
-    var link = ofLinks[selectedType][selectedPaymentTimes];
-    if(link){
-      window.location.href = link;
+async function payerCreation(){
+  if(!selectedType){
+    alert('⚠️ Veuillez choisir un type d\'organisme.');
+    return;
+  }
+
+  // 1. Vérifier connexion
+  var user = await getUser();
+  if(!user){ openAuthModal(); return; }
+
+  // 2. Calculer le total et collecter les infos
+  var total = basePrice;
+  if(hasKbis) total -= 100;
+  var optionsList = [];
+  Object.keys(options).forEach(function(name){
+    total += options[name];
+    optionsList.push({ name: name, price: options[name] });
+  });
+  if(total < 0) total = 0;
+
+  // 3. Collecter les données du formulaire (step 4)
+  var formData = {};
+  document.querySelectorAll('#step4 input').forEach(function(el){
+    var label = el.closest('.form-group');
+    if(label){
+      var lbl = label.querySelector('label');
+      var key = lbl ? lbl.textContent.trim().toLowerCase().replace(/[^a-z0-9]/g, '_') : el.placeholder;
+      formData[key] = el.value;
     }
+  });
+
+  // 4. Mapper le type sélectionné vers le type de la base
+  var typeMap = {
+    action: 'action_formation',
+    cfa: 'cfa',
+    bilan: 'bilan',
+    vae: 'vae',
+    elus: 'elus',
+    agent: 'agents_ia'
+  };
+
+  // 5. Sauvegarder en Supabase
+  try {
+    var { data: creation, error } = await sb.from('creations_of').insert({
+      user_id: user.id,
+      of_type: typeMap[selectedType] || selectedType,
+      status: 'nouveau',
+      current_step: 1,
+      base_price_cents: basePrice * 100,
+      total_price_cents: total * 100,
+      has_kbis: hasKbis,
+      payment_mode: selectedPaymentTimes + 'x',
+      paid: false,
+      form_data: formData,
+      selected_options: optionsList,
+      client_name: formData.pr_nom___nom || formData.nom_du_dirigeant || '',
+      client_email: formData.email || '',
+      client_phone: formData.t_l_phone || ''
+    }).select().single();
+
+    if(error){
+      alert('❌ Erreur : ' + error.message);
+      return;
+    }
+
+    // Sauvegarder aussi les options dans la table dédiée
+    for(var i = 0; i < optionsList.length; i++){
+      await sb.from('creation_of_options').insert({
+        creation_of_id: creation.id,
+        option_type: optionsList[i].name,
+        price_cents: optionsList[i].price * 100
+      });
+    }
+
+    // 6. Stocker en localStorage
+    localStorage.setItem('lfo_pending_order', JSON.stringify({
+      order_id: creation.id,
+      table: 'creations_of',
+      type: 'creation_of',
+      product_type: selectedType,
+      amount: total,
+      timestamp: Date.now()
+    }));
+
+  } catch(e){
+    alert('❌ Erreur de connexion. Veuillez réessayer.');
+    return;
+  }
+
+  // 7. Rediriger vers Stripe
+  if(ofLinks[selectedType] && ofLinks[selectedType][selectedPaymentTimes]){
+    window.location.href = ofLinks[selectedType][selectedPaymentTimes];
   }
 }
 </script>

@@ -149,11 +149,11 @@
       <div class="service-card" onclick="openDemarche('opco')">
         <div class="service-icon">11</div>
         <h4>Connexion OPCO</h4>
-        <p>Référencement auprès des OPCO pour prise en charge des formations. 399€/OPCO ou pack 11 OPCO à 3 000€.</p>
+        <p>Référencement auprès des OPCO pour prise en charge des formations. 290€/OPCO ou pack 11 OPCO à 2 990€.</p>
         <div class="price-display">
-          <span class="price-new">399€ <span style="font-size:12px;font-weight:400;color:var(--muted);">/ OPCO</span></span>
+          <span class="price-new">290€ <span style="font-size:12px;font-weight:400;color:var(--muted);">/ OPCO</span></span>
         </div>
-        <p class="price-reason">🤖 Nos agents traitent chaque OPCO avec précision — un expert vérifie chaque dossier. Pack 11 OPCO à 3 000€ au lieu de 4 389€. Plus efficace, plus rapide.</p>
+        <p class="price-reason">🤖 Nos agents traitent chaque OPCO avec précision — un expert vérifie chaque dossier. Pack 11 OPCO à 2 990€ au lieu de 3 190€. Plus efficace, plus rapide.</p>
       </div>
 
       <div class="service-card" onclick="openDemarche('agent')">
@@ -478,7 +478,7 @@
   <div class="modal-box">
     <button class="modal-close" onclick="closeAllModals()">✕</button>
     <h3>Connexion aux OPCO</h3>
-    <p>Sélectionnez les OPCO que vous souhaitez — 399€ par OPCO, ou le pack complet (11) à 3 000€.</p>
+    <p>Sélectionnez les OPCO que vous souhaitez — 290€ par OPCO, ou le pack complet (11) à 2 990€.</p>
         <div class="client-selector parrain-dropdown" style="display:none;">
       <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette démarche est pour :</label>
       <select onchange="toggleClientFields(this)">
@@ -712,11 +712,83 @@ var stripeLinks = {
   francetravail: 'https://buy.stripe.com/28EbJ14jggXH9Yqakqffy0I',
   rs: 'https://buy.stripe.com/bJe6oHdTQ4aV9YqgIOffy0J'
 };
-function payer(type, amount){
+
+async function payer(type, amount){
+  // 1. Vérifier connexion
+  var user = await getUser();
+  if(!user){
+    closeAllModals();
+    openAuthModal();
+    return;
+  }
+
+  // 2. Collecter les données du formulaire dans le modal ouvert
+  var modal = document.getElementById('modal-' + type);
+  var formData = {};
+  if(modal){
+    modal.querySelectorAll('input, select, textarea').forEach(function(el){
+      var label = el.closest('.form-group');
+      var key = '';
+      if(label){
+        var lbl = label.querySelector('label');
+        if(lbl) key = lbl.textContent.trim().toLowerCase().replace(/[^a-z0-9]/g, '_');
+      }
+      if(!key) key = el.id || el.name || ('field_' + Math.random().toString(36).substr(2,4));
+      if(el.type !== 'file' && el.type !== 'checkbox') formData[key] = el.value;
+    });
+  }
+
+  // 3. Vérifier si la commande est pour soi ou un client
+  var forSelf = true;
+  var clientSelector = modal ? modal.querySelector('.client-selector select') : null;
+  if(clientSelector) forSelf = (clientSelector.value === 'moi');
+
+  // 4. Sauvegarder en base Supabase AVANT redirection
+  try {
+    var { data: demarche, error } = await sb.from('demarches').insert({
+      user_id: user.id,
+      type: type,
+      status: 'nouveau',
+      current_step: 1,
+      amount_cents: amount * 100,
+      paid: false,
+      for_self: forSelf,
+      form_data: formData,
+      client_name: formData.nom_de_l_organisme || formData.nom_du_dirigeant || '',
+      client_email: formData.email || '',
+      client_phone: formData.t_l_phone || '',
+      org_name: formData.nom_de_l_organisme || '',
+      siren: formData.n__siren || ''
+    }).select().single();
+
+    if(error){
+      console.log('Erreur sauvegarde démarche:', error);
+      alert('❌ Erreur lors de l\'enregistrement. Veuillez réessayer.');
+      return;
+    }
+
+    // 5. Stocker la commande en attente dans localStorage
+    localStorage.setItem('lfo_pending_order', JSON.stringify({
+      order_id: demarche.id,
+      table: 'demarches',
+      type: 'demarche',
+      product_type: type,
+      amount: amount,
+      timestamp: Date.now()
+    }));
+
+  } catch(e){
+    console.log('Erreur:', e);
+    alert('❌ Erreur de connexion. Veuillez réessayer.');
+    return;
+  }
+
+  // 6. Rediriger vers Stripe
   if(stripeLinks[type]){
     window.location.href = stripeLinks[type];
   } else {
-    alert('Redirection vers le paiement Stripe — '+amount+'€');
+    // Fallback : rediriger vers success directement (à remplacer par un vrai lien)
+    window.location.href = 'success.html';
   }
 }
 
@@ -729,17 +801,17 @@ function updateOpcoTotal(evt){
   }
   setTimeout(function(){
     var checked = document.querySelectorAll('#opcoList input:checked').length;
-    var total = (checked === 11) ? 3000 : checked * 399;
-    var fullPrice = checked * 399;
+    var total = (checked === 11) ? 2990 : checked * 290;
+    var fullPrice = checked * 290;
     document.getElementById('opcoCount').textContent = checked + ' OPCO sélectionné' + (checked > 1 ? 's' : '');
     document.getElementById('opcoTotalDisplay').textContent = total + '€';
     var savings = document.getElementById('opcoSavings');
     if(checked === 11){
       savings.style.display = 'block';
-      savings.textContent = '🎉 Pack 11 OPCO ! Vous économisez ' + (fullPrice - 3000) + '€';
+      savings.textContent = '🎉 Pack 11 OPCO ! Vous économisez ' + (fullPrice - 2990) + '€';
     } else if(checked > 1){
       savings.style.display = 'block';
-      savings.textContent = '💡 Prenez les 11 OPCO pour 3 000€ au lieu de ' + (11*399) + '€';
+      savings.textContent = '💡 Prenez les 11 OPCO pour 2 990€ au lieu de ' + (11*290) + '€';
     } else {
       savings.style.display = 'none';
     }
@@ -826,9 +898,40 @@ var agentPacks = {
   8: 'https://buy.stripe.com/9B600jg1Y9vfgmO3W2ffy1c',
   10: 'https://buy.stripe.com/9B6aEX0306j31rU506ffy1d'
 };
-function payerAgent(){
+async function payerAgent(){
+  var user = await getUser();
+  if(!user){ closeAllModals(); openAuthModal(); return; }
+
   var selected = Object.keys(agentOpts);
   var count = selected.length;
+  if(count === 0) return;
+
+  var total = 0;
+  Object.values(agentOpts).forEach(function(p){ total += p; });
+  if(count >= 8) total = Math.round(total * 0.80);
+  else if(count >= 5) total = Math.round(total * 0.90);
+
+  try {
+    var { data: demarche, error } = await sb.from('demarches').insert({
+      user_id: user.id,
+      type: 'agent',
+      status: 'nouveau',
+      current_step: 1,
+      amount_cents: total * 100,
+      paid: false,
+      for_self: true,
+      form_data: { agent_options: selected, agent_prices: agentOpts },
+      metadata: { agents: selected, discount: count >= 8 ? '20%' : count >= 5 ? '10%' : 'none' }
+    }).select().single();
+
+    if(error){ alert('❌ Erreur : ' + error.message); return; }
+
+    localStorage.setItem('lfo_pending_order', JSON.stringify({
+      order_id: demarche.id, table: 'demarches', type: 'demarche',
+      product_type: 'agent', amount: total, timestamp: Date.now()
+    }));
+  } catch(e){ alert('❌ Erreur de connexion.'); return; }
+
   if(count === 1){
     window.location.href = agentLinks[selected[0]];
   } else if(count >= 10){
@@ -839,17 +942,47 @@ function payerAgent(){
     window.location.href = agentPacks[5];
   } else if(count >= 3){
     window.location.href = agentPacks[3];
-  } else if(count === 2){
-    // 2 agents — pay for both individually (redirect to first, second handled later)
+  } else {
     window.location.href = agentLinks[selected[0]];
   }
 }
 
-function payerOpco(){
-  var checked = document.querySelectorAll('#opcoList input:checked').length;
-  if(checked === 11){
+async function payerOpco(){
+  var user = await getUser();
+  if(!user){ closeAllModals(); openAuthModal(); return; }
+
+  var checked = document.querySelectorAll('#opcoList input:checked');
+  var count = checked.length;
+  if(count === 0) return;
+
+  var opcoNames = [];
+  checked.forEach(function(cb){ opcoNames.push(cb.closest('.opco-item').querySelector('span').textContent.trim()); });
+  var total = (count === 11) ? 2990 : count * 290;
+
+  try {
+    var { data: demarche, error } = await sb.from('demarches').insert({
+      user_id: user.id,
+      type: 'opco',
+      status: 'nouveau',
+      current_step: 1,
+      amount_cents: total * 100,
+      paid: false,
+      for_self: true,
+      form_data: { opco_list: opcoNames, opco_count: count },
+      metadata: { opco_names: opcoNames }
+    }).select().single();
+
+    if(error){ alert('❌ Erreur : ' + error.message); return; }
+
+    localStorage.setItem('lfo_pending_order', JSON.stringify({
+      order_id: demarche.id, table: 'demarches', type: 'demarche',
+      product_type: 'opco', amount: total, timestamp: Date.now()
+    }));
+  } catch(e){ alert('❌ Erreur de connexion.'); return; }
+
+  if(count === 11){
     window.location.href = 'https://buy.stripe.com/28E4gz030cHrfiKbouffy0L';
-  } else if(checked > 0){
+  } else {
     window.location.href = 'https://buy.stripe.com/8x2cN53fcdLv7Qi9gmffy0K';
   }
 }

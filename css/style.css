@@ -165,11 +165,11 @@ section{padding:80px 40px;}
 .of-type-card{position:relative;}
 .info-icon{position:absolute;top:10px;right:10px;cursor:pointer;font-size:18px;opacity:.6;transition:opacity .2s;z-index:2;}
 .info-icon:hover{opacity:1;transform:scale(1.2);}
-.info-detail{display:none;background:var(--light);border-top:1px solid var(--border);margin-top:12px;padding:12px;border-radius:8px;text-align:left;font-size:12px;line-height:1.8;}
+.info-detail{display:none;background:var(--light);border-top:1px solid var(--border);margin-top:10px;padding:10px;border-radius:8px;text-align:left;font-size:10px;line-height:1.6;}
 .info-detail.open{display:block;}
-.info-detail strong{font-size:13px;color:var(--primary);display:block;margin-bottom:6px;}
+.info-detail strong{font-size:11px;color:var(--primary);display:block;margin-bottom:4px;}
 .info-detail ul{list-style:none;padding:0;margin:0;}
-.info-detail li{padding:2px 0;}
+.info-detail li{padding:1px 0;font-size:10px;}
 
 .pass-wrap{position:relative;display:flex;align-items:center;}
 .pass-wrap input{flex:1;padding-right:40px;}

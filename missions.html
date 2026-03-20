@@ -40,7 +40,7 @@
   <div class="container">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
       <h2 style="font-size:20px;font-weight:800;">Toutes les missions</h2>
-      <a href="#" onclick="openModal('deposer');return false;" class="btn btn-outline" style="padding:8px 20px;font-size:13px;">+ Déposer une annonce</a>
+      <a href="#" onclick="deposerAnnonce();return false;" class="btn btn-outline" style="padding:8px 20px;font-size:13px;">+ Déposer une annonce</a>
     </div>
     <div class="filter-bar">
       <input type="text" id="filterSearch" placeholder="🔍 Rechercher une mission..." onkeyup="filterMissions()">
@@ -101,7 +101,8 @@
         <option>Gestion de projets</option><option>Vente</option><option>Qualité</option>
         <option>Logistique</option><option>Santé</option><option>Immobilier</option>
         <option>BTP</option><option>Restauration</option><option>Coaching</option>
-        <option>Droit</option><option>Esthétique</option>
+        <option>Droit</option><option>Esthétique</option><option>Soft Skills</option>
+        <option>Autre</option>
       </select>
     </div>
     <div class="grid-3" id="missionsGrid">
@@ -1109,39 +1110,7 @@
   </div>
 </footer>
 
-<!-- MODAL CONNEXION -->
-<div class="modal" id="modal-login">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeAllModals()">✕</button>
-    <h3>Connectez-vous</h3>
-    <p>Accédez aux missions et postulez en un clic.</p>
-    <div id="auth-error" style="display:none;background:rgba(233,69,96,.1);border:1px solid rgba(233,69,96,.3);color:#e94560;padding:10px;border-radius:6px;font-size:13px;margin-bottom:12px;"></div>
-    <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="sophie@monof.fr"></div>
-    <div class="form-group"><label>Mot de passe</label><div class="pass-wrap"><input type="password" id="login-pass" placeholder="••••••••"><span class="pass-eye" onclick="togglePass(this)">👁️</span></div></div>
-    <button class="btn btn-primary btn-block" onclick="doLogin()">Se connecter</button>
-    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--muted);">Pas encore de compte ? <a href="#" onclick="openModal('signup');return false;" style="color:var(--accent);font-weight:600;">Créer un compte</a></p>
-  </div>
-</div>
-
-<!-- MODAL INSCRIPTION -->
-<div class="modal" id="modal-signup">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeAllModals()">✕</button>
-    <h3>Créer mon compte gratuit</h3>
-    <p>Accès immédiat aux missions et à toutes les ressources.</p>
-    <div id="signup-error" style="display:none;background:rgba(233,69,96,.1);border:1px solid rgba(233,69,96,.3);color:#e94560;padding:10px;border-radius:6px;font-size:13px;margin-bottom:12px;"></div>
-    <div class="form-group"><label>Prénom</label><input type="text" id="s-prenom" placeholder="Sophie"></div>
-    <div class="form-group"><label>Nom</label><input type="text" id="s-nom" placeholder="Martin"></div>
-    <div class="form-group"><label>Email</label><input type="email" id="s-email" placeholder="sophie@monof.fr"></div>
-    <div class="form-group"><label>Téléphone</label><input type="tel" id="s-phone" placeholder="06 12 34 56 78"></div>
-    <div class="form-group"><label>Mot de passe</label><div class="pass-wrap"><input type="password" id="s-pass" placeholder="Minimum 8 caractères"><span class="pass-eye" onclick="togglePass(this)">👁️</span></div></div>
-    <div class="form-group"><label>Je suis...</label>
-      <select id="s-profil"><option value="">Choisissez...</option><option>Formateur indépendant</option><option>Gérant d'OF</option><option>Je veux créer un OF</option><option>Autre</option></select>
-    </div>
-    <button class="btn btn-primary btn-block" onclick="doSignup()">Créer mon compte →</button>
-    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--muted);">Déjà inscrit ? <a href="#" onclick="openModal('login');return false;" style="color:var(--accent);font-weight:600;">Se connecter</a></p>
-  </div>
-</div>
+<!-- Auth handled by auth-modal.js -->
 
 <!-- MODAL DEPOSER ANNONCE -->
 <!-- MODAL POSTULER -->
@@ -1344,7 +1313,7 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 });
 
-function submitDeposer(){
+async function submitDeposer(){
   var titre = document.getElementById('dep-titre').value.trim();
   var categorie = document.getElementById('dep-categorie').value;
   var lieu = document.getElementById('dep-lieu').value;
@@ -1354,6 +1323,7 @@ function submitDeposer(){
   var expiration = document.getElementById('dep-expiration').value;
   var type = document.getElementById('dep-type').value;
   var errDiv = document.getElementById('dep-error');
+  var btn = document.getElementById('dep-submit-btn');
 
   // Validation
   if(!titre || !categorie || !lieu || !tarif || !desc || !expiration){
@@ -1367,21 +1337,64 @@ function submitDeposer(){
     return;
   }
   errDiv.style.display = 'none';
+  btn.textContent = 'Publication en cours...';
+  btn.disabled = true;
 
-  if(type === 'premium'){
-    // Redirect to Stripe payment
-    window.open('https://buy.stripe.com/3cs28r6ro5eZ6Me2RYffy0Z','_blank');
+  var user = await getUser();
+  if(!user){ closeAllModals(); openAuthModal(); btn.textContent = 'Publier l\'annonce →'; btn.disabled = false; return; }
+
+  var isPremium = type === 'premium';
+
+  var { data: newAnnonce, error } = await sb.from('annonces').insert({
+    author_id: user.id,
+    title: titre,
+    category: categorie,
+    city: lieu,
+    description: desc,
+    tarif_type: tarifType,
+    tarif_montant: parseInt(tarif),
+    daily_rate: tarif + '€/' + tarifType,
+    is_premium: isPremium,
+    status: 'active',
+    expires_at: expiration
+  }).select().single();
+
+  if(error){
+    errDiv.textContent = '❌ Erreur : ' + (error.message || 'Impossible de publier.');
+    errDiv.style.display = '';
+    btn.textContent = 'Publier l\'annonce →';
+    btn.disabled = false;
+    return;
+  }
+
+  btn.textContent = 'Publier l\'annonce →';
+  btn.disabled = false;
+  closeAllModals();
+
+  if(isPremium){
+    window.open('https://buy.stripe.com/9B628r6rogXHfiK506ffy0X','_blank');
   }
 
   alert('✅ Annonce publiée avec succès !');
+  // Reload to show the new annonce
+  if(typeof loadRealAnnonces === 'function') loadRealAnnonces();
+}
+
+async function deposerAnnonce(){
+  var user = await getUser();
+  if(!user){ openAuthModal(); return; }
   closeAllModals();
+  document.getElementById('modal-deposer').classList.add('open');
 }
 
 function openModal(type){
   closeAllModals();
-  var ae = document.getElementById('auth-error'); if(ae) ae.style.display='none';
-  var se = document.getElementById('signup-error'); if(se) se.style.display='none';
-  document.getElementById('modal-'+type).classList.add('open');
+  if(type === 'login' || type === 'signup'){
+    openAuthModal();
+    return;
+  }
+  var modal = document.getElementById('modal-'+type);
+  if(modal) modal.classList.add('open');
 }
 function closeAllModals(){
   document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));
@@ -1392,13 +1405,23 @@ document.querySelectorAll('.modal').forEach(m=>{
 
 var postulerAnnonceTitle = '';
 
+var postulerAnnonceId = null;
+
 async function postuler(btn){
   var user = await getUser();
   if(!user){ openAuthModal(); return; }
   
-  // Get annonce title from the card
+  // Get annonce title and ID from the card
   var card = btn.closest('.mission-card');
-  postulerAnnonceTitle = card ? card.querySelector('h3').textContent : 'Cette mission';
+  var titleEl = card ? (card.querySelector('h3') || card.querySelector('h4')) : null;
+  postulerAnnonceTitle = titleEl ? titleEl.textContent : 'Cette mission';
+  postulerAnnonceId = card ? card.getAttribute('data-db-id') : null;
+  
+  // If no DB id (hardcoded static annonce), show info message
+  if(!postulerAnnonceId){
+    alert('ℹ️ Cette mission est un exemple. Les nouvelles missions sont publiées régulièrement par des recruteurs.\n\nPour postuler à de vraies missions, consultez les annonces marquées "Premium" ou les annonces récentes en haut de page.');
+    return;
+  }
   
   document.getElementById('postuler-title').textContent = postulerAnnonceTitle;
   document.getElementById('postuler-msg').value = '';
@@ -1439,56 +1462,52 @@ async function submitCandidature(){
     }
   }
   
-  // TODO: Save candidature to Supabase candidatures table
+  // Save candidature to Supabase
+  var user = await getUser();
+  if(!user){ btn.textContent = 'Envoyer ma candidature →'; btn.disabled = false; return; }
+  
+  var candidature = {
+    annonce_id: postulerAnnonceId,
+    user_id: user.id,
+    message: msg,
+    disponibilite: dispo,
+    linkedin: linkedin || null,
+    cv_url: cvPath || null,
+    status: 'en_attente'
+  };
+  
+  if(postulerAnnonceId){
+    var { error: saveErr } = await sb.from('candidatures').insert(candidature);
+    if(saveErr){
+      if(saveErr.message && saveErr.message.includes('unique')){
+        errDiv.textContent = '⚠️ Vous avez déjà postulé à cette annonce.';
+      } else {
+        errDiv.textContent = '❌ Erreur : ' + saveErr.message;
+      }
+      errDiv.style.display = '';
+      btn.textContent = 'Envoyer ma candidature →';
+      btn.disabled = false;
+      return;
+    }
+  }
   
   closeAllModals();
+  
+  // Update the button on the card to show "Candidature envoyée"
+  if(postulerAnnonceId){
+    var card = document.querySelector('[data-db-id="' + postulerAnnonceId + '"]');
+    if(card){
+      var postulerBtn = card.querySelector('.btn-primary');
+      if(postulerBtn){
+        postulerBtn.outerHTML = '<span style="font-size:12px;color:#f59e0b;margin-top:10px;display:inline-block;">⏳ Candidature envoyée</span>';
+      }
+    }
+  }
+  
   alert('✅ Candidature envoyée pour "' + postulerAnnonceTitle + '" !\n\nVotre candidature est en attente de réponse du recruteur.');
 }
 
-async function doLogin(){
-  console.log("doLogin called");
-  var email = document.getElementById('login-email').value.trim();
-  var pass = document.getElementById('login-pass').value;
-  if(!email||!pass){showAuthError('Remplissez email et mot de passe.');return;}
-  try {
-    await signIn(email, pass);
-    closeAllModals();
-    window.location.href = 'dashboard.html';
-  } catch(e) {
-    showAuthError(e.message === 'Invalid login credentials' ? 'Email ou mot de passe incorrect.' : e.message);
-  }
-}
-
-async function doSignup(){
-  console.log("doSignup called");
-  var prenom = document.getElementById('s-prenom').value.trim();
-  var nom = document.getElementById('s-nom').value.trim();
-  var email = document.getElementById('s-email').value.trim();
-  var phone = document.getElementById('s-phone').value.trim();
-  var pass = document.getElementById('s-pass').value;
-  var profil = document.getElementById('s-profil').value;
-  if(!prenom||!nom||!email||!pass){showAuthError('Remplissez tous les champs obligatoires.');return;}
-  if(pass.length < 8){showAuthError('Mot de passe trop court (min. 8 caractères).');return;}
-  var profileType = 'formateur';
-  if(profil.includes('Gérant')) profileType = 'gerant_of';
-  else if(profil.includes('créer')) profileType = 'creation_of';
-  var btn = document.querySelector('#modal-signup .btn-primary');
-  btn.textContent = 'Création en cours...';
-  btn.disabled = true;
-  try {
-    await signUp(email, pass, prenom, nom, phone, profileType);
-    closeAllModals();
-    window.location.href = 'dashboard.html';
-  } catch(e) {
-    btn.textContent = 'Créer mon compte →';
-    btn.disabled = false;
-    var msg = e.message;
-    if(msg.includes('already registered')) msg = 'Cet email est déjà utilisé.';
-    else if(msg.includes('valid email')) msg = 'Email invalide.';
-    else if(msg.includes('at least')) msg = 'Mot de passe trop court (min. 8 caractères).';
-    showAuthError(msg);
-  }
-}
+// Auth handled by auth-modal.js (shared)
 
 function filterMissions(){
   var search=document.getElementById('filterSearch').value.toLowerCase();
@@ -1504,6 +1523,105 @@ function filterMissions(){
     c.style.display=show?'':'none';
   });
 }
+
+// === CHARGER ANNONCES RÉELLES DEPUIS SUPABASE ===
+var currentUserId = null;
+
+async function loadRealAnnonces(){
+  try {
+    var user = await getUser();
+    if(user) currentUserId = user.id;
+    
+    var { data: annonces, error } = await sb.from('annonces')
+      .select('*')
+      .eq('paused', false)
+      .order('created_at', { ascending: false });
+    
+    if(error || !annonces || annonces.length === 0) return;
+    
+    var grid = document.getElementById('missionsGrid');
+    
+    // Check user's existing candidatures
+    var myCandidatures = {};
+    if(currentUserId){
+      var { data: cands } = await sb.from('candidatures')
+        .select('annonce_id, status')
+        .eq('user_id', currentUserId);
+      if(cands){
+        cands.forEach(function(c){ myCandidatures[c.annonce_id] = c.status; });
+      }
+    }
+    
+    annonces.forEach(function(a){
+      var card = document.createElement('div');
+      card.className = a.is_premium ? 'mission-card featured' : 'mission-card';
+      card.setAttribute('data-db-id', a.id);
+      card.setAttribute('data-author-id', a.author_id);
+      
+      var tarifLabel = (a.tarif_montant || '') + '€/' + (a.tarif_type === 'heure' ? 'h' : 'j');
+      var dateLabel = a.expires_at ? '🗓 ' + new Date(a.expires_at).toLocaleDateString('fr-FR', {month:'long', year:'numeric'}) : '';
+      var typeTag = a.is_premium ? '<span style="position:absolute;top:8px;right:8px;background:var(--accent);color:#fff;font-size:10px;padding:2px 8px;border-radius:12px;">⭐ Premium</span>' : '';
+      
+      // Determine button
+      var btnHtml = '';
+      var isOwner = currentUserId && a.author_id === currentUserId;
+      
+      if(isOwner){
+        btnHtml = '<button class="btn btn-outline" style="margin-top:10px;padding:8px 16px;font-size:12px;border-color:var(--accent);color:var(--accent);" onclick="window.location.href=\'dashboard.html\'">📋 Voir mes annonces</button>';
+      } else {
+        var candStatus = myCandidatures[a.id];
+        if(candStatus === 'bloquee'){
+          btnHtml = '<span style="font-size:12px;color:var(--muted);margin-top:10px;display:inline-block;">🚫 Candidature impossible</span>';
+        } else if(candStatus === 'en_attente'){
+          btnHtml = '<span style="font-size:12px;color:#f59e0b;margin-top:10px;display:inline-block;">⏳ Candidature envoyée</span>';
+        } else if(candStatus === 'acceptee'){
+          btnHtml = '<span style="font-size:12px;color:var(--success);margin-top:10px;display:inline-block;">✅ Candidature acceptée</span>';
+        } else {
+          btnHtml = '<button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>';
+        }
+      }
+      
+      card.innerHTML = '<div style="position:relative;">' + typeTag +
+        '<span class="mission-tag">' + (a.category || 'Mission') + '</span>' +
+        '<h4>' + a.title + '</h4>' +
+        '<p>' + (a.description || '').substring(0, 100) + (a.description && a.description.length > 100 ? '...' : '') + '</p>' +
+        '<div class="mission-meta">' +
+        '<span>📍 ' + (a.city || 'France') + '</span>' +
+        (a.tarif_montant ? '<span>💶 ' + tarifLabel + '</span>' : '') +
+        (dateLabel ? '<span>' + dateLabel + '</span>' : '') +
+        '</div>' +
+        btnHtml +
+        '</div>';
+      
+      if(a.is_premium || a.is_premium){
+        // Premium: insert at the very top
+        grid.insertBefore(card, grid.firstChild);
+      } else {
+        // Gratuite: insert after all featured cards
+        var allCards = grid.querySelectorAll('.mission-card');
+        var insertPoint = null;
+        for(var i = 0; i < allCards.length; i++){
+          if(!allCards[i].classList.contains('featured')){
+            insertPoint = allCards[i];
+            break;
+          }
+        }
+        if(insertPoint){
+          grid.insertBefore(card, insertPoint);
+        } else {
+          grid.appendChild(card);
+        }
+      }
+    });
+  } catch(e){
+    console.log('Erreur chargement annonces:', e);
+  }
+}
+
+// Charger au démarrage
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof sb !== 'undefined') loadRealAnnonces();
+});
 </script>
 </body>
 </html>

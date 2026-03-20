@@ -21,7 +21,7 @@
     "qualiopi":      { "product": "prod_UAxoMdWRZR70PH", "price": "price_1TCbt1DnwFniOSFLCD89nS2C", "amount": 490 },
     "agents_ia":     { "product": "prod_UAxoBh2wU5J9C8", "price": "price_1TCbt1DnwFniOSFLUZihRj4l", "amount": 500 },
     "edof":          { "product": "prod_UAxoDS3SeMsGa3", "price": "price_1TCbt2DnwFniOSFLDXbaLV8n", "amount": 290 },
-    "domiciliation": { "product": "prod_UAxocAZ4TWV29X", "price": "price_1TCbt3DnwFniOSFLE4IUjIeH", "amount": 200, "recurring": "year" },
+    "domiciliation": { "product": "prod_UAxocAZ4TWV29X", "price": "price_1TCbt3DnwFniOSFLE4IUjIeH", "amount": 190, "recurring": "month" },
     "opco":          { "product": "prod_UAxoxM49BEcViP", "price": "price_1TCbt4DnwFniOSFLGKWbcMup", "amount": 199 },
     "site_web":      { "product": "prod_UAxosOTVgXGYUg", "price": "price_1TCbt4DnwFniOSFLQttCCfyY", "amount": 390 }
   },

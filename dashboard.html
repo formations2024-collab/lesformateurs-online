@@ -110,6 +110,7 @@
     <a onclick="showTab('parrainage')">🎁 Parrainage (10%)</a>
     <a onclick="showTab('profil')">👤 Mon profil</a>
     <a href="#" onclick="openLogoutModal();return false;">🚪 Déconnexion</a>
+    <a href="expert.html" id="sidebar-pro-btn" style="display:none;margin-top:16px;background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;text-align:center;font-weight:700;font-size:13px;text-decoration:none;">⚡ Espace Pro</a>
   </div>
 
   <div class="main-content">
@@ -140,7 +141,7 @@
           <span class="stat-link">Voir →</span>
         </div>
         <div class="stat-card" onclick="showTab('formation')">
-          <div class="stat-value" style="color:var(--accent);">75%</div>
+          <div class="stat-value" style="color:var(--accent);" id="stat-formation">0%</div>
           <div class="stat-label">Formation</div>
           <span class="stat-link">Voir →</span>
         </div>
@@ -155,70 +156,9 @@
       </div>
 
       <div id="annonces-list">
-        <div class="detail-card" id="annonce-1">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-            <div>
-              <h4>⭐ Formateur Gestion de projet</h4>
-              <p>Paris · 400€/jour · En entreprise, sessions de 2 jours</p>
-            </div>
-            <span class="status-badge status-done">Active</span>
-          </div>
-          <div class="detail-meta">
-            <span class="detail-tag">⭐ Premium (29€)</span>
-            <span class="detail-tag">👥 6 candidatures reçues</span>
-            <span class="detail-tag">👁 124 vues</span>
-            <span class="detail-tag">📅 Publiée le 14/03</span>
-          </div>
-          <div class="action-btns">
-            <button class="action-btn" onclick="editAnnonce('annonce-1')">✏️ Modifier</button>
-            <button class="action-btn" onclick="voirCandidatures(this)">👁 Voir les candidatures</button>
-            <button class="action-btn" onclick="pauseAnnonce('annonce-1')">⏸ Mettre en pause</button>
-            <button class="action-btn danger" onclick="deleteAnnonce('annonce-1')">🗑 Supprimer</button>
-          </div>
-        </div>
-
-        <div class="detail-card" id="annonce-2">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-            <div>
-              <h4>Formateur Excel/VBA</h4>
-              <p>Distanciel · 300€/jour · Niveau intermédiaire à avancé</p>
-            </div>
-            <span class="status-badge status-done">Active</span>
-          </div>
-          <div class="detail-meta">
-            <span class="detail-tag">Gratuite</span>
-            <span class="detail-tag">👥 3 candidatures reçues</span>
-            <span class="detail-tag">👁 67 vues</span>
-            <span class="detail-tag">📅 Publiée le 16/03</span>
-          </div>
-          <div class="action-btns">
-            <button class="action-btn" onclick="editAnnonce('annonce-2')">✏️ Modifier</button>
-            <button class="action-btn" onclick="voirCandidatures(this)">👁 Voir les candidatures</button>
-            <button class="action-btn" onclick="window.open('https://buy.stripe.com/3cs28r6ro5eZ6Me2RYffy0Z','_blank')">⭐ Passer en Premium</button>
-            <button class="action-btn" onclick="pauseAnnonce('annonce-2')">⏸ Mettre en pause</button>
-            <button class="action-btn danger" onclick="deleteAnnonce('annonce-2')">🗑 Supprimer</button>
-          </div>
-        </div>
-
-        <div class="detail-card" id="annonce-3">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-            <div>
-              <h4>Formateur Soft skills — Communication</h4>
-              <p>Lyon · 350€/jour · Formations en intra-entreprise</p>
-            </div>
-            <span class="status-badge status-new">Expirée</span>
-          </div>
-          <div class="detail-meta">
-            <span class="detail-tag">Gratuite</span>
-            <span class="detail-tag">👥 9 candidatures reçues</span>
-            <span class="detail-tag">👁 203 vues</span>
-            <span class="detail-tag">📅 Publiée le 01/03</span>
-          </div>
-          <div class="action-btns">
-            <button class="action-btn">🔄 Republier</button>
-            <button class="action-btn" onclick="editAnnonce('annonce-3')">✏️ Modifier et republier</button>
-            <button class="action-btn danger" onclick="deleteAnnonce('annonce-3')">🗑 Supprimer</button>
-          </div>
+        <div id="annonces-empty" style="text-align:center;padding:40px 0;color:var(--muted);">
+          <div style="font-size:40px;margin-bottom:12px;">📋</div>
+          <p style="font-size:14px;">Chargement de vos annonces...</p>
         </div>
       </div>
     </div>
@@ -239,10 +179,14 @@
           <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Catégorie *</label>
           <select id="a-categorie" required>
             <option value="">Choisissez une catégorie...</option>
-            <option>Bureautique</option><option>Communication</option><option>Digital / Web</option>
+            <option>Bureautique</option><option>Communication</option><option>Digital</option>
             <option>Management</option><option>Langues</option><option>Sécurité</option>
-            <option>RH / Formation</option><option>Comptabilité / Gestion</option>
-            <option>Informatique / Dev</option><option>Soft Skills</option><option>Autre</option>
+            <option>RH</option><option>Comptabilité</option><option>Informatique</option>
+            <option>Gestion de projets</option><option>Vente</option><option>Qualité</option>
+            <option>Logistique</option><option>Santé</option><option>Immobilier</option>
+            <option>BTP</option><option>Restauration</option><option>Coaching</option>
+            <option>Droit</option><option>Esthétique</option><option>Soft Skills</option>
+            <option>Autre</option>
           </select>
         </div>
 
@@ -342,184 +286,29 @@
 
     <!-- ========== CANDIDATURES ========== -->
     <div class="tab-content" id="tab-candidatures">
-      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🎯 Mes candidatures (5)</h2>
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;" id="mes-candidatures-title">🎯 Mes candidatures</h2>
 
-      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;" id="candidature-filters">
-        <button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="filterCandidatures('toutes', this)">Toutes (5)</button>
-        <button class="action-btn" onclick="filterCandidatures('attente', this)">⏳ En attente (2)</button>
-        <button class="action-btn" onclick="filterCandidatures('acceptee', this)">✅ Acceptées (2)</button>
-        <button class="action-btn" onclick="filterCandidatures('refusee', this)">❌ Refusées (1)</button>
-      </div>
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;" id="candidature-filters"></div>
 
-      <div class="detail-card candidature-card" data-status="acceptee">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Formateur Marketing Digital</h4>
-            <p>Distanciel · 300€/jour · Réseaux sociaux, SEO</p>
-          </div>
-          <span class="status-badge status-done">✅ Retour positif</span>
-        </div>
-        <div class="detail-meta">
-          <span class="detail-tag">📅 Postulé le 15/03</span>
-          <span class="detail-tag">📩 Message du recruteur reçu</span>
-        </div>
-        <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">
-          <strong>💬 Message du recruteur :</strong> "Bonjour Sophie, votre profil nous intéresse beaucoup. Pouvez-vous nous contacter au 01 23 45 67 89 pour un entretien ?"
-        </div>
-        <div class="action-btns">
-          <button class="action-btn" onclick="voirCoordonnees(this, 'contact@digitalacademy.fr', '01 23 45 67 89')">📞 Voir les coordonnées</button>
+      <div id="mes-candidatures-list">
+        <div style="text-align:center;padding:40px 0;color:var(--muted);">
+          <div style="font-size:40px;margin-bottom:12px;">🎯</div>
+          <p style="font-size:14px;">Chargement des candidatures...</p>
         </div>
       </div>
 
-      <div class="detail-card candidature-card" data-status="acceptee">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Formateur Sécurité au travail — SST</h4>
-            <p>Nantes · 280€/jour · Habilitation, SST</p>
-          </div>
-          <span class="status-badge status-done">✅ Mission acceptée</span>
-        </div>
-        <div class="detail-meta">
-          <span class="detail-tag">📅 Postulé le 10/03</span>
-          <span class="detail-tag">🎉 Démarrage prévu : 25/03/2026</span>
-        </div>
-        <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">
-          <strong>💬 Message :</strong> "Mission confirmée ! Début le 25/03, centre de formation Nantes Nord. Convention envoyée par email."
-        </div>
-        <div class="action-btns">
-          <button class="action-btn" onclick="voirCoordonnees(this, 'rh@formation-nantes.fr', '02 40 12 34 56')">📞 Voir les coordonnées</button>
-          <button class="action-btn" onclick="alert('📄 Convention envoyée par email le 18/03.')">📄 Voir la convention</button>
-        </div>
-      </div>
-
-      <div class="detail-card candidature-card" data-status="attente">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Formateur Excel — Bureautique</h4>
-            <p>Paris · 350€/jour · Sessions en entreprise</p>
-          </div>
-          <span class="status-badge status-progress">⏳ En attente de retour</span>
-        </div>
-        <div class="detail-meta">
-          <span class="detail-tag">📅 Postulé le 17/03</span>
-          <span class="detail-tag">Pas encore de retour</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">💬 Relancer</button>
-          <button class="action-btn danger">❌ Retirer ma candidature</button>
-        </div>
-      </div>
-
-      <div class="detail-card candidature-card" data-status="attente">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Formateur Management — Avancé</h4>
-            <p>Bordeaux · 450€/jour · Leadership, gestion d'équipe</p>
-          </div>
-          <span class="status-badge status-progress">⏳ En attente</span>
-        </div>
-        <div class="detail-meta">
-          <span class="detail-tag">📅 Postulé le 12/03</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">💬 Relancer</button>
-          <button class="action-btn danger">❌ Retirer ma candidature</button>
-        </div>
-      </div>
-
-      <div class="detail-card candidature-card" data-status="refusee">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Formateur Prise de parole</h4>
-            <p>Lyon · 400€/jour · Formations managers</p>
-          </div>
-          <span class="status-badge status-new">❌ Non retenu</span>
-        </div>
-        <div class="detail-meta">
-          <span class="detail-tag">📅 Postulé le 14/03</span>
-          <span class="detail-tag">Refusé le 16/03</span>
-        </div>
-        <div style="background:rgba(233,69,96,.05);border:1px solid rgba(233,69,96,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">
-          <strong>💬 Motif :</strong> "Poste pourvu. Nous gardons votre profil pour de futures opportunités."
-        </div>
-      </div>
-
-      <div style="text-align:center;margin-top:24px;">
-        <a href="missions.html" class="btn btn-outline">Voir toutes les missions →</a>
-      </div>
     </div>
 
     <!-- ========== DEMARCHES ========== -->
     <div class="tab-content" id="tab-demarches">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
-        <h2 style="font-size:20px;font-weight:800;">📄 Mes démarches (3)</h2>
+        <h2 style="font-size:20px;font-weight:800;">📄 Mes démarches (<span id="demarches-count">0</span>)</h2>
         <a href="conformite.html" class="btn btn-primary" style="padding:8px 16px;font-size:12px;">+ Nouvelle démarche</a>
       </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>✦ Qualiopi — Préparation certification</h4>
-            <p>Commandé le 18/03/2026</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">490€</div>
-            <span class="status-badge status-progress">En cours</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:40%;"></div></div>
-        <p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Étape 2/5 : Vérification des documents par un expert</p>
-        <div style="font-size:12px;margin-bottom:8px;">
-          <strong>Documents envoyés :</strong><br>
-          ✅ KBIS · ✅ Manuel qualité · ⏳ <span style="color:var(--accent);">Processus RH en attente</span>
-        </div>
-        <div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:8px;padding:10px 14px;font-size:12px;">
-          💡 <strong>Prochaine étape :</strong> Envoyez votre processus de gestion RH pour passer à l'étape 3.
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">📤 Envoyer un document</button>
-          <button class="action-btn">💬 Contacter mon expert</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>NDA — Numéro de Déclaration d'Activité</h4>
-            <p>Commandé le 10/03/2026</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">199€</div>
-            <span class="status-badge status-progress">En cours</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:80%;background:var(--success);"></div></div>
-        <p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Étape 4/5 : Dossier envoyé à la DREETS, en attente de réponse</p>
-        <div style="font-size:12px;">
-          <strong>Documents envoyés :</strong><br>
-          ✅ Convention de formation · ✅ Programme pédagogique · ✅ SIREN · ✅ Pièce d'identité · ✅ Casier judiciaire
-        </div>
-        <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">
-          💡 <strong>Info :</strong> La DREETS traite votre dossier. Délai habituel : 30 jours. Nous vous tenons informé.
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>€ EDOF — Mon Compte Formation</h4>
-            <p>Commandé le 05/03/2026</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">290€</div>
-            <span class="status-badge status-done">Terminé</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:100%;background:var(--success);"></div></div>
-        <p style="font-size:11px;color:var(--success);">✅ Terminé le 12/03/2026 — Vos formations sont en ligne sur EDOF</p>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir le récapitulatif</button>
-          <button class="action-btn">🔗 Accéder à mon espace EDOF</button>
+      <div id="demarches-list">
+        <div style="text-align:center;padding:40px 0;color:var(--muted);">
+          <div style="font-size:40px;margin-bottom:12px;">📄</div>
+          <p style="font-size:14px;">Chargement de vos démarches...</p>
         </div>
       </div>
     </div>
@@ -527,74 +316,13 @@
     <!-- ========== MES OF ========== -->
     <div class="tab-content" id="tab-of">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
-        <h2 style="font-size:20px;font-weight:800;">🏛 Mes organismes de formation (2)</h2>
+        <h2 style="font-size:20px;font-weight:800;">🏛 Mes organismes de formation (<span id="of-count">0</span>)</h2>
         <a href="creer-of.html" class="btn btn-primary" style="padding:8px 16px;font-size:12px;">+ Créer un nouvel OF</a>
       </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>📚 Action de formation — "FormaPro Paris"</h4>
-            <p>Commandé le 12/03/2026</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">2 270€</div>
-            <span class="status-badge status-progress">En cours</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:60%;"></div></div>
-        <p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Étape 3/5 : Création KBIS en cours chez le greffe</p>
-        <div style="font-size:12px;margin-bottom:8px;">
-          <strong>Type :</strong> Action de formation<br>
-          <strong>Options :</strong> + Qualiopi (490€) · + EDOF (290€) · + Agents IA (500€)<br>
-          <strong>Réduction KBIS :</strong> Non (pas de KBIS existant)<br>
-          <strong>Paiement :</strong> 2x — 1 135€ payé le 12/03, 1 135€ le 12/04
-        </div>
-        <div style="font-size:12px;">
-          <strong>Avancement détaillé :</strong><br>
-          ✅ Étape 1 : Documents collectés<br>
-          ✅ Étape 2 : Statuts rédigés et signés<br>
-          ⏳ Étape 3 : Création KBIS au greffe (en cours)<br>
-          🔒 Étape 4 : Demande NDA à la DREETS<br>
-          🔒 Étape 5 : Activation Qualiopi + EDOF + Agents IA
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir les documents</button>
-          <button class="action-btn">💬 Contacter mon expert</button>
-          <button class="action-btn">🧾 Voir mes factures</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>📋 Bilan de compétences — "Bilan Expert"</h4>
-            <p>Commandé le 28/02/2026</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--accent);">890€</div>
-            <span class="status-badge status-done">Terminé</span>
-          </div>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:100%;background:var(--success);"></div></div>
-        <p style="font-size:11px;color:var(--success);margin-bottom:8px;">✅ Terminé le 10/03/2026 — OF opérationnel</p>
-        <div style="font-size:12px;margin-bottom:8px;">
-          <strong>Type :</strong> Bilan de compétences<br>
-          <strong>Options :</strong> Aucune<br>
-          <strong>Réduction KBIS :</strong> Oui (-100€)<br>
-          <strong>NDA obtenu :</strong> 11 22 33 44 55<br>
-          <strong>SIRET :</strong> 123 456 789 00010
-        </div>
-        <div style="font-size:12px;">
-          ✅ Étape 1 : Documents collectés<br>
-          ✅ Étape 2 : KBIS existant validé<br>
-          ✅ Étape 3 : NDA obtenu auprès de la DREETS<br>
-          ✅ Étape 4 : BPF initial déposé<br>
-          ✅ Étape 5 : OF activé et opérationnel
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir les documents</button>
-          <button class="action-btn">🧾 Voir mes factures</button>
+      <div id="of-list">
+        <div style="text-align:center;padding:40px 0;color:var(--muted);">
+          <div style="font-size:40px;margin-bottom:12px;">🏛</div>
+          <p style="font-size:14px;">Chargement de vos organismes...</p>
         </div>
       </div>
     </div>
@@ -660,6 +388,7 @@
             <span class="status-badge status-progress" style="font-size:12px;padding:6px 14px;">En cours — 75%</span>
           </div>
           <div class="progress-bar" style="height:12px;"><div class="progress-fill" style="width:75%;"></div></div>
+          <a href="formation.html" class="btn btn-primary" style="margin-top:16px;display:inline-block;padding:10px 24px;font-size:14px;">▶ Reprendre la formation</a>
         </div>
 
         <h3 style="font-size:15px;font-weight:700;margin-bottom:12px;">Modules de formation</h3>
@@ -687,7 +416,7 @@
           </div>
           <div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
           <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Commencé le 15/03</span></div>
-          <div class="action-btns"><button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);">▶️ Reprendre</button></div>
+          <div class="action-btns"><a href="formation.html" class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);text-decoration:none;">▶️ Reprendre</a></div>
         </div>
 
         <div class="detail-card" style="border-left:3px solid var(--border);">
@@ -727,20 +456,16 @@
       <!-- STATS PARRAINAGE -->
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:32px;">
         <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="font-size:24px;font-weight:900;color:var(--success);">347€</div>
+          <div style="font-size:24px;font-weight:900;color:var(--success);" id="ref-gains-total">0€</div>
           <div style="font-size:11px;color:var(--muted);">Gains totaux</div>
         </div>
         <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="font-size:24px;font-weight:900;color:var(--accent);">148€</div>
+          <div style="font-size:24px;font-weight:900;color:var(--accent);" id="ref-gains-pending">0€</div>
           <div style="font-size:11px;color:var(--muted);">En attente de versement</div>
         </div>
         <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="font-size:24px;font-weight:900;color:var(--primary);">7</div>
+          <div style="font-size:24px;font-weight:900;color:var(--primary);" id="ref-filleuls">0</div>
           <div style="font-size:11px;color:var(--muted);">Filleuls convertis</div>
-        </div>
-        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="font-size:24px;font-weight:900;color:var(--primary);">23</div>
-          <div style="font-size:11px;color:var(--muted);">Clics sur vos liens</div>
         </div>
       </div>
 
@@ -828,8 +553,8 @@
 
         <div class="ref-link-item">
           <div class="ref-link-info">
-            <strong>OPCO (par OPCO) — 399€</strong>
-            <span class="ref-commission">→ 39,90€ pour vous</span>
+            <strong>OPCO (par OPCO) — 290€</strong>
+            <span class="ref-commission">→ 29€ pour vous</span>
           </div>
           <div class="ref-link-actions">
             <input type="text" readonly value="https://production.lesformateurs-online.pages.dev/conformite.html?ref=CODE&p=opco" class="ref-link-input">
@@ -936,56 +661,9 @@
 
       <!-- HISTORIQUE COMMISSIONS -->
       <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">📊 Historique des commissions</h3>
-
-      <div class="detail-card" style="border-left:3px solid var(--success);">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Jean-Marc T. a payé Qualiopi (490€)</h4>
-            <p>Via votre lien · 15/03/2026</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--success);">+49€</div>
-            <span class="status-badge status-done">Versé</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="detail-card" style="border-left:3px solid var(--success);">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Fatima E. a payé NDA (199€)</h4>
-            <p>Via votre lien · 14/03/2026</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--success);">+19,90€</div>
-            <span class="status-badge status-done">Versé</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="detail-card" style="border-left:3px solid var(--success);">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Pierre L. a payé OF Action (990€)</h4>
-            <p>Via votre lien · 12/03/2026</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:var(--success);">+99€</div>
-            <span class="status-badge status-done">Versé</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="detail-card" style="border-left:3px solid rgba(200,169,110,.3);">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Sarah M. a payé Formation (1 490€)</h4>
-            <p>Via votre lien · 18/03/2026</p>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:18px;font-weight:800;color:#b8860b;">+149€</div>
-            <span class="status-badge status-progress">En attente</span>
-          </div>
+      <div id="ref-history-list">
+        <div style="text-align:center;padding:30px 0;color:var(--muted);">
+          <p style="font-size:13px;">Aucune commission pour le moment. Partagez vos liens pour commencer !</p>
         </div>
       </div>
 
@@ -993,8 +671,9 @@
         <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">💳 Versement des commissions</h4>
         <p style="font-size:12px;color:var(--muted);">Les commissions sont versées le 1er de chaque mois par virement bancaire. Minimum de versement : 50€.</p>
         <div style="margin-top:10px;">
-          <div class="form-group"><label>IBAN pour les versements</label><input type="text" placeholder="FR76 XXXX XXXX XXXX XXXX XXXX XXX" value="FR76 3000 4028 3700 0100 0466 354"></div>
-          <button class="action-btn">💾 Mettre à jour mon IBAN</button>
+          <div class="form-group"><label>IBAN pour les versements</label><input type="text" id="profil-iban" placeholder="FR76 XXXX XXXX XXXX XXXX XXXX XXX"></div>
+          <div id="iban-success" style="display:none;color:#10b981;font-size:12px;margin-bottom:8px;">✅ IBAN mis à jour !</div>
+          <button class="action-btn" onclick="saveIban()">💾 Mettre à jour mon IBAN</button>
         </div>
       </div>
     </div>
@@ -1104,20 +783,28 @@ async function submitAnnonce(){
   
   if(editingAnnonce){
     // Update in Supabase
-    var annonceDbId = document.getElementById(editingAnnonce).dataset.dbId;
-    if(annonceDbId){
-      await sb.from('annonces').update({
-        title: titre, category: categorie, city: lieu, description: desc,
-        tarif_type: unite, tarif_montant: parseInt(tarif), expires_at: expiration
-      }).eq('id', annonceDbId);
-    }
-    // Update card in DOM
     var card = document.getElementById(editingAnnonce);
-    card.querySelector('h4').textContent = titre;
-    card.querySelector('p').textContent = lieu + ' · ' + tarif + '€/' + unite + ' · ' + categorie;
+    var annonceDbId = card ? (card.dataset.dbId || card.getAttribute('data-db-id')) : null;
+    if(annonceDbId){
+      var { error: updErr } = await sb.from('annonces').update({
+        title: titre, category: categorie, city: lieu, description: desc,
+        tarif_type: unite, tarif_montant: parseInt(tarif), expires_at: expiration,
+        status: 'active', paused: false
+      }).eq('id', annonceDbId);
+      if(updErr){
+        errDiv.textContent = '❌ Erreur : ' + updErr.message;
+        errDiv.style.display = '';
+        btn.textContent = 'Enregistrer les modifications';
+        btn.disabled = false;
+        return;
+      }
+    }
     closeAnnonceModal();
     btn.textContent = 'Publier l\'annonce →';
     btn.disabled = false;
+    // Reload annonces to show updated data
+    var user2 = await getUser();
+    if(user2) await loadMesAnnonces(user2.id);
     alert('✅ Annonce modifiée avec succès !');
   } else {
     var type = document.getElementById('a-type').value;
@@ -1175,7 +862,38 @@ async function submitAnnonce(){
   }
 }
 
-function editAnnonce(id){
+async function editAnnonce(id){
+  var card = document.getElementById(id);
+  var dbId = card ? (card.dataset.dbId || card.getAttribute('data-db-id')) : null;
+  
+  if(dbId){
+    // Load fresh data from Supabase
+    var { data: annonce } = await sb.from('annonces').select('*').eq('id', dbId).single();
+    if(annonce){
+      editingAnnonce = id;
+      document.getElementById('annonce-modal-title').textContent = 'Modifier l\'annonce';
+      document.getElementById('btn-annonce-submit').textContent = 'Enregistrer les modifications';
+      var typeGroup = document.getElementById('a-type-group');
+      if(typeGroup) typeGroup.style.display = 'none';
+      
+      document.getElementById('a-titre').value = annonce.title || '';
+      document.getElementById('a-categorie').value = annonce.category || '';
+      document.getElementById('a-lieu').value = annonce.city || '';
+      document.getElementById('a-tarif').value = annonce.tarif_montant || '';
+      document.getElementById('a-unite').value = annonce.tarif_type || 'jour';
+      document.getElementById('a-desc').value = annonce.description || '';
+      document.getElementById('a-expiration').value = annonce.expires_at ? annonce.expires_at.split('T')[0] : '';
+      var charCount = document.getElementById('a-char-count');
+      if(charCount) charCount.textContent = (annonce.description || '').length;
+      var errDiv = document.getElementById('a-error'); if(errDiv) errDiv.style.display = 'none';
+      
+      var expInput = document.getElementById('a-expiration');
+      if(expInput) expInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+      document.getElementById('modal-annonce').classList.add('open');
+      return;
+    }
+  }
+  // Fallback
   openAnnonceModal(id);
 }
 
@@ -1190,40 +908,31 @@ function closePauseModal(){
 async function confirmPause(){
   if(currentAnnonceId){
     var card = document.getElementById(currentAnnonceId);
-    var dbId = card.dataset.dbId;
-    if(dbId) await sb.from('annonces').update({ paused: true, status: 'en_attente' }).eq('id', dbId);
-    var badge = card.querySelector('.status-badge');
-    if(badge.textContent === 'Active'){
-      badge.textContent = 'En pause';
-      badge.className = 'status-badge status-progress';
-      var btns = card.querySelectorAll('.action-btn');
-      btns.forEach(function(b){
-        if(b.textContent.includes('Mettre en pause')){
-          b.textContent = '▶️ Réactiver';
-          b.onclick = function(){ resumeAnnonce(currentAnnonceId); };
-        }
-      });
+    var dbId = card ? (card.dataset.dbId || card.getAttribute('data-db-id')) : null;
+    if(dbId){
+      var { error } = await sb.from('annonces').update({ paused: true, status: 'en_attente' }).eq('id', dbId);
+      if(error){ alert('❌ Erreur : ' + error.message); closePauseModal(); return; }
     }
   }
   closePauseModal();
+  // Reload annonces to refresh UI
+  var user = await getUser();
+  if(user) await loadMesAnnonces(user.id);
   alert('⏸ Annonce mise en pause.');
 }
 
 async function resumeAnnonce(id){
+  if(!confirm('▶️ Voulez-vous réactiver cette annonce ?')) return;
   var card = document.getElementById(id);
-  var dbId = card.dataset.dbId;
-  if(dbId) await sb.from('annonces').update({ paused: false, status: 'active' }).eq('id', dbId);
-  var badge = card.querySelector('.status-badge');
-  badge.textContent = 'Active';
-  badge.className = 'status-badge status-done';
-  var btns = card.querySelectorAll('.action-btn');
-  btns.forEach(function(b){
-    if(b.textContent.includes('Réactiver')){
-      b.textContent = '⏸ Mettre en pause';
-      b.onclick = function(){ pauseAnnonce(id); };
-    }
-  });
-  alert('▶️ Annonce réactivée !');
+  var dbId = card ? (card.dataset.dbId || card.getAttribute('data-db-id')) : null;
+  if(dbId){
+    var { error } = await sb.from('annonces').update({ paused: false, status: 'active' }).eq('id', dbId);
+    if(error){ alert('❌ Erreur : ' + error.message); return; }
+  }
+  // Reload annonces to refresh UI
+  var user = await getUser();
+  if(user) await loadMesAnnonces(user.id);
+  alert('✅ Annonce réactivée !');
 }
 
 function deleteAnnonce(id){
@@ -1357,6 +1066,62 @@ async function changerMotDePasse(){
   else alert('✅ Mot de passe modifié avec succès !');
 }
 
+// === REPUBLIER ANNONCE ===
+async function republierAnnonce(id){
+  if(!confirm('🔄 Republier cette annonce pour 30 jours supplémentaires ?')) return;
+  var card = document.getElementById(id);
+  var dbId = card ? (card.dataset.dbId || card.getAttribute('data-db-id')) : null;
+  if(!dbId){ alert('❌ Erreur : annonce introuvable.'); return; }
+  
+  var newExpiry = new Date();
+  newExpiry.setDate(newExpiry.getDate() + 30);
+  
+  var { error } = await sb.from('annonces').update({
+    status: 'active',
+    paused: false,
+    expires_at: newExpiry.toISOString()
+  }).eq('id', dbId);
+  
+  if(error){ alert('❌ Erreur : ' + error.message); return; }
+  
+  var user = await getUser();
+  if(user) await loadMesAnnonces(user.id);
+  alert('✅ Annonce republiée pour 30 jours !');
+}
+
+// === PASSER EN PREMIUM ===
+async function passerPremium(annonceId, btn){
+  if(!confirm('Passer cette annonce en Premium pour 29€ ?\n\nVotre annonce sera mise en avant dans les résultats.')) return;
+  
+  // Open Stripe payment
+  var stripeUrl = 'https://buy.stripe.com/3cs28r6ro5eZ6Me2RYffy0Z';
+  window.open(stripeUrl, '_blank');
+  
+  // Mark as premium in DB (optimistic — in production, use Stripe webhook)
+  btn.textContent = '⏳ En attente de paiement...';
+  btn.disabled = true;
+  
+  // Wait a moment then ask if payment was completed
+  setTimeout(async function(){
+    if(confirm('Avez-vous finalisé le paiement sur Stripe ?')){
+      var { error } = await sb.from('annonces').update({ is_premium: true }).eq('id', annonceId);
+      if(error){
+        alert('❌ Erreur : ' + error.message);
+        btn.textContent = '⭐ Passer en Premium (29€)';
+        btn.disabled = false;
+        return;
+      }
+      alert('✅ Annonce passée en Premium ! Elle sera mise en avant.');
+      // Reload annonces
+      var user = await getUser();
+      if(user) loadMesAnnonces(user.id);
+    } else {
+      btn.textContent = '⭐ Passer en Premium (29€)';
+      btn.disabled = false;
+    }
+  }, 3000);
+}
+
 // === VOIR COORDONNEES ===
 function voirCoordonnees(btn, email, tel){
   var parent = btn.closest('.action-btns');
@@ -1370,82 +1135,229 @@ function voirCoordonnees(btn, email, tel){
   btn.outerHTML = html;
 }
 
+// === CHARGER MES CANDIDATURES ===
+async function loadMesCandidatures(){
+  var user = await getUser();
+  if(!user) return;
+  
+  var { data: cands, error } = await sb.from('candidatures')
+    .select('*, annonces:annonce_id(title, city, tarif_montant, tarif_type, category, author_id)')
+    .eq('user_id', user.id)
+    .order('created_at', { ascending: false });
+  
+  if(error || !cands) cands = [];
+  
+  var container = document.getElementById('mes-candidatures-list');
+  var titleEl = document.getElementById('mes-candidatures-title');
+  titleEl.textContent = '🎯 Mes candidatures (' + cands.length + ')';
+  
+  // Build filter counts
+  var counts = { toutes: cands.length, en_attente: 0, acceptee: 0, refusee: 0 };
+  cands.forEach(function(c){ if(counts[c.status] !== undefined) counts[c.status]++; });
+  
+  var filtersDiv = document.getElementById('candidature-filters');
+  filtersDiv.innerHTML = 
+    '<button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="filterCandidatures(\'toutes\', this)">Toutes (' + counts.toutes + ')</button>' +
+    '<button class="action-btn" onclick="filterCandidatures(\'en_attente\', this)">⏳ En attente (' + counts.en_attente + ')</button>' +
+    '<button class="action-btn" onclick="filterCandidatures(\'acceptee\', this)">✅ Acceptées (' + counts.acceptee + ')</button>' +
+    '<button class="action-btn" onclick="filterCandidatures(\'refusee\', this)">❌ Refusées (' + counts.refusee + ')</button>';
+  
+  if(cands.length === 0){
+    container.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--muted);"><div style="font-size:40px;margin-bottom:12px;">🎯</div><p style="font-size:14px;">Vous n\'avez pas encore postulé à une mission.</p><a href="missions.html" class="btn btn-primary" style="margin-top:16px;display:inline-block;">Voir les missions →</a></div>';
+    return;
+  }
+  
+  var html = '';
+  cands.forEach(function(c){
+    var a = c.annonces || {};
+    var tarif = a.tarif_montant ? a.tarif_montant + '€/' + (a.tarif_type === 'heure' ? 'h' : 'jour') : '';
+    var date = new Date(c.created_at).toLocaleDateString('fr-FR');
+    
+    var statusHtml = '', statusClass = '';
+    if(c.status === 'acceptee'){ statusHtml = '<span class="status-badge status-done">✅ Acceptée</span>'; statusClass = 'acceptee'; }
+    else if(c.status === 'refusee'){ statusHtml = '<span class="status-badge status-new">❌ Non retenu</span>'; statusClass = 'refusee'; }
+    else if(c.status === 'bloquee'){ statusHtml = '<span class="status-badge" style="background:rgba(0,0,0,.05);color:#666;">🚫 Bloquée</span>'; statusClass = 'bloquee'; }
+    else { statusHtml = '<span class="status-badge status-progress">⏳ En attente</span>'; statusClass = 'en_attente'; }
+    
+    html += '<div class="detail-card candidature-card" data-status="' + statusClass + '">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">';
+    html += '<div><h4>' + (a.title || 'Mission') + '</h4>';
+    html += '<p>' + (a.city || '') + (tarif ? ' · ' + tarif : '') + (a.category ? ' · ' + a.category : '') + '</p></div>';
+    html += statusHtml + '</div>';
+    html += '<div class="detail-meta"><span class="detail-tag">📅 Postulé le ' + date + '</span></div>';
+    
+    // If accepted — show recruiter contact
+    if(c.status === 'acceptee'){
+      html += '<div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:12px;margin-top:10px;">';
+      html += '<p style="font-size:13px;font-weight:700;margin-bottom:8px;">🎉 Votre candidature a été acceptée !</p>';
+      html += '<p style="font-size:12px;color:var(--muted);">Le recruteur a partagé ses coordonnées. Contactez-le pour la suite.</p>';
+      // We need to load the annonce creator's profile for contact info
+      html += '<div class="action-btns" style="margin-top:8px;"><button class="action-btn" onclick="loadRecruiterContact(this,\'' + (a.author_id || '') + '\')">📞 Voir les coordonnées</button></div>';
+      html += '</div>';
+    }
+    
+    // If en_attente — retirer button
+    if(c.status === 'en_attente'){
+      html += '<div class="action-btns"><button class="action-btn danger" onclick="retirerCandidature(\'' + c.id + '\', this)">❌ Retirer ma candidature</button></div>';
+    }
+    
+    // If refusee — postuler à nouveau (can re-apply)
+    if(c.status === 'refusee'){
+      html += '<div style="background:rgba(233,69,96,.05);border:1px solid rgba(233,69,96,.15);border-radius:8px;padding:10px;margin-top:10px;font-size:12px;">';
+      html += '<p>Vous pouvez recandidater à cette mission depuis la <a href="missions.html">page des missions</a>.</p></div>';
+    }
+    
+    html += '</div>';
+  });
+  
+  container.innerHTML = html;
+}
+
+async function loadRecruiterContact(btn, recruiterId){
+  if(!recruiterId){ alert('Coordonnées non disponibles.'); return; }
+  var { data: profile } = await sb.from('profiles').select('email, phone, full_name').eq('id', recruiterId).single();
+  if(!profile){ alert('Coordonnées non disponibles.'); return; }
+  var parent = btn.closest('.action-btns');
+  var html = '<div style="display:flex;flex-wrap:wrap;gap:8px;">';
+  if(profile.email) html += '<a href="mailto:'+profile.email+'" style="font-size:12px;background:#fff;padding:6px 12px;border-radius:20px;border:1px solid #e0e0e0;text-decoration:none;color:var(--primary);">📧 '+profile.email+'</a>';
+  if(profile.phone) html += '<a href="tel:'+profile.phone.replace(/\\s/g,'')+'" style="font-size:12px;background:#fff;padding:6px 12px;border-radius:20px;border:1px solid #e0e0e0;text-decoration:none;color:var(--primary);">📱 '+profile.phone+'</a>';
+  html += '</div>';
+  parent.innerHTML = html;
+}
+
+async function retirerCandidature(candId, btn){
+  if(!confirm('Retirer cette candidature ?')) return;
+  btn.textContent = '...'; btn.disabled = true;
+  var { error } = await sb.from('candidatures').delete().eq('id', candId);
+  if(error){ alert('❌ Erreur : ' + error.message); btn.disabled = false; return; }
+  loadMesCandidatures();
+}
+
 // === FILTER CANDIDATURES ===
 function filterCandidatures(status, btn){
-  // Update active button
   document.querySelectorAll('#candidature-filters .action-btn').forEach(function(b){
-    b.style.background = '';
-    b.style.color = '';
-    b.style.borderColor = '';
+    b.style.background = ''; b.style.color = ''; b.style.borderColor = '';
   });
   btn.style.background = 'var(--accent)';
   btn.style.color = '#fff';
   btn.style.borderColor = 'var(--accent)';
   
-  // Filter cards
-  document.querySelectorAll('.candidature-card').forEach(function(card){
-    if(status === 'toutes'){
-      card.style.display = '';
-    } else {
-      card.style.display = card.dataset.status === status ? '' : 'none';
-    }
+  document.querySelectorAll('#mes-candidatures-list .candidature-card').forEach(function(card){
+    card.style.display = (status === 'toutes' || card.dataset.status === status) ? '' : 'none';
   });
 }
 
-// === CANDIDATURES ===
-var fakeCandidatures = {
-  'annonce-1': [
-    {nom:'Marie Dupont',email:'marie.dupont@gmail.com',tel:'06 12 34 56 78',ville:'Paris',experience:'8 ans',date:'17/03/2026',linkedin:'https://linkedin.com/in/marie-dupont',cv:true,message:'Bonjour, je suis très intéressée par cette mission. J\'ai 8 ans d\'expérience en gestion de projet.'},
-    {nom:'Thomas Bernard',email:'t.bernard@outlook.fr',tel:'07 98 76 54 32',ville:'Lyon',experience:'5 ans',date:'16/03/2026',linkedin:'https://linkedin.com/in/thomas-bernard',cv:true,message:'Disponible immédiatement pour cette mission.'},
-    {nom:'Sophie Chen',email:'sophie.chen@yahoo.fr',tel:'06 45 67 89 01',ville:'Distanciel',experience:'12 ans',date:'15/03/2026',linkedin:null,cv:true,message:'Senior PM avec certifications PMP et Prince2.'},
-    {nom:'Karim Ouali',email:'karim.o@gmail.com',tel:'06 78 90 12 34',ville:'Marseille',experience:'3 ans',date:'15/03/2026',linkedin:'https://linkedin.com/in/karim-ouali',cv:false,message:'Jeune formateur motivé, spécialisé en méthodes agiles.'},
-    {nom:'Isabelle Martin',email:'isa.martin@free.fr',tel:'07 23 45 67 89',ville:'Bordeaux',experience:'15 ans',date:'14/03/2026',linkedin:'https://linkedin.com/in/isabelle-martin',cv:true,message:null},
-    {nom:'Jean-Pierre Roux',email:'jp.roux@gmail.com',tel:'06 56 78 90 12',ville:'Toulouse',experience:'10 ans',date:'14/03/2026',linkedin:null,cv:false,message:'Expert en gestion de projet avec double compétence technique et managériale.'}
-  ],
-  'annonce-2': [
-    {nom:'Claire Moreau',email:'claire.m@gmail.com',tel:'06 34 56 78 90',ville:'Distanciel',experience:'6 ans',date:'18/03/2026',linkedin:'https://linkedin.com/in/claire-moreau',cv:true,message:'Formatrice Excel certifiée Microsoft, VBA niveau expert.'},
-    {nom:'Paul Lefebvre',email:'paul.lef@outlook.fr',tel:'07 12 34 56 78',ville:'Paris',experience:'4 ans',date:'17/03/2026',linkedin:'https://linkedin.com/in/paul-lefebvre',cv:true,message:'Spécialiste automatisation Excel/VBA en entreprise.'},
-    {nom:'Nadia Benzema',email:'nadia.b@gmail.com',tel:'06 90 12 34 56',ville:'Lyon',experience:'9 ans',date:'16/03/2026',linkedin:null,cv:true,message:null}
-  ]
-};
+// === CANDIDATURES (Supabase) ===
 
-function voirCandidatures(btn){
+async function voirCandidatures(btn){
   var card = btn.closest('.detail-card');
-  var id = card ? card.id : null;
+  var dbId = card ? card.getAttribute('data-db-id') : null;
   var titre = card ? card.querySelector('h4').textContent.replace('⭐ ','') : 'Annonce';
-  var candidats = fakeCandidatures[id] || fakeCandidatures['annonce-1'];
   
-  document.getElementById('candidatures-title').textContent = 'Candidatures reçues (' + candidats.length + ')';
+  document.getElementById('candidatures-title').textContent = 'Chargement...';
   document.getElementById('candidatures-subtitle').textContent = titre;
+  document.getElementById('candidatures-list').innerHTML = '<p style="text-align:center;color:var(--muted);">Chargement...</p>';
+  document.getElementById('modal-candidatures').classList.add('open');
+  
+  if(!dbId) {
+    document.getElementById('candidatures-list').innerHTML = '<p style="text-align:center;color:var(--muted);">Aucune candidature.</p>';
+    document.getElementById('candidatures-title').textContent = 'Candidatures reçues (0)';
+    return;
+  }
+  
+  // Load real candidatures from Supabase
+  var { data: cands, error } = await sb.from('candidatures')
+    .select('*, profiles:user_id(full_name, email, phone, first_name, last_name)')
+    .eq('annonce_id', dbId)
+    .order('created_at', { ascending: false });
+  
+  if(error || !cands) cands = [];
+  
+  document.getElementById('candidatures-title').textContent = 'Candidatures reçues (' + cands.length + ')';
+  
+  if(cands.length === 0){
+    document.getElementById('candidatures-list').innerHTML = '<div style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:36px;margin-bottom:8px;">📭</div><p>Aucune candidature pour le moment.</p></div>';
+    return;
+  }
   
   var html = '';
-  candidats.forEach(function(c, i){
-    html += '<div style="background:var(--light);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;">';
-    html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">';
-    html += '<div><strong style="font-size:15px;">'+c.nom+'</strong>';
-    html += '<p style="font-size:12px;color:var(--muted);margin-top:2px;">📍 '+c.ville+' · '+c.experience+' d\'expérience · Candidature le '+c.date+'</p></div>';
-    html += '</div>';
+  cands.forEach(function(c){
+    var p = c.profiles || {};
+    var nom = p.full_name || (p.first_name + ' ' + p.last_name) || 'Candidat';
+    var email = p.email || '';
+    var tel = p.phone || '';
+    var date = new Date(c.created_at).toLocaleDateString('fr-FR');
+    var dispoLabels = { immediat: '🟢 Immédiatement', moins_1_mois: '🟡 Moins d\'un mois', plus_1_mois: '🔴 Plus d\'un mois' };
+    var dispoLabel = dispoLabels[c.disponibilite] || c.disponibilite;
     
-    // Contact info
-    html += '<div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;">';
-    html += '<span style="font-size:12px;background:rgba(233,69,96,.08);padding:4px 10px;border-radius:20px;">📧 '+c.email+'</span>';
-    html += '<span style="font-size:12px;background:rgba(233,69,96,.08);padding:4px 10px;border-radius:20px;">📱 '+c.tel+'</span>';
-    if(c.linkedin) html += '<a href="'+c.linkedin+'" target="_blank" style="font-size:12px;background:#0077b5;color:#fff;padding:4px 10px;border-radius:20px;text-decoration:none;">🔗 LinkedIn</a>';
-    html += '</div>';
+    // Status badge
+    var statusHtml = '';
+    if(c.status === 'acceptee') statusHtml = '<span style="font-size:12px;background:rgba(16,185,129,.1);color:#10b981;padding:4px 10px;border-radius:12px;font-weight:600;">✅ Acceptée</span>';
+    else if(c.status === 'refusee') statusHtml = '<span style="font-size:12px;background:rgba(233,69,96,.1);color:var(--accent);padding:4px 10px;border-radius:12px;font-weight:600;">❌ Refusée</span>';
+    else if(c.status === 'bloquee') statusHtml = '<span style="font-size:12px;background:rgba(0,0,0,.1);color:#666;padding:4px 10px;border-radius:12px;font-weight:600;">🚫 Bloquée</span>';
+    else statusHtml = '<span style="font-size:12px;background:rgba(245,158,11,.1);color:#f59e0b;padding:4px 10px;border-radius:12px;font-weight:600;">⏳ En attente</span>';
+    
+    html += '<div style="background:var(--light);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;" id="cand-' + c.id + '">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">';
+    html += '<div><strong style="font-size:15px;">' + nom + '</strong>';
+    html += '<p style="font-size:12px;color:var(--muted);margin-top:2px;">Candidature le ' + date + ' · ' + dispoLabel + '</p></div>';
+    html += statusHtml + '</div>';
+    
+    // Contact info (shown only if accepted)
+    if(c.status === 'acceptee'){
+      html += '<div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;">';
+      if(email) html += '<a href="mailto:'+email+'" style="font-size:12px;background:rgba(233,69,96,.08);padding:4px 10px;border-radius:20px;text-decoration:none;color:var(--primary);">📧 '+email+'</a>';
+      if(tel) html += '<a href="tel:'+tel.replace(/\\s/g,'')+'" style="font-size:12px;background:rgba(233,69,96,.08);padding:4px 10px;border-radius:20px;text-decoration:none;color:var(--primary);">📱 '+tel+'</a>';
+      if(c.linkedin) html += '<a href="'+c.linkedin+'" target="_blank" style="font-size:12px;background:#0077b5;color:#fff;padding:4px 10px;border-radius:20px;text-decoration:none;">🔗 LinkedIn</a>';
+      html += '</div>';
+    }
     
     // Message
     if(c.message) html += '<p style="font-size:13px;color:var(--muted);background:#fff;padding:10px;border-radius:8px;border:1px solid var(--border);margin:8px 0;font-style:italic;">"'+c.message+'"</p>';
     
-    // Actions
-    html += '<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">';
-    if(c.cv) html += '<button class="action-btn" style="font-size:12px;" onclick="alert(\'📄 Téléchargement du CV de '+c.nom+'...\')">📄 Télécharger CV</button>';
-    else html += '<span style="font-size:11px;color:var(--muted);padding:6px 0;">Pas de CV fourni</span>';
-    html += '<button class="action-btn" style="font-size:12px;" onclick="window.location.href=\'mailto:'+c.email+'\'">✉️ Contacter</button>';
-    html += '</div></div>';
+    // CV + LinkedIn (if not accepted yet)
+    html += '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">';
+    if(c.cv_url) html += '<a href="'+c.cv_url+'" target="_blank" class="action-btn" style="font-size:12px;text-decoration:none;">📄 Télécharger CV</a>';
+    if(c.linkedin && c.status !== 'acceptee') html += '<a href="'+c.linkedin+'" target="_blank" class="action-btn" style="font-size:12px;text-decoration:none;">🔗 LinkedIn</a>';
+    html += '</div>';
+    
+    // Actions (only if en_attente)
+    if(c.status === 'en_attente'){
+      html += '<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:12px;">';
+      html += '<button class="action-btn" style="background:#10b981;color:#fff;border-color:#10b981;font-size:12px;" onclick="updateCandidatureStatus(\''+c.id+'\',\'acceptee\',this)">✅ Accepter</button>';
+      html += '<button class="action-btn" style="font-size:12px;" onclick="updateCandidatureStatus(\''+c.id+'\',\'refusee\',this)">❌ Refuser</button>';
+      html += '<button class="action-btn danger" style="font-size:12px;" onclick="updateCandidatureStatus(\''+c.id+'\',\'bloquee\',this)">🚫 Bloquer</button>';
+      html += '</div>';
+    }
+    
+    html += '</div>';
   });
   
   document.getElementById('candidatures-list').innerHTML = html;
-  document.getElementById('modal-candidatures').classList.add('open');
+}
+
+async function updateCandidatureStatus(candId, status, btn){
+  var labels = { acceptee: 'accepter', refusee: 'refuser', bloquee: 'bloquer' };
+  if(!confirm('Voulez-vous ' + labels[status] + ' cette candidature ?')) return;
+  
+  btn.textContent = '...';
+  btn.disabled = true;
+  
+  var { error } = await sb.from('candidatures').update({ status: status, updated_at: new Date().toISOString() }).eq('id', candId);
+  
+  if(error){
+    alert('❌ Erreur : ' + error.message);
+    btn.disabled = false;
+    return;
+  }
+  
+  // Refresh the modal by re-clicking voir candidatures
+  var modal = document.getElementById('modal-candidatures');
+  modal.classList.remove('open');
+  
+  // Find the annonce card and re-trigger
+  var subtitle = document.getElementById('candidatures-subtitle').textContent;
+  alert('✅ Candidature ' + (status === 'acceptee' ? 'acceptée' : status === 'refusee' ? 'refusée' : 'bloquée') + ' !');
 }
 
 function openLogoutModal(){
@@ -1476,6 +1388,11 @@ async function confirmLogout(){
     var ae = document.getElementById('profil-adresse'); if(ae) ae.value = profile.address || '';
     var se = document.getElementById('profil-siren'); if(se) se.value = profile.siren || '';
     var pt = document.getElementById('profil-type'); if(pt && profile.profile_type) pt.value = profile.profile_type;
+    // Show pro button if is_pro flag is true
+    if(profile.is_pro){
+      var proBtn = document.getElementById('sidebar-pro-btn');
+      if(proBtn) proBtn.style.display = '';
+    }
     // Update referral links with real code
     if(profile.referral_code){
       document.querySelectorAll('.ref-link-input').forEach(function(input){
@@ -1485,7 +1402,47 @@ async function confirmLogout(){
   }
   // Load user's annonces from Supabase
   await loadMesAnnonces(user.id);
+  // Load user's candidatures
+  await loadMesCandidatures();
+  // Load demarches + OF
+  var nbDem = await loadMesDemarches(user.id);
+  var nbOF = await loadMesOF(user.id);
+  // Update stats
+  await updateDashboardStats(user.id, nbDem, nbOF);
+  // Load referral data
+  await loadReferralData(user.id);
+  
+  // Check formation status and update summary + tab
+  updateFormationProgress(profile);
+
+  // Handle deep-link from success page (e.g. dashboard.html#demarches)
+  var hash = window.location.hash.replace('#', '');
+  if(hash && document.getElementById('tab-' + hash)){
+    showTab(hash);
+  }
 })();
+
+function updateFormationProgress(profile){
+  var purchased = profile && profile.formation_purchased;
+  var progress = profile && profile.formation_progress ? profile.formation_progress : 0;
+  
+  // Update summary stat
+  var statEl = document.getElementById('stat-formation');
+  if(statEl) statEl.textContent = progress + '%';
+  
+  // Toggle purchased/not-purchased views
+  var notPurchased = document.getElementById('formation-not-purchased');
+  var purchasedDiv = document.getElementById('formation-purchased');
+  if(purchased && purchasedDiv && notPurchased){
+    notPurchased.style.display = 'none';
+    purchasedDiv.style.display = '';
+    // Update progress in the purchased view
+    var badge = purchasedDiv.querySelector('.status-badge');
+    if(badge) badge.textContent = 'En cours — ' + progress + '%';
+    var fill = purchasedDiv.querySelector('.progress-fill');
+    if(fill) fill.style.width = progress + '%';
+  }
+}
 
 async function loadMesAnnonces(userId){
   var { data: annonces, error } = await sb.from('annonces')
@@ -1493,43 +1450,609 @@ async function loadMesAnnonces(userId){
     .eq('author_id', userId)
     .order('created_at', { ascending: false });
   
-  if(error || !annonces || annonces.length === 0) return;
-  
   var list = document.getElementById('annonces-list');
-  // Keep fake demo cards but add real ones on top
+  list.innerHTML = '';
+  
+  if(error || !annonces || annonces.length === 0){
+    list.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--muted);"><div style="font-size:40px;margin-bottom:12px;">📋</div><p style="font-size:14px;">Vous n\'avez pas encore d\'annonce.</p><p style="font-size:13px;">Cliquez sur "+ Déposer une annonce" pour commencer.</p></div>';
+    updateAnnonceCount();
+    return;
+  }
+  
+  // Count candidatures for each annonce
+  var annonceIds = annonces.map(function(a){ return a.id; });
+  var candCounts = {};
+  var { data: cands } = await sb.from('candidatures')
+    .select('annonce_id')
+    .in('annonce_id', annonceIds);
+  if(cands){
+    cands.forEach(function(c){
+      candCounts[c.annonce_id] = (candCounts[c.annonce_id] || 0) + 1;
+    });
+  }
+  
   annonces.forEach(function(a){
     var id = 'annonce-' + a.id;
-    // Skip if already in DOM
-    if(document.getElementById(id)) return;
-    var isPremium = a.is_premium;
+    var isPremium = a.is_premium || a.type === 'premium';
     var isPaused = a.paused;
-    var isExpired = a.status === 'expiree';
+    var isExpired = a.status === 'expiree' || (a.expires_at && new Date(a.expires_at) < new Date());
     var statusClass = isPaused ? 'status-progress' : isExpired ? 'status-new' : 'status-done';
     var statusText = isPaused ? 'En pause' : isExpired ? 'Expirée' : 'Active';
     var date = new Date(a.created_at);
     var dateStr = date.toLocaleDateString('fr-FR', {day:'2-digit',month:'2-digit'});
+    var nbCand = candCounts[a.id] || 0;
     
     var html = '<div class="detail-card" id="'+id+'" data-db-id="'+a.id+'">' +
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
       '<div><h4>'+(isPremium?'⭐ ':'')+a.title+'</h4>' +
-      '<p>'+a.city+' · '+(a.tarif_montant||'')+('€/'+(a.tarif_type||'jour'))+' · '+a.category+'</p></div>' +
+      '<p>'+(a.city||'')+' · '+(a.tarif_montant||'')+'€/'+(a.tarif_type==='heure'?'h':'jour')+' · '+(a.category||'')+'</p>' +
+      (a.description ? '<p style="font-size:11px;color:var(--muted);margin-top:4px;">'+a.description.substring(0,120)+(a.description.length>120?'...':'')+'</p>' : '') +
+      '</div>' +
       '<span class="status-badge '+statusClass+'">'+statusText+'</span></div>' +
       '<div class="detail-meta">' +
       '<span class="detail-tag">'+(isPremium?'⭐ Premium (29€)':'Gratuite')+'</span>' +
-      '<span class="detail-tag">👥 0 candidatures</span>' +
-      '<span class="detail-tag">👁 '+(a.views_count||0)+' vues</span>' +
+      '<span class="detail-tag">👥 '+nbCand+' candidature'+(nbCand>1?'s':'')+'</span>' +
+      '<span class="detail-tag">👁 '+(a.views||0)+' vues</span>' +
       '<span class="detail-tag">📅 Publiée le '+dateStr+'</span></div>' +
       '<div class="action-btns">' +
-      '<button class="action-btn" onclick="editAnnonce(\''+id+'\')">✏️ Modifier</button>' +
-      '<button class="action-btn" onclick="voirCandidatures(this)">👁 Voir les candidatures</button>' +
-      (isPaused ? '<button class="action-btn" onclick="resumeAnnonce(\''+id+'\')">▶️ Réactiver</button>' :
-       '<button class="action-btn" onclick="pauseAnnonce(\''+id+'\')">⏸ Mettre en pause</button>') +
-      (!isPremium ? '<button class="action-btn" onclick="window.open(\'https://buy.stripe.com/3cs28r6ro5eZ6Me2RYffy0Z\',\'_blank\')">⭐ Passer en Premium</button>' : '') +
+      (isExpired ? 
+        '<button class="action-btn" style="background:#10b981;color:#fff;border-color:#10b981;" onclick="republierAnnonce(\''+id+'\')">🔄 Republier</button>' +
+        '<button class="action-btn" onclick="editAnnonce(\''+id+'\')">✏️ Modifier et republier</button>'
+      :
+        '<button class="action-btn" onclick="editAnnonce(\''+id+'\')">✏️ Modifier</button>' +
+        '<button class="action-btn" onclick="voirCandidatures(this)">👁 Voir les candidatures</button>' +
+        (isPaused ? '<button class="action-btn" onclick="resumeAnnonce(\''+id+'\')">▶️ Réactiver</button>' :
+         '<button class="action-btn" onclick="pauseAnnonce(\''+id+'\')">⏸ Mettre en pause</button>') +
+        (!isPremium ? '<button class="action-btn" onclick="passerPremium(\''+a.id+'\',this)">⭐ Passer en Premium (29€)</button>' : '')
+      ) +
       '<button class="action-btn danger" onclick="deleteAnnonce(\''+id+'\')">🗑 Supprimer</button></div></div>';
-    list.insertAdjacentHTML('afterbegin', html);
+    list.insertAdjacentHTML('beforeend', html);
   });
   updateAnnonceCount();
 }
+
+// ============================
+// DÉMARCHES — Chargement dynamique
+// ============================
+
+var demarcheTypeLabels = {
+  nda: 'NDA — Numéro de Déclaration d\'Activité',
+  uai: 'UAI — Numéro UAI',
+  qualiopi: '✦ Qualiopi — Certification qualité',
+  edof: '€ EDOF — Mon Compte Formation',
+  francetravail: 'France Travail — Référencement',
+  rs_rncp: 'RS/RNCP — Enregistrement certification',
+  rs: 'RS/RNCP — Enregistrement certification',
+  opco: 'OPCO — Connexion',
+  bpf: 'BPF — Bilan Pédagogique et Financier',
+  agent: '🤖 Agent IA — Configuration'
+};
+
+var demarcheTypeIcons = {
+  nda: 'NDA', uai: 'UAI', qualiopi: '✦', edof: '€', francetravail: 'FT',
+  rs_rncp: 'RS', rs: 'RS', opco: '11', bpf: 'BPF', agent: '🤖'
+};
+
+var demarcheSteps = {
+  nda: ['Réception documents', 'Vérification par l\'expert', 'Création du dossier DREETS', 'Envoi à la DREETS', 'Réception NDA'],
+  uai: ['Réception documents', 'Création dossier rectorat', 'Envoi au rectorat', 'Réception UAI'],
+  qualiopi: ['Audit documentaire initial', 'Rédaction du manuel qualité', 'Vérification + ajustements', 'Préparation audit blanc', 'Accompagnement certification'],
+  edof: ['Vérification éligibilité', 'Création fiches formation', 'Paramétrage espace EDOF', 'Mise en ligne', 'Validation'],
+  francetravail: ['Réception documents', 'Constitution du dossier', 'Soumission France Travail', 'Validation'],
+  rs_rncp: ['Analyse de la demande', 'Rédaction des référentiels', 'Constitution dossier', 'Soumission', 'Suivi'],
+  rs: ['Analyse de la demande', 'Rédaction des référentiels', 'Constitution dossier', 'Soumission', 'Suivi'],
+  opco: ['Réception + sélection OPCO', 'Constitution des dossiers', 'Envoi aux OPCO', 'Suivi des retours'],
+  bpf: ['Réception données', 'Rédaction du BPF', 'Validation client', 'Soumission'],
+  agent: ['Prise de rendez-vous', 'RDV de cadrage', 'Configuration agent', 'Test + validation', 'Mise en production']
+};
+
+var statusLabels = {
+  nouveau: { text: 'Nouveau', cls: 'status-new' },
+  en_cours: { text: 'En cours', cls: 'status-progress' },
+  verification_expert: { text: 'Vérification expert', cls: 'status-review' },
+  soumis: { text: 'Soumis', cls: 'status-progress' },
+  termine: { text: 'Terminé', cls: 'status-done' },
+  refuse: { text: 'Refusé', cls: 'status-new' }
+};
+
+async function loadMesDemarches(userId){
+  var { data: demarches, error } = await sb.from('demarches')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+
+  var list = document.getElementById('demarches-list');
+  var countEl = document.getElementById('demarches-count');
+
+  if(error || !demarches || demarches.length === 0){
+    list.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--muted);"><div style="font-size:40px;margin-bottom:12px;">📄</div><p style="font-size:14px;">Vous n\'avez pas encore de démarche.</p><p style="font-size:13px;">Rendez-vous sur <a href="conformite.html" style="color:var(--accent);font-weight:600;">Conformité</a> pour commencer.</p></div>';
+    if(countEl) countEl.textContent = '0';
+    return demarches ? demarches.length : 0;
+  }
+
+  if(countEl) countEl.textContent = demarches.length;
+  list.innerHTML = '';
+
+  // Load documents for all demarches
+  var demIds = demarches.map(function(d){ return d.id; });
+  var { data: allDocs } = await sb.from('documents').select('*').in('demarche_id', demIds);
+  var docsMap = {};
+  if(allDocs) allDocs.forEach(function(doc){
+    if(!docsMap[doc.demarche_id]) docsMap[doc.demarche_id] = [];
+    docsMap[doc.demarche_id].push(doc);
+  });
+
+  demarches.forEach(function(d){
+    var label = demarcheTypeLabels[d.type] || d.type;
+    var steps = demarcheSteps[d.type] || ['Étape 1', 'Étape 2', 'Étape 3'];
+    var totalSteps = steps.length;
+    var currentStep = d.current_step || 1;
+    var pct = Math.round((currentStep / totalSteps) * 100);
+    if(d.status === 'termine') pct = 100;
+    var st = statusLabels[d.status] || statusLabels.nouveau;
+    var date = new Date(d.created_at).toLocaleDateString('fr-FR', {day:'2-digit',month:'2-digit',year:'numeric'});
+    var amount = d.amount_cents ? (d.amount_cents / 100) + '€' : '';
+    var progressColor = d.status === 'termine' ? 'var(--success)' : 'var(--accent)';
+
+    // Steps display
+    var stepsHtml = '<div style="font-size:12px;margin-top:8px;">';
+    steps.forEach(function(s, i){
+      var icon = '🔒';
+      if(i + 1 < currentStep || d.status === 'termine') icon = '✅';
+      else if(i + 1 === currentStep) icon = '⏳';
+      stepsHtml += icon + ' Étape ' + (i+1) + ' : ' + s + '<br>';
+    });
+    stepsHtml += '</div>';
+
+    // Documents
+    var docs = docsMap[d.id] || [];
+    var docsHtml = '';
+    if(docs.length > 0){
+      docsHtml = '<div style="font-size:12px;margin-top:8px;"><strong>Documents :</strong><br>';
+      docs.forEach(function(doc){
+        var docIcon = doc.status === 'valide' ? '✅' : doc.status === 'refuse' ? '❌' : '⏳';
+        docsHtml += docIcon + ' ' + doc.name;
+        if(doc.expert_comment) docsHtml += ' <span style="color:var(--muted);font-style:italic;">— ' + doc.expert_comment + '</span>';
+        docsHtml += '<br>';
+      });
+      docsHtml += '</div>';
+    }
+
+    // Expert info
+    var expertHtml = '';
+    if(d.expert_id){
+      expertHtml = '<div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">' +
+        '👨‍💼 <strong>Expert assigné</strong> — Votre dossier est suivi par un professionnel.' +
+        '</div>';
+    } else if(d.status !== 'termine'){
+      expertHtml = '<div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">' +
+        '⏳ <strong>En attente d\'assignation</strong> — Un expert va prendre en charge votre dossier.' +
+        '</div>';
+    }
+
+    var html = '<div class="detail-card" data-demarche-id="' + d.id + '">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>' + label + '</h4>' +
+      '<p>Commandé le ' + date + (d.org_name ? ' · ' + d.org_name : '') + '</p></div>' +
+      '<div style="text-align:right;">' +
+      (amount ? '<div style="font-size:18px;font-weight:800;color:var(--accent);">' + amount + '</div>' : '') +
+      '<span class="status-badge ' + st.cls + '">' + st.text + '</span>' +
+      (!d.paid ? ' <span style="font-size:10px;color:var(--accent);">⚠️ Non payé</span>' : '') +
+      '</div></div>' +
+      '<div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:' + pct + '%;background:' + progressColor + ';"></div></div>' +
+      '<p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Étape ' + currentStep + '/' + totalSteps + ' : ' + (steps[currentStep-1] || '') + '</p>' +
+      stepsHtml + docsHtml + expertHtml +
+      '<div class="action-btns">' +
+      '<button class="action-btn" onclick="openDocUploadModal(\'' + d.id + '\', \'demarche\')">📤 Envoyer un document</button>' +
+      (d.expert_id ? '<button class="action-btn" onclick="openMessageModal(\'' + d.id + '\', \'demarche\')">💬 Contacter mon expert</button>' : '') +
+      '</div></div>';
+
+    list.insertAdjacentHTML('beforeend', html);
+  });
+
+  return demarches.length;
+}
+
+// ============================
+// CRÉATIONS D'OF — Chargement dynamique
+// ============================
+
+var ofTypeLabels = {
+  action_formation: '📚 Action de formation',
+  cfa: '🎓 CFA — Centre de Formation d\'Apprentis',
+  bilan: '📋 Bilan de compétences',
+  vae: '📝 VAE — Validation des Acquis',
+  elus: '🏛 Formation des élus',
+  agents_ia: '🤖 OF géré par Agents IA'
+};
+
+var ofSteps = {
+  action_formation: ['Documents collectés', 'Rédaction statuts', 'Création KBIS au greffe', 'Demande NDA à la DREETS', 'Activation OF'],
+  cfa: ['Documents collectés', 'Rédaction statuts', 'Création KBIS', 'Demande NDA DREETS', 'Demande UAI mention CFA', 'Activation CFA'],
+  bilan: ['Documents collectés', 'Création société', 'KBIS au greffe', 'NDA spécifique bilan', 'Activation'],
+  vae: ['Documents collectés', 'Création société', 'KBIS au greffe', 'NDA VAE DREETS', 'Activation'],
+  elus: ['Documents collectés', 'Création société', 'KBIS au greffe', 'NDA DREETS', 'Agrément préfectoral', 'Activation'],
+  agents_ia: ['Réception commande + KBIS ou création société', 'Configuration agents IA + activation']
+};
+
+var ofStatusLabels = {
+  nouveau: { text: 'Nouveau', cls: 'status-new' },
+  en_cours: { text: 'En cours', cls: 'status-progress' },
+  verification_expert: { text: 'Vérification', cls: 'status-progress' },
+  greffe: { text: 'Au greffe', cls: 'status-progress' },
+  nda_dreets: { text: 'DREETS', cls: 'status-progress' },
+  termine: { text: 'Terminé', cls: 'status-done' },
+  refuse: { text: 'Refusé', cls: 'status-new' }
+};
+
+async function loadMesOF(userId){
+  var { data: creations, error } = await sb.from('creations_of')
+    .select('*, creation_of_options(*)')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+
+  var list = document.getElementById('of-list');
+  var countEl = document.getElementById('of-count');
+
+  if(error || !creations || creations.length === 0){
+    list.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--muted);"><div style="font-size:40px;margin-bottom:12px;">🏛</div><p style="font-size:14px;">Vous n\'avez pas encore créé d\'organisme.</p><p style="font-size:13px;">Rendez-vous sur <a href="creer-of.html" style="color:var(--accent);font-weight:600;">Créer mon OF</a> pour commencer.</p></div>';
+    if(countEl) countEl.textContent = '0';
+    return 0;
+  }
+
+  if(countEl) countEl.textContent = creations.length;
+  list.innerHTML = '';
+
+  // Load documents
+  var crIds = creations.map(function(c){ return c.id; });
+  var { data: allDocs } = await sb.from('documents').select('*').in('creation_of_id', crIds);
+  var docsMap = {};
+  if(allDocs) allDocs.forEach(function(doc){
+    if(!docsMap[doc.creation_of_id]) docsMap[doc.creation_of_id] = [];
+    docsMap[doc.creation_of_id].push(doc);
+  });
+
+  creations.forEach(function(c){
+    var label = ofTypeLabels[c.of_type] || c.of_type;
+    var steps = ofSteps[c.of_type] || ['Étape 1', 'Étape 2', 'Étape 3'];
+    var totalSteps = steps.length;
+    var currentStep = c.current_step || 1;
+    var pct = Math.round((currentStep / totalSteps) * 100);
+    if(c.status === 'termine') pct = 100;
+    var st = ofStatusLabels[c.status] || ofStatusLabels.nouveau;
+    var date = new Date(c.created_at).toLocaleDateString('fr-FR', {day:'2-digit',month:'2-digit',year:'numeric'});
+    var totalAmount = c.total_price_cents ? (c.total_price_cents / 100) : 0;
+    var progressColor = c.status === 'termine' ? 'var(--success)' : 'var(--accent)';
+
+    // Options display
+    var optionsHtml = '';
+    var opts = c.creation_of_options || c.selected_options || [];
+    if(opts.length > 0){
+      var optLabels = opts.map(function(o){
+        var n = o.option_type || o.name || '';
+        var p = o.price_cents ? (o.price_cents/100) + '€' : (o.price ? o.price + '€' : '');
+        return '+ ' + n.charAt(0).toUpperCase() + n.slice(1) + (p ? ' (' + p + ')' : '');
+      });
+      optionsHtml = '<strong>Options :</strong> ' + optLabels.join(' · ') + '<br>';
+    }
+
+    // Steps display
+    var stepsHtml = '<div style="font-size:12px;margin-top:8px;">';
+    steps.forEach(function(s, i){
+      var icon = '🔒';
+      if(i + 1 < currentStep || c.status === 'termine') icon = '✅';
+      else if(i + 1 === currentStep) icon = '⏳';
+      stepsHtml += icon + ' Étape ' + (i+1) + ' : ' + s + '<br>';
+    });
+    stepsHtml += '</div>';
+
+    // Documents
+    var docs = docsMap[c.id] || [];
+    var docsHtml = '';
+    if(docs.length > 0){
+      docsHtml = '<div style="font-size:12px;margin-top:8px;"><strong>Documents :</strong><br>';
+      docs.forEach(function(doc){
+        var docIcon = doc.status === 'valide' ? '✅' : doc.status === 'refuse' ? '❌' : '⏳';
+        docsHtml += docIcon + ' ' + doc.name;
+        if(doc.expert_comment) docsHtml += ' <span style="color:var(--muted);font-style:italic;">— ' + doc.expert_comment + '</span>';
+        docsHtml += '<br>';
+      });
+      docsHtml += '</div>';
+    }
+
+    var expertHtml = '';
+    if(c.expert_id){
+      expertHtml = '<div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">👨‍💼 <strong>Expert assigné</strong></div>';
+    } else if(c.status !== 'termine'){
+      expertHtml = '<div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">⏳ <strong>En attente d\'assignation</strong></div>';
+    }
+
+    var html = '<div class="detail-card" data-creation-id="' + c.id + '">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>' + label + (c.of_name ? ' — "' + c.of_name + '"' : '') + '</h4>' +
+      '<p>Commandé le ' + date + '</p></div>' +
+      '<div style="text-align:right;">' +
+      '<div style="font-size:18px;font-weight:800;color:var(--accent);">' + totalAmount + '€</div>' +
+      '<span class="status-badge ' + st.cls + '">' + st.text + '</span>' +
+      (!c.paid ? ' <span style="font-size:10px;color:var(--accent);">⚠️ Non payé</span>' : '') +
+      '</div></div>' +
+      '<div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:' + pct + '%;background:' + progressColor + ';"></div></div>' +
+      '<p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Étape ' + currentStep + '/' + totalSteps + ' : ' + (steps[currentStep-1] || '') + '</p>' +
+      '<div style="font-size:12px;margin-bottom:8px;">' +
+      '<strong>Type :</strong> ' + (ofTypeLabels[c.of_type] || c.of_type) + '<br>' +
+      optionsHtml +
+      '<strong>KBIS existant :</strong> ' + (c.has_kbis ? 'Oui (-100€)' : 'Non') + '<br>' +
+      '<strong>Paiement :</strong> ' + (c.payment_mode || '1x') +
+      (c.nda_number ? '<br><strong>NDA :</strong> ' + c.nda_number : '') +
+      (c.siret ? '<br><strong>SIRET :</strong> ' + c.siret : '') +
+      '</div>' +
+      stepsHtml + docsHtml + expertHtml +
+      '<div class="action-btns">' +
+      '<button class="action-btn" onclick="openDocUploadModal(\'' + c.id + '\', \'creation\')">📄 Envoyer un document</button>' +
+      (c.expert_id ? '<button class="action-btn" onclick="openMessageModal(\'' + c.id + '\', \'creation\')">💬 Contacter mon expert</button>' : '') +
+      '</div></div>';
+
+    list.insertAdjacentHTML('beforeend', html);
+  });
+
+  return creations.length;
+}
+
+// ============================
+// UPLOAD DOCUMENTS
+// ============================
+
+var uploadContext = { id: null, type: null };
+
+function openDocUploadModal(contextId, contextType){
+  uploadContext.id = contextId;
+  uploadContext.type = contextType;
+  document.getElementById('upload-file').value = '';
+  document.getElementById('upload-name').value = '';
+  document.getElementById('upload-error').style.display = 'none';
+  document.getElementById('upload-btn').textContent = 'Envoyer le document';
+  document.getElementById('upload-btn').disabled = false;
+  document.getElementById('modal-doc-upload').classList.add('open');
+}
+
+async function submitDocUpload(){
+  var fileInput = document.getElementById('upload-file');
+  var nameInput = document.getElementById('upload-name');
+  var errDiv = document.getElementById('upload-error');
+  var btn = document.getElementById('upload-btn');
+
+  var file = fileInput.files[0];
+  if(!file){ errDiv.textContent = '⚠️ Choisissez un fichier.'; errDiv.style.display = ''; return; }
+
+  var docName = nameInput.value.trim() || file.name;
+  errDiv.style.display = 'none';
+  btn.textContent = 'Envoi en cours...';
+  btn.disabled = true;
+
+  try {
+    var filePath = await uploadDocument(file, 'dossiers');
+
+    var insertData = {
+      name: docName,
+      file_path: filePath,
+      file_size: file.size,
+      mime_type: file.type,
+      status: 'en_attente'
+    };
+
+    if(uploadContext.type === 'demarche') insertData.demarche_id = uploadContext.id;
+    else insertData.creation_of_id = uploadContext.id;
+
+    var { error } = await sb.from('documents').insert(insertData);
+    if(error){ throw error; }
+
+    document.getElementById('modal-doc-upload').classList.remove('open');
+    alert('✅ Document envoyé ! Il sera vérifié par votre expert.');
+
+    // Refresh the relevant tab
+    var user = await getUser();
+    if(user){
+      if(uploadContext.type === 'demarche') loadMesDemarches(user.id);
+      else loadMesOF(user.id);
+    }
+  } catch(e){
+    errDiv.textContent = '❌ Erreur : ' + (e.message || 'Envoi échoué.');
+    errDiv.style.display = '';
+    btn.textContent = 'Envoyer le document';
+    btn.disabled = false;
+  }
+}
+
+// ============================
+// MESSAGERIE DOSSIER
+// ============================
+
+var msgContext = { id: null, type: null };
+
+async function openMessageModal(contextId, contextType){
+  msgContext.id = contextId;
+  msgContext.type = contextType;
+  document.getElementById('msg-input').value = '';
+  document.getElementById('msg-list').innerHTML = '<p style="text-align:center;color:var(--muted);font-size:13px;">Chargement...</p>';
+  document.getElementById('modal-messages').classList.add('open');
+
+  // Load messages
+  var filterCol = contextType === 'demarche' ? 'demarche_id' : 'creation_of_id';
+  var { data: msgs } = await sb.from('messages')
+    .select('*, profiles:sender_id(full_name, first_name, is_pro)')
+    .eq(filterCol, contextId)
+    .order('created_at', { ascending: true });
+
+  var container = document.getElementById('msg-list');
+  if(!msgs || msgs.length === 0){
+    container.innerHTML = '<p style="text-align:center;color:var(--muted);font-size:13px;padding:20px 0;">Aucun message. Écrivez à votre expert ci-dessous.</p>';
+    return;
+  }
+
+  var user = await getUser();
+  var html = '';
+  msgs.forEach(function(m){
+    var isMe = m.sender_id === user.id;
+    var senderName = isMe ? 'Vous' : (m.profiles ? (m.profiles.full_name || m.profiles.first_name || 'Expert') : 'Expert');
+    var date = new Date(m.created_at).toLocaleString('fr-FR', {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    var align = isMe ? 'flex-end' : 'flex-start';
+    var bg = isMe ? 'rgba(233,69,96,.08)' : 'var(--light)';
+    var border = isMe ? 'rgba(233,69,96,.15)' : 'var(--border)';
+
+    html += '<div style="display:flex;justify-content:' + align + ';margin-bottom:8px;">' +
+      '<div style="max-width:80%;background:' + bg + ';border:1px solid ' + border + ';border-radius:10px;padding:10px 14px;">' +
+      '<div style="font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;">' + senderName + ' · ' + date + '</div>' +
+      '<p style="font-size:13px;margin:0;">' + m.content + '</p>' +
+      '</div></div>';
+  });
+  container.innerHTML = html;
+  container.scrollTop = container.scrollHeight;
+}
+
+async function sendMessage(){
+  var input = document.getElementById('msg-input');
+  var text = input.value.trim();
+  if(!text) return;
+
+  var user = await getUser();
+  if(!user) return;
+
+  var insertData = {
+    sender_id: user.id,
+    content: text,
+    is_read: false
+  };
+  if(msgContext.type === 'demarche') insertData.demarche_id = msgContext.id;
+  else insertData.creation_of_id = msgContext.id;
+
+  var { error } = await sb.from('messages').insert(insertData);
+  if(error){ alert('❌ Erreur : ' + error.message); return; }
+
+  input.value = '';
+  openMessageModal(msgContext.id, msgContext.type); // refresh
+}
+
+// ============================
+// IBAN
+// ============================
+
+async function saveIban(){
+  var iban = document.getElementById('profil-iban').value.trim();
+  if(!iban){ alert('⚠️ Veuillez saisir un IBAN.'); return; }
+  var user = await getUser();
+  var { error } = await sb.from('profiles').update({ iban: iban }).eq('id', user.id);
+  if(error){ alert('❌ Erreur : ' + error.message); return; }
+  document.getElementById('iban-success').style.display = '';
+  setTimeout(function(){ document.getElementById('iban-success').style.display = 'none'; }, 3000);
+}
+
+// ============================
+// PARRAINAGE DYNAMIQUE
+// ============================
+
+async function loadReferralData(userId){
+  try {
+    var { data: refs } = await sb.from('referrals').select('*').eq('referrer_id', userId).order('created_at',{ascending:false});
+    if(!refs) refs = [];
+
+    var totalGains = 0, pendingGains = 0, filleuls = refs.length;
+    refs.forEach(function(r){
+      var amount = (r.commission_cents || 0) / 100;
+      totalGains += amount;
+      if(r.commission_status === 'pending' || r.commission_status === 'confirmed') pendingGains += amount;
+    });
+
+    document.getElementById('ref-gains-total').textContent = totalGains + '€';
+    document.getElementById('ref-gains-pending').textContent = pendingGains + '€';
+    document.getElementById('ref-filleuls').textContent = filleuls;
+
+    // History
+    var histList = document.getElementById('ref-history-list');
+    if(refs.length === 0){
+      histList.innerHTML = '<div style="text-align:center;padding:30px 0;color:var(--muted);"><p style="font-size:13px;">Aucune commission pour le moment. Partagez vos liens pour commencer !</p></div>';
+    } else {
+      var html = '';
+      refs.forEach(function(r){
+        var amount = (r.commission_cents || 0) / 100;
+        var date = new Date(r.created_at).toLocaleDateString('fr-FR');
+        var stCls = r.commission_status === 'paid' ? 'status-done' : 'status-progress';
+        var stTxt = r.commission_status === 'paid' ? 'Versé' : 'En attente';
+        var borderCol = r.commission_status === 'paid' ? 'var(--success)' : 'rgba(200,169,110,.3)';
+        var amountCol = r.commission_status === 'paid' ? 'var(--success)' : '#b8860b';
+        html += '<div class="detail-card" style="border-left:3px solid '+borderCol+';">' +
+          '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+          '<div><h4>Commission parrainage</h4><p>Via votre lien · '+date+'</p></div>' +
+          '<div style="text-align:right;"><div style="font-size:18px;font-weight:800;color:'+amountCol+';">+'+amount+'€</div>' +
+          '<span class="status-badge '+stCls+'">'+stTxt+'</span></div></div></div>';
+      });
+      histList.innerHTML = html;
+    }
+  } catch(e){ console.log('Referral load error:', e); }
+
+  // Load IBAN
+  try {
+    var profile = await getProfile();
+    if(profile && profile.iban){
+      document.getElementById('profil-iban').value = profile.iban;
+    }
+  } catch(e){}
+}
+
+// ============================
+// STATS RÉSUMÉ DYNAMIQUES
+// ============================
+
+async function updateDashboardStats(userId, nbDemarches, nbOF){
+  // Annonces count comes from the DOM
+  var annoncesCount = document.querySelectorAll('#annonces-list .detail-card').length;
+  
+  // Update stat cards
+  var statCards = document.querySelectorAll('#tab-resume .stat-card .stat-value');
+  if(statCards[0]) statCards[0].textContent = annoncesCount;
+  // Candidatures count
+  var { data: cands } = await sb.from('candidatures').select('id').eq('user_id', userId);
+  if(statCards[1]) statCards[1].textContent = cands ? cands.length : 0;
+  // Demarches
+  if(statCards[2]) statCards[2].textContent = nbDemarches || 0;
+  // OF
+  if(statCards[3]) statCards[3].textContent = nbOF || 0;
+}
+</script>
+
+<!-- MODAL UPLOAD DOCUMENT -->
+<div class="modal" id="modal-doc-upload">
+  <div class="modal-box" style="max-width:480px;">
+    <button class="modal-close" onclick="document.getElementById('modal-doc-upload').classList.remove('open')">✕</button>
+    <h3 style="font-size:22px;font-weight:800;">📤 Envoyer un document</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Votre document sera vérifié par l'expert en charge de votre dossier.</p>
+    <div class="form-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Nom du document</label>
+      <input type="text" id="upload-name" placeholder="Ex: KBIS, Convention de formation, CV...">
+    </div>
+    <div class="form-group">
+      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Fichier (PDF, image ou ZIP)</label>
+      <input type="file" id="upload-file" accept=".pdf,.jpg,.jpeg,.png,.zip,.doc,.docx">
+    </div>
+    <div id="upload-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;font-weight:600;"></div>
+    <button class="btn btn-primary btn-block" id="upload-btn" onclick="submitDocUpload()">Envoyer le document</button>
+  </div>
+</div>
+
+<!-- MODAL MESSAGERIE -->
+<div class="modal" id="modal-messages">
+  <div class="modal-box" style="max-width:560px;">
+    <button class="modal-close" onclick="document.getElementById('modal-messages').classList.remove('open')">✕</button>
+    <h3 style="font-size:22px;font-weight:800;">💬 Messagerie dossier</h3>
+    <div id="msg-list" style="max-height:350px;overflow-y:auto;padding:12px 0;margin-bottom:12px;border-bottom:1px solid var(--border);"></div>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="msg-input" placeholder="Votre message..." style="flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;" onkeydown="if(event.key==='Enter')sendMessage()">
+      <button class="btn btn-primary" style="padding:10px 20px;font-size:13px;" onclick="sendMessage()">Envoyer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Deep-link and init already handled in main auth guard above
 </script>
 </body>
 </html>

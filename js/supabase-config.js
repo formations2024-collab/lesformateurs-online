@@ -6,7 +6,14 @@ const SUPABASE_URL = 'https://bxijjjbxsevnudienvbv.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ4aWpqamJ4c2V2bnVkaWVudmJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MjU0MjcsImV4cCI6MjA4OTUwMTQyN30.9YNffsFuGv7at2nUviuCUMA469z0FuskYHJtkOAaTn8';
 
 // Init Supabase client
-var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: {
+    persistSession: true,
+    storageKey: 'lfo-auth',
+    autoRefreshToken: true,
+    detectSessionInUrl: true
+  }
+});
 
 // ====== AUTH HELPERS ======
 

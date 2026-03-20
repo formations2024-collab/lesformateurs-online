@@ -274,15 +274,69 @@ function toggleFormationFields(){
   document.getElementById('btn-autre').style.display = pour === 'autre' ? '' : 'none';
 }
 
-function payerFormationMoi(){
+async function payerFormationMoi(){
+  var user = await getUser();
+  if(!user){ openAuthModal(); return; }
+
+  try {
+    var { data: formation, error } = await sb.from('formations').insert({
+      user_id: user.id,
+      status: 'inscrit',
+      progress_percent: 0,
+      current_module: 1,
+      amount_cents: 149000,
+      paid: false,
+      professional_status: 'independant'
+    }).select().single();
+
+    if(error){
+      alert('❌ Erreur : ' + error.message);
+      return;
+    }
+
+    localStorage.setItem('lfo_pending_order', JSON.stringify({
+      order_id: formation.id,
+      table: 'formations',
+      type: 'formation',
+      product_type: 'formation',
+      amount: 1490,
+      timestamp: Date.now()
+    }));
+  } catch(e){
+    alert('❌ Erreur de connexion.');
+    return;
+  }
+
   window.location.href = 'https://buy.stripe.com/8x2eVd3fc6j3c6y0JQffy0Y';
 }
 
-function envoyerLienFormation(){
+async function envoyerLienFormation(){
   var email = document.getElementById('f-email').value.trim();
   var nom = document.getElementById('f-nom').value.trim();
+  var phone = document.getElementById('f-phone').value.trim();
+  var statut = document.getElementById('f-statut').value;
   if(!nom || !email){ alert('Veuillez remplir le nom et l\'email du candidat.'); return; }
-  alert('✅ Lien de paiement envoyé à ' + email + ' !\n\nLe candidat recevra un email avec le lien pour s\'inscrire et payer.\nVous serez notifié dès son inscription.\n\n💰 Rappel : la formation est 100% remboursée par le FIF PL.');
+
+  var user = await getUser();
+  if(!user){ openAuthModal(); return; }
+
+  // Sauvegarder l'inscription en base (sera complétée quand le candidat paie)
+  try {
+    var { error } = await sb.from('formations').insert({
+      user_id: user.id,
+      status: 'inscrit',
+      progress_percent: 0,
+      current_module: 1,
+      amount_cents: 149000,
+      paid: false,
+      professional_status: statut || 'autre',
+      metadata: { for_other: true, candidate_name: nom, candidate_email: email, candidate_phone: phone }
+    });
+
+    if(error){ console.log('Erreur:', error); }
+  } catch(e){}
+
+  alert('✅ Inscription enregistrée pour ' + nom + ' (' + email + ').\n\n📩 Le lien de paiement sera envoyé par email.\n💰 Rappel : la formation est 100% remboursée par le FIF PL.');
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>

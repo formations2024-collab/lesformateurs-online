@@ -75,6 +75,20 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script src="js/auth-modal.js"></script>
+<script>
+// Toggle Connexion / Mon compte based on auth state
+(async function(){
+  try {
+    var user = await getUser();
+    if(user){
+      var loginBtn = document.querySelector('.btn-login');
+      var dashBtn = document.querySelector('.btn-dashboard');
+      if(loginBtn) loginBtn.style.display = 'none';
+      if(dashBtn) dashBtn.style.display = '';
+    }
+  } catch(e){}
+})();
+</script>
 
 </body>
 </html>

@@ -94,7 +94,8 @@
   <a onclick="showTab('offres')">📋 Offres</a>
   <a onclick="showTab('demarches')">📄 Démarches</a>
   <a onclick="showTab('of')">🏛 OF</a>
-  <a onclick="showTab('formations')">🎓 Formations</a>
+  <a onclick="showTab('formations')">🎓 Inscriptions</a>
+  <a onclick="showTab('contenu')">📹 Contenu</a>
   <a onclick="showTab('users')">👥 Utilisateurs</a>
 </div>
 
@@ -105,7 +106,8 @@
     <a onclick="showTab('offres')">📋 Offres de missions</a>
     <a onclick="showTab('demarches')">📄 Commandes démarches</a>
     <a onclick="showTab('of')">🏛 Créations d'OF</a>
-    <a onclick="showTab('formations')">🎓 Formations</a>
+    <a onclick="showTab('formations')">🎓 Inscriptions formation</a>
+    <a onclick="showTab('contenu')">📹 Contenu formation</a>
     <a onclick="showTab('users')">👥 Utilisateurs</a>
   </div>
 
@@ -437,6 +439,7 @@
           <button class="action-btn">📄 Voir dossier</button>
           <button class="action-btn">➡️ Étape suivante</button>
           <button class="action-btn">💬 Contacter</button>
+          <button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">⚡ Promouvoir Pro</button>
         </div>
       </div>
 
@@ -506,6 +509,7 @@
         <div class="action-btns">
           <button class="action-btn">📄 Voir progression</button>
           <button class="action-btn">💬 Contacter</button>
+          <button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">⚡ Promouvoir Pro</button>
         </div>
       </div>
 
@@ -546,6 +550,107 @@
       </div>
     </div>
 
+    <!-- ========== CONTENU FORMATION ========== -->
+    <div class="tab-content" id="tab-contenu">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
+        <h2 style="font-size:20px;font-weight:800;">📹 Contenu de la formation</h2>
+        <button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);padding:8px 16px;" onclick="addModuleModal()">+ Ajouter un module</button>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Gérez les modules, leçons, vidéos et quiz de la formation formateur.</p>
+
+      <div id="admin-modules-list">
+        <p style="text-align:center;padding:40px 0;color:var(--muted);">Chargement des modules...</p>
+      </div>
+    </div>
+
+    <!-- MODAL : Ajouter/Éditer Module -->
+    <div class="modal" id="modal-module">
+      <div class="modal-box" style="max-width:480px;">
+        <button class="modal-close" onclick="document.getElementById('modal-module').classList.remove('open')">✕</button>
+        <h3 id="module-modal-title" style="font-size:20px;font-weight:800;margin-bottom:16px;">Ajouter un module</h3>
+        <div class="form-group"><label>Numéro du module</label><input type="number" id="mod-number" min="1" placeholder="Ex: 6"></div>
+        <div class="form-group"><label>Titre</label><input type="text" id="mod-title" placeholder="Ex: Financement OPCO"></div>
+        <div class="form-group"><label>Module bonus ?</label>
+          <select id="mod-bonus"><option value="false">Non — Module principal</option><option value="true">Oui — Module bonus 🎁</option></select>
+        </div>
+        <div class="form-group"><label>Auteur bonus (si applicable)</label><input type="text" id="mod-author" placeholder="Ex: Philippe Guez"></div>
+        <div class="form-group"><label>Description bonus</label><textarea id="mod-desc" rows="2" placeholder="Courte description..."></textarea></div>
+        <input type="hidden" id="mod-edit-id" value="">
+        <button class="btn btn-primary btn-block" onclick="saveModule()">Enregistrer</button>
+      </div>
+    </div>
+
+    <!-- MODAL : Ajouter/Éditer Leçon -->
+    <div class="modal" id="modal-lesson">
+      <div class="modal-box" style="max-width:640px;max-height:90vh;overflow-y:auto;">
+        <button class="modal-close" onclick="document.getElementById('modal-lesson').classList.remove('open')">✕</button>
+        <h3 id="lesson-modal-title" style="font-size:20px;font-weight:800;margin-bottom:16px;">Ajouter une leçon</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="form-group"><label>Clé unique (ex: 6-1)</label><input type="text" id="les-key" placeholder="6-1"></div>
+          <div class="form-group"><label>Type</label>
+            <select id="les-type" onchange="toggleLessonFields()">
+              <option value="video">📹 Vidéo</option>
+              <option value="lecture">📄 Lecture</option>
+              <option value="atelier">🛠 Atelier</option>
+              <option value="quiz">✏️ Quiz</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Titre</label><input type="text" id="les-title" placeholder="Titre de la leçon"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="form-group"><label>Durée (minutes)</label><input type="number" id="les-dur" min="5" value="30"></div>
+          <div class="form-group"><label>Ordre d'affichage</label><input type="number" id="les-order" min="1" value="1"></div>
+        </div>
+
+        <!-- VIDEO UPLOAD -->
+        <div id="les-video-section">
+          <div class="form-group">
+            <label>📹 Vidéo</label>
+            <div id="les-video-current" style="display:none;margin-bottom:8px;padding:10px;background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;">
+              <span style="font-size:12px;color:var(--success);font-weight:600;" id="les-video-name">✅ Vidéo uploadée</span>
+              <button class="action-btn" style="margin-left:8px;font-size:10px;" onclick="document.getElementById('les-video-current').style.display='none'">Remplacer</button>
+            </div>
+            <input type="file" id="les-video-file" accept="video/mp4,video/webm,video/mov,.mp4,.webm,.mov">
+            <p style="font-size:11px;color:var(--muted);margin-top:4px;">MP4, WebM ou MOV. Max 500 Mo.</p>
+          </div>
+          <div class="form-group"><label>OU URL vidéo externe (YouTube, Vimeo...)</label><input type="url" id="les-video-url" placeholder="https://www.youtube.com/embed/..."></div>
+        </div>
+
+        <!-- CONTENU HTML -->
+        <div id="les-body-section">
+          <div class="form-group">
+            <label>Contenu de la leçon (HTML)</label>
+            <textarea id="les-body" rows="12" style="font-family:monospace;font-size:12px;line-height:1.5;" placeholder="<h2>Titre de section</h2>
+<p>Contenu de la leçon...</p>"></textarea>
+            <p style="font-size:11px;color:var(--muted);margin-top:4px;">Utilisez les classes : highlight-box, info-box, success-box, example-box, key-points, schema-box</p>
+          </div>
+        </div>
+
+        <!-- QUIZ EDITOR -->
+        <div id="les-quiz-section" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <label style="font-weight:700;font-size:12px;">Questions du quiz</label>
+            <button class="action-btn" onclick="addQuizQuestion()">+ Question</button>
+          </div>
+          <div id="quiz-questions-list"></div>
+        </div>
+
+        <div class="form-group" style="margin-top:12px;">
+          <label class="toggle-switch" style="font-size:13px;">
+            <input type="checkbox" id="les-published" checked> Publié (visible par les étudiants)
+          </label>
+        </div>
+
+        <input type="hidden" id="les-edit-id" value="">
+        <input type="hidden" id="les-module-id" value="">
+        <div id="les-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;"></div>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-primary" style="flex:1;" id="les-save-btn" onclick="saveLesson()">Enregistrer</button>
+          <button class="btn" style="background:var(--light);border:1px solid var(--border);padding:12px 20px;" onclick="previewLesson()">👁 Aperçu</button>
+        </div>
+      </div>
+    </div>
+
     <!-- ========== USERS ========== -->
     <div class="tab-content" id="tab-users">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">👥 Utilisateurs (234)</h2>
@@ -572,6 +677,7 @@
         <div class="action-btns">
           <button class="action-btn">👁 Voir profil complet</button>
           <button class="action-btn">💬 Contacter</button>
+          <button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">⚡ Promouvoir Pro</button>
           <button class="action-btn danger">🚫 Désactiver</button>
         </div>
       </div>
@@ -593,6 +699,7 @@
         <div class="action-btns">
           <button class="action-btn">👁 Voir profil complet</button>
           <button class="action-btn">💬 Contacter</button>
+          <button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">⚡ Promouvoir Pro</button>
           <button class="action-btn danger">🚫 Désactiver</button>
         </div>
       </div>
@@ -614,6 +721,7 @@
         <div class="action-btns">
           <button class="action-btn">👁 Voir profil complet</button>
           <button class="action-btn">💬 Contacter</button>
+          <button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">⚡ Promouvoir Pro</button>
           <button class="action-btn danger">🚫 Désactiver</button>
         </div>
       </div>
@@ -634,6 +742,7 @@
         <div class="action-btns">
           <button class="action-btn">👁 Voir profil complet</button>
           <button class="action-btn">💬 Contacter</button>
+          <button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">⚡ Promouvoir Pro</button>
           <button class="action-btn danger">🚫 Désactiver</button>
         </div>
       </div>
@@ -655,6 +764,7 @@
         <div class="action-btns">
           <button class="action-btn">👁 Voir profil complet</button>
           <button class="action-btn">💬 Contacter</button>
+          <button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">⚡ Promouvoir Pro</button>
           <button class="action-btn danger">🚫 Désactiver</button>
         </div>
       </div>
@@ -677,5 +787,395 @@ function showTab(name){
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-config.js"></script>
+<script>
+// Auth guard
+(async function(){
+  var user = await getUser();
+  if(!user){ window.location.href = 'missions.html'; return; }
+  var profile = await getProfile();
+  if(!profile || profile.profile_type !== 'admin'){
+    alert('⚠️ Accès réservé aux administrateurs.');
+    window.location.href = 'dashboard.html';
+    return;
+  }
+  // Load course content
+  await loadCourseContent();
+})();
+
+// ============================
+// COURSE CONTENT MANAGEMENT
+// ============================
+
+var adminModules = [];
+var adminLessons = [];
+var quizQuestionsCount = 0;
+
+async function loadCourseContent(){
+  var { data: modules } = await sb.from('course_modules').select('*').order('sort_order',{ascending:true});
+  adminModules = modules || [];
+  
+  var { data: lessons } = await sb.from('course_lessons').select('*').order('sort_order',{ascending:true});
+  adminLessons = lessons || [];
+  
+  renderAdminModules();
+}
+
+function renderAdminModules(){
+  var container = document.getElementById('admin-modules-list');
+  
+  if(adminModules.length === 0){
+    container.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--muted);"><div style="font-size:48px;margin-bottom:12px;">📹</div><p style="font-size:14px;">Aucun module créé.</p><p style="font-size:13px;">Les modules existants dans formation.html fonctionnent toujours. Créez des modules ici pour les remplacer dynamiquement.</p><button class="btn btn-primary" style="margin-top:16px;" onclick="seedFromHardcoded()">📥 Importer les modules existants</button></div>';
+    return;
+  }
+  
+  var html = '';
+  adminModules.forEach(function(m){
+    var moduleLessons = adminLessons.filter(function(l){ return l.module_id === m.id; });
+    var hasVideo = moduleLessons.some(function(l){ return l.video_url || l.video_path; });
+    
+    html += '<div class="detail-card" style="border-left:3px solid '+(m.is_bonus?'#6366f1':'var(--accent)')+';">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">';
+    html += '<div><h4>'+(m.is_bonus?'🎁 ':'')+'Module '+m.module_number+' — '+m.title+'</h4>';
+    html += '<p>'+moduleLessons.length+' leçons'+(m.bonus_author?' · Par '+m.bonus_author:'')+'</p></div>';
+    html += '<div class="action-btns">';
+    html += '<button class="action-btn" onclick="editModule('+m.id+')">✏️ Modifier</button>';
+    html += '<button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="addLessonToModule('+m.id+','+m.module_number+')">+ Leçon</button>';
+    html += '<button class="action-btn danger" onclick="deleteModule('+m.id+')">🗑</button>';
+    html += '</div></div>';
+    
+    // Lessons list
+    if(moduleLessons.length > 0){
+      html += '<div style="margin-top:12px;">';
+      moduleLessons.forEach(function(l){
+        var typeIcon = {video:'📹',lecture:'📄',atelier:'🛠',quiz:'✏️'}[l.type] || '📄';
+        var videoStatus = '';
+        if(l.type === 'video'){
+          if(l.video_url || l.video_path) videoStatus = '<span style="color:var(--success);font-size:10px;margin-left:6px;">✅ Vidéo</span>';
+          else videoStatus = '<span style="color:var(--accent);font-size:10px;margin-left:6px;">⚠️ Pas de vidéo</span>';
+        }
+        var publishStatus = l.is_published ? '' : '<span style="color:var(--muted);font-size:10px;margin-left:6px;">🔒 Masqué</span>';
+        
+        html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:'+(l.is_published?'var(--light)':'rgba(233,69,96,.05)')+';border-radius:6px;margin-bottom:4px;font-size:13px;">';
+        html += '<div style="display:flex;align-items:center;gap:8px;">';
+        html += '<span>'+typeIcon+'</span>';
+        html += '<strong>'+l.lesson_key+'</strong> '+l.title;
+        html += videoStatus + publishStatus;
+        html += '<span style="color:var(--muted);font-size:11px;margin-left:8px;">'+l.duration_minutes+'min</span>';
+        html += '</div>';
+        html += '<div style="display:flex;gap:4px;">';
+        html += '<button class="action-btn" style="font-size:10px;padding:3px 8px;" onclick="editLesson(\''+l.id+'\')">✏️</button>';
+        html += '<button class="action-btn danger" style="font-size:10px;padding:3px 8px;" onclick="deleteLesson(\''+l.id+'\')">🗑</button>';
+        html += '</div></div>';
+      });
+      html += '</div>';
+    }
+    
+    html += '</div>';
+  });
+  
+  container.innerHTML = html;
+}
+
+// === MODULE CRUD ===
+
+function addModuleModal(){
+  document.getElementById('module-modal-title').textContent = 'Ajouter un module';
+  document.getElementById('mod-number').value = adminModules.length + 1;
+  document.getElementById('mod-title').value = '';
+  document.getElementById('mod-bonus').value = 'false';
+  document.getElementById('mod-author').value = '';
+  document.getElementById('mod-desc').value = '';
+  document.getElementById('mod-edit-id').value = '';
+  document.getElementById('modal-module').classList.add('open');
+}
+
+function editModule(id){
+  var m = adminModules.find(function(x){ return x.id === id; });
+  if(!m) return;
+  document.getElementById('module-modal-title').textContent = 'Modifier le module';
+  document.getElementById('mod-number').value = m.module_number;
+  document.getElementById('mod-title').value = m.title;
+  document.getElementById('mod-bonus').value = m.is_bonus ? 'true' : 'false';
+  document.getElementById('mod-author').value = m.bonus_author || '';
+  document.getElementById('mod-desc').value = m.bonus_description || '';
+  document.getElementById('mod-edit-id').value = id;
+  document.getElementById('modal-module').classList.add('open');
+}
+
+async function saveModule(){
+  var editId = document.getElementById('mod-edit-id').value;
+  var data = {
+    module_number: parseInt(document.getElementById('mod-number').value),
+    title: document.getElementById('mod-title').value.trim(),
+    is_bonus: document.getElementById('mod-bonus').value === 'true',
+    bonus_author: document.getElementById('mod-author').value.trim() || null,
+    bonus_description: document.getElementById('mod-desc').value.trim() || null,
+    sort_order: parseInt(document.getElementById('mod-number').value),
+    updated_at: new Date().toISOString()
+  };
+  if(!data.title){ alert('⚠️ Titre requis.'); return; }
+  
+  var error;
+  if(editId){
+    var res = await sb.from('course_modules').update(data).eq('id', parseInt(editId));
+    error = res.error;
+  } else {
+    var res = await sb.from('course_modules').insert(data);
+    error = res.error;
+  }
+  if(error){ alert('❌ '+error.message); return; }
+  document.getElementById('modal-module').classList.remove('open');
+  await loadCourseContent();
+}
+
+async function deleteModule(id){
+  if(!confirm('Supprimer ce module et toutes ses leçons ?')) return;
+  await sb.from('course_lessons').delete().eq('module_id', id);
+  await sb.from('course_modules').delete().eq('id', id);
+  await loadCourseContent();
+}
+
+// === LESSON CRUD ===
+
+function addLessonToModule(moduleId, moduleNum){
+  var existing = adminLessons.filter(function(l){ return l.module_id === moduleId; });
+  var nextNum = existing.length + 1;
+  
+  document.getElementById('lesson-modal-title').textContent = 'Ajouter une leçon';
+  document.getElementById('les-key').value = moduleNum + '-' + nextNum;
+  document.getElementById('les-type').value = 'video';
+  document.getElementById('les-title').value = '';
+  document.getElementById('les-dur').value = 30;
+  document.getElementById('les-order').value = nextNum;
+  document.getElementById('les-body').value = '';
+  document.getElementById('les-video-url').value = '';
+  document.getElementById('les-video-file').value = '';
+  document.getElementById('les-video-current').style.display = 'none';
+  document.getElementById('les-published').checked = true;
+  document.getElementById('les-edit-id').value = '';
+  document.getElementById('les-module-id').value = moduleId;
+  document.getElementById('les-error').style.display = 'none';
+  quizQuestionsCount = 0;
+  document.getElementById('quiz-questions-list').innerHTML = '';
+  toggleLessonFields();
+  document.getElementById('modal-lesson').classList.add('open');
+}
+
+function editLesson(id){
+  var l = adminLessons.find(function(x){ return x.id === id; });
+  if(!l) return;
+  
+  document.getElementById('lesson-modal-title').textContent = 'Modifier la leçon';
+  document.getElementById('les-key').value = l.lesson_key;
+  document.getElementById('les-type').value = l.type;
+  document.getElementById('les-title').value = l.title;
+  document.getElementById('les-dur').value = l.duration_minutes;
+  document.getElementById('les-order').value = l.sort_order;
+  document.getElementById('les-body').value = l.body_html || '';
+  document.getElementById('les-video-url').value = l.video_url || '';
+  document.getElementById('les-video-file').value = '';
+  document.getElementById('les-published').checked = l.is_published;
+  document.getElementById('les-edit-id').value = id;
+  document.getElementById('les-module-id').value = l.module_id;
+  document.getElementById('les-error').style.display = 'none';
+  
+  // Show current video if exists
+  if(l.video_url || l.video_path){
+    document.getElementById('les-video-current').style.display = '';
+    document.getElementById('les-video-name').textContent = '✅ Vidéo : '+(l.video_url || l.video_path).split('/').pop();
+  } else {
+    document.getElementById('les-video-current').style.display = 'none';
+  }
+  
+  // Load quiz questions
+  quizQuestionsCount = 0;
+  var qList = document.getElementById('quiz-questions-list');
+  qList.innerHTML = '';
+  if(l.type === 'quiz' && l.quiz_json){
+    var questions = typeof l.quiz_json === 'string' ? JSON.parse(l.quiz_json) : l.quiz_json;
+    questions.forEach(function(q){ addQuizQuestion(q); });
+  }
+  
+  toggleLessonFields();
+  document.getElementById('modal-lesson').classList.add('open');
+}
+
+function toggleLessonFields(){
+  var type = document.getElementById('les-type').value;
+  document.getElementById('les-video-section').style.display = (type === 'video') ? '' : 'none';
+  document.getElementById('les-body-section').style.display = (type !== 'quiz') ? '' : 'none';
+  document.getElementById('les-quiz-section').style.display = (type === 'quiz') ? '' : 'none';
+}
+
+function addQuizQuestion(prefill){
+  var idx = quizQuestionsCount++;
+  var q = prefill || {q:'', opts:['','','',''], ans:0};
+  var html = '<div class="detail-card" style="padding:12px;" id="quiz-q-'+idx+'">';
+  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">';
+  html += '<strong style="font-size:12px;">Question '+(idx+1)+'</strong>';
+  html += '<button class="action-btn danger" style="font-size:10px;padding:2px 8px;" onclick="document.getElementById(\'quiz-q-'+idx+'\').remove()">✕</button>';
+  html += '</div>';
+  html += '<div class="form-group" style="margin-bottom:8px;"><input type="text" id="qq-'+idx+'" value="'+escHtml(q.q)+'" placeholder="Question..." style="font-size:13px;"></div>';
+  for(var i=0; i<4; i++){
+    var checked = (q.ans === i) ? 'checked' : '';
+    html += '<div style="display:flex;gap:6px;align-items:center;margin-bottom:4px;">';
+    html += '<input type="radio" name="qa-'+idx+'" value="'+i+'" '+checked+' style="accent-color:var(--success);">';
+    html += '<input type="text" id="qo-'+idx+'-'+i+'" value="'+escHtml(q.opts[i]||'')+'" placeholder="Option '+(i+1)+'" style="flex:1;font-size:12px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;">';
+    html += '</div>';
+  }
+  html += '</div>';
+  document.getElementById('quiz-questions-list').insertAdjacentHTML('beforeend', html);
+}
+
+function escHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+function collectQuizQuestions(){
+  var questions = [];
+  for(var i=0; i<quizQuestionsCount; i++){
+    var el = document.getElementById('quiz-q-'+i);
+    if(!el) continue;
+    var qText = document.getElementById('qq-'+i).value.trim();
+    if(!qText) continue;
+    var opts = [];
+    for(var j=0; j<4; j++){
+      opts.push(document.getElementById('qo-'+i+'-'+j).value.trim());
+    }
+    var ans = 0;
+    var radios = document.querySelectorAll('input[name="qa-'+i+'"]:checked');
+    if(radios.length > 0) ans = parseInt(radios[0].value);
+    questions.push({q:qText, opts:opts, ans:ans});
+  }
+  return questions;
+}
+
+async function saveLesson(){
+  var editId = document.getElementById('les-edit-id').value;
+  var moduleId = parseInt(document.getElementById('les-module-id').value);
+  var type = document.getElementById('les-type').value;
+  var title = document.getElementById('les-title').value.trim();
+  var key = document.getElementById('les-key').value.trim();
+  var errDiv = document.getElementById('les-error');
+  var btn = document.getElementById('les-save-btn');
+  
+  if(!title || !key){ errDiv.textContent = '⚠️ Clé et titre requis.'; errDiv.style.display = ''; return; }
+  errDiv.style.display = 'none';
+  btn.textContent = 'Enregistrement...'; btn.disabled = true;
+  
+  var data = {
+    module_id: moduleId,
+    lesson_key: key,
+    title: title,
+    type: type,
+    duration_minutes: parseInt(document.getElementById('les-dur').value) || 30,
+    sort_order: parseInt(document.getElementById('les-order').value) || 1,
+    is_published: document.getElementById('les-published').checked,
+    updated_at: new Date().toISOString()
+  };
+  
+  // Body HTML
+  if(type !== 'quiz'){
+    data.body_html = document.getElementById('les-body').value;
+  }
+  
+  // Quiz JSON
+  if(type === 'quiz'){
+    data.quiz_json = collectQuizQuestions();
+  }
+  
+  // Video URL
+  if(type === 'video'){
+    var extUrl = document.getElementById('les-video-url').value.trim();
+    if(extUrl) data.video_url = extUrl;
+  }
+  
+  // Video file upload
+  var videoFile = document.getElementById('les-video-file').files[0];
+  if(videoFile && type === 'video'){
+    try {
+      var user = await getUser();
+      var ext = videoFile.name.split('.').pop();
+      var path = 'course-videos/'+key.replace(/-/g,'_')+'_'+Date.now()+'.'+ext;
+      var { data: uploadData, error: uploadErr } = await sb.storage
+        .from('course-videos')
+        .upload(path, videoFile, { contentType: videoFile.type });
+      if(uploadErr) throw uploadErr;
+      
+      // Get public URL
+      var { data: urlData } = sb.storage.from('course-videos').getPublicUrl(path);
+      data.video_path = path;
+      data.video_url = urlData.publicUrl;
+    } catch(e){
+      errDiv.textContent = '❌ Erreur upload vidéo : '+e.message;
+      errDiv.style.display = '';
+      btn.textContent = 'Enregistrer'; btn.disabled = false;
+      return;
+    }
+  }
+  
+  var error;
+  if(editId){
+    var res = await sb.from('course_lessons').update(data).eq('id', editId);
+    error = res.error;
+  } else {
+    var res = await sb.from('course_lessons').insert(data);
+    error = res.error;
+  }
+  
+  if(error){
+    errDiv.textContent = '❌ '+error.message;
+    errDiv.style.display = '';
+    btn.textContent = 'Enregistrer'; btn.disabled = false;
+    return;
+  }
+  
+  btn.textContent = 'Enregistrer'; btn.disabled = false;
+  document.getElementById('modal-lesson').classList.remove('open');
+  await loadCourseContent();
+  alert('✅ Leçon enregistrée !');
+}
+
+async function deleteLesson(id){
+  if(!confirm('Supprimer cette leçon ?')) return;
+  await sb.from('course_lessons').delete().eq('id', id);
+  await loadCourseContent();
+}
+
+function previewLesson(){
+  var body = document.getElementById('les-body').value;
+  var title = document.getElementById('les-title').value;
+  var w = window.open('','_blank','width=900,height=700');
+  w.document.write('<html><head><title>Aperçu : '+title+'</title><style>body{font-family:system-ui;padding:40px;max-width:800px;margin:0 auto;line-height:1.7;color:#333;}h2{margin-top:32px;}h3{margin-top:24px;}.highlight-box{border-left:4px solid #e94560;background:#fef0f3;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;}.info-box{background:#e3f2fd;border-left:4px solid #1565c0;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;}.success-box{background:#e8f8f0;border-left:4px solid #27ae60;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;}.key-points{background:#1a1a2e;color:#fff;border-radius:12px;padding:28px;margin:32px 0;}.key-points h3{color:#e94560;}.key-points li{color:rgba(255,255,255,.85);}.example-box{background:#fffde7;border:1px solid #f9a825;border-radius:8px;padding:18px;margin:20px 0;}.example-box .ex-title{font-size:12px;font-weight:700;text-transform:uppercase;color:#f9a825;margin-bottom:8px;}</style></head><body><h1>'+title+'</h1>'+body+'</body></html>');
+  w.document.close();
+}
+
+// === SEED FROM HARDCODED (import existing content) ===
+
+async function seedFromHardcoded(){
+  if(!confirm('Importer les 7 modules et 42 leçons existants depuis le code ? Cela va créer toutes les entrées en base.')) return;
+  
+  var modulesData = [
+    {module_number:1, title:"L'adulte apprenant", is_bonus:false, sort_order:1},
+    {module_number:2, title:"Concevoir une formation", is_bonus:false, sort_order:2},
+    {module_number:3, title:"Animer une formation", is_bonus:false, sort_order:3},
+    {module_number:4, title:"Évaluer les apprentissages", is_bonus:false, sort_order:4},
+    {module_number:5, title:"Cadre légal & administratif", is_bonus:false, sort_order:5},
+    {module_number:6, title:"Financement OPCO", is_bonus:true, bonus_author:"Philippe Guez", bonus_description:"Ancien Secrétaire Général Constructys IdF, Directeur AKTO", sort_order:6},
+    {module_number:7, title:"Personal Branding", is_bonus:true, bonus_author:"Agence Personnelle", bonus_description:"Caroline Mignaux & Arnaud Gazet — agence n°1 du personal branding, +1M abonnés", sort_order:7},
+  ];
+  
+  for(var i=0; i<modulesData.length; i++){
+    var { error } = await sb.from('course_modules').insert(modulesData[i]);
+    if(error && !error.message.includes('unique')){
+      alert('Erreur module '+modulesData[i].module_number+': '+error.message);
+    }
+  }
+  
+  alert('✅ Modules importés ! Ajoutez maintenant les leçons individuellement ou en batch.');
+  await loadCourseContent();
+}
+
+// Close modals on backdrop
+document.addEventListener('click',function(e){if(e.target.classList.contains('modal'))e.target.classList.remove('open');});
+</script>
 </body>
 </html>
