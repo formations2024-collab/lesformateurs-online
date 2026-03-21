@@ -921,17 +921,10 @@ var allAdminDem = [];
 var adminDemFilter = 'all';
 
 var STEP_LABELS = {
-  nda:['Réception dossier','Vérification documents','Rédaction statuts','Dépôt DREETS','NDA obtenu'],
-  uai:['Réception dossier','Vérification documents','Dépôt rectorat','Suivi demande','UAI obtenu'],
-  qualiopi:['Réception dossier','Vérification documents','Préparation audit','Audit initial','Certification obtenue'],
-  edof:['Réception dossier','Vérification Qualiopi','Création fiches EDOF','Validation plateforme','Accès EDOF actif'],
-  francetravail:['Réception dossier','Vérification documents','Dépôt dossier','Validation France Travail','Référencement actif'],
-  rs:['Réception dossier','Rédaction référentiel','Montage dossier','Dépôt France Compétences','Enregistrement RS/RNCP'],
-  rs_rncp:['Réception dossier','Rédaction référentiel','Montage dossier','Dépôt France Compétences','Enregistrement RS/RNCP'],
-  opco:['Réception dossier','Vérification NDA','Dépôt dossiers OPCO','Suivi référencement','Référencement complet'],
-  bpf:['Réception dossier','Collecte données','Rédaction BPF','Vérification','BPF déposé'],
-  agent:['Configuration IA','Intégration données','Tests & ajustements','Formation utilisateur','Agent opérationnel']
+  _universal:['En attente d\'assignation','Constitution du dossier','Soumission pour validation','Validation client','Terminé']
 };
+// All types use same steps
+['nda','uai','qualiopi','edof','francetravail','rs','rs_rncp','opco','bpf','agent'].forEach(function(k){ STEP_LABELS[k] = STEP_LABELS._universal; });
 
 async function loadAdminDemarches(){
   var { data: dems } = await sb.from('demarches')
@@ -1131,9 +1124,10 @@ function renderAdminUsers(users){
   var html = '';
   users.forEach(function(u){
     var date = u.created_at ? new Date(u.created_at).toLocaleDateString('fr-FR') : '—';
-    var typeBadge = u.profile_type === 'admin' ? '⚡ Admin' : u.is_pro ? '🏆 Expert/Pro' : (u.profile_type || 'Formateur');
-    var isBlocked = u.is_blocked;
-    var isPro = u.is_pro;
+    var isAdmin = u.profile_type === 'admin';
+    var isPro = u.is_pro === true;
+    var isBlocked = u.is_blocked === true;
+    var typeBadge = isAdmin ? '⚡ Admin' : isPro ? '🏆 Expert/Pro' : (u.profile_type || 'formateur');
 
     html += '<div class="detail-card" id="admin-user-' + u.id + '" style="' + (isBlocked ? 'opacity:.5;border-left:3px solid #e94560;' : '') + '">' +
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
@@ -1149,18 +1143,27 @@ function renderAdminUsers(users){
       '<div class="action-btns">' +
       '<button class="action-btn" onclick="adminSendMsgTo(\'' + u.id + '\',\'' + (u.full_name || u.email).replace(/'/g, "\\'") + '\')">💬 Contacter</button>';
 
-    if(u.profile_type !== 'admin'){
-      if(isPro){
-        html += '<button class="action-btn" style="background:#aaa;color:#fff;border-color:#aaa;" onclick="adminDemotePro(\'' + u.id + '\')">↩️ Retirer Pro</button>';
-      } else {
-        html += '<button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;" onclick="adminPromouvoirPro(\'' + u.id + '\')">⚡ Promouvoir Pro</button>';
-      }
-      if(isBlocked){
-        html += '<button class="action-btn" style="background:var(--success);color:#fff;border-color:var(--success);" onclick="adminDebloquer(\'' + u.id + '\')">✅ Débloquer</button>';
-      } else {
-        html += '<button class="action-btn danger" onclick="adminDesactiver(\'' + u.id + '\')">🚫 Désactiver</button>';
-      }
+    // Expert button
+    if(isPro && !isAdmin){
+      html += '<button class="action-btn" style="background:#aaa;color:#fff;border-color:#aaa;" onclick="adminDemotePro(\'' + u.id + '\')">↩️ Retirer Expert</button>';
+    } else if(!isPro && !isAdmin){
+      html += '<button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;" onclick="adminPromouvoirPro(\'' + u.id + '\')">⚡ Promouvoir Expert</button>';
     }
+
+    // Admin button
+    if(isAdmin){
+      html += '<button class="action-btn" style="background:#e94560;color:#fff;border-color:#e94560;" onclick="adminDemoteAdmin(\'' + u.id + '\',\'' + (u.email||'').replace(/'/g,"\\'") + '\')">↩️ Retirer Admin</button>';
+    } else {
+      html += '<button class="action-btn" style="background:#1a1a2e;color:#fff;border-color:#1a1a2e;" onclick="adminPromoteAdmin(\'' + u.id + '\',\'' + (u.email||'').replace(/'/g,"\\'") + '\')">👑 Promouvoir Admin</button>';
+    }
+
+    // Block/unblock button (not for self)
+    if(isBlocked){
+      html += '<button class="action-btn" style="background:var(--success);color:#fff;border-color:var(--success);" onclick="adminDebloquer(\'' + u.id + '\')">✅ Réactiver</button>';
+    } else {
+      html += '<button class="action-btn danger" onclick="adminDesactiver(\'' + u.id + '\')">🚫 Désactiver</button>';
+    }
+
     html += '</div></div>';
   });
   container.innerHTML = html;
@@ -1178,32 +1181,52 @@ function filterAdminUsers(){
 async function adminPromouvoirPro(userId){
   if(!confirm('Promouvoir cet utilisateur en Expert/Pro ?\n\nIl aura accès à l\'espace expert et pourra gérer des dossiers.')) return;
   var { error } = await sb.from('profiles').update({ is_pro: true, profile_type: 'expert' }).eq('id', userId);
-  if(error){ alert('❌ ' + error.message); return; }
+  if(error){ alert('❌ Erreur : ' + error.message + '\n\nVérifiez que la policy RLS admin est en place.'); return; }
   alert('✅ Utilisateur promu Expert/Pro !');
   await loadAdminUsers();
 }
 
 async function adminDemotePro(userId){
-  if(!confirm('Retirer le statut Pro/Expert de cet utilisateur ?')) return;
+  if(!confirm('Retirer le statut Expert/Pro de cet utilisateur ?')) return;
   var { error } = await sb.from('profiles').update({ is_pro: false, profile_type: 'formateur' }).eq('id', userId);
-  if(error){ alert('❌ ' + error.message); return; }
-  alert('✅ Statut Pro retiré.');
+  if(error){ alert('❌ Erreur : ' + error.message); return; }
+  alert('✅ Statut Expert retiré.');
+  await loadAdminUsers();
+}
+
+async function adminPromoteAdmin(userId, email){
+  if(!confirm('⚠️ Promouvoir ' + email + ' en ADMIN ?\n\nCet utilisateur aura un accès total au dashboard admin, aux utilisateurs et à tous les dossiers.')) return;
+  var { error } = await sb.from('profiles').update({ profile_type: 'admin', is_pro: true }).eq('id', userId);
+  if(error){ alert('❌ Erreur : ' + error.message); return; }
+  alert('✅ ' + email + ' est maintenant Admin !');
+  await loadAdminUsers();
+}
+
+async function adminDemoteAdmin(userId, email){
+  if(email === 'LFOadmin@gmail.com'){
+    alert('⚠️ Impossible de retirer les droits admin du compte principal.');
+    return;
+  }
+  if(!confirm('Retirer les droits admin de ' + email + ' ?\n\nIl redeviendra un utilisateur normal.')) return;
+  var { error } = await sb.from('profiles').update({ profile_type: 'formateur', is_pro: false }).eq('id', userId);
+  if(error){ alert('❌ Erreur : ' + error.message); return; }
+  alert('✅ Droits admin retirés pour ' + email);
   await loadAdminUsers();
 }
 
 async function adminDesactiver(userId){
   if(!confirm('⚠️ Désactiver ce compte ?\n\nL\'utilisateur sera bloqué et ne pourra plus accéder au site.')) return;
   var { error } = await sb.from('profiles').update({ is_blocked: true }).eq('id', userId);
-  if(error){ alert('❌ ' + error.message); return; }
+  if(error){ alert('❌ Erreur : ' + error.message); return; }
   alert('✅ Compte désactivé.');
   await loadAdminUsers();
 }
 
 async function adminDebloquer(userId){
-  if(!confirm('Débloquer ce compte ?')) return;
+  if(!confirm('Réactiver ce compte ?')) return;
   var { error } = await sb.from('profiles').update({ is_blocked: false }).eq('id', userId);
-  if(error){ alert('❌ ' + error.message); return; }
-  alert('✅ Compte débloqué.');
+  if(error){ alert('❌ Erreur : ' + error.message); return; }
+  alert('✅ Compte réactivé.');
   await loadAdminUsers();
 }
 

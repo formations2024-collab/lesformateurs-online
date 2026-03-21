@@ -1587,17 +1587,16 @@ var demarcheTypeIcons = {
 };
 
 var demarcheSteps = {
-  nda: ['Réception documents', 'Vérification par l\'expert', 'Création du dossier DREETS', 'Envoi à la DREETS', 'Réception NDA'],
-  uai: ['Réception documents', 'Création dossier rectorat', 'Envoi au rectorat', 'Réception UAI'],
-  qualiopi: ['Audit documentaire initial', 'Rédaction du manuel qualité', 'Vérification + ajustements', 'Préparation audit blanc', 'Accompagnement certification'],
-  edof: ['Vérification éligibilité', 'Création fiches formation', 'Paramétrage espace EDOF', 'Mise en ligne', 'Validation'],
-  francetravail: ['Réception documents', 'Constitution du dossier', 'Soumission France Travail', 'Validation'],
-  rs_rncp: ['Analyse de la demande', 'Rédaction des référentiels', 'Constitution dossier', 'Soumission', 'Suivi'],
-  rs: ['Analyse de la demande', 'Rédaction des référentiels', 'Constitution dossier', 'Soumission', 'Suivi'],
-  opco: ['Réception + sélection OPCO', 'Constitution des dossiers', 'Envoi aux OPCO', 'Suivi des retours'],
-  bpf: ['Réception données', 'Rédaction du BPF', 'Validation client', 'Soumission'],
-  agent: ['Prise de rendez-vous', 'RDV de cadrage', 'Configuration agent', 'Test + validation', 'Mise en production']
+  _universal: [
+    'En attente d\'assignation expert',
+    'Constitution du dossier',
+    'Soumission pour validation',
+    'Validation client',
+    'Terminé'
+  ]
 };
+// All types use the same 5 steps
+Object.keys(demarcheTypeLabels).forEach(function(k){ demarcheSteps[k] = demarcheSteps._universal; });
 
 var statusLabels = {
   nouveau: { text: 'Nouveau', cls: 'status-new' },
@@ -1635,52 +1634,90 @@ async function loadMesDemarches(userId){
     docsMap[doc.demarche_id].push(doc);
   });
 
+  // Load messages count per demarche
+  var { data: allMsgs } = await sb.from('messages').select('id, demarche_id, is_read').in('demarche_id', demIds);
+  var msgCountMap = {};
+  var unreadMap = {};
+  if(allMsgs) allMsgs.forEach(function(m){
+    msgCountMap[m.demarche_id] = (msgCountMap[m.demarche_id] || 0) + 1;
+    if(!m.is_read) unreadMap[m.demarche_id] = (unreadMap[m.demarche_id] || 0) + 1;
+  });
+
   demarches.forEach(function(d){
     var label = demarcheTypeLabels[d.type] || d.type;
-    var steps = demarcheSteps[d.type] || ['Étape 1', 'Étape 2', 'Étape 3'];
-    var totalSteps = steps.length;
+    var steps = ['En attente d\'assignation', 'Constitution du dossier', 'Soumission pour validation', 'Validation client', 'Terminé'];
+    var totalSteps = 5;
     var currentStep = d.current_step || 1;
-    var pct = Math.round((currentStep / totalSteps) * 100);
-    if(d.status === 'termine') pct = 100;
-    var st = statusLabels[d.status] || statusLabels.nouveau;
+    var isDone = d.status === 'termine' || currentStep >= 5;
+    var pct = isDone ? 100 : Math.round((currentStep / totalSteps) * 100);
+    var st = isDone ? {text:'Terminé',cls:'status-done'} : currentStep === 1 ? {text:'En attente',cls:'status-new'} : currentStep === 4 ? {text:'À valider',cls:'status-review'} : {text:'En cours',cls:'status-progress'};
     var date = new Date(d.created_at).toLocaleDateString('fr-FR', {day:'2-digit',month:'2-digit',year:'numeric'});
     var amount = d.amount_cents ? (d.amount_cents / 100) + '€' : '';
-    var progressColor = d.status === 'termine' ? 'var(--success)' : 'var(--accent)';
+    var progressColor = isDone ? 'var(--success)' : currentStep === 4 ? '#7c3aed' : 'var(--accent)';
 
     // Steps display
     var stepsHtml = '<div style="font-size:12px;margin-top:8px;">';
     steps.forEach(function(s, i){
       var icon = '🔒';
-      if(i + 1 < currentStep || d.status === 'termine') icon = '✅';
+      if(i + 1 < currentStep || isDone) icon = '✅';
       else if(i + 1 === currentStep) icon = '⏳';
       stepsHtml += icon + ' Étape ' + (i+1) + ' : ' + s + '<br>';
     });
     stepsHtml += '</div>';
 
-    // Documents
+    // Documents with status
     var docs = docsMap[d.id] || [];
     var docsHtml = '';
     if(docs.length > 0){
-      docsHtml = '<div style="font-size:12px;margin-top:8px;"><strong>Documents :</strong><br>';
+      docsHtml = '<div style="margin-top:12px;padding:12px;background:var(--light);border-radius:8px;"><strong style="font-size:12px;">📎 Documents envoyés (' + docs.length + ')</strong>';
       docs.forEach(function(doc){
         var docIcon = doc.status === 'valide' ? '✅' : doc.status === 'refuse' ? '❌' : '⏳';
-        docsHtml += docIcon + ' ' + doc.name;
-        if(doc.expert_comment) docsHtml += ' <span style="color:var(--muted);font-style:italic;">— ' + doc.expert_comment + '</span>';
-        docsHtml += '<br>';
+        var docStatus = doc.status === 'valide' ? '<span style="color:var(--success);font-size:11px;">Accepté</span>' : doc.status === 'refuse' ? '<span style="color:#e94560;font-size:11px;">Refusé</span>' : '<span style="color:var(--muted);font-size:11px;">En attente de vérification</span>';
+        docsHtml += '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #e8e8e8;font-size:12px;">' +
+          '<div>' + docIcon + ' <strong>' + doc.name + '</strong> ' + docStatus + '</div>' +
+          '<button class="action-btn" style="font-size:10px;padding:3px 8px;" onclick="viewDocument(\'' + doc.id + '\',\'' + (doc.file_path||'').replace(/'/g,"\\'") + '\')">👁 Voir</button>' +
+          '</div>';
+        if(doc.status === 'refuse' && doc.expert_comment){
+          docsHtml += '<div style="font-size:11px;color:#e94560;padding:4px 0 4px 20px;font-style:italic;">Motif : ' + doc.expert_comment + '</div>';
+        }
       });
       docsHtml += '</div>';
     }
 
-    // Expert info
+    // Expert info + messaging
     var expertHtml = '';
+    var unreadCount = unreadMap[d.id] || 0;
+    var msgCount = msgCountMap[d.id] || 0;
     if(d.expert_id){
       expertHtml = '<div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">' +
         '👨‍💼 <strong>Expert assigné</strong> — Votre dossier est suivi par un professionnel.' +
+        (msgCount > 0 ? ' · <strong>' + msgCount + ' message' + (msgCount>1?'s':'') + '</strong>' : '') +
+        (unreadCount > 0 ? ' · <span style="color:var(--accent);font-weight:700;">' + unreadCount + ' non lu' + (unreadCount>1?'s':'') + '</span>' : '') +
         '</div>';
-    } else if(d.status !== 'termine'){
+    } else if(!isDone){
       expertHtml = '<div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">' +
         '⏳ <strong>En attente d\'assignation</strong> — Un expert va prendre en charge votre dossier.' +
         '</div>';
+    }
+
+    // Validation buttons (step 4 only)
+    var validationHtml = '';
+    if(currentStep === 4 && !isDone){
+      validationHtml = '<div style="background:#f3e8ff;border:2px solid #7c3aed;border-radius:10px;padding:16px;margin-top:12px;text-align:center;">' +
+        '<p style="font-size:14px;font-weight:700;color:#7c3aed;margin-bottom:10px;">⚡ Votre expert a soumis le dossier pour validation</p>' +
+        '<p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Vérifiez les documents et le dossier. Validez pour finaliser ou renvoyez en révision.</p>' +
+        '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">' +
+        '<button class="btn btn-primary" style="padding:10px 24px;font-size:14px;background:var(--success);border-color:var(--success);" onclick="clientValidateDossier(\'' + d.id + '\',true)">✅ Valider le dossier</button>' +
+        '<button class="btn" style="padding:10px 24px;font-size:14px;background:#fff;color:#7c3aed;border:2px solid #7c3aed;" onclick="clientValidateDossier(\'' + d.id + '\',false)">↩️ Renvoyer en révision</button>' +
+        '</div></div>';
+    }
+
+    // Closed state
+    var closedHtml = '';
+    if(isDone){
+      closedHtml = '<div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:10px;padding:14px;margin-top:12px;text-align:center;">' +
+        '<p style="font-size:14px;font-weight:700;color:var(--success);">✅ Dossier terminé</p>' +
+        '<p style="font-size:12px;color:var(--muted);">Cette démarche est finalisée. La discussion est close.</p></div>';
     }
 
     var html = '<div class="detail-card" data-demarche-id="' + d.id + '">' +
@@ -1690,20 +1727,55 @@ async function loadMesDemarches(userId){
       '<div style="text-align:right;">' +
       (amount ? '<div style="font-size:18px;font-weight:800;color:var(--accent);">' + amount + '</div>' : '') +
       '<span class="status-badge ' + st.cls + '">' + st.text + '</span>' +
-      (!d.paid ? ' <span style="font-size:10px;color:var(--accent);">⚠️ Non payé</span>' : '') +
       '</div></div>' +
       '<div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:' + pct + '%;background:' + progressColor + ';"></div></div>' +
-      '<p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Étape ' + currentStep + '/' + totalSteps + ' : ' + (steps[currentStep-1] || '') + '</p>' +
-      stepsHtml + docsHtml + expertHtml +
+      '<p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Étape ' + currentStep + '/5 : ' + (steps[currentStep-1] || '') + '</p>' +
+      stepsHtml + docsHtml + expertHtml + validationHtml + closedHtml +
       '<div class="action-btns">' +
-      '<button class="action-btn" onclick="openDocUploadModal(\'' + d.id + '\', \'demarche\')">📤 Envoyer un document</button>' +
-      (d.expert_id ? '<button class="action-btn" onclick="openMessageModal(\'' + d.id + '\', \'demarche\')">💬 Contacter mon expert</button>' : '') +
+      (!isDone ? '<button class="action-btn" onclick="openDocUploadModal(\'' + d.id + '\', \'demarche\')">📤 Envoyer un document</button>' : '') +
+      (d.expert_id && !isDone ? '<button class="action-btn" onclick="openMessageModal(\'' + d.id + '\', \'demarche\')">💬 Discussion dossier' + (unreadCount > 0 ? ' <span style="background:var(--accent);color:#fff;padding:1px 6px;border-radius:8px;font-size:10px;">' + unreadCount + '</span>' : '') + '</button>' : '') +
+      (isDone && msgCount > 0 ? '<button class="action-btn" onclick="openMessageModal(\'' + d.id + '\', \'demarche\')">📋 Voir la discussion (close)</button>' : '') +
       '</div></div>';
 
     list.insertAdjacentHTML('beforeend', html);
   });
 
   return demarches.length;
+}
+
+// Client validates or rejects the dossier at step 4
+async function clientValidateDossier(demarcheId, accept){
+  if(accept){
+    if(!confirm('✅ Valider ce dossier ? Il sera marqué comme terminé.')) return;
+    var { error } = await sb.from('demarches').update({ current_step: 5, status: 'termine' }).eq('id', demarcheId);
+    if(error){ alert('❌ ' + error.message); return; }
+    // Send auto-message
+    var user = await getUser();
+    await sb.from('messages').insert({ demarche_id: demarcheId, sender_id: user.id, content: '✅ Le client a validé le dossier. Démarche terminée.' });
+    alert('✅ Dossier validé et terminé !');
+  } else {
+    var motif = prompt('Pourquoi renvoyez-vous le dossier en révision ?');
+    if(!motif) return;
+    var { error } = await sb.from('demarches').update({ current_step: 3, status: 'en_cours' }).eq('id', demarcheId);
+    if(error){ alert('❌ ' + error.message); return; }
+    var user = await getUser();
+    await sb.from('messages').insert({ demarche_id: demarcheId, sender_id: user.id, content: '↩️ Le client a renvoyé le dossier en révision.\n\nMotif : ' + motif });
+    alert('Le dossier a été renvoyé en révision. Votre expert sera notifié.');
+  }
+  var user = await getUser();
+  if(user) await loadMesDemarches(user.id);
+}
+
+// View a document (signed URL from Supabase Storage)
+async function viewDocument(docId, filePath){
+  if(!filePath){ alert('Aucun fichier associé.'); return; }
+  try {
+    var { data, error } = await sb.storage.from('documents').createSignedUrl(filePath, 300);
+    if(error) throw error;
+    window.open(data.signedUrl, '_blank');
+  } catch(e){
+    alert('❌ Impossible d\'ouvrir le document : ' + (e.message || e));
+  }
 }
 
 // ============================
@@ -1719,21 +1791,54 @@ var ofTypeLabels = {
   agents_ia: '🤖 OF géré par Agents IA'
 };
 
-var ofSteps = {
-  action_formation: ['Documents collectés', 'Rédaction statuts', 'Création KBIS au greffe', 'Demande NDA à la DREETS', 'Activation OF'],
-  cfa: ['Documents collectés', 'Rédaction statuts', 'Création KBIS', 'Demande NDA DREETS', 'Demande UAI mention CFA', 'Activation CFA'],
-  bilan: ['Documents collectés', 'Création société', 'KBIS au greffe', 'NDA spécifique bilan', 'Activation'],
-  vae: ['Documents collectés', 'Création société', 'KBIS au greffe', 'NDA VAE DREETS', 'Activation'],
-  elus: ['Documents collectés', 'Création société', 'KBIS au greffe', 'NDA DREETS', 'Agrément préfectoral', 'Activation'],
-  agents_ia: ['Réception commande + KBIS ou création société', 'Configuration agents IA + activation']
-};
+var ofSteps = {}; // Dynamic — use getOfSteps(type, hasKbis)
+
+function getOfSteps(type, hasKbis){
+  var s = [];
+  s.push('Assignation expert');
+  s.push('Vérification des documents');
+
+  if(type === 'agents_ia'){
+    if(!hasKbis){
+      s.push('Constitution dossier KBIS');
+      s.push('Obtention KBIS');
+      s.push('Validation client (KBIS)'); // validation
+    }
+    s.push('Configuration Agent IA + RDV');
+    s.push('Validation client (Agent IA)'); // validation
+    s.push('Terminé');
+    return s;
+  }
+
+  // Standard OF: action_formation, bilan, vae, elus, cfa
+  if(!hasKbis){
+    s.push('Constitution dossier KBIS');
+    s.push('Obtention KBIS');
+    s.push('Validation client (KBIS)'); // validation
+  }
+  s.push('Obtention NDA');
+  s.push('Validation client (NDA)'); // validation
+  s.push('Certification Qualiopi');
+  s.push('Validation client (Qualiopi)'); // validation
+
+  if(type === 'cfa'){
+    s.push('Obtention UAI (mention CFA)');
+    s.push('Validation client (UAI)'); // validation
+  }
+
+  s.push('Terminé');
+  return s;
+}
+
+function isValidationStep(stepName){
+  return stepName && stepName.indexOf('Validation client') === 0;
+}
 
 var ofStatusLabels = {
   nouveau: { text: 'Nouveau', cls: 'status-new' },
   en_cours: { text: 'En cours', cls: 'status-progress' },
   verification_expert: { text: 'Vérification', cls: 'status-progress' },
-  greffe: { text: 'Au greffe', cls: 'status-progress' },
-  nda_dreets: { text: 'DREETS', cls: 'status-progress' },
+  validation_client: { text: 'À valider', cls: 'status-review' },
   termine: { text: 'Terminé', cls: 'status-done' },
   refuse: { text: 'Refusé', cls: 'status-new' }
 };
@@ -1756,7 +1861,7 @@ async function loadMesOF(userId){
   if(countEl) countEl.textContent = creations.length;
   list.innerHTML = '';
 
-  // Load documents
+  // Load documents + messages
   var crIds = creations.map(function(c){ return c.id; });
   var { data: allDocs } = await sb.from('documents').select('*').in('creation_of_id', crIds);
   var docsMap = {};
@@ -1765,25 +1870,35 @@ async function loadMesOF(userId){
     docsMap[doc.creation_of_id].push(doc);
   });
 
+  var { data: allMsgs } = await sb.from('messages').select('id, creation_of_id, is_read').in('creation_of_id', crIds);
+  var msgCountMap = {};
+  var unreadMap = {};
+  if(allMsgs) allMsgs.forEach(function(m){
+    msgCountMap[m.creation_of_id] = (msgCountMap[m.creation_of_id] || 0) + 1;
+    if(!m.is_read) unreadMap[m.creation_of_id] = (unreadMap[m.creation_of_id] || 0) + 1;
+  });
+
   creations.forEach(function(c){
     var label = ofTypeLabels[c.of_type] || c.of_type;
-    var steps = ofSteps[c.of_type] || ['Étape 1', 'Étape 2', 'Étape 3'];
+    var steps = getOfSteps(c.of_type, c.has_kbis);
     var totalSteps = steps.length;
     var currentStep = c.current_step || 1;
-    var pct = Math.round((currentStep / totalSteps) * 100);
-    if(c.status === 'termine') pct = 100;
-    var st = ofStatusLabels[c.status] || ofStatusLabels.nouveau;
+    var isDone = c.status === 'termine' || currentStep >= totalSteps;
+    var currentStepName = steps[currentStep - 1] || '';
+    var isValStep = isValidationStep(currentStepName);
+    var pct = isDone ? 100 : Math.round((currentStep / totalSteps) * 100);
+    var st = isDone ? {text:'Terminé',cls:'status-done'} : isValStep ? {text:'À valider',cls:'status-review'} : currentStep === 1 ? {text:'En attente',cls:'status-new'} : {text:'En cours',cls:'status-progress'};
     var date = new Date(c.created_at).toLocaleDateString('fr-FR', {day:'2-digit',month:'2-digit',year:'numeric'});
     var totalAmount = c.total_price_cents ? (c.total_price_cents / 100) : 0;
-    var progressColor = c.status === 'termine' ? 'var(--success)' : 'var(--accent)';
+    var progressColor = isDone ? 'var(--success)' : isValStep ? '#7c3aed' : 'var(--accent)';
 
-    // Options display
+    // Options
     var optionsHtml = '';
     var opts = c.creation_of_options || c.selected_options || [];
     if(opts.length > 0){
       var optLabels = opts.map(function(o){
         var n = o.option_type || o.name || '';
-        var p = o.price_cents ? (o.price_cents/100) + '€' : (o.price ? o.price + '€' : '');
+        var p = o.price_cents ? (o.price_cents/100) + '€' : '';
         return '+ ' + n.charAt(0).toUpperCase() + n.slice(1) + (p ? ' (' + p + ')' : '');
       });
       optionsHtml = '<strong>Options :</strong> ' + optLabels.join(' · ') + '<br>';
@@ -1793,31 +1908,64 @@ async function loadMesOF(userId){
     var stepsHtml = '<div style="font-size:12px;margin-top:8px;">';
     steps.forEach(function(s, i){
       var icon = '🔒';
-      if(i + 1 < currentStep || c.status === 'termine') icon = '✅';
+      if(i + 1 < currentStep || isDone) icon = '✅';
       else if(i + 1 === currentStep) icon = '⏳';
-      stepsHtml += icon + ' Étape ' + (i+1) + ' : ' + s + '<br>';
+      var extraCls = isValidationStep(s) ? 'color:#7c3aed;font-weight:600;' : '';
+      stepsHtml += '<span style="' + extraCls + '">' + icon + ' Étape ' + (i+1) + ' : ' + s + '</span><br>';
     });
     stepsHtml += '</div>';
 
-    // Documents
+    // Documents with status
     var docs = docsMap[c.id] || [];
     var docsHtml = '';
     if(docs.length > 0){
-      docsHtml = '<div style="font-size:12px;margin-top:8px;"><strong>Documents :</strong><br>';
+      docsHtml = '<div style="margin-top:12px;padding:12px;background:var(--light);border-radius:8px;"><strong style="font-size:12px;">📎 Documents (' + docs.length + ')</strong>';
       docs.forEach(function(doc){
         var docIcon = doc.status === 'valide' ? '✅' : doc.status === 'refuse' ? '❌' : '⏳';
-        docsHtml += docIcon + ' ' + doc.name;
-        if(doc.expert_comment) docsHtml += ' <span style="color:var(--muted);font-style:italic;">— ' + doc.expert_comment + '</span>';
-        docsHtml += '<br>';
+        var docStatus = doc.status === 'valide' ? '<span style="color:var(--success);font-size:11px;">Accepté</span>' : doc.status === 'refuse' ? '<span style="color:#e94560;font-size:11px;">Refusé</span>' : '<span style="color:var(--muted);font-size:11px;">En attente</span>';
+        docsHtml += '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #e8e8e8;font-size:12px;">' +
+          '<div>' + docIcon + ' <strong>' + doc.name + '</strong> ' + docStatus + '</div>' +
+          '<button class="action-btn" style="font-size:10px;padding:3px 8px;" onclick="viewDocument(\'' + doc.id + '\',\'' + (doc.file_path||'').replace(/'/g,"\\'") + '\')">👁 Voir</button>' +
+          '</div>';
+        if(doc.status === 'refuse' && doc.expert_comment){
+          docsHtml += '<div style="font-size:11px;color:#e94560;padding:4px 0 4px 20px;font-style:italic;">Motif : ' + doc.expert_comment + '</div>';
+        }
       });
       docsHtml += '</div>';
     }
 
+    // Expert + messaging
+    var unreadCount = unreadMap[c.id] || 0;
+    var msgCount = msgCountMap[c.id] || 0;
     var expertHtml = '';
     if(c.expert_id){
-      expertHtml = '<div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">👨‍💼 <strong>Expert assigné</strong></div>';
-    } else if(c.status !== 'termine'){
+      expertHtml = '<div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">' +
+        '👨‍💼 <strong>Expert assigné</strong>' +
+        (msgCount > 0 ? ' · <strong>' + msgCount + ' message' + (msgCount>1?'s':'') + '</strong>' : '') +
+        (unreadCount > 0 ? ' · <span style="color:var(--accent);font-weight:700;">' + unreadCount + ' non lu' + (unreadCount>1?'s':'') + '</span>' : '') +
+        '</div>';
+    } else if(!isDone){
       expertHtml = '<div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;">⏳ <strong>En attente d\'assignation</strong></div>';
+    }
+
+    // Validation buttons (any validation step)
+    var validationHtml = '';
+    if(isValStep && !isDone){
+      validationHtml = '<div style="background:#f3e8ff;border:2px solid #7c3aed;border-radius:10px;padding:16px;margin-top:12px;text-align:center;">' +
+        '<p style="font-size:14px;font-weight:700;color:#7c3aed;margin-bottom:10px;">⚡ ' + currentStepName + '</p>' +
+        '<p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Vérifiez le travail effectué par votre expert. Validez pour continuer ou renvoyez en révision.</p>' +
+        '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">' +
+        '<button class="btn btn-primary" style="padding:10px 24px;font-size:14px;background:var(--success);border-color:var(--success);" onclick="clientValidateOF(\'' + c.id + '\',true,' + currentStep + ',' + totalSteps + ')">✅ Valider</button>' +
+        '<button class="btn" style="padding:10px 24px;font-size:14px;background:#fff;color:#7c3aed;border:2px solid #7c3aed;" onclick="clientValidateOF(\'' + c.id + '\',false,' + currentStep + ',' + totalSteps + ')">↩️ Renvoyer en révision</button>' +
+        '</div></div>';
+    }
+
+    // Closed state
+    var closedHtml = '';
+    if(isDone){
+      closedHtml = '<div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:10px;padding:14px;margin-top:12px;text-align:center;">' +
+        '<p style="font-size:14px;font-weight:700;color:var(--success);">✅ Création d\'OF terminée</p>' +
+        '<p style="font-size:12px;color:var(--muted);">Discussion close.</p></div>';
     }
 
     var html = '<div class="detail-card" data-creation-id="' + c.id + '">' +
@@ -1827,28 +1975,55 @@ async function loadMesOF(userId){
       '<div style="text-align:right;">' +
       '<div style="font-size:18px;font-weight:800;color:var(--accent);">' + totalAmount + '€</div>' +
       '<span class="status-badge ' + st.cls + '">' + st.text + '</span>' +
-      (!c.paid ? ' <span style="font-size:10px;color:var(--accent);">⚠️ Non payé</span>' : '') +
       '</div></div>' +
       '<div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:' + pct + '%;background:' + progressColor + ';"></div></div>' +
-      '<p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Étape ' + currentStep + '/' + totalSteps + ' : ' + (steps[currentStep-1] || '') + '</p>' +
+      '<p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Étape ' + currentStep + '/' + totalSteps + ' : ' + currentStepName + '</p>' +
       '<div style="font-size:12px;margin-bottom:8px;">' +
       '<strong>Type :</strong> ' + (ofTypeLabels[c.of_type] || c.of_type) + '<br>' +
       optionsHtml +
-      '<strong>KBIS existant :</strong> ' + (c.has_kbis ? 'Oui (-100€)' : 'Non') + '<br>' +
+      '<strong>KBIS existant :</strong> ' + (c.has_kbis ? 'Oui' : 'Non') + '<br>' +
       '<strong>Paiement :</strong> ' + (c.payment_mode || '1x') +
-      (c.nda_number ? '<br><strong>NDA :</strong> ' + c.nda_number : '') +
-      (c.siret ? '<br><strong>SIRET :</strong> ' + c.siret : '') +
       '</div>' +
-      stepsHtml + docsHtml + expertHtml +
+      stepsHtml + docsHtml + expertHtml + validationHtml + closedHtml +
       '<div class="action-btns">' +
-      '<button class="action-btn" onclick="openDocUploadModal(\'' + c.id + '\', \'creation\')">📄 Envoyer un document</button>' +
-      (c.expert_id ? '<button class="action-btn" onclick="openMessageModal(\'' + c.id + '\', \'creation\')">💬 Contacter mon expert</button>' : '') +
+      (!isDone ? '<button class="action-btn" onclick="openDocUploadModal(\'' + c.id + '\', \'creation\')">📤 Envoyer un document</button>' : '') +
+      (c.expert_id && !isDone ? '<button class="action-btn" onclick="openMessageModal(\'' + c.id + '\', \'creation\')">💬 Discussion dossier' + (unreadCount > 0 ? ' <span style="background:var(--accent);color:#fff;padding:1px 6px;border-radius:8px;font-size:10px;">' + unreadCount + '</span>' : '') + '</button>' : '') +
+      (isDone && msgCount > 0 ? '<button class="action-btn" onclick="openMessageModal(\'' + c.id + '\', \'creation\')">📋 Voir la discussion (close)</button>' : '') +
       '</div></div>';
 
     list.insertAdjacentHTML('beforeend', html);
   });
 
   return creations.length;
+}
+
+// Client validates or rejects OF at a validation step
+async function clientValidateOF(ofId, accept, currentStep, totalSteps){
+  if(accept){
+    var nextStep = currentStep + 1;
+    var isLastValidation = nextStep >= totalSteps; // next step is "Terminé"
+    if(!confirm(isLastValidation ? '✅ Valider ? La création d\'OF sera marquée comme terminée.' : '✅ Valider cette étape ?')) return;
+    
+    var update = { current_step: nextStep, updated_at: new Date().toISOString() };
+    if(isLastValidation) update.status = 'termine';
+    
+    var { error } = await sb.from('creations_of').update(update).eq('id', ofId);
+    if(error){ alert('❌ ' + error.message); return; }
+    var user = await getUser();
+    await sb.from('messages').insert({ creation_of_id: ofId, sender_id: user.id, content: '✅ Le client a validé l\'étape. ' + (isLastValidation ? 'Création d\'OF terminée.' : 'Passage à l\'étape suivante.') });
+    alert(isLastValidation ? '✅ Création d\'OF terminée !' : '✅ Étape validée !');
+  } else {
+    var motif = prompt('Pourquoi renvoyez-vous en révision ?');
+    if(!motif) return;
+    // Go back 1 step (to the work step before this validation)
+    var { error } = await sb.from('creations_of').update({ current_step: currentStep - 1, status: 'en_cours', updated_at: new Date().toISOString() }).eq('id', ofId);
+    if(error){ alert('❌ ' + error.message); return; }
+    var user = await getUser();
+    await sb.from('messages').insert({ creation_of_id: ofId, sender_id: user.id, content: '↩️ Le client a renvoyé le dossier en révision.\n\nMotif : ' + motif });
+    alert('Dossier renvoyé en révision.');
+  }
+  var user = await getUser();
+  if(user) await loadMesOF(user.id);
 }
 
 // ============================

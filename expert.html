@@ -151,8 +151,11 @@
 <script src="js/supabase-config.js"></script>
 <script>
 var typeLabels={nda:'NDA',uai:'UAI',qualiopi:'Qualiopi',edof:'EDOF',francetravail:'France Travail',rs_rncp:'RS/RNCP',rs:'RS/RNCP',opco:'OPCO',bpf:'BPF',agent:'Agent IA',action_formation:'OF — Action',cfa:'OF — CFA',bilan:'OF — Bilan',vae:'OF — VAE',elus:'OF — Élus',agents_ia:'OF — Agents IA'};
-var demarcheSteps={nda:['Réception documents','Vérification expert','Création dossier DREETS','Envoi DREETS','Réception NDA'],uai:['Réception documents','Dossier rectorat','Envoi rectorat','Réception UAI'],qualiopi:['Audit documentaire','Rédaction manuel qualité','Vérification + ajustements','Audit blanc','Certification'],edof:['Vérification éligibilité','Fiches formation','Paramétrage EDOF','Mise en ligne','Validation'],francetravail:['Réception documents','Constitution dossier','Soumission','Validation'],rs_rncp:['Analyse demande','Rédaction référentiels','Constitution dossier','Soumission','Suivi'],rs:['Analyse demande','Rédaction référentiels','Constitution dossier','Soumission','Suivi'],opco:['Sélection OPCO','Constitution dossiers','Envoi OPCO','Suivi'],bpf:['Réception données','Rédaction BPF','Validation client','Soumission'],agent:['Prise de RDV','Cadrage','Configuration','Test','Production']};
-var ofSteps={action_formation:['Documents collectés','Rédaction statuts','KBIS greffe','NDA DREETS','Activation OF'],cfa:['Documents collectés','Rédaction statuts','KBIS','NDA DREETS','UAI mention CFA','Activation CFA'],bilan:['Documents collectés','Création société','KBIS','NDA bilan','Activation'],vae:['Documents collectés','Création société','KBIS','NDA VAE','Activation'],elus:['Documents collectés','Création société','KBIS','NDA','Agrément préfectoral','Activation'],agents_ia:['Réception + KBIS ou création','Config agents + activation']};
+var demarcheSteps={_u:['En attente d\'assignation','Constitution du dossier','Soumission pour validation','Validation client','Terminé']};
+['nda','uai','qualiopi','edof','francetravail','rs_rncp','rs','opco','bpf','agent'].forEach(function(k){demarcheSteps[k]=demarcheSteps._u;});
+var ofSteps={};
+function getOfSteps(type,hasKbis){var s=['Assignation expert','Vérification des documents'];if(type==='agents_ia'){if(!hasKbis){s.push('Constitution dossier KBIS');s.push('Obtention KBIS');s.push('Validation client (KBIS)');}s.push('Configuration Agent IA + RDV');s.push('Validation client (Agent IA)');s.push('Terminé');return s;}if(!hasKbis){s.push('Constitution dossier KBIS');s.push('Obtention KBIS');s.push('Validation client (KBIS)');}s.push('Obtention NDA');s.push('Validation client (NDA)');s.push('Certification Qualiopi');s.push('Validation client (Qualiopi)');if(type==='cfa'){s.push('Obtention UAI (mention CFA)');s.push('Validation client (UAI)');}s.push('Terminé');return s;}
+function isValidationStep(n){return n&&n.indexOf('Validation client')===0;}
 var demarcheChecklist={nda:['KBIS','Casier judiciaire','Convention formation','Programme formation','CV formateurs','Pièce identité'],qualiopi:['NDA','KBIS','Programmes (min.3)','Conventions signées','CV formateurs','Questionnaires satisfaction'],edof:['NDA','Qualiopi','SIRET','RIB','Programmes formation'],uai:['NDA','KBIS','Formation visée'],francetravail:['NDA','KBIS','Programmes','Références clients'],rs_rncp:['NDA+KBIS','Référentiel compétences','Programmes détaillés','Preuves insertion','Partenariats'],rs:['NDA+KBIS','Référentiel compétences','Programmes détaillés','Preuves insertion','Partenariats'],opco:['NDA','KBIS','Programmes','Grille tarifaire'],bpf:['NDA','Nb stagiaires','CA formation','Heures formation','Données financières'],agent:['RDV effectué']};
 
 var expertId=null,allDemarches=[],allCreations=[],allDocs={};
@@ -180,7 +183,7 @@ async function loadAllDossiers(){
 
 function renderCard(item,source,mode){
   var isDem=source==='demarche';var type=isDem?item.type:item.of_type;var label=typeLabels[type]||type;
-  var steps=isDem?(demarcheSteps[type]||[]):(ofSteps[type]||[]);var total=steps.length;var cur=item.current_step||1;
+  var steps=isDem?(demarcheSteps[type]||[]):(getOfSteps(type, item.has_kbis));var total=steps.length;var cur=item.current_step||1;
   var pct=item.status==='termine'?100:Math.round((cur/total)*100);var p=item.profiles||{};
   var name=p.full_name||item.client_name||'Client';var email=p.email||'';var amount=isDem?fmtAmount(item.amount_cents):fmtAmount(item.total_price_cents);
   var date=fmtDate(item.created_at);var docs=allDocs[item.id]||[];var pending=docs.filter(function(d){return d.status==='en_attente';}).length;
@@ -253,14 +256,51 @@ function renderHistorique(){
 async function assignDossier(id,source){
   if(!confirm('Prendre en charge ce dossier ?'))return;
   var table=source==='demarche'?'demarches':'creations_of';
-  var{error}=await sb.from(table).update({expert_id:expertId,status:'en_cours',updated_at:new Date().toISOString()}).eq('id',id);
+  var col=source==='demarche'?'demarche_id':'creation_of_id';
+  // Assign + advance to step 2 (Constitution du dossier)
+  var{error}=await sb.from(table).update({expert_id:expertId, current_step:2, status:'en_cours', updated_at:new Date().toISOString()}).eq('id',id);
   if(error){alert('❌ '+error.message);return;}
-  alert('✅ Dossier assigné !');await loadAllDossiers();renderPool();renderMesDossiers();renderHistorique();showTab('mes-dossiers');
+  // Send intro message
+  var msgData={sender_id:expertId, content:'👋 Bonjour ! Je suis l\'expert en charge de votre dossier. Je vais constituer votre dossier. Si j\'ai besoin de documents complémentaires, je vous contacterai ici.\n\nN\'hésitez pas à envoyer tous les documents utiles via le bouton "Envoyer un document".'};
+  msgData[col]=id;
+  await sb.from('messages').insert(msgData);
+  alert('✅ Dossier assigné et passé en étape 2 (Constitution du dossier).');
+  await loadAllDossiers();renderPool();renderMesDossiers();renderHistorique();showTab('mes-dossiers');
 }
-async function advanceStep(id,source,cur,total){
-  if(cur>=total){if(!confirm('Marquer TERMINÉ ?'))return;var t=source==='demarche'?'demarches':'creations_of';await sb.from(t).update({status:'termine',current_step:total,updated_at:new Date().toISOString()}).eq('id',id);}
-  else{if(!confirm('Passer étape '+(cur+1)+' ?'))return;var t=source==='demarche'?'demarches':'creations_of';await sb.from(t).update({current_step:cur+1,updated_at:new Date().toISOString()}).eq('id',id);}
-  alert('✅ Mis à jour.');await loadAllDossiers();renderPool();renderMesDossiers();renderHistorique();
+async function advanceStep(id,source,cur,total,stepNames){
+  var t=source==='demarche'?'demarches':'creations_of';
+  var col=source==='demarche'?'demarche_id':'creation_of_id';
+  var nextStep = cur + 1;
+  var nextStepName = stepNames ? stepNames[nextStep - 1] : '';
+  var curStepName = stepNames ? stepNames[cur - 1] : '';
+  
+  // Block if current step is a validation step (only client can validate)
+  if(isValidationStep(curStepName)){
+    alert('⏳ Cette étape est en attente de validation client. Vous ne pouvez pas avancer manuellement.');
+    return;
+  }
+  
+  // Check if next step is a validation step → we're submitting for client review
+  if(isValidationStep(nextStepName)){
+    if(!confirm('Soumettre au client pour validation ?\n\nÉtape suivante : ' + nextStepName)) return;
+    await sb.from(t).update({current_step:nextStep, status:'en_cours', updated_at:new Date().toISOString()}).eq('id',id);
+    var msgData = {sender_id:expertId, content:'📋 L\'expert a terminé cette phase et soumis votre dossier pour validation.\n\nÉtape : ' + nextStepName + '\n\nVeuillez vérifier et valider dans votre espace.'};
+    msgData[col] = id;
+    await sb.from('messages').insert(msgData);
+    alert('✅ Soumis pour validation client.');
+  } else if(nextStepName === 'Terminé'){
+    // Should not happen — client validates the last step
+    alert('Le dossier doit être validé par le client.');
+    return;
+  } else {
+    if(!confirm('Passer à l\'étape ' + nextStep + ' : ' + nextStepName + ' ?')) return;
+    await sb.from(t).update({current_step:nextStep, status:'en_cours', updated_at:new Date().toISOString()}).eq('id',id);
+    var msgData2 = {sender_id:expertId, content:'⏭ Passage à l\'étape ' + nextStep + ' : ' + nextStepName};
+    msgData2[col] = id;
+    await sb.from('messages').insert(msgData2);
+    alert('✅ Étape mise à jour.');
+  }
+  await loadAllDossiers();renderPool();renderMesDossiers();renderHistorique();
 }
 
 // DOSSIER DETAIL
@@ -268,7 +308,7 @@ async function openDossierDetail(id,source){
   var item=null;if(source==='demarche')item=allDemarches.find(function(d){return d.id===id;});else item=allCreations.find(function(c){return c.id===id;});
   if(!item){alert('Introuvable.');return;}
   var type=source==='demarche'?item.type:item.of_type;var label=typeLabels[type]||type;
-  var steps=source==='demarche'?(demarcheSteps[type]||[]):(ofSteps[type]||[]);var cur=item.current_step||1;
+  var steps=source==='demarche'?(demarcheSteps[type]||[]):(getOfSteps(type, item.has_kbis));var cur=item.current_step||1;
   var p=item.profiles||{};var docs=allDocs[id]||[];var cl=source==='demarche'?(demarcheChecklist[type]||[]):[];
   var h='<h3 style="font-size:20px;font-weight:800;margin-bottom:4px;">'+label+'</h3>';
   h+='<p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Client : <strong>'+(p.full_name||'—')+'</strong> · '+(p.email||'')+(p.phone?' · '+p.phone:'')+'</p>';
@@ -297,20 +337,51 @@ async function openDossierDetail(id,source){
   if(item.form_data&&Object.keys(item.form_data).length>0){h+='<h4 style="font-size:14px;font-weight:700;margin:16px 0 8px;">📝 Infos formulaire</h4><div style="background:var(--light);border-radius:8px;padding:12px;font-size:12px;">';
     Object.keys(item.form_data).forEach(function(k){var v=item.form_data[k];if(v&&typeof v!=='object')h+='<div><strong>'+k.replace(/_/g,' ')+'</strong> : '+v+'</div>';});h+='</div>';}
   // Actions
+  var curStepName = steps[cur-1] || '';
+  var nextStepName = steps[cur] || '';
+  var isCurValidation = isValidationStep(curStepName);
   h+='<div class="action-btns" style="margin-top:16px;">';
   if(item.expert_id===expertId&&item.status!=='termine'){
-    h+='<button class="btn btn-primary" style="padding:10px 20px;font-size:13px;" onclick="advanceStep(\''+id+'\',\''+source+'\','+(item.current_step||1)+','+steps.length+');closeDossierModal();">⏭ Étape suivante</button>';
+    if(isCurValidation){
+      h+='<div style="background:#f3e8ff;border:1px solid #7c3aed;border-radius:8px;padding:12px;font-size:13px;color:#7c3aed;font-weight:600;">⏳ En attente de validation client : ' + curStepName + '</div>';
+    } else if(curStepName !== 'Terminé'){
+      var btnLabel = isValidationStep(nextStepName) ? '📋 Soumettre pour validation client' : '⏭ Étape suivante : ' + nextStepName;
+      h+='<button class="btn btn-primary" style="padding:10px 20px;font-size:13px;" onclick="advanceStep(\''+id+'\',\''+source+'\','+cur+','+steps.length+','+JSON.stringify(steps).replace(/'/g,"\\'")+');closeDossierModal();">'+btnLabel+'</button>';
+    }
     h+='<button class="action-btn" onclick="closeDossierModal();openExpertUpload(\''+id+'\',\''+source+'\')">📤 Doc client</button>';
     h+='<button class="action-btn" onclick="closeDossierModal();openExpertMessages(\''+id+'\',\''+source+'\')">💬 Messages</button>';
+  }
+  if(item.status==='termine'){
+    h+='<div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:12px;font-size:13px;color:var(--success);font-weight:600;">✅ Dossier terminé — Discussion close</div>';
+    h+='<button class="action-btn" onclick="closeDossierModal();openExpertMessages(\''+id+'\',\''+source+'\')">📋 Voir la discussion</button>';
   }
   h+='</div>';
   document.getElementById('dossier-detail-content').innerHTML=h;document.getElementById('modal-dossier').classList.add('open');
 }
 async function viewDoc(fp){try{var url=await getDocumentUrl(fp);if(url)window.open(url,'_blank');else alert('Non disponible.');}catch(e){alert('Erreur: '+e.message);}}
 async function validateDoc(docId,ok){
-  var comment='';if(!ok){comment=prompt('Motif du refus :');if(comment===null)return;}
+  var comment='';
+  if(!ok){
+    comment=prompt('Motif du refus (sera visible par le client) :');
+    if(comment===null)return;
+    if(!comment.trim()){alert('⚠️ Vous devez indiquer un motif de refus.');return;}
+  }
+  var{data:doc}=await sb.from('documents').select('*').eq('id',docId).single();
   var{error}=await sb.from('documents').update({status:ok?'valide':'refuse',expert_comment:comment||null}).eq('id',docId);
-  if(error){alert('❌ '+error.message);return;}alert(ok?'✅ Validé.':'❌ Refusé.');
+  if(error){alert('❌ '+error.message);return;}
+  
+  // Send message in the dossier thread
+  if(doc){
+    var msgData={sender_id:expertId, content: ok 
+      ? '✅ Document accepté : "' + (doc.name||'document') + '"'
+      : '❌ Document refusé : "' + (doc.name||'document') + '"\n\nMotif : ' + comment + '\n\nMerci de renvoyer le document corrigé.'
+    };
+    if(doc.demarche_id) msgData.demarche_id = doc.demarche_id;
+    if(doc.creation_of_id) msgData.creation_of_id = doc.creation_of_id;
+    await sb.from('messages').insert(msgData);
+  }
+  
+  alert(ok?'✅ Document validé.':'❌ Document refusé — le client a été notifié.');
   await loadAllDossiers();renderMesDossiers();closeDossierModal();
 }
 
@@ -321,12 +392,27 @@ async function openExpertMessages(id,source){expMsgCtx={id:id,s:source};document
   document.getElementById('modal-exp-messages').classList.add('open');
   var col=source==='demarche'?'demarche_id':'creation_of_id';
   var{data:msgs}=await sb.from('messages').select('*, profiles:sender_id(full_name,is_pro)').eq(col,id).order('created_at',{ascending:true});
+  
+  // Check if dossier is closed
+  var item = null;
+  if(source==='demarche') item = allDemarches.find(function(d){return d.id===id;});
+  else item = allCreations.find(function(c){return c.id===id;});
+  var isClosed = item && (item.status === 'termine' || (item.current_step||1) >= 5);
+  
+  // Hide/show input
+  var inputArea = document.getElementById('exp-msg-input').parentElement;
+  if(isClosed){
+    inputArea.innerHTML = '<div style="text-align:center;padding:12px;color:var(--muted);font-size:13px;font-style:italic;">🔒 Discussion close — Ce dossier est terminé.</div>';
+  }
+  
   var c=document.getElementById('exp-msg-list');
   if(!msgs||msgs.length===0){c.innerHTML='<p style="text-align:center;color:var(--muted);padding:20px;">Aucun message.</p>';return;}
   var h='';msgs.forEach(function(m){var me=m.sender_id===expertId;var nm=me?'Vous (Expert)':(m.profiles?m.profiles.full_name:'Client');
     var dt=new Date(m.created_at).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
     var al=me?'flex-end':'flex-start';var bg=me?'rgba(99,102,241,.08)':'var(--light)';
-    h+='<div style="display:flex;justify-content:'+al+';margin-bottom:8px;"><div style="max-width:80%;background:'+bg+';border:1px solid var(--border);border-radius:10px;padding:10px 14px;"><div style="font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;">'+nm+' · '+dt+'</div><p style="font-size:13px;margin:0;">'+m.content+'</p></div></div>';});
+    // Highlight system messages (accept/reject/validation)
+    if(m.content.startsWith('✅ Document') || m.content.startsWith('❌ Document') || m.content.startsWith('📋') || m.content.startsWith('↩️')) bg='rgba(124,58,237,.06)';
+    h+='<div style="display:flex;justify-content:'+al+';margin-bottom:8px;"><div style="max-width:80%;background:'+bg+';border:1px solid var(--border);border-radius:10px;padding:10px 14px;"><div style="font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;">'+nm+' · '+dt+'</div><p style="font-size:13px;margin:0;white-space:pre-wrap;">'+m.content+'</p></div></div>';});
   c.innerHTML=h;c.scrollTop=c.scrollHeight;
 }
 async function sendExpertMsg(){var inp=document.getElementById('exp-msg-input');var t=inp.value.trim();if(!t)return;
