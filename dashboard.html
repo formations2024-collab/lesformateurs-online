@@ -1140,7 +1140,7 @@ async function passerPremium(annonceId, btn){
   if(!confirm('Passer cette annonce en Premium pour 29€ ?\n\nVotre annonce sera mise en avant dans les résultats.')) return;
   
   // Open Stripe payment
-  var stripeUrl = 'https://buy.stripe.com/3cs28r6ro5eZ6Me2RYffy0Z';
+  var stripeUrl = 'https://buy.stripe.com/9B67sL4jg0YJ8Um0JQffy1v';
   window.open(stripeUrl, '_blank');
   
   // Mark as premium in DB (optimistic — in production, use Stripe webhook)
