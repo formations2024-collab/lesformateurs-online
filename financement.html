@@ -65,8 +65,8 @@
       <h2 id="fin-dispositif-name">—</h2>
       <p class="desc" id="fin-dispositif-desc">—</p>
       <div class="fin-info">
-        <strong>💰 Plafond indicatif :</strong> <span id="fin-plafond">—</span><br>
-        <strong>👤 Formateur :</strong> <span id="fin-formateur">—</span>
+        <strong>👤 Formateur :</strong> <span id="fin-formateur">—</span><br>
+        <strong>📚 Formation :</strong> <span id="fin-formation-name">—</span>
       </div>
     </div>
 
@@ -194,7 +194,6 @@ var uploadedDocs = [];
   var disp = DISPOSITIFS[dossier.dispositif] || {};
   document.getElementById('fin-dispositif-name').textContent = disp.name || dossier.dispositif;
   document.getElementById('fin-dispositif-desc').textContent = disp.desc || '';
-  document.getElementById('fin-plafond').textContent = disp.plafond || dossier.plafond_info || '—';
   document.getElementById('fin-formateur').textContent = formateur ? formateur.full_name : '—';
   document.getElementById('fin-subtitle').textContent = 'Bonjour ' + stag.prenom + ', complétez votre dossier ' + (disp.name || '') + '.';
 

@@ -347,122 +347,54 @@
 
     <!-- ========== FORMATION ========== -->
     <div class="tab-content" id="tab-formation">
-      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🎓 Ma formation formateur</h2>
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">🎓 Mes formations</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Suivez vos formations et progressez à votre rythme.</p>
 
-      <!-- ÉTAT : PAS ENCORE ACHETÉE -->
-      <div id="formation-not-purchased">
-        <div style="background:#fff;border:2px dashed var(--border);border-radius:14px;padding:32px;text-align:center;margin-bottom:24px;">
-          <div style="font-size:48px;margin-bottom:12px;">🎓</div>
-          <h3 style="font-size:18px;font-weight:800;margin-bottom:8px;">Vous n'avez pas encore acheté la formation</h3>
-          <p style="font-size:13px;color:var(--muted);margin-bottom:16px;max-width:500px;margin-left:auto;margin-right:auto;">
-            Devenez formateur professionnel certifié. Cette formation vous donne accès aux <strong>Agents IA</strong> qui trouvent des missions pour vous automatiquement.
-          </p>
-          <div style="display:flex;justify-content:center;margin-bottom:12px;">
-            <div class="progress-bar" style="height:12px;max-width:400px;width:100%;"><div class="progress-fill" style="width:0%;"></div></div>
-          </div>
-          <p style="font-size:12px;color:var(--muted);margin-bottom:20px;">Progression : <strong>0%</strong></p>
-        </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;">
 
-        <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:10px;padding:20px;margin-bottom:16px;">
-          <h4 style="font-size:14px;font-weight:700;margin-bottom:8px;">💰 100% remboursée pour les indépendants</h4>
-          <p style="font-size:13px;color:var(--muted);">Si vous êtes auto-entrepreneur, consultant ou formateur indépendant, cette formation est <strong style="color:var(--success);">intégralement prise en charge par le FIF PL</strong>. Vous ne payez rien au final.</p>
-        </div>
-
-        <div style="background:rgba(233,69,96,.05);border:1px solid rgba(233,69,96,.15);border-radius:10px;padding:20px;margin-bottom:16px;">
-          <h4 style="font-size:14px;font-weight:700;margin-bottom:8px;">🤖 Accès aux Agents IA après certification</h4>
-          <p style="font-size:13px;color:var(--muted);">Une fois certifié, nos agents IA travaillent pour vous : <strong>recherche de missions</strong>, <strong>prospection automatique</strong>, <strong>création de formations</strong>. C'est comme avoir un assistant commercial 24h/24.</p>
-        </div>
-
-        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:24px;">
-          <h4 style="font-size:14px;font-weight:700;margin-bottom:10px;">📋 Ce que contient la formation (21h)</h4>
-          <div style="display:grid;gap:8px;">
-            <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span>🔒</span> Module 1 : Conception pédagogique (4h30)</div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span>🔒</span> Module 2 : Animation de formation (4h30)</div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span>🔒</span> Module 3 : Gestion administrative (4h30)</div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span>🔒</span> Module 4 : Techniques de vente (4h30)</div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span>🔒</span> Module 5 : Certification finale (3h)</div>
-          </div>
-        </div>
-
-        <div style="text-align:center;">
-          <div style="margin-bottom:8px;">
-            <span style="font-size:16px;text-decoration:line-through;color:var(--muted);">2 980€</span>
-            <span style="font-size:28px;font-weight:900;color:var(--accent);margin-left:12px;">1 490€</span>
-          </div>
-          <p style="font-size:12px;color:var(--success);font-weight:600;margin-bottom:16px;">💰 Remboursé à 100% pour les indépendants (FIF PL)</p>
-          <a href="se-former.html" class="btn btn-primary" style="padding:14px 40px;font-size:16px;font-weight:700;">Acheter la formation →</a>
-          <p style="font-size:11px;color:var(--muted);margin-top:10px;">✅ Satisfait ou remboursé pendant 3 mois · 🤖 Agents IA inclus après certification</p>
-        </div>
-      </div>
-
-      <!-- ÉTAT : FORMATION EN COURS (masqué par défaut, affiché si achetée) -->
-      <div id="formation-purchased" style="display:none;">
-        <div style="background:#fff;border:2px solid var(--accent);border-radius:14px;padding:24px;margin-bottom:24px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px;">
+        <!-- FORMATION 1 : Formateur Pro -->
+        <div class="detail-card" style="border:2px solid var(--accent);">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
             <div>
-              <h3 style="font-size:16px;font-weight:800;">Formation "Formateur Professionnel"</h3>
-              <p style="font-size:12px;color:var(--muted);">21h en ligne · Inscrite le 05/03/2026</p>
+              <span style="font-size:28px;">🎓</span>
+              <h3 style="font-size:16px;font-weight:800;margin-top:6px;">Formateur Professionnel</h3>
+              <p style="font-size:12px;color:var(--muted);">Formation certifiante 21h</p>
             </div>
-            <span class="status-badge status-progress" style="font-size:12px;padding:6px 14px;">En cours — 75%</span>
+            <div style="text-align:right;">
+              <span style="display:inline-block;background:rgba(16,185,129,.1);color:var(--success);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;">100% remboursé FIF PL</span>
+            </div>
           </div>
-          <div class="progress-bar" style="height:12px;"><div class="progress-fill" style="width:75%;"></div></div>
-          <a href="formation.html" class="btn btn-primary" style="margin-top:16px;display:inline-block;padding:10px 24px;font-size:14px;">▶ Reprendre la formation</a>
-        </div>
-
-        <h3 style="font-size:15px;font-weight:700;margin-bottom:12px;">Modules de formation</h3>
-
-        <div class="detail-card" style="border-left:3px solid var(--success);">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-            <div><h4>Module 1 : Conception pédagogique</h4><p>Créer des programmes de formation efficaces, objectifs pédagogiques, ingénierie</p></div>
-            <span class="status-badge status-done">✅ Terminé</span>
+          <div class="progress-bar" style="height:10px;margin-bottom:6px;"><div class="progress-fill" id="formation-pro-bar" style="width:0%;"></div></div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Progression : <strong id="formation-pro-pct">0%</strong></p>
+          <div id="formation-pro-status">
+            <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:12px;">
+              <span style="font-size:16px;text-decoration:line-through;color:var(--muted);">2 980€</span>
+              <span style="font-size:24px;font-weight:900;color:var(--accent);">1 490€</span>
+            </div>
+            <a href="se-former.html" class="btn btn-primary" style="display:block;text-align:center;padding:12px;font-size:14px;">Acheter la formation →</a>
           </div>
-          <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Terminé le 08/03</span><span class="detail-tag">Score : 92%</span></div>
-        </div>
-
-        <div class="detail-card" style="border-left:3px solid var(--success);">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-            <div><h4>Module 2 : Animation de formation</h4><p>Techniques d'animation, gestion de groupe, outils pédagogiques</p></div>
-            <span class="status-badge status-done">✅ Terminé</span>
+          <div id="formation-pro-access" style="display:none;">
+            <a href="formation.html?f=1" class="btn btn-primary" style="display:block;text-align:center;padding:12px;font-size:14px;">▶ Reprendre la formation</a>
           </div>
-          <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Terminé le 12/03</span><span class="detail-tag">Score : 88%</span></div>
         </div>
 
-        <div class="detail-card" style="border-left:3px solid var(--accent);">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-            <div><h4>Module 3 : Gestion administrative</h4><p>Contrats, conventions, émargement, BPF, obligations légales</p></div>
-            <span class="status-badge status-progress">⏳ En cours — 60%</span>
+        <!-- FORMATION 2 : Agents IA (GRATUIT) -->
+        <div class="detail-card" style="border:2px solid #7c3aed;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+            <div>
+              <span style="font-size:28px;">🤖</span>
+              <h3 style="font-size:16px;font-weight:800;margin-top:6px;">Les Agents IA dans la Formation</h3>
+              <p style="font-size:12px;color:var(--muted);">Comprendre l'IA et les agents · 6 modules</p>
+            </div>
+            <div style="text-align:right;">
+              <span style="display:inline-block;background:rgba(124,58,237,.1);color:#7c3aed;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;">100% GRATUIT</span>
+            </div>
           </div>
-          <div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
-          <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Commencé le 15/03</span></div>
-          <div class="action-btns"><a href="formation.html" class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);text-decoration:none;">▶️ Reprendre</a></div>
+          <div class="progress-bar" style="height:10px;margin-bottom:6px;"><div class="progress-fill" id="formation-ia-bar" style="width:0%;background:#7c3aed;"></div></div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Progression : <strong id="formation-ia-pct">0%</strong></p>
+          <a href="formation.html?f=2" class="btn" style="display:block;text-align:center;padding:12px;font-size:14px;background:#7c3aed;color:#fff;border-color:#7c3aed;border-radius:10px;font-weight:700;text-decoration:none;">▶ Commencer gratuitement</a>
         </div>
 
-        <div class="detail-card" style="border-left:3px solid var(--border);">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-            <div><h4>Module 4 : Techniques de vente</h4><p>Prospecter, vendre ses formations, négocier, fidéliser</p></div>
-            <span style="font-size:12px;color:var(--muted);">🔒 À débloquer</span>
-          </div>
-          <div class="detail-meta"><span class="detail-tag">4h30</span><span class="detail-tag">Disponible après Module 3</span></div>
-        </div>
-
-        <div class="detail-card" style="border-left:3px solid var(--border);">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-            <div><h4>Module 5 : Certification finale</h4><p>Examen final, mise en situation, obtention du certificat</p></div>
-            <span style="font-size:12px;color:var(--muted);">🔒 À débloquer</span>
-          </div>
-          <div class="detail-meta"><span class="detail-tag">3h</span><span class="detail-tag">Disponible après Module 4</span></div>
-        </div>
-
-        <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:10px;padding:16px;margin-top:20px;">
-          <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">💰 Remboursement FIF PL</h4>
-          <p style="font-size:12px;color:var(--muted);">Statut : <strong style="color:var(--success);">Dossier déposé</strong></p>
-          <p style="font-size:12px;color:var(--muted);">Remboursement estimé sous 4-6 semaines après certification.</p>
-        </div>
-
-        <div style="background:rgba(233,69,96,.05);border:1px solid rgba(233,69,96,.15);border-radius:10px;padding:16px;margin-top:12px;">
-          <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">🤖 Agents IA — Recherche de missions</h4>
-          <p style="font-size:12px;color:var(--muted);">Activé après certification. Nos agents chercheront des missions adaptées à votre profil chaque jour.</p>
-        </div>
       </div>
     </div>
 
@@ -496,18 +428,25 @@
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
           <div>
             <h2 style="font-size:20px;font-weight:800;">💰 Gestion des financements</h2>
-            <p style="font-size:13px;color:var(--muted);">Créez des dossiers pour vos stagiaires et suivez les demandes.</p>
+            <p style="font-size:13px;color:var(--muted);">Créez des formations, ajoutez des stagiaires et suivez les demandes.</p>
           </div>
-          <div style="display:flex;gap:8px;">
-            <button class="btn btn-primary" onclick="openCreateFinDossier()" style="padding:8px 16px;font-size:13px;">+ Nouveau dossier</button>
-            <button class="action-btn" onclick="showFinSettings()">⚙️ Paramètres</button>
-          </div>
+          <button class="btn btn-primary" onclick="openCreateFinDossier()" style="padding:8px 16px;font-size:13px;">+ Nouveau dossier</button>
         </div>
 
         <!-- Sub-tabs -->
         <div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;">
-          <button class="action-btn" id="fin-tab-dossiers" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="showFinSubTab('dossiers')">📂 Dossiers</button>
-          <button class="action-btn" id="fin-tab-stagiaires" onclick="showFinSubTab('stagiaires')">👥 Stagiaires</button>
+          <button class="action-btn fin-subtab" id="fin-tab-formations" onclick="showFinSubTab('formations')">📚 Formations</button>
+          <button class="action-btn fin-subtab" id="fin-tab-dossiers" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="showFinSubTab('dossiers')">📂 Dossiers</button>
+          <button class="action-btn fin-subtab" id="fin-tab-stagiaires" onclick="showFinSubTab('stagiaires')">👥 Stagiaires</button>
+        </div>
+
+        <!-- Formations list -->
+        <div id="fin-sub-formations" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <p style="font-size:13px;color:var(--muted);">Vos formations avec leurs documents réutilisables.</p>
+            <button class="action-btn" onclick="openCreateFormation()">+ Nouvelle formation</button>
+          </div>
+          <div id="fin-formations-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
         </div>
 
         <!-- Dossiers list -->
@@ -527,48 +466,78 @@
       <div class="modal-box" style="max-width:560px;max-height:90vh;overflow-y:auto;">
         <button class="modal-close" onclick="document.getElementById('modal-create-fin').classList.remove('open')">✕</button>
         <h3 style="font-size:18px;font-weight:800;margin-bottom:16px;">💰 Nouveau dossier de financement</h3>
-        <div class="form-group"><label>Prénom du candidat</label><input type="text" id="fin-new-prenom" placeholder="Prénom"></div>
-        <div class="form-group"><label>Nom du candidat</label><input type="text" id="fin-new-nom" placeholder="Nom"></div>
-        <div class="form-group"><label>Email du candidat</label><input type="email" id="fin-new-email" placeholder="email@exemple.com"></div>
-        <div class="form-group"><label>Téléphone du candidat</label><input type="tel" id="fin-new-tel" placeholder="06 XX XX XX XX"></div>
-        <div class="form-group"><label>Intitulé de la formation</label><input type="text" id="fin-new-formation" placeholder="Ex: Formation Excel Avancé"></div>
+        
         <div class="form-group">
-          <label>Dispositif de financement</label>
-          <select id="fin-new-dispositif" onchange="updateFinDispDesc()">
-            <option value="">— Choisir —</option>
-            <option value="opco">OPCO (Plan de Développement) — Salariés</option>
-            <option value="fifpl_ind">FIFPL individuel — Prof. libérales</option>
-            <option value="fifpl_col">FIFPL collectif — Groupe</option>
-            <option value="cpf">CPF — Mon Compte Formation</option>
-            <option value="aif">France Travail AIF — Demandeurs d'emploi</option>
-            <option value="poei">POEI — Pré-embauche</option>
-            <option value="fne">FNE-Formation — Entreprises en mutation</option>
-            <option value="transition_pro">Transition Pro (PTP) — Reconversion</option>
-            <option value="agefice">AGEFICE — Dirigeants TNS</option>
-            <option value="fafcea">FAFCEA — Artisans</option>
+          <label>Formation *</label>
+          <select id="fin-new-formation-select" onchange="checkFinFormation()">
+            <option value="">— Choisir une formation —</option>
           </select>
+          <div id="fin-no-formation" style="display:none;margin-top:8px;">
+            <p style="font-size:12px;color:var(--accent);margin-bottom:6px;">Vous n'avez pas encore de formation. Créez-en une d'abord.</p>
+            <button class="action-btn" onclick="document.getElementById('modal-create-fin').classList.remove('open');openCreateFormation()">📚 Créer ma première formation</button>
+          </div>
         </div>
-        <div id="fin-disp-info" style="display:none;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.15);border-radius:8px;padding:12px;margin-bottom:12px;font-size:13px;"></div>
-        <div id="fin-create-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;"></div>
-        <button class="btn btn-primary" onclick="createFinDossier()" style="padding:10px 24px;width:100%;">Créer le dossier et envoyer le lien</button>
+
+        <div id="fin-dossier-fields" style="display:none;">
+          <h4 style="font-size:14px;font-weight:700;margin:16px 0 8px;">👤 Stagiaire</h4>
+          <div class="form-group">
+            <label>Rechercher un stagiaire existant</label>
+            <input type="text" id="fin-search-stag" placeholder="🔍 Tapez un nom ou email..." oninput="searchFinStagiaire()">
+            <div id="fin-stag-results" style="display:none;border:1px solid #e0e0e0;border-top:none;border-radius:0 0 8px 8px;max-height:150px;overflow-y:auto;"></div>
+          </div>
+          <div id="fin-stag-selected" style="display:none;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.15);border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:13px;">
+            <span id="fin-stag-selected-name"></span>
+            <button onclick="clearFinStagiaire()" style="float:right;border:none;background:none;color:var(--accent);cursor:pointer;font-weight:700;">✕ Changer</button>
+          </div>
+          <div id="fin-new-stag-fields">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Ou entrez les infos d'un nouveau stagiaire :</p>
+            <div class="form-group"><label>Prénom *</label><input type="text" id="fin-new-prenom" placeholder="Prénom"></div>
+            <div class="form-group"><label>Nom *</label><input type="text" id="fin-new-nom" placeholder="Nom"></div>
+            <div class="form-group"><label>Email *</label><input type="email" id="fin-new-email" placeholder="email@exemple.com"></div>
+            <div class="form-group"><label>Téléphone</label><input type="tel" id="fin-new-tel" placeholder="06 XX XX XX XX"></div>
+          </div>
+
+          <h4 style="font-size:14px;font-weight:700;margin:16px 0 8px;">📋 Dispositif</h4>
+          <div class="form-group">
+            <label>Type de financement *</label>
+            <select id="fin-new-dispositif" onchange="updateFinDispDesc()">
+              <option value="">— Choisir —</option>
+              <option value="opco">OPCO (Plan de Développement) — Salariés</option>
+              <option value="fifpl_ind">FIFPL individuel — Prof. libérales</option>
+              <option value="fifpl_col">FIFPL collectif — Groupe</option>
+              <option value="cpf">CPF — Mon Compte Formation</option>
+              <option value="aif">France Travail AIF — Demandeurs d'emploi</option>
+              <option value="poei">POEI — Pré-embauche</option>
+              <option value="fne">FNE-Formation — Entreprises en mutation</option>
+              <option value="transition_pro">Transition Pro (PTP) — Reconversion</option>
+              <option value="agefice">AGEFICE — Dirigeants TNS</option>
+              <option value="fafcea">FAFCEA — Artisans</option>
+            </select>
+          </div>
+          <div id="fin-disp-info" style="display:none;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.15);border-radius:8px;padding:12px;margin-bottom:12px;font-size:13px;"></div>
+          <div id="fin-create-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;"></div>
+          <button class="btn btn-primary" onclick="createFinDossier()" style="padding:10px 24px;width:100%;">Créer le dossier et envoyer le lien</button>
+        </div>
       </div>
     </div>
 
-    <!-- MODAL FINANCEMENT SETTINGS -->
-    <div class="modal" id="modal-fin-settings">
+    <!-- MODAL CREATE FORMATION -->
+    <div class="modal" id="modal-create-formation">
       <div class="modal-box" style="max-width:560px;max-height:90vh;overflow-y:auto;">
-        <button class="modal-close" onclick="document.getElementById('modal-fin-settings').classList.remove('open')">✕</button>
-        <h3 style="font-size:18px;font-weight:800;margin-bottom:16px;">⚙️ Paramètres Financement</h3>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Ces documents seront réutilisés pour chaque dossier.</p>
-        <div class="form-group"><label>Convention de formation type</label><input type="file" id="fin-set-convention" accept=".pdf,.doc,.docx"></div>
-        <div class="form-group"><label>Programme pédagogique type</label><input type="file" id="fin-set-programme" accept=".pdf,.doc,.docx"></div>
-        <div class="form-group"><label>Devis type</label><input type="file" id="fin-set-devis" accept=".pdf,.doc,.docx"></div>
-        <div class="form-group"><label>KBIS</label><input type="file" id="fin-set-kbis" accept=".pdf,.jpg,.png"></div>
-        <div class="form-group"><label>RIB</label><input type="file" id="fin-set-rib" accept=".pdf,.jpg,.png"></div>
-        <h4 style="font-size:14px;font-weight:700;margin:16px 0 8px;">🔗 Liens CPF</h4>
-        <div class="form-group"><label>Lien Mon Compte Formation (votre page)</label><input type="url" id="fin-set-cpf-link" placeholder="https://www.moncompteformation.gouv.fr/..."></div>
-        <div id="fin-set-existing" style="margin-bottom:12px;"></div>
-        <button class="btn btn-primary" onclick="saveFinSettings()" style="padding:10px 24px;">💾 Enregistrer</button>
+        <button class="modal-close" onclick="document.getElementById('modal-create-formation').classList.remove('open')">✕</button>
+        <h3 style="font-size:18px;font-weight:800;margin-bottom:16px;">📚 Nouvelle formation</h3>
+        <div class="form-group"><label>Titre de la formation *</label><input type="text" id="fin-form-title" placeholder="Ex: Formation Excel Avancé"></div>
+        <div class="form-group"><label>Lien CPF (si applicable)</label><input type="url" id="fin-form-cpf" placeholder="https://www.moncompteformation.gouv.fr/..."></div>
+        <div class="form-group"><label>Prix de la formation (€)</label><input type="number" id="fin-form-price" placeholder="1500"></div>
+        <h4 style="font-size:14px;font-weight:700;margin:16px 0 8px;">📎 Documents réutilisables</h4>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Ces documents seront proposés automatiquement pour chaque dossier de financement lié à cette formation.</p>
+        <div class="form-group"><label>Programme de formation</label><input type="file" id="fin-form-programme" accept=".pdf,.doc,.docx"></div>
+        <div class="form-group"><label>Livret d'accueil</label><input type="file" id="fin-form-livret" accept=".pdf,.doc,.docx"></div>
+        <div class="form-group"><label>Convention type</label><input type="file" id="fin-form-convention" accept=".pdf,.doc,.docx"></div>
+        <div class="form-group"><label>Devis type</label><input type="file" id="fin-form-devis" accept=".pdf,.doc,.docx"></div>
+        <div class="form-group"><label>Autre document</label><input type="file" id="fin-form-autre" accept=".pdf,.doc,.docx,.jpg,.png"></div>
+        <div id="fin-form-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;"></div>
+        <button class="btn btn-primary" onclick="createFormation()" style="padding:10px 24px;width:100%;">📚 Créer la formation</button>
       </div>
     </div>
 
@@ -1450,24 +1419,35 @@ async function confirmLogout(){
 
 function updateFormationProgress(profile){
   var purchased = profile && profile.formation_purchased;
-  var progress = profile && profile.formation_progress ? profile.formation_progress : 0;
+  var progressPro = profile && profile.formation_progress ? profile.formation_progress : 0;
+  var progressIA = profile && profile.formation_ia_progress ? profile.formation_ia_progress : 0;
+  
+  // Average progress for summary
+  var avgProgress = purchased ? Math.round((progressPro + progressIA) / 2) : Math.round(progressIA / 1);
+  if(purchased) avgProgress = Math.round((progressPro + progressIA) / 2);
+  else avgProgress = progressIA;
   
   // Update summary stat
   var statEl = document.getElementById('stat-formation');
-  if(statEl) statEl.textContent = progress + '%';
+  if(statEl) statEl.textContent = avgProgress + '%';
   
-  // Toggle purchased/not-purchased views
-  var notPurchased = document.getElementById('formation-not-purchased');
-  var purchasedDiv = document.getElementById('formation-purchased');
-  if(purchased && purchasedDiv && notPurchased){
-    notPurchased.style.display = 'none';
-    purchasedDiv.style.display = '';
-    // Update progress in the purchased view
-    var badge = purchasedDiv.querySelector('.status-badge');
-    if(badge) badge.textContent = 'En cours — ' + progress + '%';
-    var fill = purchasedDiv.querySelector('.progress-fill');
-    if(fill) fill.style.width = progress + '%';
+  // Update formation Pro card
+  var proBar = document.getElementById('formation-pro-bar');
+  var proPct = document.getElementById('formation-pro-pct');
+  var proStatus = document.getElementById('formation-pro-status');
+  var proAccess = document.getElementById('formation-pro-access');
+  if(proBar) proBar.style.width = progressPro + '%';
+  if(proPct) proPct.textContent = progressPro + '%';
+  if(purchased && proStatus && proAccess){
+    proStatus.style.display = 'none';
+    proAccess.style.display = '';
   }
+  
+  // Update formation IA card
+  var iaBar = document.getElementById('formation-ia-bar');
+  var iaPct = document.getElementById('formation-ia-pct');
+  if(iaBar) iaBar.style.width = progressIA + '%';
+  if(iaPct) iaPct.textContent = progressIA + '%';
 }
 
 async function loadMesAnnonces(userId){
@@ -1551,12 +1531,17 @@ var demarcheTypeLabels = {
   rs: 'RS/RNCP — Enregistrement certification',
   opco: 'OPCO — Connexion',
   bpf: 'BPF — Bilan Pédagogique et Financier',
-  agent: '🤖 Agent IA — Configuration'
+  agent: '🤖 Agent IA — Configuration',
+  pack_pedagogique: '📚 Pack Pédagogique',
+  pack_commercial: '💼 Pack Commercial OF',
+  pack_cfa_docs: '🎓 Pack CFA / Apprentissage',
+  pack_complet_3en1: '📦 Pack Complet 3-en-1'
 };
 
 var demarcheTypeIcons = {
   nda: 'NDA', uai: 'UAI', qualiopi: '✦', edof: '€', francetravail: 'FT',
-  rs_rncp: 'RS', rs: 'RS', opco: '11', bpf: 'BPF', agent: '🤖'
+  rs_rncp: 'RS', rs: 'RS', opco: '11', bpf: 'BPF', agent: '🤖',
+  pack_pedagogique: '📚', pack_commercial: '💼', pack_cfa_docs: '🎓', pack_complet_3en1: '📦'
 };
 
 var demarcheSteps = {
@@ -2427,17 +2412,134 @@ async function loadFinancement(userId, profile){
   }
   gate.style.display = 'none';
   content.style.display = '';
+  await loadFinFormations(userId);
   await loadFinDossiers(userId);
   await loadFinStagiaires(userId);
 }
 
 function showFinSubTab(tab){
+  document.getElementById('fin-sub-formations').style.display = tab === 'formations' ? '' : 'none';
   document.getElementById('fin-sub-dossiers').style.display = tab === 'dossiers' ? '' : 'none';
   document.getElementById('fin-sub-stagiaires').style.display = tab === 'stagiaires' ? '' : 'none';
-  document.getElementById('fin-tab-dossiers').style.background = tab === 'dossiers' ? 'var(--accent)' : '';
-  document.getElementById('fin-tab-dossiers').style.color = tab === 'dossiers' ? '#fff' : '';
-  document.getElementById('fin-tab-stagiaires').style.background = tab === 'stagiaires' ? 'var(--accent)' : '';
-  document.getElementById('fin-tab-stagiaires').style.color = tab === 'stagiaires' ? '#fff' : '';
+  document.querySelectorAll('.fin-subtab').forEach(function(b){ b.style.background=''; b.style.color=''; b.style.borderColor=''; });
+  var active = document.getElementById('fin-tab-'+tab);
+  if(active){ active.style.background='var(--accent)'; active.style.color='#fff'; active.style.borderColor='var(--accent)'; }
+}
+
+// === FORMATIONS ===
+var userFormations = [];
+
+async function loadFinFormations(userId){
+  var { data } = await sb.from('formations_of').select('*').eq('user_id', userId).order('created_at',{ascending:false});
+  userFormations = data || [];
+  renderFinFormations();
+  return userFormations;
+}
+
+function renderFinFormations(){
+  var c = document.getElementById('fin-formations-list');
+  if(userFormations.length === 0){
+    c.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted);"><div style="font-size:40px;margin-bottom:12px;">📚</div><p>Aucune formation.</p><p style="font-size:13px;">Créez votre première formation pour pouvoir déposer des dossiers.</p></div>';
+    return;
+  }
+  var h = '';
+  userFormations.forEach(function(f){
+    var docs = f.documents || [];
+    var docsHtml = docs.length > 0 ? docs.map(function(d){ return '<span style="font-size:11px;background:rgba(16,185,129,.08);color:var(--success);padding:2px 8px;border-radius:4px;">✅ '+d.name+'</span>'; }).join(' ') : '<span style="font-size:11px;color:var(--muted);">Aucun document</span>';
+    h += '<div class="detail-card"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>📚 ' + f.title + '</h4>' +
+      (f.cpf_link ? '<p style="font-size:12px;color:#6366f1;">🔗 Lien CPF configuré</p>' : '') +
+      (f.price ? '<p style="font-size:12px;color:var(--accent);font-weight:700;">' + f.price + '€</p>' : '') +
+      '<div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px;">' + docsHtml + '</div></div>' +
+      '<span style="font-size:11px;color:var(--muted);">' + new Date(f.created_at).toLocaleDateString('fr-FR') + '</span></div></div>';
+  });
+  c.innerHTML = h;
+}
+
+function openCreateFormation(){
+  document.getElementById('fin-form-title').value = '';
+  document.getElementById('fin-form-cpf').value = '';
+  document.getElementById('fin-form-price').value = '';
+  document.getElementById('fin-form-error').style.display = 'none';
+  document.getElementById('modal-create-formation').classList.add('open');
+}
+
+async function createFormation(){
+  var title = document.getElementById('fin-form-title').value.trim();
+  var cpf = document.getElementById('fin-form-cpf').value.trim();
+  var price = document.getElementById('fin-form-price').value.trim();
+  var err = document.getElementById('fin-form-error');
+  if(!title){ err.textContent = '⚠️ Le titre est obligatoire.'; err.style.display = ''; return; }
+  err.style.display = 'none';
+
+  var user = await getUser();
+  var docs = [];
+  var fields = ['programme','livret','convention','devis','autre'];
+  for(var i=0;i<fields.length;i++){
+    var file = document.getElementById('fin-form-'+fields[i]).files[0];
+    if(file){
+      var ext = file.name.split('.').pop();
+      var path = 'formations/'+user.id+'/'+fields[i]+'-'+Date.now()+'.'+ext;
+      await sb.storage.from('financement').upload(path, file, {contentType:file.type});
+      docs.push({name:fields[i].charAt(0).toUpperCase()+fields[i].slice(1),path:path});
+    }
+  }
+
+  var { error } = await sb.from('formations_of').insert({
+    user_id: user.id, title: title, cpf_link: cpf || null,
+    price: price ? parseFloat(price) : null, documents: docs
+  });
+  if(error){ err.textContent = '❌ '+error.message; err.style.display = ''; return; }
+
+  document.getElementById('modal-create-formation').classList.remove('open');
+  alert('✅ Formation créée !');
+  await loadFinFormations(user.id);
+}
+
+// === DOSSIER CREATION ===
+var selectedFinStagiaireId = null;
+
+function checkFinFormation(){
+  var sel = document.getElementById('fin-new-formation-select');
+  var noForm = document.getElementById('fin-no-formation');
+  var fields = document.getElementById('fin-dossier-fields');
+  if(sel.value){ fields.style.display = ''; noForm.style.display = 'none'; }
+  else if(sel.options.length <= 1){ noForm.style.display = ''; fields.style.display = 'none'; }
+  else { fields.style.display = 'none'; noForm.style.display = 'none'; }
+}
+
+async function searchFinStagiaire(){
+  var q = document.getElementById('fin-search-stag').value.toLowerCase().trim();
+  var results = document.getElementById('fin-stag-results');
+  if(q.length < 2){ results.style.display = 'none'; return; }
+  var user = await getUser();
+  var { data } = await sb.from('stagiaires').select('*').eq('user_id', user.id);
+  var filtered = (data||[]).filter(function(s){
+    return (s.nom||'').toLowerCase().includes(q)||(s.prenom||'').toLowerCase().includes(q)||(s.email||'').toLowerCase().includes(q);
+  }).slice(0,5);
+  if(filtered.length === 0){ results.innerHTML = '<div style="padding:8px 12px;font-size:12px;color:var(--muted);">Aucun résultat</div>'; results.style.display=''; return; }
+  var h = '';
+  filtered.forEach(function(s){
+    h += '<div style="padding:8px 12px;cursor:pointer;border-bottom:1px solid #f0f0f0;font-size:13px;" onmouseover="this.style.background=\'#f8f8f8\'" onmouseout="this.style.background=\'#fff\'" onclick="selectFinStagiaire(\''+s.id+'\',\''+s.prenom+' '+s.nom+'\',\''+s.email+'\')"><strong>'+s.prenom+' '+s.nom+'</strong> · '+s.email+'</div>';
+  });
+  results.innerHTML = h; results.style.display = '';
+}
+
+function selectFinStagiaire(id, name, email){
+  selectedFinStagiaireId = id;
+  document.getElementById('fin-stag-results').style.display = 'none';
+  document.getElementById('fin-search-stag').style.display = 'none';
+  document.getElementById('fin-new-stag-fields').style.display = 'none';
+  document.getElementById('fin-stag-selected').style.display = '';
+  document.getElementById('fin-stag-selected-name').innerHTML = '<strong>'+name+'</strong> · '+email;
+}
+
+function clearFinStagiaire(){
+  selectedFinStagiaireId = null;
+  document.getElementById('fin-search-stag').value = '';
+  document.getElementById('fin-search-stag').style.display = '';
+  document.getElementById('fin-new-stag-fields').style.display = '';
+  document.getElementById('fin-stag-selected').style.display = 'none';
 }
 
 async function loadFinDossiers(userId){
@@ -2522,60 +2624,83 @@ function updateFinDispDesc(){
 }
 
 function openCreateFinDossier(){
+  selectedFinStagiaireId = null;
   document.getElementById('fin-new-prenom').value = '';
   document.getElementById('fin-new-nom').value = '';
   document.getElementById('fin-new-email').value = '';
   document.getElementById('fin-new-tel').value = '';
-  document.getElementById('fin-new-formation').value = '';
   document.getElementById('fin-new-dispositif').value = '';
   document.getElementById('fin-disp-info').style.display = 'none';
   document.getElementById('fin-create-error').style.display = 'none';
+  document.getElementById('fin-search-stag').value = '';
+  document.getElementById('fin-search-stag').style.display = '';
+  document.getElementById('fin-new-stag-fields').style.display = '';
+  document.getElementById('fin-stag-selected').style.display = 'none';
+  document.getElementById('fin-stag-results').style.display = 'none';
+  document.getElementById('fin-dossier-fields').style.display = 'none';
+  document.getElementById('fin-no-formation').style.display = 'none';
+  
+  // Populate formations dropdown
+  var sel = document.getElementById('fin-new-formation-select');
+  var opts = '<option value="">— Choisir une formation —</option>';
+  userFormations.forEach(function(f){ opts += '<option value="'+f.id+'">'+f.title+(f.price?' ('+f.price+'€)':'')+'</option>'; });
+  sel.innerHTML = opts;
+  if(userFormations.length === 0) document.getElementById('fin-no-formation').style.display = '';
+  
   document.getElementById('modal-create-fin').classList.add('open');
 }
 
 async function createFinDossier(){
-  var prenom = document.getElementById('fin-new-prenom').value.trim();
-  var nom = document.getElementById('fin-new-nom').value.trim();
-  var email = document.getElementById('fin-new-email').value.trim();
-  var tel = document.getElementById('fin-new-tel').value.trim();
-  var formation = document.getElementById('fin-new-formation').value.trim();
+  var formationId = document.getElementById('fin-new-formation-select').value;
   var dispositif = document.getElementById('fin-new-dispositif').value;
   var errDiv = document.getElementById('fin-create-error');
-
-  if(!prenom || !nom || !email){ errDiv.textContent = '⚠️ Prénom, nom et email obligatoires.'; errDiv.style.display = ''; return; }
+  
+  if(!formationId){ errDiv.textContent = '⚠️ Sélectionnez une formation.'; errDiv.style.display = ''; return; }
   if(!dispositif){ errDiv.textContent = '⚠️ Choisissez un dispositif.'; errDiv.style.display = ''; return; }
   errDiv.style.display = 'none';
 
   var user = await getUser();
+  var stagId = selectedFinStagiaireId;
+  
+  // If no existing stagiaire selected, create new
+  if(!stagId){
+    var prenom = document.getElementById('fin-new-prenom').value.trim();
+    var nom = document.getElementById('fin-new-nom').value.trim();
+    var email = document.getElementById('fin-new-email').value.trim();
+    var tel = document.getElementById('fin-new-tel').value.trim();
+    if(!prenom || !nom || !email){ errDiv.textContent = '⚠️ Prénom, nom et email du stagiaire obligatoires.'; errDiv.style.display = ''; return; }
+    
+    var { data: stag, error: stagErr } = await sb.from('stagiaires').insert({
+      user_id: user.id, nom: nom, prenom: prenom, email: email, telephone: tel
+    }).select().single();
+    if(stagErr){ errDiv.textContent = '❌ ' + stagErr.message; errDiv.style.display = ''; return; }
+    stagId = stag.id;
+  }
 
-  // Create stagiaire
-  var { data: stag, error: stagErr } = await sb.from('stagiaires').insert({
-    user_id: user.id, nom: nom, prenom: prenom, email: email, telephone: tel
-  }).select().single();
-  if(stagErr){ errDiv.textContent = '❌ ' + stagErr.message; errDiv.style.display = ''; return; }
-
-  // Create dossier
+  // Get formation info
+  var formation = userFormations.find(function(f){ return f.id === formationId; });
   var disp = FIN_DISPOSITIFS[dispositif] || {};
+
   var { data: dossier, error: dosErr } = await sb.from('dossiers_financement').insert({
-    user_id: user.id, stagiaire_id: stag.id, dispositif: dispositif,
-    plafond_info: disp.plafond || '', formation_title: formation,
+    user_id: user.id, stagiaire_id: stagId, dispositif: dispositif,
+    plafond_info: disp.plafond || '', formation_title: formation ? formation.title : '',
+    formation_id: formationId,
     status: 'en_attente_candidat', current_step: 1
   }).select().single();
   if(dosErr){ errDiv.textContent = '❌ ' + dosErr.message; errDiv.style.display = ''; return; }
 
-  // System message
   await sb.from('messages_financement').insert({
     dossier_id: dossier.id, sender_type: 'systeme', sender_name: 'Système',
-    content: '📋 Dossier ' + disp.name + ' créé pour ' + prenom + ' ' + nom + '. En attente des documents du candidat.'
+    content: '📋 Dossier ' + (disp.name||dispositif) + ' créé pour la formation "' + (formation?formation.title:'') + '".'
   });
 
   document.getElementById('modal-create-fin').classList.remove('open');
 
-  // Show link to copy
-  var link = window.location.origin + '/financement.html?token=' + stag.token;
-  var copied = false;
-  try { await navigator.clipboard.writeText(link); copied = true; } catch(e){}
-  alert('✅ Dossier créé !\n\n' + (copied ? 'Le lien a été copié dans votre presse-papier.' : 'Lien du candidat :') + '\n\n' + link + '\n\nEnvoyez ce lien à ' + prenom + ' ' + nom + ' (' + email + ') pour qu\'il complète son dossier.');
+  // Get stagiaire token for link
+  var { data: stagData } = await sb.from('stagiaires').select('token').eq('id', stagId).single();
+  var link = window.location.origin + '/financement.html?token=' + (stagData?stagData.token:'');
+  try { await navigator.clipboard.writeText(link); } catch(e){}
+  alert('✅ Dossier créé !\n\nLien du candidat copié :\n' + link + '\n\nEnvoyez ce lien au stagiaire.');
 
   await loadFinDossiers(user.id);
   await loadFinStagiaires(user.id);

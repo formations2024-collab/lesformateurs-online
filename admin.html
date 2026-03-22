@@ -132,8 +132,6 @@
     <a onclick="showTab('achats')">💳 Achats</a>
     <a onclick="showTab('funnels')">🚀 Funnels</a>
     <a onclick="showTab('messagerie')">💬 Messagerie</a>
-    <a onclick="showTab('funnels')">🚀 Funnels</a>
-    <a onclick="showTab('funnels')">🎯 Funnels</a>
   </div>
 
   <div class="main-content">
@@ -267,10 +265,14 @@
     <!-- ========== CONTENU FORMATION ========== -->
     <div class="tab-content" id="tab-contenu">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
-        <h2 style="font-size:20px;font-weight:800;">📹 Contenu de la formation</h2>
+        <h2 style="font-size:20px;font-weight:800;">📹 Contenu des formations</h2>
         <button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);padding:8px 16px;" onclick="addModuleModal()">+ Ajouter un module</button>
       </div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Gérez les modules, leçons, vidéos et quiz de la formation formateur.</p>
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+        <button class="action-btn" id="admin-f1-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="switchAdminFormation(1)">🎓 Formateur Pro</button>
+        <button class="action-btn" id="admin-f2-btn" onclick="switchAdminFormation(2)">🤖 Agents IA (gratuite)</button>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;" id="admin-formation-desc">Gérez les modules et leçons de la formation Formateur Professionnel.</p>
 
       <div id="admin-modules-list">
         <p style="text-align:center;padding:40px 0;color:var(--muted);">Chargement des modules...</p>
@@ -418,38 +420,6 @@
       <div id="admin-stagiaires-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
 
-    <!-- ========== FUNNELS ========== -->
-    <div class="tab-content" id="tab-funnels">
-      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🎯 Pages de vente (Funnels)</h2>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Liens directs vers les pages de vente. Partagez-les sur les réseaux sociaux, par email ou dans vos campagnes.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;">
-        <div class="detail-card"><h4>🎓 Webinaire IA gratuit</h4><p style="font-size:12px;color:var(--muted);">Lead → inscription email → formation</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-webinaire.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-webinaire.html');alert('Lien copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>🏆 Audit Qualiopi</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement (490€)</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-qualiopi.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-qualiopi.html');alert('Lien copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>📋 RS / RNCP</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement (390€)</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-rs-rncp.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-rs-rncp.html');alert('Lien copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>€ Espace EDOF</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement (290€)</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-edof.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-edof.html');alert('Lien copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>🤖 Agent IA</h4><p style="font-size:12px;color:var(--muted);">Lead → RDV / devis → paiement</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-agent-ia.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-agent-ia.html');alert('Lien copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>🚀 NDA (Lancer son OF)</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement (199€)</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-nda.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-nda.html');alert('Lien copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>🔗 Connexion OPCO</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement (290€ ou 2990€)</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-opco.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-opco.html');alert('Lien copié !')">📋 Copier</button></div></div>
-        <div class="detail-card" style="border-color:#7c3aed;"><h4>👑 Premium Financement</h4><p style="font-size:12px;color:var(--muted);">Abonnement 69€/mois</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-premium.html" target="_blank" class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-premium.html');alert('Lien copié !')">📋 Copier</button></div></div>
-      </div>
-    </div>
-
-    <!-- ========== FUNNELS ========== -->
-    <div class="tab-content" id="tab-funnels">
-      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🚀 Pages de vente (Funnels)</h2>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Liens vers les pages de vente. Partagez-les sur vos réseaux, emails, publicités.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;">
-        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-webinaire.html','_blank')"><h4>🎯 Webinaire IA gratuit</h4><p style="font-size:12px;color:var(--muted);">Lead → inscription email</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-webinaire.html</p></div>
-        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-qualiopi.html','_blank')"><h4>✦ Audit Qualiopi</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement 490€</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-qualiopi.html</p></div>
-        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-rsrncp.html','_blank')"><h4>📋 RS / RNCP</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement 390€</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-rsrncp.html</p></div>
-        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-edof.html','_blank')"><h4>€ Espace EDOF</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement 290€</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-edof.html</p></div>
-        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-agents-ia.html','_blank')"><h4>🤖 Agents IA</h4><p style="font-size:12px;color:var(--muted);">Lead → RDV / devis</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-agents-ia.html</p></div>
-        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-nda.html','_blank')"><h4>📄 NDA</h4><p style="font-size:12px;color:var(--muted);">Paiement direct 199€</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-nda.html</p></div>
-        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-opco.html','_blank')"><h4>🔗 Connexion OPCO</h4><p style="font-size:12px;color:var(--muted);">Paiement direct</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-opco.html</p></div>
-        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-premium.html','_blank')"><h4>👑 Premium</h4><p style="font-size:12px;color:var(--muted);">Abonnement 69€/mois</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-premium.html</p></div>
-      </div>
-    </div>
-
     <!-- ========== MESSAGERIE ADMIN ========== -->
     <div class="tab-content" id="tab-messagerie">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">💬 Messagerie</h2>
@@ -521,13 +491,29 @@ function showTab(name){
 var adminModules = [];
 var adminLessons = [];
 var quizQuestionsCount = 0;
+var adminFormationId = 1;
+
+function switchAdminFormation(fId){
+  adminFormationId = fId;
+  document.getElementById('admin-f1-btn').style.background = fId === 1 ? 'var(--accent)' : '';
+  document.getElementById('admin-f1-btn').style.color = fId === 1 ? '#fff' : '';
+  document.getElementById('admin-f2-btn').style.background = fId === 2 ? '#7c3aed' : '';
+  document.getElementById('admin-f2-btn').style.color = fId === 2 ? '#fff' : '';
+  document.getElementById('admin-formation-desc').textContent = fId === 1 ? 'Gérez les modules et leçons de la formation Formateur Professionnel.' : 'Gérez les modules et leçons de la formation Agents IA (gratuite).';
+  loadCourseContent();
+}
 
 async function loadCourseContent(){
-  var { data: modules } = await sb.from('course_modules').select('*').order('sort_order',{ascending:true});
+  var { data: modules } = await sb.from('course_modules').select('*').eq('formation_id', adminFormationId).order('sort_order',{ascending:true});
   adminModules = modules || [];
   
-  var { data: lessons } = await sb.from('course_lessons').select('*').order('sort_order',{ascending:true});
-  adminLessons = lessons || [];
+  var modIds = adminModules.map(function(m){ return m.id; });
+  var adminLessonsAll = [];
+  if(modIds.length > 0){
+    var { data: lessons } = await sb.from('course_lessons').select('*').in('module_id', modIds).order('sort_order',{ascending:true});
+    adminLessonsAll = lessons || [];
+  }
+  adminLessons = adminLessonsAll;
   
   renderAdminModules();
 }
@@ -623,6 +609,7 @@ async function saveModule(){
     bonus_author: document.getElementById('mod-author').value.trim() || null,
     bonus_description: document.getElementById('mod-desc').value.trim() || null,
     sort_order: parseInt(document.getElementById('mod-number').value),
+    formation_id: adminFormationId,
     updated_at: new Date().toISOString()
   };
   if(!data.title){ alert('⚠️ Titre requis.'); return; }

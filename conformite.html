@@ -17,7 +17,7 @@
 }
 .agent-option:hover{border-color:var(--accent);}
 .agent-option.checked{border-color:var(--accent);background:rgba(233,69,96,.03);}
-.agent-option input{accent-color:var(--accent);width:18px;height:18px;flex-shrink:0;}
+.agent-option input{accent-color:var(--accent);width:18px;height:18px;flex-shrink:0;pointer-events:none;}
 .agent-opt-info{flex:1;}
 .agent-opt-info h5{font-size:13px;font-weight:700;margin-bottom:2px;}
 .agent-opt-info p{font-size:11px;color:var(--muted);line-height:1.4;}
@@ -42,7 +42,7 @@
 }
 .opco-item:hover{border-color:var(--accent);}
 .opco-item input:checked ~ span{font-weight:700;color:var(--accent);}
-.opco-item input{accent-color:var(--accent);width:16px;height:16px;}
+.opco-item input{accent-color:var(--accent);width:16px;height:16px;pointer-events:none;}
 .opco-item span{font-weight:600;flex-shrink:0;}
 .opco-item small{color:var(--muted);font-size:11px;margin-left:auto;}
 </style>
@@ -85,12 +85,12 @@
       <div class="service-card" onclick="openDemarche('nda')">
         <div class="service-icon">NDA</div>
         <h4>Numéro de Déclaration d'Activité</h4>
-        <p>Dossier complet pour la DREETS. Convention, programme, casier judiciaire — on gère tout.</p>
+        <p>Dossier complet pour la DREETS. Convention, programme — on gère tout.</p>
         <div class="price-display">
           <span class="price-old">800€</span>
           <span class="price-new">199€</span>
         </div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> pour les membres Premium</div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <p class="price-reason">🤖 L'IA prépare et structure votre dossier en quelques heures — un expert contrôle chaque document avant envoi. Des résultats plus performants, plus rapides, et 75% moins cher que le marché.</p>
       </div>
 
@@ -102,7 +102,7 @@
           <span class="price-old">600€</span>
           <span class="price-new">149€</span>
         </div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> pour les membres Premium</div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <p class="price-reason">🤖 L'IA génère votre dossier complet, un expert le valide. Résultat : un dossier plus solide, un traitement plus rapide, et 75% d'économie.</p>
       </div>
 
@@ -114,7 +114,7 @@
           <span class="price-old">2 000€</span>
           <span class="price-new">490€</span>
         </div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> pour les membres Premium</div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <p class="price-reason">🤖 Nos agents IA construisent l'intégralité de votre dossier Qualiopi — un expert certifié vérifie chaque indicateur. Dossiers plus complets, taux de réussite supérieur, et 4x moins cher.</p>
       </div>
 
@@ -126,7 +126,7 @@
           <span class="price-old">1 200€</span>
           <span class="price-new">290€</span>
         </div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> pour les membres Premium</div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <p class="price-reason">🤖 L'IA prépare vos fiches formation et configure votre espace EDOF — un expert valide avant mise en ligne. Plus performant, plus rapide, 76% moins cher.</p>
       </div>
 
@@ -138,7 +138,7 @@
           <span class="price-old">500€</span>
           <span class="price-new">129€</span>
         </div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> pour les membres Premium</div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <p class="price-reason">🤖 Dossier monté par IA et contrôlé par un spécialiste. Référencement plus fiable, délais réduits, et 74% d'économie.</p>
       </div>
 
@@ -150,7 +150,7 @@
           <span class="price-old">1 500€</span>
           <span class="price-new">390€</span>
         </div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> pour les membres Premium</div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <p class="price-reason">🤖 Agents IA + expert dédié : référentiel de compétences et dossier complet générés avec précision. Meilleur taux d'acceptation, 74% moins cher.</p>
       </div>
 
@@ -161,7 +161,7 @@
         <div class="price-display">
           <span class="price-new">290€ <span style="font-size:12px;font-weight:400;color:var(--muted);">/ OPCO</span></span>
         </div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> pour les membres Premium</div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <p class="price-reason">🤖 Nos agents traitent chaque OPCO avec précision — un expert vérifie chaque dossier. Pack 11 OPCO à 2 990€ au lieu de 3 190€. Plus efficace, plus rapide.</p>
       </div>
 
@@ -172,7 +172,7 @@
         <div class="price-display">
           <span class="price-new">à partir de 399€</span>
         </div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> pour les membres Premium</div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <p class="price-reason">🤖 Un agent formé spécifiquement pour votre centre. Il travaille 24h/24, ne fait pas d'erreur, et vous fait gagner des heures chaque semaine.</p>
       </div>
 
@@ -202,20 +202,7 @@
     <div class="form-group"><label>Nom du dirigeant</label><input type="text" placeholder="Sophie Martin"></div>
     <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
     <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="06 12 34 56 78"></div>
-    <div class="form-group doc-toggle-group">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-        <label style="margin-bottom:0;">Casier judiciaire (bulletin n°3)</label>
-        <label class="toggle-switch">
-          <input type="checkbox" onchange="toggleDocUpload(this,'casier_judiciaire__bulletin_n_')">
-          <span class="toggle-label-no">☐ Je ne l'ai pas encore</span>
-        </label>
-      </div>
-      <div class="doc-upload-area" id="doc_casier_judiciaire__bulletin_n_">
-        <input type="file" accept=".pdf,.jpg,.png,.zip">
-      </div>
-      <div class="doc-later-msg" style="display:none;" id="later_casier_judiciaire__bulletin_n_">
-        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
-      </div>
+    </div>
     </div>
     <div class="form-group doc-toggle-group">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
@@ -229,7 +216,7 @@
         <input type="file" accept=".pdf,.jpg,.png,.zip">
       </div>
       <div class="doc-later-msg" style="display:none;" id="later_premi_re_convention_de_formati">
-        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
+        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">✅ Pas de soucis ! L'expert vous proposera de vous les rédiger.</p>
       </div>
     </div>
     <div class="form-group doc-toggle-group">
@@ -244,23 +231,10 @@
         <input type="file" accept=".pdf,.jpg,.png,.zip">
       </div>
       <div class="doc-later-msg" style="display:none;" id="later_programme_de_formation">
-        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
+        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">✅ Pas de soucis ! L'expert vous proposera de vous les rédiger.</p>
       </div>
     </div>
-    <div class="form-group doc-toggle-group">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-        <label style="margin-bottom:0;">NDA avec mention CFA</label>
-        <label class="toggle-switch">
-          <input type="checkbox" onchange="toggleDocUpload(this,'nda_mention_cfa')">
-          <span class="toggle-label-no">☐ Je ne l'ai pas encore</span>
-        </label>
-      </div>
-      <div class="doc-upload-area" id="doc_nda_mention_cfa">
-        <input type="file" accept=".pdf,.jpg,.png,.zip">
-      </div>
-      <div class="doc-later-msg" style="display:none;" id="later_nda_mention_cfa">
-        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Nous vous recontacterons pour récupérer ce document.</p>
-      </div>
+    </div>
     </div>
     <div style="background:var(--light);padding:16px;border-radius:8px;margin:20px 0;">
       <p style="font-size:13px;font-weight:600;margin-bottom:4px;">🤖 Traitement IA + vérification pro</p>
@@ -296,6 +270,8 @@
     </div>
     <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
     <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="06 12 34 56 78"></div>
+    <div class="form-group"><label>NDA avec mention CFA</label><input type="file" accept=".pdf,.jpg,.png"></div>
+    <div class="form-group"><label>Certificat Qualiopi <span style="font-weight:400;color:var(--muted);font-size:11px;">(facultatif)</span></label><input type="file" accept=".pdf,.jpg,.png"></div>
     <div style="background:var(--light);padding:16px;border-radius:8px;margin:20px 0;">
       <p style="font-size:13px;font-weight:600;margin-bottom:4px;">📄 Document prêt à soumettre au rectorat</p>
       <p style="font-size:12px;color:var(--muted);">Nous générons un dossier complet que vous pouvez envoyer directement.</p>
@@ -335,7 +311,7 @@
       <textarea rows="3" placeholder="Ex: Qualiopi actions de formation + bilan de compétences, audit initial prévu en septembre..."></textarea>
     </div>
     <div class="form-group">
-      <label>Documents existants <span style="font-weight:400;color:var(--muted);font-size:11px;">(facultatif — livret d'accueil, CGV, programmes, etc.)</span></label>
+      <label>Documents à votre disposition <span style="font-weight:400;color:var(--muted);font-size:11px;">(facultatif — livret d'accueil, CGV, programmes, etc.)</span></label>
       <div id="qualiopi-docs-list">
         <div class="doc-upload-area" style="margin-bottom:8px;">
           <input type="file" accept=".pdf,.jpg,.png,.zip">
@@ -384,6 +360,11 @@
     </div>
     <div class="form-group"><label>Formations à inscrire (intitulés)</label><textarea rows="3" placeholder="Ex: Formation Excel avancé, Formation management..."></textarea></div>
     <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
+    <div class="form-group">
+      <label>Documents à votre disposition <span style="font-weight:400;color:var(--muted);font-size:11px;">(facultatif — programmes, certifications, etc.)</span></label>
+      <div id="edof-docs-list"><div class="doc-upload-area" style="margin-bottom:8px;"><input type="file" accept=".pdf,.jpg,.png,.zip"></div></div>
+      <button type="button" class="action-btn" style="font-size:12px;margin-top:4px;" onclick="addEdofDoc()">+ Ajouter un document</button>
+    </div>
     <div style="background:var(--light);padding:16px;border-radius:8px;margin:20px 0;">
       <p style="font-size:13px;font-weight:600;margin-bottom:4px;">€ 40 millions d'actifs potentiels</p>
       <p style="font-size:12px;color:var(--muted);">Nous créons vos fiches formation, configurons votre espace EDOF et assurons la mise en ligne.</p>
@@ -426,7 +407,7 @@
         <input type="file" accept=".pdf,.jpg,.png,.zip">
       </div>
       <div class="doc-later-msg" style="display:none;" id="later_catalogue_de_formations__pdf_">
-        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
+        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">✅ Pas de soucis ! L'expert vous proposera de vous les rédiger.</p>
       </div>
     </div>
     <div class="price-display" style="justify-content:center;margin:16px 0;">
@@ -471,10 +452,15 @@
         <input type="file" accept=".pdf,.jpg,.png,.zip">
       </div>
       <div class="doc-later-msg" style="display:none;" id="later_r_f_rentiel_de_comp_tences__pd">
-        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">📌 Pas de souci ! Vous pourrez l'envoyer après le paiement depuis votre espace personnel.</p>
+        <p style="font-size:11px;color:var(--muted);background:rgba(233,69,96,.05);padding:8px 12px;border-radius:6px;">✅ Pas de soucis ! L'expert vous proposera de vous les rédiger.</p>
       </div>
     </div>
     <div class="form-group"><label>Email</label><input type="email" placeholder="contact@monof.fr"></div>
+    <div class="form-group">
+      <label>Documents à votre disposition <span style="font-weight:400;color:var(--muted);font-size:11px;">(facultatif — référentiels, études, etc.)</span></label>
+      <div id="rs-docs-list"><div class="doc-upload-area" style="margin-bottom:8px;"><input type="file" accept=".pdf,.jpg,.png,.zip"></div></div>
+      <button type="button" class="action-btn" style="font-size:12px;margin-top:4px;" onclick="addRsDoc()">+ Ajouter un document</button>
+    </div>
     <div class="price-display" style="justify-content:center;margin:16px 0;">
       <span class="price-old" style="font-size:18px;">1 500€</span>
       <span class="price-new" style="font-size:28px;">390€</span>
@@ -511,17 +497,17 @@
         <button type="button" onclick="toggleAllOpco()" style="background:var(--accent);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;">✅ Sélectionner les 11 (3 000€)</button>
       </div>
       <div id="opcoList" style="display:grid;grid-template-columns:1fr;gap:6px;">
-        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="afdas"> <span>AFDAS</span> <small>Culture, médias, loisirs</small></label>
-        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="atlas"> <span>ATLAS</span> <small>Services financiers, conseil</small></label>
-        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="uniformation"> <span>UNIFORMATION</span> <small>Cohésion sociale</small></label>
-        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="akto"> <span>AKTO</span> <small>Services à forte intensité de main-d'œuvre</small></label>
-        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="ocapiat"> <span>OCAPIAT</span> <small>Agriculture, pêche, agroalimentaire</small></label>
-        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="opco2i"> <span>OPCO 2i</span> <small>Interindustriel</small></label>
-        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="constructys"> <span>CONSTRUCTYS</span> <small>Construction</small></label>
-        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="loperateur"> <span>L'OPCOMMERCE</span> <small>Commerce</small></label>
-        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="opcomobilites"> <span>OPCO Mobilités</span> <small>Transport, logistique</small></label>
-        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="opcoep"> <span>OPCO EP</span> <small>Entreprises de proximité</small></label>
-        <label class="opco-item" onclick="updateOpcoTotal(event)"><input type="checkbox" name="opco" value="opcosante"> <span>OPCO Santé</span> <small>Santé, médico-social</small></label>
+        <label class="opco-item"><input type="checkbox" onchange="updateOpcoTotal(event)" name="opco" value="afdas"> <span>AFDAS</span> <small>Culture, médias, loisirs</small></label>
+        <label class="opco-item"><input type="checkbox" onchange="updateOpcoTotal(event)" name="opco" value="atlas"> <span>ATLAS</span> <small>Services financiers, conseil</small></label>
+        <label class="opco-item"><input type="checkbox" onchange="updateOpcoTotal(event)" name="opco" value="uniformation"> <span>UNIFORMATION</span> <small>Cohésion sociale</small></label>
+        <label class="opco-item"><input type="checkbox" onchange="updateOpcoTotal(event)" name="opco" value="akto"> <span>AKTO</span> <small>Services à forte intensité de main-d'œuvre</small></label>
+        <label class="opco-item"><input type="checkbox" onchange="updateOpcoTotal(event)" name="opco" value="ocapiat"> <span>OCAPIAT</span> <small>Agriculture, pêche, agroalimentaire</small></label>
+        <label class="opco-item"><input type="checkbox" onchange="updateOpcoTotal(event)" name="opco" value="opco2i"> <span>OPCO 2i</span> <small>Interindustriel</small></label>
+        <label class="opco-item"><input type="checkbox" onchange="updateOpcoTotal(event)" name="opco" value="constructys"> <span>CONSTRUCTYS</span> <small>Construction</small></label>
+        <label class="opco-item"><input type="checkbox" onchange="updateOpcoTotal(event)" name="opco" value="loperateur"> <span>L'OPCOMMERCE</span> <small>Commerce</small></label>
+        <label class="opco-item"><input type="checkbox" onchange="updateOpcoTotal(event)" name="opco" value="opcomobilites"> <span>OPCO Mobilités</span> <small>Transport, logistique</small></label>
+        <label class="opco-item"><input type="checkbox" onchange="updateOpcoTotal(event)" name="opco" value="opcoep"> <span>OPCO EP</span> <small>Entreprises de proximité</small></label>
+        <label class="opco-item"><input type="checkbox" onchange="updateOpcoTotal(event)" name="opco" value="opcosante"> <span>OPCO Santé</span> <small>Santé, médico-social</small></label>
       </div>
     </div>
 
@@ -608,6 +594,123 @@
   </div>
 </div>
 
+<!-- ============================
+     PACKS DOCUMENTS
+     ============================ -->
+<section style="padding:80px 40px;background:var(--light);" id="packs">
+  <div class="container">
+    <div class="section-label">📦 Packs de templates</div>
+    <h2 class="section-title">Vous voulez le faire vous-même ? Voici vos templates prêts à l'emploi</h2>
+    <p class="section-sub">Templates professionnels générés par l'IA, vérifiés par un expert. Personnalisez-les avec votre logo et vos infos. Livrés en 48h. <strong>Pour ceux qui veulent avancer seuls, à leur rythme.</strong></p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:40px;">
+
+      <!-- Pack Pédagogique -->
+      <div class="card" style="position:relative;display:flex;flex-direction:column;">
+        <div style="font-size:28px;margin-bottom:8px;">📚</div>
+        <h3 style="font-size:18px;font-weight:800;margin-bottom:4px;">Pack Pédagogique</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:12px;flex:1;">Tous les outils pour concevoir, délivrer et évaluer vos formations comme un pro.</p>
+        <div style="font-size:12px;margin-bottom:12px;line-height:1.8;">
+          ✅ Trame programme pédagogique (modulable)<br>
+          ✅ Scénario pédagogique type<br>
+          ✅ Support de cours type (PowerPoint)<br>
+          ✅ QCM / évaluation pré et post-formation<br>
+          ✅ Grille d'évaluation formative<br>
+          ✅ Certificat de réalisation<br>
+          ✅ Enquête satisfaction chaud + froid<br>
+          ✅ Bilan de formation type<br>
+          ✅ Fiche objectifs et prérequis<br>
+          <strong>9 templates personnalisables</strong>
+        </div>
+        <div class="price-display">
+          <span class="price-old">500€</span>
+          <span class="price-new">249€</span>
+        </div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
+        <button class="btn btn-primary btn-block" style="margin-top:12px;" onclick="payerPack('pedagogique', 249)">Commander →</button>
+      </div>
+
+      <!-- Pack Commercial -->
+      <div class="card" style="position:relative;display:flex;flex-direction:column;">
+        <div style="font-size:28px;margin-bottom:8px;">💼</div>
+        <h3 style="font-size:18px;font-weight:800;margin-bottom:4px;">Pack Commercial OF</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:12px;flex:1;">Les documents pour vendre et contractualiser vos formations professionnellement.</p>
+        <div style="font-size:12px;margin-bottom:12px;line-height:1.8;">
+          ✅ Proposition commerciale type<br>
+          ✅ Convention inter-entreprises<br>
+          ✅ Convention intra-entreprise<br>
+          ✅ Convention sous-traitance (formateur ext.)<br>
+          ✅ Devis type conforme OPCO<br>
+          ✅ Bon de commande<br>
+          ✅ Templates emails relance & suivi<br>
+          <strong>7 templates personnalisables</strong>
+        </div>
+        <div class="price-display">
+          <span class="price-old">400€</span>
+          <span class="price-new">199€</span>
+        </div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
+        <button class="btn btn-primary btn-block" style="margin-top:12px;" onclick="payerPack('commercial', 199)">Commander →</button>
+      </div>
+
+      <!-- Pack CFA -->
+      <div class="card" style="position:relative;display:flex;flex-direction:column;border:2px solid var(--accent);">
+        <div style="position:absolute;top:-1px;right:16px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;padding:4px 12px;border-radius:0 0 8px 8px;">⭐ SPÉCIALISÉ</div>
+        <div style="font-size:28px;margin-bottom:8px;">🎓</div>
+        <h3 style="font-size:18px;font-weight:800;margin-bottom:4px;">Pack CFA / Apprentissage</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:12px;flex:1;">Documents spécifiques à l'apprentissage et aux exigences CFA.</p>
+        <div style="font-size:12px;margin-bottom:12px;line-height:1.8;">
+          ✅ Convention formation par apprentissage<br>
+          ✅ Livret d'apprentissage<br>
+          ✅ Carnet liaison entreprise-CFA<br>
+          ✅ Grille suivi tuteur / maître d'apprentissage<br>
+          ✅ Fiche de visite entreprise<br>
+          ✅ Convention partenariat entreprise<br>
+          ✅ Bilan intermédiaire de progression<br>
+          ✅ Procédure de rupture de contrat<br>
+          <strong>8 templates personnalisables</strong>
+        </div>
+        <div class="price-display">
+          <span class="price-old">900€</span>
+          <span class="price-new">390€</span>
+        </div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
+        <button class="btn btn-primary btn-block" style="margin-top:12px;" onclick="payerPack('cfa_docs', 390)">Commander →</button>
+      </div>
+
+      <!-- Pack Complet (les 3 réunis) -->
+      <div class="card" style="position:relative;display:flex;flex-direction:column;border:2px solid #7c3aed;">
+        <div style="position:absolute;top:-1px;right:16px;background:#7c3aed;color:#fff;font-size:10px;font-weight:700;padding:4px 12px;border-radius:0 0 8px 8px;">👑 MEILLEUR PRIX</div>
+        <div style="font-size:28px;margin-bottom:8px;">📦</div>
+        <h3 style="font-size:18px;font-weight:800;margin-bottom:4px;">Pack Complet 3-en-1</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:12px;flex:1;">Les 3 packs réunis. 24 templates + 1h d'accompagnement expert offerte.</p>
+        <div style="font-size:12px;margin-bottom:12px;line-height:1.8;">
+          ✅ Pack Pédagogique (9 templates)<br>
+          ✅ Pack Commercial (7 templates)<br>
+          ✅ Pack CFA (8 templates)<br>
+          ✅ <strong>1h accompagnement expert offerte</strong><br>
+          ✅ <strong>Mises à jour gratuites 1 an</strong><br>
+          <strong>24 templates + bonus</strong>
+        </div>
+        <div class="price-display">
+          <span class="price-old">838€</span>
+          <span class="price-new">590€</span>
+        </div>
+        <p style="font-size:11px;color:var(--success);font-weight:600;">Économisez 248€ vs achat séparé</p>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
+        <button class="btn btn-primary btn-block" style="margin-top:12px;background:#7c3aed;border-color:#7c3aed;" onclick="payerPack('complet_3en1', 590)">Commander le pack complet →</button>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:32px;padding:20px;background:#fff;border-radius:12px;border:1px solid var(--border);">
+      <p style="font-size:14px;font-weight:700;margin-bottom:4px;">🤖 Comment ça marche ?</p>
+      <p style="font-size:13px;color:var(--muted);">1. Vous commandez → 2. L'IA génère vos templates personnalisés → 3. Un expert vérifie chaque document → 4. Vous recevez tout en 48h</p>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px;">💡 <strong>Vous préférez qu'on s'occupe de tout ?</strong> Nos <a href="#" style="color:var(--accent);" onclick="window.scrollTo({top:0,behavior:'smooth'})">démarches complètes</a> incluent la constitution + les documents + l'accompagnement expert.</p>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="footer-inner">
     <div><div class="footer-brand">lesformateurs.online</div><div>La plateforme des professionnels de la formation</div></div>
@@ -657,6 +760,24 @@ function checkEdofQualiopi(){
 
 function addQualiopiDoc(){
   var list = document.getElementById('qualiopi-docs-list');
+  var div = document.createElement('div');
+  div.className = 'doc-upload-area';
+  div.style.marginBottom = '8px';
+  div.innerHTML = '<input type="file" accept=".pdf,.jpg,.png,.zip">';
+  list.appendChild(div);
+}
+
+function addEdofDoc(){
+  var list = document.getElementById('edof-docs-list');
+  var div = document.createElement('div');
+  div.className = 'doc-upload-area';
+  div.style.marginBottom = '8px';
+  div.innerHTML = '<input type="file" accept=".pdf,.jpg,.png,.zip">';
+  list.appendChild(div);
+}
+
+function addRsDoc(){
+  var list = document.getElementById('rs-docs-list');
   var div = document.createElement('div');
   div.className = 'doc-upload-area';
   div.style.marginBottom = '8px';
@@ -1016,6 +1137,40 @@ async function payerOpco(){
   } else {
     window.location.href = userIsPremium ? 'https://buy.stripe.com/9B6fZh7vs22N6Me2RYffy1E' : 'https://buy.stripe.com/bJe7sL5nk9vfgmOakqffy1t';
   }
+}
+
+var packLabels = {
+  pedagogique: 'Pack Pédagogique',
+  commercial: 'Pack Commercial OF',
+  cfa_docs: 'Pack CFA / Apprentissage',
+  complet_3en1: 'Pack Complet 3-en-1'
+};
+
+async function payerPack(packType, amount){
+  var user = await getUser();
+  if(!user){ closeAllModals(); openAuthModal(); return; }
+
+  try {
+    var { data: demarche, error } = await sb.from('demarches').insert({
+      user_id: user.id,
+      type: 'pack_' + packType,
+      status: 'nouveau',
+      current_step: 1,
+      amount_cents: amount * 100,
+      paid: false,
+      for_self: true,
+      form_data: { pack_type: packType, pack_label: packLabels[packType] || packType }
+    }).select().single();
+    if(error){ alert('❌ ' + error.message); return; }
+
+    localStorage.setItem('lfo_pending_order', JSON.stringify({
+      order_id: demarche.id, table: 'demarches', type: 'demarche',
+      product_type: 'pack_' + packType, amount: amount, timestamp: Date.now()
+    }));
+  } catch(e){ alert('❌ Erreur de connexion.'); return; }
+
+  // TODO: Replace with actual Stripe links when created
+  alert('✅ Commande enregistrée !\n\nVous serez redirigé vers le paiement. Notre équipe prépare vos templates personnalisés sous 48h.');
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>

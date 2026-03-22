@@ -2191,9 +2191,9 @@ async function saveProgress(){
     var pct = updateProgressBar();
     const user = await getUser();
     if(user){
-      await sb.from('profiles').update({
-        formation_progress: pct
-      }).eq('id', user.id);
+      var updateData = {};
+      updateData[progressField] = pct;
+      await sb.from('profiles').update(updateData).eq('id', user.id);
     }
   } catch(e){ console.log('Progress save error:', e); }
 }
@@ -2207,11 +2207,18 @@ loadLesson(currentLesson);
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script>
-// Auth guard — admin can always access, others need formation_purchased
+// Auth guard — admin can always access, f=2 is free for all, f=1 needs formation_purchased
+var formationId = parseInt(new URLSearchParams(window.location.search).get('f') || '1');
+var progressField = formationId === 2 ? 'formation_ia_progress' : 'formation_progress';
+
 (async function(){
   var user = await getUser();
   if(!user){
-    window.location.href = 'se-former.html';
+    if(formationId === 2){
+      // IA formation is free but needs account
+      alert('Créez un compte gratuit pour accéder à cette formation.');
+    }
+    window.location.href = formationId === 2 ? 'dashboard.html' : 'se-former.html';
     return;
   }
   var profile = await getProfile();
@@ -2220,23 +2227,24 @@ loadLesson(currentLesson);
   if(profile && (profile.profile_type === 'admin' || profile.email === 'LFOadmin@gmail.com')){
     isAdmin = true;
     document.getElementById('admin-badge').style.display = '';
-    // Unlock all modules for admin
     MODULES.forEach(function(m){
       m.state = 'active';
       m.lessons.forEach(function(l){ if(l.state === 'locked') l.state = 'active'; });
     });
     renderSidebar();
     loadLesson(currentLesson);
-  } else if(!profile || !profile.formation_purchased){
+  } else if(formationId === 1 && (!profile || !profile.formation_purchased)){
     alert('⚠️ Vous devez acheter la formation pour y accéder.');
     window.location.href = 'se-former.html';
     return;
   }
+  // Formation IA (f=2) is free — no purchase check needed
 
   // Load dynamic content overrides from Supabase
   try {
     var { data: dbLessons } = await sb.from('course_lessons')
-      .select('*, course_modules!inner(module_number, title)')
+      .select('*, course_modules!inner(module_number, title, formation_id)')
+      .eq('course_modules.formation_id', formationId)
       .eq('is_published', true)
       .order('sort_order', {ascending:true});
     
