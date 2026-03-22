@@ -100,9 +100,14 @@
   <a onclick="showTab('formations')">🎓 Inscriptions</a>
   <a onclick="showTab('contenu')">📹 Contenu</a>
   <a onclick="showTab('users')">👥 Utilisateurs</a>
-    <a onclick="showTab('stagiaires')">🎓 Stagiaires</a>
-    <a onclick="showTab('achats')">💳 Achats</a>
-    <a onclick="showTab('messagerie')">💬 Messagerie</a>
+  <a onclick="showTab('stagiaires')">🎓 Stagiaires</a>
+  <a onclick="showTab('achats')">💳 Achats</a>
+  <a onclick="showTab('funnels')">🚀 Funnels</a>
+  <a onclick="showTab('messagerie')">💬 Messages</a>
+</div>
+<div id="admin-mobile-nav-links" style="padding:8px 12px;background:#2c2c2e;gap:8px;display:none;flex-wrap:wrap;">
+  <a href="dashboard.html" style="flex:1;text-align:center;padding:10px;background:rgba(255,255,255,.12);color:#fff;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;">👤 Mon espace</a>
+  <a href="expert.html" id="admin-mobile-expert-btn" style="display:none;flex:1;text-align:center;padding:10px;background:var(--accent);color:#fff;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;">⚡ Expert</a>
 </div>
 
 <div class="admin-layout">
@@ -125,7 +130,10 @@
     <a onclick="showTab('users')">👥 Utilisateurs</a>
     <a onclick="showTab('stagiaires')">🎓 Stagiaires</a>
     <a onclick="showTab('achats')">💳 Achats</a>
+    <a onclick="showTab('funnels')">🚀 Funnels</a>
     <a onclick="showTab('messagerie')">💬 Messagerie</a>
+    <a onclick="showTab('funnels')">🚀 Funnels</a>
+    <a onclick="showTab('funnels')">🎯 Funnels</a>
   </div>
 
   <div class="main-content">
@@ -368,6 +376,26 @@
       <div id="admin-users-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
 
+    <!-- ========== FUNNELS ========== -->
+    <div class="tab-content" id="tab-funnels">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🚀 Pages de vente (Funnels)</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Ces pages ne sont pas visibles depuis l'accueil. Partagez-les directement ou via des campagnes publicitaires.</p>
+      
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:32px;">
+        <div class="detail-card"><h4>🎓 Webinaire IA gratuit</h4><p style="font-size:12px;color:var(--muted);">Lead → Email → Webinaire</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-webinaire.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-webinaire.html');alert('Copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>✦ Audit Qualiopi</h4><p style="font-size:12px;color:var(--muted);">Lead → Paiement 490€</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-qualiopi.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-qualiopi.html');alert('Copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>📋 RS/RNCP Certifications</h4><p style="font-size:12px;color:var(--muted);">Lead → Paiement 390€</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-rs-rncp.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-rs-rncp.html');alert('Copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>€ Espace EDOF</h4><p style="font-size:12px;color:var(--muted);">Paiement direct 290€</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-edof.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-edof.html');alert('Copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>🤖 Agent IA</h4><p style="font-size:12px;color:var(--muted);">Lead → RDV/Demo</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-agent-ia.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-agent-ia.html');alert('Copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>📄 NDA Déclaration</h4><p style="font-size:12px;color:var(--muted);">Paiement direct 199€</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-nda.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-nda.html');alert('Copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>🔗 Connexion OPCO</h4><p style="font-size:12px;color:var(--muted);">Paiement 290€/OPCO ou 2 990€ pack</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-opco.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-opco.html');alert('Copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>👑 Abonnement Premium</h4><p style="font-size:12px;color:var(--muted);">Abonnement 69€/mois</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-premium.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-premium.html');alert('Copié !')">📋 Copier</button></div></div>
+      </div>
+
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">📧 Leads collectés</h3>
+      <div id="admin-leads-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
+    </div>
+
     <!-- ========== ACHATS ADMIN ========== -->
     <div class="tab-content" id="tab-achats">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">💳 Historique des achats</h2>
@@ -388,6 +416,38 @@
         <input type="text" id="admin-stag-search" placeholder="🔍 Rechercher un stagiaire..." oninput="filterAdminStagiaires()" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;">
       </div>
       <div id="admin-stagiaires-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
+    </div>
+
+    <!-- ========== FUNNELS ========== -->
+    <div class="tab-content" id="tab-funnels">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🎯 Pages de vente (Funnels)</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Liens directs vers les pages de vente. Partagez-les sur les réseaux sociaux, par email ou dans vos campagnes.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;">
+        <div class="detail-card"><h4>🎓 Webinaire IA gratuit</h4><p style="font-size:12px;color:var(--muted);">Lead → inscription email → formation</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-webinaire.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-webinaire.html');alert('Lien copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>🏆 Audit Qualiopi</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement (490€)</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-qualiopi.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-qualiopi.html');alert('Lien copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>📋 RS / RNCP</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement (390€)</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-rs-rncp.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-rs-rncp.html');alert('Lien copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>€ Espace EDOF</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement (290€)</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-edof.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-edof.html');alert('Lien copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>🤖 Agent IA</h4><p style="font-size:12px;color:var(--muted);">Lead → RDV / devis → paiement</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-agent-ia.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-agent-ia.html');alert('Lien copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>🚀 NDA (Lancer son OF)</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement (199€)</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-nda.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-nda.html');alert('Lien copié !')">📋 Copier</button></div></div>
+        <div class="detail-card"><h4>🔗 Connexion OPCO</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement (290€ ou 2990€)</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-opco.html" target="_blank" class="action-btn">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-opco.html');alert('Lien copié !')">📋 Copier</button></div></div>
+        <div class="detail-card" style="border-color:#7c3aed;"><h4>👑 Premium Financement</h4><p style="font-size:12px;color:var(--muted);">Abonnement 69€/mois</p><div style="display:flex;gap:8px;margin-top:10px;"><a href="funnel-premium.html" target="_blank" class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">🔗 Ouvrir</a><button class="action-btn" onclick="navigator.clipboard.writeText(location.origin+'/funnel-premium.html');alert('Lien copié !')">📋 Copier</button></div></div>
+      </div>
+    </div>
+
+    <!-- ========== FUNNELS ========== -->
+    <div class="tab-content" id="tab-funnels">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🚀 Pages de vente (Funnels)</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Liens vers les pages de vente. Partagez-les sur vos réseaux, emails, publicités.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;">
+        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-webinaire.html','_blank')"><h4>🎯 Webinaire IA gratuit</h4><p style="font-size:12px;color:var(--muted);">Lead → inscription email</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-webinaire.html</p></div>
+        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-qualiopi.html','_blank')"><h4>✦ Audit Qualiopi</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement 490€</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-qualiopi.html</p></div>
+        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-rsrncp.html','_blank')"><h4>📋 RS / RNCP</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement 390€</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-rsrncp.html</p></div>
+        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-edof.html','_blank')"><h4>€ Espace EDOF</h4><p style="font-size:12px;color:var(--muted);">Lead → paiement 290€</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-edof.html</p></div>
+        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-agents-ia.html','_blank')"><h4>🤖 Agents IA</h4><p style="font-size:12px;color:var(--muted);">Lead → RDV / devis</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-agents-ia.html</p></div>
+        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-nda.html','_blank')"><h4>📄 NDA</h4><p style="font-size:12px;color:var(--muted);">Paiement direct 199€</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-nda.html</p></div>
+        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-opco.html','_blank')"><h4>🔗 Connexion OPCO</h4><p style="font-size:12px;color:var(--muted);">Paiement direct</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-opco.html</p></div>
+        <div class="detail-card" style="cursor:pointer;" onclick="window.open('funnel-premium.html','_blank')"><h4>👑 Premium</h4><p style="font-size:12px;color:var(--muted);">Abonnement 69€/mois</p><p style="font-size:11px;color:var(--accent);margin-top:4px;">funnel-premium.html</p></div>
+      </div>
     </div>
 
     <!-- ========== MESSAGERIE ADMIN ========== -->
@@ -434,7 +494,12 @@ function showTab(name){
   if(profile.is_pro){
     var eb = document.getElementById('nav-expert-btn');
     if(eb) eb.style.display = '';
+    var aeb = document.getElementById('admin-mobile-expert-btn');
+    if(aeb) aeb.style.display = '';
   }
+  // Show mobile nav links
+  var amnl = document.getElementById('admin-mobile-nav-links');
+  if(amnl) amnl.style.display = 'flex';
   // Load course content
   await loadCourseContent();
   // Load offres
@@ -446,6 +511,7 @@ function showTab(name){
   await loadAdminMessages();
   await loadAdminStagiaires();
   await loadAdminAchats();
+  await loadAdminLeads();
 })();
 
 // ============================
@@ -1320,6 +1386,25 @@ function filterAdminStagiaires(){
 }
 
 // ============================
+// ADMIN — LEADS
+// ============================
+
+async function loadAdminLeads(){
+  var { data: leads } = await sb.from('leads').select('*').order('created_at',{ascending:false}).limit(100);
+  var c = document.getElementById('admin-leads-list');
+  if(!leads || leads.length === 0){ c.innerHTML = '<p style="text-align:center;padding:20px;color:var(--muted);">Aucun lead pour le moment.</p>'; return; }
+  var h = '<div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:8px;">' + leads.length + ' lead' + (leads.length > 1 ? 's' : '') + ' collectés</div>';
+  leads.forEach(function(l){
+    var date = new Date(l.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    var src = l.source || '—';
+    h += '<div class="detail-card" style="padding:12px 16px;"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">' +
+      '<div><strong>' + (l.name||'Sans nom') + '</strong> · ' + l.email + (l.phone ? ' · ' + l.phone : '') + '</div>' +
+      '<div><span class="detail-tag" style="font-size:10px;">' + src + '</span> <span style="font-size:11px;color:var(--muted);">' + date + '</span></div></div></div>';
+  });
+  c.innerHTML = h;
+}
+
+// ============================
 // ADMIN — ACHATS
 // ============================
 
@@ -1473,24 +1558,68 @@ async function openAdminMsgDetail(msgId){
 
 function openAdminComposeMsg(){
   document.getElementById('compose-recipient-id').value = '';
-  document.getElementById('compose-recipient-name').value = '';
+  document.getElementById('compose-search').value = '';
   document.getElementById('compose-subject').value = '';
   document.getElementById('compose-body').value = '';
   document.getElementById('compose-error').style.display = 'none';
-  // Populate recipient dropdown
-  var opts = '<option value="">— Choisir un destinataire —</option>';
-  allAdminUsers.forEach(function(u){
-    if(u.profile_type !== 'admin'){
-      opts += '<option value="' + u.id + '">' + (u.full_name || u.email) + ' (' + u.email + ')</option>';
-    }
-  });
-  document.getElementById('compose-recipient-select').innerHTML = opts;
+  document.getElementById('compose-results').style.display = 'none';
+  document.getElementById('compose-selected').style.display = 'none';
+  document.getElementById('compose-search').style.display = '';
   document.getElementById('modal-admin-compose').classList.add('open');
 }
 
+function searchComposeRecipient(){
+  var q = document.getElementById('compose-search').value.toLowerCase().trim();
+  var results = document.getElementById('compose-results');
+  if(q.length < 1){ results.style.display = 'none'; return; }
+
+  var filtered = allAdminUsers.filter(function(u){
+    return (u.full_name||'').toLowerCase().includes(q) || (u.email||'').toLowerCase().includes(q);
+  }).slice(0, 10);
+
+  if(filtered.length === 0){
+    results.innerHTML = '<div style="padding:10px 14px;font-size:13px;color:var(--muted);">Aucun résultat</div>';
+  } else {
+    var h = '';
+    filtered.forEach(function(u){
+      var role = u.profile_type === 'admin' ? '👑 Admin' : u.is_pro ? '⚡ Expert' : '👤 Utilisateur';
+      var roleColor = u.profile_type === 'admin' ? '#7c3aed' : u.is_pro ? '#6366f1' : 'var(--muted)';
+      h += '<div style="padding:10px 14px;cursor:pointer;border-bottom:1px solid #f0f0f0;transition:background .1s;" onmouseover="this.style.background=\'#f8f8f8\'" onmouseout="this.style.background=\'#fff\'" onclick="selectComposeRecipient(\'' + u.id + '\',\'' + (u.full_name||u.email).replace(/'/g,"\\'") + '\',\'' + (u.email||'').replace(/'/g,"\\'") + '\')">' +
+        '<div style="font-size:13px;font-weight:600;">' + (u.full_name || 'Sans nom') + '</div>' +
+        '<div style="font-size:11px;color:var(--muted);">' + u.email + ' · <span style="color:' + roleColor + ';">' + role + '</span></div></div>';
+    });
+    results.innerHTML = h;
+  }
+  results.style.display = '';
+}
+
+function selectComposeRecipient(id, name, email){
+  document.getElementById('compose-recipient-id').value = id;
+  document.getElementById('compose-search').style.display = 'none';
+  document.getElementById('compose-results').style.display = 'none';
+  document.getElementById('compose-selected').style.display = '';
+  document.getElementById('compose-selected-name').innerHTML = '<strong>' + name + '</strong> · ' + email;
+}
+
+function clearComposeRecipient(){
+  document.getElementById('compose-recipient-id').value = '';
+  document.getElementById('compose-search').value = '';
+  document.getElementById('compose-search').style.display = '';
+  document.getElementById('compose-selected').style.display = 'none';
+  document.getElementById('compose-search').focus();
+}
+
+// Close search results when clicking outside
+document.addEventListener('click', function(e){
+  if(!e.target.closest('#compose-search') && !e.target.closest('#compose-results')){
+    var r = document.getElementById('compose-results');
+    if(r) r.style.display = 'none';
+  }
+});
+
 function adminSendMsgTo(userId, name){
   openAdminComposeMsg();
-  document.getElementById('compose-recipient-select').value = userId;
+  selectComposeRecipient(userId, name, '');
   document.getElementById('compose-subject').value = '';
   document.getElementById('compose-body').value = '';
 }
@@ -1498,18 +1627,18 @@ function adminSendMsgTo(userId, name){
 function adminReplyTo(userId, name, subject){
   document.getElementById('modal-admin-msg-detail').classList.remove('open');
   openAdminComposeMsg();
-  document.getElementById('compose-recipient-select').value = userId;
+  selectComposeRecipient(userId, name, '');
   document.getElementById('compose-subject').value = 'Re: ' + subject;
   document.getElementById('compose-body').focus();
 }
 
 async function sendAdminCompose(){
-  var recipientId = document.getElementById('compose-recipient-select').value;
+  var recipientId = document.getElementById('compose-recipient-id').value;
   var subject = document.getElementById('compose-subject').value.trim();
   var body = document.getElementById('compose-body').value.trim();
   var errDiv = document.getElementById('compose-error');
 
-  if(!recipientId){ errDiv.textContent = '⚠️ Choisissez un destinataire.'; errDiv.style.display = ''; return; }
+  if(!recipientId){ errDiv.textContent = '⚠️ Recherchez et sélectionnez un destinataire.'; errDiv.style.display = ''; return; }
   if(!body){ errDiv.textContent = '⚠️ Le message ne peut pas être vide.'; errDiv.style.display = ''; return; }
   errDiv.style.display = 'none';
 
@@ -1551,7 +1680,14 @@ async function sendAdminCompose(){
     <h3 style="font-size:18px;font-weight:800;margin-bottom:16px;">✉️ Nouveau message</h3>
     <div style="margin-bottom:12px;">
       <label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px;">Destinataire</label>
-      <select id="compose-recipient-select" style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;"></select>
+      <div style="position:relative;">
+        <input type="text" id="compose-search" placeholder="🔍 Rechercher un utilisateur ou expert..." oninput="searchComposeRecipient()" onfocus="document.getElementById('compose-results').style.display=''" style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;">
+        <div id="compose-results" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #e0e0e0;border-top:none;border-radius:0 0 8px 8px;max-height:200px;overflow-y:auto;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.1);"></div>
+      </div>
+      <div id="compose-selected" style="display:none;margin-top:8px;padding:8px 12px;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.15);border-radius:8px;font-size:13px;display:none;">
+        <span id="compose-selected-name"></span>
+        <button onclick="clearComposeRecipient()" style="float:right;border:none;background:none;color:var(--accent);cursor:pointer;font-weight:700;">✕</button>
+      </div>
     </div>
     <div style="margin-bottom:12px;">
       <label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px;">Objet</label>
@@ -1562,7 +1698,6 @@ async function sendAdminCompose(){
       <textarea id="compose-body" rows="6" placeholder="Votre message..." style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;resize:vertical;"></textarea>
     </div>
     <input type="hidden" id="compose-recipient-id">
-    <input type="hidden" id="compose-recipient-name">
     <div id="compose-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;"></div>
     <button class="btn btn-primary" onclick="sendAdminCompose()" style="padding:10px 24px;">📤 Envoyer</button>
   </div>

@@ -91,7 +91,7 @@
         <h4>Action de formation</h4>
         <p>OF classique : vente de formations à des entreprises ou particuliers.</p>
         <div class="type-price">990€</div>
-        <div class="premium-ribbon">👑 Premium : <strong>-10%</strong></div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <div class="info-detail" id="info-action">
           <strong>Ce qui est inclus :</strong>
           <ul>
@@ -110,7 +110,7 @@
         <h4>CFA (Apprentissage)</h4>
         <p>Centre de formation d'apprentis — contrats d'apprentissage.</p>
         <div class="type-price">2 990€</div>
-        <div class="premium-ribbon">👑 Premium : <strong>-10%</strong></div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <div class="info-detail" id="info-cfa">
           <strong>Ce qui est inclus :</strong>
           <ul>
@@ -131,7 +131,7 @@
         <h4>Bilan de compétences</h4>
         <p>Accompagnement des salariés dans leur évolution professionnelle.</p>
         <div class="type-price">990€</div>
-        <div class="premium-ribbon">👑 Premium : <strong>-10%</strong></div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <div class="info-detail" id="info-bilan">
           <strong>Ce qui est inclus :</strong>
           <ul>
@@ -150,7 +150,7 @@
         <h4>VAE</h4>
         <p>Validation des acquis de l'expérience — accompagnement candidats.</p>
         <div class="type-price">990€</div>
-        <div class="premium-ribbon">👑 Premium : <strong>-10%</strong></div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <div class="info-detail" id="info-vae">
           <strong>Ce qui est inclus :</strong>
           <ul>
@@ -169,7 +169,7 @@
         <h4>Formation des élus</h4>
         <p>Formation des élus locaux — cadre réglementaire spécifique.</p>
         <div class="type-price">1 490€</div>
-        <div class="premium-ribbon">👑 Premium : <strong>-10%</strong></div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <div class="info-detail" id="info-elus">
           <strong>Ce qui est inclus :</strong>
           <ul>
@@ -189,7 +189,7 @@
         <h4>OF géré par agents IA</h4>
         <p>Centre entièrement piloté par des agents IA : docs, clients, gestion.</p>
         <div class="type-price">2 790€</div>
-        <div class="premium-ribbon">👑 Premium : <strong>-10%</strong></div>
+        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
         <div class="info-detail" id="info-agent">
           <strong>Ce qui est inclus :</strong>
           <ul>
@@ -316,7 +316,7 @@
       <div>
         <p style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:12px;">Choisissez votre mode de paiement :</p>
         <div class="payment-options">
-          <div class="payment-option selected" onclick="selectPayment(this,1)" style="background:var(--primary);border-color:rgba(255,255,255,.2);color:#fff;">
+          <div class="payment-option selected" onclick="selectPayment(this,1)" style="background:var(--accent);border-color:var(--accent);color:#fff;transform:scale(1.03);">
             <h5 style="color:#fff;">En 1 fois</h5>
             <p style="color:rgba(255,255,255,.5);" id="pay1x">990€</p>
           </div>
@@ -409,8 +409,18 @@ function updateTotal(){
 var selectedPaymentTimes = 1;
 
 function selectPayment(el, times){
-  el.parentNode.querySelectorAll('.payment-option').forEach(o=>o.classList.remove('selected'));
+  el.parentNode.querySelectorAll('.payment-option').forEach(function(o){
+    o.classList.remove('selected');
+    o.style.background = 'var(--primary)';
+    o.style.borderColor = 'rgba(255,255,255,.2)';
+    o.style.transform = 'scale(1)';
+    o.querySelectorAll('h5').forEach(function(h){ h.style.color = '#fff'; });
+  });
   el.classList.add('selected');
+  el.style.background = 'var(--accent)';
+  el.style.borderColor = 'var(--accent)';
+  el.style.transform = 'scale(1.03)';
+  el.querySelectorAll('h5').forEach(function(h){ h.style.color = '#fff'; });
   selectedPaymentTimes = times;
 }
 

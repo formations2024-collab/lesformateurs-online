@@ -68,6 +68,12 @@
   <a onclick="showTab('pool')">🆕 Pool</a>
   <a onclick="showTab('mes-dossiers')">📂 Mes dossiers <span class="pool-badge" id="mes-dossiers-badge" style="background:var(--accent);">0</span></a>
   <a onclick="showTab('historique')">✅ Historique <span class="pool-badge" id="historique-badge" style="background:var(--success);">0</span></a>
+  <a onclick="showTab('pool-stagiaires')">🎓 Stagiaires</a>
+  <a onclick="showTab('messagerie')">💬 Messages</a>
+</div>
+<div id="expert-mobile-nav-links" style="display:none;padding:8px 12px;background:#0f3460;gap:8px;flex-wrap:wrap;">
+  <a href="dashboard.html" style="flex:1;text-align:center;padding:10px;background:rgba(255,255,255,.15);color:#fff;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;">👤 Mon espace</a>
+  <a href="admin.html" id="expert-mobile-admin-btn" style="display:none;flex:1;text-align:center;padding:10px;background:#7c3aed;color:#fff;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;">👑 Admin</a>
 </div>
 <div class="dash-layout">
   <div class="sidebar">
@@ -484,6 +490,10 @@ async function saveExpertProfile(){
   document.getElementById('expert-name').textContent=fn;
   document.getElementById('expert-role').textContent=profile.profile_type==='admin'?'⚡ Super Admin':'Expert conformité';
   document.getElementById('expert-welcome').textContent=profile.first_name||fn;
+  // Show mobile nav links
+  var emn=document.getElementById('expert-mobile-nav-links');
+  if(emn) emn.style.display='flex';
+  if(profile.profile_type==='admin'){var eab=document.getElementById('expert-mobile-admin-btn');if(eab)eab.style.display='';}
   document.getElementById('exp-prenom').value=profile.first_name||'';
   document.getElementById('exp-nom').value=profile.last_name||'';
   document.getElementById('exp-email').value=profile.email||'';
