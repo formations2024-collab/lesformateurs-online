@@ -297,10 +297,11 @@ footer{background:var(--primary);padding:48px 40px;color:rgba(255,255,255,.5);fo
 /* Premium -10% ribbon */
 .premium-ribbon{
   background:linear-gradient(135deg,#7c3aed 0%,#6d28d9 50%,#5b21b6 100%);
-  color:#fff;font-size:12px;font-weight:500;
-  padding:8px 16px;border-radius:8px;margin-top:10px;
+  color:#fff;font-size:12px;font-weight:400;
+  padding:10px 16px;border-radius:8px;margin-top:10px;
   display:flex;align-items:center;gap:6px;
-  box-shadow:0 2px 8px rgba(124,58,237,.2);
+  white-space:nowrap;overflow:hidden;
   letter-spacing:.2px;
 }
-.premium-ribbon strong{font-weight:800;font-size:14px;}
+.premium-ribbon strong{font-weight:600;font-size:13px;}
+@media(max-width:480px){.premium-ribbon{font-size:11px;white-space:normal;}}
