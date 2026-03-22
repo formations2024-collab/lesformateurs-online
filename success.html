@@ -144,7 +144,8 @@ var typeLabels = {
   elus: 'Créer un OF — Formation des élus',
   agents_ia: 'Créer un OF — OF Agents IA',
   formation: 'Formation Formateur Professionnel',
-  premium: 'Annonce Premium'
+  premium: 'Annonce Premium',
+  premium_subscription: 'Abonnement Premium Financement'
 };
 
 var dashboardTabs = {
@@ -153,7 +154,8 @@ var dashboardTabs = {
   bpf: 'demarches', agent: 'demarches',
   action: 'of', cfa: 'of', bilan: 'of', vae: 'of', elus: 'of', agents_ia: 'of',
   formation: 'formation',
-  premium: 'annonces'
+  premium: 'annonces',
+  premium_subscription: 'financement'
 };
 
 function hideAll(){
@@ -194,13 +196,34 @@ function showState(state){
   var amount = pendingOrder.amount;
   var productType = pendingOrder.product_type;
 
+  // Handle premium subscription (no orderId needed)
+  if(orderType === 'premium_subscription'){
+    try {
+      await sb.from('profiles').update({
+        is_premium: true,
+        premium_since: new Date().toISOString()
+      }).eq('id', user.id);
+      await sb.from('payments').insert({
+        user_id: user.id, amount_cents: 6900, payment_type: 'premium_subscription',
+        status: 'completed', metadata: { source: 'stripe_redirect' }
+      });
+    } catch(e){ console.log('Erreur premium:', e); }
+  }
+
   if(orderId && table){
     try {
-      var { error } = await sb.from(table).update({
+      var updateData = {
         paid: true,
         status: table === 'annonces' ? 'active' : 'en_cours',
         updated_at: new Date().toISOString()
-      }).eq('id', orderId);
+      };
+      
+      // Premium annonce: also mark as premium
+      if(pendingOrder.type === 'premium' && table === 'annonces'){
+        updateData.is_premium = true;
+      }
+      
+      var { error } = await sb.from(table).update(updateData).eq('id', orderId);
 
       if(error){
         console.log('Erreur mise à jour commande:', error);
@@ -224,12 +247,59 @@ function showState(state){
         }).eq('id', user.id);
       }
 
+      // Si c'est un abonnement premium
+      if(pendingOrder.type === 'premium_subscription'){
+        await sb.from('profiles').update({
+          is_premium: true,
+          premium_since: new Date().toISOString()
+        }).eq('id', user.id);
+      }
+
     } catch(e){
       console.log('Erreur post-paiement:', e);
     }
   }
 
-  // 4. Afficher le succès
+  // 4b. Enregistrer l'achat + commission parrainage
+  try {
+    var saleLabel = typeLabels[productType] || productType || 'Achat';
+    var saleCents = (amount || 0) * 100;
+    
+    // Record achat (even without referral)
+    var refCode = getActiveReferral();
+    var referrerId = null;
+    if(refCode){
+      var { data: referrer } = await sb.from('profiles').select('id').eq('referral_code', refCode).single();
+      if(referrer && referrer.id !== user.id) referrerId = referrer.id;
+    }
+    var commCents = referrerId ? Math.round(saleCents * 0.10) : 0;
+    
+    await sb.from('achats').insert({
+      user_id: user.id,
+      product_type: productType || orderType,
+      product_label: saleLabel,
+      amount_cents: saleCents,
+      referrer_id: referrerId,
+      referral_code: refCode || null,
+      commission_cents: commCents
+    });
+    
+    // Record commission for referrer
+    if(referrerId){
+      await sb.from('referrals').insert({
+        referrer_id: referrerId,
+        buyer_id: user.id,
+        product_type: productType || orderType,
+        product_label: saleLabel,
+        sale_amount_cents: saleCents,
+        commission_cents: commCents,
+        is_recurring: orderType === 'premium_subscription',
+        commission_status: 'pending'
+      });
+    }
+  } catch(e){ console.log('Achat/referral error:', e); }
+
+  // 5. Afficher le succès
   showState('success');
 
   // Remplir le résumé

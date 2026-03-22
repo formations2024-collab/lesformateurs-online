@@ -66,8 +66,8 @@
 <div class="mobile-nav">
   <a class="active" onclick="showTab('dashboard')">📊 Résumé</a>
   <a onclick="showTab('pool')">🆕 Pool</a>
-  <a onclick="showTab('mes-dossiers')">📂 Mes dossiers</a>
-  <a onclick="showTab('historique')">✅ Historique</a>
+  <a onclick="showTab('mes-dossiers')">📂 Mes dossiers <span class="pool-badge" id="mes-dossiers-badge" style="background:var(--accent);">0</span></a>
+  <a onclick="showTab('historique')">✅ Historique <span class="pool-badge" id="historique-badge" style="background:var(--success);">0</span></a>
 </div>
 <div class="dash-layout">
   <div class="sidebar">
@@ -75,11 +75,20 @@
       <div class="name" id="expert-name">Chargement...</div>
       <div class="role" id="expert-role">Expert</div>
     </div>
+    <div class="font-size-toggle" id="fontSizeToggle">
+      <span class="fst-label">Taille du texte</span>
+      <div class="fst-btns">
+        <button class="fst-btn active" onclick="setFontSize('normal')" title="Normal">A</button>
+        <button class="fst-btn" onclick="setFontSize('large')" title="Grand" style="font-size:16px;">A</button>
+        <button class="fst-btn" onclick="setFontSize('xlarge')" title="Très grand" style="font-size:19px;">A</button>
+      </div>
+    </div>
     <div class="sidebar-title">Dossiers</div>
     <a class="active" onclick="showTab('dashboard')">📊 Résumé</a>
     <a onclick="showTab('pool')">🆕 Pool dossiers <span class="pool-badge" id="pool-count-badge">0</span></a>
-    <a onclick="showTab('mes-dossiers')">📂 Mes dossiers</a>
-    <a onclick="showTab('historique')">✅ Historique</a>
+    <a onclick="showTab('mes-dossiers')">📂 Mes dossiers <span class="pool-badge" id="mes-dossiers-badge" style="background:var(--accent);">0</span></a>
+    <a onclick="showTab('historique')">✅ Historique <span class="pool-badge" id="historique-badge" style="background:var(--success);">0</span></a>
+    <a onclick="showTab('pool-stagiaires')">🎓 Pool stagiaires <span class="pool-badge" id="pool-stag-badge" style="background:#7c3aed;">0</span></a>
     <div class="sidebar-title" style="margin-top:24px;">Compte</div>
     <a onclick="showTab('messagerie')">💬 Messagerie</a>
     <a onclick="showTab('profil')">👤 Mon profil</a>
@@ -115,6 +124,12 @@
     <div class="tab-content" id="tab-historique">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">✅ Dossiers terminés</h2>
       <div id="historique-list"><p style="text-align:center;padding:40px 0;color:var(--muted);">Chargement...</p></div>
+    </div>
+    <!-- POOL STAGIAIRES -->
+    <div class="tab-content" id="tab-pool-stagiaires">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">🎓 Pool stagiaires</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Dossiers de financement où un formateur demande l'aide d'un expert.</p>
+      <div id="pool-stagiaires-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
     <!-- MESSAGERIE -->
     <div class="tab-content" id="tab-messagerie">
@@ -202,13 +217,15 @@ function renderCard(item,source,mode){
   if(mode==='pool'){
     h+='<button class="action-btn assign" onclick="assignDossier(\''+item.id+'\',\''+source+'\')">🙋 Prendre en charge</button>';
     h+='<button class="action-btn" onclick="openDossierDetail(\''+item.id+'\',\''+source+'\')">👁 Détail</button>';
+    h+='<button class="action-btn" onclick="expertContactBeforeAssign(\''+item.id+'\',\''+source+'\',\''+(p.full_name||'Client').replace(/'/g,"\\'")+'\')">💬 Contacter</button>';
   } else if(mode==='encours'){
     h+='<button class="action-btn" onclick="openDossierDetail(\''+item.id+'\',\''+source+'\')">📄 Ouvrir</button>';
     h+='<button class="action-btn" onclick="openExpertMessages(\''+item.id+'\',\''+source+'\')">💬 Messages</button>';
     h+='<button class="action-btn" onclick="openExpertUpload(\''+item.id+'\',\''+source+'\')">📤 Doc client</button>';
-    if(item.status!=='termine')h+='<button class="action-btn validate" onclick="advanceStep(\''+item.id+'\',\''+source+'\','+cur+','+total+')">⏭ Étape suivante</button>';
+    if(item.status!=='termine')h+='<button class="action-btn validate" onclick="advanceStep(\''+item.id+'\',\''+source+'\','+cur+','+total+','+JSON.stringify(steps).replace(/'/g,"\\'")+')">⏭ Étape suivante</button>';
   } else {
     h+='<button class="action-btn" onclick="openDossierDetail(\''+item.id+'\',\''+source+'\')">👁 Voir</button>';
+    h+='<button class="action-btn" onclick="openExpertMessages(\''+item.id+'\',\''+source+'\')">📋 Discussion</button>';
   }
   h+='</div></div>';return h;
 }
@@ -230,6 +247,7 @@ function renderMesDossiers(){
   allCreations.forEach(function(c){if(c.expert_id===expertId&&c.status!=='termine')mine.push({i:c,s:'creation'});});
   document.getElementById('mes-dossiers-count').textContent=mine.length;
   document.getElementById('stat-encours').textContent=mine.length;
+  var mdb=document.querySelectorAll('#mes-dossiers-badge');mdb.forEach(function(b){b.textContent=mine.length;});
   var list=document.getElementById('mes-dossiers-list');
   if(mine.length===0){list.innerHTML='<div style="text-align:center;padding:40px 0;color:var(--muted);"><div style="font-size:40px;margin-bottom:12px;">📂</div><p>Aucun dossier. Prenez-en un dans le pool !</p></div>';return;}
   var h='';mine.forEach(function(m){h+=renderCard(m.i,m.s,'encours');});list.innerHTML=h;
@@ -247,12 +265,26 @@ function renderHistorique(){
   allDemarches.forEach(function(d){if(d.expert_id===expertId&&d.status==='termine')done.push({i:d,s:'demarche'});});
   allCreations.forEach(function(c){if(c.expert_id===expertId&&c.status==='termine')done.push({i:c,s:'creation'});});
   document.getElementById('stat-termines').textContent=done.length;
+  var hb=document.querySelectorAll('#historique-badge');hb.forEach(function(b){b.textContent=done.length;});
   var list=document.getElementById('historique-list');
   if(done.length===0){list.innerHTML='<div style="text-align:center;padding:40px 0;color:var(--muted);"><p>Aucun dossier terminé.</p></div>';return;}
   var h='';done.forEach(function(d){h+=renderCard(d.i,d.s,'historique');});list.innerHTML=h;
 }
 
 // ACTIONS
+// Contact user before taking the dossier
+function expertContactBeforeAssign(dossierId, source, clientName){
+  var msg = prompt('Envoyer un message à ' + clientName + ' avant de prendre en charge le dossier :');
+  if(!msg || !msg.trim()) return;
+  var col = source === 'demarche' ? 'demarche_id' : 'creation_of_id';
+  var data = { sender_id: expertId, content: '💬 [Message d\'un expert avant prise en charge]\n\n' + msg };
+  data[col] = dossierId;
+  sb.from('messages').insert(data).then(function(res){
+    if(res.error){ alert('❌ ' + res.error.message); return; }
+    alert('✅ Message envoyé à ' + clientName + ' !');
+  });
+}
+
 async function assignDossier(id,source){
   if(!confirm('Prendre en charge ce dossier ?'))return;
   var table=source==='demarche'?'demarches':'creations_of';
@@ -407,12 +439,14 @@ async function openExpertMessages(id,source){expMsgCtx={id:id,s:source};document
   
   var c=document.getElementById('exp-msg-list');
   if(!msgs||msgs.length===0){c.innerHTML='<p style="text-align:center;color:var(--muted);padding:20px;">Aucun message.</p>';return;}
-  var h='';msgs.forEach(function(m){var me=m.sender_id===expertId;var nm=me?'Vous (Expert)':(m.profiles?m.profiles.full_name:'Client');
+  var h='';msgs.forEach(function(m){var me=m.sender_id===expertId;var nm=me?'Vous (Expert)':(m.profiles?(m.profiles.full_name||'Client'):'Client');
     var dt=new Date(m.created_at).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
-    var al=me?'flex-end':'flex-start';var bg=me?'rgba(99,102,241,.08)':'var(--light)';
-    // Highlight system messages (accept/reject/validation)
-    if(m.content.startsWith('✅ Document') || m.content.startsWith('❌ Document') || m.content.startsWith('📋') || m.content.startsWith('↩️')) bg='rgba(124,58,237,.06)';
-    h+='<div style="display:flex;justify-content:'+al+';margin-bottom:8px;"><div style="max-width:80%;background:'+bg+';border:1px solid var(--border);border-radius:10px;padding:10px 14px;"><div style="font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;">'+nm+' · '+dt+'</div><p style="font-size:13px;margin:0;white-space:pre-wrap;">'+m.content+'</p></div></div>';});
+    var al=me?'flex-end':'flex-start';
+    var bg=me?'rgba(99,102,241,.08)':'rgba(233,69,96,.08)';
+    var bd=me?'rgba(99,102,241,.15)':'rgba(233,69,96,.15)';
+    var isSystem=m.content.startsWith('✅ Document')||m.content.startsWith('❌ Document')||m.content.startsWith('📋')||m.content.startsWith('↩️')||m.content.startsWith('⏭')||m.content.startsWith('👋');
+    if(isSystem){bg='rgba(124,58,237,.06)';bd='rgba(124,58,237,.12)';}
+    h+='<div style="display:flex;justify-content:'+al+';margin-bottom:8px;"><div style="max-width:80%;background:'+bg+';border:1px solid '+bd+';border-radius:10px;padding:10px 14px;"><div style="font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;">'+nm+' · '+dt+'</div><p style="font-size:13px;margin:0;white-space:pre-wrap;">'+m.content+'</p></div></div>';});
   c.innerHTML=h;c.scrollTop=c.scrollHeight;
 }
 async function sendExpertMsg(){var inp=document.getElementById('exp-msg-input');var t=inp.value.trim();if(!t)return;
@@ -456,7 +490,62 @@ async function saveExpertProfile(){
   document.getElementById('exp-tel').value=profile.phone||'';
   await loadAllDossiers();renderPool();renderMesDossiers();renderHistorique();
   await loadExpertMessages();
+  await loadPoolStagiaires();
 })();
+
+// ============================
+// POOL STAGIAIRES (FINANCEMENT)
+// ============================
+async function loadPoolStagiaires(){
+  var { data: dossiers } = await sb.from('dossiers_financement')
+    .select('*, stagiaire:stagiaire_id(nom, prenom, email), formateur:user_id(full_name, email)')
+    .eq('expert_requested', true)
+    .is('expert_id', null)
+    .order('created_at',{ascending:false});
+
+  var badge = document.querySelectorAll('#pool-stag-badge');
+  badge.forEach(function(b){ b.textContent = (dossiers||[]).length; });
+
+  var c = document.getElementById('pool-stagiaires-list');
+  if(!dossiers || dossiers.length === 0){
+    c.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted);"><div style="font-size:40px;margin-bottom:12px;">✅</div><p>Aucun dossier en attente d\'expert.</p></div>';
+    return;
+  }
+
+  var h = '';
+  dossiers.forEach(function(d){
+    var stag = d.stagiaire || {};
+    var form = d.formateur || {};
+    var dispName = d.dispositif;
+    var date = new Date(d.created_at).toLocaleDateString('fr-FR');
+    h += '<div class="dossier-card" style="border-left:3px solid #7c3aed;">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>🎓 ' + stag.prenom + ' ' + stag.nom + ' — ' + dispName + '</h4>' +
+      '<p>Formateur : ' + (form.full_name || form.email) + ' · ' + date + '</p>' +
+      (d.formation_title ? '<p style="font-size:12px;color:var(--muted);">📚 ' + d.formation_title + '</p>' : '') + '</div>' +
+      '<span class="status-badge status-review">Expert demandé</span></div>' +
+      '<div class="action-btns" style="margin-top:10px;">' +
+      '<button class="action-btn assign" onclick="takeFinDossier(\'' + d.id + '\')">🙋 Prendre en charge</button>' +
+      '<button class="action-btn" onclick="openFinMessages(\'' + d.id + '\')">💬 Messages</button>' +
+      '</div></div>';
+  });
+  c.innerHTML = h;
+}
+
+async function takeFinDossier(dossierId){
+  if(!confirm('Prendre en charge ce dossier de financement ?')) return;
+  await sb.from('dossiers_financement').update({ expert_id: expertId, status: 'en_preparation' }).eq('id', dossierId);
+  await sb.from('messages_financement').insert({
+    dossier_id: dossierId, sender_type: 'expert', sender_name: 'Expert',
+    content: '👋 Un expert a pris en charge la préparation de vos documents de financement.'
+  });
+  alert('✅ Dossier pris en charge !');
+  await loadPoolStagiaires();
+}
+
+function openFinMessages(dossierId){
+  openExpertMessages(dossierId, 'financement');
+}
 
 // ============================
 // EXPERT — MESSAGERIE

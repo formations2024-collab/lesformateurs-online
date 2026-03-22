@@ -196,3 +196,102 @@ sb.auth.onAuthStateChange(function(event, session) {
     updateAuthUI();
   }
 });
+
+// ====== FONT SIZE ACCESSIBILITY ======
+
+function setFontSize(size){
+  // Find the layout container
+  var layout = document.querySelector('.dash-layout') || document.querySelector('.admin-layout') || document.querySelector('.expert-layout');
+  if(!layout) layout = document.body;
+  
+  layout.classList.remove('fs-large', 'fs-xlarge');
+  if(size === 'large') layout.classList.add('fs-large');
+  if(size === 'xlarge') layout.classList.add('fs-xlarge');
+  
+  // Update active button
+  document.querySelectorAll('.fst-btn').forEach(function(b){ b.classList.remove('active'); });
+  var idx = size === 'normal' ? 0 : size === 'large' ? 1 : 2;
+  var btns = document.querySelectorAll('.fst-btn');
+  if(btns[idx]) btns[idx].classList.add('active');
+  
+  // Persist
+  try { localStorage.setItem('lfo-fontsize', size); } catch(e){}
+}
+
+// Restore on load
+(function(){
+  try {
+    var saved = localStorage.getItem('lfo-fontsize');
+    if(saved && saved !== 'normal') setFontSize(saved);
+  } catch(e){}
+})();
+
+// ====== REFERRAL TRACKING ======
+// Detects ?ref=CODE in URL and persists it for the entire session
+(function(){
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var ref = params.get('ref');
+    if(ref && ref.length > 3){
+      localStorage.setItem('lfo_referral', ref);
+      localStorage.setItem('lfo_referral_ts', Date.now().toString());
+    }
+    // Clean URL without reload (remove ref param)
+    if(ref && window.history.replaceState){
+      params.delete('ref');
+      var clean = window.location.pathname + (params.toString() ? '?' + params.toString() : '') + window.location.hash;
+      window.history.replaceState({}, '', clean);
+    }
+  } catch(e){}
+})();
+
+function getActiveReferral(){
+  try {
+    var code = localStorage.getItem('lfo_referral');
+    var ts = parseInt(localStorage.getItem('lfo_referral_ts') || '0');
+    // Referral valid for 30 days
+    if(code && ts && (Date.now() - ts) < 30 * 24 * 60 * 60 * 1000){
+      return code;
+    }
+    return null;
+  } catch(e){ return null; }
+}
+
+async function recordReferralCommission(buyerId, productType, productLabel, saleAmountCents){
+  var refCode = getActiveReferral();
+  if(!refCode) return null;
+  
+  try {
+    // Find the referrer by code
+    var { data: referrer } = await sb.from('profiles').select('id, is_premium').eq('referral_code', refCode).single();
+    if(!referrer || referrer.id === buyerId) return null; // Can't refer yourself
+    
+    var commissionCents = Math.round(saleAmountCents * 0.10);
+    var isRecurring = productType === 'premium_subscription';
+    
+    // Record in referrals table
+    var { data: ref } = await sb.from('referrals').insert({
+      referrer_id: referrer.id,
+      buyer_id: buyerId,
+      product_type: productType,
+      product_label: productLabel,
+      sale_amount_cents: saleAmountCents,
+      commission_cents: commissionCents,
+      is_recurring: isRecurring,
+      commission_status: 'pending'
+    }).select().single();
+    
+    // Record in achats table
+    await sb.from('achats').insert({
+      user_id: buyerId,
+      product_type: productType,
+      product_label: productLabel,
+      amount_cents: saleAmountCents,
+      referrer_id: referrer.id,
+      referral_code: refCode,
+      commission_cents: commissionCents
+    });
+    
+    return ref;
+  } catch(e){ console.log('Referral error:', e); return null; }
+}

@@ -90,7 +90,8 @@
   <a onclick="showTab('demarches')">📄 Démarches</a>
   <a onclick="showTab('of')">🏛 Mes OF</a>
   <a onclick="showTab('formation')">🎓 Formation</a>
-  <a onclick="showTab('messagerie')">💬 Messagerie</a>
+  <a onclick="showTab('financement')">💰 Financement</a>
+    <a onclick="showTab('messagerie')">💬 Messagerie</a>
   <a onclick="showTab('parrainage')">🎁 Parrainage</a>
   <a onclick="showTab('profil')">👤 Profil</a>
 </div>
@@ -101,6 +102,14 @@
       <div class="name" id="sidebar-name">Chargement...</div>
       <div class="email" id="sidebar-email">...</div>
     </div>
+    <div class="font-size-toggle" id="fontSizeToggle">
+      <span class="fst-label">Taille du texte</span>
+      <div class="fst-btns">
+        <button class="fst-btn active" onclick="setFontSize('normal')" title="Normal">A</button>
+        <button class="fst-btn" onclick="setFontSize('large')" title="Grand" style="font-size:16px;">A</button>
+        <button class="fst-btn" onclick="setFontSize('xlarge')" title="Très grand" style="font-size:19px;">A</button>
+      </div>
+    </div>
     <div class="sidebar-title">Mon espace</div>
     <a class="active" onclick="showTab('resume')">📊 Résumé</a>
     <a onclick="showTab('annonces')">📋 Mes annonces</a>
@@ -108,7 +117,9 @@
     <a onclick="showTab('demarches')">📄 Mes démarches</a>
     <a onclick="showTab('of')">🏛 Mes créations d'OF</a>
     <a onclick="showTab('formation')">🎓 Ma formation</a>
+    <a onclick="showTab('financement')">💰 Financement</a>
     <div class="sidebar-title" style="margin-top:24px;">Compte</div>
+    <a onclick="showTab('financement')">💰 Financement</a>
     <a onclick="showTab('messagerie')">💬 Messagerie</a>
     <a onclick="showTab('parrainage')">🎁 Parrainage (10%)</a>
     <a onclick="showTab('profil')">👤 Mon profil</a>
@@ -453,13 +464,118 @@
     </div>
 
     <!-- ========== MESSAGERIE ========== -->
+    <!-- ========== FINANCEMENT ========== -->
+    <div class="tab-content" id="tab-financement">
+      <!-- PREMIUM GATE -->
+      <div id="fin-premium-gate" style="display:none;position:relative;">
+        <div style="filter:blur(4px);pointer-events:none;opacity:.5;">
+          <h2 style="font-size:20px;font-weight:800;">💰 Gestion des financements</h2>
+          <p style="font-size:13px;color:var(--muted);">Créez des dossiers de financement pour vos stagiaires.</p>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;">
+            <div class="detail-card"><h4>OPCO</h4><p>2 100 à 4 150€/an</p></div>
+            <div class="detail-card"><h4>CPF</h4><p>5 000€</p></div>
+            <div class="detail-card"><h4>AIF</h4><p>8 000€</p></div>
+          </div>
+        </div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:10;">
+          <div style="background:#fff;border:2px solid var(--accent);border-radius:16px;padding:32px;max-width:480px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.12);">
+            <div style="font-size:48px;margin-bottom:12px;">👑</div>
+            <h3 style="font-size:20px;font-weight:800;margin-bottom:8px;">Devenez Premium</h3>
+            <p style="font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px;">Accélérez vos demandes de financement et profitez de <strong style="color:var(--accent);">10% de réduction</strong> sur tous les services du site.</p>
+            <div style="font-size:32px;font-weight:900;color:var(--accent);margin-bottom:16px;">69€<span style="font-size:14px;font-weight:400;color:var(--muted);">/mois</span></div>
+            <button class="btn btn-primary" onclick="souscrirePremium()" style="padding:14px 32px;font-size:16px;font-weight:700;width:100%;">👑 Souscrire Premium</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PREMIUM CONTENT -->
+      <div id="fin-premium-content" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+          <div>
+            <h2 style="font-size:20px;font-weight:800;">💰 Gestion des financements</h2>
+            <p style="font-size:13px;color:var(--muted);">Créez des dossiers pour vos stagiaires et suivez les demandes.</p>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-primary" onclick="openCreateFinDossier()" style="padding:8px 16px;font-size:13px;">+ Nouveau dossier</button>
+            <button class="action-btn" onclick="showFinSettings()">⚙️ Paramètres</button>
+          </div>
+        </div>
+
+        <!-- Sub-tabs -->
+        <div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;">
+          <button class="action-btn" id="fin-tab-dossiers" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="showFinSubTab('dossiers')">📂 Dossiers</button>
+          <button class="action-btn" id="fin-tab-stagiaires" onclick="showFinSubTab('stagiaires')">👥 Stagiaires</button>
+        </div>
+
+        <!-- Dossiers list -->
+        <div id="fin-sub-dossiers">
+          <div id="fin-dossiers-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
+        </div>
+
+        <!-- Stagiaires list -->
+        <div id="fin-sub-stagiaires" style="display:none;">
+          <div id="fin-stagiaires-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL CREATE DOSSIER FINANCEMENT -->
+    <div class="modal" id="modal-create-fin">
+      <div class="modal-box" style="max-width:560px;max-height:90vh;overflow-y:auto;">
+        <button class="modal-close" onclick="document.getElementById('modal-create-fin').classList.remove('open')">✕</button>
+        <h3 style="font-size:18px;font-weight:800;margin-bottom:16px;">💰 Nouveau dossier de financement</h3>
+        <div class="form-group"><label>Prénom du candidat</label><input type="text" id="fin-new-prenom" placeholder="Prénom"></div>
+        <div class="form-group"><label>Nom du candidat</label><input type="text" id="fin-new-nom" placeholder="Nom"></div>
+        <div class="form-group"><label>Email du candidat</label><input type="email" id="fin-new-email" placeholder="email@exemple.com"></div>
+        <div class="form-group"><label>Téléphone du candidat</label><input type="tel" id="fin-new-tel" placeholder="06 XX XX XX XX"></div>
+        <div class="form-group"><label>Intitulé de la formation</label><input type="text" id="fin-new-formation" placeholder="Ex: Formation Excel Avancé"></div>
+        <div class="form-group">
+          <label>Dispositif de financement</label>
+          <select id="fin-new-dispositif" onchange="updateFinDispDesc()">
+            <option value="">— Choisir —</option>
+            <option value="opco">OPCO (Plan de Développement) — Salariés</option>
+            <option value="fifpl_ind">FIFPL individuel — Prof. libérales</option>
+            <option value="fifpl_col">FIFPL collectif — Groupe</option>
+            <option value="cpf">CPF — Mon Compte Formation</option>
+            <option value="aif">France Travail AIF — Demandeurs d'emploi</option>
+            <option value="poei">POEI — Pré-embauche</option>
+            <option value="fne">FNE-Formation — Entreprises en mutation</option>
+            <option value="transition_pro">Transition Pro (PTP) — Reconversion</option>
+            <option value="agefice">AGEFICE — Dirigeants TNS</option>
+            <option value="fafcea">FAFCEA — Artisans</option>
+          </select>
+        </div>
+        <div id="fin-disp-info" style="display:none;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.15);border-radius:8px;padding:12px;margin-bottom:12px;font-size:13px;"></div>
+        <div id="fin-create-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;"></div>
+        <button class="btn btn-primary" onclick="createFinDossier()" style="padding:10px 24px;width:100%;">Créer le dossier et envoyer le lien</button>
+      </div>
+    </div>
+
+    <!-- MODAL FINANCEMENT SETTINGS -->
+    <div class="modal" id="modal-fin-settings">
+      <div class="modal-box" style="max-width:560px;max-height:90vh;overflow-y:auto;">
+        <button class="modal-close" onclick="document.getElementById('modal-fin-settings').classList.remove('open')">✕</button>
+        <h3 style="font-size:18px;font-weight:800;margin-bottom:16px;">⚙️ Paramètres Financement</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Ces documents seront réutilisés pour chaque dossier.</p>
+        <div class="form-group"><label>Convention de formation type</label><input type="file" id="fin-set-convention" accept=".pdf,.doc,.docx"></div>
+        <div class="form-group"><label>Programme pédagogique type</label><input type="file" id="fin-set-programme" accept=".pdf,.doc,.docx"></div>
+        <div class="form-group"><label>Devis type</label><input type="file" id="fin-set-devis" accept=".pdf,.doc,.docx"></div>
+        <div class="form-group"><label>KBIS</label><input type="file" id="fin-set-kbis" accept=".pdf,.jpg,.png"></div>
+        <div class="form-group"><label>RIB</label><input type="file" id="fin-set-rib" accept=".pdf,.jpg,.png"></div>
+        <h4 style="font-size:14px;font-weight:700;margin:16px 0 8px;">🔗 Liens CPF</h4>
+        <div class="form-group"><label>Lien Mon Compte Formation (votre page)</label><input type="url" id="fin-set-cpf-link" placeholder="https://www.moncompteformation.gouv.fr/..."></div>
+        <div id="fin-set-existing" style="margin-bottom:12px;"></div>
+        <button class="btn btn-primary" onclick="saveFinSettings()" style="padding:10px 24px;">💾 Enregistrer</button>
+      </div>
+    </div>
+
     <div class="tab-content" id="tab-messagerie">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">💬 Messagerie</h2>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Échangez avec l'équipe lesformateurs.online et vos experts.</p>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Vos discussions avec les experts et l'administration.</p>
 
-      <button class="btn btn-primary" style="margin-bottom:16px;padding:8px 16px;font-size:13px;" onclick="openUserCompose()">✉️ Nouveau message</button>
+      <button class="btn btn-primary" style="margin-bottom:20px;padding:8px 16px;font-size:13px;" onclick="openUserCompose()">✉️ Contacter l'administration</button>
 
-      <div id="user-msg-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
+      <div id="user-msg-threads"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
 
     <!-- MODAL COMPOSE (user) -->
@@ -491,10 +607,10 @@
     <!-- ========== PARRAINAGE ========== -->
     <div class="tab-content" id="tab-parrainage">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">🎁 Programme de parrainage</h2>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Partagez vos liens et gagnez <strong style="color:var(--accent);">10% de commission</strong> sur chaque vente.</p>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Partagez votre lien unique et gagnez <strong style="color:var(--accent);">10% de commission</strong> sur chaque vente.</p>
 
-      <!-- STATS PARRAINAGE -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:32px;">
+      <!-- STATS -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:24px;">
         <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">
           <div style="font-size:24px;font-weight:900;color:var(--success);" id="ref-gains-total">0€</div>
           <div style="font-size:11px;color:var(--muted);">Gains totaux</div>
@@ -509,212 +625,70 @@
         </div>
       </div>
 
-      <div style="background:linear-gradient(135deg,var(--primary),#0f3460);border-radius:12px;padding:24px;color:#fff;margin-bottom:24px;">
-        <h3 style="font-size:16px;font-weight:800;margin-bottom:8px;">💰 Comment ça marche ?</h3>
-        <div style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.6;">
-          1. Copiez un lien de parrainage ci-dessous<br>
-          2. Envoyez-le à un collègue ou un contact<br>
-          3. Quand il paye, vous touchez <strong>10% de commission</strong> automatiquement<br>
-          4. Vos gains sont versés chaque mois sur votre compte
+      <!-- LIEN UNIQUE -->
+      <div style="background:linear-gradient(135deg,var(--primary),#0f3460);border-radius:14px;padding:28px;color:#fff;margin-bottom:24px;">
+        <h3 style="font-size:18px;font-weight:800;margin-bottom:12px;">🔗 Votre lien unique de parrainage</h3>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <input type="text" id="ref-unique-link" readonly value="https://lesformateurs.online/?ref=CODE" style="flex:1;min-width:250px;padding:14px;border-radius:10px;border:none;font-size:14px;font-family:monospace;background:rgba(255,255,255,.95);color:var(--primary);">
+          <button onclick="copyRefLink()" style="padding:14px 24px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:14px;cursor:pointer;white-space:nowrap;">📋 Copier</button>
+        </div>
+        <div style="margin-top:16px;font-size:13px;color:rgba(255,255,255,.8);line-height:1.7;">
+          <strong>Comment ça fonctionne :</strong><br>
+          1. Partagez ce lien unique à vos contacts<br>
+          2. Quand quelqu'un clique, <strong>le site détecte automatiquement votre lien</strong> et l'associe à sa navigation<br>
+          3. Le lien reste actif <strong>pendant 30 jours</strong> — toutes les commandes de votre filleul vous rapportent 10%<br>
+          4. Pas besoin de code promo — la détection est automatique et transparente<br>
+          5. Si votre filleul prend l'abonnement Premium (69€/mois), <strong>vous touchez 6,90€ chaque mois</strong>
         </div>
       </div>
 
-      <!-- LIENS DE PARRAINAGE -->
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">🔗 Vos liens de parrainage</h3>
-
-      <div style="margin-bottom:24px;">
-        <h4 style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">📄 Conformité</h4>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>NDA — 199€</strong>
-            <span class="ref-commission">→ 19,90€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/conformite.html?ref=CODE&p=nda" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>UAI — 149€</strong>
-            <span class="ref-commission">→ 14,90€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/conformite.html?ref=CODE&p=uai" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>Qualiopi — 490€</strong>
-            <span class="ref-commission">→ 49€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/conformite.html?ref=CODE&p=qualiopi" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>EDOF — 290€</strong>
-            <span class="ref-commission">→ 29€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/conformite.html?ref=CODE&p=edof" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>France Travail — 129€</strong>
-            <span class="ref-commission">→ 12,90€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/conformite.html?ref=CODE&p=ft" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>RS/RNCP — 390€</strong>
-            <span class="ref-commission">→ 39€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/conformite.html?ref=CODE&p=rs" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>OPCO (par OPCO) — 290€</strong>
-            <span class="ref-commission">→ 29€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/conformite.html?ref=CODE&p=opco" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>Agent IA (à partir de) — 399€</strong>
-            <span class="ref-commission">→ 39,90€+ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/conformite.html?ref=CODE&p=agent" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
+      <!-- TABLEAU DES COMMISSIONS -->
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">💰 Tableau des commissions (10%)</h3>
+      <div style="overflow-x:auto;margin-bottom:24px;">
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <thead>
+            <tr style="background:var(--light);"><th style="text-align:left;padding:10px 14px;font-weight:700;">Service</th><th style="text-align:right;padding:10px 14px;font-weight:700;">Prix</th><th style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">Votre commission</th></tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">📄 NDA</td><td style="text-align:right;padding:10px 14px;">199€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">19,90€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">📄 UAI</td><td style="text-align:right;padding:10px 14px;">149€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">14,90€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">✦ Qualiopi</td><td style="text-align:right;padding:10px 14px;">490€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">49€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">€ EDOF</td><td style="text-align:right;padding:10px 14px;">290€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">29€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">🏛 France Travail</td><td style="text-align:right;padding:10px 14px;">129€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">12,90€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">📋 RS/RNCP</td><td style="text-align:right;padding:10px 14px;">390€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">39€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">🔗 OPCO unitaire</td><td style="text-align:right;padding:10px 14px;">290€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">29€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">📦 Pack 11 OPCO</td><td style="text-align:right;padding:10px 14px;">2 990€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">299€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">🏛 OF Action</td><td style="text-align:right;padding:10px 14px;">990€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">99€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">🎓 CFA</td><td style="text-align:right;padding:10px 14px;">2 990€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">299€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">📝 Bilan / VAE</td><td style="text-align:right;padding:10px 14px;">990€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">99€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">🏛 Élus CSE</td><td style="text-align:right;padding:10px 14px;">1 490€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">149€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">🤖 OF Agents IA</td><td style="text-align:right;padding:10px 14px;">2 790€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">279€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">🎓 Formation Pro</td><td style="text-align:right;padding:10px 14px;">1 490€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">149€</td></tr>
+            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">⭐ Annonce Premium</td><td style="text-align:right;padding:10px 14px;">29€</td><td style="text-align:right;padding:10px 14px;font-weight:700;color:var(--success);">2,90€</td></tr>
+            <tr style="background:rgba(124,58,237,.06);"><td style="padding:10px 14px;font-weight:700;">👑 Abonnement Premium</td><td style="text-align:right;padding:10px 14px;font-weight:700;">69€/mois</td><td style="text-align:right;padding:10px 14px;font-weight:800;color:#7c3aed;">6,90€/mois récurrent</td></tr>
+          </tbody>
+        </table>
       </div>
-
-      <div style="margin-bottom:24px;">
-        <h4 style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🏛 Créer un OF</h4>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>Action de formation — 990€</strong>
-            <span class="ref-commission">→ 99€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/creer-of.html?ref=CODE&p=of-action" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>CFA — 2 990€</strong>
-            <span class="ref-commission">→ 299€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/creer-of.html?ref=CODE&p=of-cfa" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>Bilan de compétences — 990€</strong>
-            <span class="ref-commission">→ 99€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/creer-of.html?ref=CODE&p=of-bilan" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>VAE — 990€</strong>
-            <span class="ref-commission">→ 99€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/creer-of.html?ref=CODE&p=of-vae" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>Formation des élus — 1 490€</strong>
-            <span class="ref-commission">→ 149€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/creer-of.html?ref=CODE&p=of-elus" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>OF agents IA — 2 790€</strong>
-            <span class="ref-commission">→ 279€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/creer-of.html?ref=CODE&p=of-ia" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-bottom:24px;">
-        <h4 style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🎓 Se former</h4>
-
-        <div class="ref-link-item">
-          <div class="ref-link-info">
-            <strong>Formation Formateur Pro — 1 490€</strong>
-            <span class="ref-commission">→ 149€ pour vous</span>
-          </div>
-          <div class="ref-link-actions">
-            <input type="text" readonly value="https://lesformateurs.online/se-former.html?ref=CODE&p=formation" class="ref-link-input">
-            <button class="action-btn" onclick="copyLink(this)">📋 Copier</button>
-          </div>
-        </div>
+      <div style="background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.15);border-radius:10px;padding:14px;margin-bottom:24px;font-size:13px;">
+        <strong style="color:#7c3aed;">💡 Si votre filleul est membre Premium :</strong> les commissions sont calculées sur le prix après réduction (-10%). Exemple : NDA à 179,10€ → votre commission = 17,91€. Mais si le filleul souscrit au Premium, vous touchez <strong>6,90€ chaque mois</strong> tant qu'il reste abonné.
       </div>
 
       <!-- HISTORIQUE COMMISSIONS -->
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">📊 Historique des commissions</h3>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">📊 Historique des commissions</h3>
       <div id="ref-history-list">
         <div style="text-align:center;padding:30px 0;color:var(--muted);">
-          <p style="font-size:13px;">Aucune commission pour le moment. Partagez vos liens pour commencer !</p>
+          <p style="font-size:13px;">Aucune commission pour le moment. Partagez votre lien pour commencer !</p>
         </div>
       </div>
 
+      <!-- VERSEMENT -->
       <div style="background:var(--light);border-radius:10px;padding:16px;margin-top:20px;">
         <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">💳 Versement des commissions</h4>
-        <p style="font-size:12px;color:var(--muted);">Les commissions sont versées le 1er de chaque mois par virement bancaire. Minimum de versement : 50€.</p>
-        <div style="margin-top:10px;">
-          <div class="form-group"><label>IBAN pour les versements</label><input type="text" id="profil-iban" placeholder="FR76 XXXX XXXX XXXX XXXX XXXX XXX"></div>
-          <div id="iban-success" style="display:none;color:#10b981;font-size:12px;margin-bottom:8px;">✅ IBAN mis à jour !</div>
-          <button class="action-btn" onclick="saveIban()">💾 Mettre à jour mon IBAN</button>
-        </div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Les commissions sont versées le 1er de chaque mois par virement bancaire. Minimum de versement : 50€.</p>
+        <div class="form-group"><label>Nom sur le RIB</label><input type="text" id="profil-iban-name" placeholder="Prénom NOM ou Raison sociale"></div>
+        <div class="form-group"><label>IBAN</label><input type="text" id="profil-iban" placeholder="FR76 XXXX XXXX XXXX XXXX XXXX XXX"></div>
+        <div id="iban-success" style="display:none;color:#10b981;font-size:12px;margin-bottom:8px;">✅ Informations bancaires enregistrées !</div>
+        <button class="action-btn" onclick="saveIban()">💾 Enregistrer</button>
       </div>
     </div>
 
@@ -1139,33 +1113,23 @@ async function republierAnnonce(id){
 async function passerPremium(annonceId, btn){
   if(!confirm('Passer cette annonce en Premium pour 29€ ?\n\nVotre annonce sera mise en avant dans les résultats.')) return;
   
-  // Open Stripe payment
+  var user = await getUser();
+  if(!user){ openAuthModal(); return; }
+  
+  // Save pending order in localStorage (same flow as conformité/OF)
+  localStorage.setItem('lfo_pending_order', JSON.stringify({
+    type: 'premium',
+    table: 'annonces',
+    order_id: annonceId,
+    amount: 29,
+    amount_cents: 2900,
+    user_id: user.id,
+    product_type: 'annonce_premium'
+  }));
+  
+  // Redirect to Stripe
   var stripeUrl = 'https://buy.stripe.com/9B67sL4jg0YJ8Um0JQffy1v';
-  window.open(stripeUrl, '_blank');
-  
-  // Mark as premium in DB (optimistic — in production, use Stripe webhook)
-  if(btn){
-    btn.textContent = '⏳ En attente de paiement...';
-    btn.disabled = true;
-  }
-  
-  // Wait a moment then ask if payment was completed
-  setTimeout(async function(){
-    if(confirm('Avez-vous finalisé le paiement sur Stripe ?')){
-      var { error } = await sb.from('annonces').update({ is_premium: true }).eq('id', annonceId);
-      if(error){
-        alert('❌ Erreur : ' + error.message);
-        if(btn){ btn.textContent = '⭐ Passer en Premium (29€)'; btn.disabled = false; }
-        return;
-      }
-      alert('✅ Annonce passée en Premium ! Elle sera mise en avant.');
-      // Reload annonces
-      var user = await getUser();
-      if(user) loadMesAnnonces(user.id);
-    } else {
-      if(btn){ btn.textContent = '⭐ Passer en Premium (29€)'; btn.disabled = false; }
-    }
-  }, 3000);
+  window.location.href = stripeUrl;
 }
 
 // === VOIR COORDONNEES ===
@@ -1444,12 +1408,6 @@ async function confirmLogout(){
       var proBtn = document.getElementById('sidebar-pro-btn');
       if(proBtn) proBtn.style.display = '';
     }
-    // Update referral links with real code
-    if(profile.referral_code){
-      document.querySelectorAll('.ref-link-input').forEach(function(input){
-        input.value = input.value.replace('ref=CODE', 'ref=' + profile.referral_code);
-      });
-    }
   }
   // Load user's annonces from Supabase
   await loadMesAnnonces(user.id);
@@ -1464,6 +1422,8 @@ async function confirmLogout(){
   await loadReferralData(user.id);
   // Load messages
   await loadUserMessages(user.id);
+  // Load financement
+  await loadFinancement(user.id, profile);
   
   // Check formation status and update summary + tab
   updateFormationProgress(profile);
@@ -2121,16 +2081,21 @@ async function openMessageModal(contextId, contextType){
   var html = '';
   msgs.forEach(function(m){
     var isMe = m.sender_id === user.id;
-    var senderName = isMe ? 'Vous' : (m.profiles ? (m.profiles.full_name || m.profiles.first_name || 'Expert') : 'Expert');
+    var isExpert = m.profiles && m.profiles.is_pro;
+    // In dashboard: user's messages on right, expert's on left
+    var senderName = isMe ? 'Vous' : (isExpert ? '👨‍💼 Expert' : (m.profiles ? (m.profiles.full_name || m.profiles.first_name || 'Interlocuteur') : 'Interlocuteur'));
     var date = new Date(m.created_at).toLocaleString('fr-FR', {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
     var align = isMe ? 'flex-end' : 'flex-start';
-    var bg = isMe ? 'rgba(233,69,96,.08)' : 'var(--light)';
-    var border = isMe ? 'rgba(233,69,96,.15)' : 'var(--border)';
+    var bg = isMe ? 'rgba(233,69,96,.08)' : 'rgba(99,102,241,.08)';
+    var border = isMe ? 'rgba(233,69,96,.15)' : 'rgba(99,102,241,.15)';
+    // System messages (doc accept/reject/step) get special styling
+    var isSystem = m.content.startsWith('✅ Document') || m.content.startsWith('❌ Document') || m.content.startsWith('📋') || m.content.startsWith('↩️') || m.content.startsWith('⏭') || m.content.startsWith('👋');
+    if(isSystem){ bg = 'rgba(124,58,237,.06)'; border = 'rgba(124,58,237,.12)'; }
 
     html += '<div style="display:flex;justify-content:' + align + ';margin-bottom:8px;">' +
       '<div style="max-width:80%;background:' + bg + ';border:1px solid ' + border + ';border-radius:10px;padding:10px 14px;">' +
       '<div style="font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;">' + senderName + ' · ' + date + '</div>' +
-      '<p style="font-size:13px;margin:0;">' + m.content + '</p>' +
+      '<p style="font-size:13px;margin:0;white-space:pre-wrap;">' + m.content + '</p>' +
       '</div></div>';
   });
   container.innerHTML = html;
@@ -2166,12 +2131,21 @@ async function sendMessage(){
 
 async function saveIban(){
   var iban = document.getElementById('profil-iban').value.trim();
+  var ibanName = document.getElementById('profil-iban-name').value.trim();
   if(!iban){ alert('⚠️ Veuillez saisir un IBAN.'); return; }
+  if(!ibanName){ alert('⚠️ Veuillez saisir le nom sur le RIB.'); return; }
   var user = await getUser();
-  var { error } = await sb.from('profiles').update({ iban: iban }).eq('id', user.id);
+  var { error } = await sb.from('profiles').update({ iban: iban, iban_name: ibanName }).eq('id', user.id);
   if(error){ alert('❌ Erreur : ' + error.message); return; }
   document.getElementById('iban-success').style.display = '';
   setTimeout(function(){ document.getElementById('iban-success').style.display = 'none'; }, 3000);
+}
+
+function copyRefLink(){
+  var input = document.getElementById('ref-unique-link');
+  input.select();
+  try { navigator.clipboard.writeText(input.value); } catch(e){ document.execCommand('copy'); }
+  alert('✅ Lien copié !');
 }
 
 // ============================
@@ -2183,47 +2157,54 @@ async function loadReferralData(userId){
     var { data: refs } = await sb.from('referrals').select('*').eq('referrer_id', userId).order('created_at',{ascending:false});
     if(!refs) refs = [];
 
-    var totalGains = 0, pendingGains = 0, filleuls = refs.length;
+    var totalGains = 0, pendingGains = 0;
+    var buyerIds = new Set();
     refs.forEach(function(r){
       var amount = (r.commission_cents || 0) / 100;
       totalGains += amount;
       if(r.commission_status === 'pending' || r.commission_status === 'confirmed') pendingGains += amount;
+      if(r.buyer_id) buyerIds.add(r.buyer_id);
     });
 
-    document.getElementById('ref-gains-total').textContent = totalGains + '€';
-    document.getElementById('ref-gains-pending').textContent = pendingGains + '€';
-    document.getElementById('ref-filleuls').textContent = filleuls;
+    document.getElementById('ref-gains-total').textContent = totalGains.toFixed(2) + '€';
+    document.getElementById('ref-gains-pending').textContent = pendingGains.toFixed(2) + '€';
+    document.getElementById('ref-filleuls').textContent = buyerIds.size;
+
+    // Update unique link
+    var profile = await getProfile();
+    if(profile && profile.referral_code){
+      document.getElementById('ref-unique-link').value = 'https://lesformateurs.online/?ref=' + profile.referral_code;
+    }
+
+    // Load IBAN
+    if(profile){
+      if(profile.iban) document.getElementById('profil-iban').value = profile.iban;
+      if(profile.iban_name) document.getElementById('profil-iban-name').value = profile.iban_name;
+    }
 
     // History
     var histList = document.getElementById('ref-history-list');
     if(refs.length === 0){
-      histList.innerHTML = '<div style="text-align:center;padding:30px 0;color:var(--muted);"><p style="font-size:13px;">Aucune commission pour le moment. Partagez vos liens pour commencer !</p></div>';
+      histList.innerHTML = '<div style="text-align:center;padding:30px 0;color:var(--muted);"><p style="font-size:13px;">Aucune commission pour le moment. Partagez votre lien pour commencer !</p></div>';
     } else {
       var html = '';
       refs.forEach(function(r){
         var amount = (r.commission_cents || 0) / 100;
         var date = new Date(r.created_at).toLocaleDateString('fr-FR');
         var stCls = r.commission_status === 'paid' ? 'status-done' : 'status-progress';
-        var stTxt = r.commission_status === 'paid' ? 'Versé' : 'En attente';
+        var stTxt = r.commission_status === 'paid' ? 'Versé' : r.commission_status === 'confirmed' ? 'Confirmé' : 'En attente';
         var borderCol = r.commission_status === 'paid' ? 'var(--success)' : 'rgba(200,169,110,.3)';
         var amountCol = r.commission_status === 'paid' ? 'var(--success)' : '#b8860b';
+        var recurring = r.is_recurring ? ' <span style="font-size:10px;color:#7c3aed;font-weight:600;">🔄 Récurrent</span>' : '';
         html += '<div class="detail-card" style="border-left:3px solid '+borderCol+';">' +
           '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
-          '<div><h4>Commission parrainage</h4><p>Via votre lien · '+date+'</p></div>' +
-          '<div style="text-align:right;"><div style="font-size:18px;font-weight:800;color:'+amountCol+';">+'+amount+'€</div>' +
+          '<div><h4>' + (r.product_label || r.product_type || 'Achat') + recurring + '</h4><p style="font-size:12px;color:var(--muted);">' + date + ' · Montant vente : ' + ((r.sale_amount_cents||0)/100) + '€</p></div>' +
+          '<div style="text-align:right;"><div style="font-size:18px;font-weight:800;color:'+amountCol+';">+'+amount.toFixed(2)+'€</div>' +
           '<span class="status-badge '+stCls+'">'+stTxt+'</span></div></div></div>';
       });
       histList.innerHTML = html;
     }
   } catch(e){ console.log('Referral load error:', e); }
-
-  // Load IBAN
-  try {
-    var profile = await getProfile();
-    if(profile && profile.iban){
-      document.getElementById('profil-iban').value = profile.iban;
-    }
-  } catch(e){}
 }
 
 // ============================
@@ -2235,32 +2216,103 @@ var currentUserId = null;
 
 async function loadUserMessages(userId){
   currentUserId = userId;
-  var { data: msgs } = await sb.from('admin_messages')
+  var container = document.getElementById('user-msg-threads');
+  var html = '';
+
+  // 1. Load dossier threads (demarches with expert assigned)
+  var { data: dems } = await sb.from('demarches')
+    .select('id, type, expert_id, status, current_step, created_at')
+    .eq('user_id', userId)
+    .not('expert_id', 'is', null)
+    .order('created_at',{ascending:false});
+
+  var { data: ofs } = await sb.from('creations_of')
+    .select('id, of_type, expert_id, status, current_step, created_at')
+    .eq('user_id', userId)
+    .not('expert_id', 'is', null)
+    .order('created_at',{ascending:false});
+
+  // Get message counts per dossier
+  var allDossierIds = [];
+  (dems||[]).forEach(function(d){ allDossierIds.push(d.id); });
+  (ofs||[]).forEach(function(c){ allDossierIds.push(c.id); });
+
+  var msgCounts = {};
+  var unreadCounts = {};
+  if(allDossierIds.length > 0){
+    // Load from messages table for demarches
+    var demIds = (dems||[]).map(function(d){ return d.id; });
+    if(demIds.length > 0){
+      var { data: demMsgs } = await sb.from('messages').select('id, demarche_id, is_read, sender_id').in('demarche_id', demIds);
+      if(demMsgs) demMsgs.forEach(function(m){
+        msgCounts[m.demarche_id] = (msgCounts[m.demarche_id]||0) + 1;
+        if(!m.is_read && m.sender_id !== userId) unreadCounts[m.demarche_id] = (unreadCounts[m.demarche_id]||0) + 1;
+      });
+    }
+    var ofIds = (ofs||[]).map(function(c){ return c.id; });
+    if(ofIds.length > 0){
+      var { data: ofMsgs } = await sb.from('messages').select('id, creation_of_id, is_read, sender_id').in('creation_of_id', ofIds);
+      if(ofMsgs) ofMsgs.forEach(function(m){
+        msgCounts[m.creation_of_id] = (msgCounts[m.creation_of_id]||0) + 1;
+        if(!m.is_read && m.sender_id !== userId) unreadCounts[m.creation_of_id] = (unreadCounts[m.creation_of_id]||0) + 1;
+      });
+    }
+  }
+
+  // Render dossier threads
+  var threads = [];
+  (dems||[]).forEach(function(d){
+    var label = demarcheTypeLabels[d.type] || d.type;
+    var isDone = d.status === 'termine';
+    threads.push({ id: d.id, source: 'demarche', label: '📄 ' + label, isDone: isDone, msgs: msgCounts[d.id]||0, unread: unreadCounts[d.id]||0, date: d.created_at });
+  });
+  (ofs||[]).forEach(function(c){
+    var label = ofTypeLabels[c.of_type] || c.of_type;
+    var isDone = c.status === 'termine';
+    threads.push({ id: c.id, source: 'creation', label: '🏛 ' + label, isDone: isDone, msgs: msgCounts[c.id]||0, unread: unreadCounts[c.id]||0, date: c.created_at });
+  });
+
+  if(threads.length > 0){
+    html += '<h3 style="font-size:15px;font-weight:700;margin-bottom:12px;">📂 Discussions dossiers</h3>';
+    threads.forEach(function(t){
+      var unreadBadge = t.unread > 0 ? ' <span style="background:var(--accent);color:#fff;font-size:10px;padding:2px 7px;border-radius:8px;">' + t.unread + '</span>' : '';
+      var statusTag = t.isDone ? '<span style="font-size:11px;color:var(--success);font-weight:600;">🔒 Close</span>' : '<span style="font-size:11px;color:var(--accent);font-weight:600;">En cours</span>';
+      html += '<div class="detail-card" style="cursor:pointer;' + (t.unread > 0 ? 'border-left:3px solid var(--accent);background:#fef0f3;' : '') + '" onclick="openMessageModal(\'' + t.id + '\',\'' + t.source + '\')">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">' +
+        '<div><h4 style="font-size:14px;">' + t.label + unreadBadge + '</h4>' +
+        '<p style="font-size:12px;color:var(--muted);">' + t.msgs + ' message' + (t.msgs>1?'s':'') + '</p></div>' +
+        statusTag + '</div></div>';
+    });
+  }
+
+  // 2. Load admin messages
+  var { data: adminMsgs } = await sb.from('admin_messages')
     .select('*, sender:sender_id(full_name, email), recipient:recipient_id(full_name, email)')
     .or('sender_id.eq.' + userId + ',recipient_id.eq.' + userId)
     .order('created_at',{ascending:false});
-  userMessages = msgs || [];
+  userMessages = adminMsgs || [];
 
-  var container = document.getElementById('user-msg-list');
-  if(userMessages.length === 0){
-    container.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucun message. Contactez-nous si vous avez une question !</p>';
-    return;
+  if(userMessages.length > 0){
+    html += '<h3 style="font-size:15px;font-weight:700;margin:24px 0 12px;">✉️ Messages administration</h3>';
+    userMessages.forEach(function(m){
+      var isReceived = m.recipient_id === userId;
+      var otherName = isReceived ? (m.sender ? m.sender.full_name || m.sender.email : 'Équipe LFO') : (m.recipient ? m.recipient.full_name || m.recipient.email : 'Équipe LFO');
+      var date = new Date(m.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+      var unread = isReceived && !m.is_read;
+
+      html += '<div class="detail-card" style="cursor:pointer;' + (unread ? 'border-left:3px solid var(--accent);background:#fef0f3;' : '') + '" onclick="openUserMsgDetail(\'' + m.id + '\')">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+        '<div><h4 style="font-size:14px;">' + (isReceived ? '📩 De : ' : '📤 À : ') + otherName + (unread ? ' <span style="background:var(--accent);color:#fff;font-size:10px;padding:1px 6px;border-radius:8px;">Nouveau</span>' : '') + '</h4>' +
+        '<p style="font-size:13px;">' + (m.subject || 'Sans objet') + '</p></div>' +
+        '<span style="font-size:11px;color:var(--muted);">' + date + '</span></div>' +
+        '<p style="font-size:12px;color:var(--muted);margin-top:4px;">' + (m.content || '').substring(0, 80) + '...</p></div>';
+    });
   }
 
-  var html = '';
-  userMessages.forEach(function(m){
-    var isReceived = m.recipient_id === userId;
-    var otherName = isReceived ? (m.sender ? m.sender.full_name || m.sender.email : 'Équipe LFO') : (m.recipient ? m.recipient.full_name || m.recipient.email : 'Équipe LFO');
-    var date = new Date(m.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
-    var unread = isReceived && !m.is_read;
+  if(!html){
+    html = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucune discussion. Les conversations s\'ouvrent automatiquement quand un expert prend en charge votre dossier.</p>';
+  }
 
-    html += '<div class="detail-card" style="cursor:pointer;' + (unread ? 'border-left:3px solid var(--accent);background:#fef0f3;' : '') + '" onclick="openUserMsgDetail(\'' + m.id + '\')">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
-      '<div><h4 style="font-size:14px;">' + (isReceived ? '📩 De : ' : '📤 À : ') + otherName + (unread ? ' <span style="background:var(--accent);color:#fff;font-size:10px;padding:1px 6px;border-radius:8px;">Nouveau</span>' : '') + '</h4>' +
-      '<p style="font-size:13px;">' + (m.subject || 'Sans objet') + '</p></div>' +
-      '<span style="font-size:11px;color:var(--muted);">' + date + '</span></div>' +
-      '<p style="font-size:12px;color:var(--muted);margin-top:4px;">' + (m.content || '').substring(0, 80) + '...</p></div>';
-  });
   container.innerHTML = html;
 }
 
@@ -2333,6 +2385,296 @@ async function sendUserCompose(){
   document.getElementById('modal-user-compose').dataset.replyTo = '';
   alert('✅ Message envoyé !');
   await loadUserMessages(currentUserId);
+}
+
+// ============================
+// FINANCEMENT — Module Premium
+// ============================
+
+var FIN_DISPOSITIFS = {
+  opco:{name:'OPCO (Plan de Développement)',plafond:'2 100 à 4 150€/an',desc:'Financement OPCO pour salariés d\'entreprises <50 sal.'},
+  fifpl_ind:{name:'FIFPL individuel',plafond:'600 à 900€/an',desc:'Professions libérales.'},
+  fifpl_col:{name:'FIFPL collectif',plafond:'Idem par stagiaire',desc:'Convention collective FIFPL pour un groupe.'},
+  cpf:{name:'CPF',plafond:'5 000€ cumulés',desc:'Compte Personnel de Formation. Reste à charge 102,23€.'},
+  aif:{name:'France Travail AIF',plafond:'Jusqu\'à 8 000€',desc:'Demandeurs d\'emploi inscrits.'},
+  poei:{name:'POEI',plafond:'Jusqu\'à 400h',desc:'Pré-embauche avec promesse d\'embauche.'},
+  fne:{name:'FNE-Formation',plafond:'Jusqu\'à 100%',desc:'Entreprises en mutation/difficulté.'},
+  transition_pro:{name:'Transition Pro (PTP)',plafond:'Variable',desc:'Reconversion professionnelle.'},
+  agefice:{name:'AGEFICE',plafond:'3 000€/an',desc:'Dirigeants TNS commerce/industrie.'},
+  fafcea:{name:'FAFCEA',plafond:'Jusqu\'à 7 500€',desc:'Artisans inscrits au RM.'}
+};
+
+async function loadFinancement(userId, profile){
+  var gate = document.getElementById('fin-premium-gate');
+  var content = document.getElementById('fin-premium-content');
+  if(!profile || !profile.is_premium){
+    gate.style.display = '';
+    content.style.display = 'none';
+    return;
+  }
+  gate.style.display = 'none';
+  content.style.display = '';
+  await loadFinDossiers(userId);
+  await loadFinStagiaires(userId);
+}
+
+function showFinSubTab(tab){
+  document.getElementById('fin-sub-dossiers').style.display = tab === 'dossiers' ? '' : 'none';
+  document.getElementById('fin-sub-stagiaires').style.display = tab === 'stagiaires' ? '' : 'none';
+  document.getElementById('fin-tab-dossiers').style.background = tab === 'dossiers' ? 'var(--accent)' : '';
+  document.getElementById('fin-tab-dossiers').style.color = tab === 'dossiers' ? '#fff' : '';
+  document.getElementById('fin-tab-stagiaires').style.background = tab === 'stagiaires' ? 'var(--accent)' : '';
+  document.getElementById('fin-tab-stagiaires').style.color = tab === 'stagiaires' ? '#fff' : '';
+}
+
+async function loadFinDossiers(userId){
+  var { data: dossiers } = await sb.from('dossiers_financement')
+    .select('*, stagiaire:stagiaire_id(nom, prenom, email, telephone)')
+    .eq('user_id', userId)
+    .order('created_at',{ascending:false});
+
+  var c = document.getElementById('fin-dossiers-list');
+  if(!dossiers || dossiers.length === 0){
+    c.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted);"><div style="font-size:40px;margin-bottom:12px;">💰</div><p>Aucun dossier de financement.</p><p style="font-size:13px;">Cliquez sur "+ Nouveau dossier" pour commencer.</p></div>';
+    return;
+  }
+
+  var h = '';
+  dossiers.forEach(function(d){
+    var disp = FIN_DISPOSITIFS[d.dispositif] || {};
+    var stag = d.stagiaire || {};
+    var statusMap = {en_attente_candidat:{t:'En attente candidat',c:'status-new'},docs_recus:{t:'Docs reçus',c:'status-progress'},verification:{t:'Vérification',c:'status-progress'},en_preparation:{t:'En préparation',c:'status-progress'},en_attente_expert:{t:'Expert',c:'status-review'},soumis:{t:'Soumis',c:'status-progress'},termine:{t:'Terminé',c:'status-done'}};
+    var st = statusMap[d.status] || statusMap.en_attente_candidat;
+    var date = new Date(d.created_at).toLocaleDateString('fr-FR');
+    var link = window.location.origin + '/financement.html?token=' + (d.stagiaire ? '' : '');
+
+    h += '<div class="detail-card">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>' + (disp.name || d.dispositif) + '</h4>' +
+      '<p>' + stag.prenom + ' ' + stag.nom + ' · ' + stag.email + '</p>' +
+      (d.formation_title ? '<p style="font-size:12px;color:var(--muted);">📚 ' + d.formation_title + '</p>' : '') + '</div>' +
+      '<div style="text-align:right;"><span class="status-badge ' + st.c + '">' + st.t + '</span>' +
+      '<div style="font-size:11px;color:var(--muted);margin-top:4px;">' + date + '</div>' +
+      '<div style="font-size:12px;font-weight:700;color:var(--accent);margin-top:2px;">Max: ' + (disp.plafond || '—') + '</div></div></div>' +
+      '<div class="action-btns" style="margin-top:10px;">';
+
+    if(d.status === 'en_attente_candidat'){
+      h += '<button class="action-btn" onclick="copyFinLink(\'' + d.stagiaire_id + '\')">🔗 Copier le lien candidat</button>';
+      h += '<button class="action-btn" onclick="resendFinLink(\'' + d.id + '\')">📧 Renvoyer par email</button>';
+    }
+    if(d.status === 'docs_recus'){
+      h += '<button class="action-btn validate" onclick="reviewFinDossier(\'' + d.id + '\')">📋 Vérifier les documents</button>';
+    }
+    if(d.status === 'verification' || d.status === 'en_preparation'){
+      h += '<button class="action-btn" onclick="prepareFinDocs(\'' + d.id + '\')">📤 Fournir mes documents</button>';
+      h += '<button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;" onclick="requestFinExpert(\'' + d.id + '\')">👨‍💼 Demander à un expert</button>';
+    }
+    if(d.status !== 'termine'){
+      h += '<button class="action-btn" onclick="openFinMessages(\'' + d.id + '\')">💬 Messages</button>';
+    }
+    h += '</div></div>';
+  });
+  c.innerHTML = h;
+}
+
+async function loadFinStagiaires(userId){
+  var { data: stags } = await sb.from('stagiaires')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at',{ascending:false});
+
+  var c = document.getElementById('fin-stagiaires-list');
+  if(!stags || stags.length === 0){
+    c.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucun stagiaire enregistré.</p>';
+    return;
+  }
+  var h = '';
+  stags.forEach(function(s){
+    var date = new Date(s.created_at).toLocaleDateString('fr-FR');
+    h += '<div class="detail-card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>' + s.prenom + ' ' + s.nom + '</h4><p>📧 ' + s.email + (s.telephone ? ' · 📞 ' + s.telephone : '') + '</p></div>' +
+      '<span style="font-size:11px;color:var(--muted);">Ajouté le ' + date + '</span></div></div>';
+  });
+  c.innerHTML = h;
+}
+
+function updateFinDispDesc(){
+  var disp = document.getElementById('fin-new-dispositif').value;
+  var info = document.getElementById('fin-disp-info');
+  if(!disp){ info.style.display = 'none'; return; }
+  var d = FIN_DISPOSITIFS[disp];
+  if(!d){ info.style.display = 'none'; return; }
+  info.innerHTML = '<strong>' + d.name + '</strong><br>' + d.desc + '<br><strong style="color:var(--accent);">💰 Plafond : ' + d.plafond + '</strong>';
+  info.style.display = '';
+}
+
+function openCreateFinDossier(){
+  document.getElementById('fin-new-prenom').value = '';
+  document.getElementById('fin-new-nom').value = '';
+  document.getElementById('fin-new-email').value = '';
+  document.getElementById('fin-new-tel').value = '';
+  document.getElementById('fin-new-formation').value = '';
+  document.getElementById('fin-new-dispositif').value = '';
+  document.getElementById('fin-disp-info').style.display = 'none';
+  document.getElementById('fin-create-error').style.display = 'none';
+  document.getElementById('modal-create-fin').classList.add('open');
+}
+
+async function createFinDossier(){
+  var prenom = document.getElementById('fin-new-prenom').value.trim();
+  var nom = document.getElementById('fin-new-nom').value.trim();
+  var email = document.getElementById('fin-new-email').value.trim();
+  var tel = document.getElementById('fin-new-tel').value.trim();
+  var formation = document.getElementById('fin-new-formation').value.trim();
+  var dispositif = document.getElementById('fin-new-dispositif').value;
+  var errDiv = document.getElementById('fin-create-error');
+
+  if(!prenom || !nom || !email){ errDiv.textContent = '⚠️ Prénom, nom et email obligatoires.'; errDiv.style.display = ''; return; }
+  if(!dispositif){ errDiv.textContent = '⚠️ Choisissez un dispositif.'; errDiv.style.display = ''; return; }
+  errDiv.style.display = 'none';
+
+  var user = await getUser();
+
+  // Create stagiaire
+  var { data: stag, error: stagErr } = await sb.from('stagiaires').insert({
+    user_id: user.id, nom: nom, prenom: prenom, email: email, telephone: tel
+  }).select().single();
+  if(stagErr){ errDiv.textContent = '❌ ' + stagErr.message; errDiv.style.display = ''; return; }
+
+  // Create dossier
+  var disp = FIN_DISPOSITIFS[dispositif] || {};
+  var { data: dossier, error: dosErr } = await sb.from('dossiers_financement').insert({
+    user_id: user.id, stagiaire_id: stag.id, dispositif: dispositif,
+    plafond_info: disp.plafond || '', formation_title: formation,
+    status: 'en_attente_candidat', current_step: 1
+  }).select().single();
+  if(dosErr){ errDiv.textContent = '❌ ' + dosErr.message; errDiv.style.display = ''; return; }
+
+  // System message
+  await sb.from('messages_financement').insert({
+    dossier_id: dossier.id, sender_type: 'systeme', sender_name: 'Système',
+    content: '📋 Dossier ' + disp.name + ' créé pour ' + prenom + ' ' + nom + '. En attente des documents du candidat.'
+  });
+
+  document.getElementById('modal-create-fin').classList.remove('open');
+
+  // Show link to copy
+  var link = window.location.origin + '/financement.html?token=' + stag.token;
+  var copied = false;
+  try { await navigator.clipboard.writeText(link); copied = true; } catch(e){}
+  alert('✅ Dossier créé !\n\n' + (copied ? 'Le lien a été copié dans votre presse-papier.' : 'Lien du candidat :') + '\n\n' + link + '\n\nEnvoyez ce lien à ' + prenom + ' ' + nom + ' (' + email + ') pour qu\'il complète son dossier.');
+
+  await loadFinDossiers(user.id);
+  await loadFinStagiaires(user.id);
+}
+
+async function copyFinLink(stagiaireId){
+  var { data: stag } = await sb.from('stagiaires').select('token').eq('id', stagiaireId).single();
+  if(!stag){ alert('❌ Stagiaire introuvable.'); return; }
+  var link = window.location.origin + '/financement.html?token=' + stag.token;
+  try { await navigator.clipboard.writeText(link); alert('✅ Lien copié !\n\n' + link); } catch(e){ prompt('Copiez ce lien :', link); }
+}
+
+async function reviewFinDossier(dossierId){
+  await sb.from('dossiers_financement').update({ status: 'verification', current_step: 4 }).eq('id', dossierId);
+  var user = await getUser();
+  await loadFinDossiers(user.id);
+}
+
+async function prepareFinDocs(dossierId){
+  // Check if user has base docs
+  var user = await getUser();
+  var profile = await getProfile();
+  var baseDocs = profile.of_base_documents || [];
+  if(baseDocs.length > 0){
+    if(confirm('Vous avez des documents de base déjà enregistrés.\n\nVoulez-vous les réutiliser pour ce dossier ?')){
+      // Copy base docs to this dossier
+      for(var i = 0; i < baseDocs.length; i++){
+        await sb.from('docs_financement').insert({
+          dossier_id: dossierId, uploaded_by: 'formateur',
+          name: baseDocs[i].name, file_path: baseDocs[i].path, status: 'valide'
+        });
+      }
+      await sb.from('dossiers_financement').update({ status: 'soumis', current_step: 6 }).eq('id', dossierId);
+      alert('✅ Documents réutilisés et dossier soumis !');
+      await loadFinDossiers(user.id);
+      return;
+    }
+  }
+  // Open upload modal for formateur docs
+  openDocUploadModal(dossierId, 'financement');
+}
+
+async function requestFinExpert(dossierId){
+  if(!confirm('Demander à un expert de préparer vos documents ?\n\nUn expert prendra en charge la préparation de la convention, du devis et du programme.')) return;
+  await sb.from('dossiers_financement').update({ expert_requested: true, status: 'en_attente_expert' }).eq('id', dossierId);
+  await sb.from('messages_financement').insert({
+    dossier_id: dossierId, sender_type: 'systeme', sender_name: 'Système',
+    content: '👨‍💼 L\'utilisateur a demandé l\'aide d\'un expert pour préparer les documents.'
+  });
+  alert('✅ Demande envoyée ! Un expert va prendre en charge votre dossier.');
+  var user = await getUser();
+  await loadFinDossiers(user.id);
+}
+
+function openFinMessages(dossierId){
+  openMessageModal(dossierId, 'financement');
+}
+
+function showFinSettings(){
+  document.getElementById('modal-fin-settings').classList.add('open');
+  // Load existing base docs
+  loadFinSettingsExisting();
+}
+
+async function loadFinSettingsExisting(){
+  var profile = await getProfile();
+  var baseDocs = profile.of_base_documents || [];
+  var cpfLinks = profile.cpf_links || {};
+  document.getElementById('fin-set-cpf-link').value = cpfLinks.main || '';
+  var h = '';
+  if(baseDocs.length > 0){
+    h = '<p style="font-size:12px;font-weight:700;margin-bottom:8px;">Documents existants :</p>';
+    baseDocs.forEach(function(d){ h += '<div class="fin-doc-item" style="background:var(--light);border-radius:8px;padding:8px 12px;margin-bottom:4px;font-size:12px;">✅ ' + d.name + '</div>'; });
+  }
+  document.getElementById('fin-set-existing').innerHTML = h;
+}
+
+async function saveFinSettings(){
+  var user = await getUser();
+  var baseDocs = [];
+  var fields = ['convention','programme','devis','kbis','rib'];
+  for(var i = 0; i < fields.length; i++){
+    var file = document.getElementById('fin-set-' + fields[i]).files[0];
+    if(file){
+      var ext = file.name.split('.').pop();
+      var path = 'base-docs/' + user.id + '/' + fields[i] + '.' + ext;
+      await sb.storage.from('financement').upload(path, file, { contentType: file.type, upsert: true });
+      baseDocs.push({ name: fields[i].charAt(0).toUpperCase() + fields[i].slice(1), path: path });
+    }
+  }
+
+  var cpfLink = document.getElementById('fin-set-cpf-link').value.trim();
+  var profile = await getProfile();
+  var existing = profile.of_base_documents || [];
+  var merged = existing.concat(baseDocs);
+
+  await sb.from('profiles').update({
+    of_base_documents: merged,
+    cpf_links: { main: cpfLink }
+  }).eq('id', user.id);
+
+  document.getElementById('modal-fin-settings').classList.remove('open');
+  alert('✅ Paramètres enregistrés !');
+}
+
+function souscrirePremium(){
+  localStorage.setItem('lfo_pending_order', JSON.stringify({
+    type: 'premium_subscription', table: 'profiles',
+    product_type: 'premium', amount: 69, timestamp: Date.now()
+  }));
+  // TODO: Replace with actual Stripe premium link when available
+  window.location.href = 'https://buy.stripe.com/PREMIUM_LINK_PLACEHOLDER';
 }
 
 // ============================

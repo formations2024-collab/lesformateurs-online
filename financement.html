@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dossier de financement — lesformateurs.online</title>
+<meta name="description" content="Complétez votre dossier de financement formation.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<style>
+.fin-container{max-width:720px;margin:0 auto;padding:40px 24px 80px;}
+.fin-header{text-align:center;margin-bottom:32px;}
+.fin-header h1{font-size:28px;font-weight:900;color:var(--primary);}
+.fin-header p{font-size:14px;color:var(--muted);margin-top:8px;}
+.fin-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:20px;}
+.fin-card h2{font-size:18px;font-weight:800;margin-bottom:4px;}
+.fin-card .desc{font-size:13px;color:var(--muted);margin-bottom:16px;}
+.fin-info{background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.15);border-radius:10px;padding:14px;margin-bottom:20px;font-size:13px;}
+.fin-info strong{color:#6366f1;}
+.fin-docs{margin-top:16px;}
+.fin-doc-item{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--light);border-radius:8px;margin-bottom:8px;font-size:13px;}
+.fin-doc-item .status{font-size:11px;font-weight:600;}
+.fin-upload-zone{border:2px dashed var(--border);border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;}
+.fin-upload-zone:hover{border-color:var(--accent);background:rgba(233,69,96,.03);}
+.fin-success{text-align:center;padding:40px 20px;}
+.fin-success .icon{font-size:64px;margin-bottom:16px;}
+.fin-expired{text-align:center;padding:60px 20px;color:var(--muted);}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
+</nav>
+
+<div class="fin-container">
+  <!-- LOADING -->
+  <div id="fin-loading" style="text-align:center;padding:60px 20px;">
+    <p style="font-size:16px;color:var(--muted);">Chargement de votre dossier...</p>
+  </div>
+
+  <!-- EXPIRED -->
+  <div id="fin-expired" style="display:none;" class="fin-expired">
+    <div style="font-size:64px;margin-bottom:16px;">⏰</div>
+    <h2 style="font-size:22px;font-weight:800;">Lien expiré</h2>
+    <p style="margin-top:8px;">Ce lien n'est plus valide. Contactez votre formateur pour obtenir un nouveau lien.</p>
+  </div>
+
+  <!-- ALREADY SUBMITTED -->
+  <div id="fin-submitted" style="display:none;" class="fin-success">
+    <div class="icon">✅</div>
+    <h2 style="font-size:22px;font-weight:800;color:var(--success);">Documents envoyés !</h2>
+    <p style="font-size:14px;color:var(--muted);margin-top:8px;">Votre formateur a été notifié. Il vérifiera vos documents et reviendra vers vous si nécessaire.</p>
+    <div id="fin-submitted-docs" style="margin-top:24px;text-align:left;"></div>
+  </div>
+
+  <!-- MAIN FORM -->
+  <div id="fin-form" style="display:none;">
+    <div class="fin-header">
+      <h1>📋 Dossier de financement</h1>
+      <p id="fin-subtitle">Complétez votre dossier pour obtenir votre financement.</p>
+    </div>
+
+    <div class="fin-card">
+      <h2 id="fin-dispositif-name">—</h2>
+      <p class="desc" id="fin-dispositif-desc">—</p>
+      <div class="fin-info">
+        <strong>💰 Plafond indicatif :</strong> <span id="fin-plafond">—</span><br>
+        <strong>👤 Formateur :</strong> <span id="fin-formateur">—</span>
+      </div>
+    </div>
+
+    <!-- Questions spécifiques au dispositif -->
+    <div class="fin-card" id="fin-questions-card">
+      <h2>📝 Vos informations</h2>
+      <p class="desc">Répondez à ces questions pour constituer votre dossier.</p>
+      <div id="fin-questions"></div>
+    </div>
+
+    <!-- Upload documents -->
+    <div class="fin-card">
+      <h2>📎 Vos documents</h2>
+      <p class="desc" id="fin-docs-desc">Uploadez les documents nécessaires ci-dessous.</p>
+      <div id="fin-required-docs"></div>
+      <div style="margin-top:16px;">
+        <label style="font-size:12px;font-weight:700;display:block;margin-bottom:6px;">Ajouter un document</label>
+        <input type="text" id="fin-doc-name" placeholder="Nom du document" style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;margin-bottom:8px;">
+        <input type="file" id="fin-doc-file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xlsx,.zip" style="margin-bottom:8px;">
+        <button class="btn btn-primary" onclick="uploadFinDoc()" style="padding:8px 20px;font-size:13px;">📤 Envoyer</button>
+        <div id="fin-upload-error" style="display:none;color:#e94560;font-size:12px;margin-top:6px;"></div>
+      </div>
+      <div id="fin-uploaded-docs" style="margin-top:16px;"></div>
+    </div>
+
+    <!-- Submit -->
+    <div style="text-align:center;margin-top:24px;">
+      <button class="btn btn-primary" id="fin-submit-btn" onclick="submitFinDossier()" style="padding:14px 40px;font-size:16px;font-weight:700;">✅ Valider et envoyer mon dossier</button>
+      <p style="font-size:11px;color:var(--muted);margin-top:8px;">Votre formateur sera notifié et vérifiera vos documents.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script>
+// Dispositifs data
+var DISPOSITIFS = {
+  opco: { name:'OPCO (Plan de Développement)', plafond:'2 100 à 4 150€/an (variable selon OPCO)', desc:'Financement par l\'OPCO pour les salariés d\'entreprises de moins de 50 salariés.',
+    docs:['Carte d\'identité','Bulletin de salaire récent','Attestation employeur'], 
+    questions:['Nom de l\'entreprise','SIRET de l\'entreprise','OPCO de rattachement','Poste occupé'] },
+  fifpl_ind: { name:'FIFPL (individuel)', plafond:'600 à 900€/an', desc:'Financement pour les professions libérales.',
+    docs:['SIRET','Attestation URSSAF','Justificatif activité libérale','Carte d\'identité'],
+    questions:['Code NAF','Profession exercée'] },
+  fifpl_col: { name:'FIFPL (collectif)', plafond:'Idem par stagiaire', desc:'Convention collective avec le FIFPL pour un groupe.',
+    docs:['Liste des participants','SIRET de chaque participant'],
+    questions:['Nombre de participants','Profession commune'] },
+  cpf: { name:'CPF (Mon Compte Formation)', plafond:'5 000€ cumulés (500€/an)', desc:'Le candidat utilise son Compte Personnel de Formation. Reste à charge de 102,23€.',
+    docs:['Carte d\'identité','Justificatif d\'activité'],
+    questions:['Avez-vous un compte sur moncompteformation.gouv.fr ?','Quel est votre solde CPF approximatif ?'] },
+  aif: { name:'France Travail — AIF', plafond:'Jusqu\'à 8 000€', desc:'Aide individuelle à la formation pour les demandeurs d\'emploi inscrits.',
+    docs:['Identifiant France Travail','Attestation d\'inscription Pôle Emploi','PPAE validé','Carte d\'identité'],
+    questions:['Numéro identifiant France Travail','Date d\'inscription','Votre conseiller a-t-il validé votre projet ?'] },
+  poei: { name:'POEI (Prépa Opérationnelle Emploi)', plafond:'Jusqu\'à 400h (5 à 8€/h)', desc:'Formation pré-embauche avec promesse d\'embauche de l\'employeur.',
+    docs:['Promesse d\'embauche signée','CV','Carte d\'identité'],
+    questions:['Nom de l\'employeur','Type de contrat promis (CDI, CDD ≥12 mois)'] },
+  fne: { name:'FNE-Formation', plafond:'Jusqu\'à 100% des frais', desc:'Financement pour les salariés d\'entreprises en mutation ou en difficulté.',
+    docs:['Justificatif entreprise en mutation/difficulté','Carte d\'identité','Bulletin de salaire'],
+    questions:['Nom de l\'entreprise','SIRET','Contexte (transition numérique, écologique, etc.)'] },
+  transition_pro: { name:'Transition Pro (PTP)', plafond:'Variable (salaire + frais)', desc:'Projet de Transition Professionnelle pour les salariés en reconversion.',
+    docs:['24 derniers bulletins de salaire','Projet de reconversion','Lettre de motivation','Autorisation de congé employeur','Carte d\'identité'],
+    questions:['Ancienneté dans l\'entreprise','Projet de reconversion en quelques mots','Type de contrat actuel (CDI/CDD)'] },
+  agefice: { name:'AGEFICE', plafond:'3 000€/an (ou 5 000€ RNCP)', desc:'Financement pour les dirigeants non-salariés du commerce et de l\'industrie.',
+    docs:['Attestation URSSAF (CFP à jour)','SIRET','Carte d\'identité','Code NAF'],
+    questions:['Secteur d\'activité','CFP à jour (oui/non) ?'] },
+  fafcea: { name:'FAFCEA', plafond:'Jusqu\'à 7 500€ (RNCP)', desc:'Financement pour les chefs d\'entreprise artisanale inscrits au Répertoire des Métiers.',
+    docs:['Attestation URSSAF','SIRET','Code NAF','Carte d\'identité','Justificatif inscription RM'],
+    questions:['Métier exercé','Code NAF'] }
+};
+
+var currentToken = null;
+var currentDossier = null;
+var currentStagiaire = null;
+var uploadedDocs = [];
+
+// Init
+(async function(){
+  var params = new URLSearchParams(window.location.search);
+  currentToken = params.get('token');
+  if(!currentToken){
+    document.getElementById('fin-loading').style.display = 'none';
+    document.getElementById('fin-expired').style.display = '';
+    return;
+  }
+
+  // Load stagiaire by token
+  var { data: stag } = await sb.from('stagiaires').select('*').eq('token', currentToken).single();
+  if(!stag || new Date(stag.token_expires_at) < new Date()){
+    document.getElementById('fin-loading').style.display = 'none';
+    document.getElementById('fin-expired').style.display = '';
+    return;
+  }
+  currentStagiaire = stag;
+
+  // Load dossier
+  var { data: dossier } = await sb.from('dossiers_financement').select('*').eq('stagiaire_id', stag.id).order('created_at',{ascending:false}).limit(1).single();
+  if(!dossier){
+    document.getElementById('fin-loading').style.display = 'none';
+    document.getElementById('fin-expired').style.display = '';
+    return;
+  }
+  currentDossier = dossier;
+
+  // Load formateur
+  var { data: formateur } = await sb.from('profiles').select('full_name, email').eq('id', dossier.user_id).single();
+
+  // Check if already submitted
+  if(dossier.status !== 'en_attente_candidat'){
+    document.getElementById('fin-loading').style.display = 'none';
+    document.getElementById('fin-submitted').style.display = '';
+    // Show uploaded docs
+    var { data: docs } = await sb.from('docs_financement').select('*').eq('dossier_id', dossier.id);
+    if(docs && docs.length > 0){
+      var h = '<h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">📎 Vos documents envoyés</h3>';
+      docs.forEach(function(d){
+        var icon = d.status === 'valide' ? '✅' : d.status === 'refuse' ? '❌' : '⏳';
+        h += '<div class="fin-doc-item">' + icon + ' ' + d.name + ' <span class="status">' + (d.status === 'valide' ? 'Accepté' : d.status === 'refuse' ? 'Refusé' : 'En attente') + '</span></div>';
+      });
+      document.getElementById('fin-submitted-docs').innerHTML = h;
+    }
+    return;
+  }
+
+  // Show form
+  var disp = DISPOSITIFS[dossier.dispositif] || {};
+  document.getElementById('fin-dispositif-name').textContent = disp.name || dossier.dispositif;
+  document.getElementById('fin-dispositif-desc').textContent = disp.desc || '';
+  document.getElementById('fin-plafond').textContent = disp.plafond || dossier.plafond_info || '—';
+  document.getElementById('fin-formateur').textContent = formateur ? formateur.full_name : '—';
+  document.getElementById('fin-subtitle').textContent = 'Bonjour ' + stag.prenom + ', complétez votre dossier ' + (disp.name || '') + '.';
+
+  // Render questions
+  var qHtml = '';
+  if(disp.questions){
+    disp.questions.forEach(function(q, i){
+      qHtml += '<div class="form-group" style="margin-bottom:12px;"><label style="font-weight:700;font-size:12px;">' + q + '</label>' +
+        '<input type="text" id="fin-q-' + i + '" class="fin-question-input" placeholder="Votre réponse" style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;"></div>';
+    });
+  }
+  document.getElementById('fin-questions').innerHTML = qHtml || '<p style="color:var(--muted);font-size:13px;">Aucune question supplémentaire.</p>';
+
+  // Render required docs
+  var docsHtml = '';
+  if(disp.docs){
+    disp.docs.forEach(function(d){
+      docsHtml += '<div class="fin-doc-item"><span>📄 ' + d + '</span><span class="status" style="color:var(--muted);">À fournir</span></div>';
+    });
+  }
+  document.getElementById('fin-required-docs').innerHTML = docsHtml;
+
+  document.getElementById('fin-loading').style.display = 'none';
+  document.getElementById('fin-form').style.display = '';
+})();
+
+async function uploadFinDoc(){
+  var file = document.getElementById('fin-doc-file').files[0];
+  var name = document.getElementById('fin-doc-name').value.trim();
+  var err = document.getElementById('fin-upload-error');
+  if(!file){ err.textContent = '⚠️ Choisissez un fichier.'; err.style.display = ''; return; }
+  if(!name) name = file.name;
+  err.style.display = 'none';
+
+  try {
+    var ext = file.name.split('.').pop();
+    var path = 'candidats/' + currentStagiaire.id + '/' + Date.now() + '.' + ext;
+    var { error: upErr } = await sb.storage.from('financement').upload(path, file, { contentType: file.type });
+    if(upErr) throw upErr;
+
+    var { data: doc, error: insErr } = await sb.from('docs_financement').insert({
+      dossier_id: currentDossier.id,
+      uploaded_by: 'candidat',
+      name: name,
+      file_path: path,
+      file_size: file.size,
+      mime_type: file.type
+    }).select().single();
+    if(insErr) throw insErr;
+
+    uploadedDocs.push(doc);
+    document.getElementById('fin-doc-name').value = '';
+    document.getElementById('fin-doc-file').value = '';
+    renderUploadedDocs();
+  } catch(e){
+    err.textContent = '❌ ' + (e.message || 'Erreur d\'envoi');
+    err.style.display = '';
+  }
+}
+
+function renderUploadedDocs(){
+  var h = '';
+  uploadedDocs.forEach(function(d){
+    h += '<div class="fin-doc-item" style="background:rgba(16,185,129,.06);"><span>✅ ' + d.name + '</span><span class="status" style="color:var(--success);">Envoyé</span></div>';
+  });
+  document.getElementById('fin-uploaded-docs').innerHTML = h;
+}
+
+async function submitFinDossier(){
+  if(uploadedDocs.length === 0){
+    if(!confirm('Vous n\'avez envoyé aucun document. Voulez-vous quand même valider ?')) return;
+  }
+
+  // Collect answers
+  var answers = {};
+  document.querySelectorAll('.fin-question-input').forEach(function(inp, i){
+    answers['q' + i] = inp.value.trim();
+  });
+
+  // Update dossier
+  var { error } = await sb.from('dossiers_financement').update({
+    status: 'docs_recus',
+    current_step: 3,
+    notes: JSON.stringify(answers),
+    updated_at: new Date().toISOString()
+  }).eq('id', currentDossier.id);
+
+  if(error){ alert('❌ ' + error.message); return; }
+
+  // Send system message
+  await sb.from('messages_financement').insert({
+    dossier_id: currentDossier.id,
+    sender_type: 'candidat',
+    sender_name: currentStagiaire.prenom + ' ' + currentStagiaire.nom,
+    content: '📎 Le candidat a envoyé ' + uploadedDocs.length + ' document(s) et complété le formulaire.'
+  });
+
+  // Show success
+  document.getElementById('fin-form').style.display = 'none';
+  document.getElementById('fin-submitted').style.display = '';
+}
+</script>
+</body>
+</html>

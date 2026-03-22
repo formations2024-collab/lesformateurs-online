@@ -9,7 +9,7 @@
 <link href="css/style.css" rel="stylesheet">
 <style>
 .admin-layout{display:flex;min-height:calc(100vh - 64px);}
-.sidebar{width:240px;background:var(--primary);color:#fff;padding:24px 0;flex-shrink:0;}
+.sidebar{width:240px;background:#2c2c2e;color:#fff;padding:24px 0;flex-shrink:0;}
 .sidebar a{display:block;padding:10px 24px;font-size:13px;color:rgba(255,255,255,.7);transition:all .2s;cursor:pointer;}
 .sidebar a:hover,.sidebar a.active{background:rgba(255,255,255,.08);color:#fff;}
 .sidebar .sidebar-title{padding:10px 24px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:16px;}
@@ -85,6 +85,8 @@
   <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
   <div class="nav-links">
     <a href="admin.html" style="color:#fff;">🔧 Admin</a>
+    <a href="expert.html" id="nav-expert-btn" style="display:none;color:#fff;">⚡ Expert</a>
+    <a href="dashboard.html" id="nav-dashboard-btn" style="color:#fff;">👤 Dashboard</a>
     <a href="index.html" class="nav-cta">Retour au site</a>
   </div>
 </nav>
@@ -98,11 +100,21 @@
   <a onclick="showTab('formations')">🎓 Inscriptions</a>
   <a onclick="showTab('contenu')">📹 Contenu</a>
   <a onclick="showTab('users')">👥 Utilisateurs</a>
+    <a onclick="showTab('stagiaires')">🎓 Stagiaires</a>
+    <a onclick="showTab('achats')">💳 Achats</a>
     <a onclick="showTab('messagerie')">💬 Messagerie</a>
 </div>
 
 <div class="admin-layout">
   <div class="sidebar">
+    <div class="font-size-toggle" id="fontSizeToggle" style="margin-bottom:12px;">
+      <span class="fst-label">Taille du texte</span>
+      <div class="fst-btns">
+        <button class="fst-btn active" onclick="setFontSize('normal')" title="Normal">A</button>
+        <button class="fst-btn" onclick="setFontSize('large')" title="Grand" style="font-size:16px;">A</button>
+        <button class="fst-btn" onclick="setFontSize('xlarge')" title="Très grand" style="font-size:19px;">A</button>
+      </div>
+    </div>
     <div class="sidebar-title">Navigation</div>
     <a class="active" onclick="showTab('dashboard')">📊 Tableau de bord</a>
     <a onclick="showTab('offres')">📋 Offres de missions</a>
@@ -111,6 +123,8 @@
     <a onclick="showTab('formations')">🎓 Inscriptions formation</a>
     <a onclick="showTab('contenu')">📹 Contenu formation</a>
     <a onclick="showTab('users')">👥 Utilisateurs</a>
+    <a onclick="showTab('stagiaires')">🎓 Stagiaires</a>
+    <a onclick="showTab('achats')">💳 Achats</a>
     <a onclick="showTab('messagerie')">💬 Messagerie</a>
   </div>
 
@@ -354,6 +368,28 @@
       <div id="admin-users-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
 
+    <!-- ========== ACHATS ADMIN ========== -->
+    <div class="tab-content" id="tab-achats">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">💳 Historique des achats</h2>
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+        <button class="action-btn" id="achats-filter-all" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="filterAchats('all')">Tous</button>
+        <button class="action-btn" id="achats-filter-parrain" onclick="filterAchats('parrain')">🎁 Avec parrain</button>
+      </div>
+      <div style="margin-bottom:16px;">
+        <input type="text" id="admin-achats-search" placeholder="🔍 Rechercher un achat..." oninput="filterAchatsSearch()" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;">
+      </div>
+      <div id="admin-achats-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
+    </div>
+
+    <!-- ========== STAGIAIRES ADMIN ========== -->
+    <div class="tab-content" id="tab-stagiaires">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🎓 Stagiaires & Financement</h2>
+      <div style="margin-bottom:16px;">
+        <input type="text" id="admin-stag-search" placeholder="🔍 Rechercher un stagiaire..." oninput="filterAdminStagiaires()" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;">
+      </div>
+      <div id="admin-stagiaires-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
+    </div>
+
     <!-- ========== MESSAGERIE ADMIN ========== -->
     <div class="tab-content" id="tab-messagerie">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">💬 Messagerie</h2>
@@ -394,6 +430,11 @@ function showTab(name){
     window.location.href = 'dashboard.html';
     return;
   }
+  // Show expert nav if user is also pro/expert
+  if(profile.is_pro){
+    var eb = document.getElementById('nav-expert-btn');
+    if(eb) eb.style.display = '';
+  }
   // Load course content
   await loadCourseContent();
   // Load offres
@@ -403,6 +444,8 @@ function showTab(name){
   await loadAdminOF();
   await loadAdminUsers();
   await loadAdminMessages();
+  await loadAdminStagiaires();
+  await loadAdminAchats();
 })();
 
 // ============================
@@ -1228,6 +1271,128 @@ async function adminDebloquer(userId){
   if(error){ alert('❌ Erreur : ' + error.message); return; }
   alert('✅ Compte réactivé.');
   await loadAdminUsers();
+}
+
+// ============================
+// ADMIN — STAGIAIRES
+// ============================
+
+var allAdminStagiaires = [];
+
+async function loadAdminStagiaires(){
+  var { data: dossiers } = await sb.from('dossiers_financement')
+    .select('*, stagiaire:stagiaire_id(nom, prenom, email, telephone), formateur:user_id(full_name, email)')
+    .order('created_at',{ascending:false});
+  allAdminStagiaires = dossiers || [];
+  renderAdminStagiaires(allAdminStagiaires);
+}
+
+function renderAdminStagiaires(dossiers){
+  var c = document.getElementById('admin-stagiaires-list');
+  if(dossiers.length === 0){ c.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucun dossier de financement.</p>'; return; }
+
+  var statusMap = {en_attente_candidat:'En attente candidat',docs_recus:'Docs reçus',verification:'Vérification',en_preparation:'Préparation',en_attente_expert:'Expert demandé',soumis:'Soumis',termine:'Terminé'};
+  var h = '';
+  dossiers.forEach(function(d){
+    var stag = d.stagiaire || {};
+    var form = d.formateur || {};
+    var st = statusMap[d.status] || d.status;
+    var date = new Date(d.created_at).toLocaleDateString('fr-FR');
+    h += '<div class="detail-card"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>🎓 ' + stag.prenom + ' ' + stag.nom + ' — ' + d.dispositif + '</h4>' +
+      '<p>📧 ' + stag.email + (stag.telephone ? ' · 📞 ' + stag.telephone : '') + '</p>' +
+      '<p style="font-size:12px;color:var(--muted);">Formateur : ' + (form.full_name || form.email || '—') + ' · ' + date + '</p>' +
+      (d.formation_title ? '<p style="font-size:12px;color:var(--muted);">📚 ' + d.formation_title + '</p>' : '') + '</div>' +
+      '<span class="detail-tag">' + st + '</span></div></div>';
+  });
+  c.innerHTML = h;
+}
+
+function filterAdminStagiaires(){
+  var q = document.getElementById('admin-stag-search').value.toLowerCase();
+  if(!q){ renderAdminStagiaires(allAdminStagiaires); return; }
+  var filtered = allAdminStagiaires.filter(function(d){
+    var s = d.stagiaire || {};
+    var f = d.formateur || {};
+    return (s.nom||'').toLowerCase().includes(q) || (s.prenom||'').toLowerCase().includes(q) || (s.email||'').toLowerCase().includes(q) || (f.full_name||'').toLowerCase().includes(q) || (d.dispositif||'').toLowerCase().includes(q);
+  });
+  renderAdminStagiaires(filtered);
+}
+
+// ============================
+// ADMIN — ACHATS
+// ============================
+
+var allAdminAchats = [];
+var achatsFilterMode = 'all';
+
+async function loadAdminAchats(){
+  var { data: achats } = await sb.from('achats')
+    .select('*, buyer:user_id(full_name, email), referrer:referrer_id(full_name, email, iban, iban_name)')
+    .order('created_at',{ascending:false});
+  allAdminAchats = achats || [];
+  renderAdminAchats(allAdminAchats);
+}
+
+function filterAchats(mode){
+  achatsFilterMode = mode;
+  document.getElementById('achats-filter-all').style.background = mode === 'all' ? 'var(--accent)' : '';
+  document.getElementById('achats-filter-all').style.color = mode === 'all' ? '#fff' : '';
+  document.getElementById('achats-filter-parrain').style.background = mode === 'parrain' ? 'var(--accent)' : '';
+  document.getElementById('achats-filter-parrain').style.color = mode === 'parrain' ? '#fff' : '';
+  var filtered = mode === 'parrain' ? allAdminAchats.filter(function(a){ return a.referrer_id; }) : allAdminAchats;
+  renderAdminAchats(filtered);
+}
+
+function filterAchatsSearch(){
+  var q = document.getElementById('admin-achats-search').value.toLowerCase();
+  var base = achatsFilterMode === 'parrain' ? allAdminAchats.filter(function(a){ return a.referrer_id; }) : allAdminAchats;
+  if(!q){ renderAdminAchats(base); return; }
+  var filtered = base.filter(function(a){
+    var b = a.buyer || {};
+    var r = a.referrer || {};
+    return (b.full_name||'').toLowerCase().includes(q) || (b.email||'').toLowerCase().includes(q) || (r.full_name||'').toLowerCase().includes(q) || (a.product_label||'').toLowerCase().includes(q) || (a.product_type||'').toLowerCase().includes(q);
+  });
+  renderAdminAchats(filtered);
+}
+
+function renderAdminAchats(achats){
+  var c = document.getElementById('admin-achats-list');
+  if(achats.length === 0){ c.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucun achat.</p>'; return; }
+
+  var totalCA = 0;
+  var totalCommissions = 0;
+  achats.forEach(function(a){ totalCA += (a.amount_cents||0); totalCommissions += (a.commission_cents||0); });
+
+  var h = '<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">' +
+    '<div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 16px;"><div style="font-size:20px;font-weight:900;color:var(--success);">' + (totalCA/100).toLocaleString('fr-FR') + '€</div><div style="font-size:11px;color:var(--muted);">CA total (' + achats.length + ' achats)</div></div>' +
+    '<div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 16px;"><div style="font-size:20px;font-weight:900;color:var(--accent);">' + (totalCommissions/100).toFixed(2) + '€</div><div style="font-size:11px;color:var(--muted);">Commissions à verser</div></div></div>';
+
+  achats.forEach(function(a){
+    var buyer = a.buyer || {};
+    var referrer = a.referrer || {};
+    var date = new Date(a.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    var amount = ((a.amount_cents||0)/100);
+    var hasRef = !!a.referrer_id;
+    var commAmount = ((a.commission_cents||0)/100);
+
+    h += '<div class="detail-card" style="' + (hasRef ? 'border-left:3px solid #7c3aed;' : '') + '">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div><h4>' + (a.product_label || a.product_type) + '</h4>' +
+      '<p style="font-size:12px;">Acheteur : <strong>' + (buyer.full_name || buyer.email || '—') + '</strong> · ' + date + '</p></div>' +
+      '<div style="text-align:right;"><div style="font-size:18px;font-weight:800;color:var(--success);">' + amount.toFixed(2) + '€</div></div></div>';
+
+    if(hasRef){
+      h += '<div style="background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.12);border-radius:8px;padding:10px 14px;margin-top:8px;font-size:12px;">' +
+        '<strong style="color:#7c3aed;">🎁 Parrain à payer :</strong> ' + (referrer.full_name || referrer.email || '—') +
+        ' · <strong style="color:var(--accent);">' + commAmount.toFixed(2) + '€</strong>' +
+        (referrer.iban ? ' · IBAN: ' + referrer.iban.substring(0,12) + '...' : ' · <span style="color:#e94560;">⚠️ Pas d\'IBAN</span>') +
+        (referrer.iban_name ? ' · Titulaire: ' + referrer.iban_name : '') +
+        '</div>';
+    }
+    h += '</div>';
+  });
+  c.innerHTML = h;
 }
 
 // ============================

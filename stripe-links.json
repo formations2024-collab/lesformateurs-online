@@ -23,7 +23,7 @@
     "qualiopi": "https://buy.stripe.com/00w8wP3fcgXH3A2csyffy0S",
     "agents_ia": "https://buy.stripe.com/9B68wP6roePz9Yq78effy0T",
     "edof": "https://buy.stripe.com/9B6cN57vs22N3A2eAGffy0U",
-    "opco": "https://buy.stripe.com/fZu8wP9DA7n7eeG0JQffy0V",
+    "opco": "https://buy.stripe.com/00w28r2b87n7daCdwCffy1w",
     "site_web": "https://buy.stripe.com/8x2aEX17422NgmOakqffy0W"
   },
   "annonces": {
@@ -45,5 +45,34 @@
     "planification": "https://buy.stripe.com/8x2aEX6ro4aV5IaeAGffy18"
   },
   "domiciliation": "https://buy.stripe.com/7sYdR9bLIcHrgmO0JQffy1u",
-  "premium_annonce": "https://buy.stripe.com/9B67sL4jg0YJ8Um0JQffy1v"
+  "premium_annonce": "https://buy.stripe.com/9B67sL4jg0YJ8Um0JQffy1v",
+  "premium_subscription": {
+    "product_id": "prod_UByOo84Qg3WOwI",
+    "price_id": "price_1TDaRNDnwFniOSFLxoz0r8G6",
+    "payment_link": "https://buy.stripe.com/7sY7sL7vs22N4E69gmffy1x"
+  },
+  "coupon_id": "PREMIUM10",
+  "premium_links": {
+    "conformite": {
+      "nda": "https://buy.stripe.com/aFa8wPdTQ4aV2vYbouffy1y",
+      "uai": "https://buy.stripe.com/3cIdR96rofTD6Me3W2ffy1z",
+      "qualiopi": "https://buy.stripe.com/8x27sLdTQbDndaC2RYffy1A",
+      "edof": "https://buy.stripe.com/4gMdR93fcazjb2u64affy1B",
+      "francetravail": "https://buy.stripe.com/bJeeVd9DA7n7b2u64affy1C",
+      "rs": "https://buy.stripe.com/4gMaEX4jg4aV2vYeAGffy1D",
+      "opco_unit": "https://buy.stripe.com/9B6fZh7vs22N6Me2RYffy1E",
+      "opco_pack11": "https://buy.stripe.com/4gM5kDaHE36RgmO64affy1F",
+      "bpf": "https://buy.stripe.com/aFafZh8zwePzb2u2RYffy1G"
+    },
+    "creer_of": {
+      "action_1x": "https://buy.stripe.com/4gMcN53fc6j3gmO8ciffy1H",
+      "cfa_1x": "https://buy.stripe.com/fZuaEX2b822Nc6y8ciffy1I",
+      "bilan_1x": "https://buy.stripe.com/6oU9AT4jg22N8UmfEKffy1J",
+      "vae_1x": "https://buy.stripe.com/5kQ9AT2b88rb4E60JQffy1K",
+      "elus_1x": "https://buy.stripe.com/cNi14n5nkazjeeG2RYffy1L",
+      "agents_ia_1x": "https://buy.stripe.com/4gM8wP174bDn5Iacsyffy1M"
+    },
+    "formation": "https://buy.stripe.com/3cIdR93fc8rb4E63W2ffy1N",
+    "premium_annonce": "https://buy.stripe.com/00w14n8zwgXHdaC0JQffy1O"
+  }
 }
