@@ -718,7 +718,20 @@ var stripeLinks = {
   edof: 'https://buy.stripe.com/14AfZh6ro9vfdaC1NUffy0H',
   francetravail: 'https://buy.stripe.com/28EbJ14jggXH9Yqakqffy0I',
   rs: 'https://buy.stripe.com/bJe6oHdTQ4aV9YqgIOffy0J',
-  bpf: 'https://buy.stripe.com/8x2cN53fcdLv7Qi9gmffy0K'
+  bpf: 'https://buy.stripe.com/8x2cN53fcdLv7Qi9gmffy0K',
+  opco: 'https://buy.stripe.com/bJe7sL5nk9vfgmOakqffy1t'
+};
+
+var stripePremiumLinks = {
+  nda: 'https://buy.stripe.com/aFa8wPdTQ4aV2vYbouffy1y',
+  uai: 'https://buy.stripe.com/3cIdR96rofTD6Me3W2ffy1z',
+  qualiopi: 'https://buy.stripe.com/8x27sLdTQbDndaC2RYffy1A',
+  edof: 'https://buy.stripe.com/4gMdR93fcazjb2u64affy1B',
+  francetravail: 'https://buy.stripe.com/bJeeVd9DA7n7b2u64affy1C',
+  rs: 'https://buy.stripe.com/4gMaEX4jg4aV2vYeAGffy1D',
+  opco_unit: 'https://buy.stripe.com/9B6fZh7vs22N6Me2RYffy1E',
+  opco_pack11: 'https://buy.stripe.com/4gM5kDaHE36RgmO64affy1F',
+  bpf: 'https://buy.stripe.com/aFafZh8zwePzb2u2RYffy1G'
 };
 
 async function payer(type, amount){
@@ -791,11 +804,13 @@ async function payer(type, amount){
     return;
   }
 
-  // 6. Rediriger vers Stripe
-  if(stripeLinks[type]){
-    window.location.href = stripeLinks[type];
+  // 6. Rediriger vers Stripe (lien premium si abonné)
+  var profile = await sb.from('profiles').select('is_premium').eq('id', user.id).single();
+  var isPremium = profile.data && profile.data.is_premium;
+  var link = (isPremium && stripePremiumLinks[type]) ? stripePremiumLinks[type] : stripeLinks[type];
+  if(link){
+    window.location.href = link;
   } else {
-    // Fallback : rediriger vers success directement (à remplacer par un vrai lien)
     window.location.href = 'success.html';
   }
 }

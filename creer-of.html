@@ -441,6 +441,39 @@ var ofLinks = {
   }
 };
 
+var ofPremiumLinks = {
+  action: {
+    1: 'https://buy.stripe.com/4gMcN53fc6j3gmO8ciffy1H',
+    2: 'https://buy.stripe.com/3cI6oHbLI36RdaC78effy1P',
+    3: 'https://buy.stripe.com/aFa14ncPM0YJ1rUfEKffy1Q'
+  },
+  cfa: {
+    1: 'https://buy.stripe.com/fZuaEX2b822Nc6y8ciffy1I',
+    2: 'https://buy.stripe.com/00w14n8zwePz3A28ciffy1R',
+    3: 'https://buy.stripe.com/bJe28r7vs8rbeeG9gmffy1S'
+  },
+  bilan: {
+    1: 'https://buy.stripe.com/6oU9AT4jg22N8UmfEKffy1J',
+    2: 'https://buy.stripe.com/aFa7sL3fcfTDfiKeAGffy1T',
+    3: 'https://buy.stripe.com/4gM6oHaHE36RfiK9gmffy1U'
+  },
+  vae: {
+    1: 'https://buy.stripe.com/5kQ9AT2b88rb4E60JQffy1K',
+    2: 'https://buy.stripe.com/fZu28rg1Y9vfeeGdwCffy1V',
+    3: 'https://buy.stripe.com/28E7sL8zw5eZgmOdwCffy1W'
+  },
+  elus: {
+    1: 'https://buy.stripe.com/cNi14n5nkazjeeG2RYffy1L',
+    2: 'https://buy.stripe.com/7sY28rcPM22Nb2u3W2ffy1X',
+    3: 'https://buy.stripe.com/eVqaEX17436R5Ia1NUffy1Y'
+  },
+  agent: {
+    1: 'https://buy.stripe.com/4gM8wP174bDn5Iacsyffy1M',
+    2: 'https://buy.stripe.com/cNibJ17vsazjeeGgIOffy1Z',
+    3: 'https://buy.stripe.com/7sYeVd6ro5eZ1rUdwCffy20'
+  }
+};
+
 async function payerCreation(){
   if(!selectedType){
     alert('⚠️ Veuillez choisir un type d\'organisme.');
@@ -530,9 +563,12 @@ async function payerCreation(){
     return;
   }
 
-  // 7. Rediriger vers Stripe
-  if(ofLinks[selectedType] && ofLinks[selectedType][selectedPaymentTimes]){
-    window.location.href = ofLinks[selectedType][selectedPaymentTimes];
+  // 7. Rediriger vers Stripe (lien premium si abonné)
+  var profileRes = await sb.from('profiles').select('is_premium').eq('id', user.id).single();
+  var isPremium = profileRes.data && profileRes.data.is_premium;
+  var linkObj = (isPremium && ofPremiumLinks[selectedType]) ? ofPremiumLinks : ofLinks;
+  if(linkObj[selectedType] && linkObj[selectedType][selectedPaymentTimes]){
+    window.location.href = linkObj[selectedType][selectedPaymentTimes];
   }
 }
 </script>

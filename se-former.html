@@ -314,7 +314,11 @@ async function payerFormationMoi(){
     return;
   }
 
-  window.location.href = 'https://buy.stripe.com/8x2eVd3fc6j3c6y0JQffy0Y';
+  var profileRes = await sb.from('profiles').select('is_premium').eq('id', user.id).single();
+  var isPremium = profileRes.data && profileRes.data.is_premium;
+  window.location.href = isPremium
+    ? 'https://buy.stripe.com/3cIdR93fc8rb4E63W2ffy1N'
+    : 'https://buy.stripe.com/8x2eVd3fc6j3c6y0JQffy0Y';
 }
 
 async function envoyerLienFormation(){
