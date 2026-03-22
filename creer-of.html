@@ -90,7 +90,8 @@
         <span class="type-emoji">📚</span>
         <h4>Action de formation</h4>
         <p>OF classique : vente de formations à des entreprises ou particuliers.</p>
-        <div class="type-price">990€</div> <span class="premium-badge">-10% Premium</span>
+        <div class="type-price">990€</div>
+        <div class="premium-ribbon">👑 Premium : <strong>-10%</strong></div>
         <div class="info-detail" id="info-action">
           <strong>Ce qui est inclus :</strong>
           <ul>
@@ -108,7 +109,8 @@
         <span class="type-emoji">🎓</span>
         <h4>CFA (Apprentissage)</h4>
         <p>Centre de formation d'apprentis — contrats d'apprentissage.</p>
-        <div class="type-price">2 990€</div> <span class="premium-badge">-10% Premium</span>
+        <div class="type-price">2 990€</div>
+        <div class="premium-ribbon">👑 Premium : <strong>-10%</strong></div>
         <div class="info-detail" id="info-cfa">
           <strong>Ce qui est inclus :</strong>
           <ul>
@@ -128,7 +130,8 @@
         <span class="type-emoji">📋</span>
         <h4>Bilan de compétences</h4>
         <p>Accompagnement des salariés dans leur évolution professionnelle.</p>
-        <div class="type-price">990€</div> <span class="premium-badge">-10% Premium</span>
+        <div class="type-price">990€</div>
+        <div class="premium-ribbon">👑 Premium : <strong>-10%</strong></div>
         <div class="info-detail" id="info-bilan">
           <strong>Ce qui est inclus :</strong>
           <ul>
@@ -146,7 +149,8 @@
         <span class="type-emoji">🏆</span>
         <h4>VAE</h4>
         <p>Validation des acquis de l'expérience — accompagnement candidats.</p>
-        <div class="type-price">990€</div> <span class="premium-badge">-10% Premium</span>
+        <div class="type-price">990€</div>
+        <div class="premium-ribbon">👑 Premium : <strong>-10%</strong></div>
         <div class="info-detail" id="info-vae">
           <strong>Ce qui est inclus :</strong>
           <ul>
@@ -164,7 +168,8 @@
         <span class="type-emoji">🏛</span>
         <h4>Formation des élus</h4>
         <p>Formation des élus locaux — cadre réglementaire spécifique.</p>
-        <div class="type-price">1 490€</div> <span class="premium-badge">-10% Premium</span>
+        <div class="type-price">1 490€</div>
+        <div class="premium-ribbon">👑 Premium : <strong>-10%</strong></div>
         <div class="info-detail" id="info-elus">
           <strong>Ce qui est inclus :</strong>
           <ul>
@@ -183,7 +188,8 @@
         <span class="type-emoji">🤖</span>
         <h4>OF géré par agents IA</h4>
         <p>Centre entièrement piloté par des agents IA : docs, clients, gestion.</p>
-        <div class="type-price">2 790€</div> <span class="premium-badge">-10% Premium</span>
+        <div class="type-price">2 790€</div>
+        <div class="premium-ribbon">👑 Premium : <strong>-10%</strong></div>
         <div class="info-detail" id="info-agent">
           <strong>Ce qui est inclus :</strong>
           <ul>
@@ -440,39 +446,21 @@ var ofLinks = {
     3: 'https://buy.stripe.com/cNibJ14jg5eZ5IagIOffy1s'
   }
 };
-
-var ofPremiumLinks = {
-  action: {
-    1: 'https://buy.stripe.com/4gMcN53fc6j3gmO8ciffy1H',
-    2: 'https://buy.stripe.com/3cI6oHbLI36RdaC78effy1P',
-    3: 'https://buy.stripe.com/aFa14ncPM0YJ1rUfEKffy1Q'
-  },
-  cfa: {
-    1: 'https://buy.stripe.com/fZuaEX2b822Nc6y8ciffy1I',
-    2: 'https://buy.stripe.com/00w14n8zwePz3A28ciffy1R',
-    3: 'https://buy.stripe.com/bJe28r7vs8rbeeG9gmffy1S'
-  },
-  bilan: {
-    1: 'https://buy.stripe.com/6oU9AT4jg22N8UmfEKffy1J',
-    2: 'https://buy.stripe.com/aFa7sL3fcfTDfiKeAGffy1T',
-    3: 'https://buy.stripe.com/4gM6oHaHE36RfiK9gmffy1U'
-  },
-  vae: {
-    1: 'https://buy.stripe.com/5kQ9AT2b88rb4E60JQffy1K',
-    2: 'https://buy.stripe.com/fZu28rg1Y9vfeeGdwCffy1V',
-    3: 'https://buy.stripe.com/28E7sL8zw5eZgmOdwCffy1W'
-  },
-  elus: {
-    1: 'https://buy.stripe.com/cNi14n5nkazjeeG2RYffy1L',
-    2: 'https://buy.stripe.com/7sY28rcPM22Nb2u3W2ffy1X',
-    3: 'https://buy.stripe.com/eVqaEX17436R5Ia1NUffy1Y'
-  },
-  agent: {
-    1: 'https://buy.stripe.com/4gM8wP174bDn5Iacsyffy1M',
-    2: 'https://buy.stripe.com/cNibJ17vsazjeeGgIOffy1Z',
-    3: 'https://buy.stripe.com/7sYeVd6ro5eZ1rUdwCffy20'
-  }
+var ofLinksPremium = {
+  action: { 1: 'https://buy.stripe.com/4gMcN53fc6j3gmO8ciffy1H' },
+  cfa: { 1: 'https://buy.stripe.com/fZuaEX2b822Nc6y8ciffy1I' },
+  bilan: { 1: 'https://buy.stripe.com/6oU9AT4jg22N8UmfEKffy1J' },
+  vae: { 1: 'https://buy.stripe.com/5kQ9AT2b88rb4E60JQffy1K' },
+  elus: { 1: 'https://buy.stripe.com/cNi14n5nkazjeeG2RYffy1L' },
+  agent: { 1: 'https://buy.stripe.com/4gM8wP174bDn5Iacsyffy1M' }
 };
+var userIsPremiumOF = false;
+(async function(){ try { var p = await getProfile(); if(p && p.is_premium) userIsPremiumOF = true; } catch(e){} })();
+
+function getOfLink(type, times){
+  if(userIsPremiumOF && ofLinksPremium[type] && ofLinksPremium[type][times]) return ofLinksPremium[type][times];
+  return ofLinks[type] ? ofLinks[type][times] : null;
+}
 
 async function payerCreation(){
   if(!selectedType){
@@ -563,12 +551,9 @@ async function payerCreation(){
     return;
   }
 
-  // 7. Rediriger vers Stripe (lien premium si abonné)
-  var profileRes = await sb.from('profiles').select('is_premium').eq('id', user.id).single();
-  var isPremium = profileRes.data && profileRes.data.is_premium;
-  var linkObj = (isPremium && ofPremiumLinks[selectedType]) ? ofPremiumLinks : ofLinks;
-  if(linkObj[selectedType] && linkObj[selectedType][selectedPaymentTimes]){
-    window.location.href = linkObj[selectedType][selectedPaymentTimes];
+  // 7. Rediriger vers Stripe
+  if(getOfLink(selectedType, selectedPaymentTimes)){
+    window.location.href = getOfLink(selectedType, selectedPaymentTimes);
   }
 }
 </script>

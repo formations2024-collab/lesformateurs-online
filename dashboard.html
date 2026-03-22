@@ -1128,7 +1128,9 @@ async function passerPremium(annonceId, btn){
   }));
   
   // Redirect to Stripe
-  var stripeUrl = 'https://buy.stripe.com/9B67sL4jg0YJ8Um0JQffy1v';
+  // Premium users get -10%
+  var profile = await getProfile();
+  var stripeUrl = (profile && profile.is_premium) ? 'https://buy.stripe.com/00w14n8zwgXHdaC0JQffy1O' : 'https://buy.stripe.com/9B67sL4jg0YJ8Um0JQffy1v';
   window.location.href = stripeUrl;
 }
 
@@ -2674,7 +2676,7 @@ function souscrirePremium(){
     product_type: 'premium', amount: 69, timestamp: Date.now()
   }));
   // TODO: Replace with actual Stripe premium link when available
-  window.location.href = 'https://buy.stripe.com/PREMIUM_LINK_PLACEHOLDER';
+  window.location.href = 'https://buy.stripe.com/7sY7sL7vs22N4E69gmffy1x';
 }
 
 // ============================

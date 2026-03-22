@@ -154,10 +154,11 @@
     <h2 class="section-title" style="text-align:center;">Investissez dans votre carrière</h2>
 
     <div class="big-price">
-      <div class="old">1 490€ prix habituel <span class="premium-badge">-10% Premium</span></div>
+      <div class="old">1 490€ prix habituel </div>
       <div class="new">100% remboursé</div>
       <div class="sub">via FIF PL pour les travailleurs indépendants *</div>
     </div>
+    <div class="premium-ribbon" style="max-width:500px;margin:12px auto;">👑 Membres Premium : <strong>-10%</strong> sur cette formation</div>
 
     <div style="max-width:500px;margin:0 auto;">
       <ul style="list-style:none;margin-bottom:32px;">
@@ -314,11 +315,10 @@ async function payerFormationMoi(){
     return;
   }
 
-  var profileRes = await sb.from('profiles').select('is_premium').eq('id', user.id).single();
-  var isPremium = profileRes.data && profileRes.data.is_premium;
-  window.location.href = isPremium
-    ? 'https://buy.stripe.com/3cIdR93fc8rb4E63W2ffy1N'
-    : 'https://buy.stripe.com/8x2eVd3fc6j3c6y0JQffy0Y';
+  // Check if premium user for -10%
+  var formationLink = 'https://buy.stripe.com/8x2eVd3fc6j3c6y0JQffy0Y';
+  try { var p = await getProfile(); if(p && p.is_premium) formationLink = 'https://buy.stripe.com/3cIdR93fc8rb4E63W2ffy1N'; } catch(e){}
+  window.location.href = formationLink;
 }
 
 async function envoyerLienFormation(){

@@ -200,31 +200,36 @@ sb.auth.onAuthStateChange(function(event, session) {
 // ====== FONT SIZE ACCESSIBILITY ======
 
 function setFontSize(size){
-  // Find the layout container
-  var layout = document.querySelector('.dash-layout') || document.querySelector('.admin-layout') || document.querySelector('.expert-layout');
-  if(!layout) layout = document.body;
+  // Use zoom on main-content — works even with inline styles
+  var mc = document.querySelector('.main-content');
+  if(!mc) return;
   
-  layout.classList.remove('fs-large', 'fs-xlarge');
-  if(size === 'large') layout.classList.add('fs-large');
-  if(size === 'xlarge') layout.classList.add('fs-xlarge');
+  if(size === 'normal') mc.style.zoom = '1';
+  else if(size === 'large') mc.style.zoom = '1.15';
+  else if(size === 'xlarge') mc.style.zoom = '1.3';
   
-  // Update active button
+  // Update active button (handle duplicates from mobile/desktop sidebar)
   document.querySelectorAll('.fst-btn').forEach(function(b){ b.classList.remove('active'); });
   var idx = size === 'normal' ? 0 : size === 'large' ? 1 : 2;
-  var btns = document.querySelectorAll('.fst-btn');
-  if(btns[idx]) btns[idx].classList.add('active');
+  // Each sidebar has 3 buttons, so we update all matching ones
+  document.querySelectorAll('.fst-btn').forEach(function(b, i){
+    if(i % 3 === idx) b.classList.add('active');
+  });
   
   // Persist
   try { localStorage.setItem('lfo-fontsize', size); } catch(e){}
 }
 
 // Restore on load
-(function(){
+document.addEventListener('DOMContentLoaded', function(){
   try {
     var saved = localStorage.getItem('lfo-fontsize');
-    if(saved && saved !== 'normal') setFontSize(saved);
+    if(saved && saved !== 'normal'){
+      // Delay slightly to ensure main-content exists
+      setTimeout(function(){ setFontSize(saved); }, 100);
+    }
   } catch(e){}
-})();
+});
 
 // ====== REFERRAL TRACKING ======
 // Detects ?ref=CODE in URL and persists it for the entire session
