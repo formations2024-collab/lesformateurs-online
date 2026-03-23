@@ -4,13 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Abonnement Premium — 69€/mois</title>
-<meta name="description" content="Module financement + 10% de réduction sur tout.">
+<meta name="description" content="Module financement + 10% sur tout.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/funnel.css" rel="stylesheet">
 </head>
 <body class="funnel-page">
-
 <nav class="navbar">
   <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
   <div class="nav-links" id="fNavLinks">
@@ -18,88 +17,137 @@
     <a href="conformite.html">Conformité</a>
     <a href="creer-of.html">Créer mon OF</a>
     <a href="se-former.html">Se former</a>
-    <a href="#commander" class="nav-cta">Commander →</a>
+    <a href="#commander" class="nav-cta">Commander</a>
   </div>
   <button class="hamburger" onclick="document.getElementById('fNavLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="fn-hero">
-  <div class="fn-badge">PREMIUM · 69€/MOIS</div>
-  <h1>Accélérez vos financements et économisez <em>10% sur tout</em></h1>
-  <p class="fn-sub">Module Financement Express + réduction permanente sur tous les services.</p>
-  <a href="#commander" class="fn-btn">Commencer maintenant →</a>
-  <div class="fn-stats"><div class="fn-stat"><span class="fn-stat-num">69€</span><span class="fn-stat-label">par mois</span></div><div class="fn-stat"><span class="fn-stat-num">-10%</span><span class="fn-stat-label">sur tout</span></div><div class="fn-stat"><span class="fn-stat-num">2x</span><span class="fn-stat-label">plus rapide</span></div><div class="fn-stat"><span class="fn-stat-num">48h</span><span class="fn-stat-label">délai moyen</span></div></div>
+<div class="hf-hero">
+  <p class="hf-eyebrow">PREMIUM · 69€/MOIS</p>
+  <h1>Économisez <em>10% sur tout</em> et accélérez vos financements</h1>
+  <p class="hf-sub">Module Financement Express + réduction permanente sur tous les services.</p>
+  <a href="#commander" class="hf-btn">Commencer maintenant</a>
+  <div class="hf-stats"><div class="hf-stat"><strong>69€</strong><span>par mois</span></div><div class="hf-stat"><strong>-10%</strong><span>sur tout</span></div><div class="hf-stat"><strong>2x</strong><span>plus rapide</span></div><div class="hf-stat"><strong>48h</strong><span>délai moyen</span></div></div>
 </div>
 
-<div class="fn-social-bar"><div class="fn-social-item"><strong>2 847+</strong> formateurs accompagnés</div><div class="fn-social-item"><strong>94%</strong> de satisfaction</div><div class="fn-social-item"><strong>48h</strong> délai moyen</div></div>
-<section class="fn-video-section">
-  <div class="fn-label">FONCTIONNALITÉS</div>
-  <h2 class="fn-title" style="margin-bottom:32px;">Le Premium en action</h2>
-  <div class="fn-video-wrap" id="video-wrap" onclick="playVideo(this)">
-    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a1a2e,#0f3460);display:flex;align-items:center;justify-content:center;">
-      <div style="text-align:center;color:rgba(255,255,255,.3);font-family:Outfit;font-size:14px;">
-        <div style="font-size:48px;margin-bottom:8px;">🎬</div>
-        Vidéo de présentation
+<div class="hf-trust">
+  <div class="hf-trust-item"><strong>2 847+</strong> formateurs accompagnés</div>
+  <div class="hf-trust-item"><strong>94%</strong> de satisfaction</div>
+  <div class="hf-trust-item"><strong>48h</strong> délai moyen</div>
+</div>
+<section class="hf-section">
+  <div class="hf-inner">
+    <p class="hf-eyebrow">FONCTIONNALITÉS</p>
+    <h2>Le Premium en action</h2>
+    <p class="hf-muted">Une présentation rapide pour comprendre notre approche.</p>
+    <div class="hf-video" onclick="this.innerHTML='<div style=\'position:absolute;inset:0;background:#111;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:14px;\'>Ajoutez votre URL vidéo ici</div>'">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--hf-light),#e8e6e1);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;">
+        <div style="font-size:40px;opacity:.3;">🎬</div>
+        <div style="font-size:13px;color:var(--hf-muted);">Vidéo de présentation</div>
       </div>
+      <div class="hf-video-play">▶</div>
     </div>
-  </div>
-  <p class="fn-video-label">⏱ Durée : 3 min · Sans engagement</p>
-</section>
-<section class="fn-section fn-alt">
-  <div class="fn-inner">
-    <div class="fn-label">Le problème</div>
-    <h2 class="fn-title">Les financements prennent <em>trop de temps</em></h2>
-    <p class="fn-desc">Collecter les documents, remplir les formulaires, suivre les dossiers... des heures chaque semaine.</p>
-    <div class="fn-pain-grid"><div class="fn-pain"><div class="fn-pain-icon">⏳</div><h4>Semaines de délai</h4><p>2 à 4 semaines par dossier.</p></div><div class="fn-pain"><div class="fn-pain-icon">📋</div><h4>Documents éparpillés</h4><p>Chaque stagiaire = pièces différentes.</p></div><div class="fn-pain"><div class="fn-pain-icon">💰</div><h4>Plein tarif</h4><p>Pas de réduction sur vos services.</p></div><div class="fn-pain"><div class="fn-pain-icon">🔄</div><h4>Processus manuel</h4><p>Chaque dossier fait à la main.</p></div></div>
+    <p class="hf-video-caption">Durée : 3 min · Sans engagement</p>
   </div>
 </section>
-<section class="fn-section">
-  <div class="fn-label">La solution</div>
-  <h2 class="fn-title">Ce que le Premium <em>vous apporte</em></h2>
-  <p class="fn-desc"></p>
-  <div class="fn-benefit-grid"><div class="fn-benefit"><div class="fn-benefit-icon">💰</div><h4>10% sur tout</h4><p>Chaque service : NDA, Qualiopi, OPCO, formation...</p></div><div class="fn-benefit"><div class="fn-benefit-icon">🚀</div><h4>Financement Express</h4><p>Dossiers en quelques clics.</p></div><div class="fn-benefit"><div class="fn-benefit-icon">📋</div><h4>Documents réutilisables</h4><p>Uploadez une fois, réutilisez pour chaque dossier.</p></div><div class="fn-benefit"><div class="fn-benefit-icon">👨‍💼</div><h4>Accès aux experts</h4><p>Demande en 1 clic.</p></div><div class="fn-benefit"><div class="fn-benefit-icon">📊</div><h4>Tableau de bord</h4><p>Suivi temps réel.</p></div><div class="fn-benefit"><div class="fn-benefit-icon">🔗</div><h4>Lien stagiaire auto</h4><p>Le stagiaire uploade ses docs, vous êtes notifié.</p></div></div>
+<section class="hf-section hf-cream-bg">
+  <div class="hf-inner">
+    <p class="hf-eyebrow">Le problème</p>
+    <h2>Les financements prennent <em>trop de temps</em></h2>
+    <p class="hf-muted">Des heures chaque semaine en paperasse.</p>
+    <div class="hf-pain-grid"><div class="hf-pain"><div class="hf-pain-icon">⏳</div><h4>Semaines de délai</h4><p>2 à 4 semaines par dossier.</p></div><div class="hf-pain"><div class="hf-pain-icon">📋</div><h4>Documents éparpillés</h4><p>Chaque stagiaire différent.</p></div><div class="hf-pain"><div class="hf-pain-icon">💰</div><h4>Plein tarif</h4><p>Aucune réduction.</p></div><div class="hf-pain"><div class="hf-pain-icon">🔄</div><h4>Processus manuel</h4><p>Tout à la main.</p></div></div>
+  </div>
 </section>
-<section class="fn-section fn-alt">
-  <div class="fn-inner">
-    <div class="fn-label">Comparaison</div>
-    <h2 class="fn-title"></h2>
-    <p class="fn-desc"></p>
-    <table class="fn-compare"><thead><tr><th></th><th>Sans nous</th><th>Avec lesformateurs.online</th></tr></thead><tbody><tr><td>Délai dossier</td><td>2-4 semaines</td><td>48h</td></tr><tr><td>Coût si 3 services/mois</td><td>~800€</td><td>~720€ (-80€)</td></tr><tr><td>Collecte documents</td><td>Manuelle</td><td>Automatisée</td></tr><tr><td>Templates</td><td>Non</td><td>Réutilisables</td></tr></tbody></table>
+<section class="hf-section">
+  <div class="hf-inner">
+    <p class="hf-eyebrow">La solution</p>
+    <h2>Ce que le Premium <em>vous apporte</em></h2>
+    <p class="hf-muted"></p>
+    <div class="hf-features"><div class="hf-feature">
+  <div class="hf-feature-icon">💰</div>
+  <h3>10% sur tout le site</h3>
+  <p>NDA, Qualiopi, OPCO, formation...</p>
+  <div class="hf-feature-img">Screenshot / illustration</div>
+</div><div class="hf-feature">
+  <div class="hf-feature-icon">🚀</div>
+  <h3>Financement Express</h3>
+  <p>Dossiers en quelques clics.</p>
+  <div class="hf-feature-img">Screenshot / illustration</div>
+</div><div class="hf-feature">
+  <div class="hf-feature-icon">📋</div>
+  <h3>Templates réutilisables</h3>
+  <p>Uploadez une fois, réutilisez.</p>
+  <div class="hf-feature-img">Screenshot / illustration</div>
+</div><div class="hf-feature">
+  <div class="hf-feature-icon">🔗</div>
+  <h3>Lien stagiaire auto</h3>
+  <p>Le stagiaire uploade, vous êtes notifié.</p>
+  <div class="hf-feature-img">Screenshot / illustration</div>
+</div></div>
+  </div>
+</section>
+<section class="hf-section hf-cream-bg">
+  <div class="hf-inner">
+    <p class="hf-eyebrow">Comparaison</p>
+    <h2></h2>
+    <p class="hf-muted"></p>
+    <table class="hf-compare"><thead><tr><th></th><th>Sans nous</th><th>Avec lesformateurs.online</th></tr></thead><tbody><tr><td>Délai dossier</td><td>2-4 semaines</td><td>48h</td></tr><tr><td>Coût mensuel</td><td>~800€</td><td>~720€ (-80€)</td></tr><tr><td>Collecte docs</td><td>Manuelle</td><td>Automatisée</td></tr><tr><td>Templates</td><td>Non</td><td>Réutilisables</td></tr></tbody></table>
+  </div>
+</section>
+<section class="hf-big-testi">
+  <div class="hf-inner">
+    <div class="hf-testi-avatar">CP</div>
+    <div class="hf-testi-name">Catherine P.</div>
+    <div class="hf-testi-role">Directrice OF, Marseille</div>
+    <div class="hf-quote">&ldquo;Le Premium se rentabilise dès le premier mois. J'économise 120€/mois.&rdquo;</div>
   </div>
 </section>
 
-<section class="fn-section">
-  <div class="fn-label">Témoignages</div>
-  <h2 class="fn-title">Ils nous font <em>confiance</em></h2>
-  <div class="fn-testi-grid"><div class="fn-testi"><div class="fn-testi-stars">★★★★★</div><div class="fn-testi-quote">Le Premium se rentabilise dès le premier mois. J'économise 120€/mois.</div><div class="fn-testi-author">Catherine P.</div><div class="fn-testi-role">Directrice OF, Marseille</div></div><div class="fn-testi"><div class="fn-testi-stars">★★★★★</div><div class="fn-testi-quote">Le lien stagiaire est génial. Plus de relances, tout arrive auto.</div><div class="fn-testi-author">Olivier B.</div><div class="fn-testi-role">Formateur, Nantes</div></div></div>
+<section class="hf-section">
+  <div class="hf-inner">
+    <p class="hf-eyebrow">Témoignages</p>
+    <h2>Ce que disent nos clients</h2>
+    <p class="hf-muted">Des formateurs comme vous, qui ont fait le pas.</p>
+    <div class="hf-testi-grid"><div class="hf-testi-card">
+  <div class="hf-testi-card-stars">★★★★★</div>
+  <div class="hf-testi-card-quote">&ldquo;Le lien stagiaire est génial. Plus de relances, tout arrive automatiquement.&rdquo;</div>
+  <div class="hf-testi-card-header">
+    <div class="hf-testi-card-avatar">OB</div>
+    <div><div class="hf-testi-name">Olivier B.</div><div class="hf-testi-role">Formateur, Nantes</div></div>
+  </div>
+</div></div>
+  </div>
 </section>
-<section class="fn-cta-section" id="commander">
-  <div class="fn-label" style="color:var(--fn-accent2);">PASSEZ PREMIUM</div>
+<section class="hf-cta" id="commander">
+  <p class="hf-eyebrow">PASSEZ PREMIUM</p>
   <h2>Passez Premium <em>maintenant</em></h2>
-  <p class="fn-desc">Sans engagement — annulez quand vous voulez.</p>
-  <div class="fn-price-tag">
-    <span class="fn-price-old"></span>
-    <span class="fn-price-new">69€<span>/mois</span></span>
+  <p class="hf-muted">Sans engagement. Annulez quand vous voulez.</p>
+  <div class="hf-price">
+    <span class="hf-price-old"></span>
+    <span class="hf-price-new">69€<small>/mois</small></span>
   </div>
-  <div class="fn-ribbon">👑 <strong>-10%</strong> membres Premium</div><br>
-  <a href="https://buy.stripe.com/7sY7sL7vs22N4E69gmffy1x" class="fn-btn" style="margin-top:8px;">Commander maintenant →</a>
-  <div class="fn-guarantee"><h4>✅ Satisfait ou remboursé 30 jours</h4><p>Si vous n'êtes pas satisfait, remboursement intégral. Sans condition.</p></div>
+  <div class="hf-ribbon">-10% pour les membres Premium</div><br>
+  <a href="https://buy.stripe.com/7sY7sL7vs22N4E69gmffy1x" class="hf-btn hf-btn-accent" style="margin-top:16px;">Commander maintenant</a>
+  <div class="hf-guarantee"><h4>Satisfait ou remboursé 30 jours</h4><p>Si vous n'êtes pas satisfait, remboursement intégral. Sans condition.</p></div>
 </section>
-<section class="fn-section">
-  <div class="fn-label">Questions fréquentes</div>
-  <h2 class="fn-title">Vos questions, <em>nos réponses</em></h2>
-  <div class="fn-faq"><div class="fn-faq-item"><div class="fn-faq-q" onclick="this.parentElement.classList.toggle('open')">Sans engagement ? <span>+</span></div><div class="fn-faq-a">Oui. Annulez quand vous voulez.</div></div><div class="fn-faq-item"><div class="fn-faq-q" onclick="this.parentElement.classList.toggle('open')">Les 10% s'appliquent sur quoi ? <span>+</span></div><div class="fn-faq-a">Sur TOUS les services du site.</div></div><div class="fn-faq-item"><div class="fn-faq-q" onclick="this.parentElement.classList.toggle('open')">Le module Financement ? <span>+</span></div><div class="fn-faq-a">Outil intégré dans votre dashboard.</div></div><div class="fn-faq-item"><div class="fn-faq-q" onclick="this.parentElement.classList.toggle('open')">Combien j'économise ? <span>+</span></div><div class="fn-faq-a">80 à 150€/mois en moyenne. Rentabilisé dès le 1er mois.</div></div></div>
+<section class="hf-section">
+  <div class="hf-inner">
+    <h2>Questions fréquentes</h2>
+    <p class="hf-muted">Tout ce que vous devez savoir.</p>
+    <div class="hf-faq"><div class="hf-faq-item"><div class="hf-faq-q" onclick="this.parentElement.classList.toggle('open')">Sans engagement ? <span>+</span></div><div class="hf-faq-a">Oui.</div></div><div class="hf-faq-item"><div class="hf-faq-q" onclick="this.parentElement.classList.toggle('open')">10% sur quoi ? <span>+</span></div><div class="hf-faq-a">Sur TOUS les services.</div></div><div class="hf-faq-item"><div class="hf-faq-q" onclick="this.parentElement.classList.toggle('open')">Le module Financement ? <span>+</span></div><div class="hf-faq-a">Outil intégré dans votre dashboard.</div></div><div class="hf-faq-item"><div class="hf-faq-q" onclick="this.parentElement.classList.toggle('open')">Combien j'économise ? <span>+</span></div><div class="hf-faq-a">80 à 150€/mois en moyenne.</div></div></div>
+  </div>
+</section>
+<section class="hf-section" style="padding:80px 32px;">
+  <h2>Passez a l action</h2>
+  <p class="hf-muted">Rejoignez les formateurs qui ont déjà fait le pas.</p>
+  <a href="#commander" class="hf-btn">Commencer</a>
 </section>
 
-<div class="fn-footer">© 2026 lesformateurs.online — EXPERIENCE PROD SASU · SIREN 982 828 774</div>
+<div class="hf-footer">© 2026 lesformateurs.online — EXPERIENCE PROD SASU · SIREN 982 828 774</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script>
-function playVideo(el){
-  // Replace with actual video URL when ready
-  el.innerHTML = '<div style="position:absolute;inset:0;background:#111;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-family:Outfit;">Vidéo à venir — ajoutez votre URL YouTube ici</div>';
-}
 async function sendLead(source){
   var n=document.getElementById('lead-nom').value.trim();
   var e=document.getElementById('lead-email').value.trim();
@@ -108,7 +156,7 @@ async function sendLead(source){
   if(!n||!e){err.textContent='Nom et email obligatoires.';err.style.display='';return;}
   err.style.display='none';
   try{await sb.from('leads').insert({name:n,email:e,phone:t,source:source});}catch(ex){}
-  document.querySelector('.fn-form').style.display='none';
+  document.querySelector('.hf-form').style.display='none';
   document.getElementById('lead-success').style.display='';
 }
 </script>
