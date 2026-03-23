@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ouverture EDOF — Mon Compte Formation · 290€</title>
-<meta name="description" content="Ouvrez et configurez votre espace EDOF pour vendre vos formations sur Mon Compte Formation. 40 millions d'actifs accessibles.">
+<title>Ouverture EDOF — 290€</title>
+<meta name="description" content="Accédez à 40 millions de clients sur Mon Compte Formation.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-<link href="css/style.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/funnel.css" rel="stylesheet">
 </head>
-<body>
+<body class="funnel-page">
 
-<nav class="navbar" style="position:sticky;top:0;z-index:90;">
+<nav class="navbar">
   <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
   <div class="nav-links" id="fNavLinks">
     <a href="missions.html">Missions</a>
@@ -21,85 +20,99 @@
     <a href="se-former.html">Se former</a>
     <a href="#commander" class="nav-cta">Commander →</a>
   </div>
+  <button class="hamburger" onclick="document.getElementById('fNavLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="f-hero">
-  <div class="badge">EDOF / MON COMPTE FORMATION</div>
-  <h1>Accédez à 40 millions de clients potentiels sur Mon Compte Formation</h1>
-  <p>On ouvre, configure et optimise votre espace EDOF. Vos fiches formation sont en ligne en 72h, prêtes à recevoir des inscriptions.</p>
-  <div class="stat-row"><div class="stat-item"><div class="stat-num">40M</div><div class="stat-label">d'actifs éligibles</div></div><div class="stat-item"><div class="stat-num">290€</div><div class="stat-label">configuration complète</div></div><div class="stat-item"><div class="stat-num">72h</div><div class="stat-label">pour être en ligne</div></div><div class="stat-item"><div class="stat-num">87</div><div class="stat-label">OF configurés</div></div></div>
+<div class="fn-hero">
+  <div class="fn-badge">EDOF / MON COMPTE FORMATION</div>
+  <h1>Accédez à <em>40 millions</em> de clients sur Mon Compte Formation</h1>
+  <p class="fn-sub">On ouvre, configure et optimise votre espace EDOF. Vos formations en ligne en 72h.</p>
+  <a href="#commander" class="fn-btn">Commencer maintenant →</a>
+  <div class="fn-stats"><div class="fn-stat"><span class="fn-stat-num">40M</span><span class="fn-stat-label">d'actifs éligibles</span></div><div class="fn-stat"><span class="fn-stat-num">290€</span><span class="fn-stat-label">tout compris</span></div><div class="fn-stat"><span class="fn-stat-num">72h</span><span class="fn-stat-label">pour être en ligne</span></div></div>
 </div>
 
-<section class="f-section">
-  <div class="f-label">Le problème</div>
-  <h2 class="f-title">Sans EDOF, vous passez à côté du plus gros marché de la formation</h2>
-  <p class="f-sub">Mon Compte Formation représente 40 millions de clients potentiels. Ne pas y être, c'est comme ne pas avoir de site web en 2026.</p>
-  <div class="pain-grid"><div class="pain-card"><h4>🚫 Invisible</h4><p>Sans EDOF, vos formations n'apparaissent pas sur Mon Compte Formation. 0 visibilité auprès de 40M d'actifs.</p></div><div class="pain-card"><h4>📋 Configuration complexe</h4><p>La plateforme EDOF est technique, mal documentée, et les erreurs bloquent votre référencement.</p></div><div class="pain-card"><h4>⏳ Des semaines perdues</h4><p>Beaucoup d'OF mettent 2 à 4 semaines pour configurer EDOF correctement. Certains abandonnent.</p></div><div class="pain-card"><h4>💸 Fiches mal optimisées</h4><p>Une fiche formation mal rédigée = 0 inscription. Le wording et la structure font toute la différence.</p></div></div>
+<div class="fn-social-bar"><div class="fn-social-item"><strong>2 847+</strong> formateurs accompagnés</div><div class="fn-social-item"><strong>94%</strong> de satisfaction</div><div class="fn-social-item"><strong>48h</strong> délai moyen</div></div>
+<section class="fn-video-section">
+  <div class="fn-label">DÉMONSTRATION</div>
+  <h2 class="fn-title" style="margin-bottom:32px;">Votre espace EDOF en 72h</h2>
+  <div class="fn-video-wrap" id="video-wrap" onclick="playVideo(this)">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a1a2e,#0f3460);display:flex;align-items:center;justify-content:center;">
+      <div style="text-align:center;color:rgba(255,255,255,.3);font-family:Outfit;font-size:14px;">
+        <div style="font-size:48px;margin-bottom:8px;">🎬</div>
+        Vidéo de présentation
+      </div>
+    </div>
+  </div>
+  <p class="fn-video-label">⏱ Durée : 3 min · Sans engagement</p>
+</section>
+<section class="fn-section fn-alt">
+  <div class="fn-inner">
+    <div class="fn-label">Le problème</div>
+    <h2 class="fn-title">Sans EDOF, vous êtes <em>invisible</em></h2>
+    <p class="fn-desc">Mon Compte Formation = 40 millions de clients. Ne pas y être = ne pas exister.</p>
+    <div class="fn-pain-grid"><div class="fn-pain"><div class="fn-pain-icon">🚫</div><h4>Invisible</h4><p>0 visibilité auprès de 40M d'actifs.</p></div><div class="fn-pain"><div class="fn-pain-icon">📋</div><h4>Configuration complexe</h4><p>Plateforme technique, mal documentée.</p></div><div class="fn-pain"><div class="fn-pain-icon">⏳</div><h4>Semaines perdues</h4><p>2 à 4 semaines pour configurer seul.</p></div><div class="fn-pain"><div class="fn-pain-icon">💸</div><h4>Fiches mal optimisées</h4><p>Mauvais wording = 0 inscription.</p></div></div>
+  </div>
+</section>
+<section class="fn-section">
+  <div class="fn-label">La solution</div>
+  <h2 class="fn-title">Ce qu'on fait <em>pour vous</em></h2>
+  <p class="fn-desc">Configuration complète en 72h.</p>
+  <div class="fn-benefit-grid"><div class="fn-benefit"><div class="fn-benefit-icon">🔧</div><h4>Configuration complète</h4><p>Création compte, paramétrage A à Z.</p></div><div class="fn-benefit"><div class="fn-benefit-icon">📝</div><h4>Fiches optimisées IA</h4><p>Mots-clés qui convertissent.</p></div><div class="fn-benefit"><div class="fn-benefit-icon">✅</div><h4>Vérification conformité</h4><p>Conforme aux exigences Caisse des Dépôts.</p></div><div class="fn-benefit"><div class="fn-benefit-icon">🚀</div><h4>En ligne en 72h</h4><p>Pas de semaines d'attente.</p></div></div>
 </section>
 
-<section class="f-section">
-  <div class="f-label">La solution</div>
-  <h2 class="f-title">Ce qu'on fait pour vous</h2>
-  <div class="benefit-grid"><div class="benefit-card"><div class="benefit-icon">🔧</div><h4>Configuration complète</h4><p>Création de votre compte, vérification des prérequis, paramétrage de A à Z.</p></div><div class="benefit-card"><div class="benefit-icon">📝</div><h4>Fiches formation optimisées</h4><p>L'IA rédige vos fiches avec les mots-clés qui convertissent. Structure conforme aux standards CPF.</p></div><div class="benefit-card"><div class="benefit-icon">✅</div><h4>Vérification conformité</h4><p>On s'assure que tout est conforme aux exigences de la Caisse des Dépôts.</p></div><div class="benefit-card"><div class="benefit-icon">🚀</div><h4>En ligne en 72h</h4><p>Pas de semaines d'attente. Votre espace est opérationnel en 3 jours.</p></div></div>
-</section>
-<section class="f-section alt">
-  <div class="f-inner">
-    <div class="f-label">La différence</div>
-    <h2 class="f-title">Seul vs avec lesformateurs.online</h2>
-    <table class="compare-table">
-      <thead><tr><th></th><th>🔴 Seul</th><th>🟢 Avec nous</th></tr></thead>
-      <tbody><tr><td>Temps de mise en ligne</td><td>2 à 4 semaines</td><td>72 heures</td></tr><tr><td>Fiches optimisées</td><td>Non</td><td>Oui — IA + expert</td></tr><tr><td>Erreurs de configuration</td><td>Fréquentes</td><td>0 — vérifié par un expert</td></tr><tr><td>Coût</td><td>Votre temps (valeur 1 500€+)</td><td>290€</td></tr><tr><td>Support post-config</td><td>Non</td><td>30 jours inclus</td></tr></tbody>
-    </table>
+<section class="fn-section fn-alt">
+  <div class="fn-inner">
+    <div class="fn-label">Cas concret</div>
+    <h2 class="fn-title">DigiForm : <em>12 400€</em> en 2 mois sur EDOF</h2>
+    <div class="fn-case">
+      <div class="fn-case-before"><h4>Avant EDOF</h4><p>Formations uniquement en direct. CA moyen : 4 200€/mois.</p></div>
+      <div class="fn-case-after"><h4>2 mois après</h4><p>3 formations sur Mon Compte Formation. 18 inscriptions CPF, 12 400€ de CA supplémentaire.</p></div>
+    </div>
   </div>
 </section>
-<section class="f-section">
-  <div class="f-label">Cas concret</div>
-  <h2 class="f-title">Comment "DigiForm" a généré 12 400€ en 2 mois sur EDOF</h2>
-  <div class="example-card"><h4>Avant EDOF</h4><p>DigiForm proposait ses formations uniquement en direct et via son site web. CA moyen : 4 200€/mois. Prospection manuelle, bouche-à-oreille.</p></div>
-  <div class="example-card" style="border-color:rgba(16,185,129,.2);background:linear-gradient(135deg,rgba(16,185,129,.04),rgba(99,102,241,.04));"><h4 style="color:var(--success);">2 mois après l'ouverture EDOF</h4><p>3 formations publiées sur Mon Compte Formation, fiches optimisées par l'IA. <strong>18 inscriptions CPF en 2 mois, 12 400€ de CA supplémentaire.</strong> Les clients viennent à eux.</p></div>
+<section class="fn-section">
+  <div class="fn-label">Témoignages</div>
+  <h2 class="fn-title">Ils nous font <em>confiance</em></h2>
+  <div class="fn-testi-grid"><div class="fn-testi"><div class="fn-testi-stars">★★★★★</div><div class="fn-testi-quote">3 semaines à essayer seul. Puis 290€ et 48h après c'était fait.</div><div class="fn-testi-author">François G.</div><div class="fn-testi-role">Formateur, Strasbourg</div></div><div class="fn-testi"><div class="fn-testi-stars">★★★★★</div><div class="fn-testi-quote">Mes 3 premières inscriptions CPF 10 jours après l'ouverture.</div><div class="fn-testi-author">Sandra T.</div><div class="fn-testi-role">Formatrice langues, Nice</div></div></div>
 </section>
-<section class="f-section">
-  <div class="">
-    <div class="f-label">Témoignages</div>
-    <h2 class="f-title">Ils nous font confiance</h2>
-    <div class="testi-grid"><div class="testi-card"><div class="stars">★★★★★</div><div class="quote">"J'ai mis 3 semaines à essayer seul. J'ai payé 290€ et en 48h c'était fait. Je regrette de ne pas avoir commencé par là."</div><div class="author">François G.</div><div class="role">Formateur bureautique, Strasbourg</div></div><div class="testi-card"><div class="stars">★★★★★</div><div class="quote">"Mes 3 premières inscriptions CPF sont arrivées 10 jours après l'ouverture. ROI immédiat."</div><div class="author">Sandra T.</div><div class="role">Formatrice langues, Nice</div></div></div>
+<section class="fn-cta-section" id="commander">
+  <div class="fn-label" style="color:var(--fn-accent2);">OUVREZ VOTRE ESPACE</div>
+  <h2>Ouvrez votre espace EDOF <em>maintenant</em></h2>
+  <p class="fn-desc">Configuration complète + fiches optimisées + support 30 jours.</p>
+  <div class="fn-price-tag">
+    <span class="fn-price-old">1 200€</span>
+    <span class="fn-price-new">290€</span>
   </div>
+  <div class="fn-ribbon">👑 <strong>-10%</strong> membres Premium</div><br>
+  <a href="https://lesformateurs.online/conformite.html" class="fn-btn" style="margin-top:8px;">Commander maintenant →</a>
+  <div class="fn-guarantee"><h4>✅ Satisfait ou remboursé 30 jours</h4><p>Si vous n'êtes pas satisfait, remboursement intégral. Sans condition.</p></div>
 </section>
-<section class="f-section" style="text-align:center;" id="commander">
-  <div class="f-cta">
-    <h3>Ouvrez votre espace EDOF maintenant</h3>
-    <p>Configuration complète + fiches optimisées + support 30 jours.</p>
-    <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:8px;">290€</div>
-    <div class="premium-ribbon" style="display:inline-flex;margin-bottom:16px;">👑 <strong>-10%</strong> pour les membres Premium</div><br>
-    <a href="https://lesformateurs.online/conformite.html" class="f-btn">Commander maintenant →</a>
-    <div class="guarantee-box" style="margin-top:24px;max-width:400px;display:inline-block;text-align:center;"><h4>✅ Satisfait ou remboursé 30 jours</h4><p>Si vous n'êtes pas satisfait du résultat, on vous rembourse intégralement. Sans condition.</p></div>
-  </div>
-</section>
-<section class="f-section">
-  <div class="f-label">Questions fréquentes</div>
-  <h2 class="f-title">FAQ</h2>
-  <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">J'ai besoin de Qualiopi pour EDOF ? <span>▼</span></div><div class="faq-a">Oui, la certification Qualiopi est obligatoire pour être référencé sur Mon Compte Formation. On peut aussi vous aider pour Qualiopi.</div></div><div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Combien de formations puis-je publier ? <span>▼</span></div><div class="faq-a">Autant que vous voulez. Le forfait inclut la configuration de votre espace + les premières fiches.</div></div><div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">C'est quoi le « reste à charge » CPF ? <span>▼</span></div><div class="faq-a">Depuis 2024, les bénéficiaires payent 102,23€ de reste à charge. Votre formation doit donc valoir le coup pour eux.</div></div>
+<section class="fn-section">
+  <div class="fn-label">Questions fréquentes</div>
+  <h2 class="fn-title">Vos questions, <em>nos réponses</em></h2>
+  <div class="fn-faq"><div class="fn-faq-item"><div class="fn-faq-q" onclick="this.parentElement.classList.toggle('open')">Besoin de Qualiopi ? <span>+</span></div><div class="fn-faq-a">Oui, Qualiopi est obligatoire pour EDOF.</div></div><div class="fn-faq-item"><div class="fn-faq-q" onclick="this.parentElement.classList.toggle('open')">Combien de formations ? <span>+</span></div><div class="fn-faq-a">Autant que vous voulez.</div></div><div class="fn-faq-item"><div class="fn-faq-q" onclick="this.parentElement.classList.toggle('open')">Le reste à charge CPF ? <span>+</span></div><div class="fn-faq-a">102,23€ pour les bénéficiaires depuis 2024.</div></div></div>
 </section>
 
-<footer style="background:var(--primary);color:rgba(255,255,255,.5);text-align:center;padding:24px;font-size:12px;">
-  © 2026 lesformateurs.online — EXPERIENCE PROD SASU · SIREN 982 828 774
-</footer>
+<div class="fn-footer">© 2026 lesformateurs.online — EXPERIENCE PROD SASU · SIREN 982 828 774</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script>
+function playVideo(el){
+  // Replace with actual video URL when ready
+  el.innerHTML = '<div style="position:absolute;inset:0;background:#111;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-family:Outfit;">Vidéo à venir — ajoutez votre URL YouTube ici</div>';
+}
 async function sendLead(source){
   var n=document.getElementById('lead-nom').value.trim();
   var e=document.getElementById('lead-email').value.trim();
   var t=document.getElementById('lead-tel').value.trim();
   var err=document.getElementById('lead-error');
-  if(!n||!e){err.textContent='⚠️ Nom et email obligatoires.';err.style.display='';return;}
+  if(!n||!e){err.textContent='Nom et email obligatoires.';err.style.display='';return;}
   err.style.display='none';
   try{await sb.from('leads').insert({name:n,email:e,phone:t,source:source});}catch(ex){}
-  document.querySelector('.f-form').style.display='none';
+  document.querySelector('.fn-form').style.display='none';
   document.getElementById('lead-success').style.display='';
 }
 </script>
-
 </body>
 </html>

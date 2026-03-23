@@ -12,8 +12,7 @@
   --radius:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{overflow-x:hidden;max-width:100%;}
-body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:#fff;line-height:1.6;overflow-x:hidden;max-width:100%;position:relative;}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:#fff;line-height:1.6;overflow-x:hidden;}
 a{text-decoration:none;color:inherit;}
 .accent{color:var(--accent);}
 
