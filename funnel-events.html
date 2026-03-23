@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Événements IA — Workshops, Conférences & Retraites | lesformateurs.online</title>
+<meta name="description" content="Workshops IA, conférence TEDx, retraite Annecy — formez-vous aux agents IA en présentiel.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+<link href="css/funnel.css" rel="stylesheet">
+</head>
+<body class="funnel-page">
+
+<div class="hf-hero">
+  <p class="hf-eyebrow">ÉVÉNEMENTS 2026</p>
+  <h1>Formez-vous à l'IA <em>en présentiel</em></h1>
+  <p class="hf-sub">Workshops intensifs, conférence TEDx, retraite au chalet — choisissez votre expérience et transformez votre organisme de formation.</p>
+  <a href="#reserver" class="hf-btn">Voir les événements disponibles</a>
+  <div class="hf-stats">
+    <div class="hf-stat"><strong>7</strong><span>événements</span></div>
+    <div class="hf-stat"><strong>5</strong><span>villes</span></div>
+    <div class="hf-stat"><strong>89€</strong><span>à partir de</span></div>
+    <div class="hf-stat"><strong>4/7</strong><span>complets</span></div>
+  </div>
+</div>
+
+<div class="hf-trust">
+  <div class="hf-trust-item"><strong>2 847+</strong> formateurs accompagnés</div>
+  <div class="hf-trust-item"><strong>94%</strong> de satisfaction</div>
+  <div class="hf-trust-item"><strong>100%</strong> pratique</div>
+</div>
+
+<section class="hf-section">
+  <div class="hf-inner">
+    <p class="hf-eyebrow">Aperçu</p>
+    <h2>Découvrez nos événements</h2>
+    <p class="hf-muted">Une présentation de notre approche unique : IA + pratique + réseau.</p>
+    <div class="hf-video" onclick="this.innerHTML='<div style=\'position:absolute;inset:0;background:#111;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:14px;\'>Ajoutez votre URL vidéo ici</div>'">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--hf-light),#e8e6e1);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;">
+        <div style="font-size:40px;opacity:.3;">🎬</div>
+        <div style="font-size:13px;color:var(--hf-muted);">Vidéo des événements</div>
+      </div>
+      <div class="hf-video-play">▶</div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENT CARDS -->
+<section class="hf-section hf-cream-bg">
+  <div class="hf-inner">
+    <p class="hf-eyebrow">Tous les événements</p>
+    <h2>Workshops, conférence & <em>retraite</em></h2>
+    <p class="hf-muted">Places très limitées. 4 événements sur 7 sont déjà complets.</p>
+    <div id="event-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;text-align:left;">
+      <p style="text-align:center;padding:40px;color:var(--hf-muted);">Chargement des événements...</p>
+    </div>
+  </div>
+</section>
+
+<section class="hf-big-testi">
+  <div class="hf-inner">
+    <div class="hf-testi-avatar">LF</div>
+    <div class="hf-testi-name">Laurent F.</div>
+    <div class="hf-testi-role">Gérant d'OF, Toulouse</div>
+    <div class="hf-quote">"Le workshop m'a ouvert les yeux. En une journée, j'ai compris comment automatiser 80% de mon administratif. 42 leads le premier mois après."</div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="hf-cta" id="reserver" style="background:var(--hf-dark);color:#fff;">
+  <p class="hf-eyebrow" style="color:var(--hf-accent);">RÉSERVATION</p>
+  <h2 style="color:#fff;">Réservez votre place</h2>
+  <p class="hf-muted" style="color:rgba(255,255,255,.5);">Choisissez votre événement et sécurisez votre place.</p>
+  <div style="max-width:480px;margin:0 auto;">
+    <div style="margin-bottom:14px;">
+      <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;color:rgba(255,255,255,.7);">Événement</label>
+      <select id="evt-select" onchange="updateEvtPrice()" style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;background:rgba(255,255,255,.06);color:#fff;-webkit-appearance:none;">
+        <option value="">— Choisissez un événement —</option>
+      </select>
+    </div>
+    <div id="evt-price-display" style="display:none;text-align:center;margin:20px 0;">
+      <span id="evt-price" style="font-family:'DM Serif Text';font-size:48px;color:#fff;"></span>
+      <p id="evt-info" style="font-size:13px;color:rgba(255,255,255,.4);margin-top:4px;"></p>
+    </div>
+    <div style="margin-bottom:14px;"><input type="text" id="evt-name" placeholder="Votre prénom et nom" style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;background:rgba(255,255,255,.06);color:#fff;" /></div>
+    <div style="margin-bottom:14px;"><input type="email" id="evt-email" placeholder="Votre email" style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;background:rgba(255,255,255,.06);color:#fff;" /></div>
+    <div style="margin-bottom:14px;"><input type="tel" id="evt-phone" placeholder="Téléphone" style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;background:rgba(255,255,255,.06);color:#fff;" /></div>
+    <div id="evt-error" style="display:none;color:var(--hf-accent);font-size:13px;margin-bottom:12px;text-align:center;"></div>
+    <button class="hf-btn hf-btn-accent" style="width:100%;" onclick="reserveEvent()">Réserver ma place →</button>
+    <p style="font-size:12px;color:rgba(255,255,255,.3);text-align:center;margin-top:12px;">Paiement sécurisé par Stripe. Places limitées.</p>
+  </div>
+  <div id="evt-success" style="display:none;padding:40px;text-align:center;">
+    <div style="font-size:48px;margin-bottom:12px;">✓</div>
+    <h3 style="color:#fff;font-size:24px;">Réservation enregistrée !</h3>
+    <p style="color:rgba(255,255,255,.5);font-size:15px;margin-top:8px;">Vous allez être redirigé vers le paiement.</p>
+  </div>
+</section>
+
+<section class="hf-section">
+  <div class="hf-inner">
+    <h2>Questions fréquentes</h2>
+    <p class="hf-muted">Tout ce que vous devez savoir sur nos événements.</p>
+    <div class="hf-faq">
+      <div class="hf-faq-item"><div class="hf-faq-q" onclick="this.parentElement.classList.toggle('open')">Quel niveau est requis ? <span>+</span></div><div class="hf-faq-a">Aucun prérequis technique. Nos workshops sont conçus pour des formateurs, pas des développeurs. Si vous savez utiliser un ordinateur, vous êtes prêt.</div></div>
+      <div class="hf-faq-item"><div class="hf-faq-q" onclick="this.parentElement.classList.toggle('open')">Le déjeuner est inclus ? <span>+</span></div><div class="hf-faq-a">Oui, le déjeuner est inclus dans tous les workshops et la retraite Annecy. Pour la conférence TEDx, un cocktail networking est servi.</div></div>
+      <div class="hf-faq-item"><div class="hf-faq-q" onclick="this.parentElement.classList.toggle('open')">La retraite Annecy inclut l'hébergement ? <span>+</span></div><div class="hf-faq-a">Oui. Le tarif de 2 590€ inclut l'hébergement en chalet (2 nuits), tous les repas, le spa, et les 16h de formation.</div></div>
+      <div class="hf-faq-item"><div class="hf-faq-q" onclick="this.parentElement.classList.toggle('open')">Un événement est complet, que faire ? <span>+</span></div><div class="hf-faq-a">Inscrivez-vous sur liste d'attente via le formulaire. Nous vous préviendrons en priorité si une place se libère ou si nous ouvrons une nouvelle date.</div></div>
+      <div class="hf-faq-item"><div class="hf-faq-q" onclick="this.parentElement.classList.toggle('open')">Je peux annuler ma réservation ? <span>+</span></div><div class="hf-faq-a">Annulation gratuite jusqu'à 14 jours avant l'événement. Entre 14 et 7 jours : 50% remboursé. Moins de 7 jours : non remboursable. Vous pouvez transférer votre place à quelqu'un d'autre.</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="hf-footer">© 2026 lesformateurs.online — EXPERIENCE PROD SASU · SIREN 982 828 774</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script>
+var eventsData = [];
+
+(async function(){
+  var { data } = await sb.from('events').select('*').eq('is_published', true).order('sort_order',{ascending:true});
+  eventsData = data || [];
+  renderEventCards();
+  populateEventSelect();
+})();
+
+function renderEventCards(){
+  var c = document.getElementById('event-cards');
+  var typeIcons = { workshop:'🛠', retreat:'🏔', conference:'🎤' };
+  var h = '';
+  eventsData.forEach(function(e){
+    var d = new Date(e.event_date);
+    var dateStr = d.toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
+    var full = e.is_full;
+    h += '<div style="background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--hf-border);'+(full?'opacity:.7;':'').replace(';','')+';">' +
+      '<div style="background:var(--hf-light);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:48px;">'+(typeIcons[e.event_type]||'📅')+'</div>' +
+      '<div style="padding:24px;">' +
+      (full ? '<span style="background:rgba(0,0,0,.06);color:var(--hf-muted);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;">COMPLET</span>' :
+       '<span style="background:rgba(233,69,96,.08);color:var(--hf-accent);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;">PLACES DISPONIBLES</span>') +
+      '<h3 style="font-size:18px;margin:10px 0 6px;">'+e.title+'</h3>' +
+      '<p style="font-size:13px;color:var(--hf-muted);margin-bottom:12px;">'+e.subtitle+'</p>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">' +
+      '<span style="font-size:12px;color:var(--hf-muted);">📍 '+e.location+'</span>' +
+      '<span style="font-size:12px;color:var(--hf-muted);">📅 '+dateStr+'</span>' +
+      '</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+      '<span style="font-family:\'DM Serif Text\';font-size:24px;color:'+(full?'var(--hf-muted)':'var(--hf-dark)')+';">'+e.price+'€</span>' +
+      (full ? '<span style="font-size:13px;color:var(--hf-muted);">Complet</span>' :
+       '<a href="#reserver" class="hf-btn" style="padding:10px 20px;font-size:13px;">Réserver</a>') +
+      '</div></div></div>';
+  });
+  c.innerHTML = h;
+}
+
+function populateEventSelect(){
+  var sel = document.getElementById('evt-select');
+  eventsData.forEach(function(e){
+    var d = new Date(e.event_date).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'});
+    var opt = document.createElement('option');
+    opt.value = e.id;
+    opt.textContent = (e.is_full ? '🔴 COMPLET — ' : '🟢 ') + e.title + ' — ' + d + ' — ' + e.price + '€';
+    opt.disabled = e.is_full;
+    opt.style.color = e.is_full ? '#999' : '';
+    sel.appendChild(opt);
+  });
+}
+
+function updateEvtPrice(){
+  var sel = document.getElementById('evt-select');
+  var e = eventsData.find(function(ev){ return ev.id === sel.value; });
+  var display = document.getElementById('evt-price-display');
+  if(e && !e.is_full){
+    document.getElementById('evt-price').textContent = e.price + '€';
+    document.getElementById('evt-info').textContent = e.location + ' · ' + e.duration + ' · ' + (e.current_attendees||0) + '/' + (e.max_attendees||'∞') + ' places';
+    display.style.display = '';
+  } else {
+    display.style.display = 'none';
+  }
+}
+
+async function reserveEvent(){
+  var evtId = document.getElementById('evt-select').value;
+  var name = document.getElementById('evt-name').value.trim();
+  var email = document.getElementById('evt-email').value.trim();
+  var phone = document.getElementById('evt-phone').value.trim();
+  var err = document.getElementById('evt-error');
+  if(!evtId){ err.textContent='Choisissez un événement.'; err.style.display=''; return; }
+  if(!name||!email){ err.textContent='Nom et email obligatoires.'; err.style.display=''; return; }
+  err.style.display='none';
+
+  // Save lead
+  var evt = eventsData.find(function(e){ return e.id === evtId; });
+  try {
+    await sb.from('leads').insert({ name:name, email:email, phone:phone, source:'event-'+evt.event_type, metadata:{ event_id:evtId, event_title:evt.title, event_price:evt.price } });
+  } catch(ex){}
+
+  // Try create account
+  try {
+    await sb.auth.signUp({ email:email, password:'temp_'+Date.now(), options:{ data:{ full_name:name, phone:phone } } });
+  } catch(ex){}
+
+  document.querySelector('[style*="max-width:480px"]').style.display = 'none';
+  document.getElementById('evt-success').style.display = '';
+
+  // TODO: redirect to Stripe payment link
+  // window.location.href = 'STRIPE_LINK';
+}
+</script>
+</body>
+</html>

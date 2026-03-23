@@ -93,6 +93,8 @@
   <a onclick="showTab('financement')">💰 Financement</a>
   <a onclick="showTab('messagerie')">💬 Messagerie</a>
   <a onclick="showTab('parrainage')">🎁 Parrainage</a>
+  <a onclick="showTab('forum')">💬 Forum</a>
+  <a onclick="showTab('events')">📅 Events</a>
   <a onclick="showTab('profil')">👤 Profil</a>
 </div>
 <div id="mobile-access-btns" style="display:none;padding:8px 12px;background:var(--primary);gap:8px;flex-wrap:wrap;">
@@ -125,6 +127,8 @@
     <div class="sidebar-title" style="margin-top:24px;">Compte</div>
     <a onclick="showTab('messagerie')">💬 Messagerie</a>
     <a onclick="showTab('parrainage')">🎁 Parrainage (10%)</a>
+    <a onclick="showTab('forum')">💬 Forum</a>
+    <a onclick="showTab('events')">📅 Events</a>
     <a onclick="showTab('profil')">👤 Mon profil</a>
     <a href="#" onclick="openLogoutModal();return false;">🚪 Déconnexion</a>
     <a href="expert.html" id="sidebar-pro-btn" style="display:none;margin-top:16px;background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;text-align:center;font-weight:700;font-size:13px;text-decoration:none;">⚡ Espace Pro</a>
@@ -661,6 +665,72 @@
         <div class="form-group"><label>IBAN</label><input type="text" id="profil-iban" placeholder="FR76 XXXX XXXX XXXX XXXX XXXX XXX"></div>
         <div id="iban-success" style="display:none;color:#10b981;font-size:12px;margin-bottom:8px;">✅ Informations bancaires enregistrées !</div>
         <button class="action-btn" onclick="saveIban()">💾 Enregistrer</button>
+      </div>
+    </div>
+
+    <!-- ========== FORUM ========== -->
+    <div class="tab-content" id="tab-forum">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
+        <div>
+          <h2 style="font-size:20px;font-weight:800;">💬 Forum communautaire</h2>
+          <p style="font-size:13px;color:var(--muted);">Posez vos questions, partagez vos retours d'expérience.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openNewTopic()" style="padding:8px 16px;font-size:13px;">+ Nouveau sujet</button>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+        <button class="action-btn forum-cat-btn active" onclick="filterForum('all',this)">Tous</button>
+        <button class="action-btn forum-cat-btn" onclick="filterForum('nda',this)">NDA</button>
+        <button class="action-btn forum-cat-btn" onclick="filterForum('qualiopi',this)">Qualiopi</button>
+        <button class="action-btn forum-cat-btn" onclick="filterForum('opco',this)">OPCO</button>
+        <button class="action-btn forum-cat-btn" onclick="filterForum('edof',this)">EDOF</button>
+        <button class="action-btn forum-cat-btn" onclick="filterForum('formation',this)">Formation</button>
+        <button class="action-btn forum-cat-btn" onclick="filterForum('general',this)">Général</button>
+      </div>
+
+      <input type="text" id="forum-search" placeholder="🔍 Rechercher un sujet..." style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;margin-bottom:16px;" oninput="searchForum()">
+
+      <div id="forum-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
+    </div>
+
+    <!-- MODAL: Nouveau sujet -->
+    <div class="modal" id="modal-new-topic">
+      <div class="modal-box" style="max-width:560px;">
+        <button class="modal-close" onclick="document.getElementById('modal-new-topic').classList.remove('open')">✕</button>
+        <h3 style="font-size:18px;font-weight:800;margin-bottom:16px;">💬 Nouveau sujet</h3>
+        <div class="form-group"><label>Titre du sujet</label><input type="text" id="topic-title" placeholder="Ex: Comment obtenir mon NDA ?"></div>
+        <div class="form-group"><label>Catégorie</label>
+          <select id="topic-category"><option value="general">Général</option><option value="nda">NDA</option><option value="qualiopi">Qualiopi</option><option value="opco">OPCO</option><option value="edof">EDOF</option><option value="formation">Formation</option><option value="paiement">Paiement</option><option value="bug">Bug / Problème</option></select>
+        </div>
+        <div class="form-group"><label>Votre question</label><textarea id="topic-body" rows="4" placeholder="Décrivez votre question en détail..."></textarea></div>
+        <button class="btn btn-primary" onclick="submitTopic()" style="width:100%;padding:10px;">Publier le sujet</button>
+      </div>
+    </div>
+
+    <!-- MODAL: Topic detail -->
+    <div class="modal" id="modal-topic-detail">
+      <div class="modal-box" style="max-width:640px;max-height:85vh;overflow-y:auto;">
+        <button class="modal-close" onclick="document.getElementById('modal-topic-detail').classList.remove('open')">✕</button>
+        <div id="topic-detail-content"></div>
+        <div style="border-top:1px solid var(--border);padding-top:16px;margin-top:16px;">
+          <textarea id="reply-body" rows="3" placeholder="Votre réponse..." style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;margin-bottom:8px;"></textarea>
+          <button class="btn btn-primary" onclick="submitReply()" style="padding:8px 20px;font-size:13px;">Répondre</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== EVENTS ========== -->
+    <div class="tab-content" id="tab-events">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">📅 Événements à venir</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Workshops, conférences et formations en présentiel.</p>
+      <div id="events-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
+    </div>
+
+    <!-- MODAL: Event detail -->
+    <div class="modal" id="modal-event-detail">
+      <div class="modal-box" style="max-width:640px;max-height:85vh;overflow-y:auto;">
+        <button class="modal-close" onclick="document.getElementById('modal-event-detail').classList.remove('open')">✕</button>
+        <div id="event-detail-content"></div>
       </div>
     </div>
 
@@ -1406,6 +1476,9 @@ async function confirmLogout(){
   await loadUserMessages(user.id);
   // Load financement
   await loadFinancement(user.id, profile);
+  // Load forum + events
+  await loadForum();
+  await loadEvents();
   
   // Check formation status and update summary + tab
   updateFormationProgress(profile);
@@ -2833,6 +2906,192 @@ async function updateDashboardStats(userId, nbDemarches, nbOF){
   if(statCards[2]) statCards[2].textContent = nbDemarches || 0;
   // OF
   if(statCards[3]) statCards[3].textContent = nbOF || 0;
+}
+
+// ============================
+// FORUM
+// ============================
+var forumTopics = [];
+var forumFilter = 'all';
+var currentTopicId = null;
+
+async function loadForum(){
+  var { data } = await sb.from('forum_topics')
+    .select('*, profiles!forum_topics_user_id_fkey(full_name)')
+    .order('is_pinned',{ascending:false})
+    .order('last_reply_at',{ascending:false,nullsFirst:false})
+    .order('created_at',{ascending:false});
+  forumTopics = data || [];
+  renderForum();
+}
+
+function renderForum(){
+  var c = document.getElementById('forum-list');
+  var q = (document.getElementById('forum-search')?.value || '').toLowerCase();
+  var filtered = forumTopics.filter(function(t){
+    if(forumFilter !== 'all' && t.category !== forumFilter) return false;
+    if(q && !t.title.toLowerCase().includes(q) && !(t.body||'').toLowerCase().includes(q)) return false;
+    return true;
+  });
+  if(filtered.length === 0){ c.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucun sujet trouvé.</p>'; return; }
+  var catColors = {nda:'#6366f1',qualiopi:'#e94560',opco:'#f59e0b',edof:'#10b981',formation:'#8b5cf6',paiement:'#ef4444',bug:'#ef4444',general:'#6b7280',premium:'#7c3aed',agent_ia:'#0ea5e9',creation_of:'#14b8a6',missions:'#f97316',parrainage:'#ec4899',rs_rncp:'#6366f1',francetravail:'#3b82f6',documents:'#78716c',financement:'#10b981',compte:'#6b7280',packs:'#d97706',uai:'#8b5cf6',events:'#0ea5e9',messagerie:'#6366f1'};
+  var h = '';
+  filtered.forEach(function(t){
+    var name = t.profiles ? t.profiles.full_name.split(' ')[0] : 'Anonyme';
+    var date = new Date(t.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'});
+    var cat = t.category || 'general';
+    var color = catColors[cat] || '#6b7280';
+    h += '<div class="detail-card" style="cursor:pointer;border-left:3px solid '+color+';" onclick="openTopic(\''+t.id+'\')">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
+      '<div style="flex:1;min-width:200px;">' +
+      (t.is_pinned ? '<span style="font-size:11px;color:#f59e0b;font-weight:700;">📌 Épinglé</span> ' : '') +
+      '<h4 style="font-size:14px;font-weight:700;margin-bottom:4px;">'+t.title+'</h4>' +
+      '<p style="font-size:12px;color:var(--muted);">Par <strong>'+name+'</strong> · '+t.ref_number+' · '+date+'</p></div>' +
+      '<div style="display:flex;gap:8px;align-items:center;">' +
+      '<span style="font-size:11px;background:'+color+'15;color:'+color+';padding:3px 10px;border-radius:6px;font-weight:600;">'+cat+'</span>' +
+      '<span style="font-size:12px;color:var(--muted);">💬 '+(t.reply_count||0)+'</span>' +
+      '</div></div></div>';
+  });
+  c.innerHTML = h;
+}
+
+function filterForum(cat, btn){
+  forumFilter = cat;
+  document.querySelectorAll('.forum-cat-btn').forEach(function(b){ b.classList.remove('active'); b.style.background=''; b.style.color=''; });
+  if(btn){ btn.classList.add('active'); btn.style.background='var(--accent)'; btn.style.color='#fff'; }
+  renderForum();
+}
+
+function searchForum(){ renderForum(); }
+
+function openNewTopic(){ document.getElementById('modal-new-topic').classList.add('open'); }
+
+async function submitTopic(){
+  var title = document.getElementById('topic-title').value.trim();
+  var body = document.getElementById('topic-body').value.trim();
+  var cat = document.getElementById('topic-category').value;
+  if(!title){ alert('Titre requis.'); return; }
+  var user = await getUser();
+  var count = forumTopics.length + 1;
+  var ref = 'REF-' + String(count).padStart(4,'0');
+  await sb.from('forum_topics').insert({ user_id: user.id, ref_number: ref, title: title, body: body, category: cat });
+  document.getElementById('modal-new-topic').classList.remove('open');
+  document.getElementById('topic-title').value = '';
+  document.getElementById('topic-body').value = '';
+  await loadForum();
+}
+
+async function openTopic(id){
+  currentTopicId = id;
+  var { data: topic } = await sb.from('forum_topics').select('*, profiles!forum_topics_user_id_fkey(full_name)').eq('id', id).single();
+  var { data: replies } = await sb.from('forum_replies').select('*, profiles!forum_replies_user_id_fkey(full_name)').eq('topic_id', id).order('created_at',{ascending:true});
+  if(!topic) return;
+  var name = topic.profiles ? topic.profiles.full_name.split(' ')[0] : 'Anonyme';
+  var date = new Date(topic.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});
+  var h = '<div style="margin-bottom:6px;"><span style="font-size:11px;color:var(--accent);font-weight:700;">'+topic.ref_number+' · '+(topic.category||'general')+'</span></div>' +
+    '<h3 style="font-size:18px;font-weight:800;margin-bottom:8px;">'+topic.title+'</h3>' +
+    '<p style="font-size:12px;color:var(--muted);margin-bottom:16px;">Par <strong>'+name+'</strong> · '+date+'</p>' +
+    '<div style="font-size:14px;line-height:1.7;margin-bottom:24px;padding:16px;background:var(--light);border-radius:10px;">'+( topic.body||'<em style="color:var(--muted);">Pas de description.</em>')+'</div>';
+  if(replies && replies.length > 0){
+    h += '<h4 style="font-size:14px;font-weight:700;margin-bottom:12px;">'+replies.length+' réponse'+(replies.length>1?'s':'')+'</h4>';
+    replies.forEach(function(r){
+      var rn = r.profiles ? r.profiles.full_name.split(' ')[0] : 'Anonyme';
+      var rd = new Date(r.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'});
+      var adminBadge = r.is_admin ? '<span style="background:var(--accent);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-left:6px;">ADMIN</span>' : '';
+      h += '<div style="padding:12px 16px;background:'+(r.is_admin?'rgba(233,69,96,.04)':'#fff')+';border:1px solid var(--border);border-radius:10px;margin-bottom:8px;">' +
+        '<div style="font-size:12px;color:var(--muted);margin-bottom:6px;"><strong>'+rn+'</strong>'+adminBadge+' · '+rd+'</div>' +
+        '<div style="font-size:13px;line-height:1.7;">'+r.body+'</div></div>';
+    });
+  }
+  document.getElementById('topic-detail-content').innerHTML = h;
+  document.getElementById('modal-topic-detail').classList.add('open');
+}
+
+async function submitReply(){
+  var body = document.getElementById('reply-body').value.trim();
+  if(!body || !currentTopicId){ alert('Écrivez une réponse.'); return; }
+  var user = await getUser();
+  var profile = await getProfile();
+  var isAdmin = profile && profile.profile_type === 'admin';
+  await sb.from('forum_replies').insert({ topic_id: currentTopicId, user_id: user.id, body: body, is_admin: isAdmin });
+  await sb.from('forum_topics').update({ reply_count: (await sb.from('forum_replies').select('id').eq('topic_id',currentTopicId)).data.length, last_reply_at: new Date().toISOString() }).eq('id', currentTopicId);
+  document.getElementById('reply-body').value = '';
+  await openTopic(currentTopicId);
+  await loadForum();
+}
+
+// ============================
+// EVENTS
+// ============================
+var allEvents = [];
+
+async function loadEvents(){
+  var { data } = await sb.from('events').select('*').eq('is_published', true).order('sort_order',{ascending:true});
+  allEvents = data || [];
+  renderEvents();
+}
+
+function renderEvents(){
+  var c = document.getElementById('events-list');
+  if(allEvents.length === 0){ c.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucun événement à venir.</p>'; return; }
+  var typeIcons = { workshop:'🛠', retreat:'🏔', conference:'🎤' };
+  var typeLabels = { workshop:'Workshop', retreat:'Retraite', conference:'Conférence' };
+  var h = '';
+  allEvents.forEach(function(e){
+    var d = new Date(e.event_date);
+    var dateStr = d.toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
+    var icon = typeIcons[e.event_type] || '📅';
+    var label = typeLabels[e.event_type] || 'Événement';
+    var full = e.is_full;
+    h += '<div class="detail-card" style="cursor:pointer;border-left:3px solid '+(full?'var(--muted)':'var(--accent)')+';" onclick="openEventDetail(\''+e.id+'\')">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">' +
+      '<div style="flex:1;min-width:200px;">' +
+      '<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;">' +
+      '<span style="font-size:20px;">'+icon+'</span>' +
+      '<span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;background:'+(full?'rgba(0,0,0,.06)':'rgba(233,69,96,.08)')+';color:'+(full?'var(--muted)':'var(--accent)')+';">'+label+(full?' · COMPLET':'')+'</span>' +
+      '</div>' +
+      '<h4 style="font-size:15px;font-weight:700;margin-bottom:4px;">'+e.title+'</h4>' +
+      '<p style="font-size:12px;color:var(--muted);">'+e.subtitle+'</p>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">' +
+      '<span class="detail-tag">📍 '+e.location+'</span>' +
+      '<span class="detail-tag">📅 '+dateStr+'</span>' +
+      '<span class="detail-tag">⏱ '+e.duration+'</span>' +
+      '<span class="detail-tag" style="font-weight:700;color:'+(full?'var(--muted)':'var(--accent)')+';">'+e.price+'€</span>' +
+      (e.max_attendees ? '<span class="detail-tag">'+(full?'🔴':'🟢')+' '+e.current_attendees+'/'+e.max_attendees+' places</span>' : '') +
+      '</div></div>' +
+      '</div></div>';
+  });
+  c.innerHTML = h;
+}
+
+function openEventDetail(id){
+  var e = allEvents.find(function(ev){ return ev.id === id; });
+  if(!e) return;
+  var d = new Date(e.event_date);
+  var dateStr = d.toLocaleDateString('fr-FR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+  var typeLabels = { workshop:'Workshop', retreat:'Retraite', conference:'Conférence' };
+  var full = e.is_full;
+  var h = '<div style="background:var(--light);border-radius:12px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:40px;color:var(--muted);overflow:hidden;">' +
+    (e.image_url ? '<img src="'+e.image_url+'" style="width:100%;height:100%;object-fit:cover;">' : '<div style="text-align:center;"><div style="font-size:48px;margin-bottom:8px;">'+(e.event_type==='retreat'?'🏔':e.event_type==='conference'?'🎤':'🛠')+'</div><div style="font-size:13px;">Photo de l\'événement</div></div>') +
+    '</div>' +
+    '<span style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;">'+(typeLabels[e.event_type]||'Événement')+(full?' · COMPLET':'')+'</span>' +
+    '<h3 style="font-size:20px;font-weight:800;margin:8px 0;">'+e.title+'</h3>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">' +
+    '<span class="detail-tag">📍 '+e.location+'</span>' +
+    '<span class="detail-tag">📅 '+dateStr+'</span>' +
+    '<span class="detail-tag">⏱ '+(e.event_time||'')+' · '+e.duration+'</span>' +
+    '<span class="detail-tag">📍 '+(e.address||'')+'</span>' +
+    '</div>' +
+    '<p style="font-size:14px;line-height:1.8;color:#444;margin-bottom:20px;">'+( e.description||'')+'</p>' +
+    '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:16px;background:var(--light);border-radius:10px;">' +
+    '<div><span style="font-size:24px;font-weight:900;color:var(--accent);">'+e.price+'€</span>' +
+    (e.max_attendees ? '<span style="font-size:12px;color:var(--muted);margin-left:8px;">'+(full?'🔴 Complet':'🟢 '+e.current_attendees+'/'+e.max_attendees+' places')+'</span>' : '') +
+    '</div>' +
+    (full ? '<span style="font-size:13px;color:var(--muted);font-weight:600;">Inscriptions fermées</span>' :
+    '<a href="funnel-events.html" class="btn btn-primary" style="padding:10px 24px;font-size:13px;">S\'inscrire →</a>') +
+    '</div>';
+  document.getElementById('event-detail-content').innerHTML = h;
+  document.getElementById('modal-event-detail').classList.add('open');
 }
 </script>
 

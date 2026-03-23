@@ -6,27 +6,16 @@
 <title>Abonnement Premium — 69€/mois</title>
 <meta name="description" content="Module financement + 10% sur tout.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-<link href="css/style.css" rel="stylesheet">
 <link href="css/funnel.css" rel="stylesheet">
 </head>
 <body class="funnel-page">
-<nav class="navbar">
-  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
-  <div class="nav-links" id="fNavLinks">
-    <a href="missions.html">Missions</a>
-    <a href="conformite.html">Conformité</a>
-    <a href="creer-of.html">Créer mon OF</a>
-    <a href="se-former.html">Se former</a>
-    <a href="#commander" class="nav-cta">Commander</a>
-  </div>
-  <button class="hamburger" onclick="document.getElementById('fNavLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
-</nav>
+
 
 <div class="hf-hero">
   <p class="hf-eyebrow">PREMIUM · 69€/MOIS</p>
   <h1>Économisez <em>10% sur tout</em> et accélérez vos financements</h1>
   <p class="hf-sub">Module Financement Express + réduction permanente sur tous les services.</p>
-  <a href="#commander" class="hf-btn">Commencer maintenant</a>
+  <a href="#commander" class="hf-btn" onclick="document.getElementById('commander').scrollIntoView({behavior:'smooth'});return false;">Commencer maintenant</a>
   <div class="hf-stats"><div class="hf-stat"><strong>69€</strong><span>par mois</span></div><div class="hf-stat"><strong>-10%</strong><span>sur tout</span></div><div class="hf-stat"><strong>2x</strong><span>plus rapide</span></div><div class="hf-stat"><strong>48h</strong><span>délai moyen</span></div></div>
 </div>
 
@@ -127,8 +116,8 @@
     <span class="hf-price-new">69€<small>/mois</small></span>
   </div>
   <div class="hf-ribbon">-10% pour les membres Premium</div><br>
-  <a href="https://buy.stripe.com/7sY7sL7vs22N4E69gmffy1x" class="hf-btn hf-btn-accent" style="margin-top:16px;">Commander maintenant</a>
-  <div class="hf-guarantee"><h4>Satisfait ou remboursé 30 jours</h4><p>Si vous n'êtes pas satisfait, remboursement intégral. Sans condition.</p></div>
+  <a href="#" class="hf-btn hf-btn-accent" style="margin-top:16px;" onclick="openFunnelCheckout(event)">Commander maintenant</a>
+
 </section>
 <section class="hf-section">
   <div class="hf-inner">
@@ -140,7 +129,7 @@
 <section class="hf-section" style="padding:80px 32px;">
   <h2>Passez a l action</h2>
   <p class="hf-muted">Rejoignez les formateurs qui ont déjà fait le pas.</p>
-  <a href="#commander" class="hf-btn">Commencer</a>
+  <a href="#commander" class="hf-btn" onclick="document.getElementById('commander')?.scrollIntoView({behavior:'smooth'}) || document.getElementById('contact')?.scrollIntoView({behavior:'smooth'}) || document.getElementById('inscription')?.scrollIntoView({behavior:'smooth'});return false;">Commencer</a>
 </section>
 
 <div class="hf-footer">© 2026 lesformateurs.online — EXPERIENCE PROD SASU · SIREN 982 828 774</div>
@@ -158,6 +147,84 @@ async function sendLead(source){
   try{await sb.from('leads').insert({name:n,email:e,phone:t,source:source});}catch(ex){}
   document.querySelector('.hf-form').style.display='none';
   document.getElementById('lead-success').style.display='';
+}
+</script>
+
+<!-- CHECKOUT POPUP -->
+<div id="funnel-checkout-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#fff;border-radius:20px;max-width:480px;width:100%;padding:40px;position:relative;max-height:90vh;overflow-y:auto;">
+    <button onclick="document.getElementById('funnel-checkout-overlay').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#6b7080;">✕</button>
+    <h3 style="font-family:'DM Serif Text',serif;font-size:28px;margin-bottom:8px;text-align:center;">Finalisez votre commande</h3>
+    <p style="font-size:14px;color:#6b7080;text-align:center;margin-bottom:28px;">Créez votre compte et accédez à votre espace personnel.</p>
+    <div id="fco-form">
+      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Prénom et nom</label><input type="text" id="fco-name" placeholder="Sophie Martin" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;" /></div>
+      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Email</label><input type="email" id="fco-email" placeholder="sophie@monof.fr" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;" /></div>
+      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Téléphone</label><input type="tel" id="fco-phone" placeholder="06 12 34 56 78" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;" /></div>
+      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Mot de passe</label><input type="password" id="fco-pass" placeholder="Minimum 6 caractères" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;" /></div>
+      <div id="fco-error" style="display:none;color:#e94560;font-size:13px;margin-bottom:12px;text-align:center;"></div>
+      <button onclick="submitFunnelCheckout()" style="width:100%;padding:16px;background:#e94560;color:#fff;border:none;border-radius:50px;font-size:16px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px;">Créer mon compte et payer →</button>
+      <p style="font-size:12px;color:#6b7080;text-align:center;margin-top:14px;">Déjà un compte ? <a href="#" onclick="toggleFcoLogin(event)" style="color:#e94560;font-weight:600;">Se connecter</a></p>
+    </div>
+    <div id="fco-login" style="display:none;">
+      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Email</label><input type="email" id="fco-login-email" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;" /></div>
+      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Mot de passe</label><input type="password" id="fco-login-pass" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;" /></div>
+      <div id="fco-login-error" style="display:none;color:#e94560;font-size:13px;margin-bottom:12px;text-align:center;"></div>
+      <button onclick="loginFunnelCheckout()" style="width:100%;padding:16px;background:#1a1d23;color:#fff;border:none;border-radius:50px;font-size:16px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">Se connecter et payer →</button>
+      <p style="font-size:12px;color:#6b7080;text-align:center;margin-top:14px;"><a href="#" onclick="toggleFcoLogin(event)" style="color:#e94560;font-weight:600;">← Créer un compte</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+var funnelStripeLink = 'https://buy.stripe.com/7sY7sL7vs22N4E69gmffy1x';
+
+function openFunnelCheckout(e){
+  if(e) e.preventDefault();
+  document.getElementById('funnel-checkout-overlay').style.display = 'flex';
+}
+
+function toggleFcoLogin(e){
+  e.preventDefault();
+  var f = document.getElementById('fco-form');
+  var l = document.getElementById('fco-login');
+  if(f.style.display === 'none'){ f.style.display=''; l.style.display='none'; }
+  else { f.style.display='none'; l.style.display=''; }
+}
+
+async function submitFunnelCheckout(){
+  var name = document.getElementById('fco-name').value.trim();
+  var email = document.getElementById('fco-email').value.trim();
+  var phone = document.getElementById('fco-phone').value.trim();
+  var pass = document.getElementById('fco-pass').value;
+  var err = document.getElementById('fco-error');
+  if(!name||!email||pass.length<6){ err.textContent='Remplissez tous les champs (mot de passe 6 car. min).'; err.style.display=''; return; }
+  err.style.display='none';
+  try {
+    var { data, error } = await sb.auth.signUp({ email: email, password: pass, options: { data: { full_name: name, phone: phone } } });
+    if(error){ err.textContent = error.message; err.style.display=''; return; }
+    // Also try auto sign in
+    await sb.auth.signInWithPassword({ email: email, password: pass });
+    // Update profile
+    var user = data.user || (await sb.auth.getUser()).data.user;
+    if(user){
+      await sb.from('profiles').update({ full_name: name, phone: phone }).eq('id', user.id);
+    }
+    // Redirect to Stripe
+    window.location.href = funnelStripeLink;
+  } catch(ex){ err.textContent = 'Erreur: ' + ex.message; err.style.display=''; }
+}
+
+async function loginFunnelCheckout(){
+  var email = document.getElementById('fco-login-email').value.trim();
+  var pass = document.getElementById('fco-login-pass').value;
+  var err = document.getElementById('fco-login-error');
+  if(!email||!pass){ err.textContent='Email et mot de passe requis.'; err.style.display=''; return; }
+  err.style.display='none';
+  try {
+    var { error } = await sb.auth.signInWithPassword({ email: email, password: pass });
+    if(error){ err.textContent = error.message; err.style.display=''; return; }
+    window.location.href = funnelStripeLink;
+  } catch(ex){ err.textContent = 'Erreur: ' + ex.message; err.style.display=''; }
 }
 </script>
 </body>
