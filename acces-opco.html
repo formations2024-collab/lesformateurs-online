@@ -317,17 +317,56 @@ h1,h2,h3,.quote-text{font-family:'DM Serif Text',Georgia,serif}
 </div></div>
   </div>
 </section>
-<section class="cta-section" id="commander">
-  <div class="eyebrow-section">RÉFÉRENCEZ-VOUS</div>
-  <h2>Connexion aux <em>11 OPCO</em></h2>
-  <p class="section-sub">Pack complet 2 990€ ou 290€ par OPCO à l'unité.</p>
-  <div class="hf-price">
-    <span class="hf-price-old">11 000€</span>
-    <span class="hf-price-new">2 990€</span>
+<section class="cta-section" id="commander" style="background:#fff;padding:80px 32px;">
+  <div style="max-width:760px;margin:0 auto;text-align:center;">
+    <div class="eyebrow-section" style="color:#e94560;">RÉFÉRENCEZ-VOUS</div>
+    <h2 style="font-family:'DM Serif Text',serif;font-size:36px;color:#1a1d23;margin-bottom:8px;">Sélectionnez vos OPCO</h2>
+    <p style="color:#6b7080;font-size:16px;margin-bottom:32px;"><strong style="color:#1a1d23;">290€ par OPCO</strong> · Pack complet 11 OPCO à <strong style="color:#e94560;">2 990€</strong></p>
+
+    <div id="opco-list" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px;text-align:left;">
+      <label class="opco-item" onclick="toggleOpco(this)"><input type="checkbox" style="display:none"><span class="opco-check">☐</span><span class="opco-name">AFDAS</span><small>Communication, culture, spectacle</small><span class="opco-price">290€</span></label>
+      <label class="opco-item" onclick="toggleOpco(this)"><input type="checkbox" style="display:none"><span class="opco-check">☐</span><span class="opco-name">ATLAS</span><small>Industrie chimique et pharmacie</small><span class="opco-price">290€</span></label>
+      <label class="opco-item" onclick="toggleOpco(this)"><input type="checkbox" style="display:none"><span class="opco-check">☐</span><span class="opco-name">CONSTRUCTYS</span><small>Construction et immobilier</small><span class="opco-price">290€</span></label>
+      <label class="opco-item" onclick="toggleOpco(this)"><input type="checkbox" style="display:none"><span class="opco-check">☐</span><span class="opco-name">FAFIH</span><small>Hôtellerie, restauration, alimentation</small><span class="opco-price">290€</span></label>
+      <label class="opco-item" onclick="toggleOpco(this)"><input type="checkbox" style="display:none"><span class="opco-check">☐</span><span class="opco-name">FAFSEA</span><small>Agriculture, pêche maritime</small><span class="opco-price">290€</span></label>
+      <label class="opco-item" onclick="toggleOpco(this)"><input type="checkbox" style="display:none"><span class="opco-check">☐</span><span class="opco-name">OCAPIAT</span><small>Agriculture, coopératives, CUMA</small><span class="opco-price">290€</span></label>
+      <label class="opco-item" onclick="toggleOpco(this)"><input type="checkbox" style="display:none"><span class="opco-check">☐</span><span class="opco-name">OPCO 2i</span><small>Industries technologiques</small><span class="opco-price">290€</span></label>
+      <label class="opco-item" onclick="toggleOpco(this)"><input type="checkbox" style="display:none"><span class="opco-check">☐</span><span class="opco-name">OPCO EP</span><small>Entreprises de proximité</small><span class="opco-price">290€</span></label>
+      <label class="opco-item" onclick="toggleOpco(this)"><input type="checkbox" style="display:none"><span class="opco-check">☐</span><span class="opco-name">OPCO SANTÉ</span><small>Secteur sanitaire et social</small><span class="opco-price">290€</span></label>
+      <label class="opco-item" onclick="toggleOpco(this)"><input type="checkbox" style="display:none"><span class="opco-check">☐</span><span class="opco-name">UNIFORMATION</span><small>Économie sociale et solidaire</small><span class="opco-price">290€</span></label>
+      <label class="opco-item" onclick="toggleOpco(this)" style="grid-column:1/-1;background:linear-gradient(135deg,rgba(233,69,96,.03),rgba(233,69,96,.07));border-color:rgba(233,69,96,.25);"><input type="checkbox" style="display:none"><span class="opco-check">☐</span><span class="opco-name">OPCO MOBILITÉS</span><small>Transport, logistique, mobilité</small><span class="opco-price">290€</span></label>
+    </div>
+
+    <div id="opco-cart" style="background:#faf8f5;border:2px solid #e9e7e2;border-radius:20px;padding:28px;">
+      <div id="opco-summary" style="font-size:15px;color:#6b7080;margin-bottom:6px;">0 OPCO sélectionné(s)</div>
+      <div id="opco-total-price" style="font-family:'DM Serif Text',serif;font-size:52px;color:#e94560;font-weight:700;line-height:1;">0€</div>
+
+      <div id="pack11-options" style="display:none;margin-top:20px;padding:16px;background:rgba(233,69,96,.04);border-radius:12px;border:1px solid rgba(233,69,96,.15);">
+        <p style="font-size:13px;font-weight:700;color:#6b7080;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Pack 11 OPCO — Choisissez votre paiement :</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <button onclick="payOpco('1x')" style="padding:12px 20px;background:#1a1d23;color:#fff;border:none;border-radius:50px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">1× 2 990€</button>
+          <button onclick="payOpco('2x')" style="padding:12px 20px;background:#1a1d23;color:#fff;border:none;border-radius:50px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">2× 1 490€ <span style="font-size:11px;opacity:.7;">/paiement</span></button>
+          <button onclick="payOpco('3x')" style="padding:12px 20px;background:#1a1d23;color:#fff;border:none;border-radius:50px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">3× 990€ <span style="font-size:11px;opacity:.7;">/paiement</span></button>
+        </div>
+      </div>
+
+      <div id="opco-pay-wrap" style="margin-top:20px;">
+        <button id="opco-pay-btn" onclick="openOpcoCheckout()" disabled style="padding:16px 40px;background:#ccc;color:#fff;border:none;border-radius:50px;font-size:16px;font-weight:600;cursor:not-allowed;font-family:'DM Sans',sans-serif;transition:all .25s;pointer-events:none;">Sélectionnez au moins 1 OPCO</button>
+      </div>
+    </div>
+
+    <style>
+    .opco-item{display:flex;align-items:center;gap:10px;padding:14px 16px;border:2px solid #e9e7e2;border-radius:12px;cursor:pointer;transition:all .2s;user-select:none;background:#fff;}
+    .opco-item:hover{border-color:#e94560;background:rgba(233,69,96,.02);}
+    .opco-item.selected{border-color:#e94560;background:rgba(233,69,96,.05);}
+    .opco-check{font-size:18px;color:#d1d5db;flex-shrink:0;width:20px;transition:color .15s;}
+    .opco-item.selected .opco-check{color:#e94560;}
+    .opco-name{font-weight:700;font-size:14px;flex-shrink:0;}
+    .opco-item small{font-size:12px;color:#9ca3af;flex:1;margin-left:4px;}
+    .opco-price{font-weight:700;font-size:13px;color:#e94560;flex-shrink:0;margin-left:auto;}
+    @media(max-width:600px){#opco-list{grid-template-columns:1fr;}}
+    </style>
   </div>
-  
-  <a href="#" class="btn btn-accent" style="margin-top:16px;" onclick="openFunnelCheckout(event)">Réserver un appel stratégique</a>
-  
 </section>
 <section class="section">
   <div class="section-inner reveal">
@@ -356,16 +395,16 @@ async function sendLead(source){
 }
 </script>
 
-<div id="funnel-checkout-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
+<div id="acces-checkout-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
   <div style="background:#fff;border-radius:20px;max-width:480px;width:100%;padding:40px;position:relative;max-height:90vh;overflow-y:auto;">
-    <button onclick="document.getElementById('funnel-checkout-overlay').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#6b7080;">×</button>
+    <button onclick="document.getElementById('acces-checkout-overlay').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#6b7080;">×</button>
     <h3 style="font-family:'DM Serif Text',serif;font-size:28px;margin-bottom:8px;text-align:center;">Réservez votre appel stratégique</h3>
     <p style="font-size:14px;color:#6b7080;text-align:center;margin-bottom:28px;">30 minutes avec un expert OPCO pour analyser votre situation et définir votre stratégie de référencement.</p>
     <div id="fco-form">
-      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Prénom et nom</label><input type="text" id="fco-name" placeholder="Sophie Martin" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;"/></div>
+      <div style="display:flex;gap:12px;margin-bottom:14px;"><div style="flex:1;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Prénom</label><input type="text" id="fco-firstname" placeholder="Sophie" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;box-sizing:border-box;"/></div><div style="flex:1;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Nom</label><input type="text" id="fco-lastname" placeholder="Martin" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;box-sizing:border-box;"/></div></div>
       <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Email</label><input type="email" id="fco-email" placeholder="sophie@monof.fr" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;"/></div>
       <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Téléphone</label><input type="tel" id="fco-phone" placeholder="06 12 34 56 78" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;"/></div>
-      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Mot de passe</label><input type="password" id="fco-pass" placeholder="Minimum 6 caractères" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;"/></div>
+      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Mot de passe</label><div style="position:relative;"><input type="password" id="fco-pass" placeholder="Minimum 8 caractères" style="width:100%;padding:14px 16px;padding-right:48px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;box-sizing:border-box;"/><button type="button" onclick="toggleFcoPass()" id="fco-pass-eye" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#999;font-size:18px;padding:0;line-height:1;">👁</button></div></div>
       <div id="fco-error" style="display:none;color:#e94560;font-size:13px;margin-bottom:12px;text-align:center;"></div>
       <button onclick="submitFunnelCheckout()" style="width:100%;padding:16px;background:#e94560;color:#fff;border:none;border-radius:50px;font-size:16px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px;">Réserver mon appel gratuit</button>
       <p style="font-size:12px;color:#6b7080;text-align:center;margin-top:14px;">Déjà un compte ? <a href="#" onclick="toggleFcoLogin(event)" style="color:#e94560;font-weight:600;">Se connecter</a></p>
@@ -380,11 +419,41 @@ async function sendLead(source){
   </div>
 </div>
 <script>
-var funnelStripeLink = "https://lesformateurs.online/success.html";
-function openFunnelCheckout(e){if(e)e.preventDefault();document.getElementById('funnel-checkout-overlay').style.display='flex';}
+var opcoLinks = {
+  1:"https://buy.stripe.com/bJe7sL5nk9vfgmOakqffy1t",
+  2:"https://buy.stripe.com/28EcN5bLI36R2vYdwCffy22",
+  3:"https://buy.stripe.com/5kQcN5g1Y5eZ9Yqakqffy23",
+  4:"https://buy.stripe.com/8x2aEXbLIbDn1rU1NUffy24",
+  5:"https://buy.stripe.com/bJecN59DA9vf3A28ciffy25",
+  6:"https://buy.stripe.com/dRm8wP3fcgXH0nQ2RYffy26",
+  7:"https://buy.stripe.com/14A7sL9DAcHr4E6dwCffy27",
+  8:"https://buy.stripe.com/cNi7sLg1YdLv8Um78effy28",
+  9:"https://buy.stripe.com/9B64gz8zwfTD8Umakqffy29",
+  10:"https://buy.stripe.com/14A8wP7vsazjfiK64affy2a",
+  "11_1x":"https://buy.stripe.com/28E4gz030cHrfiKbouffy0L",
+  "11_2x":"https://buy.stripe.com/14A4gz1745eZ8Umbouffy2b",
+  "11_3x":"https://buy.stripe.com/3cI3cvdTQ8rb9YqdwCffy2c"
+};
+var currentOpcoCount=0; var funnelStripeLink="";
+function toggleOpco(label){label.classList.toggle("selected");updateOpcoCart();}
+function updateOpcoCart(){
+  currentOpcoCount=document.querySelectorAll("#opco-list .opco-item.selected").length;
+  var total=currentOpcoCount===11?2990:currentOpcoCount*290;
+  document.getElementById("opco-summary").textContent=currentOpcoCount+" OPCO sélectionné(s)";
+  document.getElementById("opco-total-price").textContent=total>0?total+"€":"0€";
+  var btn=document.getElementById("opco-pay-btn");
+  var pack11=document.getElementById("pack11-options");
+  var pw=document.getElementById("opco-pay-wrap");
+  if(currentOpcoCount===0){btn.textContent="Sélectionnez au moins 1 OPCO";btn.style.background="#ccc";btn.style.cursor="not-allowed";btn.style.pointerEvents="none";btn.disabled=true;pack11.style.display="none";pw.style.display="";}
+  else if(currentOpcoCount===11){pack11.style.display="";pw.style.display="none";}
+  else{pack11.style.display="none";pw.style.display="";btn.textContent="Payer "+total+"€ →";btn.style.background="#e94560";btn.style.cursor="pointer";btn.style.pointerEvents="";btn.disabled=false;funnelStripeLink=opcoLinks[currentOpcoCount];}
+}
+function payOpco(inst){funnelStripeLink=opcoLinks["11_"+inst];openOpcoCheckout();}
+function openOpcoCheckout(){if(currentOpcoCount===0)return;document.getElementById("acces-checkout-overlay").style.display="flex";}
+function openFunnelCheckout(e){if(e)e.preventDefault();document.getElementById('acces-checkout-overlay').style.display='flex';}
 function toggleFcoLogin(e){e.preventDefault();var f=document.getElementById('fco-form'),l=document.getElementById('fco-login');if(f.style.display==='none'){f.style.display='';l.style.display='none';}else{f.style.display='none';l.style.display='';}}
-async function submitFunnelCheckout(){var n=document.getElementById('fco-name').value.trim(),e=document.getElementById('fco-email').value.trim(),p=document.getElementById('fco-pass').value,err=document.getElementById('fco-error');if(!n||!e||p.length<6){err.textContent='Remplissez tous les champs (6 car. min).';err.style.display='';return;}err.style.display='none';try{var{data,error}=await sb.auth.signUp({email:e,password:p,options:{data:{full_name:n}}});if(error){err.textContent=error.message;err.style.display='';return;}await sb.auth.signInWithPassword({email:e,password:p});window.location.href=funnelStripeLink;}catch(ex){err.textContent='Erreur: '+ex.message;err.style.display='';}}
-async function loginFunnelCheckout(){var e=document.getElementById('fco-login-email').value.trim(),p=document.getElementById('fco-login-pass').value,err=document.getElementById('fco-login-error');if(!e||!p){err.textContent='Email et mot de passe requis.';err.style.display='';return;}err.style.display='none';try{var{error}=await sb.auth.signInWithPassword({email:e,password:p});if(error){err.textContent=error.message;err.style.display='';return;}window.location.href=funnelStripeLink;}catch(ex){err.textContent='Erreur: '+ex.message;err.style.display='';}}
+function toggleFcoPass(){var inp=document.getElementById('fco-pass');var eye=document.getElementById('fco-pass-eye');if(inp.type==='password'){inp.type='text';eye.textContent='🙈';}else{inp.type='password';eye.textContent='👁';}}async function submitFunnelCheckout(){var fn=document.getElementById('fco-firstname').value.trim(),ln=document.getElementById('fco-lastname').value.trim(),n=(fn+' '+ln).trim(),e=document.getElementById('fco-email').value.trim(),p=document.getElementById('fco-pass').value,err=document.getElementById('fco-error');if(!fn||!ln||!e||p.length<8){err.textContent='Remplissez tous les champs (8 car. min.).';err.style.display='';return;}err.style.display='none';try{var{data,error}=await sb.auth.signUp({email:e,password:p,options:{data:{full_name:n,first_name:fn,last_name:ln}}});if(error&&error.message!=='User already registered'){err.textContent=error.message;err.style.display='';return;}await sb.auth.signInWithPassword({email:e,password:p});window.open(funnelStripeLink,'_blank');}catch(ex){err.textContent='Erreur: '+ex.message;err.style.display='';}}
+async function loginFunnelCheckout(){var e=document.getElementById('fco-login-email').value.trim(),p=document.getElementById('fco-login-pass').value,err=document.getElementById('fco-login-error');if(!e||!p){err.textContent='Email et mot de passe requis.';err.style.display='';return;}err.style.display='none';try{var{error}=await sb.auth.signInWithPassword({email:e,password:p});if(error){err.textContent=error.message;err.style.display='';return;}window.open(funnelStripeLink,'_blank');}catch(ex){err.textContent='Erreur: '+ex.message;err.style.display='';}}
 </script>
 
 <script>

@@ -83,7 +83,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;}
 async function sendIALead(){
   var nom=document.getElementById('ia-nom').value.trim(),email=document.getElementById('ia-email').value.trim(),tel=document.getElementById('ia-tel').value.trim(),agent=document.getElementById('ia-agent').value,msg=document.getElementById('ia-msg').value.trim();
   if(!email||!email.includes('@')){alert('⚠️ Email requis.');return;}
-  try{await sb.from('leads').insert({email:email,nom:nom,telephone:tel,source:'funnel-agents-ia',funnel:'agents-ia',metadata:{agent:agent,message:msg}});}catch(e){}
+  try{await sb.from('leads').insert({email:email,nom:nom,telephone:tel,source:'acces-agents-ia',funnel:'agents-ia',metadata:{agent:agent,message:msg}});}catch(e){}
   alert('✅ Demande envoyée !\n\nNous vous rappelons sous 24h pour configurer votre agent.');
   document.querySelector('.lead-form').innerHTML='<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">🎉</div><h4>Demande reçue !</h4><p style="color:#666;font-size:14px;">Nous vous contactons sous 24h.</p></div>';
 }

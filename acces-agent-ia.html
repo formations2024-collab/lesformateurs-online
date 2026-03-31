@@ -361,24 +361,76 @@ h1,h2,h3,.quote-text{font-family:'DM Serif Text',Georgia,serif}
   </div>
 </section>
 
-<section class="cta-section" id="contact">
-  <div class="cta-inner reveal">
-    <div class="cta-badge"><span class="cta-badge-dot"></span> Démo gratuite · 30 min</div>
-    <h2>Voyez votre agent en action</h2>
-    <p class="cta-sub">Un expert configure une démo personnalisée avec vos vrais cas d'usage. 30 minutes, sans engagement.</p>
-    <div class="form-card" id="form-card">
-      <input type="text" id="lead-nom" placeholder="Votre prénom et nom">
-      <input type="email" id="lead-email" placeholder="Votre email professionnel">
-      <input type="tel" id="lead-tel" placeholder="Téléphone (facultatif)">
-      <div class="form-error" id="lead-error">Nom et email obligatoires.</div>
-      <button class="btn btn-accent form-btn" onclick="sendLead('funnel-agent-ia')">Demander ma démo gratuite <span class="btn-arrow">→</span></button>
-      <p class="form-note"><span class="form-note-icon">✓</span> Réponse sous 24h · Sans engagement</p>
+<section class="cta-section" id="contact" style="background:#fff;padding:80px 32px;">
+  <div style="max-width:760px;margin:0 auto;text-align:center;">
+    <div class="eyebrow-section" style="color:#e94560;">COMPOSEZ VOTRE AGENT</div>
+    <h2 style="font-family:'DM Serif Text',serif;font-size:36px;color:#1a1d23;margin-bottom:8px;">Choisissez les capacités de votre agent</h2>
+    <p style="color:#6b7080;font-size:16px;margin-bottom:8px;">Sélectionnez les missions que vous voulez déléguer à votre IA.</p>
+    <p style="display:inline-flex;align-items:center;gap:8px;background:#f0fdf4;color:#16a34a;font-size:13px;font-weight:700;padding:8px 16px;border-radius:50px;margin-bottom:32px;border:1px solid #bbf7d0;">✅ Satisfait ou remboursé sous 7 jours</p>
+
+    <div id="agent-list" style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;text-align:left;">
+      <label class="agent-item" onclick="toggleAgent(this,'creation_formations',399)"><input type="checkbox" style="display:none"><span class="ag-check">☐</span><span class="ag-icon">📚</span><div class="ag-info"><span class="ag-name">Création de formations</span><span class="ag-desc">Génère programmes pédagogiques, supports de cours, évaluations, fiches modules. Adapté à votre domaine.</span></div><span class="ag-price">399€</span></label>
+      <label class="agent-item" onclick="toggleAgent(this,'depots_dossiers',399)"><input type="checkbox" style="display:none"><span class="ag-check">☐</span><span class="ag-icon">📄</span><div class="ag-info"><span class="ag-name">Dépôts de dossiers &amp; démarches</span><span class="ag-desc">BPF, dossiers stagiaires, déclarations DREETS, dépôts de capital, toutes démarches administratives.</span></div><span class="ag-price">399€</span></label>
+      <label class="agent-item" onclick="toggleAgent(this,'gestion_stagiaires',349)"><input type="checkbox" style="display:none"><span class="ag-check">☐</span><span class="ag-icon">👥</span><div class="ag-info"><span class="ag-name">Gestion des stagiaires</span><span class="ag-desc">Inscriptions, émargement numérique, suivi de présence, évaluations à chaud/froid, attestations de fin.</span></div><span class="ag-price">349€</span></label>
+      <label class="agent-item" onclick="toggleAgent(this,'facturation',349)"><input type="checkbox" style="display:none"><span class="ag-check">☐</span><span class="ag-icon">🧾</span><div class="ag-info"><span class="ag-name">Facturation &amp; devis automatiques</span><span class="ag-desc">Conventions de formation, devis, factures, relances de paiement, suivi de trésorerie.</span></div><span class="ag-price">349€</span></label>
+      <label class="agent-item" onclick="toggleAgent(this,'prospection',499)" style="border-color:#e94560;background:linear-gradient(135deg,rgba(233,69,96,.03),rgba(233,69,96,.07));"><input type="checkbox" style="display:none"><span class="ag-check">☐</span><span class="ag-icon">🎯</span><div class="ag-info"><span class="ag-name">Recherche de clients &amp; prospection</span><span class="ag-desc">Réponse aux appels d'offres, prospection email, détection d'opportunités, relances automatiques.</span></div><span class="ag-price">499€</span></label>
+      <label class="agent-item" onclick="toggleAgent(this,'cpf_edof',299)"><input type="checkbox" style="display:none"><span class="ag-check">☐</span><span class="ag-icon">💰</span><div class="ag-info"><span class="ag-name">Gestion CPF / EDOF</span><span class="ag-desc">Suivi des inscriptions Mon Compte Formation, gestion des sessions, validation des dossiers CPF.</span></div><span class="ag-price">299€</span></label>
+      <label class="agent-item" onclick="toggleAgent(this,'veille',249)"><input type="checkbox" style="display:none"><span class="ag-check">☐</span><span class="ag-icon">📡</span><div class="ag-info"><span class="ag-name">Veille réglementaire</span><span class="ag-desc">Alertes en temps réel sur les évolutions légales, Qualiopi, CPF, OPCO. Plus jamais pris au dépourvu.</span></div><span class="ag-price">249€</span></label>
+      <label class="agent-item" onclick="toggleAgent(this,'community',299)"><input type="checkbox" style="display:none"><span class="ag-check">☐</span><span class="ag-icon">📱</span><div class="ag-info"><span class="ag-name">Community management</span><span class="ag-desc">Posts LinkedIn/réseaux sociaux, rédaction d'articles, gestion de votre image en ligne.</span></div><span class="ag-price">299€</span></label>
+      <label class="agent-item" onclick="toggleAgent(this,'reporting',199)"><input type="checkbox" style="display:none"><span class="ag-check">☐</span><span class="ag-icon">📊</span><div class="ag-info"><span class="ag-name">Reporting &amp; tableaux de bord</span><span class="ag-desc">Statistiques de votre activité, taux de remplissage, satisfaction, CA prévisionnel. Rapports automatiques.</span></div><span class="ag-price">199€</span></label>
+      <label class="agent-item" onclick="toggleAgent(this,'planification',299)"><input type="checkbox" style="display:none"><span class="ag-check">☐</span><span class="ag-icon">📅</span><div class="ag-info"><span class="ag-name">Planification &amp; logistique</span><span class="ag-desc">Planning des sessions, réservation de salles, envoi des convocations, gestion des intervenants.</span></div><span class="ag-price">299€</span></label>
     </div>
-    <div class="form-success" id="lead-success">
-      <div class="form-success-icon">✓</div>
-      <h3>C'est envoyé !</h3>
-      <p>Notre équipe vous recontacte sous 24h.</p>
+
+    <div id="agent-cart" style="background:#faf8f5;border:2px solid #e9e7e2;border-radius:20px;padding:24px;">
+      <div id="agent-count-text" style="font-size:14px;color:#6b7080;margin-bottom:4px;">0 capacité(s) sélectionnée(s)</div>
+      <div id="agent-total-price" style="font-family:'DM Serif Text',serif;font-size:48px;color:#e94560;font-weight:700;line-height:1.1;">0€</div>
+      <div style="margin-top:16px;">
+        <button id="agent-pay-btn" onclick="openAgentCheckout()" disabled style="padding:16px 40px;background:#ccc;color:#fff;border:none;border-radius:50px;font-size:16px;font-weight:600;cursor:not-allowed;font-family:'DM Sans',sans-serif;transition:all .25s;pointer-events:none;">Sélectionnez au moins 1 capacité</button>
+      </div>
+      <p style="font-size:12px;color:#6b7080;margin-top:10px;">✅ Satisfait ou remboursé sous 7 jours · Sans engagement</p>
     </div>
+
+    <!-- AGENT CHECKOUT OVERLAY -->
+    <div id="agent-checkout-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+      <div style="background:#fff;border-radius:24px;padding:32px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.2);max-height:90vh;overflow-y:auto;position:relative;">
+        <button onclick="document.getElementById('agent-checkout-overlay').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#6b7080;">✕</button>
+        <h3 style="font-family:'DM Serif Text',serif;font-size:22px;color:#1a1d23;margin-bottom:4px;">Finaliser votre commande</h3>
+        <p id="agent-order-summary" style="font-size:14px;color:#6b7080;margin-bottom:20px;"></p>
+        <div id="agent-fco-form">
+          <div style="display:flex;gap:10px">
+            <input type="text" id="ag-firstname" placeholder="Prénom" style="flex:1;padding:12px 14px;border:1.5px solid #d1d5db;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1a1d23;">
+            <input type="text" id="ag-lastname" placeholder="Nom" style="flex:1;padding:12px 14px;border:1.5px solid #d1d5db;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1a1d23;">
+          </div>
+          <input type="email" id="ag-email" placeholder="Email professionnel" style="width:100%;padding:12px 14px;border:1.5px solid #d1d5db;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;margin-top:10px;color:#1a1d23;">
+          <input type="tel" id="ag-phone" placeholder="Téléphone" style="width:100%;padding:12px 14px;border:1.5px solid #d1d5db;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;margin-top:10px;color:#1a1d23;">
+          <div style="position:relative;margin-top:10px;">
+            <input type="password" id="ag-pass" placeholder="Mot de passe (8 car. min)" minlength="8" style="width:100%;padding:12px 14px;padding-right:44px;border:1.5px solid #d1d5db;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1a1d23;">
+            <span onclick="var x=document.getElementById('ag-pass');x.type=x.type==='password'?'text':'password';" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:16px;color:#9ca3af;">👁</span>
+          </div>
+          <div id="ag-error" style="display:none;color:#e94560;font-size:13px;margin-top:8px;text-align:center;"></div>
+          <button onclick="submitAgentCheckout()" style="width:100%;margin-top:16px;padding:15px;background:#e94560;color:#fff;border:none;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;" id="ag-submit-btn">Payer et accéder à mon agent →</button>
+          <p style="font-size:11px;color:#9ca3af;margin-top:8px;text-align:center;">✅ Satisfait ou remboursé sous 7 jours</p>
+        </div>
+        <div id="agent-fco-success" style="display:none;text-align:center;padding:20px 0;">
+          <div style="font-size:48px;margin-bottom:8px;">✓</div>
+          <h3 style="color:#1a1d23;font-size:20px;">Commande enregistrée !</h3>
+          <p style="color:#6b7080;font-size:14px;margin-top:6px;">Vous allez être redirigé vers le paiement…</p>
+        </div>
+      </div>
+    </div>
+
+    <style>
+    .agent-item{display:flex;align-items:flex-start;gap:12px;padding:16px;border:2px solid #e9e7e2;border-radius:14px;cursor:pointer;transition:all .2s;user-select:none;background:#fff;}
+    .agent-item:hover{border-color:#e94560;background:rgba(233,69,96,.02);}
+    .agent-item.selected{border-color:#e94560;background:rgba(233,69,96,.04);}
+    .ag-check{font-size:20px;color:#d1d5db;flex-shrink:0;transition:color .15s;}
+    .agent-item.selected .ag-check{color:#e94560;}
+    .ag-icon{font-size:22px;flex-shrink:0;}
+    .ag-info{flex:1;text-align:left;}
+    .ag-name{display:block;font-weight:700;font-size:15px;color:#1a1d23;margin-bottom:2px;}
+    .ag-desc{display:block;font-size:13px;color:#9ca3af;line-height:1.4;}
+    .ag-price{font-weight:800;font-size:16px;color:#e94560;flex-shrink:0;padding-top:2px;}
+    </style>
   </div>
 </section>
 
@@ -421,6 +473,77 @@ async function sendLead(source){
   try{await sb.from('leads').insert({name:n,email:e,phone:t,source:source})}catch(ex){}
   document.getElementById('form-card').style.display='none';
   document.getElementById('lead-success').style.display='';
+}
+</script>
+<script>
+var agentLinks = {
+  "creation_formations":"https://buy.stripe.com/4gM4gz9DAbDn0nQ0JQffy2e",
+  "depots_dossiers":"https://buy.stripe.com/6oU3cv174dLv6Me1NUffy2f",
+  "gestion_stagiaires":"https://buy.stripe.com/9B6aEX3fcfTD4E62RYffy2g",
+  "facturation":"https://buy.stripe.com/14A4gz6ro8rbdaC3W2ffy2h",
+  "prospection":"https://buy.stripe.com/dRm8wPg1Y6j3daC1NUffy2i",
+  "cpf_edof":"https://buy.stripe.com/28EdR9bLI8rb5Ia78effy2j",
+  "veille":"https://buy.stripe.com/dRm28r4jg6j35Ia8ciffy2k",
+  "community":"https://buy.stripe.com/28E3cv030bDn8Um9gmffy2l",
+  "reporting":"https://buy.stripe.com/9B67sL6ro36R1rUfEKffy2m",
+  "planification":"https://buy.stripe.com/14A28r030azj2vY1NUffy2n"
+};
+var selectedAgents = {};
+var agentStripeLink = "";
+
+function toggleAgent(label, key, price){
+  label.classList.toggle("selected");
+  if(selectedAgents[key]) delete selectedAgents[key];
+  else selectedAgents[key] = price;
+  updateAgentCart();
+}
+
+function updateAgentCart(){
+  var keys = Object.keys(selectedAgents);
+  var total = keys.reduce(function(s,k){return s+selectedAgents[k];},0);
+  document.getElementById("agent-count-text").textContent = keys.length + " capacité(s) sélectionnée(s)";
+  document.getElementById("agent-total-price").textContent = total > 0 ? total+"€" : "0€";
+  var btn = document.getElementById("agent-pay-btn");
+  if(keys.length === 0){btn.textContent="Sélectionnez au moins 1 capacité";btn.style.background="#ccc";btn.style.cursor="not-allowed";btn.style.pointerEvents="none";btn.disabled=true;}
+  else{btn.textContent="Commander "+total+"€ →";btn.style.background="#e94560";btn.style.cursor="pointer";btn.style.pointerEvents="";btn.disabled=false;
+    if(keys.length===1) agentStripeLink=agentLinks[keys[0]];
+    else agentStripeLink="";}
+}
+
+function openAgentCheckout(){
+  var keys = Object.keys(selectedAgents);
+  if(keys.length===0) return;
+  var total = keys.reduce(function(s,k){return s+selectedAgents[k];},0);
+  document.getElementById("agent-order-summary").textContent = keys.length+" capacité(s) · Total : "+total+"€";
+  document.getElementById("agent-checkout-overlay").style.display="flex";
+}
+
+async function submitAgentCheckout(){
+  var fn=(document.getElementById("ag-firstname").value||"").trim();
+  var ln=(document.getElementById("ag-lastname").value||"").trim();
+  var em=(document.getElementById("ag-email").value||"").trim();
+  var ph=(document.getElementById("ag-phone").value||"").trim();
+  var pw=(document.getElementById("ag-pass").value||"").trim();
+  var err=document.getElementById("ag-error");
+  if(!fn||!ln||!em||!pw){err.textContent="Tous les champs sont obligatoires.";err.style.display="";return;}
+  if(pw.length<8){err.textContent="Le mot de passe doit faire au moins 8 caractères.";err.style.display="";return;}
+  err.style.display="none";
+  document.getElementById("ag-submit-btn").textContent="Chargement…";document.getElementById("ag-submit-btn").disabled=true;
+  var keys=Object.keys(selectedAgents);
+  var total=keys.reduce(function(s,k){return s+selectedAgents[k];},0);
+  try{
+    var res=await sb.auth.signUp({email:em,password:pw,options:{data:{first_name:fn,last_name:ln,full_name:fn+" "+ln}}});
+    if(res.error&&res.error.message!=="User already registered")throw res.error;
+    if(res.error&&res.error.message==="User already registered"){var r2=await sb.auth.signInWithPassword({email:em,password:pw});if(r2.error)throw r2.error;}
+    await sb.from("leads").insert({name:fn+" "+ln,email:em,phone:ph||null,source:"acces-agent-ia",metadata:{agents:keys,total:total,first_name:fn,last_name:ln}});
+  }catch(ex){console.warn("Supabase:",ex);}
+  document.getElementById("agent-fco-form").style.display="none";
+  document.getElementById("agent-fco-success").style.display="";
+  setTimeout(function(){
+    if(agentStripeLink) window.open(agentStripeLink,"_blank");
+    else window.open("https://lesformateurs.online/success.html","_blank");
+    document.getElementById("agent-checkout-overlay").style.display="none";
+  },1500);
 }
 </script>
 </body>

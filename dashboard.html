@@ -3088,7 +3088,7 @@ function openEventDetail(id){
     (e.max_attendees ? '<span style="font-size:12px;color:var(--muted);margin-left:8px;">'+(full?'🔴 Complet':'🟢 '+e.current_attendees+'/'+e.max_attendees+' places')+'</span>' : '') +
     '</div>' +
     (full ? '<span style="font-size:13px;color:var(--muted);font-weight:600;">Inscriptions fermées</span>' :
-    '<a href="funnel-events.html" class="btn btn-primary" style="padding:10px 24px;font-size:13px;">S\'inscrire →</a>') +
+    '<a href="acces-events.html" class="btn btn-primary" style="padding:10px 24px;font-size:13px;">S\'inscrire →</a>') +
     '</div>';
   document.getElementById('event-detail-content').innerHTML = h;
   document.getElementById('modal-event-detail').classList.add('open');

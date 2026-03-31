@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Formation Agents IA — En ligne, Annecy ou Château | lesformateurs.online</title>
+<meta name="description" content="Formez-vous aux agents IA en 2 semaines en ligne (990€), un week-end à Annecy (2490€) ou dans un château près de Paris (2990€). Installez, formez et lancez vos agents.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+
+:root{--dark:#1a1d23;--text:#2d3039;--muted:#6b7080;--light:#f5f3ef;--cream:#faf8f5;--accent:#e94560;--accent-dark:#d03a52;--green:#16a34a;--border:#e9e7e2;--r:20px;--shadow-sm:0 1px 3px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.06);--shadow-md:0 4px 20px rgba(0,0,0,.06);--shadow-lg:0 12px 40px rgba(0,0,0,.08);--shadow-accent:0 8px 30px rgba(233,69,96,.18)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:#fff;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.quote-text{font-family:'DM Serif Text',Georgia,serif}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}
+
+/* HERO */
+.hero{position:relative;padding:100px 32px 80px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(233,69,96,.06) 0%,transparent 65%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:24px;animation:fadeUp .8s cubic-bezier(.22,1,.36,1) both}
+.eyebrow-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s ease infinite}
+.hero h1{font-size:clamp(34px,5.2vw,60px);line-height:1.08;letter-spacing:-.5px;margin-bottom:24px;animation:fadeUp .8s .1s cubic-bezier(.22,1,.36,1) both}
+.hero h1 em{font-style:italic;color:var(--accent);position:relative}
+.hero h1 em::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:3px;background:var(--accent);opacity:.2;border-radius:2px}
+.hero .sub{font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:600px;margin:0 auto 40px;font-weight:400;line-height:1.65;animation:fadeUp .8s .2s cubic-bezier(.22,1,.36,1) both}
+.hero .btn-wrap{animation:fadeUp .8s .3s cubic-bezier(.22,1,.36,1) both}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--dark);color:#fff;font-family:'DM Sans',sans-serif;font-weight:600;font-size:15px;padding:17px 36px;border-radius:60px;border:none;cursor:pointer;text-decoration:none;transition:all .25s cubic-bezier(.22,1,.36,1);letter-spacing:.3px;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.08) 0%,transparent 100%);pointer-events:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.14)}
+.btn:active{transform:translateY(0)}
+.btn-accent{background:var(--accent)}
+.btn-accent:hover{background:var(--accent-dark);box-shadow:var(--shadow-accent)}
+.btn-arrow{transition:transform .25s}
+.btn:hover .btn-arrow{transform:translateX(3px)}
+
+/* STATS */
+.stats{display:flex;justify-content:center;gap:0;padding-top:48px;margin-top:8px;border-top:1px solid var(--border);animation:fadeUp .8s .45s cubic-bezier(.22,1,.36,1) both}
+.stat{text-align:center;flex:1;position:relative;padding:0 20px}
+.stat:not(:last-child)::after{content:'';position:absolute;right:0;top:4px;bottom:4px;width:1px;background:var(--border)}
+.stat strong{display:block;font-family:'DM Serif Text',serif;font-size:clamp(26px,3vw,34px);color:var(--dark);line-height:1.1}
+.stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;margin-top:4px;display:block}
+
+/* TRUST */
+.trust{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;padding:32px;background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);font-weight:500}
+.trust-item strong{font-size:18px;color:var(--dark);font-family:'DM Serif Text',serif}
+.trust-check{width:20px;height:20px;background:rgba(22,163,74,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--green);flex-shrink:0}
+
+/* SECTIONS */
+.section{padding:100px 32px;text-align:center}
+.section-inner{max-width:1100px;margin:0 auto}
+.cream-bg{background:var(--cream)}
+.eyebrow-section{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:16px}
+.section h2{font-size:clamp(28px,3.8vw,46px);line-height:1.1;letter-spacing:-.3px;margin-bottom:16px}
+.section h2 em{font-style:italic;color:var(--accent)}
+.section-sub{font-size:16px;color:var(--muted);max-width:580px;margin:0 auto 52px;font-weight:400;line-height:1.65}
+
+/* VIDEO */
+.video-wrap{max-width:860px;margin:0 auto;border-radius:var(--r);overflow:hidden;aspect-ratio:16/9;background:linear-gradient(145deg,#f0ede8 0%,#e4e1db 100%);position:relative;cursor:pointer;box-shadow:var(--shadow-lg);transition:transform .3s,box-shadow .3s}
+.video-wrap:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.12)}
+.video-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px}
+.video-icon{font-size:36px;opacity:.25}
+.video-label{font-size:13px;color:var(--muted);font-weight:500}
+.video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:68px;background:var(--dark);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;padding-left:3px;transition:all .3s cubic-bezier(.22,1,.36,1);box-shadow:0 6px 24px rgba(0,0,0,.2);z-index:2}
+.video-wrap:hover .video-play{transform:translate(-50%,-50%) scale(1.1);box-shadow:0 8px 32px rgba(0,0,0,.25)}
+.video-caption{font-size:13px;color:var(--muted);margin-top:18px;text-align:center;font-weight:500}
+
+/* PAIN GRID */
+.pain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;text-align:left}
+.pain-card{background:#fff;border-radius:var(--r);padding:32px;border:1px solid var(--border);transition:all .3s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden}
+.pain-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:0;transition:opacity .3s}
+.pain-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:transparent}
+.pain-card:hover::before{opacity:1}
+.pain-icon{width:44px;height:44px;background:rgba(233,69,96,.06);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+.pain-card h4{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px;color:var(--dark)}
+.pain-card p{font-size:14px;color:var(--muted);line-height:1.65}
+
+/* FEATURES */
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;text-align:left}
+.feature{background:var(--cream);border-radius:var(--r);padding:40px;transition:all .3s cubic-bezier(.22,1,.36,1);border:1px solid transparent}
+.feature:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--border);background:#fff}
+.feature-icon{width:48px;height:48px;background:linear-gradient(135deg,rgba(233,69,96,.08) 0%,rgba(233,69,96,.02) 100%);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px}
+.feature h3{font-size:21px;margin-bottom:10px;line-height:1.25}
+.feature p{font-size:14px;color:var(--muted);line-height:1.7}
+.feature-img{width:100%;border-radius:12px;margin-top:20px;background:var(--light);min-height:150px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;border:1.5px dashed var(--border);font-weight:500}
+
+/* COMPARISON */
+.compare-wrap{max-width:780px;margin:0 auto;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-md)}
+.compare{width:100%;border-collapse:collapse;font-size:14px;background:#fff;text-align:left}
+.compare thead th{padding:20px 28px;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.8px}
+.compare thead th:first-child{background:var(--cream);color:var(--muted);width:35%}
+.compare thead th:nth-child(2){background:rgba(233,69,96,.04);color:var(--accent);text-align:center}
+.compare thead th:nth-child(3){background:rgba(22,163,74,.04);color:var(--green);text-align:center}
+.compare td{padding:16px 28px;border-top:1px solid rgba(0,0,0,.04);font-weight:500}
+.compare td:first-child{color:var(--dark);font-weight:600;font-size:13px}
+.compare td:nth-child(2){text-align:center;color:var(--accent);opacity:.7}
+.compare td:nth-child(3){text-align:center;color:var(--green);font-weight:700}
+.compare tbody tr{transition:background .2s}
+.compare tbody tr:hover{background:rgba(0,0,0,.015)}
+
+/* BIG TESTIMONIAL */
+.big-testi{padding:100px 32px;text-align:center;background:linear-gradient(180deg,#f7f5f0 0%,#edeae4 100%);position:relative;overflow:hidden}
+.big-testi::before{content:'\201C';position:absolute;top:40px;left:50%;transform:translateX(-50%);font-family:'DM Serif Text',serif;font-size:200px;color:var(--accent);opacity:.04;line-height:1;pointer-events:none}
+.big-testi .section-inner{max-width:800px;position:relative;z-index:1}
+.testi-avatar{width:80px;height:80px;border-radius:50%;margin:0 auto 16px;overflow:hidden;border:3px solid #fff;box-shadow:var(--shadow-md)}
+.testi-avatar img{width:100%;height:100%;object-fit:cover}
+.testi-name{font-weight:700;font-size:15px;color:var(--dark)}
+.testi-role{font-size:13px;color:var(--muted);font-weight:500}
+.quote-text{font-size:clamp(22px,2.8vw,34px);line-height:1.35;margin:28px auto;max-width:720px;letter-spacing:-.2px;color:var(--dark)}
+
+/* CASE STUDY */
+.case-wrap{max-width:720px;margin:0 auto;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-md);background:#fff}
+.case-block{padding:36px 40px;text-align:left}
+.case-block+.case-block{border-top:1px solid var(--border)}
+.case-label{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:inline-flex;align-items:center;gap:6px}
+.case-label-before{color:var(--accent)}
+.case-label-after{color:var(--green)}
+.case-label-dot{width:8px;height:8px;border-radius:50%}
+.case-label-before .case-label-dot{background:var(--accent);opacity:.3}
+.case-label-after .case-label-dot{background:var(--green)}
+.case-block p{font-size:14px;color:var(--muted);line-height:1.75}
+.case-highlight{display:inline-block;background:rgba(22,163,74,.06);color:var(--green);font-weight:700;padding:2px 8px;border-radius:6px;font-size:14px}
+
+/* TESTIMONIAL CARDS */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;text-align:left}
+.testi-card{background:var(--cream);border-radius:var(--r);padding:32px;transition:all .3s cubic-bezier(.22,1,.36,1);border:1px solid transparent}
+.testi-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);background:#fff;border-color:var(--border)}
+.testi-card-stars{color:#f59e0b;font-size:13px;margin-bottom:14px;letter-spacing:2px}
+.testi-card-quote{font-size:15px;color:var(--text);line-height:1.75;font-style:italic;margin-bottom:20px}
+.testi-card-footer{display:flex;align-items:center;gap:12px}
+.testi-card-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid #fff;box-shadow:var(--shadow-sm)}
+.testi-card-avatar img{width:100%;height:100%;object-fit:cover}
+.testi-card-name{font-weight:700;font-size:14px;color:var(--dark)}
+.testi-card-role{font-size:12px;color:var(--muted);font-weight:500}
+
+/* CTA / FORM */
+.cta-section{padding:100px 32px;text-align:center;background:#fff;position:relative}
+.cta-section::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(233,69,96,.04) 0%,transparent 65%);pointer-events:none}
+.cta-inner{position:relative;z-index:1}
+.cta-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(233,69,96,.06);color:var(--accent);font-size:12px;font-weight:700;padding:8px 20px;border-radius:50px;margin-bottom:24px;letter-spacing:.5px;text-transform:uppercase}
+.cta-badge-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s ease infinite}
+.cta-section h2{font-family:'DM Serif Text',serif;font-size:clamp(28px,4vw,46px);margin-bottom:14px;color:var(--dark)}
+.cta-sub{font-size:16px;color:var(--muted);max-width:480px;margin:0 auto 40px;font-weight:400;line-height:1.6}
+.form-card{max-width:420px;margin:0 auto;background:var(--cream);border-radius:var(--r);padding:36px 32px;border:1px solid var(--border)}
+.form-card input{width:100%;padding:15px 18px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;margin-bottom:12px;background:#fff;color:var(--dark);transition:all .25s;font-weight:500}
+.form-card input:focus{outline:none;border-color:var(--dark);box-shadow:0 0 0 3px rgba(26,29,35,.06)}
+.form-card input::placeholder{color:#b0b3bc;font-weight:400}
+.form-error{display:none;color:var(--accent);font-size:13px;margin-bottom:10px;font-weight:500}
+.form-btn{width:100%;margin-top:4px;font-size:16px;padding:17px 24px}
+.form-note{font-size:12px;color:var(--muted);margin-top:16px;display:flex;align-items:center;justify-content:center;gap:6px}
+.form-note-icon{width:14px;height:14px;border-radius:50%;background:rgba(22,163,74,.08);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--green)}
+.form-success{display:none;padding:40px 20px;text-align:center}
+.form-success-icon{width:56px;height:56px;background:rgba(22,163,74,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--green);margin:0 auto 16px}
+.form-success h3{font-family:'DM Serif Text',serif;font-size:24px;color:var(--dark);margin-bottom:8px}
+.form-success p{color:var(--muted);font-size:15px}
+
+/* FAQ */
+.faq-list{max-width:680px;margin:0 auto;text-align:left}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{font-size:16px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;transition:color .2s;user-select:none;-webkit-user-select:none}
+.faq-q:hover{color:var(--accent)}
+.faq-toggle{width:28px;height:28px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s cubic-bezier(.22,1,.36,1);font-size:16px;color:var(--muted);border:1px solid var(--border)}
+.faq-item.open .faq-toggle{background:var(--accent);color:#fff;transform:rotate(45deg);border-color:var(--accent)}
+.faq-a{font-size:15px;color:var(--muted);padding:0 0 24px;display:none;line-height:1.75;max-width:90%}
+.faq-item.open .faq-a{display:block}
+
+/* FINAL CTA */
+.final-cta{padding:80px 32px;text-align:center;background:var(--dark);color:#fff;position:relative;overflow:hidden}
+.final-cta::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(233,69,96,.15) 0%,transparent 65%);pointer-events:none}
+.final-cta h2{font-size:clamp(26px,3.5vw,40px);color:#fff;margin-bottom:12px;position:relative;z-index:1}
+.final-cta p{color:rgba(255,255,255,.5);font-size:16px;margin-bottom:32px;position:relative;z-index:1}
+.final-cta .btn{background:var(--accent);position:relative;z-index:1}
+.final-cta .btn:hover{background:var(--accent-dark);box-shadow:var(--shadow-accent)}
+
+/* FOOTER */
+.footer{text-align:center;padding:36px 32px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);font-weight:500}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.hero{padding:72px 20px 60px}
+.hero h1{font-size:clamp(30px,7vw,44px)}
+.stats{flex-wrap:wrap;gap:24px;padding-top:36px}
+.stat{flex:none;width:45%}
+.stat:not(:last-child)::after{display:none}
+.section{padding:68px 20px}
+.pain-grid{grid-template-columns:1fr}
+.features{grid-template-columns:1fr}
+.testi-grid{grid-template-columns:1fr}
+.trust{gap:16px;padding:24px 20px}
+.big-testi{padding:68px 20px}
+.quote-text{font-size:clamp(20px,5vw,28px)}
+.compare td,.compare th{padding:12px 16px;font-size:12px}
+.btn{width:100%;text-align:center;padding:16px 24px}
+.cta-section{padding:68px 20px}
+.form-card{padding:28px 24px}
+.case-block{padding:28px 24px}
+.final-cta{padding:60px 20px}
+}
+
+.hf-price{margin:32px 0}
+.hf-price-old{font-size:18px;text-decoration:line-through;color:var(--muted);margin-right:12px}
+.hf-price-new{font-family:'DM Serif Text',serif;font-size:52px;color:var(--dark)}
+.hf-price-new small{font-family:'DM Sans',sans-serif;font-size:16px;color:var(--muted);font-weight:400}
+.hf-guarantee{max-width:440px;margin:32px auto 0;background:rgba(22,163,74,.04);border:1.5px solid rgba(22,163,74,.12);border-radius:14px;padding:24px}
+.hf-guarantee h4{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;color:var(--green);margin-bottom:4px}
+.hf-guarantee p{font-size:13px;color:var(--muted)}
+.hf-ribbon{display:inline-flex;align-items:center;gap:6px;background:rgba(233,69,96,.06);color:var(--accent);font-size:13px;font-weight:600;padding:8px 18px;border-radius:50px;margin-bottom:24px}
+
+</style>
+
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="eyebrow-dot"></span> FORMATION AGENTS IA · 3 FORMATS</div>
+    <h1>Comprenez, installez et<br><em>lancez vos agents IA</em></h1>
+    <p class="sub">En 2 semaines en ligne, un week-end au chalet à Annecy, ou dans un château proche de Paris. Vous repartez avec vos agents configurés, entraînés et opérationnels. Prospection, financement, administratif — tout tourne en autopilote.</p>
+    <a href="#formules" class="btn btn-accent" onclick="document.getElementById('formules')?.scrollIntoView({behavior:'smooth'});return false;">Voir les 3 formules <span class="btn-arrow">→</span></a>
+    <div class="stats">
+      <div class="stat"><strong>990€</strong><span>à partir de</span></div>
+      <div class="stat"><strong>3</strong><span>formules</span></div>
+      <div class="stat"><strong>12-30</strong><span>participants max</span></div>
+      <div class="stat"><strong>2h</strong><span>coaching individuel</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="trust">
+  <div class="trust-item"><span class="trust-check">✓</span> Agents installés pendant la formation</div>
+  <div class="trust-item"><span class="trust-check">✓</span> 2h d'accompagnement individuel</div>
+  <div class="trust-item"><span class="trust-check">✓</span> Replay inclus à vie</div>
+  <div class="trust-item"><span class="trust-check">✓</span> Finançable OPCO</div>
+</div>
+
+<!-- CE QUE VOUS ALLEZ APPRENDRE -->
+<section class="section cream-bg">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="eyebrow-section">Le programme</div>
+      <h2>Ce que vous saurez faire<br><em>à la fin</em></h2>
+      <p class="section-sub">Le même programme dans les 3 formules. Vous comprenez les agents, vous les installez, vous les formez à travailler pour vous.</p>
+    </div>
+    <div class="features reveal">
+      <div class="feature">
+        <div class="feature-icon">🧠</div>
+        <h3>Comprendre les agents IA</h3>
+        <p>Qu'est-ce qu'un agent IA. Comment il fonctionne. Ce qu'il peut faire pour un organisme de formation. La différence avec ChatGPT. Les cas d'usage concrets qui rapportent de l'argent.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⚙️</div>
+        <h3>Installer vos agents</h3>
+        <p>Vous installez vous-même vos agents sur la plateforme. Agent de prospection. Agent de financement. Agent administratif. Pas de code, pas de technique — on vous guide clic par clic.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎓</div>
+        <h3>Former vos agents à travailler</h3>
+        <p>Un agent mal formé est inutile. Vous apprenez à entraîner vos agents avec vos données, vos process, votre ton. Ils deviennent des employés numériques qui connaissent votre OF par cœur.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚀</div>
+        <h3>Lancer et mesurer les résultats</h3>
+        <p>Vous lancez vos agents en conditions réelles. Premiers leads, premiers dossiers, premières automatisations. Vous mesurez le ROI dès la première semaine.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;" class="reveal">
+      <p style="font-size:15px;color:var(--muted);max-width:600px;margin:0 auto;">+ <strong>2 heures d'accompagnement individuel</strong> avec le formateur pour adapter les agents à votre situation spécifique.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LES 3 FORMULES -->
+<section class="section" id="formules">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="eyebrow-section">3 formules</div>
+      <h2>Choisissez votre <em>expérience</em></h2>
+      <p class="section-sub">Le même programme, 3 façons de le vivre. Quel que soit votre choix, vous repartez opérationnel.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1060px;margin:0 auto;text-align:left;" class="reveal">
+
+      <!-- EN LIGNE -->
+      <div class="pricing-card" style="background:var(--cream);border-radius:var(--r);padding:36px 28px;border:2px solid var(--border);transition:all .3s;position:relative;">
+        <div style="font-size:48px;text-align:center;margin-bottom:16px;">💻</div>
+        <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#6366f1;margin-bottom:8px;">En ligne</div>
+        <div style="font-family:'DM Serif Text';font-size:42px;color:var(--dark);line-height:1;margin-bottom:4px;">990€</div>
+        <div style="font-size:16px;font-weight:800;color:var(--green);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);">2 semaines · 2h/soir</div>
+        <ul style="list-style:none;margin-bottom:24px;">
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;">
+            <span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span>10 sessions de 2h en visio (soirs)
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;">
+            <span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span>Du lundi au vendredi, 2 semaines
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;">
+            <span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span>2h de coaching individuel
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;">
+            <span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span>Replay à vie
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;">
+            <span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span>Groupe WhatsApp 90 jours
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;">
+            <span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span>Depuis chez vous, à votre rythme
+          </li>
+        </ul>
+        <a href="#inscription" class="btn btn-accent" style="display:block;width:100%;text-align:center;font-size:14px;padding:14px;" onclick="selectFormule('ligne',event)">Réserver — 990€ <span class="btn-arrow">→</span></a>
+        <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:12px;">Finançable OPCO · Paiement en 3×</p>
+      </div>
+
+      <!-- ANNECY -->
+      <div style="background:#fff;border-radius:var(--r);padding:36px 28px;border:2px solid var(--green);transition:all .3s;position:relative;">
+        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:4px 16px;border-radius:20px;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;">⭐ Le + demandé</div>
+        <div style="font-size:48px;text-align:center;margin-bottom:16px;">🏔️</div>
+        <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);margin-bottom:8px;">Chalet Annecy</div>
+        <div style="font-family:'DM Serif Text';font-size:42px;color:var(--dark);line-height:1;margin-bottom:4px;">2 490€</div>
+        <div style="font-size:16px;font-weight:800;color:var(--green);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);">2 jours · Week-end immersif</div>
+        <ul style="list-style:none;margin-bottom:24px;">
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;">
+            <span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span>Vendredi soir → Dimanche midi
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;">
+            <span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span>Chalet premium vue lac d'Annecy (piscine, sauna, bain nordique)
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;">
+            <span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span>Hébergement 2 nuits + tous repas inclus
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;">
+            <span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span>2h de coaching individuel
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;">
+            <span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span>Networking entre formateurs
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;">
+            <span style="position:absolute;left:0;color:var(--green);font-weight:700;">✓</span>12 participants max · Petit groupe intimiste
+          </li>
+        </ul>
+        <a href="#inscription" class="btn btn-green" style="display:block;width:100%;text-align:center;font-size:14px;padding:14px;" onclick="selectFormule('annecy',event)">Réserver — 2 490€ <span class="btn-arrow">→</span></a>
+        <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:12px;">Finançable OPCO · Paiement en 3×</p>
+      </div>
+
+      <!-- CHÂTEAU -->
+      <div style="background:var(--dark);border-radius:var(--r);padding:36px 28px;border:2px solid var(--dark);transition:all .3s;position:relative;color:#fff;">
+        <div style="font-size:48px;text-align:center;margin-bottom:16px;">🏰</div>
+        <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:8px;">Château · Paris</div>
+        <div style="font-family:'DM Serif Text';font-size:42px;color:#fff;line-height:1;margin-bottom:4px;">2 990€</div>
+        <div style="font-size:16px;font-weight:800;color:var(--accent);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.1);">2 jours · Week-end d'exception</div>
+        <ul style="list-style:none;margin-bottom:24px;">
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;color:rgba(255,255,255,.8);">
+            <span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>Vendredi soir → Dimanche midi
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;color:rgba(255,255,255,.8);">
+            <span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>Château d'exception en Île-de-France (domaine privé, parc, gastronomie)
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;color:rgba(255,255,255,.8);">
+            <span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>Hébergement 2 nuits + gastronomie inclus
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;color:rgba(255,255,255,.8);">
+            <span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>2h de coaching individuel
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;color:rgba(255,255,255,.8);">
+            <span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>30 participants · Networking d'élite
+          </li>
+          <li style="font-size:13px;padding:6px 0 6px 22px;position:relative;color:rgba(255,255,255,.8);">
+            <span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>Suivi VIP 6 mois après
+          </li>
+        </ul>
+        <a href="#inscription" class="btn btn-accent" style="display:block;width:100%;text-align:center;font-size:14px;padding:14px;" onclick="selectFormule('chateau',event)">Réserver — 2 990€ <span class="btn-arrow">→</span></a>
+        <p style="font-size:12px;color:rgba(255,255,255,.4);text-align:center;margin-top:12px;">Finançable OPCO · Paiement en 3×</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMOIGNAGE -->
+<section class="big-testi">
+  <div class="section-inner reveal">
+    <div class="testi-avatar"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD/6xeKSlAAAQAAAAEAABeAanVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAF1pqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjNkOWViODU5LTkzZDYtZWY0YS05NzE5LTQwZDhmMzM5ZWY3MAAAABMDanVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABLTY2JvctKEWQYrogEmGCGCWQM/MIIDOzCCAsCgAwIBAgIUAJ6vFWKBqUkCFltI/1ipbSSYHs4wCgYIKoZIzj0EAwMwUTELMAkGA1UEBhMCVVMxEzARBgNVBAoMCkdvb2dsZSBMTEMxLTArBgNVBAMMJEdvb2dsZSBDMlBBIE1lZGlhIFNlcnZpY2VzIDFQIElDQSBHMzAeFw0yNjAyMTcxNTE3MTJaFw0yNzAyMTIxNTE3MTFaMGsxCzAJBgNVBAYTAlVTMRMwEQYDVQQKEwpHb29nbGUgTExDMRwwGgYDVQQLExNHb29nbGUgU3lzdGVtIDYwMDMyMSkwJwYDVQQDEyBHb29nbGUgTWVkaWEgUHJvY2Vzc2luZyBTZXJ2aWNlczBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABLBjir7O78duFgwA85LMipPVJpwNGfPRe9uLhP2QbYYvWYLwkqIuwXGpMdIYJ5OtG6kKVtfi3xS50maSO0eJywCjggFaMIIBVjAOBgNVHQ8BAf8EBAMCBsAwHwYDVR0lBBgwFgYIKwYBBQUHAwQGCisGAQQBg+heAgEwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUkG/QOXwhnfJG44eVEH4Wr2aQ5O4wHwYDVR0jBBgwFoAU2nvhvbQsioXgENZrmsdK8frf9jcwbAYIKwYBBQUHAQEEYDBeMCYGCCsGAQUFBzABhhpodHRwOi8vYzJwYS1vY3NwLnBraS5nb29nLzA0BggrBgEFBQcwAoYoaHR0cDovL3BraS5nb29nL2MycGEvbWVkaWEtMXAtaWNhLWczLmNydDAXBgNVHSAEEDAOMAwGCisGAQQBg+heAQEwGQYJKwYBBAGD6F4DBAwGCisGAQQBg+heAwowMwYJKwYBBAGD6F4EBCYMJDAxOWMzNGQzLTczM2YtN2E0Ny1iOTE3LTUwZGQzOGY0MWVjZTAKBggqhkjOPQQDAwNpADBmAjEAk41aMTcCgSsA+aAKV0GYPGVAUzMSnab02y1JhvXYZraq9fLZxPw8G8NcdJnCEndyAjEAvrBQu9UmLza4dENTmz+o32xGSkRJXRQgjFfWVLanodD/bGcbObPJxEvCR0JMirQCWQLgMIIC3DCCAmOgAwIBAgIUQfqlIUd2IVjaf5ss/439Fgke7j4wCgYIKoZIzj0EAwMwQzELMAkGA1UEBhMCVVMxEzARBgNVBAoMCkdvb2dsZSBMTEMxHzAdBgNVBAMMFkdvb2dsZSBDMlBBIFJvb3QgQ0EgRzMwHhcNMjUwNTA4MjIzNjI2WhcNMzAwNTA4MjIzNjI2WjBRMQswCQYDVQQGEwJVUzETMBEGA1UECgwKR29vZ2xlIExMQzEtMCsGA1UEAwwkR29vZ2xlIEMyUEEgTWVkaWEgU2VydmljZXMgMVAgSUNBIEczMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEuCPlUxSiltqnB2lx2ES7FK+TVZWmAxRzzDjTzKZ8umoqyvCqSLOkZBrOieaLqrp+rnzt0EADWWH3X62NqzEXRewW6rb/lS7VXkVCM02gC0ZgJW7+PCsZgLoUBUQ+nkN5o4IBCDCCAQQwFwYDVR0gBBAwDjAMBgorBgEEAYPoXgEBMA4GA1UdDwEB/wQEAwIBBjAfBgNVHSUEGDAWBggrBgEFBQcDBAYKKwYBBAGD6F4CATASBgNVHRMBAf8ECDAGAQH/AgEAMGQGCCsGAQUFBwEBBFgwVjAsBggrBgEFBQcwAoYgaHR0cDovL3BraS5nb29nL2MycGEvcm9vdC1nMy5jcnQwJgYIKwYBBQUHMAGGGmh0dHA6Ly9jMnBhLW9jc3AucGtpLmdvb2cvMB8GA1UdIwQYMBaAFJxc2IlTQ+da1YHbA94ZfwQqKi2qMB0GA1UdDgQWBBTae+G9tCyKheAQ1muax0rx+t/2NzAKBggqhkjOPQQDAwNnADBkAjACxtEE3NW13bwN1u/51ericNF6rkEhYVESDO6Jqb5cX37Hwg0X9S2rH+vXaoFZIHsCMC03wCKKomDHgqV47UtyyHpZlo5IZACW72Xdc4gipdWMEmhvPk88dvxbYtn+LVd9zKRnc2lnVHN0MqFpdHN0VG9rZW5zgaFjdmFsWQfiMIIH3gYJKoZIhvcNAQcCoIIHzzCCB8sCAQMxDTALBglghkgBZQMEAgEwgZEGCyqGSIb3DQEJEAEEoIGBBH8wfQIBAQYKKwYBBAHWeQIKATAxMA0GCWCGSAFlAwQCAQUABCAidrDuNjVjJUMZLQNGKNZYpgcOrkdXhuNHxUEJ8CWyLgIVAO2yqidU/so9d/qRH7ED2nrZ3ZOEGA8yMDI2MDMyNDAyNDIxOVowBgIBAYABCgIJAKkd5SFkoMzroIIFoTCCAsowggJPoAMCAQICE3tRmXD/11qVnQxA106G8ddwJIMwCgYIKoZIzj0EAwMwUjELMAkGA1UEBhMCVVMxEzARBgNVBAoMCkdvb2dsZSBMTEMxLjAsBgNVBAMMJUdvb2dsZSBDMlBBIENvcmUgVGltZS1TdGFtcGluZyBJQ0EgRzMwHhcNMjUwOTA4MTM0ODU5WhcNMzEwOTA5MDE0ODU4WjBUMQswCQYDVQQGEwJVUzETMBEGA1UEChMKR29vZ2xlIExMQzEwMC4GA1UEAxMnR29vZ2xlIENvcmUgVGltZSBTdGFtcGluZyBBdXRob3JpdHkgVDExMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEWyCZ79Jnw7nOmO5YPTJRuoq6/DMh97fLCHlF0FzNhOWr4TOe9SsHZGc9ZxOcmjsSrz4M+a6nMPEtJtL9nNzck6OCAQAwgf0wDgYDVR0PAQH/BAQDAgbAMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFBjP23xnp7tX2Hy/oQpT/9D3/PnWMB8GA1UdIwQYMBaAFN5Vl4xgdDsD4mq0RAZll2HK5fiOMGwGCCsGAQUFBwEBBGAwXjAmBggrBgEFBQcwAYYaaHR0cDovL2MycGEtb2NzcC5wa2kuZ29vZy8wNAYIKwYBBQUHMAKGKGh0dHA6Ly9wa2kuZ29vZy9jMnBhL2NvcmUtdHNhLWljYS1nMy5jcnQwFwYDVR0gBBAwDjAMBgorBgEEAYPoXgEBMBYGA1UdJQEB/wQMMAoGCCsGAQUFBwMIMAoGCCqGSM49BAMDA2kAMGYCMQDeY2s2oS1nBnuO6zB8baqPfYmZ9vlAcHhUXQ9CAzxbekYb+poepLWyRvt+68MP7cECMQCXXdYqsU7IPTvCnE6CnpisD3vkdVYJZxzFhwQo+lDsJ8wa1Xl7xoNpzWgSpNOJCkkwggLPMIICVqADAgECAhRFAINuchMCxWSknmQzdvqPCbdk9DAKBggqhkjOPQQDAzBDMQswCQYDVQQGEwJVUzETMBEGA1UECgwKR29vZ2xlIExMQzEfMB0GA1UEAwwWR29vZ2xlIEMyUEEgUm9vdCBDQSBHMzAeFw0yNTA1MDgyMjM2MjZaFw00MDA1MDgyMjM2MjZaMFIxCzAJBgNVBAYTAlVTMRMwEQYDVQQKDApHb29nbGUgTExDMS4wLAYDVQQDDCVHb29nbGUgQzJQQSBDb3JlIFRpbWUtU3RhbXBpbmcgSUNBIEczMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEo3338b0IKh9FWSXgUvmpIN/+2y6PRSHYTwrVzQNx3WcqLFluwJwkMnIiebkCkV+5pspHn6fFNHMTfl7FJUTpMSKONNW4Fv4awasz6sYhLCNP/wHk4MF/8DhrxXKtJUsKo4H7MIH4MBcGA1UdIAQQMA4wDAYKKwYBBAGD6F4BATAOBgNVHQ8BAf8EBAMCAQYwEwYDVR0lBAwwCgYIKwYBBQUHAwgwEgYDVR0TAQH/BAgwBgEB/wIBADBkBggrBgEFBQcBAQRYMFYwLAYIKwYBBQUHMAKGIGh0dHA6Ly9wa2kuZ29vZy9jMnBhL3Jvb3QtZzMuY3J0MCYGCCsGAQUFBzABhhpodHRwOi8vYzJwYS1vY3NwLnBraS5nb29nLzAfBgNVHSMEGDAWgBScXNiJU0PnWtWB2wPeGX8EKiotqjAdBgNVHQ4EFgQU3lWXjGB0OwPiarREBmWXYcrl+I4wCgYIKoZIzj0EAwMDZwAwZAIwQcYGjR1KfAGV1uVNgXR8YF3McEJbShGEY/+lh9yUJNiBzKj5R1Hmdi6IdmkoWFBxAjBwC6Yt0x6bxekQmwAR51P07SWj6Sxq5/Bsn3cFWHkcbeHfuvGKPycTTri6GlI+Iy0xggF8MIIBeAIBATBpMFIxCzAJBgNVBAYTAlVTMRMwEQYDVQQKDApHb29nbGUgTExDMS4wLAYDVQQDDCVHb29nbGUgQzJQQSBDb3JlIFRpbWUtU3RhbXBpbmcgSUNBIEczAhN7UZlw/9dalZ0MQNdOhvHXcCSDMAsGCWCGSAFlAwQCAaCBpDAaBgkqhkiG9w0BCQMxDQYLKoZIhvcNAQkQAQQwHAYJKoZIhvcNAQkFMQ8XDTI2MDMyNDAyNDIxOVowLwYJKoZIhvcNAQkEMSIEIPTSSUUOdxmlkqvNATQrZhAF4lxGnLG0/462u3wAsUauMDcGCyqGSIb3DQEJEAIvMSgwJjAkMCIEIO95JxpPu3E/KTw+3/K3r7rwpfPOqhZ/axZqIsHKU2EoMAoGCCqGSM49BAMCBEgwRgIhAKnce7ZhTHbtrO4X5VQyH9QELyZGEo4SShQCxxeDymQgAiEAyGqNHIerYkxDIK6qHAwY3avqqrfbKiujxw6kNouB+3tlclZhbHOhaG9jc3BWYWxzglkD9TCCA/EKAQCgggPqMIID5gYJKwYBBQUHMAEBBIID1zCCA9MwgeyhQjBAMQswCQYDVQQGEwJVUzETMBEGA1UEChMKR29vZ2xlIExMQzEcMBoGA1UEAxMTQzJQQSBPQ1NQIFJlc3BvbmRlchgPMjAyNjAzMjMxNTIxMDBaMIGUMIGRMGkwDQYJYIZIAWUDBAIBBQAEILLMkMmpnzLwV15QgrzTg7jRCdDGWOB7mh3G6KoVFu0qBCCcGv1fPn5cgkeWtXTyUz/jgmlvrg23RvZwELGVObHbPQIUAJ6vFWKBqUkCFltI/1ipbSSYHs6AABgPMjAyNjAzMjMxNTIxNDJaoBEYDzIwMjYwMzMwMTUyMTQyWjAKBggqhkjOPQQDAgNJADBGAiEAx1nKp5PAp7l2K3A0QrdwWDenV2aBZSWUdn2D9DeJifkCIQCxP2qFt3jDXFSbUxkXw9SwF6dm47i/AaSn1jp2j4waxaCCAokwggKFMIICgTCCAgagAwIBAgITQQA0Yo502LtxPpYOiaQNn2TymTAKBggqhkjOPQQDAzBRMQswCQYDVQQGEwJVUzETMBEGA1UECgwKR29vZ2xlIExMQzEtMCsGA1UEAwwkR29vZ2xlIEMyUEEgTWVkaWEgU2VydmljZXMgMVAgSUNBIEczMB4XDTI2MDMyMjEwNTYxMVoXDTI2MDQyMTEwNTYxMFowQDELMAkGA1UEBhMCVVMxEzARBgNVBAoTCkdvb2dsZSBMTEMxHDAaBgNVBAMTE0MyUEEgT0NTUCBSZXNwb25kZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARxE0BmFf4emRQcLggifNFyli9DNmEFS4qV1T/SF6oAYlF3wqX/m50op9GjuXIpvQw9OS9Ss064GnX+I1MMU0mlo4HNMIHKMA4GA1UdDwEB/wQEAwIHgDATBgNVHSUEDDAKBggrBgEFBQcDCTAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBTTTWcDFyGhW2HdzIzYeGZ33+HnwTAfBgNVHSMEGDAWgBTae+G9tCyKheAQ1muax0rx+t/2NzBEBggrBgEFBQcBAQQ4MDYwNAYIKwYBBQUHMAKGKGh0dHA6Ly9wa2kuZ29vZy9jMnBhL21lZGlhLTFwLWljYS1nMy5jcnQwDwYJKwYBBQUHMAEFBAIFADAKBggqhkjOPQQDAwNpADBmAjEAl1quvmDyFT9JkV21c1uNAVRXvyiMRYnz3hfo0WIO2AulPR7ITCWd1JKfc39zdGNtAjEA7sibJPpDTcB3yxBbMtEG9KKMkR95OW7CEw0bi3UhL/VckNfsFm0zxX3wJ1VaTSLAQGNwYWRYQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGRwYWQyQQD2WEChJnunW6k6coPBUvA+9sR6opeYBq643yyFiXccGvIE8sXjE03h+hx0cSYsHTFJO0PHG9S0976RuqTYi8pKBeL1AAABt2p1bWIAAAAnanVtZGMyY2wAEQAQgAAAqgA4m3EDYzJwYS5jbGFpbS52MgAAAAGIY2JvcqVqaW5zdGFuY2VJRHgkODIzZmI1MjEtM2VmYS0wOTY3LTU3YjUtNGUwMTE1ZDAzYWZldGNsYWltX2dlbmVyYXRvcl9pbmZvomRuYW1leCJHb29nbGUgQzJQQSBDb3JlIEdlbmVyYXRvciBMaWJyYXJ5Z3ZlcnNpb25zODg4MDUwNDY2Ojg4ODA1MDQ2NnJjcmVhdGVkX2Fzc2VydGlvbnOComN1cmx4KnNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuYWN0aW9ucy52MmRoYXNoWCBoIlEry3OUHQkL7sBT6fq20DpcCKubtEkMo/VaRNDouaJjdXJseClzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmhhc2guZGF0YWRoYXNoWCBC9t4p8Lq+NqGwX7rWhu1gNe3o9jhLpXIeH8+HukuMEGlzaWduYXR1cmV4GXNlbGYjanVtYmY9YzJwYS5zaWduYXR1cmVjYWxnZnNoYTI1NgAAAlFqdW1iAAAAKWp1bWRjMmFzABEAEIAAAKoAOJtxA2MycGEuYXNzZXJ0aW9ucwAAAACcanVtYgAAAChqdW1kY2JvcgARABCAAACqADibcQNjMnBhLmhhc2guZGF0YQAAAABsY2JvcqRqZXhjbHVzaW9uc4GiZXN0YXJ0FGZsZW5ndGgZF4xjYWxnZnNoYTI1NmRoYXNoWCCpbTEU1ezRpYUbNg2Mp/5AyJTAjrj0+zd3xwE4xtfCVGNwYWROAAAAAAAAAAAAAAAAAAAAAAGEanVtYgAAAClqdW1kY2JvcgARABCAAACqADibcQNjMnBhLmFjdGlvbnMudjIAAAABU2Nib3KhZ2FjdGlvbnOCo2ZhY3Rpb25sYzJwYS5jcmVhdGVka2Rlc2NyaXB0aW9ueCBDcmVhdGVkIGJ5IEdvb2dsZSBHZW5lcmF0aXZlIEFJLnFkaWdpdGFsU291cmNlVHlwZXhGaHR0cDovL2N2LmlwdGMub3JnL25ld3Njb2Rlcy9kaWdpdGFsc291cmNldHlwZS90cmFpbmVkQWxnb3JpdGhtaWNNZWRpYaNmYWN0aW9ua2MycGEuZWRpdGVka2Rlc2NyaXB0aW9ueChBcHBsaWVkIGltcGVyY2VwdGlibGUgU3ludGhJRCB3YXRlcm1hcmsucWRpZ2l0YWxTb3VyY2VUeXBleEZodHRwOi8vY3YuaXB0Yy5vcmcvbmV3c2NvZGVzL2RpZ2l0YWxzb3VyY2V0eXBlL3RyYWluZWRBbGdvcml0aG1pY01lZGlh/9sAQwAGBAUGBQQGBgUGBwcGCAoQCgoJCQoUDg8MEBcUGBgXFBYWGh0lHxobIxwWFiAsICMmJykqKRkfLTAtKDAlKCko/9sAQwEHBwcKCAoTCgoTKBoWGigoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgo/8AAEQgAyADIAwEiAAIRAQMRAf/EABwAAAICAwEBAAAAAAAAAAAAAAUGBAcAAwgCAf/EAEUQAAEDAwMCAwUGBAMFBwUAAAECAwQABREGEiExQRNRYQcUInGBFSMykaGxQlLB8Agz0RYkJ4LxJTQ2Q2Ky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" alt="Laurent F."></div>
+    <div class="testi-name">Laurent F.</div>
+    <div class="testi-role">Gérant d'OF, Toulouse · Formule Annecy</div>
+    <div class="quote-text">"J'ai été formé par vos équipes et c'était incroyable. Très clair, très concret. Aujourd'hui je fonctionne qu'en IA, tout est automatisé. Et si j'avais su, j'aurais pris l'offre Chalet — en immersion au bord du lac, ça doit être magnifique."</div>
+  </div>
+</section>
+
+<!-- INSCRIPTION -->
+<section class="cta-section" id="inscription">
+  <div class="cta-inner">
+    <div class="cta-badge"><span class="cta-badge-dot"></span> INSCRIPTION</div>
+    <h2>Réservez votre formule</h2>
+    <p class="cta-sub">Places très limitées (12 à 30 selon la formule). Finançable OPCO.</p>
+    <div class="form-card">
+      <select id="ws-formule" onchange="updateFormulePrice()" style="width:100%;padding:14px 16px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;margin-bottom:12px;">
+        <option value="">— Choisissez votre formule —</option>
+        <option value="ligne">💻 En ligne — 2 semaines, 2h/soir — 990€</option>
+        <option value="annecy">🏔️ Chalet Annecy — 2 jours, hébergement inclus — 2 490€</option>
+        <option value="chateau">🏰 Château Île-de-France — 2 jours, hébergement inclus — 2 990€</option>
+      </select>
+      <div id="ws-price-display" style="display:none;text-align:center;margin:16px 0;">
+        <span id="ws-price" style="font-family:'DM Serif Text';font-size:42px;color:var(--dark);"></span>
+        <p id="ws-info" style="font-size:12px;color:var(--muted);margin-top:4px;"></p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:0;"><input type="text" id="ws-prenom" placeholder="Prénom"><input type="text" id="ws-nom" placeholder="Nom"></div>
+      <input type="email" id="ws-email" placeholder="Votre email professionnel">
+      <input type="tel" id="ws-phone" placeholder="Téléphone">
+      <div id="ws-error" class="form-error"></div>
+      <button class="btn btn-accent form-btn" onclick="reserveWorkshop()">Réserver ma place <span class="btn-arrow">→</span></button>
+      <div class="form-note"><span class="form-note-icon">✓</span> Paiement sécurisé · Paiement en 3× disponible · Annulation 14j</div>
+    </div>
+    <div id="ws-success" class="form-success">
+      <div class="form-success-icon">✓</div>
+      <h3>Place réservée !</h3>
+      <p>Vous allez recevoir un email de confirmation avec tous les détails pratiques.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="section-inner reveal">
+    <h2>Questions fréquentes</h2>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Quel niveau est requis ?<span class="faq-toggle">+</span></div><div class="faq-a">Aucun prérequis technique. La formation est conçue pour des formateurs, pas des développeurs. Si vous savez utiliser un navigateur web, vous êtes prêt.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">La formule en ligne, c'est quand exactement ?<span class="faq-toggle">+</span></div><div class="faq-a">Du lundi au vendredi, pendant 2 semaines. 2h chaque soir (20h-22h). Vous avancez progressivement et vous avez le temps d'appliquer entre les sessions. Le replay est disponible à vie si vous ratez un soir.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Qu'est-ce qui est inclus dans les formules Annecy et Château ?<span class="faq-toggle">+</span></div><div class="faq-a">Tout est inclus : hébergement 2 nuits, tous les repas, la formation complète, les 2h de coaching individuel, et le networking. &lt;br&gt;&lt;br&gt;&lt;strong&gt;Annecy :&lt;/strong&gt; Chalet premium avec vue sur le lac d'Annecy. Piscine intérieure chauffée, sauna, bain nordique. 12 participants maximum pour un format intimiste.&lt;br&gt;&lt;br&gt;&lt;strong&gt;Château :&lt;/strong&gt; Domaine d'exception en Île-de-France, à moins d'une heure de Paris. Parc privé, salons historiques, gastronomie. 30 participants pour un networking d'élite.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">C'est finançable OPCO ?<span class="faq-toggle">+</span></div><div class="faq-a">Oui, les 3 formules sont éligibles au financement OPCO. Nous fournissons convention, programme pédagogique et attestation. On peut même vous aider à monter le dossier.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Le paiement en 3× est sans frais ?<span class="faq-toggle">+</span></div><div class="faq-a">Oui, paiement en 3 mensualités sans frais via Stripe. Le premier tiers est débité à l'inscription, les 2 suivants à 30 et 60 jours.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Je peux annuler ?<span class="faq-toggle">+</span></div><div class="faq-a">Annulation gratuite jusqu'à 14 jours avant. Entre 14 et 7 jours : 50% remboursé. Moins de 7 jours : non remboursable mais transférable à un confrère.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">C'est quoi les 2h d'accompagnement individuel ?<span class="faq-toggle">+</span></div><div class="faq-a">Un rendez-vous en visio avec le formateur, juste vous et lui. Pour adapter les agents à votre situation spécifique, régler les derniers détails, et s'assurer que tout fonctionne parfaitement pour votre OF.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <h2>12 à 30 places selon la formule.</h2>
+  <p>Choisissez votre formule et rejoignez les formateurs qui ont déjà automatisé leur OF.</p>
+  <a href="#inscription" class="btn" onclick="document.getElementById('inscription')?.scrollIntoView({behavior:'smooth'});return false;">Réserver ma place <span class="btn-arrow">→</span></a>
+</section>
+
+<div class="footer">© 2026 lesformateurs.online — EXPERIENCE PROD SASU · SIREN 982 828 774</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script>
+var formules = {
+  ligne: { price:'990€', info:'En ligne · 2 semaines · 2h/soir + 2h coaching', stripe:'STRIPE_WORKSHOP_LIGNE' },
+  annecy: { price:'2 490€', info:'Chalet Annecy · Week-end · Hébergement 2 nuits + tous repas inclus', stripe:'STRIPE_WORKSHOP_ANNECY' },
+  chateau: { price:'2 990€', info:'Château Île-de-France · 2 jours · Hébergement 2 nuits + gastronomie · 30 participants', stripe:'STRIPE_WORKSHOP_CHATEAU' }
+};
+
+function selectFormule(f, e) {
+  if(e) e.preventDefault();
+  document.getElementById('ws-formule').value = f;
+  updateFormulePrice();
+  document.getElementById('inscription')?.scrollIntoView({behavior:'smooth'});
+}
+
+function updateFormulePrice() {
+  var sel = document.getElementById('ws-formule').value;
+  var display = document.getElementById('ws-price-display');
+  if(sel && formules[sel]) {
+    document.getElementById('ws-price').textContent = formules[sel].price;
+    document.getElementById('ws-info').textContent = formules[sel].info;
+    display.style.display = '';
+  } else {
+    display.style.display = 'none';
+  }
+}
+
+async function reserveWorkshop() {
+  var formule = document.getElementById('ws-formule').value;
+  var prenom = document.getElementById('ws-prenom').value.trim();
+  var nom = document.getElementById('ws-nom').value.trim();
+  var name = prenom + ' ' + nom;
+  var email = document.getElementById('ws-email').value.trim();
+  var phone = document.getElementById('ws-phone').value.trim();
+  var err = document.getElementById('ws-error');
+  if(!formule) { err.textContent='Choisissez une formule.'; err.style.display=''; return; }
+  if(!prenom||!nom||!email) { err.textContent='Prénom, nom et email obligatoires.'; err.style.display=''; return; }
+  err.style.display='none';
+  try {
+    await sb.from('leads').insert({ name:name, email:email, phone:phone, source:'workshop-'+formule, metadata:{ formule:formule, price:formules[formule].price } });
+  } catch(ex) {}
+  document.querySelector('.form-card').style.display = 'none';
+  document.getElementById('ws-success').style.display = '';
+  // Redirect to Stripe
+  // if(formules[formule].stripe && !formules[formule].stripe.startsWith('STRIPE_'))
+  //   window.location.href = formules[formule].stripe;
+}
+
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold:.1, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+</script>
+</body>
+</html>
