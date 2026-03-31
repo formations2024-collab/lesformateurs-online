@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Financement Express — Déposez des centaines de dossiers sans effort · lesformateurs.online</title>
+<meta name="description" content="Créez un dossier OPCO, FIFPL, FNE en 2 minutes. Envoyez un lien, le stagiaire remplit, le dossier part. 3 dossiers offerts puis abonnement dès 29€/mois.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+<style>
+:root{--dark:#1a1d23;--text:#2d3039;--muted:#6b7080;--light:#f5f3ef;--cream:#faf8f5;--accent:#e94560;--accent-dark:#d03a52;--green:#16a34a;--border:#e9e7e2;--r:20px;--shadow-sm:0 1px 3px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.06);--shadow-md:0 4px 20px rgba(0,0,0,.06);--shadow-lg:0 12px 40px rgba(0,0,0,.08);--shadow-accent:0 8px 30px rgba(233,69,96,.18)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:#fff;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.quote-text{font-family:'DM Serif Text',Georgia,serif}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}
+
+.hero{position:relative;padding:100px 32px 80px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(22,163,74,.06) 0%,transparent 65%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:24px;animation:fadeUp .8s cubic-bezier(.22,1,.36,1) both}
+.eyebrow-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s ease infinite}
+.hero h1{font-size:clamp(34px,5.2vw,58px);line-height:1.08;letter-spacing:-.5px;margin-bottom:24px;animation:fadeUp .8s .1s cubic-bezier(.22,1,.36,1) both}
+.hero h1 em{font-style:italic;color:var(--green);position:relative}
+.hero h1 em::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:3px;background:var(--green);opacity:.2;border-radius:2px}
+.hero .sub{font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:660px;margin:0 auto 40px;font-weight:400;line-height:1.65;animation:fadeUp .8s .2s cubic-bezier(.22,1,.36,1) both}
+.hero .btn-wrap{animation:fadeUp .8s .3s cubic-bezier(.22,1,.36,1) both}
+.hero .micro{font-size:13px;color:var(--muted);margin-top:14px;animation:fadeUp .8s .35s cubic-bezier(.22,1,.36,1) both}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--dark);color:#fff;font-family:'DM Sans',sans-serif;font-weight:600;font-size:15px;padding:17px 36px;border-radius:60px;border:none;cursor:pointer;text-decoration:none;transition:all .25s cubic-bezier(.22,1,.36,1);letter-spacing:.3px;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.08) 0%,transparent 100%);pointer-events:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.14)}
+.btn-accent{background:var(--accent)}.btn-accent:hover{background:var(--accent-dark);box-shadow:var(--shadow-accent)}
+.btn-green{background:var(--green)}.btn-green:hover{background:#15803d;box-shadow:0 8px 30px rgba(22,163,74,.25)}
+.btn-arrow{transition:transform .25s}.btn:hover .btn-arrow{transform:translateX(3px)}
+
+.stats{display:flex;justify-content:center;gap:0;padding-top:48px;margin-top:8px;border-top:1px solid var(--border);animation:fadeUp .8s .45s cubic-bezier(.22,1,.36,1) both}
+.stat{text-align:center;flex:1;position:relative;padding:0 20px}
+.stat:not(:last-child)::after{content:'';position:absolute;right:0;top:4px;bottom:4px;width:1px;background:var(--border)}
+.stat strong{display:block;font-family:'DM Serif Text',serif;font-size:clamp(26px,3vw,34px);color:var(--dark);line-height:1.1}
+.stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;margin-top:4px;display:block}
+
+.trust{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;padding:32px;background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);font-weight:500}
+.trust-check{width:20px;height:20px;background:rgba(22,163,74,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--green);flex-shrink:0}
+
+.section{padding:100px 32px;text-align:center}
+.section-inner{max-width:1100px;margin:0 auto}
+.cream-bg{background:var(--cream)}
+.eyebrow-section{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:16px}
+.section h2{font-size:clamp(28px,3.8vw,46px);line-height:1.1;letter-spacing:-.3px;margin-bottom:16px}
+.section h2 em{font-style:italic;color:var(--accent)}
+.section h2 em.green{color:var(--green)}
+.section-sub{font-size:16px;color:var(--muted);max-width:580px;margin:0 auto 52px;font-weight:400;line-height:1.65}
+
+.pain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;text-align:left}
+.pain-card{background:#fff;border-radius:var(--r);padding:32px;border:1px solid var(--border);transition:all .3s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden}
+.pain-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:0;transition:opacity .3s}
+.pain-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:transparent}
+.pain-card:hover::before{opacity:1}
+.pain-icon{width:44px;height:44px;background:rgba(233,69,96,.06);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+.pain-card h4{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px;color:var(--dark)}
+.pain-card p{font-size:14px;color:var(--muted);line-height:1.65}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;max-width:960px;margin:0 auto}
+.step{position:relative}
+.step:not(:last-child)::after{content:'→';position:absolute;right:-18px;top:30px;color:var(--border);font-size:24px}
+.step-num{width:56px;height:56px;background:var(--green);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Text',serif;font-size:22px;margin:0 auto 14px}
+.step h4{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;color:var(--dark)}
+.step p{font-size:12px;color:var(--muted);line-height:1.5}
+
+.fin-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:800px;margin:0 auto}
+.fin-tag{background:#fff;border:1px solid var(--border);border-radius:50px;padding:10px 22px;font-size:13px;font-weight:600;color:var(--dark);transition:all .25s}
+.fin-tag:hover{border-color:var(--green);background:rgba(22,163,74,.04);color:var(--green)}
+
+.roi-box{background:var(--dark);border-radius:var(--r);padding:48px 40px;max-width:800px;margin:0 auto;color:#fff;text-align:left}
+.roi-box h3{font-size:24px;color:#fff;margin-bottom:24px}
+.roi-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.roi-row:last-child{border:none}
+.roi-label{font-size:14px;color:rgba(255,255,255,.6)}
+.roi-value{font-size:18px;font-weight:700;color:#fff}
+.roi-value.green{color:#4ade80}
+.roi-value.accent{color:var(--accent)}
+.roi-total{margin-top:20px;padding:20px;background:rgba(22,163,74,.12);border-radius:14px;text-align:center}
+.roi-total p{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:4px}
+.roi-total .big{font-family:'DM Serif Text',serif;font-size:42px;color:#4ade80}
+
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:0 auto;text-align:left}
+.pricing-card{background:var(--cream);border-radius:var(--r);padding:36px 28px;border:2px solid var(--border);transition:all .3s cubic-bezier(.22,1,.36,1);position:relative}
+.pricing-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.pricing-card.pop{border-color:var(--green);background:#fff}
+.pricing-card.pop::before{content:'⭐ Le + populaire';position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:4px 16px;border-radius:20px;text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
+.pc-name{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:8px}
+.pc-price{font-family:'DM Serif Text',serif;font-size:42px;color:var(--dark);line-height:1;margin-bottom:4px}
+.pc-price small{font-family:'DM Sans',sans-serif;font-size:14px;color:var(--muted);font-weight:400}
+.pc-dossiers{font-size:16px;font-weight:800;color:var(--green);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.pc-list{list-style:none;margin-bottom:24px}
+.pc-list li{font-size:13px;color:var(--text);padding:6px 0 6px 22px;position:relative}
+.pc-list li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700}
+.pc-btn{display:block;width:100%;text-align:center;font-size:14px;padding:14px}
+.pc-trial{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
+
+.extra-pack{background:var(--cream);border-radius:var(--r);padding:24px 32px;max-width:700px;margin:32px auto 0;border:1.5px dashed var(--border);text-align:center}
+.extra-pack p{font-size:14px;color:var(--muted)}
+.extra-pack strong{color:var(--dark)}
+
+.big-testi{background:#fff;border-radius:var(--r);padding:48px;border:1px solid var(--border);max-width:800px;margin:0 auto;text-align:left}
+.big-testi .quote-text{font-size:20px;color:var(--dark);line-height:1.6;margin-bottom:24px}
+
+.faq-list{max-width:680px;margin:0 auto;text-align:left}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{font-size:16px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;transition:color .2s;user-select:none}
+.faq-q:hover{color:var(--accent)}
+.faq-toggle{width:28px;height:28px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;font-size:16px;color:var(--muted);border:1px solid var(--border)}
+.faq-item.open .faq-toggle{background:var(--accent);color:#fff;transform:rotate(45deg);border-color:var(--accent)}
+.faq-a{font-size:15px;color:var(--muted);padding:0 0 24px;display:none;line-height:1.75;max-width:90%}
+.faq-item.open .faq-a{display:block}
+
+.final-cta{padding:80px 32px;text-align:center;background:var(--dark);color:#fff;position:relative;overflow:hidden}
+.final-cta::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(22,163,74,.15) 0%,transparent 65%);pointer-events:none}
+.final-cta h2{font-size:clamp(26px,3.5vw,40px);color:#fff;margin-bottom:12px;position:relative;z-index:1}
+.final-cta p{color:rgba(255,255,255,.5);font-size:16px;margin-bottom:32px;position:relative;z-index:1}
+.final-cta .btn{background:var(--green);position:relative;z-index:1}
+.final-cta .btn:hover{background:#15803d;box-shadow:0 8px 30px rgba(22,163,74,.25)}
+
+.footer{text-align:center;padding:36px 32px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);font-weight:500}
+
+@media(max-width:768px){
+.hero{padding:72px 20px 60px}
+.stats{flex-wrap:wrap;gap:24px;padding-top:36px}.stat{flex:none;width:45%}.stat:not(:last-child)::after{display:none}
+.section{padding:68px 20px}
+.pain-grid{grid-template-columns:1fr}
+.pricing-grid{grid-template-columns:1fr;max-width:400px}
+.steps{grid-template-columns:1fr 1fr;gap:32px}.step:not(:last-child)::after{display:none}
+.trust{gap:16px;padding:24px 20px}
+.btn{width:100%;text-align:center;padding:16px 24px}
+.final-cta{padding:60px 20px}
+.roi-box{padding:32px 24px}
+.roi-row{flex-direction:column;align-items:flex-start;gap:4px}
+.big-testi{padding:28px 24px}
+.big-testi .quote-text{font-size:17px}
+}
+</style>
+</head>
+<body>
+
+<!-- =========== HERO =========== -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="eyebrow-dot"></span> FINANCEMENT AUTOMATISÉ · ESSAI GRATUIT 7 JOURS</div>
+    <h1>Déposez <em>des centaines</em> de dossiers de financement.<br>Votre CA va exploser.</h1>
+    <p class="sub">OPCO, FIFPL, FNE, AGEFICE, Transition Pro — créez un dossier en 2 clics, envoyez un lien au stagiaire, il remplit et uploade lui-même. Le dossier complet part à l'organisme financeur. <strong>Vous passez de 5 dossiers par mois à 50, puis 100.</strong></p>
+    <div class="btn-wrap">
+      <a href="#pricing" class="btn btn-green" onclick="document.getElementById('pricing')?.scrollIntoView({behavior:'smooth'});return false;">Essayer gratuitement 7 jours <span class="btn-arrow">→</span></a>
+    </div>
+    <p class="micro">3 dossiers offerts — aucune carte bancaire requise pour tester</p>
+    <div class="stats">
+      <div class="stat"><strong>3</strong><span>dossiers offerts</span></div>
+      <div class="stat"><strong>2 min</strong><span>par dossier</span></div>
+      <div class="stat"><strong>11</strong><span>financements supportés</span></div>
+      <div class="stat"><strong>×8</strong><span>ROI moyen</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="trust-item"><span class="trust-check">✓</span> OPCO (les 11)</div>
+  <div class="trust-item"><span class="trust-check">✓</span> FIFPL</div>
+  <div class="trust-item"><span class="trust-check">✓</span> FNE-Formation</div>
+  <div class="trust-item"><span class="trust-check">✓</span> AGEFICE</div>
+  <div class="trust-item"><span class="trust-check">✓</span> Transition Pro</div>
+  <div class="trust-item"><span class="trust-check">✓</span> AIF Pôle Emploi</div>
+  <div class="trust-item"><span class="trust-check">✓</span> POEI</div>
+  <div class="trust-item"><span class="trust-check">✓</span> FAFCEA</div>
+</div>
+
+<!-- =========== LE PROBLÈME =========== -->
+<section class="section cream-bg">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="eyebrow-section">Le problème</div>
+      <h2>Chaque dossier non déposé,<br>c'est <em>de l'argent perdu</em></h2>
+      <p class="section-sub">Vos stagiaires veulent se faire financer. Mais monter les dossiers à la main prend des heures. Résultat : vous en faites 5 par mois au lieu de 50.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card reveal reveal-delay-1"><div class="pain-icon">⏰</div><h4>4 heures par dossier en moyenne</h4><p>Remplir les formulaires, collecter les pièces du stagiaire, vérifier chaque document, scanner, relancer… Pour chaque stagiaire c'est le même cauchemar.</p></div>
+      <div class="pain-card reveal reveal-delay-2"><div class="pain-icon">📋</div><h4>11 portails différents, 11 procédures</h4><p>OPCO EP, Atlas, Santé, AFDAS, FIFPL, FNE, AGEFICE, FAFCEA, AIF, POEI, Transition Pro… Chaque organisme a ses propres exigences et formulaires.</p></div>
+      <div class="pain-card reveal reveal-delay-3"><div class="pain-icon">🤷</div><h4>Des stagiaires qui ne renvoient jamais leurs pièces</h4><p>Vous relancez 5 fois par email pour une pièce d'identité ou un devis signé. Ça prend des semaines. Certains finissent par abandonner.</p></div>
+      <div class="pain-card reveal reveal-delay-4"><div class="pain-icon">💸</div><h4>Des dizaines de milliers d'euros qui dorment</h4><p>Chaque dossier financé rapporte 1 500 à 8 000€. Si vous n'en déposez que 5/mois au lieu de 50, c'est 50 000€ de CA que vous laissez sur la table. Chaque mois.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== COMMENT ÇA MARCHE =========== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="eyebrow-section">Comment ça marche</div>
+      <h2>Un dossier complet en <em class="green">2 minutes</em></h2>
+      <p class="section-sub">Plus de paperasse. Plus de relances. Plus de pièces manquantes.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><div class="step-num">1</div><h4>Créez le dossier</h4><p>Choisissez le financement (OPCO, FIFPL, FNE…) et la formation concernée. 2 clics.</p></div>
+      <div class="step"><div class="step-num">2</div><h4>Envoyez le lien</h4><p>Le stagiaire reçoit un lien unique. Il remplit son formulaire et uploade ses documents lui-même.</p></div>
+      <div class="step"><div class="step-num">3</div><h4>Vérification auto</h4><p>L'IA vérifie la conformité de chaque pièce. Manque un doc ? Le stagiaire est relancé automatiquement.</p></div>
+      <div class="step"><div class="step-num">4</div><h4>Dossier envoyé</h4><p>Le dossier complet part à l'organisme financeur. Vous suivez tout depuis votre tableau de bord.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== FINANCEMENTS SUPPORTÉS =========== -->
+<section class="section cream-bg">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="eyebrow-section">11 types de financement</div>
+      <h2>Tous les organismes, <em class="green">un seul outil</em></h2>
+      <p class="section-sub">Fini de jongler entre 11 portails différents avec 11 procédures différentes.</p>
+    </div>
+    <div class="fin-grid reveal">
+      <div class="fin-tag">OPCO EP</div>
+      <div class="fin-tag">OPCO Atlas</div>
+      <div class="fin-tag">OPCO Santé</div>
+      <div class="fin-tag">AFDAS</div>
+      <div class="fin-tag">FIFPL</div>
+      <div class="fin-tag">FNE-Formation</div>
+      <div class="fin-tag">AGEFICE</div>
+      <div class="fin-tag">FAFCEA</div>
+      <div class="fin-tag">AIF France Travail</div>
+      <div class="fin-tag">POEI</div>
+      <div class="fin-tag">Transition Pro</div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== ROI CALCULATOR =========== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="eyebrow-section">Faites le calcul</div>
+      <h2>Avec l'abonnement Pro à <em class="green">69€/mois</em></h2>
+      <p class="section-sub">Vous déposez 20 dossiers/mois au lieu de 5. Voici ce que ça change.</p>
+    </div>
+    <div class="roi-box reveal">
+      <h3>💰 Simulation de revenus mensuels</h3>
+      <div class="roi-row"><span class="roi-label">Dossiers déposés par mois</span><span class="roi-value green">20 dossiers</span></div>
+      <div class="roi-row"><span class="roi-label">Taux d'acceptation moyen</span><span class="roi-value">75%</span></div>
+      <div class="roi-row"><span class="roi-label">Dossiers acceptés</span><span class="roi-value green">15 dossiers</span></div>
+      <div class="roi-row"><span class="roi-label">Revenu moyen par dossier financé</span><span class="roi-value">2 500€</span></div>
+      <div class="roi-row"><span class="roi-label">Coût de l'abonnement Pro</span><span class="roi-value accent">-69€</span></div>
+      <div class="roi-total">
+        <p>Revenu mensuel additionnel net</p>
+        <div class="big">+37 431€</div>
+      </div>
+    </div>
+    <div class="extra-pack" style="margin-top:32px;border-style:none;background:transparent;">
+      <p style="font-size:18px;font-weight:700;color:var(--dark);">C'est un ROI de <span style="color:var(--green);">×542</span> sur votre abonnement.</p>
+      <p style="font-size:14px;color:var(--muted);margin-top:8px;">Et avec le plan Business (100 dossiers/mois), multipliez par 5.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =========== TÉMOIGNAGE =========== -->
+<section class="section cream-bg">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="eyebrow-section">Témoignage</div>
+      <h2>Ils sont passés de 5 à <em class="green">80 dossiers</em>/mois</h2>
+    </div>
+    <div class="big-testi reveal" style="margin-top:40px;">
+      <div class="quote-text">&ldquo;Avant, je déposais 3-4 dossiers OPCO par semaine. C'était ma limite physique : les relances, les pièces manquantes, les formulaires différents pour chaque OPCO. Avec la plateforme, j'ai envoyé 80 dossiers le premier mois. Le stagiaire reçoit un lien, il fait tout seul. Mon CA en financement a été multiplié par 6. Le plan Business à 249€/mois me rapporte +200 000€ de financement par mois. C'est absurde.&rdquo;</div>
+      <div><strong style="font-size:14px;color:var(--dark);">Philippe D.</strong></div>
+      <div style="font-size:13px;color:var(--muted);">Gérant de 4 centres de formation · Plan Business</div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== PRICING =========== -->
+<section class="section" id="pricing">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="eyebrow-section">Tarifs</div>
+      <h2>Choisissez votre <em class="green">volume</em></h2>
+      <p class="section-sub">Testez gratuitement avec 3 dossiers offerts. Quand vous êtes convaincu, choisissez le plan qui correspond à votre volume. <strong>7 jours d'essai gratuit</strong> sur tous les plans.</p>
+    </div>
+
+    <div class="pricing-grid reveal">
+      <!-- STARTER -->
+      <div class="pricing-card">
+        <div class="pc-name">Starter</div>
+        <div class="pc-price">29€<small>/mois</small></div>
+        <div class="pc-dossiers">5 dossiers / mois</div>
+        <ul class="pc-list">
+          <li>Tous les types de financement</li>
+          <li>Liens stagiaires auto</li>
+          <li>Relances automatiques</li>
+          <li>Vérification IA des pièces</li>
+          <li>Suivi temps réel</li>
+        </ul>
+        <a href="#" class="btn btn-green pc-btn" onclick="subscribePlan('starter',event)">Essai gratuit 7 jours <span class="btn-arrow">→</span></a>
+        <p class="pc-trial">Puis 29€/mois · Annulation en 1 clic</p>
+      </div>
+
+      <!-- PRO -->
+      <div class="pricing-card pop">
+        <div class="pc-name">Pro</div>
+        <div class="pc-price">69€<small>/mois</small></div>
+        <div class="pc-dossiers">20 dossiers / mois</div>
+        <ul class="pc-list">
+          <li>Tout Starter +</li>
+          <li>20 dossiers/mois</li>
+          <li>Templates personnalisés</li>
+          <li>Export comptable CSV</li>
+          <li>Support prioritaire</li>
+        </ul>
+        <a href="#" class="btn btn-green pc-btn" onclick="subscribePlan('pro',event)">Essai gratuit 7 jours <span class="btn-arrow">→</span></a>
+        <p class="pc-trial">Puis 69€/mois · Annulation en 1 clic</p>
+      </div>
+
+      <!-- BUSINESS -->
+      <div class="pricing-card">
+        <div class="pc-name">Business</div>
+        <div class="pc-price">249€<small>/mois</small></div>
+        <div class="pc-dossiers">100 dossiers / mois</div>
+        <ul class="pc-list">
+          <li>Tout Pro +</li>
+          <li>100 dossiers/mois</li>
+          <li>Multi-centres</li>
+          <li>API d'intégration</li>
+          <li>Account manager dédié</li>
+        </ul>
+        <a href="#" class="btn btn-green pc-btn" onclick="subscribePlan('business',event)">Essai gratuit 7 jours <span class="btn-arrow">→</span></a>
+        <p class="pc-trial">Puis 249€/mois · Annulation en 1 clic</p>
+      </div>
+    </div>
+
+    <div class="extra-pack reveal">
+      <p><strong>Plan Business :</strong> besoin de plus de 100 dossiers/mois ? Achetez des packs de 10 dossiers supplémentaires à <strong>20€</strong> (soit 2€/dossier).</p>
+    </div>
+
+    <div style="text-align:center;margin-top:40px;" class="reveal">
+      <p style="font-size:14px;color:var(--muted);">💡 <strong>Gratuit pour commencer :</strong> chaque membre reçoit 3 dossiers offerts pour tester. Après vos 3 dossiers, le site vous propose de choisir un plan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =========== FAQ =========== -->
+<section class="section cream-bg">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="eyebrow-section">Questions fréquentes</div>
+      <h2>Vos questions</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Comment fonctionnent les 3 dossiers gratuits ?<span class="faq-toggle">+</span></div><div class="faq-a">Dès votre inscription (gratuite), vous pouvez créer 3 dossiers de financement complets. C'est un quota total, pas mensuel. C'est fait pour que vous testiez l'outil en conditions réelles. Quand les 3 dossiers sont utilisés, le site vous propose de souscrire un plan.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Que se passe-t-il quand j'atteins ma limite mensuelle ?<span class="faq-toggle">+</span></div><div class="faq-a">Le site vous propose de passer au plan supérieur. Pour le plan Business (100 dossiers/mois), vous pouvez acheter des packs de 10 dossiers supplémentaires à 20€ (soit 2€/dossier), directement depuis votre tableau de bord.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">L'essai gratuit de 7 jours, comment ça marche ?<span class="faq-toggle">+</span></div><div class="faq-a">Vous accédez à toutes les fonctionnalités de votre plan pendant 7 jours. Si vous annulez avant la fin de l'essai, vous ne payez rien. Après 7 jours, le paiement mensuel commence automatiquement.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Le compteur de dossiers se réinitialise quand ?<span class="faq-toggle">+</span></div><div class="faq-a">Chaque mois, à la date de renouvellement de votre abonnement. Les 3 dossiers gratuits du plan Découverte sont un quota total (pas mensuel).</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Je peux changer de plan en cours de route ?<span class="faq-toggle">+</span></div><div class="faq-a">Oui, à tout moment. L'upgrade est immédiat et votre compteur de dossiers est ajusté au prorata. Le downgrade prend effet au prochain renouvellement.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Quels types de financement sont supportés ?<span class="faq-toggle">+</span></div><div class="faq-a">Tous les 11 OPCO (EP, Atlas, Santé, AFDAS…), le FIFPL, le FNE-Formation, l'AGEFICE, le FAFCEA, l'AIF France Travail, le POEI et Transition Pro. Chaque type a ses propres formulaires pré-remplis et checklist de pièces.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Je peux annuler quand je veux ?<span class="faq-toggle">+</span></div><div class="faq-a">Oui, sans engagement. Annulation en 1 clic depuis votre espace. Votre accès continue jusqu'à la fin de la période payée.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== CTA FINAL =========== -->
+<section class="final-cta">
+  <h2>3 dossiers gratuits. Zéro risque.</h2>
+  <p>Testez maintenant, décidez après. Vos 3 premiers dossiers sont offerts.</p>
+  <a href="#pricing" class="btn" onclick="document.getElementById('pricing')?.scrollIntoView({behavior:'smooth'});return false;">Commencer gratuitement <span class="btn-arrow">→</span></a>
+</section>
+
+<div class="footer">© 2026 lesformateurs.online — EXPERIENCE PROD SASU · SIREN 982 828 774</div>
+
+<!-- =========== CHECKOUT MODAL =========== -->
+<div id="checkout-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#fff;border-radius:20px;max-width:480px;width:100%;padding:40px;position:relative;max-height:90vh;overflow-y:auto;">
+    <button onclick="document.getElementById('checkout-overlay').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#6b7080;">×</button>
+    <h3 style="font-family:'DM Serif Text',serif;font-size:26px;margin-bottom:8px;text-align:center;">Démarrez votre essai gratuit</h3>
+    <p id="co-desc" style="font-size:14px;color:#6b7080;text-align:center;margin-bottom:28px;">Plan Pro · 7 jours gratuits · Sans engagement</p>
+
+    <!-- Signup form -->
+    <div id="co-signup">
+      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Prénom et nom</label><input type="text" id="co-name" placeholder="Sophie Martin" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:inherit;"></div>
+      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Email professionnel</label><input type="email" id="co-email" placeholder="sophie@monof.fr" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:inherit;"></div>
+      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Mot de passe</label><input type="password" id="co-pass" placeholder="Minimum 6 caractères" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:inherit;"></div>
+      <div id="co-error" style="display:none;color:#e94560;font-size:13px;margin-bottom:12px;text-align:center;"></div>
+      <button onclick="doSignup()" style="width:100%;padding:16px;background:#16a34a;color:#fff;border:none;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:4px;">Démarrer mon essai gratuit →</button>
+      <p style="font-size:12px;color:#6b7080;text-align:center;margin-top:14px;">Déjà un compte ? <a href="#" onclick="toggleForm(event)" style="color:#e94560;font-weight:600;">Connexion</a></p>
+    </div>
+
+    <!-- Login form -->
+    <div id="co-login" style="display:none;">
+      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Email</label><input type="email" id="co-le" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:inherit;"></div>
+      <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Mot de passe</label><input type="password" id="co-lp" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:inherit;"></div>
+      <div id="co-lerr" style="display:none;color:#e94560;font-size:13px;margin-bottom:12px;text-align:center;"></div>
+      <button onclick="doLogin()" style="width:100%;padding:16px;background:#1a1d23;color:#fff;border:none;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;">Se connecter →</button>
+      <p style="font-size:12px;color:#6b7080;text-align:center;margin-top:14px;"><a href="#" onclick="toggleForm(event)" style="color:#e94560;font-weight:600;">Créer un compte</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script>
+// === Scroll reveal ===
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold:.1, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+
+// === Stripe checkout links ===
+// REMPLACER PAR LES VRAIS LIENS STRIPE (subscriptions avec trial 7 jours)
+var stripeLinks = {
+  starter:  'STRIPE_STARTER_LINK',
+  pro:      'STRIPE_PRO_LINK',
+  business: 'STRIPE_BUSINESS_LINK'
+};
+
+var selectedPlan = 'pro';
+
+function subscribePlan(plan, e){
+  if(e) e.preventDefault();
+  selectedPlan = plan;
+  var labels = { starter:'Starter · 29€/mois', pro:'Pro · 69€/mois', business:'Business · 249€/mois' };
+  document.getElementById('co-desc').textContent = 'Plan ' + labels[plan] + ' · 7 jours gratuits · Sans engagement';
+  document.getElementById('checkout-overlay').style.display = 'flex';
+}
+
+function toggleForm(e){
+  e.preventDefault();
+  var s = document.getElementById('co-signup');
+  var l = document.getElementById('co-login');
+  if(s.style.display==='none'){ s.style.display=''; l.style.display='none'; }
+  else { s.style.display='none'; l.style.display=''; }
+}
+
+async function activateSub(userId){
+  try {
+    var limits = { starter: 5, pro: 20, business: 100 };
+    await sb.from('user_subscriptions').upsert({
+      user_id: userId,
+      plan_id: selectedPlan,
+      status: 'trialing',
+      monthly_dossier_limit: limits[selectedPlan],
+      trial_ends_at: new Date(Date.now() + 7*24*60*60*1000).toISOString(),
+      current_period_start: new Date().toISOString(),
+      current_period_end: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
+      dossiers_used_this_period: 0
+    }, { onConflict: 'user_id' });
+    await sb.from('profiles').update({
+      subscription_plan: selectedPlan,
+      is_premium: true
+    }).eq('id', userId);
+  } catch(ex){ console.error('Sub error:', ex); }
+}
+
+async function doSignup(){
+  var n = document.getElementById('co-name').value.trim();
+  var e = document.getElementById('co-email').value.trim();
+  var p = document.getElementById('co-pass').value;
+  var err = document.getElementById('co-error');
+  if(!n||!e||p.length<6){ err.textContent='Remplissez tous les champs (mot de passe 6 car. min).'; err.style.display=''; return; }
+  err.style.display='none';
+  try {
+    var res = await sb.auth.signUp({ email:e, password:p, options:{ data:{ full_name:n }}});
+    if(res.error){ err.textContent=res.error.message; err.style.display=''; return; }
+    await sb.auth.signInWithPassword({ email:e, password:p });
+    var user = res.data.user || (await sb.auth.getUser()).data.user;
+    if(user) await activateSub(user.id);
+    window.location.href = stripeLinks[selectedPlan];
+  } catch(ex){ err.textContent='Erreur: '+ex.message; err.style.display=''; }
+}
+
+async function doLogin(){
+  var e = document.getElementById('co-le').value.trim();
+  var p = document.getElementById('co-lp').value;
+  var err = document.getElementById('co-lerr');
+  if(!e||!p){ err.textContent='Email et mot de passe requis.'; err.style.display=''; return; }
+  err.style.display='none';
+  try {
+    var res = await sb.auth.signInWithPassword({ email:e, password:p });
+    if(res.error){ err.textContent=res.error.message; err.style.display=''; return; }
+    var user = (await sb.auth.getUser()).data.user;
+    if(user) await activateSub(user.id);
+    window.location.href = stripeLinks[selectedPlan];
+  } catch(ex){ err.textContent='Erreur: '+ex.message; err.style.display=''; }
+}
+</script>
+</body>
+</html>
