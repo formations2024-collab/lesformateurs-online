@@ -392,19 +392,19 @@ async function sendLead(source){
       <!-- Toggles prérequis -->
       <div style="margin-bottom:18px;margin-top:4px;">
         <p style="font-size:13px;font-weight:700;margin-bottom:10px;color:#1a1d23;">Prérequis obligatoires :</p>
-        <div onclick="toggleFcoCheck('fco-toggle-nda')" style="display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;font-size:13px;color:#1a1d23;user-select:none;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;color:#1a1d23;user-select:none;">
           <input type="checkbox" id="fco-toggle-nda" style="display:none;"/>
-          <span id="fco-track-nda" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
+          <span onclick="toggleFcoCheck('fco-toggle-nda')" id="fco-track-nda" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;cursor:pointer;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
           J'ai mon NDA
         </div>
-        <div onclick="toggleFcoCheck('fco-toggle-qualiopi')" style="display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;font-size:13px;color:#1a1d23;user-select:none;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;color:#1a1d23;user-select:none;">
           <input type="checkbox" id="fco-toggle-qualiopi" style="display:none;"/>
-          <span id="fco-track-qualiopi" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
+          <span onclick="toggleFcoCheck('fco-toggle-qualiopi')" id="fco-track-qualiopi" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;cursor:pointer;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
           J'ai un certificat Qualiopi valide
         </div>
-        <div onclick="toggleFcoCheck('fco-toggle-rs')" style="display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;font-size:13px;color:#1a1d23;user-select:none;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;color:#1a1d23;user-select:none;">
           <input type="checkbox" id="fco-toggle-rs" style="display:none;"/>
-          <span id="fco-track-rs" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
+          <span onclick="toggleFcoCheck('fco-toggle-rs')" id="fco-track-rs" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;cursor:pointer;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
           J'ai une habilitation ou une certification RS ou RNCP
         </div>
       </div>
