@@ -1,0 +1,30 @@
+# Redirections funnel-* → lien-* (301 permanent)
+/funnel-nda /lien-nda 301
+/funnel-qualiopi /lien-qualiopi 301
+/funnel-edof /lien-edof 301
+/funnel-rs-rncp /lien-rs-rncp 301
+/funnel-rsrncp /lien-rsrncp 301
+/funnel-opco /lien-opco 301
+/funnel-agent-ia /lien-agent-ia 301
+/funnel-agents-ia /lien-agents-ia 301
+/funnel-webinaire /lien-webinaire 301
+/funnel-workshops /lien-workshops 301
+/funnel-ted /lien-ted 301
+/funnel-premium /lien-premium 301
+/funnel-certification /lien-certification 301
+/funnel-events /lien-events 301
+
+# Redirections acces-* → lien-* (301 permanent)
+/acces-nda /lien-nda 301
+/acces-qualiopi /lien-qualiopi 301
+/acces-edof /lien-edof 301
+/acces-rs-rncp /lien-rs-rncp 301
+/acces-rsrncp /lien-rsrncp 301
+/acces-opco /lien-opco 301
+/acces-agent-ia /lien-agent-ia 301
+/acces-agents-ia /lien-agents-ia 301
+/acces-webinaire /lien-webinaire 301
+/acces-workshops /lien-workshops 301
+/acces-certification /lien-certification 301
+/acces-events /lien-events 301
+/acces-premium /lien-premium 301
