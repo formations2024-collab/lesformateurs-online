@@ -392,21 +392,21 @@ async function sendLead(source){
       <!-- Toggles prérequis -->
       <div style="margin-bottom:18px;margin-top:4px;">
         <p style="font-size:13px;font-weight:700;margin-bottom:10px;color:#1a1d23;">Prérequis obligatoires :</p>
-        <label style="display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;font-size:13px;color:#1a1d23;">
-          <input type="checkbox" id="fco-toggle-nda" onchange="checkFcoReady()" style="display:none;"/>
-          <span class="fco-toggle-track" id="fco-track-nda" onclick="toggleFcoCheck('fco-toggle-nda')" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;cursor:pointer;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
+        <div onclick="toggleFcoCheck('fco-toggle-nda')" style="display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;font-size:13px;color:#1a1d23;user-select:none;">
+          <input type="checkbox" id="fco-toggle-nda" style="display:none;"/>
+          <span id="fco-track-nda" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
           J'ai mon NDA
-        </label>
-        <label style="display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;font-size:13px;color:#1a1d23;">
-          <input type="checkbox" id="fco-toggle-qualiopi" onchange="checkFcoReady()" style="display:none;"/>
-          <span class="fco-toggle-track" id="fco-track-qualiopi" onclick="toggleFcoCheck('fco-toggle-qualiopi')" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;cursor:pointer;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
+        </div>
+        <div onclick="toggleFcoCheck('fco-toggle-qualiopi')" style="display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;font-size:13px;color:#1a1d23;user-select:none;">
+          <input type="checkbox" id="fco-toggle-qualiopi" style="display:none;"/>
+          <span id="fco-track-qualiopi" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
           J'ai un certificat Qualiopi valide
-        </label>
-        <label style="display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;font-size:13px;color:#1a1d23;">
-          <input type="checkbox" id="fco-toggle-rs" onchange="checkFcoReady()" style="display:none;"/>
-          <span class="fco-toggle-track" id="fco-track-rs" onclick="toggleFcoCheck('fco-toggle-rs')" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;cursor:pointer;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
+        </div>
+        <div onclick="toggleFcoCheck('fco-toggle-rs')" style="display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;font-size:13px;color:#1a1d23;user-select:none;">
+          <input type="checkbox" id="fco-toggle-rs" style="display:none;"/>
+          <span id="fco-track-rs" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
           J'ai une habilitation ou une certification RS ou RNCP
-        </label>
+        </div>
       </div>
       <div id="fco-error" style="display:none;color:#e94560;font-size:13px;margin-bottom:12px;text-align:center;"></div>
       <button id="fco-pay-btn" onclick="submitFunnelCheckout()" disabled style="width:100%;padding:16px;background:#ccc;color:#fff;border:none;border-radius:50px;font-size:16px;font-weight:600;cursor:not-allowed;font-family:'DM Sans',sans-serif;margin-top:4px;transition:background .2s,cursor .2s;">Payer et lancer la procédure</button>
@@ -428,7 +428,7 @@ var funnelStripeLink = "https://buy.stripe.com/00weVddTQgXH2vY0JQffy21";
 function openFunnelCheckout(e){if(e)e.preventDefault();document.getElementById('acces-checkout-overlay').style.display='flex';}
 function toggleFcoLogin(e){e.preventDefault();var f=document.getElementById('fco-form'),l=document.getElementById('fco-login');if(f.style.display==='none'){f.style.display='';l.style.display='none';}else{f.style.display='none';l.style.display='';}}
 function toggleFcoPass(){var inp=document.getElementById('fco-pass');var eye=document.getElementById('fco-pass-eye');if(inp.type==='password'){inp.type='text';eye.textContent='🙈';}else{inp.type='password';eye.textContent='👁';}}
-function toggleFcoCheck(id){var cb=document.getElementById(id);cb.checked=!cb.checked;cb.dispatchEvent(new Event('change'));}
+function toggleFcoCheck(id){var cb=document.getElementById(id);cb.checked=!cb.checked;checkFcoReady();}
 function checkFcoReady(){var ids=['fco-toggle-nda','fco-toggle-qualiopi','fco-toggle-rs'];var allOn=true;ids.forEach(function(id){var cb=document.getElementById(id);var track=document.getElementById(id.replace('toggle','track'));var knob=track.querySelector('span');if(cb.checked){track.style.background='#e94560';knob.style.transform='translateX(18px)';}else{track.style.background='#ccc';knob.style.transform='translateX(0)';allOn=false;}});var fn=document.getElementById('fco-firstname').value.trim(),ln=document.getElementById('fco-lastname').value.trim(),em=document.getElementById('fco-email').value.trim(),ph=document.getElementById('fco-phone').value.trim(),pw=document.getElementById('fco-pass').value;var fieldsOk=fn&&ln&&em&&ph&&pw.length>=8;var btn=document.getElementById('fco-pay-btn');if(allOn&&fieldsOk){btn.disabled=false;btn.style.background='#e94560';btn.style.cursor='pointer';}else{btn.disabled=true;btn.style.background='#ccc';btn.style.cursor='not-allowed';}}
 document.addEventListener('DOMContentLoaded',function(){['fco-firstname','fco-lastname','fco-email','fco-phone','fco-pass'].forEach(function(id){var el=document.getElementById(id);if(el){el.addEventListener('input',checkFcoReady);}});});
 async function submitFunnelCheckout(){var btn=document.getElementById('fco-pay-btn');if(btn.disabled)return;var fn=document.getElementById('fco-firstname').value.trim(),ln=document.getElementById('fco-lastname').value.trim(),n=(fn+' '+ln).trim(),e=document.getElementById('fco-email').value.trim(),p=document.getElementById('fco-pass').value,err=document.getElementById('fco-error');if(!fn||!ln||!e||p.length<8){err.textContent='Remplissez tous les champs (8 car. min.).';err.style.display='';return;}err.style.display='none';try{var{data,error}=await sb.auth.signUp({email:e,password:p,options:{data:{full_name:n,first_name:fn,last_name:ln}}});if(error&&error.message!=='User already registered'){err.textContent=error.message;err.style.display='';return;}await sb.auth.signInWithPassword({email:e,password:p});window.open(funnelStripeLink,'_blank');}catch(ex){err.textContent='Erreur: '+ex.message;err.style.display='';}}
