@@ -43,7 +43,7 @@ a{text-decoration:none;color:inherit;}
   display:flex;flex-direction:column;justify-content:center;
 }
 .hero::before{
-  content:'';position:absolute;inset:0;
+  content:'';position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(ellipse at 50% 0%,rgba(233,69,96,.15) 0%,transparent 60%);
 }
 .hero-tag{
