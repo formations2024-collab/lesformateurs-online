@@ -1,132 +1,435 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B6XVYRVT9D');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-<title>lesformateurs.online — Missions, Conformité, Création d'OF, Formation</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>lesformateurs.online — Créez, gérez et développez votre organisme de formation</title>
 <link rel="canonical" href="https://lesformateurs.online/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://lesformateurs.online/">
-<meta property="og:title" content="lesformateurs.online — La plateforme des formateurs professionnels">
-<meta property="og:description" content="Missions, conformité Qualiopi, création d'OF, formation formateurs, agents IA — tout en un seul endroit.">
+<meta property="og:title" content="lesformateurs.online — La plateforme des organismes de formation">
+<meta property="og:description" content="EDOF, Qualiopi, NDA, RS/RNCP — prix cassés grâce à l'automatisation IA.">
 <meta property="og:site_name" content="lesformateurs.online">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="lesformateurs.online — La plateforme des formateurs professionnels">
-<meta name="twitter:description" content="Missions, conformité Qualiopi, création d'OF, formation formateurs — en un seul endroit.">
-<meta name="description" content="La plateforme n°1 des professionnels de la formation : missions, conformité Qualiopi, création d'OF, devenir formateur.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "lesformateurs.online",
-  "url": "https://lesformateurs.online",
-  "description": "La plateforme n°1 des professionnels de la formation : conformité Qualiopi, NDA, EDOF, OPCO, agents IA.",
-  "knowsAbout": ["formation professionnelle", "Qualiopi", "EDOF", "OPCO", "NDA", "agents IA", "organisme de formation"]
-}</script>
+<meta name="description" content="Créez, gérez et développez votre organisme de formation. EDOF, Qualiopi, NDA, RS/RNCP — prix cassés grâce à l'automatisation IA.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/mono-light.css">
+<style>
+*{box-sizing:border-box;}
+.idx-body{font-family:'DM Sans',-apple-system,sans-serif;color:#1a1a1a;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* Hero split */
+.hero-split{display:grid;grid-template-columns:1fr 1fr;min-height:480px;}
+.hero-left{padding:72px 48px;display:flex;flex-direction:column;justify-content:center;background:#fff;}
+.hero-eyebrow{font-size:11px;font-weight:700;color:#D85A30;text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;animation:fadeUp .5s both;}
+.hero-left h1{font-size:42px;font-weight:800;line-height:1.08;letter-spacing:-.8px;margin:0 0 16px;animation:fadeUp .5s .08s both;}
+.hero-left h1 span{color:#D85A30;}
+.hero-left>p{font-size:15px;color:#6B7280;line-height:1.6;max-width:420px;margin:0 0 28px;animation:fadeUp .5s .16s both;}
+.hero-ctas{display:flex;gap:12px;animation:fadeUp .5s .24s both;}
+.hero-ctas a{padding:14px 26px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;font-family:inherit;transition:transform .15s;}
+.hero-ctas .cta-primary{background:#D85A30;color:#fff;}
+.hero-ctas .cta-primary:hover{transform:scale(1.03);}
+.hero-ctas .cta-secondary{background:#fff;color:#1a1a1a;border:1px solid #E5E7EB;font-weight:600;}
+.hero-stats{display:flex;gap:32px;margin-top:36px;animation:fadeUp .5s .32s both;}
+.hero-stats .hs{text-align:left;}
+.hero-stats .hs-val{font-size:22px;font-weight:800;color:#D85A30;}
+.hero-stats .hs-lbl{font-size:10px;color:#9CA3AF;}
+
+/* Right cards */
+.hero-right{background:linear-gradient(135deg,#FFF8F3,#FFEDE3);padding:40px 32px;display:flex;flex-direction:column;gap:14px;justify-content:center;}
+.bs-card{background:#fff;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;border:1px solid #E5E7EB;cursor:pointer;transition:all .2s;text-decoration:none;color:inherit;}
+.bs-card:hover{border-color:#D85A30;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06);}
+.bs-icon{width:40px;height:40px;flex-shrink:0;}
+.bs-body{flex:1;min-width:0;}
+.bs-name-row{display:flex;align-items:center;gap:8px;}
+.bs-name{font-size:14px;font-weight:700;}
+.bs-tag{font-size:9px;font-weight:700;color:#fff;padding:2px 8px;border-radius:10px;}
+.bs-desc{font-size:11px;color:#9CA3AF;margin-top:2px;}
+.bs-prices{text-align:right;flex-shrink:0;}
+.bs-old{font-size:11px;color:#9CA3AF;text-decoration:line-through;}
+.bs-new{font-size:20px;font-weight:800;}
+
+/* Video */
+.vid-section{padding:56px 24px;text-align:center;background:#fff;}
+.vid-section .vid-eyebrow{font-size:10px;font-weight:700;color:#D85A30;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
+.vid-section h2{font-size:26px;font-weight:800;margin-bottom:8px;}
+.vid-section .vid-sub{color:#9CA3AF;font-size:13px;margin-bottom:24px;}
+.vid-wrap{max-width:680px;margin:0 auto;border-radius:16px;overflow:hidden;background:#F9FAFB;border:1px solid #E5E7EB;aspect-ratio:16/9;}
+.vid-wrap iframe{width:100%;height:100%;border:none;}
+.vid-cta{text-align:center;margin-top:28px;}
+.vid-cta a{display:inline-block;padding:12px 24px;background:#D85A30;color:#fff;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;transition:transform .15s;}
+.vid-cta a:hover{transform:scale(1.03);}
+
+/* Services grid */
+.svc-section{padding:56px 24px;background:#FAFAFA;border-top:1px solid #F3F4F6;}
+.svc-inner{max-width:960px;margin:0 auto;}
+.svc-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;}
+.svc-header .svc-eyebrow{font-size:10px;font-weight:700;color:#D85A30;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;}
+.svc-header h2{font-size:24px;font-weight:800;margin:0;}
+.svc-header a{color:#D85A30;font-size:12px;font-weight:600;text-decoration:none;}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.svc-card{background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:18px 16px;cursor:pointer;transition:all .15s;text-decoration:none;color:inherit;display:block;}
+.svc-card:hover{border-color:#D85A30;transform:translateY(-2px);}
+.svc-card h4{font-size:14px;font-weight:700;margin:0 0 4px;}
+.svc-card p{font-size:11.5px;color:#6B7280;line-height:1.5;margin:0 0 10px;}
+.svc-card .svc-price{font-size:18px;font-weight:800;}
+
+/* CTA final */
+.cta-final{background:linear-gradient(135deg,#1a1a1a,#2D1810);color:#fff;text-align:center;padding:52px 24px;}
+.cta-final h2{font-size:26px;font-weight:800;margin:0 0 10px;}
+.cta-final>p{color:#9CA3AF;font-size:13px;max-width:420px;margin:0 auto 28px;line-height:1.6;}
+.cta-btns{display:flex;justify-content:center;gap:12px;}
+.cta-btns a{padding:14px 28px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;font-family:inherit;transition:all .15s;}
+.cta-btn-p{background:#D85A30;color:#fff;}
+.cta-btn-p:hover{transform:scale(1.03);}
+.cta-btn-s{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2);font-weight:600;}
+.cta-btn-s:hover{border-color:rgba(255,255,255,.5);}
+
+/* Partners (reuse from mono-light.css) */
+/* Team band */
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+.qsn-team-band{max-width:1100px;margin:60px auto 80px;padding:0 20px;}
+.qsn-team-band h2{font-family:'Lora',serif;font-weight:600;font-size:38px;color:#1a1a1a;text-align:center;margin:0 0 40px;}
+.qsn-team-band .qsn-team-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:20px;}
+.qsn-team-band .qsn-member{text-align:center;}
+.qsn-team-band .qsn-member-photo{width:80px;height:80px;border-radius:50%;object-fit:cover;background:#f5f5f5;margin:0 auto 14px;display:block;}
+.qsn-team-band .qsn-member-name{font-size:12px;font-weight:700;color:#1a1a1a;margin:0 0 2px;}
+.qsn-team-band .qsn-member-role{font-size:11px;color:#D85A30;font-weight:500;margin:0;line-height:1.3;}
+
+/* Responsive */
+@media(max-width:768px){
+  .hero-split{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:40px 20px 32px;}
+  .hero-left h1{font-size:28px;}
+  .hero-right{padding:20px 16px;}
+  .hero-stats{gap:20px;flex-wrap:wrap;}
+  .hero-ctas{flex-direction:column;}
+  .hero-ctas a{text-align:center;}
+  .svc-grid{grid-template-columns:1fr;}
+  .cta-btns{flex-direction:column;align-items:center;}
+  .qsn-team-band .qsn-team-grid{grid-template-columns:repeat(3,1fr);gap:16px;}
+  .qsn-team-band h2{font-size:28px;}
+}
+@media(max-width:1024px){
+  .qsn-team-band .qsn-team-grid{grid-template-columns:repeat(4,1fr);gap:24px;}
+}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="navbar">
-  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
-  <div class="nav-links" id="navLinks">
-    <a href="missions.html">Missions</a>
-    <a href="conformite.html">Conformité</a>
+<!-- NAVBAR -->
+<nav class="ml-nav">
+  <a href="index.html" class="ml-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="ml-nav-links" id="navLinks">
+    <a href="formation.html">Services</a>
     <a href="creer-of.html">Créer mon OF</a>
+    <a href="creer-certifier.html">Créer / Certifier</a>
     <a href="se-former.html">Se former</a>
-    <a href="#" class="nav-cta btn-login" onclick="openAuthModal();return false;">Connexion</a>
-    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon compte</a>
+    <a href="devenir-expert.html" style="color:#D85A30;font-weight:600;">Recrutement</a>
+    <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;">Connexion</a>
+    <a href="dashboard.html" class="ml-nav-cta btn-dashboard hidden">Mon espace</a>
   </div>
-  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-inner">
-    <header>
-      <h1>Bienvenue sur lesformateurs.online</h1>
-    </header>
-    <div style="max-width:720px;margin:0 auto;aspect-ratio:16/9;border-radius:16px;overflow:hidden;position:relative;z-index:10;">
-      <iframe src="https://www.youtube.com/embed/5Zxx2gZARnw?rel=0" style="width:100%;height:100%;border:0;position:relative;z-index:11;pointer-events:auto;" title="Ouverture EDOF - Campagne lesformateurs.online" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    
-    <p class="video-caption">45 secondes : ouverture EDOF</p>
-<div style="text-align:center;margin-top:20px;margin-bottom:48px;position:relative;z-index:100;"><a href="https://lesformateurs.online/lien-edof" class="btn btn-primary" style="display:inline-block;padding:14px 40px;position:relative;z-index:101;cursor:pointer;">Voir le service EDOF</a></div>
+<div class="idx-body">
 
-    <div class="cards-grid">
-      <a href="missions.html" class="card-nav">
-        <div class="card-icon icon-missions">🎯</div>
-        <h3>Trouver une mission</h3>
-        <p>Accédez à 110+ offres de formation partout en France</p>
-      </a>
-      <a href="conformite.html" class="card-nav">
-        <div class="card-icon icon-conformite">✅</div>
-        <h3>Mettre en conformité</h3>
-        <p>NDA, Qualiopi, EDOF, OPCO — on gère tout</p>
-      </a>
-      <a href="creer-of.html" class="card-nav">
-        <div class="card-icon icon-creer">🏛</div>
-        <h3>Créer mon OF</h3>
-        <p>Lancez votre organisme de A à Z dès 990€</p>
-      </a>
-      <a href="se-former.html" class="card-nav">
-        <div class="card-icon icon-former">🎓</div>
-        <h3>Devenir formateur</h3>
-        <p>Formation 100% remboursée — placement garanti</p>
-      </a>
+<!-- HERO SPLIT -->
+<section class="hero-split">
+  <div class="hero-left">
+    <div class="hero-eyebrow">L'IA divise vos coûts par 4</div>
+    <h1>Créez et développez<br>votre <span>organisme</span></h1>
+    <p>EDOF, Qualiopi, NDA, RS/RNCP — des prix cassés, une rapidité d'exécution et une précision qui font la différence.</p>
+    <div class="hero-ctas">
+      <a href="creer-of.html" class="cta-primary">Créer mon OF</a>
+      <a href="monaccesedof.html" class="cta-secondary">Ouvrir mon EDOF</a>
     </div>
-    <footer>
-      <p>©2026 lesformateurs.online - Tous droits réservés</p>
-    </footer>
+    <div class="hero-stats" id="hero-stats">
+      <div class="hs">
+        <div class="hs-val" data-target="85966">0</div>
+        <div class="hs-lbl">Organismes référencés</div>
+      </div>
+      <div class="hs">
+        <div class="hs-val" data-target="48" data-suffix="h">0</div>
+        <div class="hs-lbl">Dossier déposé</div>
+      </div>
+      <div class="hs">
+        <div class="hs-val" data-target="97" data-suffix="%">0</div>
+        <div class="hs-lbl">Taux de réussite</div>
+      </div>
+    </div>
   </div>
-</div>
 
-<!-- SEO CONTENT SECTION -->
+  <div class="hero-right">
+    <a href="lien-edof.html" class="bs-card" style="animation:fadeUp .4s .2s both">
+      <div class="bs-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="1.5" width="40" height="40"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h8M8 14h5"/><polyline points="14,18 16,20 20,16" stroke-width="2"/></svg>
+      </div>
+      <div class="bs-body">
+        <div class="bs-name-row">
+          <span class="bs-name">Ouverture EDOF</span>
+          <span class="bs-tag" style="background:#D85A30">Best seller</span>
+        </div>
+        <div class="bs-desc">Mon Compte Formation — dossier déposé sous 48h, tout compris</div>
+      </div>
+      <div class="bs-prices">
+        <div class="bs-old">1 990€</div>
+        <div class="bs-new" style="color:#D85A30">490€</div>
+      </div>
+    </a>
 
+    <a href="creer-of.html" class="bs-card" style="animation:fadeUp .4s .3s both">
+      <div class="bs-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="1.5" width="40" height="40"><rect x="3" y="7" width="18" height="15" rx="1"/><path d="M3 7l9-5 9 5"/><rect x="7" y="11" width="3" height="3"/><rect x="14" y="11" width="3" height="3"/><rect x="10" y="17" width="4" height="5"/></svg>
+      </div>
+      <div class="bs-body">
+        <div class="bs-name-row">
+          <span class="bs-name">Créer mon OF</span>
+        </div>
+        <div class="bs-desc">NDA + Qualiopi inclus. Statuts + SIRET, clé en main.</div>
+      </div>
+      <div class="bs-prices">
+        <div class="bs-old">3 990€</div>
+        <div class="bs-new" style="color:#1D9E75">1 490€</div>
+      </div>
+    </a>
+
+    <a href="lien-rs-rncp.html" class="bs-card" style="animation:fadeUp .4s .4s both">
+      <div class="bs-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7F77DD" stroke-width="1.5" width="40" height="40"><path d="M12 2L4 6v6c0 5.5 3.4 10 8 11.5 4.6-1.5 8-6 8-11.5V6l-8-4z"/><polyline points="9,12 11,14 15,10" stroke-width="2"/></svg>
+      </div>
+      <div class="bs-body">
+        <div class="bs-name-row">
+          <span class="bs-name">Habilitation RS/RNCP</span>
+          <span class="bs-tag" style="background:#7F77DD">Nouveau</span>
+        </div>
+        <div class="bs-desc">Enregistrement France Compétences — accompagnement complet</div>
+      </div>
+      <div class="bs-prices">
+        <div class="bs-old">2 990€</div>
+        <div class="bs-new" style="color:#7F77DD">990€</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="vid-section">
+  <div class="vid-eyebrow">Démonstration</div>
+  <h2>45 secondes pour comprendre</h2>
+  <p class="vid-sub">Ouverture EDOF — dépôt de dossier, validation, mise en ligne</p>
+  <div class="vid-wrap">
+    <iframe src="https://www.youtube.com/embed/5Zxx2gZARnw?rel=0" title="Ouverture EDOF" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+  </div>
+  <div class="vid-cta">
+    <a href="lien-edof.html">Voir le service EDOF</a>
+  </div>
+</section>
+
+<!-- SERVICES POPULAIRES -->
+<section class="svc-section">
+  <div class="svc-inner">
+    <div class="svc-header">
+      <div>
+        <div class="svc-eyebrow">À la carte</div>
+        <h2>Services populaires</h2>
+      </div>
+      <a href="formation.html">Voir les 27 services →</a>
+    </div>
+    <div class="svc-grid">
+      <a href="formation.html" class="svc-card" style="animation:fadeUp .4s .05s both">
+        <h4>NDA</h4>
+        <p>Déclaration d'activité auprès de la DREETS</p>
+        <div class="svc-price" style="color:#7F77DD">290€</div>
+      </a>
+      <a href="formation.html" class="svc-card" style="animation:fadeUp .4s .1s both">
+        <h4>Qualiopi</h4>
+        <p>Certification qualité — 32 indicateurs</p>
+        <div class="svc-price" style="color:#1D9E75">990€</div>
+      </a>
+      <a href="formation.html" class="svc-card" style="animation:fadeUp .4s .15s both">
+        <h4>Site internet</h4>
+        <p>Site vitrine professionnel clé en main</p>
+        <div class="svc-price" style="color:#378ADD">990€</div>
+      </a>
+      <a href="formation.html" class="svc-card" style="animation:fadeUp .4s .2s both">
+        <h4>Agent IA</h4>
+        <p>Automatisation de vos tâches admin et prospection</p>
+        <div class="svc-price" style="color:#378ADD">390€</div>
+      </a>
+      <a href="formation.html" class="svc-card" style="animation:fadeUp .4s .25s both">
+        <h4>OPCO</h4>
+        <p>Référencement auprès du financeur de votre choix</p>
+        <div class="svc-price" style="color:#1D9E75">290€</div>
+      </a>
+      <a href="formation.html" class="svc-card" style="animation:fadeUp .4s .3s both">
+        <h4>LMS</h4>
+        <p>Plateforme e-learning pour vos apprenants</p>
+        <div class="svc-price" style="color:#378ADD">2 900€</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PARTENAIRES -->
+<section class="ml-partners">
+  <div class="ml-partners-inner">
+    <span class="ml-eyebrow">Partenaires</span>
+    <h2 class="ml-section-title" style="font-size:22px;">Certificateurs Qualiopi accrédités COFRAC</h2>
+    <p class="ml-section-sub" style="margin-bottom:0;">38 organismes habilités</p>
+    <div class="ml-partners-track">
+      <div class="ml-partners-fade-l"></div>
+      <div class="ml-partners-fade-r"></div>
+      <div class="ml-partners-scroll">
+        <a href="https://www.abcertification.com" target="_blank" rel="noopener" class="ml-partner">AB Certification</a>
+        <a href="https://www.afnor.org/certification" target="_blank" rel="noopener" class="ml-partner">AFNOR</a>
+        <a href="https://www.apave.com" target="_blank" rel="noopener" class="ml-partner">Apave</a>
+        <a href="https://www.bureauveritas.fr" target="_blank" rel="noopener" class="ml-partner">Bureau Veritas</a>
+        <a href="https://www.capcert.fr" target="_blank" rel="noopener" class="ml-partner">CapCert</a>
+        <a href="https://www.certi-kontrol.fr" target="_blank" rel="noopener" class="ml-partner">Certi. Kôntrol</a>
+        <a href="https://certifopac.fr" target="_blank" rel="noopener" class="ml-partner">Certifopac</a>
+        <a href="https://www.certification-qse.com" target="_blank" rel="noopener" class="ml-partner">Certification QSE</a>
+        <a href="https://www.certisolis.com" target="_blank" rel="noopener" class="ml-partner">Certisolis</a>
+        <a href="https://www.dekra.fr" target="_blank" rel="noopener" class="ml-partner">DEKRA</a>
+        <a href="https://docteurcertif.fr" target="_blank" rel="noopener" class="ml-partner">DocteurCertif</a>
+        <a href="https://www.globalcertification.fr" target="_blank" rel="noopener" class="ml-partner">Global Certification</a>
+        <a href="https://www.icpf.fr" target="_blank" rel="noopener" class="ml-partner">ICPF &amp; PSI</a>
+        <a href="https://www.iscert.fr" target="_blank" rel="noopener" class="ml-partner">ISCert</a>
+        <a href="https://www.iso-group.fr" target="_blank" rel="noopener" class="ml-partner">I.Cert</a>
+        <a href="https://www.lrqa.com/fr" target="_blank" rel="noopener" class="ml-partner">LRQA</a>
+        <a href="https://www.nfrancecertification.com" target="_blank" rel="noopener" class="ml-partner">NFrance</a>
+        <a href="https://www.proqualis.fr" target="_blank" rel="noopener" class="ml-partner">ProQualis</a>
+        <a href="https://www.qualianor.fr" target="_blank" rel="noopener" class="ml-partner">Qualianor</a>
+        <a href="https://www.qualisphere.fr" target="_blank" rel="noopener" class="ml-partner">Qualisphère</a>
+        <a href="https://www.qualitia.fr" target="_blank" rel="noopener" class="ml-partner">Qualitia</a>
+        <a href="https://www.sgs.com/fr-fr" target="_blank" rel="noopener" class="ml-partner">SGS ICS</a>
+        <a href="https://www.socotec.fr" target="_blank" rel="noopener" class="ml-partner">SOCOTEC</a>
+        <a href="https://www.wecert.fr" target="_blank" rel="noopener" class="ml-partner">WeCert</a>
+        <a href="https://www.cofrac.fr" target="_blank" rel="noopener" class="ml-partner">COFRAC</a>
+        <a href="https://www.francecompetences.fr" target="_blank" rel="noopener" class="ml-partner">France Compétences</a>
+        <a href="https://www.caissedesdepots.fr" target="_blank" rel="noopener" class="ml-partner">Caisse des Dépôts</a>
+        <a href="https://www.moncompteformation.gouv.fr" target="_blank" rel="noopener" class="ml-partner">Mon Compte Formation</a>
+        <!-- duplicate for seamless loop -->
+        <a href="https://www.abcertification.com" target="_blank" rel="noopener" class="ml-partner">AB Certification</a>
+        <a href="https://www.afnor.org/certification" target="_blank" rel="noopener" class="ml-partner">AFNOR</a>
+        <a href="https://www.apave.com" target="_blank" rel="noopener" class="ml-partner">Apave</a>
+        <a href="https://www.bureauveritas.fr" target="_blank" rel="noopener" class="ml-partner">Bureau Veritas</a>
+        <a href="https://www.capcert.fr" target="_blank" rel="noopener" class="ml-partner">CapCert</a>
+        <a href="https://www.dekra.fr" target="_blank" rel="noopener" class="ml-partner">DEKRA</a>
+        <a href="https://www.icpf.fr" target="_blank" rel="noopener" class="ml-partner">ICPF &amp; PSI</a>
+        <a href="https://www.sgs.com/fr-fr" target="_blank" rel="noopener" class="ml-partner">SGS ICS</a>
+        <a href="https://www.socotec.fr" target="_blank" rel="noopener" class="ml-partner">SOCOTEC</a>
+        <a href="https://www.francecompetences.fr" target="_blank" rel="noopener" class="ml-partner">France Compétences</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPE -->
+<a class="qsn-team-link" href="/qui-sommes-nous.html" style="display:block;text-decoration:none;color:inherit;">
+<section class="qsn-team-band">
+  <h2>Notre équipe</h2>
+  <div class="qsn-team-grid">
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/yohan.png" alt="Yohan" loading="lazy"><p class="qsn-member-name">Yohan</p><p class="qsn-member-role">Expert Tech &amp; IA</p></div>
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/philippe.png" alt="Philippe" loading="lazy"><p class="qsn-member-name">Philippe</p><p class="qsn-member-role">Ancien directeur OPCO</p></div>
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/amina.png" alt="Amina" loading="lazy"><p class="qsn-member-name">Amina</p><p class="qsn-member-role">Experte Pédagogique</p></div>
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/karim.png" alt="Karim" loading="lazy"><p class="qsn-member-name">Karim</p><p class="qsn-member-role">Expert conformité</p></div>
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/marie.png" alt="Marie" loading="lazy"><p class="qsn-member-name">Marie</p><p class="qsn-member-role">Assistante pédagogique</p></div>
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/josh.png" alt="Josh" loading="lazy"><p class="qsn-member-name">Josh</p><p class="qsn-member-role">Auditeur Qualiopi</p></div>
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/laurent.png" alt="Laurent" loading="lazy"><p class="qsn-member-name">Laurent</p><p class="qsn-member-role">Expert Achat / Revente</p></div>
+  </div>
+</section>
+</a>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <h2>Prêt à lancer votre organisme ?</h2>
+  <p>Créez votre compte et lancez votre première démarche en quelques minutes. Paiement sécurisé, expert dédié, résultat garanti.</p>
+  <div class="cta-btns">
+    <a href="creer-of.html" class="cta-btn-p">Créer mon OF</a>
+    <a href="formation.html" class="cta-btn-s">Voir les services</a>
+  </div>
+</section>
+
+</div><!-- /idx-body -->
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
+<footer class="ml-footer">
+  <div class="ml-footer-inner">
     <div>
-      <div class="footer-brand">lesformateurs.online</div>
-      <div>La plateforme des professionnels de la formation</div>
+      <div class="ml-footer-brand">les<span class="accent">formateurs</span>.online</div>
+      <p>La plateforme des professionnels de la formation.<br>EDOF, Qualiopi, NDA, RS/RNCP — prix cassés grâce à l'IA.</p>
+      <p class="siren">Experience Prod SASU · SIREN 982 828 774</p>
     </div>
-    <div class="footer-links">
-      <a href="missions.html">Missions</a>
+    <div class="ml-footer-col">
+      <h4>Services</h4>
+      <a href="formation.html">Gérer mon activité</a>
       <a href="conformite.html">Conformité</a>
       <a href="creer-of.html">Créer mon OF</a>
       <a href="se-former.html">Se former</a>
     </div>
-    <div class="footer-links" style="margin-top:8px;font-size:11px;opacity:.6;">
+    <div class="ml-footer-col">
+      <h4>Légal</h4>
+      <a href="qui-sommes-nous.html">Qui sommes-nous</a>
       <a href="mentions-legales.html">Mentions légales</a>
       <a href="cgv.html">CGV</a>
-      <a href="politique-confidentialite.html">Politique de confidentialité</a>
+      <a href="politique-confidentialite.html">Confidentialité</a>
     </div>
   </div>
+  <div class="ml-partners" style="text-align:left;padding:16px 0 12px;">
+    <div style="font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Partenaires certifiés</div>
+    <div style="display:flex;justify-content:flex-start;align-items:center;gap:24px;flex-wrap:wrap;">
+      <img src="img/logo-qualiopi.png" alt="Qualiopi" style="height:72px;background:transparent;">
+    </div>
+  </div>
+  <div class="ml-footer-bottom">© 2026 lesformateurs.online — Tous droits réservés · <span style="color:#6C5CE7;font-weight:500;">Membres : -10% sur tous nos services</span></div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src="js/referral.js"></script>
+<script src="js/analytics.js" defer></script>
+<script src="js/maintenance-check.js" defer></script>
 <script src="js/auth-modal.js"></script>
 <script>
-// Toggle Connexion / Mon compte based on auth state
+// Animated counters
+var countersRan = false;
+var statsObs = new IntersectionObserver(function(entries){
+  if(countersRan) return;
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      countersRan = true;
+      document.querySelectorAll('.hs-val').forEach(function(el){
+        var target = parseInt(el.getAttribute('data-target'));
+        var suffix = el.getAttribute('data-suffix') || '';
+        var current = 0;
+        var iv = setInterval(function(){
+          current += Math.max(1, Math.floor(target / 35));
+          if(current >= target){ current = target; clearInterval(iv); }
+          el.textContent = current.toLocaleString('fr-FR') + suffix;
+        }, 30);
+      });
+    }
+  });
+}, { threshold: 0.2 });
+statsObs.observe(document.getElementById('hero-stats'));
+
+// Auth state
 (async function(){
   try {
     var user = await getUser();
     if(user){
       var loginBtn = document.querySelector('.btn-login');
       var dashBtn = document.querySelector('.btn-dashboard');
-      if(loginBtn) loginBtn.style.display = 'none';
-      if(dashBtn) dashBtn.style.display = '';
+      if(loginBtn) loginBtn.classList.add('hidden');
+      if(dashBtn) dashBtn.classList.remove('hidden');
     }
   } catch(e){}
 })();
 </script>
-
 </body>
 </html>
