@@ -416,48 +416,44 @@ body{font-family:'DM Sans',-apple-system,sans-serif;color:#1a1a1a;background:#FA
 var CATEGORIES = [
   {
     id: 'procedures', color: '#D85A30', colorLight: '#FFF8F3',
-    link: 'creer-of.html',
     items: [
-      { name: "Cr\u00e9ation OF", desc: "Organisme complet : statuts, SIRET, NDA, Qualiopi \u2014 tout inclus, cl\u00e9 en main", price: "1 490\u20ac", time: "6 semaines", tag: "Le plus demand\u00e9" },
-      { name: "NDA", desc: "D\u00e9claration d\u2019activit\u00e9 aupr\u00e8s de la DREETS \u2014 obligatoire pour exercer", price: "290\u20ac", time: "3 semaines", tag: null },
-      { name: "Qualiopi", desc: "Certification qualit\u00e9 avec les 32 indicateurs \u2014 acc\u00e8s aux financements publics", price: "990\u20ac", time: "8 semaines", tag: "Indispensable" },
-      { name: "EDOF / CPF", desc: "R\u00e9f\u00e9rencement Mon Compte Formation pour acc\u00e9der au CPF", price: "490\u20ac", time: "6 semaines", tag: null },
-      { name: "OPCO", desc: "R\u00e9f\u00e9rencement aupr\u00e8s de l\u2019OPCO de votre choix", price: "290\u20ac / OPCO", time: "3 semaines", tag: null },
-      { name: "France Travail", desc: "Compte KAIROS pour former les demandeurs d\u2019emploi", price: "290\u20ac", time: "3 semaines", tag: null },
-      { name: "Cr\u00e9ation OF \u00c9lus", desc: "OF sp\u00e9cialis\u00e9 formation des \u00e9lus locaux \u2014 agr\u00e9ment CNFEL inclus", price: "3 490\u20ac", time: "3 mois", tag: null }
+      { name: "Cr\u00e9ation OF", desc: "Organisme complet : statuts, SIRET, NDA, Qualiopi \u2014 tout inclus, cl\u00e9 en main", price: "1 490\u20ac", time: "6 semaines", tag: "Le plus demand\u00e9", link: "service-creation-of.html" },
+      { name: "NDA", desc: "D\u00e9claration d\u2019activit\u00e9 aupr\u00e8s de la DREETS \u2014 obligatoire pour exercer", price: "290\u20ac", time: "3 semaines", tag: null, link: "service-nda.html" },
+      { name: "Qualiopi", desc: "Certification qualit\u00e9 avec les 32 indicateurs \u2014 acc\u00e8s aux financements publics", price: "990\u20ac", time: "8 semaines", tag: "Indispensable", link: "service-qualiopi.html" },
+      { name: "EDOF / CPF", desc: "R\u00e9f\u00e9rencement Mon Compte Formation pour acc\u00e9der au CPF", price: "490\u20ac", time: "6 semaines", tag: null, link: "service-edof.html" },
+      { name: "OPCO", desc: "R\u00e9f\u00e9rencement aupr\u00e8s de l\u2019OPCO de votre choix", price: "290\u20ac / OPCO", time: "3 semaines", tag: null, link: "service-opco.html" },
+      { name: "France Travail", desc: "Compte KAIROS pour former les demandeurs d\u2019emploi", price: "290\u20ac", time: "3 semaines", tag: null, link: "service-france-travail.html" },
+      { name: "Cr\u00e9ation OF \u00c9lus", desc: "OF sp\u00e9cialis\u00e9 formation des \u00e9lus locaux \u2014 agr\u00e9ment CNFEL inclus", price: "3 490\u20ac", time: "3 mois", tag: null, link: "service-formation-elus.html" }
     ]
   },
   {
     id: 'demarches', color: '#7F77DD', colorLight: '#EEEDFE',
-    link: 'dashboard.html',
     items: [
-      { name: "Habilitation RS/RNCP", desc: "\u00catre habilit\u00e9 par un certificateur \u00e0 dispenser une certification", price: "490\u20ac+", time: "2 \u00e0 8 semaines", tag: "Nouveau" },
-      { name: "Centre certifi\u00e9", desc: "Devenir certificateur enregistr\u00e9 aupr\u00e8s de France Comp\u00e9tences", price: "5 990\u20ac+", time: "6 mois", tag: null },
-      { name: "Centre d\u2019examen", desc: "Devenir centre d\u2019examen agr\u00e9\u00e9 pour des certifications", price: "1 990\u20ac", time: "3 mois", tag: null },
-      { name: "Agr\u00e9ment pr\u00e9fectoral", desc: "Auto-\u00e9cole, SSIAP, CACES, habilitations \u00e9lectriques", price: "690\u20ac", time: "2 mois", tag: null },
-      { name: "Contr\u00f4le DREETS", desc: "Mise en conformit\u00e9 suite \u00e0 un contr\u00f4le \u2014 r\u00e9actif ou anticip\u00e9", price: "890\u20ac", time: "4 semaines", tag: null },
-      { name: "UAI", desc: "Num\u00e9ro UAI aupr\u00e8s du rectorat pour les formations RS/RNCP", price: "149\u20ac", time: "3 semaines", tag: null },
-      { name: "Cr\u00e9ation formation", desc: "Programme complet : 5 modules, supports, quiz, \u00e9valuation", price: "990\u20ac", time: "4 semaines", tag: null }
+      { name: "Habilitation RS/RNCP", desc: "\u00catre habilit\u00e9 par un certificateur \u00e0 dispenser une certification", price: "490\u20ac+", time: "2 \u00e0 8 semaines", tag: "Nouveau", link: "service-habilitation.html" },
+      { name: "Centre certifi\u00e9", desc: "Devenir certificateur enregistr\u00e9 aupr\u00e8s de France Comp\u00e9tences", price: "5 990\u20ac+", time: "6 mois", tag: null, link: "service-centre-certifie.html" },
+      { name: "Centre d\u2019examen", desc: "Devenir centre d\u2019examen agr\u00e9\u00e9 pour des certifications", price: "1 990\u20ac", time: "3 mois", tag: null, link: "service-centre-examen.html" },
+      { name: "Agr\u00e9ment pr\u00e9fectoral", desc: "Auto-\u00e9cole, SSIAP, CACES, habilitations \u00e9lectriques", price: "690\u20ac", time: "2 mois", tag: null, link: "service-agrement-prefectoral.html" },
+      { name: "Contr\u00f4le DREETS", desc: "Mise en conformit\u00e9 suite \u00e0 un contr\u00f4le \u2014 r\u00e9actif ou anticip\u00e9", price: "890\u20ac", time: "4 semaines", tag: null, link: "service-controle.html" },
+      { name: "UAI", desc: "Num\u00e9ro UAI aupr\u00e8s du rectorat pour les formations RS/RNCP", price: "149\u20ac", time: "3 semaines", tag: null, link: "service-uai.html" },
+      { name: "Cr\u00e9ation formation", desc: "Programme complet : 5 modules, supports, quiz, \u00e9valuation", price: "990\u20ac", time: "4 semaines", tag: null, link: "service-creation-formation.html" }
     ]
   },
   {
     id: 'solutions', color: '#378ADD', colorLight: '#E6F1FB',
-    link: 'creer-of.html',
     items: [
-      { name: "Site internet", desc: "Site vitrine professionnel \u2014 design responsive, mentions l\u00e9gales, h\u00e9bergement inclus", price: "990\u20ac", time: "3 semaines", tag: "Populaire" },
-      { name: "LMS", desc: "Plateforme e-learning compl\u00e8te \u2014 parcours, quiz, \u00e9margement, attestations", price: "2 900\u20ac", time: "4 semaines", tag: null },
-      { name: "Application mobile", desc: "App iOS et/ou Android pour vos apprenants et formateurs", price: "4 990\u20ac", time: "6 semaines", tag: null },
-      { name: "Agent IA", desc: "Automatisez vos t\u00e2ches : admin, prospection, support, conformit\u00e9", price: "390\u20ac / agent", time: "2 semaines", tag: "Nouveau" }
+      { name: "Site internet", desc: "Site vitrine professionnel \u2014 design responsive, mentions l\u00e9gales, h\u00e9bergement inclus", price: "990\u20ac", time: "3 semaines", tag: "Populaire", link: "service-site.html" },
+      { name: "LMS", desc: "Plateforme e-learning compl\u00e8te \u2014 parcours, quiz, \u00e9margement, attestations", price: "2 900\u20ac", time: "4 semaines", tag: null, link: "service-lms.html" },
+      { name: "Application mobile", desc: "App iOS et/ou Android pour vos apprenants et formateurs", price: "4 990\u20ac", time: "6 semaines", tag: null, link: "service-app.html" },
+      { name: "Agent IA", desc: "Automatisez vos t\u00e2ches : admin, prospection, support, conformit\u00e9", price: "390\u20ac / agent", time: "2 semaines", tag: "Nouveau", link: "service-agent-ia.html" }
     ]
   },
   {
     id: 'packs', color: '#1D9E75', colorLight: '#E1F5EE',
-    link: 'creer-of.html',
     items: [
-      { name: "Pack Pr\u00e9sence", desc: "Site vitrine + documents l\u00e9gaux + livret d\u2019accueil", price: "990\u20ac", time: "3 semaines", tag: null },
-      { name: "Pack Digital", desc: "Pr\u00e9sence + LMS + 3 formations + quiz + \u00e9margement", price: "2 990\u20ac", time: "4 semaines", tag: "Meilleur rapport" },
-      { name: "Pack Premium", desc: "Digital + 1 agent IA configur\u00e9 et op\u00e9rationnel", price: "4 990\u20ac", time: "5 semaines", tag: null },
-      { name: "Pack Enterprise", desc: "Premium + application mobile + agents IA multiples", price: "7 990\u20ac", time: "6 semaines", tag: null }
+      { name: "Pack Pr\u00e9sence", desc: "Site vitrine + documents l\u00e9gaux + livret d\u2019accueil", price: "990\u20ac", time: "3 semaines", tag: null, link: "service-pack-presence.html" },
+      { name: "Pack Digital", desc: "Pr\u00e9sence + LMS + 3 formations + quiz + \u00e9margement", price: "2 990\u20ac", time: "4 semaines", tag: "Meilleur rapport", link: "service-pack-digital.html" },
+      { name: "Pack Premium", desc: "Digital + 1 agent IA configur\u00e9 et op\u00e9rationnel", price: "4 990\u20ac", time: "5 semaines", tag: null, link: "service-pack-premium.html" },
+      { name: "Pack Enterprise", desc: "Premium + application mobile + agents IA multiples", price: "7 990\u20ac", time: "6 semaines", tag: null, link: "service-pack-enterprise.html" }
     ]
   }
 ];
@@ -473,7 +469,7 @@ function renderCards(){
     if(!grid) return;
     var h = '';
     cat.items.forEach(function(item, i){
-      h += '<div class="card" data-color="'+esc(cat.color)+'" data-light="'+esc(cat.colorLight)+'" data-link="'+esc(cat.link)+'" style="animation:fadeUp .5s '+(0.04*i)+'s both" onmouseenter="cardHover(this,true)" onmouseleave="cardHover(this,false)">';
+      h += '<div class="card" data-color="'+esc(cat.color)+'" data-light="'+esc(cat.colorLight)+'" data-link="'+esc(item.link||'formation.html')+'" style="animation:fadeUp .5s '+(0.04*i)+'s both" onmouseenter="cardHover(this,true)" onmouseleave="cardHover(this,false)">';
       h += '<div class="card-bar" style="background:'+esc(cat.color)+'"></div>';
       if(item.tag) h += '<span class="card-tag" style="background:'+esc(cat.color)+'">'+esc(item.tag)+'</span>';
       h += '<div class="card-name" '+(item.tag?'style="padding-right:80px"':'')+'>'+esc(item.name)+'</div>';

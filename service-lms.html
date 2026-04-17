@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B6XVYRVT9D');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>LMS — Plateforme e-learning — lesformateurs.online</title>
+<meta name="description" content="Plateforme e-learning complète — parcours, quiz, émargement, attestations.">
+<link rel="canonical" href="https://lesformateurs.online/service-lms">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/mono-light.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',-apple-system,sans-serif;color:#1a1a1a;background:#FAFAFA;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+/* Breadcrumb */
+.sp-bread{max-width:960px;margin:0 auto;padding:16px 24px;font-size:12px;color:#9CA3AF;}
+.sp-bread a{color:#6B7280;text-decoration:none;}
+.sp-bread a:hover{color:#1a1a1a;}
+/* Hero split */
+.sp-hero{display:grid;grid-template-columns:1fr 1fr;max-width:960px;margin:0 auto;padding:0 24px 48px;gap:40px;align-items:center;}
+.sp-hero-left{animation:fadeUp .5s both;}
+.sp-hero-tag{display:inline-block;color:#fff;font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;}
+.sp-hero-cat{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;}
+.sp-hero-left h1{font-size:34px;font-weight:800;line-height:1.1;letter-spacing:-.5px;margin-bottom:14px;}
+.sp-hero-left>p{font-size:14px;color:#6B7280;line-height:1.6;margin-bottom:24px;}
+.sp-prices{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;}
+.sp-old-price{font-size:16px;color:#9CA3AF;text-decoration:line-through;}
+.sp-new-price{font-size:36px;font-weight:800;}
+.sp-payment{font-size:12px;color:#9CA3AF;margin-bottom:6px;}
+.sp-time{font-size:12px;color:#6B7280;display:flex;align-items:center;gap:4px;margin-bottom:24px;}
+.sp-ctas{display:flex;gap:12px;}
+.sp-ctas a{padding:14px 28px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;font-family:inherit;transition:all .15s;}
+.sp-cta-main{color:#fff;}
+.sp-cta-main:hover{transform:scale(1.03);}
+.sp-cta-sec{background:#fff;color:#1a1a1a;border:1px solid #E5E7EB;}
+.sp-hero-right{display:flex;align-items:center;justify-content:center;animation:fadeUp .5s .15s both;}
+/* Sections */
+.sp-section{max-width:960px;margin:0 auto;padding:48px 24px;}
+.sp-section h2{font-size:24px;font-weight:800;margin-bottom:24px;letter-spacing:-.3px;}
+/* Steps */
+.sp-steps{display:flex;flex-direction:column;gap:14px;}
+.sp-step{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:18px 20px;}
+.sp-step-num{width:32px;height:32px;border-radius:50%;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sp-step-title{font-size:15px;font-weight:700;margin-bottom:4px;}
+.sp-step-desc{font-size:13px;color:#6B7280;line-height:1.5;}
+/* Includes */
+.sp-incl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.sp-incl-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;}
+.sp-incl-item svg{flex-shrink:0;margin-top:2px;}
+/* Prerequisites */
+.sp-prereqs{display:flex;gap:8px;flex-wrap:wrap;}
+.sp-prereq{background:#FEF3C7;color:#92400E;font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;}
+/* Options */
+.sp-options{display:flex;flex-direction:column;gap:10px;}
+.sp-option{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #E5E7EB;border-radius:10px;padding:14px 18px;}
+.sp-opt-name{font-size:14px;font-weight:600;display:block;}
+.sp-opt-desc{font-size:12px;color:#9CA3AF;}
+.sp-opt-price{font-size:16px;font-weight:800;flex-shrink:0;}
+/* FAQ */
+.sp-faq{display:flex;flex-direction:column;gap:8px;}
+.sp-faq-item{background:#fff;border:1px solid #E5E7EB;border-radius:10px;overflow:hidden;cursor:pointer;}
+.sp-faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;font-size:14px;font-weight:600;}
+.sp-faq-chevron{transition:transform .2s;flex-shrink:0;}
+.sp-faq-item.open .sp-faq-chevron{transform:rotate(180deg);}
+.sp-faq-a{padding:0 18px;max-height:0;overflow:hidden;font-size:13px;color:#6B7280;line-height:1.6;transition:all .2s;}
+.sp-faq-item.open .sp-faq-a{max-height:200px;padding:0 18px 16px;}
+/* CTA final */
+.sp-cta-final{background:linear-gradient(135deg,#1a1a1a,#2D1810);color:#fff;text-align:center;padding:52px 24px;margin-top:24px;}
+.sp-cta-final h2{font-size:26px;font-weight:800;margin-bottom:10px;color:#fff;}
+.sp-cta-final>p{color:#9CA3AF;font-size:13px;max-width:420px;margin:0 auto 28px;line-height:1.6;}
+.sp-cta-final .sp-ctas{justify-content:center;}
+.sp-cta-final .sp-cta-sec{border-color:rgba(255,255,255,.2);color:#fff;background:transparent;}
+/* Footer */
+.sp-footer{background:#1a1a1a;color:#999;padding:40px 24px 20px;font-size:12px;}
+.sp-footer-inner{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;}
+.sp-footer-brand{font-size:17px;font-weight:700;color:#fff;margin-bottom:8px;}
+.sp-footer-brand .accent{color:#D85A30;}
+.sp-footer-col{display:flex;flex-direction:column;gap:6px;}
+.sp-footer-col h4{color:#fff;font-size:12px;margin-bottom:4px;}
+.sp-footer-col a{color:#999;text-decoration:none;font-size:12px;}
+.sp-footer-col a:hover{color:#fff;}
+.sp-footer-bottom{max-width:960px;margin:20px auto 0;padding-top:16px;border-top:1px solid #333;font-size:11px;text-align:center;}
+/* Responsive */
+@media(max-width:768px){
+  .sp-hero{grid-template-columns:1fr;text-align:center;}
+  .sp-hero-right{order:-1;}
+  .sp-hero-right svg{width:120px !important;height:120px !important;}
+  .sp-hero-left h1{font-size:26px;}
+  .sp-ctas{flex-direction:column;align-items:center;}
+  .sp-prices{justify-content:center;}
+  .sp-time{justify-content:center;}
+  .sp-incl-grid{grid-template-columns:1fr;}
+  .sp-footer-inner{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<nav class="ml-nav">
+  <a href="index.html" class="ml-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="ml-nav-links" id="navLinks">
+    <a href="formation.html">Services</a>
+    <a href="creer-of.html">Cr&eacute;er mon OF</a>
+    <a href="creer-certifier.html">Cr&eacute;er / Certifier</a>
+    <a href="se-former.html">Se former</a>
+    <a href="devenir-expert.html" style="color:#D85A30;font-weight:600;">Recrutement</a>
+    <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;">Connexion</a>
+    <a href="dashboard.html" class="ml-nav-cta btn-dashboard hidden">Mon espace</a>
+  </div>
+  <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- Breadcrumb -->
+<div class="sp-bread">
+  <a href="formation.html">Services</a> &rsaquo; <a href="formation.html">Solutions digitales</a> &rsaquo; LMS — Plateforme e-learning
+</div>
+
+<!-- Hero -->
+<div class="sp-hero">
+  <div class="sp-hero-left">
+    
+    <div class="sp-hero-cat" style="color:#378ADD">Solutions digitales</div>
+    <h1>LMS — Plateforme e-learning</h1>
+    <p>Nous développons votre plateforme LMS sur mesure : parcours pédagogiques, quiz, émargement numérique, attestations automatiques. Scalable de 50 à 500+ apprenants.</p>
+    <div class="sp-prices">
+      <span class="sp-old-price">5 900€</span>
+      <span class="sp-new-price" style="color:#378ADD">2 900€</span>
+    </div>
+    <div class="sp-payment">Comptant ou 3 x 967€</div>
+    <div class="sp-time">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#9CA3AF" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><polyline points="8,5 8,8 10,9.5"/></svg>
+      4 semaines
+    </div>
+    <div class="sp-ctas">
+      <a href="/creer-of" class="sp-cta-main" style="background:#378ADD">Commander</a>
+      <a href="formation.html" class="sp-cta-sec">Tous les services</a>
+    </div>
+  </div>
+  <div class="sp-hero-right">
+    <svg viewBox="0 0 200 200" fill="none" width="200" height="200">
+    <rect x="30" y="36" width="140" height="96" rx="12" fill="#378ADD" opacity=".08" stroke="#378ADD" stroke-width="2"/>
+    <rect x="30" y="36" width="140" height="24" rx="12" fill="#378ADD" opacity=".06"/>
+    <circle cx="50" cy="48" r="4" fill="#E24B4A" opacity=".6"/>
+    <circle cx="64" cy="48" r="4" fill="#FFB347" opacity=".6"/>
+    <circle cx="78" cy="48" r="4" fill="#1D9E75" opacity=".6"/>
+    <path d="M60 84l-16 16 16 16" stroke="#378ADD" stroke-width="3.5" stroke-linecap="round" opacity=".5"/>
+    <path d="M140 84l16 16-16 16" stroke="#378ADD" stroke-width="3.5" stroke-linecap="round" opacity=".5"/>
+    <path d="M110 76L90 116" stroke="#378ADD" stroke-width="3.5" stroke-linecap="round" opacity=".4"/>
+    <rect x="76" y="144" width="48" height="8" rx="4" fill="#378ADD" opacity=".15"/>
+    <circle cx="150" cy="140" r="28" fill="white" stroke="#378ADD" stroke-width="2"/>
+    <path d="M140 140l6 6 12-14" stroke="#378ADD" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  </div>
+</div>
+
+<!-- Steps -->
+<section class="sp-section" style="background:#fff;border-top:1px solid #F3F4F6;">
+  <h2>Le processus en 5 &eacute;tapes</h2>
+  <div class="sp-steps">
+    
+      <div class="sp-step" style="animation:fadeUp .4s 0.00s both">
+        <div class="sp-step-num" style="background:#378ADD">1</div>
+        <div>
+          <div class="sp-step-title">Configuration</div>
+          <div class="sp-step-desc">Brief + options + nombre apprenants + contenus + paiement</div>
+        </div>
+      </div>
+
+      <div class="sp-step" style="animation:fadeUp .4s 0.10s both">
+        <div class="sp-step-num" style="background:#378ADD">2</div>
+        <div>
+          <div class="sp-step-title">Design</div>
+          <div class="sp-step-desc">Wireframes LMS (apprenant + admin) + maquettes</div>
+        </div>
+      </div>
+
+      <div class="sp-step" style="animation:fadeUp .4s 0.20s both">
+        <div class="sp-step-num" style="background:#378ADD">3</div>
+        <div>
+          <div class="sp-step-title">Production</div>
+          <div class="sp-step-desc">LMS staging + parcours + quiz configurés</div>
+        </div>
+      </div>
+
+      <div class="sp-step" style="animation:fadeUp .4s 0.30s both">
+        <div class="sp-step-num" style="background:#378ADD">4</div>
+        <div>
+          <div class="sp-step-title">Sécurité</div>
+          <div class="sp-step-desc">SSL + RGPD + formation admin 1h</div>
+        </div>
+      </div>
+
+      <div class="sp-step" style="animation:fadeUp .4s 0.40s both">
+        <div class="sp-step-num" style="background:#378ADD">5</div>
+        <div>
+          <div class="sp-step-title">Terminée</div>
+          <div class="sp-step-desc">LMS en production</div>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Includes -->
+<section class="sp-section">
+  <h2>Ce qui est inclus</h2>
+  <div class="sp-incl-grid">
+    
+      <div class="sp-incl-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" width="18" height="18"><polyline points="6,12 10,16 18,8"/></svg>
+        <span>LMS jusqu&#39;à 50 apprenants</span>
+      </div>
+
+      <div class="sp-incl-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" width="18" height="18"><polyline points="6,12 10,16 18,8"/></svg>
+        <span>Parcours pédagogiques</span>
+      </div>
+
+      <div class="sp-incl-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" width="18" height="18"><polyline points="6,12 10,16 18,8"/></svg>
+        <span>Quiz + évaluations</span>
+      </div>
+
+      <div class="sp-incl-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" width="18" height="18"><polyline points="6,12 10,16 18,8"/></svg>
+        <span>Émargement numérique</span>
+      </div>
+
+      <div class="sp-incl-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" width="18" height="18"><polyline points="6,12 10,16 18,8"/></svg>
+        <span>Attestations automatiques</span>
+      </div>
+
+      <div class="sp-incl-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" width="18" height="18"><polyline points="6,12 10,16 18,8"/></svg>
+        <span>Formation admin 1h</span>
+      </div>
+
+      <div class="sp-incl-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" width="18" height="18"><polyline points="6,12 10,16 18,8"/></svg>
+        <span>Expert dédié</span>
+      </div>
+  </div>
+</section>
+
+
+
+    <section class="sp-section">
+      <h2>Options disponibles</h2>
+      <div class="sp-options">
+        
+        <div class="sp-option">
+          <div class="sp-opt-info"><span class="sp-opt-name">50-500 apprenants</span><span class="sp-opt-desc">Montée en charge</span></div>
+          <span class="sp-opt-price" style="color:#378ADD">+1 500€</span>
+        </div>
+
+        <div class="sp-option">
+          <div class="sp-opt-info"><span class="sp-opt-name">500+ apprenants</span><span class="sp-opt-desc">Version entreprise</span></div>
+          <span class="sp-opt-price" style="color:#378ADD">+3 000€</span>
+        </div>
+
+        <div class="sp-option">
+          <div class="sp-opt-info"><span class="sp-opt-name">Intégration CPF/EDOF</span><span class="sp-opt-desc">Connexion EDOF</span></div>
+          <span class="sp-opt-price" style="color:#378ADD">+990€</span>
+        </div>
+
+        <div class="sp-option">
+          <div class="sp-opt-info"><span class="sp-opt-name">App mobile apprenant</span><span class="sp-opt-desc">Application dédiée</span></div>
+          <span class="sp-opt-price" style="color:#378ADD">+1 990€</span>
+        </div>
+      </div>
+    </section>
+
+<!-- FAQ -->
+<section class="sp-section" style="background:#fff;border-top:1px solid #F3F4F6;">
+  <h2>Questions fr&eacute;quentes</h2>
+  <div class="sp-faq">
+    
+      <div class="sp-faq-item" onclick="this.classList.toggle('open')">
+        <div class="sp-faq-q">
+          <span>Combien d&#39;apprenants en base ?</span>
+          <svg class="sp-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" width="18" height="18"><polyline points="6,9 12,15 18,9"/></svg>
+        </div>
+        <div class="sp-faq-a">Jusqu&#39;à 50 apprenants inclus. Options pour monter à 500+.</div>
+      </div>
+
+      <div class="sp-faq-item" onclick="this.classList.toggle('open')">
+        <div class="sp-faq-q">
+          <span>Le LMS est-il RGPD ?</span>
+          <svg class="sp-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" width="18" height="18"><polyline points="6,9 12,15 18,9"/></svg>
+        </div>
+        <div class="sp-faq-a">Oui, nous configurons la conformité RGPD (hébergement France/EU).</div>
+      </div>
+
+      <div class="sp-faq-item" onclick="this.classList.toggle('open')">
+        <div class="sp-faq-q">
+          <span>Puis-je importer mes formations existantes ?</span>
+          <svg class="sp-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" width="18" height="18"><polyline points="6,9 12,15 18,9"/></svg>
+        </div>
+        <div class="sp-faq-a">Oui, nous pouvons importer vos contenus SCORM, PDF ou vidéos.</div>
+      </div>
+  </div>
+</section>
+
+<!-- CTA Final -->
+<section class="sp-cta-final">
+  <h2>Pr&ecirc;t &agrave; lancer cette d&eacute;marche ?</h2>
+  <p>Paiement s&eacute;curis&eacute;, expert d&eacute;di&eacute;, r&eacute;sultat garanti. Comptant ou 3 x 967€.</p>
+  <div class="sp-ctas">
+    <a href="/creer-of" class="sp-cta-main" style="background:#378ADD">Commander</a>
+    <a href="formation.html" class="sp-cta-sec">Voir tous les services</a>
+  </div>
+</section>
+
+<footer class="sp-footer">
+  <div class="sp-footer-inner">
+    <div>
+      <div class="sp-footer-brand">les<span class="accent">formateurs</span>.online</div>
+      <p>La plateforme des professionnels de la formation.</p>
+      <p style="font-size:11px;color:#666;margin-top:4px;">Experience Prod SASU &middot; SIREN 982 828 774</p>
+    </div>
+    <div class="sp-footer-col"><h4>Services</h4><a href="formation.html">Services</a><a href="creer-of.html">Cr&eacute;er mon OF</a><a href="se-former.html">Se former</a></div>
+    <div class="sp-footer-col"><h4>L&eacute;gal</h4><a href="mentions-legales.html">Mentions l&eacute;gales</a><a href="cgv.html">CGV</a><a href="politique-confidentialite.html">Confidentialit&eacute;</a></div>
+  </div>
+  <div class="sp-footer-bottom">&copy; 2026 lesformateurs.online</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/auth-modal.js"></script>
+<script>
+(async function(){
+  try {
+    var sb = window.__lfoSupabase; if(!sb) return;
+    var r = await sb.auth.getUser();
+    if(r.data && r.data.user){
+      var l=document.querySelector('.btn-login'),d=document.querySelector('.btn-dashboard');
+      if(l)l.classList.add('hidden');if(d)d.classList.remove('hidden');
+    }
+  } catch(e){}
+})();
+</script>
+</body>
+</html>
