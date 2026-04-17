@@ -1,384 +1,350 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B6XVYRVT9D');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-<title>Créer mon OF - lesformateurs.online</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Créer mon OF — lesformateurs.online</title>
 <meta name="description" content="Créez votre organisme de formation : Action de formation, CFA, Bilan, VAE. Clé en main avec Qualiopi inclus.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="css/mono-light.css">
+<script src="js/pricing.js"></script>
 <style>
-.of-type-card{
-  background:#fff;border:2px solid var(--border);border-radius:12px;
-  padding:24px;cursor:pointer;transition:all .2s;text-align:center;
-}
-.of-type-card:hover{border-color:var(--accent);transform:translateY(-2px);}
-.of-type-card.selected{border-color:var(--accent);background:rgba(233,69,96,.03);}
-.of-type-card h4{font-size:16px;font-weight:700;margin:12px 0 6px;}
-.of-type-card p{font-size:12px;color:var(--muted);margin-bottom:12px;}
-.of-type-card .type-price{font-size:24px;font-weight:900;color:var(--accent);}
-.of-type-card .type-emoji{font-size:32px;display:block;margin-bottom:8px;}
-
-.option-item{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 16px;background:#fff;border:1px solid var(--border);border-radius:8px;
-  margin-bottom:8px;cursor:pointer;transition:all .2s;
-}
-.option-item:hover{border-color:var(--accent);}
-.option-item.checked{border-color:var(--accent);background:rgba(233,69,96,.03);}
-.option-item input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px;pointer-events:none;}
-.option-left h4{font-size:14px;font-weight:600;margin-bottom:2px;}
-.option-left p{font-size:12px;color:var(--muted);}
-.option-price{font-size:16px;font-weight:800;color:var(--accent);white-space:nowrap;}
-
-.total-bar{
-  background:var(--primary);border-radius:12px;padding:24px;color:#fff;
-  display:flex;justify-content:space-between;align-items:center;margin-top:32px;
-  flex-wrap:wrap;gap:16px;
-}
-.total-bar .total-label{font-size:14px;color:rgba(255,255,255,.6);}
-.total-bar .total-amount{font-size:32px;font-weight:900;color:var(--accent);}
-
-.payment-options{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
-.payment-option{
-  flex:1;min-width:140px;padding:14px;border:2px solid var(--border);border-radius:8px;
-  text-align:center;cursor:pointer;transition:all .2s;background:#fff;
-}
-.payment-option:hover,.payment-option.selected{border-color:var(--accent);}
-.payment-option h5{font-size:14px;font-weight:700;margin-bottom:4px;}
-.payment-option p{font-size:11px;color:var(--muted);}
+  .of-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .of-card{display:flex;align-items:center;gap:14px;background:#fff;border:0.5px solid #f0f0f0;border-radius:12px;padding:14px 16px;cursor:pointer;transition:all .15s ease;position:relative;}
+  .of-card:hover{border-color:#D85A30;}
+  .of-card.selected{border:2px solid #D85A30;padding:13px 15px;}
+  .of-card .of-svg{flex:0 0 64px;width:64px;height:64px;display:flex;align-items:center;justify-content:center;}
+  .of-card .of-body{flex:1;min-width:0;}
+  .of-card .of-body h4{font-size:14px;font-weight:600;margin:0 0 4px;color:#1a1a1a;}
+  .of-card .of-body p{font-size:12px;color:#6b6b6b;margin:0;line-height:1.35;}
+  .of-card .of-price{flex:0 0 auto;text-align:right;}
+  .of-card .of-price .strike{font-size:11px;color:#a0a0a0;text-decoration:line-through;display:block;}
+  .of-card .of-price .now{font-size:16px;color:#D85A30;font-weight:600;display:block;}
+  .of-card.full{grid-column:1 / -1;}
+  .of-card .of-badge{position:absolute;top:-8px;right:12px;background:#1D9E75;color:#fff;font-size:10px;font-weight:600;padding:3px 8px;border-radius:10px;letter-spacing:.5px;text-transform:uppercase;}
+  @media (max-width:640px){.of-cards{grid-template-columns:1fr;}.of-card.full{grid-column:auto;}}
 </style>
-<style>html,body{overflow-x:hidden;max-width:100%;} img,video,iframe{max-width:100%;}</style>
 </head>
 <body>
 
-<nav class="navbar">
-  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
-  <div class="nav-links" id="navLinks">
-    <a href="index.html">Accueil</a>
-    <a href="missions.html">Missions</a>
-    <a href="conformite.html">Conformité</a>
-    <a href="creer-of.html" style="color:#fff;background:rgba(255,255,255,.1);">Créer mon OF</a>
+<nav class="ml-nav">
+  <a href="index.html" class="ml-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="ml-nav-links" id="navLinks">
+    <a href="formation.html">Services</a>
+    <a href="creer-of.html" class="active">Créer mon OF</a>
     <a href="se-former.html">Se former</a>
-    <a href="#" class="nav-cta btn-login" onclick="openAuthModal();return false;">Connexion</a>
-    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon compte</a>
+    <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;">Mon espace</a>
+    <a href="dashboard.html" class="ml-nav-cta btn-dashboard hidden">Mon espace</a>
   </div>
-  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+  <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="page-header">
-  <h1>Créez votre organisme de formation</h1>
-  <p>De A à Z, à partir de 990€. On s'occupe de tout — vous fournissez les documents, on fait le reste.</p>
+<section class="ml-hero" style="padding:48px 28px 16px;">
+  <span class="ml-eyebrow">Création clé en main</span>
+  <h1 class="ml-h1">Créez votre organisme de formation</h1>
+  <p class="ml-sub">De A à Z, à partir de <strong>1 490€</strong>. Statuts + SIRET + <strong style="color:#6C5CE7;">NDA + Qualiopi INCLUS</strong>. Pack complet à 1 490€ (au lieu de 3 990€).</p>
+</section>
+
+<div class="ml-stepper" id="stepper">
+  <div class="ml-step active" id="sdot1"><div class="dot">1</div><div class="label">Type d'OF</div></div>
+  <div class="ml-step" id="sdot2"><div class="dot">2</div><div class="label">Options</div></div>
+  <div class="ml-step" id="sdot3"><div class="dot">3</div><div class="label">Paiement</div></div>
 </div>
 
-<div class="trust-bar">
-  <div class="trust-item">⚡ Le plus rapide du marché</div>
-  <div class="trust-item">🔓 Capacité à débloquer toute situation</div>
-  <div class="trust-item">🤖 IA + expert dédié sur chaque dossier</div>
+<section style="max-width:680px;margin:0 auto;padding:0 20px 60px;">
+
+<!-- ÉTAPE 1 -->
+<div id="step1">
+  <p style="font-size:16px;font-weight:500;margin-bottom:16px;">Quel type d'organisme souhaitez-vous créer ?</p>
+  <div class="of-cards">
+
+    <div class="of-card" onclick="selectType(this,'action_formation',1490)">
+      <div class="of-svg">
+        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#D85A30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="8" y="10" width="48" height="28" rx="2"/>
+          <line x1="14" y1="18" x2="36" y2="18"/>
+          <line x1="14" y1="24" x2="30" y2="24"/>
+          <line x1="14" y1="30" x2="26" y2="30"/>
+          <circle cx="22" cy="48" r="4"/>
+          <path d="M16 58c0-4 3-6 6-6s6 2 6 6"/>
+          <circle cx="36" cy="48" r="4"/>
+          <path d="M30 58c0-4 3-6 6-6s6 2 6 6"/>
+          <circle cx="50" cy="48" r="4"/>
+          <path d="M44 58c0-4 3-6 6-6s6 2 6 6"/>
+        </svg>
+      </div>
+      <div class="of-body"><h4>Action de formation</h4><p>OF classique : formations pour entreprises ou particuliers</p></div>
+      <div class="of-price"><span class="strike">3 990€</span><span class="now">1 490€</span></div>
+    </div>
+
+    <div class="of-card" onclick="selectType(this,'cfa',2990)">
+      <div class="of-svg">
+        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#378ADD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 24 L32 12 L54 24 Z"/>
+          <rect x="14" y="24" width="36" height="26"/>
+          <line x1="22" y1="24" x2="22" y2="50"/>
+          <line x1="32" y1="24" x2="32" y2="50"/>
+          <line x1="42" y1="24" x2="42" y2="50"/>
+          <rect x="28" y="38" width="8" height="12"/>
+          <path d="M6 56 L14 56" marker-end="url(#arrR)"/>
+          <path d="M58 56 L50 56"/>
+          <polyline points="10,54 6,56 10,58"/>
+          <polyline points="54,54 58,56 54,58"/>
+        </svg>
+      </div>
+      <div class="of-body"><h4>CFA — Apprentissage</h4><p>Centre de formation d'apprentis — contrats d'apprentissage</p></div>
+      <div class="of-price"><span class="strike">5 990€</span><span class="now">2 990€</span></div>
+    </div>
+
+    <div class="of-card" onclick="selectType(this,'bilan',1990)">
+      <div class="of-svg">
+        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="22" cy="22" r="10"/>
+          <line x1="30" y1="30" x2="38" y2="38"/>
+          <rect x="32" y="14" width="22" height="36" rx="2"/>
+          <polyline points="36,22 39,25 44,20"/>
+          <polyline points="36,32 39,35 44,30"/>
+          <polyline points="36,42 39,45 44,40"/>
+        </svg>
+      </div>
+      <div class="of-body"><h4>Bilan de compétences</h4><p>Accompagnement des salariés dans leur évolution professionnelle</p></div>
+      <div class="of-price"><span class="strike">3 990€</span><span class="now">1 990€</span></div>
+    </div>
+
+    <div class="of-card" onclick="selectType(this,'vae',1990)">
+      <div class="of-svg">
+        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#7F77DD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 14 h30 a4 4 0 0 1 4 4 v24 a4 4 0 0 1 -4 4 h-30 a4 4 0 0 0 -4 -4 v-24 a4 4 0 0 0 4 -4 z"/>
+          <line x1="18" y1="22" x2="40" y2="22"/>
+          <line x1="18" y1="28" x2="40" y2="28"/>
+          <line x1="18" y1="34" x2="34" y2="34"/>
+          <circle cx="46" cy="50" r="6"/>
+          <path d="M42 54 L38 62 L46 58 L54 62 L50 54"/>
+        </svg>
+      </div>
+      <div class="of-body"><h4>VAE</h4><p>Validation des acquis de l'expérience — accompagnement candidats</p></div>
+      <div class="of-price"><span class="strike">3 990€</span><span class="now">1 990€</span></div>
+    </div>
+
+    <div class="of-card" onclick="selectType(this,'vae_bilan',2490)">
+      <div class="of-svg">
+        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#BA7517" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 10 h28 a3 3 0 0 1 3 3 v30 a3 3 0 0 1 -3 3 h-28 a3 3 0 0 0 -3 -3 v-30 a3 3 0 0 0 3 -3 z"/>
+          <line x1="22" y1="18" x2="42" y2="18"/>
+          <line x1="22" y1="24" x2="42" y2="24"/>
+          <line x1="22" y1="30" x2="38" y2="30"/>
+          <circle cx="38" cy="44" r="11" fill="#fff"/>
+          <line x1="46" y1="52" x2="54" y2="60"/>
+          <polyline points="33,44 37,48 43,41"/>
+        </svg>
+      </div>
+      <div class="of-body"><h4>VAE + Bilan de compétences</h4><p>Offre combinée complète — bilan + validation des acquis</p></div>
+      <div class="of-price"><span class="strike">4 990€</span><span class="now">2 490€</span></div>
+    </div>
+
+    <div class="of-card" onclick="selectType(this,'formation_elus',1990)">
+      <div class="of-svg">
+        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#D4537E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 24 L32 12 L56 24 Z"/>
+          <line x1="8" y1="28" x2="56" y2="28"/>
+          <line x1="14" y1="28" x2="14" y2="52"/>
+          <line x1="24" y1="28" x2="24" y2="52"/>
+          <line x1="40" y1="28" x2="40" y2="52"/>
+          <line x1="50" y1="28" x2="50" y2="52"/>
+          <line x1="6" y1="56" x2="58" y2="56"/>
+          <line x1="32" y1="12" x2="32" y2="4"/>
+          <path d="M32 4 L44 6 L32 10 Z" fill="#D4537E"/>
+        </svg>
+      </div>
+      <div class="of-body"><h4>Formation des élus</h4><p>Formation des élus locaux — cadre réglementaire spécifique</p></div>
+      <div class="of-price"><span class="strike">3 990€</span><span class="now">1 990€</span></div>
+    </div>
+
+    <div class="of-card full" onclick="selectType(this,'centre_online',2990)">
+      <span class="of-badge">Nouveau</span>
+      <div class="of-svg">
+        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="14" y="20" width="36" height="24" rx="2"/>
+          <line x1="10" y1="50" x2="54" y2="50"/>
+          <line x1="26" y1="44" x2="26" y2="50"/>
+          <line x1="38" y1="44" x2="38" y2="50"/>
+          <circle cx="8" cy="14" r="4" stroke="#D85A30"/>
+          <circle cx="56" cy="14" r="4" stroke="#D85A30"/>
+          <circle cx="8" cy="50" r="4" stroke="#D85A30"/>
+          <circle cx="56" cy="50" r="4" stroke="#D85A30"/>
+          <line x1="12" y1="14" x2="26" y2="22" stroke="#D85A30"/>
+          <line x1="52" y1="14" x2="38" y2="22" stroke="#D85A30"/>
+          <line x1="12" y1="50" x2="18" y2="44" stroke="#D85A30"/>
+          <line x1="52" y1="50" x2="46" y2="44" stroke="#D85A30"/>
+          <text x="32" y="35" text-anchor="middle" font-size="7" font-family="sans-serif" fill="#1a1a1a" stroke="none" font-weight="600">IA</text>
+        </svg>
+      </div>
+      <div class="of-body"><h4>Centre 100% en ligne</h4><p>Conçu pour les formateurs qui ont une communauté. Funnel + LMS + Agents IA — tout automatisé, 0 admin.</p></div>
+      <div class="of-price"><span class="strike">7 990€</span><span class="now">2 990€</span></div>
+    </div>
+
+  </div>
+
+  <div style="background:#fff;border:0.5px solid var(--border);border-radius:8px;padding:14px 18px;margin-top:16px;display:flex;gap:10px;align-items:center;">
+    <span style="color:var(--accent);font-size:18px;">✓</span>
+    <div>
+      <p style="font-size:13px;font-weight:500;">Tout inclus dans chaque formule</p>
+      <p style="font-size:12px;color:var(--muted);">Statuts juridiques + greffe + SIRET + NDA + Qualiopi + expert dédié</p>
+    </div>
+  </div>
+
+  <button onclick="goStep(2)" id="btn-step1" class="ml-btn ml-btn-lg ml-btn-block" style="margin-top:16px;opacity:.4;pointer-events:none;" disabled>Continuer</button>
 </div>
 
-<!-- ETAPE 1 : TYPE D'OF -->
-<section>
-  <div class="container">
-    <span class="section-label">Étape 1</span>
-    <h2 class="section-title">Choisissez le type d'organisme</h2>
-    <p class="section-sub">Sélectionnez le type de centre que vous souhaitez créer.</p>
+<!-- ÉTAPE 2 -->
+<div id="step2" class="hidden">
+  <p style="font-size:16px;font-weight:500;margin-bottom:6px;">Personnalisez votre offre</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Avez-vous déjà votre KBIS ? Ajoutez des options.</p>
 
-    <div class="grid-3" id="typeGrid">
-      <div class="of-type-card" onclick="selectType(this,'action',990)">
-        <span class="info-icon" onclick="event.stopPropagation();toggleInfo('info-action')">ℹ️</span>
-        <span class="type-emoji">📚</span>
-        <h4>Action de formation</h4>
-        <p>OF classique : vente de formations à des entreprises ou particuliers.</p>
-        <div class="type-price">990€</div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
-        <div class="info-detail" id="info-action">
-          <strong>Ce qui est inclus :</strong>
-          <ul>
-            <li>✅ Création des statuts juridiques de votre OF</li>
-            <li>✅ Dépôt du dossier au greffe du tribunal</li>
-            <li>✅ Obtention du numéro SIRET</li>
-            <li>✅ Dépôt du dossier NDA auprès de la DREETS</li>
-            <li>✅ Préparation complète du dossier Qualiopi</li>
-            <li>✅ Accompagnement jusqu'à l'obtention Qualiopi</li>
-          </ul>
-        </div>
-      </div>
-      <div class="of-type-card" onclick="selectType(this,'cfa',2990)">
-        <span class="info-icon" onclick="event.stopPropagation();toggleInfo('info-cfa')">ℹ️</span>
-        <span class="type-emoji">🎓</span>
-        <h4>CFA (Apprentissage)</h4>
-        <p>Centre de formation d'apprentis — contrats d'apprentissage.</p>
-        <div class="type-price">2 990€</div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
-        <div class="info-detail" id="info-cfa">
-          <strong>Ce qui est inclus :</strong>
-          <ul>
-            <li>✅ Création des statuts juridiques (CFA)</li>
-            <li>✅ Dépôt du dossier au greffe du tribunal</li>
-            <li>✅ Obtention du numéro SIRET</li>
-            <li>✅ Dépôt du dossier NDA auprès de la DREETS</li>
-            <li>✅ Préparation et obtention Qualiopi</li>
-            <li>✅ Obtention du numéro UAI</li>
-            <li>✅ Convention avec les OPCO pour l'apprentissage</li>
-            <li>✅ Mise en conformité réglementaire CFA</li>
-          </ul>
-        </div>
-      </div>
-      <div class="of-type-card" onclick="selectType(this,'bilan',990)">
-        <span class="info-icon" onclick="event.stopPropagation();toggleInfo('info-bilan')">ℹ️</span>
-        <span class="type-emoji">📋</span>
-        <h4>Bilan de compétences</h4>
-        <p>Accompagnement des salariés dans leur évolution professionnelle.</p>
-        <div class="type-price">990€</div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
-        <div class="info-detail" id="info-bilan">
-          <strong>Ce qui est inclus :</strong>
-          <ul>
-            <li>✅ Création des statuts juridiques de votre OF</li>
-            <li>✅ Dépôt du dossier au greffe du tribunal</li>
-            <li>✅ Obtention du numéro SIRET</li>
-            <li>✅ Dépôt du dossier NDA auprès de la DREETS</li>
-            <li>✅ Préparation et obtention Qualiopi</li>
-            <li>✅ Méthodologie et outils pour le bilan de compétences</li>
-          </ul>
-        </div>
-      </div>
-      <div class="of-type-card" onclick="selectType(this,'vae',990)">
-        <span class="info-icon" onclick="event.stopPropagation();toggleInfo('info-vae')">ℹ️</span>
-        <span class="type-emoji">🏆</span>
-        <h4>VAE</h4>
-        <p>Validation des acquis de l'expérience — accompagnement candidats.</p>
-        <div class="type-price">990€</div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
-        <div class="info-detail" id="info-vae">
-          <strong>Ce qui est inclus :</strong>
-          <ul>
-            <li>✅ Création des statuts juridiques de votre OF</li>
-            <li>✅ Dépôt du dossier au greffe du tribunal</li>
-            <li>✅ Obtention du numéro SIRET</li>
-            <li>✅ Dépôt du dossier NDA auprès de la DREETS</li>
-            <li>✅ Préparation et obtention Qualiopi</li>
-            <li>✅ Processus VAE et accompagnement candidats</li>
-          </ul>
-        </div>
-      </div>
-      <div class="of-type-card" onclick="selectType(this,'elus',1490)">
-        <span class="info-icon" onclick="event.stopPropagation();toggleInfo('info-elus')">ℹ️</span>
-        <span class="type-emoji">🏛</span>
-        <h4>Formation des élus</h4>
-        <p>Formation des élus locaux — cadre réglementaire spécifique.</p>
-        <div class="type-price">1 490€</div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
-        <div class="info-detail" id="info-elus">
-          <strong>Ce qui est inclus :</strong>
-          <ul>
-            <li>✅ Création des statuts juridiques de votre OF</li>
-            <li>✅ Dépôt du dossier au greffe du tribunal</li>
-            <li>✅ Obtention du numéro SIRET</li>
-            <li>✅ Dépôt du dossier NDA auprès de la DREETS</li>
-            <li>✅ Préparation et obtention Qualiopi</li>
-            <li>✅ Agrément spécifique formation des élus</li>
-            <li>✅ Mise en conformité cadre réglementaire élus</li>
-          </ul>
-        </div>
-      </div>
-      <div class="of-type-card" onclick="selectType(this,'agent',2790)">
-        <span class="info-icon" onclick="event.stopPropagation();toggleInfo('info-agent')">ℹ️</span>
-        <span class="type-emoji">🤖</span>
-        <h4>OF géré par agents IA</h4>
-        <p>Centre entièrement piloté par des agents IA : docs, clients, gestion.</p>
-        <div class="type-price">2 790€</div>
-        <div class="premium-ribbon">👑 <strong>-10%</strong> membres Premium</div>
-        <div class="info-detail" id="info-agent">
-          <strong>Ce qui est inclus :</strong>
-          <ul>
-            <li>✅ Création de l'entreprise (statuts + greffe + SIRET)</li>
-            <li>✅ Dépôt NDA + préparation et obtention Qualiopi</li>
-            <li>✅ Système complet d'agents IA 360° :</li>
-            <li>🤖 Prospection et recherche de candidats automatisée</li>
-            <li>🤖 Création de formations sur mesure par IA</li>
-            <li>🤖 Gestion des stagiaires et suivi pédagogique</li>
-            <li>🤖 Facturation et gestion administrative</li>
-            <li>🤖 Dépôts de dossiers OPCO / EDOF / France Travail</li>
-            <li>🤖 Reporting et tableaux de bord automatisés</li>
-            <li>🔥 Mise en place d'un tunnel de vente — <em>sur demande</em></li>
-          </ul>
-        </div>
-      </div>
+  <div style="display:flex;gap:10px;margin-bottom:20px;">
+    <div class="ml-select-card" id="kbis-oui" onclick="selectKbis(true)" style="flex:1;">
+      <div class="ml-radio"></div>
+      <div class="ml-sc-info"><h4>Oui, j'ai mon KBIS</h4><p>-100€ sur votre commande</p></div>
+    </div>
+    <div class="ml-select-card selected" id="kbis-non" onclick="selectKbis(false)" style="flex:1;">
+      <div class="ml-radio"></div>
+      <div class="ml-sc-info"><h4>Non, pas encore</h4><p>On crée votre société (inclus)</p></div>
     </div>
   </div>
-</section>
 
-<!-- ETAPE 2 : CABIS -->
-<section class="bg-light" id="step2" style="display:none;">
-  <div class="container">
-    <span class="section-label">Étape 2</span>
-    <h2 class="section-title">Avez-vous déjà votre KBIS ?</h2>
-    <p class="section-sub">Si vous avez déjà immatriculé votre société, vous bénéficiez d'une réduction de 100€.</p>
-    <div style="display:flex;gap:16px;flex-wrap:wrap;">
-      <div class="payment-option" id="kbis-oui" onclick="selectKbis(true)">
-        <h5>✅ Oui, j'ai mon KBIS</h5>
-        <p>Réduction de 100€ appliquée</p>
-      </div>
-      <div class="payment-option selected" id="kbis-non" onclick="selectKbis(false)">
-        <h5>📝 Non, je n'ai pas encore de KBIS</h5>
-        <p>Nous créons votre société (inclus dans le prix)</p>
-      </div>
-    </div>
+  <p style="font-size:14px;font-weight:500;margin-bottom:10px;">Options supplémentaires</p>
+
+  <div class="ml-opt" onclick="toggleOption(this,'agents_ia',500)">
+    <div style="display:flex;align-items:center;gap:12px;"><input type="checkbox"><div><h4 style="font-size:14px;font-weight:500;">Pack Agents IA — Gestion du centre</h4><p style="font-size:12px;color:var(--muted);">Documents, recherche clients, facturation automatisée</p></div></div>
+    <div class="ml-opt-price">+500€</div>
   </div>
-</section>
 
-<!-- ETAPE 3 : OPTIONS -->
-<section id="step3" style="display:none;">
-  <div class="container">
-    <span class="section-label">Étape 3</span>
-    <h2 class="section-title">Options supplémentaires</h2>
-    <p class="section-sub">Personnalisez votre offre avec des services additionnels.</p>
-
-    
-
-    <div class="option-item" onclick="toggleOption(this,'agents',500)">
-      <div class="option-left">
-        <h4>Pack Agents IA — Gestion du centre</h4>
-        <p>Agents IA pour gérer vos documents, recherche clients, facturation.</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <span class="option-price">+500€</span>
-        <input type="checkbox">
-      </div>
-    </div>
-
-    <div class="option-item" onclick="toggleOption(this,'edof',290)">
-      <div class="option-left">
-        <h4>Inscription EDOF / CPF</h4>
-        <p>Mise en ligne de vos formations sur Mon Compte Formation.</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <span class="option-price">+290€</span>
-        <input type="checkbox">
-      </div>
-    </div>
-
-    <div class="option-item" onclick="toggleOption(this,'domiciliation',190)">
-      <div class="option-left">
-        <h4>Domiciliation spécialisée formation</h4>
-        <p>Adresse dans un centre spécialisé — assistance en cas de contrôle.</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <span class="option-price">+190€/mois</span>
-        <input type="checkbox">
-      </div>
-    </div>
-
-    <div class="option-item" onclick="toggleOption(this,'opco_pack',2990)">
-      <div class="option-left">
-        <h4>Connexion aux 11 OPCO — Pack complet</h4>
-        <p>Référencement auprès des 11 OPCO. Prix unitaire : 290€/OPCO.</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <span class="option-price">+2 990€</span>
-        <input type="checkbox">
-      </div>
-    </div>
-
-    <div class="option-item" onclick="toggleOption(this,'site',390)">
-      <div class="option-left">
-        <h4>Site web vitrine pour votre OF</h4>
-        <p>Site professionnel clé en main pour présenter vos formations.</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <span class="option-price">+390€</span>
-        <input type="checkbox">
-      </div>
-    </div>
+  <div class="ml-opt" onclick="toggleOption(this,'edof',290)">
+    <div style="display:flex;align-items:center;gap:12px;"><input type="checkbox"><div><h4 style="font-size:14px;font-weight:500;">Inscription EDOF / CPF</h4><p style="font-size:12px;color:var(--muted);">Mise en ligne sur Mon Compte Formation</p></div></div>
+    <div class="ml-opt-price">+290€</div>
   </div>
-</section>
 
-<!-- ETAPE 4 : COORDONNÉES + PAIEMENT -->
-<section class="bg-light" id="step4" style="display:none;">
-  <div class="container">
-    <span class="section-label">Étape 4</span>
-    <h2 class="section-title">Vos coordonnées</h2>
+  <div class="ml-opt" onclick="toggleOption(this,'domiciliation',190)">
+    <div style="display:flex;align-items:center;gap:12px;"><input type="checkbox"><div><h4 style="font-size:14px;font-weight:500;">Domiciliation spécialisée formation</h4><p style="font-size:12px;color:var(--muted);">Adresse pro + assistance contrôle</p></div></div>
+    <div class="ml-opt-price">+190€/mois</div>
+  </div>
 
-    <div style="max-width:500px;">
-      <div class="form-group"><label>Prénom et nom</label><input type="text" placeholder="Sophie Martin"></div>
-      <div class="form-group"><label>Email</label><input type="email" placeholder="sophie@monof.fr"></div>
-      <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="06 12 34 56 78"></div>
-      <div class="form-group"><label>Adresse</label><input type="text" placeholder="12 rue de la Formation, 75001 Paris"></div>
-    </div>
+  <div class="ml-opt" onclick="toggleOption(this,'opco',2990)">
+    <div style="display:flex;align-items:center;gap:12px;"><input type="checkbox"><div><h4 style="font-size:14px;font-weight:500;">Connexion aux 11 OPCO</h4><p style="font-size:12px;color:var(--muted);">Référencement complet</p></div></div>
+    <div class="ml-opt-price">+2 990€</div>
+  </div>
 
-    <div class="total-bar">
+  <div class="ml-opt" onclick="toggleOption(this,'site_web',390)">
+    <div style="display:flex;align-items:center;gap:12px;"><input type="checkbox"><div><h4 style="font-size:14px;font-weight:500;">Site web vitrine pour votre OF</h4><p style="font-size:12px;color:var(--muted);">Site professionnel clé en main</p></div></div>
+    <div class="ml-opt-price">+390€</div>
+  </div>
+
+  <div style="display:flex;gap:10px;margin-top:20px;">
+    <button onclick="goStep(1)" class="ml-btn ml-btn-ghost" style="flex:1;">← Retour</button>
+    <button onclick="goStep(3)" class="ml-btn ml-btn-lg" style="flex:2;">Continuer</button>
+  </div>
+</div>
+
+<!-- ÉTAPE 3 -->
+<div id="step3" class="hidden">
+  <p style="font-size:16px;font-weight:500;margin-bottom:6px;">Coordonnées et paiement</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Dernière étape — renseignez vos coordonnées.</p>
+
+  <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">
+    <div class="form-group"><label class="ml-label">Prénom et nom</label><input type="text" placeholder="Jean Dupont" class="ml-input"></div>
+    <div class="form-group"><label class="ml-label">Email</label><input type="email" placeholder="jean@exemple.fr" class="ml-input"></div>
+    <div class="form-group"><label class="ml-label">Téléphone</label><input type="tel" placeholder="06 12 34 56 78" class="ml-input"></div>
+    <div class="form-group"><label class="ml-label">Adresse</label><input type="text" placeholder="12 rue de la Formation, 75001 Paris" class="ml-input"></div>
+  </div>
+
+  <div class="ml-total">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
       <div>
-        <div class="total-label">Total à payer</div>
-        <div class="total-amount" id="totalDisplay">990€</div>
+        <p style="font-size:12px;color:var(--muted);">Total à payer</p>
+        <p id="totalDisplay" class="ml-total-num">990€</p>
       </div>
-      <div>
-        <p style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:12px;">Choisissez votre mode de paiement :</p>
-        <div class="payment-options">
-          <div class="payment-option selected" onclick="selectPayment(this,1)" style="background:var(--accent);border-color:var(--accent);color:#fff;transform:scale(1.03);">
-            <h5 style="color:#fff;">En 1 fois</h5>
-            <p style="color:rgba(255,255,255,.5);" id="pay1x">990€</p>
-          </div>
-          <div class="payment-option" onclick="selectPayment(this,2)" style="background:var(--primary);border-color:rgba(255,255,255,.2);color:#fff;">
-            <h5 style="color:#fff;">En 2 fois</h5>
-            <p style="color:rgba(255,255,255,.5);" id="pay2x">495€ x2</p>
-          </div>
-          <div class="payment-option" onclick="selectPayment(this,3)" style="background:var(--primary);border-color:rgba(255,255,255,.2);color:#fff;">
-            <h5 style="color:#fff;">En 3 fois</h5>
-            <p style="color:rgba(255,255,255,.5);" id="pay3x">330€ x3</p>
-          </div>
-        </div>
-      </div>
+      <p style="font-size:11px;color:var(--muted);">Premium : -10%</p>
     </div>
-
-    <div style="text-align:center;margin-top:24px;">
-      <button class="btn btn-primary btn-lg" onclick="payerCreation()">Payer et créer mon OF →</button>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:10px;">Mode de paiement</p>
+    <div class="ml-pay-opts">
+      <div class="ml-pay-opt selected" onclick="selectPayment(this,1)"><h5 id="pay1x">990€</h5><p>En 1 fois</p></div>
+      <div class="ml-pay-opt" onclick="selectPayment(this,2)"><h5 id="pay2x">495€ x2</h5><p>En 2 fois</p></div>
+      <div class="ml-pay-opt" onclick="selectPayment(this,3)"><h5 id="pay3x">330€ x3</h5><p>En 3 fois</p></div>
     </div>
   </div>
+
+  <div style="display:flex;gap:10px;margin-top:16px;">
+    <button onclick="goStep(2)" class="ml-btn ml-btn-ghost" style="flex:1;">← Retour</button>
+    <button onclick="payerCreation()" class="ml-btn ml-btn-lg" style="flex:2;">Payer et créer mon OF</button>
+  </div>
+  <p style="text-align:center;margin-top:12px;font-size:12px;color:var(--muted);">Paiement sécurisé Stripe · Satisfait ou remboursé 30 jours</p>
+</div>
+
 </section>
 
-<footer>
-  <div class="footer-inner">
-    <div><div class="footer-brand">lesformateurs.online</div><div>La plateforme des professionnels de la formation</div></div>
-    <div class="footer-links">
-    <div class="footer-links" style="margin-top:8px;font-size:11px;opacity:.6;">
+<footer class="ml-footer">
+  <div class="ml-footer-inner">
+    <div>
+      <div class="ml-footer-brand">les<span class="accent">formateurs</span>.online</div>
+      <p>La plateforme des professionnels de la formation.</p>
+      <p class="siren">Experience Prod SASU · SIREN 982 828 774</p>
+    </div>
+    <div class="ml-footer-col">
+      <h4>Services</h4>
+      <a href="formation.html">Gérer mon activité</a>
+      <a href="conformite.html">Conformité</a>
+      <a href="creer-of.html">Créer mon OF</a>
+      <a href="se-former.html">Se former</a>
+    </div>
+    <div class="ml-footer-col">
+      <h4>Légal</h4>
       <a href="mentions-legales.html">Mentions légales</a>
       <a href="cgv.html">CGV</a>
-      <a href="politique-confidentialite.html">Politique de confidentialité</a>
-    </div>
-    <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
-      <a href="creer-of.html">Créer mon OF</a><a href="se-former.html">Se former</a>
+      <a href="politique-confidentialite.html">Confidentialité</a>
     </div>
   </div>
+  <div class="ml-partners" style="text-align:left;padding:16px 0 12px;">
+    <div style="font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Partenaires certifiés</div>
+    <div style="display:flex;justify-content:flex-start;align-items:center;gap:24px;flex-wrap:wrap;">
+      <img src="img/logo-qualiopi.png" alt="Qualiopi" style="height:72px;background:transparent;">
+    </div>
+  </div>
+  <div class="ml-footer-bottom">© 2026 lesformateurs.online · <span style="color:#6C5CE7;font-weight:500;">Membres : -10% sur tous nos services</span></div>
 </footer>
 
 <script>
-var selectedType = null;
-var basePrice = 0;
-var hasKbis = false;
-var options = {};
-
-function toggleInfo(id){
-  var el = document.getElementById(id);
-  var allInfos = document.querySelectorAll('.info-detail');
-  allInfos.forEach(function(info){
-    if(info.id !== id) info.classList.remove('open');
-  });
-  el.classList.toggle('open');
+var currentStep = 1;
+function goStep(n){
+  if(n===2 && !selectedType){ alert("Choisissez un type d'organisme"); return; }
+  currentStep = n;
+  ['step1','step2','step3'].forEach(function(id){ document.getElementById(id).classList.add('hidden'); });
+  document.getElementById('step'+n).classList.remove('hidden');
+  for(var i=1;i<=3;i++){
+    var dot = document.getElementById('sdot'+i);
+    dot.classList.remove('active','done');
+    if(i<n) dot.classList.add('done');
+    if(i===n) dot.classList.add('active');
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
+var selectedType = null, basePrice = 0, hasKbis = false, options = {};
+
 function selectType(el, type, price){
-  document.querySelectorAll('.of-type-card').forEach(c=>c.classList.remove('selected'));
+  document.querySelectorAll('#step1 .of-card').forEach(function(c){c.classList.remove('selected');});
   el.classList.add('selected');
-  selectedType = type;
-  basePrice = price;
-  document.getElementById('step2').style.display='';
-  document.getElementById('step3').style.display='';
-  document.getElementById('step4').style.display='';
-  updateTotal();
-  el.scrollIntoView({behavior:'smooth',block:'center'});
+  selectedType = type; basePrice = price; updateTotal();
+  var btn = document.getElementById('btn-step1');
+  btn.disabled = false; btn.style.opacity = '1'; btn.style.pointerEvents = 'auto';
 }
 
 function selectKbis(has){
@@ -396,180 +362,142 @@ function toggleOption(el, name, price){
   updateTotal();
 }
 
+function fmt(n){ return (n||0).toLocaleString('fr-FR').replace(/\u202f/g,' ')+'€'; }
 function updateTotal(){
   var total = basePrice;
   if(hasKbis) total -= 100;
-  Object.values(options).forEach(p=>total+=p);
+  Object.values(options).forEach(function(p){total+=p;});
   if(total<0) total=0;
-  document.getElementById('totalDisplay').textContent = total+'€';
-  document.getElementById('pay1x').textContent = total+'€';
-  document.getElementById('pay2x').textContent = Math.ceil(total/2)+'€ x2';
-  document.getElementById('pay3x').textContent = Math.ceil(total/3)+'€ x3';
+  document.getElementById('totalDisplay').textContent = fmt(total);
+  document.getElementById('pay1x').textContent = fmt(total);
+  document.getElementById('pay2x').textContent = fmt(Math.ceil(total/2))+' x2';
+  document.getElementById('pay3x').textContent = fmt(Math.ceil(total/3))+' x3';
 }
 
 var selectedPaymentTimes = 1;
-
 function selectPayment(el, times){
-  el.parentNode.querySelectorAll('.payment-option').forEach(function(o){
-    o.classList.remove('selected');
-    o.style.background = 'var(--primary)';
-    o.style.borderColor = 'rgba(255,255,255,.2)';
-    o.style.transform = 'scale(1)';
-    o.querySelectorAll('h5').forEach(function(h){ h.style.color = '#fff'; });
-  });
+  el.parentNode.querySelectorAll('.ml-pay-opt').forEach(function(o){ o.classList.remove('selected'); });
   el.classList.add('selected');
-  el.style.background = 'var(--accent)';
-  el.style.borderColor = 'var(--accent)';
-  el.style.transform = 'scale(1.03)';
-  el.querySelectorAll('h5').forEach(function(h){ h.style.color = '#fff'; });
   selectedPaymentTimes = times;
 }
 
-var ofLinks = {
-  action: {
-    1: 'https://buy.stripe.com/bJe4gz7vs9vffiKgIOffy0M',
-    2: 'https://buy.stripe.com/4gM6oHcPMazjb2u64affy1h',
-    3: 'https://buy.stripe.com/7sY4gz4jggXH3A2gIOffy1i'
-  },
-  cfa: {
-    1: 'https://buy.stripe.com/5kQeVd5nk5eZ1rU3W2ffy1e',
-    2: 'https://buy.stripe.com/fZu9ATbLIbDn9YqfEKffy1j',
-    3: 'https://buy.stripe.com/bJe6oH3fcdLvdaC1NUffy1k'
-  },
-  bilan: {
-    1: 'https://buy.stripe.com/cNi4gz2b86j39Yq506ffy0O',
-    2: 'https://buy.stripe.com/14AbJ17vsbDn9YqgIOffy1l',
-    3: 'https://buy.stripe.com/bJeaEX2b8gXHgmOcsyffy1m'
-  },
-  vae: {
-    1: 'https://buy.stripe.com/dRm8wPdTQ0YJ2vY2RYffy0P',
-    2: 'https://buy.stripe.com/00wbJ18zw4aVc6yakqffy1n',
-    3: 'https://buy.stripe.com/fZu28rg1YgXHb2uakqffy1o'
-  },
-  elus: {
-    1: 'https://buy.stripe.com/8x28wP4jgePzgmO2RYffy1f',
-    2: 'https://buy.stripe.com/dRm5kDg1YbDndaCbouffy1p',
-    3: 'https://buy.stripe.com/6oU28rdTQ4aVdaCcsyffy1q'
-  },
-  agent: {
-    1: 'https://buy.stripe.com/7sY6oHcPMgXH6Me1NUffy1g',
-    2: 'https://buy.stripe.com/14A28r030dLv1rUdwCffy1r',
-    3: 'https://buy.stripe.com/cNibJ14jg5eZ5IagIOffy1s'
-  }
-};
-var ofLinksPremium = {
-  action: { 1: 'https://buy.stripe.com/4gMcN53fc6j3gmO8ciffy1H' },
-  cfa: { 1: 'https://buy.stripe.com/fZuaEX2b822Nc6y8ciffy1I' },
-  bilan: { 1: 'https://buy.stripe.com/6oU9AT4jg22N8UmfEKffy1J' },
-  vae: { 1: 'https://buy.stripe.com/5kQ9AT2b88rb4E60JQffy1K' },
-  elus: { 1: 'https://buy.stripe.com/cNi14n5nkazjeeG2RYffy1L' },
-  agent: { 1: 'https://buy.stripe.com/4gM8wP174bDn5Iacsyffy1M' }
-};
 var userIsPremiumOF = false;
-(async function(){ try { var p = await getProfile(); if(p && p.is_premium) userIsPremiumOF = true; } catch(e){} })();
 
-function getOfLink(type, times){
-  if(userIsPremiumOF && ofLinksPremium[type] && ofLinksPremium[type][times]) return ofLinksPremium[type][times];
-  return ofLinks[type] ? ofLinks[type][times] : null;
+// Slug → Stripe base key + DB type/category
+var stripeKeyMap = {
+  action_formation: { base:'creation_of', db:'creation_of', cat:'demarche' },
+  cfa:              { base:'creation_of_cfa', db:'creation_of', cat:'demarche' },
+  bilan:            { base:'creation_of', db:'creation_of', cat:'demarche' },
+  vae:              { base:'creation_of', db:'creation_of', cat:'demarche' },
+  vae_bilan:        { base:'creation_of', db:'creation_of', cat:'demarche' },
+  formation_elus:   { base:'formation_elus', db:'formation_elus', cat:'demarche' },
+  centre_online:    { base:'pack_digital', db:'pack_digital', cat:'service' }
+};
+
+async function loadStripeLinks(){
+  if(window.STRIPE_LINKS && window.STRIPE_LINKS.links) return window.STRIPE_LINKS;
+  try {
+    var r = await fetch('stripe-links.json', {cache:'no-cache'});
+    var j = await r.json();
+    window.STRIPE_LINKS = j;
+    return j;
+  } catch(e){ return null; }
+}
+
+function getStripeUrl(slug, times){
+  var m = stripeKeyMap[slug]; if(!m) return null;
+  var links = window.STRIPE_LINKS && window.STRIPE_LINKS.links ? window.STRIPE_LINKS.links : {};
+  var tries = [m.base+'_'+times+'x', m.base+'_1x'];
+  for(var i=0;i<tries.length;i++){
+    var url = links[tries[i]];
+    if(url && typeof url === 'string' && url.indexOf('STRIPE_')!==0 && url.indexOf('http')===0) return url;
+  }
+  return null;
+}
+
+function toast(msg){
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:8px;font-size:14px;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.2);max-width:90%;text-align:center;';
+  document.body.appendChild(t);
+  setTimeout(function(){ t.style.opacity='0'; t.style.transition='opacity .3s'; }, 3500);
+  setTimeout(function(){ t.remove(); }, 4000);
 }
 
 async function payerCreation(){
-  if(!selectedType){
-    alert('⚠️ Veuillez choisir un type d\'organisme.');
-    return;
-  }
-
-  // 1. Vérifier connexion
+  if(!selectedType){ alert("Veuillez choisir un type d'organisme."); return; }
   var user = await getUser();
   if(!user){ openAuthModal(); return; }
-
-  // 2. Calculer le total et collecter les infos
   var total = basePrice;
   if(hasKbis) total -= 100;
   var optionsList = [];
-  Object.keys(options).forEach(function(name){
-    total += options[name];
-    optionsList.push({ name: name, price: options[name] });
-  });
-  if(total < 0) total = 0;
-
-  // 3. Collecter les données du formulaire (step 4)
+  Object.keys(options).forEach(function(name){ total += options[name]; optionsList.push({name:name,price:options[name]}); });
+  if(total<0) total=0;
   var formData = {};
-  document.querySelectorAll('#step4 input').forEach(function(el){
-    var label = el.closest('.form-group');
-    if(label){
-      var lbl = label.querySelector('label');
-      var key = lbl ? lbl.textContent.trim().toLowerCase().replace(/[^a-z0-9]/g, '_') : el.placeholder;
-      formData[key] = el.value;
-    }
+  document.querySelectorAll('#step3 input').forEach(function(el){
+    var fg = el.closest('.form-group');
+    if(fg){ var lbl = fg.querySelector('label'); var key = lbl ? lbl.textContent.trim().toLowerCase().replace(/[^a-z0-9]/g,'_') : ''; formData[key] = el.value; }
   });
-
-  // 4. Mapper le type sélectionné vers le type de la base
-  var typeMap = {
-    action: 'action_formation',
-    cfa: 'cfa',
-    bilan: 'bilan',
-    vae: 'vae',
-    elus: 'elus',
-    agent: 'agents_ia'
-  };
-
-  // 5. Sauvegarder en Supabase
+  await loadStripeLinks();
+  var mapping = stripeKeyMap[selectedType] || stripeKeyMap.action_formation;
+  var stripeUrl = getStripeUrl(selectedType, selectedPaymentTimes);
+  if(!stripeUrl){ toast('Paiement en cours de configuration, réessayez dans quelques heures'); return; }
   try {
-    var { data: creation, error } = await sb.from('creations_of').insert({
-      user_id: user.id,
-      of_type: typeMap[selectedType] || selectedType,
-      status: 'nouveau',
-      current_step: 1,
-      base_price_cents: basePrice * 100,
-      total_price_cents: total * 100,
-      has_kbis: hasKbis,
-      payment_mode: selectedPaymentTimes + 'x',
-      paid: false,
-      form_data: formData,
-      selected_options: optionsList,
-      client_name: formData.pr_nom___nom || formData.nom_du_dirigeant || '',
-      client_email: formData.email || '',
-      client_phone: formData.t_l_phone || ''
+    var dbType = mapping.db;
+    var category = mapping.cat;
+    var totalCents = ((total||basePrice))*100;
+    var mergedFormData = Object.assign({}, formData, { of_type: selectedType, has_kbis: hasKbis, payment_mode: selectedPaymentTimes+'x', selected_options: optionsList });
+    var { data: creation, error } = await sb.from('demarches').insert({
+      user_id:user.id, type:dbType, category:category, status:'nouveau', current_step:1,
+      amount_cents: totalCents, paid:false, form_data: mergedFormData,
+      client_name:formData.pr_nom_et_nom||'', client_email:formData.email||'', client_phone:formData.t_l_phone||'',
+      metadata:{ of_type: selectedType, base_price_cents: basePrice*100, total_price_cents: total*100, has_kbis: hasKbis, payment_mode: selectedPaymentTimes+'x', selected_options: optionsList }
     }).select().single();
-
-    if(error){
-      alert('❌ Erreur : ' + error.message);
-      return;
-    }
-
-    // Sauvegarder aussi les options dans la table dédiée
-    for(var i = 0; i < optionsList.length; i++){
-      await sb.from('creation_of_options').insert({
-        creation_of_id: creation.id,
-        option_type: optionsList[i].name,
-        price_cents: optionsList[i].price * 100
-      });
-    }
-
-    // 6. Stocker en localStorage
+    if(error){ alert('Erreur : '+error.message); return; }
+    var referrerId = null;
+    try {
+      var refCode = localStorage.getItem('lfo_ref') || localStorage.getItem('lfo_referral');
+      if(refCode){
+        var { data: refProf } = await sb.from('profiles').select('id').eq('referral_code', refCode).single();
+        if(refProf && refProf.id && refProf.id !== user.id) referrerId = refProf.id;
+      }
+    } catch(e){}
     localStorage.setItem('lfo_pending_order', JSON.stringify({
-      order_id: creation.id,
-      table: 'creations_of',
-      type: 'creation_of',
-      product_type: selectedType,
-      amount: total,
-      timestamp: Date.now()
+      demarche_id: creation.id,
+      type: dbType,
+      amount_cents: totalCents,
+      user_id: user.id,
+      payment_mode: selectedPaymentTimes+'x',
+      sub_type: selectedType,
+      referrer_id: referrerId,
+      order_id: creation.id, table: 'demarches', product_type: selectedType, amount: total, timestamp: Date.now()
     }));
-
-  } catch(e){
-    alert('❌ Erreur de connexion. Veuillez réessayer.');
-    return;
-  }
-
-  // 7. Rediriger vers Stripe
-  if(getOfLink(selectedType, selectedPaymentTimes)){
-    window.location.href = getOfLink(selectedType, selectedPaymentTimes);
-  }
+  } catch(e){ alert('Erreur de connexion. Réessayez.'); return; }
+  window.location.href = stripeUrl;
 }
+
+// Preload stripe links once user lands on step 3 or earlier
+loadStripeLinks();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src="js/referral.js"></script>
+<script src="js/analytics.js" defer></script>
+<script src="js/maintenance-check.js" defer></script>
 <script src="js/auth-modal.js"></script>
+<script>
+(async function(){
+  try {
+    var user = await getUser();
+    if(user){
+      var loginBtn = document.querySelector('.btn-login');
+      var dashBtn = document.querySelector('.btn-dashboard');
+      if(loginBtn) loginBtn.classList.add('hidden');
+      if(dashBtn) dashBtn.classList.remove('hidden');
+    }
+    try { var p = await getProfile(); if(p && p.is_premium) userIsPremiumOF = true; } catch(e){}
+  } catch(e){}
+})();
+</script>
 </body>
 </html>
