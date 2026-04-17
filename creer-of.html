@@ -41,8 +41,10 @@
   <div class="ml-nav-links" id="navLinks">
     <a href="formation.html">Services</a>
     <a href="creer-of.html" class="active">Créer mon OF</a>
+    <a href="creer-certifier.html">Créer / Certifier</a>
     <a href="se-former.html">Se former</a>
-    <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;">Mon espace</a>
+    <a href="devenir-expert.html" style="color:#D85A30;font-weight:600;">Recrutement</a>
+    <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;">Connexion</a>
     <a href="dashboard.html" class="ml-nav-cta btn-dashboard hidden">Mon espace</a>
   </div>
   <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
@@ -255,10 +257,13 @@
   <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Dernière étape — renseignez vos coordonnées.</p>
 
   <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">
-    <div class="form-group"><label class="ml-label">Prénom et nom</label><input type="text" placeholder="Jean Dupont" class="ml-input"></div>
-    <div class="form-group"><label class="ml-label">Email</label><input type="email" placeholder="jean@exemple.fr" class="ml-input"></div>
-    <div class="form-group"><label class="ml-label">Téléphone</label><input type="tel" placeholder="06 12 34 56 78" class="ml-input"></div>
-    <div class="form-group"><label class="ml-label">Adresse</label><input type="text" placeholder="12 rue de la Formation, 75001 Paris" class="ml-input"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="form-group"><label class="ml-label">Prénom</label><input type="text" id="first_name" placeholder="Jean" class="ml-input" required></div>
+      <div class="form-group"><label class="ml-label">Nom</label><input type="text" id="last_name" placeholder="Dupont" class="ml-input" required></div>
+    </div>
+    <div class="form-group"><label class="ml-label">Email</label><input type="email" id="client_email" placeholder="jean@exemple.fr" class="ml-input" required></div>
+    <div class="form-group"><label class="ml-label">Téléphone</label><input type="tel" id="client_phone" placeholder="06 12 34 56 78" class="ml-input"></div>
+    <div class="form-group"><label class="ml-label">Adresse</label><input type="text" id="client_address" placeholder="12 rue de la Formation, 75001 Paris" class="ml-input"></div>
   </div>
 
   <div class="ml-total">
@@ -378,37 +383,16 @@ function selectPayment(el, times){
 
 var userIsPremiumOF = false;
 
-// Slug → Stripe base key + DB type/category
+// Slug → DB type/category
 var stripeKeyMap = {
-  action_formation: { base:'creation_of', db:'creation_of', cat:'demarche' },
-  cfa:              { base:'creation_of_cfa', db:'creation_of', cat:'demarche' },
-  bilan:            { base:'creation_of', db:'creation_of', cat:'demarche' },
-  vae:              { base:'creation_of', db:'creation_of', cat:'demarche' },
-  vae_bilan:        { base:'creation_of', db:'creation_of', cat:'demarche' },
-  formation_elus:   { base:'formation_elus', db:'formation_elus', cat:'demarche' },
-  centre_online:    { base:'pack_digital', db:'pack_digital', cat:'service' }
+  action_formation: { db:'creation_of', cat:'demarche' },
+  cfa:              { db:'creation_cfa', cat:'demarche' },
+  bilan:            { db:'creation_bilan', cat:'demarche' },
+  vae:              { db:'creation_vae', cat:'demarche' },
+  vae_bilan:        { db:'creation_vae_bilan', cat:'demarche' },
+  formation_elus:   { db:'formation_elus', cat:'demarche' },
+  centre_online:    { db:'creation_centre_online', cat:'demarche' }
 };
-
-async function loadStripeLinks(){
-  if(window.STRIPE_LINKS && window.STRIPE_LINKS.links) return window.STRIPE_LINKS;
-  try {
-    var r = await fetch('stripe-links.json', {cache:'no-cache'});
-    var j = await r.json();
-    window.STRIPE_LINKS = j;
-    return j;
-  } catch(e){ return null; }
-}
-
-function getStripeUrl(slug, times){
-  var m = stripeKeyMap[slug]; if(!m) return null;
-  var links = window.STRIPE_LINKS && window.STRIPE_LINKS.links ? window.STRIPE_LINKS.links : {};
-  var tries = [m.base+'_'+times+'x', m.base+'_1x'];
-  for(var i=0;i<tries.length;i++){
-    var url = links[tries[i]];
-    if(url && typeof url === 'string' && url.indexOf('STRIPE_')!==0 && url.indexOf('http')===0) return url;
-  }
-  return null;
-}
 
 function toast(msg){
   var t = document.createElement('div');
@@ -421,58 +405,74 @@ function toast(msg){
 
 async function payerCreation(){
   if(!selectedType){ alert("Veuillez choisir un type d'organisme."); return; }
+  var firstName = (document.getElementById('first_name').value||'').trim();
+  var lastName = (document.getElementById('last_name').value||'').trim();
+  var email = (document.getElementById('client_email').value||'').trim();
+  var phone = (document.getElementById('client_phone').value||'').trim();
+  var address = (document.getElementById('client_address').value||'').trim();
+  if(!firstName || !lastName){ alert('Veuillez renseigner votre prénom et nom.'); return; }
+  if(!email){ alert('Veuillez renseigner votre email.'); return; }
+
   var user = await getUser();
   if(!user){ openAuthModal(); return; }
+
   var total = basePrice;
   if(hasKbis) total -= 100;
   var optionsList = [];
   Object.keys(options).forEach(function(name){ total += options[name]; optionsList.push({name:name,price:options[name]}); });
   if(total<0) total=0;
-  var formData = {};
-  document.querySelectorAll('#step3 input').forEach(function(el){
-    var fg = el.closest('.form-group');
-    if(fg){ var lbl = fg.querySelector('label'); var key = lbl ? lbl.textContent.trim().toLowerCase().replace(/[^a-z0-9]/g,'_') : ''; formData[key] = el.value; }
-  });
-  await loadStripeLinks();
-  var mapping = stripeKeyMap[selectedType] || stripeKeyMap.action_formation;
-  var stripeUrl = getStripeUrl(selectedType, selectedPaymentTimes);
-  if(!stripeUrl){ toast('Paiement en cours de configuration, réessayez dans quelques heures'); return; }
-  try {
-    var dbType = mapping.db;
-    var category = mapping.cat;
-    var totalCents = ((total||basePrice))*100;
-    var mergedFormData = Object.assign({}, formData, { of_type: selectedType, has_kbis: hasKbis, payment_mode: selectedPaymentTimes+'x', selected_options: optionsList });
-    var { data: creation, error } = await sb.from('demarches').insert({
-      user_id:user.id, type:dbType, category:category, status:'nouveau', current_step:1,
-      amount_cents: totalCents, paid:false, form_data: mergedFormData,
-      client_name:formData.pr_nom_et_nom||'', client_email:formData.email||'', client_phone:formData.t_l_phone||'',
-      metadata:{ of_type: selectedType, base_price_cents: basePrice*100, total_price_cents: total*100, has_kbis: hasKbis, payment_mode: selectedPaymentTimes+'x', selected_options: optionsList }
-    }).select().single();
-    if(error){ alert('Erreur : '+error.message); return; }
-    var referrerId = null;
-    try {
-      var refCode = localStorage.getItem('lfo_ref') || localStorage.getItem('lfo_referral');
-      if(refCode){
-        var { data: refProf } = await sb.from('profiles').select('id').eq('referral_code', refCode).single();
-        if(refProf && refProf.id && refProf.id !== user.id) referrerId = refProf.id;
-      }
-    } catch(e){}
-    localStorage.setItem('lfo_pending_order', JSON.stringify({
-      demarche_id: creation.id,
-      type: dbType,
-      amount_cents: totalCents,
-      user_id: user.id,
-      payment_mode: selectedPaymentTimes+'x',
-      sub_type: selectedType,
-      referrer_id: referrerId,
-      order_id: creation.id, table: 'demarches', product_type: selectedType, amount: total, timestamp: Date.now()
-    }));
-  } catch(e){ alert('Erreur de connexion. Réessayez.'); return; }
-  window.location.href = stripeUrl;
-}
 
-// Preload stripe links once user lands on step 3 or earlier
-loadStripeLinks();
+  var totalCents = total * 100;
+  var pm = selectedPaymentTimes === 1 ? 'comptant' : selectedPaymentTimes+'x';
+  var installmentsTotal = selectedPaymentTimes;
+  var installCents = Math.ceil(totalCents / installmentsTotal);
+
+  var mapping = stripeKeyMap[selectedType] || stripeKeyMap.action_formation;
+  var dbType = mapping.db;
+  var category = mapping.cat;
+
+  var btn = document.querySelector('#step3 .ml-btn-lg:last-child');
+  if(btn){ btn.disabled = true; btn.textContent = 'Création en cours...'; }
+
+  try {
+    var mergedFormData = { first_name: firstName, last_name: lastName, email: email, phone: phone, address: address, of_type: selectedType, has_kbis: hasKbis, payment_mode: pm, selected_options: optionsList };
+    var { data: creation, error } = await sb.from('demarches').insert({
+      user_id: user.id, type: dbType, category: category, status: 'en_attente_paiement', current_step: 1,
+      amount_cents: totalCents, payment_mode: pm,
+      installment_amount_cents: installCents, installments_paid: 0, installments_total: installmentsTotal,
+      paid: false, form_data: mergedFormData,
+      client_name: firstName + ' ' + lastName, client_email: email, client_phone: phone,
+      metadata: { of_type: selectedType, base_price_cents: basePrice*100, total_price_cents: totalCents, has_kbis: hasKbis, payment_mode: pm, selected_options: optionsList }
+    }).select().single();
+    if(error) throw error;
+
+    // Stripe dynamic checkout via webhook endpoint
+    try {
+      var r = await fetch('https://webhook.lesformateurs.online/create-stripe-link', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          entity: 'demarche',
+          entity_id: creation.id,
+          amount_cents: totalCents,
+          payment_mode: pm,
+          installment_cents: installCents,
+          installments_total: installmentsTotal,
+          label: 'Création OF — ' + selectedType.replace(/_/g,' '),
+          type: dbType,
+          user_email: email || user.email || null
+        })
+      });
+      var j = await r.json();
+      if(j && j.url){ window.location.href = j.url; return; }
+    } catch(e){ console.warn('Stripe link error', e); }
+
+    // Fallback: redirect to dashboard
+    window.location.href = 'dashboard.html?demarche_created=' + creation.id;
+  } catch(e){
+    alert('Erreur : ' + (e.message || e));
+    if(btn){ btn.disabled = false; btn.textContent = 'Payer et créer mon OF'; }
+  }
+}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
