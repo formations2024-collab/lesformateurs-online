@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Déclaration d&#39;activité NDA — lesformateurs.online</title>
-<meta name="description" content="Obtenez votre numéro NDA auprès de la DREETS">
-<link rel="canonical" href="https://lesformateurs.online/funnel-nda">
+<title>Agrément préfectoral — lesformateurs.online</title>
+<meta name="description" content="Auto-école, SSIAP, CACES, habilitations électriques">
+<link rel="canonical" href="https://lesformateurs.online/funnel-agrement-prefectoral">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B6XVYRVT9D');</script>
@@ -108,14 +108,14 @@ textarea{resize:vertical;min-height:80px;}
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">les<span>formateurs</span>.online</a>
-    <span class="badge-top">NDA</span>
+    <span class="badge-top">Agrément</span>
   </div>
 </header>
 
 <div class="container">
   <div class="page-intro">
-    <h1>Déclaration d&#39;activité NDA</h1>
-    <p>Obtenez votre numéro NDA auprès de la DREETS — a partir de <span class="price-highlight">290 EUR</span> — 3 semaines</p>
+    <h1>Agrément préfectoral</h1>
+    <p>Auto-école, SSIAP, CACES, habilitations électriques — a partir de <span class="price-highlight">690 EUR</span> — 2 mois</p>
   </div>
 
   <!-- STEP 1 — Identification -->
@@ -145,12 +145,13 @@ textarea{resize:vertical;min-height:80px;}
 
   <!-- STEP 2 — Configuration -->
   <div class="card">
-    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Documents requis pour votre NDA</h3><p>La DREETS exige ces documents pour traiter votre déclaration</p></div></div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Documents requis</p><div class="field"><label class="label-required">Casier judiciaire B3 du dirigeant</label><div class="hint">Moins de 3 mois</div><input type="text" id="doc-casier_b3" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-<div class="field"><label class="label-required">Pièce d&#39;identité du dirigeant</label><div class="hint">Recto-verso</div><input type="text" id="doc-cni_dirigeant" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-<div class="field"><label class="">CV + diplômes du formateur</label><div class="hint">Si formateur par le client</div><input type="text" id="doc-cv_formateur" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
+    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Configuration agrément préfectoral</h3><p>Choisissez votre type d&#39;agrément et uploadez les documents requis</p></div></div>
+    <div class="field"><label class="label-required">Type d&#39;agrément souhaité</label><select id="ef-type_agrement" data-key="type_agrement"><option value="">— Choisir —</option><option value="Auto-école">Auto-école</option><option value="SSIAP">SSIAP</option><option value="CACES">CACES</option><option value="Habilitations électriques">Habilitations électriques</option><option value="Autre">Autre</option></select></div>
+<div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Documents requis</p><div class="field"><label class="label-required">Casier judiciaire B3 du dirigeant</label><div class="hint">Moins de 3 mois</div><input type="text" id="doc-casier_b3" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
+<div class="field"><label class="">CV des formateurs</label><div class="hint">Ou +450€ si LFO fournit</div><input type="text" id="doc-cv_formateurs" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
 </div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Options disponibles</p><div class="action-card" data-option="formateur_lfo" data-price="220" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Formateur habilité LFO</b><span>Si vous n&#39;avez pas de formateur qualifié</span></div><span class="opt-price">+220 EUR</span></div>
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Options disponibles</p><div class="action-card" data-option="formateurs_specifiques" data-price="450" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Formateurs spécifiques LFO</b><span>Auto-école, SSIAP, CACES, habilitations électriques</span></div><span class="opt-price">+450 EUR</span></div>
+<div class="action-card" data-option="expert_inspection" data-price="490" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Expert LFO jour inspection</b><span>Présent lors de l&#39;inspection préfectorale</span></div><span class="opt-price">+490 EUR</span></div>
 </div>
   </div>
 
@@ -185,7 +186,7 @@ textarea{resize:vertical;min-height:80px;}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script>
-var FUNNEL = {"id":"nda","demType":"nda","basePrice":290,"totalSteps":4,"title":"Déclaration d'activité NDA","paymentRule":"2x","options":[{"key":"formateur_lfo","label":"Formateur habilité LFO","desc":"Si vous n'avez pas de formateur qualifié","price":220}],"dynamicPricing":null,"extraFields":[]};
+var FUNNEL = {"id":"agrement_prefectoral","demType":"agrement_prefectoral","basePrice":690,"totalSteps":4,"title":"Agrément préfectoral","paymentRule":"3x","options":[{"key":"formateurs_specifiques","label":"Formateurs spécifiques LFO","desc":"Auto-école, SSIAP, CACES, habilitations électriques","price":450},{"key":"expert_inspection","label":"Expert LFO jour inspection","desc":"Présent lors de l'inspection préfectorale","price":490}],"dynamicPricing":null,"extraFields":[{"key":"type_agrement","label":"Type d'agrément souhaité","type":"select","options":["Auto-école","SSIAP","CACES","Habilitations électriques","Autre"],"required":true}]};
 
 var STATE = { email: '', organisme: null, paymentMode: null, selectedOptions: {}, radioValues: {}, msValues: {} };
 
