@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Déclaration d&#39;activité NDA — lesformateurs.online</title>
-<meta name="description" content="Obtenez votre numéro NDA auprès de la DREETS">
-<link rel="canonical" href="https://lesformateurs.online/funnel-nda">
+<title>Pack Enterprise — lesformateurs.online</title>
+<meta name="description" content="Premium + app mobile + agents IA multiples">
+<link rel="canonical" href="https://lesformateurs.online/funnel-pack-enterprise">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B6XVYRVT9D');</script>
@@ -108,14 +108,14 @@ textarea{resize:vertical;min-height:80px;}
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">les<span>formateurs</span>.online</a>
-    <span class="badge-top">NDA</span>
+    <span class="badge-top">Pack Enterprise</span>
   </div>
 </header>
 
 <div class="container">
   <div class="page-intro">
-    <h1>Déclaration d&#39;activité NDA</h1>
-    <p>Obtenez votre numéro NDA auprès de la DREETS — a partir de <span class="price-highlight">290 EUR</span> — 3 semaines</p>
+    <h1>Pack Enterprise</h1>
+    <p>Premium + app mobile + agents IA multiples — a partir de <span class="price-highlight">7 990 EUR</span> — 6 semaines</p>
   </div>
 
   <!-- STEP 1 — Identification -->
@@ -145,12 +145,14 @@ textarea{resize:vertical;min-height:80px;}
 
   <!-- STEP 2 — Configuration -->
   <div class="card">
-    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Documents requis pour votre NDA</h3><p>La DREETS exige ces documents pour traiter votre déclaration</p></div></div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Documents requis</p><div class="field"><label class="label-required">Casier judiciaire B3 du dirigeant</label><div class="hint">Moins de 3 mois</div><input type="text" id="doc-casier_b3" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-<div class="field"><label class="label-required">Pièce d&#39;identité du dirigeant</label><div class="hint">Recto-verso</div><input type="text" id="doc-cni_dirigeant" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-<div class="field"><label class="">CV + diplômes du formateur</label><div class="hint">Si formateur par le client</div><input type="text" id="doc-cv_formateur" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-</div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Options disponibles</p><div class="action-card" data-option="formateur_lfo" data-price="220" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Formateur habilité LFO</b><span>Si vous n&#39;avez pas de formateur qualifié</span></div><span class="opt-price">+220 EUR</span></div>
+    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Brief du Pack Enterprise</h3><p>La solution complète : formations + IA + app mobile</p></div></div>
+    <div class="field"><label class="label-required">Thème formation 1</label><input type="text" id="ef-theme1" data-key="theme1"></div>
+<div class="field"><label class="label-required">Thème formation 2</label><input type="text" id="ef-theme2" data-key="theme2"></div>
+<div class="field"><label class="label-required">Thème formation 3</label><input type="text" id="ef-theme3" data-key="theme3"></div>
+<div class="field"><label class="label-required">Agent IA principal</label><select id="ef-agent_ia" data-key="agent_ia"><option value="">— Choisir —</option><option value="Réseaux sociaux">Réseaux sociaux</option><option value="Dossiers administratifs">Dossiers administratifs</option><option value="Répondre aux candidats">Répondre aux candidats</option><option value="Support client">Support client</option><option value="Gérer les apprenants">Gérer les apprenants</option><option value="Comptabilité">Comptabilité</option><option value="Veille réglementaire">Veille réglementaire</option><option value="Marketing &amp; prospection">Marketing &amp; prospection</option></select></div>
+<div class="field"><label class="label-required">Plateforme app mobile</label><select id="ef-plateforme_app" data-key="plateforme_app"><option value="">— Choisir —</option><option value="iOS">iOS</option><option value="Android">Android</option><option value="iOS + Android">iOS + Android</option></select></div>
+
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Options disponibles</p><div class="action-card" data-option="agent_sup" data-price="390" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Agent IA supplémentaire</b><span>Par agent au-delà du 1er inclus</span></div><span class="opt-price">+390 EUR</span></div>
 </div>
   </div>
 
@@ -185,7 +187,7 @@ textarea{resize:vertical;min-height:80px;}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script>
-var FUNNEL = {"id":"nda","demType":"nda","basePrice":290,"totalSteps":4,"title":"Déclaration d'activité NDA","paymentRule":"2x","options":[{"key":"formateur_lfo","label":"Formateur habilité LFO","desc":"Si vous n'avez pas de formateur qualifié","price":220}],"dynamicPricing":null,"extraFields":[]};
+var FUNNEL = {"id":"pack_enterprise","demType":"pack_enterprise","basePrice":7990,"totalSteps":4,"title":"Pack Enterprise","paymentRule":"3x","options":[{"key":"agent_sup","label":"Agent IA supplémentaire","desc":"Par agent au-delà du 1er inclus","price":390}],"dynamicPricing":null,"extraFields":[{"key":"theme1","label":"Thème formation 1","type":"text","required":true},{"key":"theme2","label":"Thème formation 2","type":"text","required":true},{"key":"theme3","label":"Thème formation 3","type":"text","required":true},{"key":"agent_ia","label":"Agent IA principal","type":"select","options":["Réseaux sociaux","Dossiers administratifs","Répondre aux candidats","Support client","Gérer les apprenants","Comptabilité","Veille réglementaire","Marketing & prospection"],"required":true},{"key":"plateforme_app","label":"Plateforme app mobile","type":"select","options":["iOS","Android","iOS + Android"],"required":true}]};
 
 var STATE = { email: '', organisme: null, paymentMode: null, selectedOptions: {}, radioValues: {}, msValues: {} };
 

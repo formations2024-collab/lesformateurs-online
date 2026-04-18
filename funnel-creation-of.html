@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Déclaration d&#39;activité NDA — lesformateurs.online</title>
-<meta name="description" content="Obtenez votre numéro NDA auprès de la DREETS">
-<link rel="canonical" href="https://lesformateurs.online/funnel-nda">
+<title>Création Organisme de Formation — lesformateurs.online</title>
+<meta name="description" content="OF complet : statuts + SIRET + NDA + Qualiopi">
+<link rel="canonical" href="https://lesformateurs.online/funnel-creation-of">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B6XVYRVT9D');</script>
@@ -108,14 +108,14 @@ textarea{resize:vertical;min-height:80px;}
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">les<span>formateurs</span>.online</a>
-    <span class="badge-top">NDA</span>
+    <span class="badge-top">Création OF</span>
   </div>
 </header>
 
 <div class="container">
   <div class="page-intro">
-    <h1>Déclaration d&#39;activité NDA</h1>
-    <p>Obtenez votre numéro NDA auprès de la DREETS — a partir de <span class="price-highlight">290 EUR</span> — 3 semaines</p>
+    <h1>Création Organisme de Formation</h1>
+    <p>OF complet : statuts + SIRET + NDA + Qualiopi — a partir de <span class="price-highlight">1 490 EUR</span> — 6 semaines</p>
   </div>
 
   <!-- STEP 1 — Identification -->
@@ -145,12 +145,16 @@ textarea{resize:vertical;min-height:80px;}
 
   <!-- STEP 2 — Configuration -->
   <div class="card">
-    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Documents requis pour votre NDA</h3><p>La DREETS exige ces documents pour traiter votre déclaration</p></div></div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Documents requis</p><div class="field"><label class="label-required">Casier judiciaire B3 du dirigeant</label><div class="hint">Moins de 3 mois</div><input type="text" id="doc-casier_b3" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-<div class="field"><label class="label-required">Pièce d&#39;identité du dirigeant</label><div class="hint">Recto-verso</div><input type="text" id="doc-cni_dirigeant" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-<div class="field"><label class="">CV + diplômes du formateur</label><div class="hint">Si formateur par le client</div><input type="text" id="doc-cv_formateur" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
+    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Configuration de votre OF</h3><p>Choisissez votre forme juridique et uploadez les documents</p></div></div>
+    <div class="field"><label class="label-required">Forme juridique souhaitée</label><select id="ef-forme_juridique" data-key="forme_juridique"><option value="">— Choisir —</option><option value="SAS">SAS</option><option value="SASU">SASU</option><option value="SARL">SARL</option><option value="EURL">EURL</option><option value="EI">EI</option><option value="Association 1901">Association 1901</option><option value="Autre">Autre</option></select></div>
+<div class="field"><label class="label-required">Avez-vous déjà un Kbis ?</label><div class="ms-grid"><div class="action-card" data-radio-group="has_kbis" data-value="Oui (-100€)" onclick="selectRadio(this,'has_kbis')"><div class="cb"></div><div><b>Oui (-100€)</b></div></div><div class="action-card" data-radio-group="has_kbis" data-value="Non" onclick="selectRadio(this,'has_kbis')"><div class="cb"></div><div><b>Non</b></div></div></div></div>
+<div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Documents requis</p><div class="field"><label class="label-required">CNI du dirigeant</label><div class="hint">Recto-verso</div><input type="text" id="doc-cni_dirigeant" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
+<div class="field"><label class="label-required">Justificatif de domicile</label><div class="hint">Moins de 3 mois</div><input type="text" id="doc-justif_domicile" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
+<div class="field"><label class="label-required">Justificatif du siège social</label><input type="text" id="doc-justif_siege" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
 </div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Options disponibles</p><div class="action-card" data-option="formateur_lfo" data-price="220" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Formateur habilité LFO</b><span>Si vous n&#39;avez pas de formateur qualifié</span></div><span class="opt-price">+220 EUR</span></div>
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Options disponibles</p><div class="action-card" data-option="bilan" data-price="490" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Bilan de compétences</b><span>Ajout spécialisation bilan</span></div><span class="opt-price">+490 EUR</span></div>
+<div class="action-card" data-option="vae" data-price="490" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>VAE</b><span>Ajout spécialisation VAE</span></div><span class="opt-price">+490 EUR</span></div>
+<div class="action-card" data-option="formateur_lfo" data-price="220" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Formateur LFO</b><span>Si vous n&#39;avez pas de formateur</span></div><span class="opt-price">+220 EUR</span></div>
 </div>
   </div>
 
@@ -185,7 +189,7 @@ textarea{resize:vertical;min-height:80px;}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script>
-var FUNNEL = {"id":"nda","demType":"nda","basePrice":290,"totalSteps":4,"title":"Déclaration d'activité NDA","paymentRule":"2x","options":[{"key":"formateur_lfo","label":"Formateur habilité LFO","desc":"Si vous n'avez pas de formateur qualifié","price":220}],"dynamicPricing":null,"extraFields":[]};
+var FUNNEL = {"id":"creation_of","demType":"creation_of","basePrice":1490,"totalSteps":6,"title":"Création Organisme de Formation","paymentRule":"3x","options":[{"key":"bilan","label":"Bilan de compétences","desc":"Ajout spécialisation bilan","price":490},{"key":"vae","label":"VAE","desc":"Ajout spécialisation VAE","price":490},{"key":"formateur_lfo","label":"Formateur LFO","desc":"Si vous n'avez pas de formateur","price":220}],"dynamicPricing":null,"extraFields":[{"key":"forme_juridique","label":"Forme juridique souhaitée","type":"select","options":["SAS","SASU","SARL","EURL","EI","Association 1901","Autre"],"required":true},{"key":"has_kbis","label":"Avez-vous déjà un Kbis ?","type":"radio","options":["Oui (-100€)","Non"],"required":true,"discount":{"value":"Oui (-100€)","amount":-100}}]};
 
 var STATE = { email: '', organisme: null, paymentMode: null, selectedOptions: {}, radioValues: {}, msValues: {} };
 

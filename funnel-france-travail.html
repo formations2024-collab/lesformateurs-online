@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Déclaration d&#39;activité NDA — lesformateurs.online</title>
-<meta name="description" content="Obtenez votre numéro NDA auprès de la DREETS">
-<link rel="canonical" href="https://lesformateurs.online/funnel-nda">
+<title>France Travail — Compte KAIROS — lesformateurs.online</title>
+<meta name="description" content="Former les demandeurs d&#39;emploi via le dispositif AIF">
+<link rel="canonical" href="https://lesformateurs.online/funnel-france-travail">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B6XVYRVT9D');</script>
@@ -108,14 +108,14 @@ textarea{resize:vertical;min-height:80px;}
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">les<span>formateurs</span>.online</a>
-    <span class="badge-top">NDA</span>
+    <span class="badge-top">France Travail</span>
   </div>
 </header>
 
 <div class="container">
   <div class="page-intro">
-    <h1>Déclaration d&#39;activité NDA</h1>
-    <p>Obtenez votre numéro NDA auprès de la DREETS — a partir de <span class="price-highlight">290 EUR</span> — 3 semaines</p>
+    <h1>France Travail — Compte KAIROS</h1>
+    <p>Former les demandeurs d&#39;emploi via le dispositif AIF — a partir de <span class="price-highlight">290 EUR</span> — 3 semaines</p>
   </div>
 
   <!-- STEP 1 — Identification -->
@@ -145,12 +145,12 @@ textarea{resize:vertical;min-height:80px;}
 
   <!-- STEP 2 — Configuration -->
   <div class="card">
-    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Documents requis pour votre NDA</h3><p>La DREETS exige ces documents pour traiter votre déclaration</p></div></div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Documents requis</p><div class="field"><label class="label-required">Casier judiciaire B3 du dirigeant</label><div class="hint">Moins de 3 mois</div><input type="text" id="doc-casier_b3" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-<div class="field"><label class="label-required">Pièce d&#39;identité du dirigeant</label><div class="hint">Recto-verso</div><input type="text" id="doc-cni_dirigeant" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-<div class="field"><label class="">CV + diplômes du formateur</label><div class="hint">Si formateur par le client</div><input type="text" id="doc-cv_formateur" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
+    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Configuration France Travail</h3><p>Création de votre compte KAIROS et configuration des fiches formation</p></div></div>
+    <div class="field"><label class="label-required">Avez-vous déjà vos formations créées ?</label><div class="ms-grid"><div class="action-card" data-radio-group="has_formations" data-value="Oui" onclick="selectRadio(this,'has_formations')"><div class="cb"></div><div><b>Oui</b></div></div><div class="action-card" data-radio-group="has_formations" data-value="Non — je souhaite en créer" onclick="selectRadio(this,'has_formations')"><div class="cb"></div><div><b>Non — je souhaite en créer</b></div></div></div></div>
+<div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Documents requis</p><div class="field"><label class="label-required">Certificat Qualiopi</label><div class="hint">Obligatoire</div><input type="text" id="doc-qualiopi" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
+<div class="field"><label class="label-required">NDA</label><input type="text" id="doc-nda" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
 </div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Options disponibles</p><div class="action-card" data-option="formateur_lfo" data-price="220" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Formateur habilité LFO</b><span>Si vous n&#39;avez pas de formateur qualifié</span></div><span class="opt-price">+220 EUR</span></div>
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Options disponibles</p><div class="action-card" data-option="formateur_lfo" data-price="220" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Formateur LFO</b><span>Si vous n&#39;avez pas de formateur</span></div><span class="opt-price">+220 EUR</span></div>
 </div>
   </div>
 
@@ -185,7 +185,7 @@ textarea{resize:vertical;min-height:80px;}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script>
-var FUNNEL = {"id":"nda","demType":"nda","basePrice":290,"totalSteps":4,"title":"Déclaration d'activité NDA","paymentRule":"2x","options":[{"key":"formateur_lfo","label":"Formateur habilité LFO","desc":"Si vous n'avez pas de formateur qualifié","price":220}],"dynamicPricing":null,"extraFields":[]};
+var FUNNEL = {"id":"france_travail","demType":"france_travail","basePrice":290,"totalSteps":3,"title":"France Travail — Compte KAIROS","paymentRule":"2x","options":[{"key":"formateur_lfo","label":"Formateur LFO","desc":"Si vous n'avez pas de formateur","price":220}],"dynamicPricing":null,"extraFields":[{"key":"has_formations","label":"Avez-vous déjà vos formations créées ?","type":"radio","options":["Oui","Non — je souhaite en créer"],"required":true}]};
 
 var STATE = { email: '', organisme: null, paymentMode: null, selectedOptions: {}, radioValues: {}, msValues: {} };
 

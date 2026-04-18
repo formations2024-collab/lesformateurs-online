@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Déclaration d&#39;activité NDA — lesformateurs.online</title>
-<meta name="description" content="Obtenez votre numéro NDA auprès de la DREETS">
-<link rel="canonical" href="https://lesformateurs.online/funnel-nda">
+<title>LMS — Plateforme e-learning — lesformateurs.online</title>
+<meta name="description" content="Parcours, quiz, émargement, attestations">
+<link rel="canonical" href="https://lesformateurs.online/funnel-lms">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B6XVYRVT9D');</script>
@@ -108,14 +108,14 @@ textarea{resize:vertical;min-height:80px;}
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">les<span>formateurs</span>.online</a>
-    <span class="badge-top">NDA</span>
+    <span class="badge-top">LMS</span>
   </div>
 </header>
 
 <div class="container">
   <div class="page-intro">
-    <h1>Déclaration d&#39;activité NDA</h1>
-    <p>Obtenez votre numéro NDA auprès de la DREETS — a partir de <span class="price-highlight">290 EUR</span> — 3 semaines</p>
+    <h1>LMS — Plateforme e-learning</h1>
+    <p>Parcours, quiz, émargement, attestations — a partir de <span class="price-highlight">2 900 EUR</span> — 4 semaines</p>
   </div>
 
   <!-- STEP 1 — Identification -->
@@ -145,12 +145,14 @@ textarea{resize:vertical;min-height:80px;}
 
   <!-- STEP 2 — Configuration -->
   <div class="card">
-    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Documents requis pour votre NDA</h3><p>La DREETS exige ces documents pour traiter votre déclaration</p></div></div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Documents requis</p><div class="field"><label class="label-required">Casier judiciaire B3 du dirigeant</label><div class="hint">Moins de 3 mois</div><input type="text" id="doc-casier_b3" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-<div class="field"><label class="label-required">Pièce d&#39;identité du dirigeant</label><div class="hint">Recto-verso</div><input type="text" id="doc-cni_dirigeant" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-<div class="field"><label class="">CV + diplômes du formateur</label><div class="hint">Si formateur par le client</div><input type="text" id="doc-cv_formateur" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-</div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Options disponibles</p><div class="action-card" data-option="formateur_lfo" data-price="220" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Formateur habilité LFO</b><span>Si vous n&#39;avez pas de formateur qualifié</span></div><span class="opt-price">+220 EUR</span></div>
+    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Brief de votre LMS</h3><p>Décrivez vos besoins en termes de plateforme e-learning</p></div></div>
+    <div class="field"><label class="label-required">Nombre d&#39;apprenants prévu</label><input type="text" id="ef-nb_apprenants" data-key="nb_apprenants"></div>
+<div class="field"><label class="">Contenus pédagogiques existants ?</label><textarea id="ef-contenus" data-key="contenus" rows="3"></textarea></div>
+
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Options disponibles</p><div class="action-card" data-option="scale_500" data-price="1500" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>50-500 apprenants</b><span>Montée en charge</span></div><span class="opt-price">+1 500 EUR</span></div>
+<div class="action-card" data-option="scale_500plus" data-price="3000" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>500+ apprenants</b><span>Version entreprise</span></div><span class="opt-price">+3 000 EUR</span></div>
+<div class="action-card" data-option="integration_cpf" data-price="990" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Intégration CPF/EDOF</b><span>Connexion EDOF</span></div><span class="opt-price">+990 EUR</span></div>
+<div class="action-card" data-option="app_apprenant" data-price="1990" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>App mobile apprenant</b><span>Application dédiée</span></div><span class="opt-price">+1 990 EUR</span></div>
 </div>
   </div>
 
@@ -185,7 +187,7 @@ textarea{resize:vertical;min-height:80px;}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script>
-var FUNNEL = {"id":"nda","demType":"nda","basePrice":290,"totalSteps":4,"title":"Déclaration d'activité NDA","paymentRule":"2x","options":[{"key":"formateur_lfo","label":"Formateur habilité LFO","desc":"Si vous n'avez pas de formateur qualifié","price":220}],"dynamicPricing":null,"extraFields":[]};
+var FUNNEL = {"id":"lms","demType":"lms","basePrice":2900,"totalSteps":5,"title":"LMS — Plateforme e-learning","paymentRule":"3x","options":[{"key":"scale_500","label":"50-500 apprenants","desc":"Montée en charge","price":1500},{"key":"scale_500plus","label":"500+ apprenants","desc":"Version entreprise","price":3000},{"key":"integration_cpf","label":"Intégration CPF/EDOF","desc":"Connexion EDOF","price":990},{"key":"app_apprenant","label":"App mobile apprenant","desc":"Application dédiée","price":1990}],"dynamicPricing":null,"extraFields":[{"key":"nb_apprenants","label":"Nombre d'apprenants prévu","type":"text","required":true},{"key":"contenus","label":"Contenus pédagogiques existants ?","type":"textarea","required":false}]};
 
 var STATE = { email: '', organisme: null, paymentMode: null, selectedOptions: {}, radioValues: {}, msValues: {} };
 

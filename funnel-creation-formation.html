@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Déclaration d&#39;activité NDA — lesformateurs.online</title>
-<meta name="description" content="Obtenez votre numéro NDA auprès de la DREETS">
-<link rel="canonical" href="https://lesformateurs.online/funnel-nda">
+<title>Création de Formation — lesformateurs.online</title>
+<meta name="description" content="1 formation complète avec 5 modules, supports, quiz">
+<link rel="canonical" href="https://lesformateurs.online/funnel-creation-formation">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B6XVYRVT9D');</script>
@@ -108,14 +108,14 @@ textarea{resize:vertical;min-height:80px;}
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">les<span>formateurs</span>.online</a>
-    <span class="badge-top">NDA</span>
+    <span class="badge-top">Formation</span>
   </div>
 </header>
 
 <div class="container">
   <div class="page-intro">
-    <h1>Déclaration d&#39;activité NDA</h1>
-    <p>Obtenez votre numéro NDA auprès de la DREETS — a partir de <span class="price-highlight">290 EUR</span> — 3 semaines</p>
+    <h1>Création de Formation</h1>
+    <p>1 formation complète avec 5 modules, supports, quiz — a partir de <span class="price-highlight">990 EUR</span> — 4 semaines</p>
   </div>
 
   <!-- STEP 1 — Identification -->
@@ -145,12 +145,15 @@ textarea{resize:vertical;min-height:80px;}
 
   <!-- STEP 2 — Configuration -->
   <div class="card">
-    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Documents requis pour votre NDA</h3><p>La DREETS exige ces documents pour traiter votre déclaration</p></div></div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Documents requis</p><div class="field"><label class="label-required">Casier judiciaire B3 du dirigeant</label><div class="hint">Moins de 3 mois</div><input type="text" id="doc-casier_b3" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-<div class="field"><label class="label-required">Pièce d&#39;identité du dirigeant</label><div class="hint">Recto-verso</div><input type="text" id="doc-cni_dirigeant" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-<div class="field"><label class="">CV + diplômes du formateur</label><div class="hint">Si formateur par le client</div><input type="text" id="doc-cv_formateur" placeholder="Vous pourrez les uploader dans votre dashboard après paiement" style="background:var(--bg-subtle);color:#999;font-size:12px;" readonly></div>
-</div>
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Options disponibles</p><div class="action-card" data-option="formateur_lfo" data-price="220" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Formateur habilité LFO</b><span>Si vous n&#39;avez pas de formateur qualifié</span></div><span class="opt-price">+220 EUR</span></div>
+    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Brief de votre formation</h3><p>Décrivez la formation que vous souhaitez créer</p></div></div>
+    <div class="field"><label class="label-required">Titre de la formation</label><input type="text" id="ef-titre_formation" data-key="titre_formation"></div>
+<div class="field"><label class="label-required">Thématique / domaine</label><input type="text" id="ef-thematique" data-key="thematique"></div>
+<div class="field"><label class="">Public cible</label><input type="text" id="ef-public_cible" data-key="public_cible"></div>
+<div class="field"><label class="">Durée souhaitée</label><input type="text" id="ef-duree" data-key="duree"></div>
+<div class="field"><label class="">Objectifs pédagogiques</label><textarea id="ef-objectifs" data-key="objectifs" rows="3"></textarea></div>
+
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Options disponibles</p><div class="action-card" data-option="module_sup" data-price="290" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Module supplémentaire</b><span>Par module au-delà des 5 inclus</span></div><span class="opt-price">+290 EUR</span></div>
+<div class="action-card" data-option="formateur_lfo" data-price="220" onclick="toggleOption(this)"><div class="cb"></div><div style="flex:1"><b>Formateur LFO</b><span>Si vous n&#39;avez pas de formateur</span></div><span class="opt-price">+220 EUR</span></div>
 </div>
   </div>
 
@@ -185,7 +188,7 @@ textarea{resize:vertical;min-height:80px;}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
 <script>
-var FUNNEL = {"id":"nda","demType":"nda","basePrice":290,"totalSteps":4,"title":"Déclaration d'activité NDA","paymentRule":"2x","options":[{"key":"formateur_lfo","label":"Formateur habilité LFO","desc":"Si vous n'avez pas de formateur qualifié","price":220}],"dynamicPricing":null,"extraFields":[]};
+var FUNNEL = {"id":"creation_formation","demType":"creation_formation","basePrice":990,"totalSteps":5,"title":"Création de Formation","paymentRule":"3x","options":[{"key":"module_sup","label":"Module supplémentaire","desc":"Par module au-delà des 5 inclus","price":290},{"key":"formateur_lfo","label":"Formateur LFO","desc":"Si vous n'avez pas de formateur","price":220}],"dynamicPricing":null,"extraFields":[{"key":"titre_formation","label":"Titre de la formation","type":"text","required":true},{"key":"thematique","label":"Thématique / domaine","type":"text","required":true},{"key":"public_cible","label":"Public cible","type":"text","required":false},{"key":"duree","label":"Durée souhaitée","type":"text","required":false},{"key":"objectifs","label":"Objectifs pédagogiques","type":"textarea","required":false}]};
 
 var STATE = { email: '', organisme: null, paymentMode: null, selectedOptions: {}, radioValues: {}, msValues: {} };
 
