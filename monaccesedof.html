@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon Acces EDOF — lesformateurs.online</title>
+<meta name="description" content="Obtenez votre acces EDOF (Mon Compte Formation) en 6 semaines. Habilitations RS/RNCP et site internet inclus si besoin.">
+<link rel="canonical" href="https://lesformateurs.online/monaccesedof">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B6XVYRVT9D');</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #D85A30;
+    --orange-dark: #B8421C;
+    --orange-light: #FFF8F3;
+    --orange-soft: #FFEDE3;
+    --text: #1a1a1a;
+    --text-muted: #6B7280;
+    --text-faded: #9CA3AF;
+    --border: #E5E7EB;
+    --border-light: #F3F4F6;
+    --bg: #FFFFFF;
+    --bg-subtle: #FAFAFA;
+    --green: #10B981;
+    --blue: #3B82F6;
+    --yellow: #F59E0B;
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); background: #F9FAFB; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .header { background: white; border-bottom: 1px solid var(--border); padding: 14px 24px; position: sticky; top: 0; z-index: 50; }
+  .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-size: 18px; font-weight: 700; }
+  .logo span { color: var(--orange); font-weight: 600; }
+  .badge-top { background: #D1FAE5; color: #065F46; font-size: 11px; font-weight: 600; padding: 6px 12px; border-radius: 20px; }
+  .container { max-width: 860px; margin: 0 auto; padding: 32px 24px 80px; }
+  .page-intro { text-align: center; margin-bottom: 32px; }
+  .page-intro h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.3px; }
+  .page-intro p { color: var(--text-muted); font-size: 14px; }
+  .page-intro .price-highlight { color: var(--orange); font-weight: 700; }
+  .card { background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 16px; }
+  .card-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+  .card-num { width: 32px; height: 32px; background: var(--orange); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+  .card-title h3 { font-size: 16px; font-weight: 700; }
+  .card-title p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+  .info-bubble { background: #EFF6FF; border-left: 3px solid var(--blue); padding: 12px 14px; margin-bottom: 16px; font-size: 12px; color: #1E40AF; border-radius: 6px; line-height: 1.5; }
+  label { display: block; font-size: 12px; font-weight: 500; color: var(--text-muted); margin-bottom: 6px; }
+  .label-required::after { content: " *"; color: var(--orange); }
+  .input, input[type=text], input[type=email], input[type=password], input[type=tel], input[type=url], input[type=date] {
+    width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-family: inherit; font-size: 13.5px; background: white; transition: border-color .12s, box-shadow .12s;
+  }
+  .input:focus, input:focus { outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(216, 90, 48, 0.1); }
+  .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .field { margin-bottom: 14px; }
+  .field .hint { font-size: 11px; color: #bbb; margin-top: 3px; }
+  /* SIRET row */
+  .siret-row { display: flex; gap: 10px; }
+  .siret-row input { flex: 1; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 15px; font-family: inherit; background: white; letter-spacing: 1px; }
+  .siret-row input:focus { outline: none; border-color: var(--orange); background: white; }
+  .btn-search { background: #1a1a1a; color: white; border: none; padding: 12px 20px; border-radius: var(--radius); font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; font-family: inherit; }
+  .btn-search:disabled { opacity: 0.5; cursor: not-allowed; }
+  /* Org card */
+  .org-card { border: 1px solid #c0dd97; border-radius: 12px; padding: 18px; margin-top: 16px; display: none; background: #f8fdf6; }
+  .org-card.show { display: block; }
+  .org-card .found { font-size: 11px; color: #1D9E75; font-weight: 500; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+  .org-card .org-name { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .org-card .org-meta { font-size: 12px; color: #666; line-height: 1.6; }
+  .org-card .attrs { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+  .org-card .attr { font-size: 10px; padding: 3px 8px; border-radius: 4px; font-weight: 500; }
+  .org-card .attr.on { background: #E1F5EE; color: #0F6E56; }
+  .org-card .attr.off { background: #f5f4f0; color: #999; }
+  .org-card .sep { height: 1px; background: #e0e0e0; margin: 12px 0; }
+  .org-card .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .org-card .detail { font-size: 11px; }
+  .org-card .detail .dl { color: #999; }
+  .org-card .detail .dv { color: #1a1a1a; font-weight: 500; }
+  /* Action grid */
+  .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .action-card { display: flex; align-items: flex-start; gap: 10px; padding: 14px; border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: all .12s; background: white; user-select: none; }
+  .action-card:hover { border-color: var(--orange); }
+  .action-card.selected { background: var(--orange-light); border-color: var(--orange); }
+  .action-card .cb { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: white; transition: all .12s; }
+  .action-card.selected .cb { background: var(--orange); border-color: var(--orange); }
+  .action-card.selected .cb::after { content: '\2713'; color: white; font-weight: bold; font-size: 11px; line-height: 1; }
+  .action-card b { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .action-card.selected b { color: var(--orange); }
+  .action-card span { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+  .action-card.no-formations { grid-column: 1 / -1; background: #FEF3C7; border-color: #FCD34D; }
+  .action-card.no-formations.selected { background: #FEF3C7; border-color: var(--yellow); }
+  .action-card.no-formations.selected .cb { background: var(--yellow); border-color: var(--yellow); }
+  .action-card.no-formations b { color: #92400E; }
+  .action-card.no-formations span { color: #78350F; }
+  /* Cert search module */
+  .cert-search { position: relative; margin-top: 16px; display: none; }
+  .cert-search.show { display: block; }
+  .cert-search input[type=text] { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; font-family: inherit; background: var(--bg-subtle); }
+  .cert-search input[type=text]:focus { outline: none; border-color: var(--orange); background: white; }
+  .cert-search .results { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid var(--border); border-radius: 0 0 8px 8px; max-height: 200px; overflow-y: auto; z-index: 10; display: none; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .cert-search .results.show { display: block; }
+  .cert-search .result-item { padding: 10px 14px; cursor: pointer; border-bottom: 1px solid var(--border-light); font-size: 12px; }
+  .cert-search .result-item:hover { background: var(--orange-light); }
+  .cert-search .result-item .code { font-weight: 600; color: var(--orange); }
+  .cert-search .result-item .org { color: #999; font-size: 11px; }
+  .cert-added { margin-top: 10px; }
+  .cert-tag { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--border-light); border-radius: 8px; font-size: 12px; margin-top: 6px; background: var(--bg-subtle); }
+  .cert-tag strong { color: var(--orange); }
+  .cert-tag select { font-size: 11px; border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px; background: #fff; font-family: inherit; }
+  .cert-tag .remove { cursor: pointer; color: #E24B4A; font-size: 16px; margin-left: auto; }
+  /* Habil section */
+  .habil-section { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); display: none; }
+  .habil-section.show { display: block; }
+  .hs-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .hs-head h4 { color: var(--orange); font-size: 15px; font-weight: 700; }
+  .hs-head .duration-tag { font-size: 11px; color: var(--text-muted); background: var(--orange-light); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--orange-soft); }
+  .hs-head .price-tag { font-size: 11px; color: white; background: var(--orange); padding: 4px 10px; border-radius: 12px; font-weight: 600; }
+  .hs-sub { font-size: 12.5px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5; }
+  .accordion { display: flex; flex-direction: column; gap: 8px; }
+  .accord-item { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: white; }
+  .accord-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; cursor: pointer; user-select: none; transition: background .12s; }
+  .accord-head:hover { background: var(--bg-subtle); }
+  .accord-item.open .accord-head { background: var(--orange-light); border-bottom: 1px solid var(--orange-soft); }
+  .accord-title { display: flex; align-items: center; gap: 12px; }
+  .accord-icon { width: 36px; height: 36px; background: var(--bg-subtle); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--text-muted); transition: all .12s; }
+  .accord-icon svg { width: 20px; height: 20px; }
+  .accord-item.open .accord-icon { background: var(--orange-soft); color: var(--orange); }
+  .accord-title-text b { font-size: 14px; font-weight: 600; display: block; }
+  .accord-title-text span { font-size: 11px; color: var(--text-muted); }
+  .accord-meta { display: flex; align-items: center; gap: 10px; }
+  .accord-selected-count { font-size: 10.5px; color: var(--orange); background: var(--orange-light); padding: 3px 8px; border-radius: 10px; font-weight: 600; display: none; }
+  .accord-item.has-selected .accord-selected-count { display: inline-flex; }
+  .accord-chevron { color: var(--text-faded); transition: transform .2s; font-size: 11px; }
+  .accord-item.open .accord-chevron { transform: rotate(180deg); color: var(--orange); }
+  .accord-body { display: none; padding: 4px 16px 14px 16px; }
+  .accord-item.open .accord-body { display: block; }
+  .cert-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border-light); cursor: pointer; transition: padding-left .12s; }
+  .cert-row:last-child { border-bottom: none; }
+  .cert-row:hover { padding-left: 4px; }
+  .cert-row input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--orange); flex-shrink: 0; cursor: pointer; }
+  .cert-code { font-size: 11px; font-weight: 700; color: var(--orange); min-width: 72px; }
+  .cert-label { flex: 1; font-size: 12.5px; color: var(--text); line-height: 1.3; }
+  .cert-tag-inline { font-size: 10px; color: var(--text-muted); background: var(--bg-subtle); padding: 3px 8px; border-radius: 10px; white-space: nowrap; }
+  /* Site block */
+  .site-block { display: none; margin-top: 14px; padding: 16px; background: linear-gradient(135deg, #FFF8F3 0%, #FFEDE3 100%); border: 1px solid var(--orange-soft); border-radius: var(--radius); }
+  .site-block.show { display: block; }
+  .site-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 12px; }
+  .site-head-left { flex: 1; }
+  .site-head h5 { font-size: 14px; font-weight: 700; color: var(--orange); margin-bottom: 4px; }
+  .site-head p { font-size: 12px; color: #78350F; line-height: 1.5; }
+  .site-price-block { text-align: right; flex-shrink: 0; }
+  .site-price-block .price { font-size: 20px; font-weight: 700; color: var(--orange); line-height: 1; }
+  .site-price-block .price-sub { font-size: 10.5px; color: var(--text-muted); margin-top: 2px; }
+  .site-features { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+  .site-feature { font-size: 10.5px; background: white; border: 1px solid var(--orange-soft); color: var(--orange-dark); padding: 3px 8px; border-radius: 10px; }
+  .site-toggle { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: white; border: 1px solid var(--orange-soft); border-radius: 8px; cursor: pointer; transition: all .12s; user-select: none; }
+  .site-toggle:hover { border-color: var(--orange); }
+  .site-toggle.selected { background: var(--orange); border-color: var(--orange); }
+  .site-toggle.selected b, .site-toggle.selected span { color: white; }
+  .site-toggle .cb { width: 18px; height: 18px; border: 2px solid white; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: transparent; }
+  .site-toggle:not(.selected) .cb { border-color: var(--orange); }
+  .site-toggle.selected .cb { background: white; border-color: white; }
+  .site-toggle.selected .cb::after { content: '\2713'; color: var(--orange); font-weight: bold; font-size: 11px; }
+  .site-toggle b { font-size: 13px; font-weight: 600; color: var(--text); }
+  .site-toggle span { font-size: 11px; color: var(--text-muted); margin-left: 4px; }
+  .radio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .radio-card { display: flex; align-items: center; gap: 10px; padding: 14px; border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: all .12s; background: white; user-select: none; }
+  .radio-card:hover { border-color: var(--orange); }
+  .radio-card.selected { background: var(--orange-light); border-color: var(--orange); }
+  .radio-card .rb { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: white; transition: all .12s; }
+  .radio-card.selected .rb { border-color: var(--orange); }
+  .radio-card.selected .rb::after { content: ''; width: 8px; height: 8px; background: var(--orange); border-radius: 50%; }
+  .radio-card span { font-size: 13px; font-weight: 500; }
+  .url-field { display: none; margin-top: 12px; }
+  .url-field.show { display: block; }
+  .summary { background: linear-gradient(135deg, var(--orange-light) 0%, #FFEDE3 100%); border: 1px solid var(--orange-soft); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 16px; }
+  .summary h3 { font-size: 14px; font-weight: 700; color: var(--orange-dark); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 12px; }
+  .summary-lines { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .summary-line { display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding: 8px 0; border-bottom: 1px dashed rgba(216, 90, 48, 0.2); }
+  .summary-line:last-child { border-bottom: none; }
+  .summary-line .label { color: var(--text); font-weight: 500; }
+  .summary-line .count { font-size: 11px; color: var(--text-muted); margin-left: 4px; }
+  .summary-line .amount { font-weight: 600; color: var(--text); }
+  .summary-total { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 2px solid var(--orange); }
+  .summary-total .label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600; }
+  .summary-total .amount { font-size: 28px; font-weight: 700; color: var(--orange); }
+  .payment-modes { display: flex; flex-direction: column; gap: 8px; }
+  .payment-option { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: all .12s; background: white; user-select: none; }
+  .payment-option:hover:not(.disabled) { border-color: var(--orange); }
+  .payment-option.selected { background: var(--orange-light); border-color: var(--orange); }
+  .payment-option.disabled { opacity: 0.45; cursor: not-allowed; background: var(--bg-subtle); }
+  .payment-option-left { display: flex; align-items: center; gap: 12px; }
+  .payment-option .rb { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: white; }
+  .payment-option.selected .rb { border-color: var(--orange); }
+  .payment-option.selected .rb::after { content: ''; width: 8px; height: 8px; background: var(--orange); border-radius: 50%; }
+  .payment-option-title { font-size: 13px; font-weight: 600; }
+  .payment-option-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .payment-option-amount { font-size: 14px; font-weight: 700; color: var(--text); }
+  .payment-option.selected .payment-option-amount { color: var(--orange); }
+  .btn-submit { width: 100%; padding: 16px; background: var(--orange); color: white; border: none; border-radius: var(--radius); font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; transition: all .15s; margin-top: 20px; box-shadow: 0 4px 12px rgba(216, 90, 48, 0.2); }
+  .btn-submit:hover { background: var(--orange-dark); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(216, 90, 48, 0.3); }
+  .btn-submit:disabled { background: #D1D5DB; cursor: not-allowed; transform: none; box-shadow: none; }
+  .virement-info { display: none; margin-top: 14px; padding: 14px; background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: var(--radius); font-size: 12px; color: #1E40AF; line-height: 1.6; }
+  .virement-info.show { display: block; }
+  .virement-info b { display: block; margin-bottom: 6px; }
+  .virement-info .iban { font-family: 'SF Mono', Monaco, Consolas, monospace; font-size: 12.5px; background: white; padding: 8px 10px; border-radius: 6px; margin-top: 6px; border: 1px solid #BFDBFE; }
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1a1a1a; color: white; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 500; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 200; }
+  .toast.show { opacity: 1; }
+  .premium-block{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:16px;color:#fff;position:relative;overflow:hidden;}
+  .premium-block::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(255,215,0,.15) 0%,transparent 70%);border-radius:50%;}
+  .premium-block .pm-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+  .premium-block h4{font-size:16px;font-weight:700;margin-bottom:4px;}
+  .premium-block .pm-sub{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:14px;}
+  .premium-block .pm-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .premium-block .pm-saving{font-size:22px;font-weight:800;color:#FFD700;}
+  .premium-block .pm-saving small{font-size:12px;font-weight:500;color:rgba(255,255,255,.6);display:block;}
+  .premium-block .pm-btn{background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;border:none;padding:10px 20px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s;}
+  .premium-block .pm-btn:hover{opacity:.9;}
+  .premium-block.is-member{background:linear-gradient(135deg,#0f3d0f 0%,#1a4a1a 100%);}
+  .premium-block.is-member .pm-badge{background:linear-gradient(135deg,#10B981,#059669);color:#fff;}
+  @media (max-width: 640px) {
+    .action-grid { grid-template-columns: 1fr; }
+    .radio-grid { grid-template-columns: 1fr; }
+    .input-group { grid-template-columns: 1fr; }
+    .container { padding: 20px 16px 60px; }
+    .page-intro h1 { font-size: 22px; }
+    .summary-total .amount { font-size: 22px; }
+    .org-card .detail-grid { grid-template-columns: 1fr; }
+    .premium-block .pm-row{flex-direction:column;align-items:flex-start;}
+    .steps-nav{flex-wrap:nowrap;overflow-x:auto;}
+  }
+  .steps-nav{display:flex;gap:6px;flex-wrap:wrap;max-width:860px;margin:0 auto;padding:0 24px 16px;border-bottom:1px solid var(--border);}
+  .step-pill{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:white;color:var(--text-muted);transition:all .2s;font-family:inherit;white-space:nowrap;}
+  .step-pill.active{background:var(--orange);color:white;border-color:var(--orange);}
+  .step-pill .step-num{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;}
+  .step-pill.active .step-num{background:rgba(255,255,255,.25);color:white;}
+  .step-pill:not(.active):not(.completed) .step-num{background:#F3F4F6;color:#9CA3AF;}
+  .step-pill.completed{background:#F3F4F6;color:#9CA3AF;border-color:#F3F4F6;opacity:.5;cursor:default;pointer-events:none;}
+  .step-pill.completed .step-num{background:#E5E7EB;color:#9CA3AF;}
+  .step-content{display:none;}
+  .step-content.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  .step-placeholder{padding:60px 24px;text-align:center;max-width:860px;margin:0 auto;}
+  .step-placeholder .sph-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px;font-weight:800;}
+  .step-placeholder h3{font-size:22px;font-weight:800;margin-bottom:8px;letter-spacing:-.3px;}
+  .step-placeholder p{font-size:14px;color:var(--text-muted);max-width:440px;margin:0 auto;line-height:1.6;}
+  .step-placeholder .sph-badge{display:inline-block;margin-top:20px;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600;background:#FEF3C7;color:#92400E;}
+  @keyframes sphPulse{0%,100%{opacity:.4}50%{opacity:1}}
+  .sph-dots{display:flex;gap:6px;justify-content:center;margin-top:20px;}
+  .sph-dots span{width:8px;height:8px;border-radius:50%;background:var(--orange);animation:sphPulse 1.4s infinite;}
+  .sph-dots span:nth-child(2){animation-delay:.2s;}
+  .sph-dots span:nth-child(3){animation-delay:.4s;}
+  /* EDOF Form styles */
+  .ef-stepper{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:28px;flex-wrap:wrap;}
+  .ef-step-btn{display:flex;flex-direction:column;align-items:center;gap:6px;border:none;background:transparent;cursor:pointer;padding:8px 14px;font-family:inherit;}
+  .ef-step-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+  .ef-step-circle.active{box-shadow:0 3px 12px rgba(216,90,48,.27);}
+  .ef-step-label{font-size:11px;color:#999;}
+  .ef-step-label.active{font-weight:700;color:#D85A30;}
+  .ef-step-line{width:36px;height:2px;background:#eee;border-radius:2px;transition:background .3s;}
+  .ef-step-line.done{background:#4CAF50;}
+  .ef-accord{border:1px solid #f0f0f0;border-radius:8px;margin-bottom:12px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .ef-accord-head{width:100%;padding:14px 18px;display:flex;align-items:center;gap:12px;border:none;background:transparent;cursor:pointer;font-size:15px;font-weight:600;color:#1a1a1a;font-family:inherit;text-align:left;}
+  .ef-accord-head .arr{transition:transform .2s;font-size:18px;flex-shrink:0;margin-left:auto;}
+  .ef-accord-body{padding:0 18px 18px;border-top:1px solid #f0f0f0;display:none;}
+  .ef-accord.open .ef-accord-body{display:block;}
+  .ef-accord.open .arr{transform:rotate(180deg);}
+  .ef-fg{display:flex;flex-direction:column;gap:18px;margin-top:14px;}
+  .ef-lbl{display:block;margin-bottom:6px;font-weight:600;font-size:14px;color:#1a1a1a;}
+  .ef-lbl .req{color:#D85A30;margin-left:4px;}
+  .ef-input{width:100%;padding:10px 14px;font-size:14px;border:1.5px solid #e0e0e0;border-radius:8px;background:#FAFAFA;color:#1a1a1a;outline:none;transition:border .2s,box-shadow .2s;box-sizing:border-box;font-family:inherit;}
+  .ef-input:focus{border-color:#D85A30;box-shadow:0 0 0 3px rgba(216,90,48,.08);}
+  .ef-select{width:100%;padding:10px 14px;font-size:14px;border:1.5px solid #e0e0e0;border-radius:8px;background:#FAFAFA;color:#1a1a1a;outline:none;font-family:inherit;cursor:pointer;box-sizing:border-box;}
+  .ef-textarea{width:100%;padding:10px 14px;font-size:14px;border:1.5px solid #e0e0e0;border-radius:8px;background:#FAFAFA;color:#1a1a1a;resize:vertical;outline:none;box-sizing:border-box;font-family:inherit;}
+  .ef-textarea:focus,.ef-select:focus{border-color:#D85A30;}
+  .ef-row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .ef-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+  .ef-alert{padding:12px 16px;background:rgba(216,90,48,.05);border-radius:8px;border-left:3px solid #D85A30;font-size:13px;color:#666;line-height:1.6;display:flex;gap:10px;align-items:flex-start;}
+  .ef-hint{font-size:11px;color:#999;margin-top:4px;}
+  .ef-upload{border:2px dashed #e0e0e0;border-radius:8px;padding:20px;text-align:center;cursor:pointer;background:#FAFAFA;transition:border .2s;}
+  .ef-upload:hover{border-color:#D85A30;}
+  .ef-upload input[type=file]{display:none;}
+  .ef-nav{display:flex;justify-content:space-between;margin-top:36px;gap:12px;}
+  .ef-btn-prev{padding:12px 28px;border:1.5px solid #f0f0f0;border-radius:8px;background:transparent;color:#1a1a1a;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
+  .ef-btn-next{padding:12px 28px;border:none;border-radius:8px;background:#D85A30;color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 3px 12px rgba(216,90,48,.27);}
+  .ef-btn-next.final{background:#4CAF50;box-shadow:0 3px 12px rgba(76,175,80,.27);}
+  .ef-btn-verif{padding:10px 16px;background:#D85A30;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;}
+  .ef-help{background:#F0F7FF;border:1px solid #BFDBFE;border-radius:8px;padding:14px 16px;margin:12px 0;font-size:12px;line-height:1.7;color:#1E40AF;}
+  .ef-help b{color:#1E3A5F;}
+  .ef-help a{color:#D85A30;text-decoration:underline;}
+  .ef-help ul{margin:6px 0 0 16px;padding:0;}
+  .ef-help li{margin-bottom:4px;}
+  .ef-help-toggle{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #BFDBFE;background:#F0F7FF;color:#1E40AF;margin:8px 0;font-family:inherit;}
+  .ef-help-toggle:hover{background:#E0EFFF;}
+  .ef-stat{display:inline-block;background:#E8FAF0;color:#065F46;font-size:11px;font-weight:600;padding:3px 10px;border-radius:12px;margin:2px;}
+  .ef-example{background:#FEFCE8;border-left:3px solid #F59E0B;border-radius:6px;padding:10px 14px;margin:8px 0;font-size:12px;color:#713F12;line-height:1.6;}
+  .ef-example b{color:#92400E;}
+  .ef-error{background:#FEF2F2;border-left:3px solid #EF4444;border-radius:6px;padding:8px 14px;margin:4px 0;font-size:12px;color:#991B1B;line-height:1.5;}
+  @media(max-width:640px){.ef-row2,.ef-row3{grid-template-columns:1fr;}.ef-stepper{gap:0;}.ef-step-btn{padding:6px 8px;}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo" style="text-decoration:none;color:var(--text);">les<span>formateurs</span>.online</a>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="badge-top">Mon Acces EDOF</span>
+      <a href="#" id="btn-login" style="display:none;" onclick="return false;">Connexion</a>
+      <a href="dashboard.html" id="btn-compte" style="display:none;background:#1a1a1a;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;">Mon compte</a>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="page-intro">
+    <h1>Obtenez votre acces EDOF</h1>
+    <p>Acces Mon Compte Formation a partir de <span class="price-highlight">490 EUR</span> — 6 semaines en moyenne</p>
+  </div>
+
+  <!-- Stepper pills -->
+  <div class="steps-nav">
+    <div class="step-pill active" onclick="switchStep(0)"><span class="step-num">1</span> Configuration</div>
+    <div class="step-pill" onclick="switchStep(1)"><span class="step-num">2</span> Formulaire</div>
+    <div class="step-pill" onclick="switchStep(2)"><span class="step-num">3</span> D&eacute;p&ocirc;t du dossier</div>
+    <div class="step-pill" onclick="switchStep(3)"><span class="step-num">4</span> Webinaire</div>
+    <div class="step-pill" onclick="switchStep(4)"><span class="step-num">5</span> Termin&eacute;e</div>
+  </div>
+
+  <!-- Step 0: Configuration -->
+  <div class="step-content active" id="step-0">
+
+  <!-- BLOC 0 — Admin only -->
+  <div class="card admin-block" id="admin-block" style="display:none;border:2px solid #7F77DD;">
+    <div class="card-head"><div class="card-num" style="background:#7F77DD;">0</div><div class="card-title"><h3>Gestion admin</h3><p>Visible uniquement pour les administrateurs</p></div></div>
+
+    <div id="admin-premium-toggle" style="display:none;margin-bottom:14px;padding:10px 14px;background:#FAEEDA;border:1px solid rgba(201,168,76,.2);border-radius:8px;">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;font-weight:600;color:#854F0B;">
+        <input type="checkbox" checked onchange="STATE.isPremium=this.checked;renderPremiumBlock();refreshSummary();" style="accent-color:#C9A84C;width:16px;height:16px;">
+        Appliquer la reduction Premium (-10%)
+      </label>
+    </div>
+
+    <div style="margin-bottom:18px;">
+      <label style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:10px;">Statut du paiement</label>
+      <div class="action-grid" style="grid-template-columns:1fr 1fr 1fr;">
+        <div class="action-card" data-admpay="en_attente" onclick="selectAdminPay(this,'en_attente')"><div class="cb"></div><div><b>En attente de paiement</b></div></div>
+        <div class="action-card" data-admpay="paid_offline" onclick="selectAdminPay(this,'paid_offline')"><div class="cb"></div><div><b>Paye hors plate-forme</b></div></div>
+        <div class="action-card" data-admpay="offert" onclick="selectAdminPay(this,'offert')"><div class="cb"></div><div><b>Prestation offerte</b></div></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:18px;">
+      <label style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:10px;">Compte client</label>
+      <div class="action-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="action-card selected" data-admacct="existing" onclick="selectAdminAcct(this,'existing')"><div class="cb"></div><div><b>Compte existant</b></div></div>
+        <div class="action-card" data-admacct="new" onclick="selectAdminAcct(this,'new')"><div class="cb"></div><div><b>Nouveau compte</b></div></div>
+      </div>
+    </div>
+
+    <div id="admin-existing" style="margin-top:14px;">
+      <div class="field">
+        <label class="label-required">Rechercher le client par email</label>
+        <div class="siret-row">
+          <input type="email" id="admin-search-email" placeholder="client@email.com">
+          <button class="btn-search" onclick="adminSearchUser()">Rechercher</button>
+        </div>
+      </div>
+      <div id="admin-user-found" style="display:none;border:1px solid #c0dd97;border-radius:12px;padding:14px;background:#f8fdf6;margin-top:10px;">
+        <div style="font-size:11px;color:#1D9E75;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Client trouve</div>
+        <div id="admin-user-info" style="font-size:14px;font-weight:600;"></div>
+      </div>
+      <div id="admin-user-notfound" style="display:none;border:1px solid #FCD34D;border-radius:12px;padding:14px;background:#FEF3C7;margin-top:10px;font-size:13px;color:#92400E;">Aucun compte trouve avec cet email.</div>
+    </div>
+
+    <div id="admin-new" style="display:none;margin-top:14px;">
+      <div class="input-group"><div><label class="label-required">Prenom</label><input type="text" id="admin-fn" placeholder="Jean"></div><div><label class="label-required">Nom</label><input type="text" id="admin-ln" placeholder="Dupont"></div></div>
+      <div class="field"><label class="label-required">Email</label><input type="email" id="admin-email" placeholder="client@email.com"></div>
+      <div class="field"><label>Telephone</label><input type="tel" id="admin-phone" placeholder="06 12 34 56 78"></div>
+      <div class="field"><label class="label-required">Mot de passe</label><input type="password" id="admin-password" placeholder="Minimum 8 caracteres" minlength="8"></div>
+      <div class="field">
+        <label class="label-required">Profil</label>
+        <select id="admin-profil" style="width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:var(--radius);font-family:inherit;font-size:13.5px;">
+          <option value="">— Choisir —</option>
+          <option value="formateur_independant">Formateur independant</option>
+          <option value="organisme_formation">Organisme de formation</option>
+          <option value="porteur_projet">Porteur de projet</option>
+          <option value="demandeur_emploi">Demandeur d'emploi</option>
+          <option value="association">Association</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 1 — Identification -->
+  <div class="card" id="step-identification">
+    <div class="card-head"><div class="card-num">1</div><div class="card-title"><h3>Votre compte</h3><p>Saisissez votre email pour vous identifier</p></div></div>
+
+    <!-- Not logged in -->
+    <div id="auth-not-connected">
+      <div class="field">
+        <label class="label-required">Votre adresse email</label>
+        <div class="siret-row">
+          <input type="email" id="auth-email-input" placeholder="votre@email.fr" style="flex:1;">
+          <button class="btn-search" onclick="checkEmailAndAuth()">Continuer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logged in -->
+    <div id="auth-connected" style="display:none;">
+      <div style="border:1px solid #c0dd97;border-radius:12px;padding:16px;background:#f8fdf6;margin-bottom:16px;">
+        <div style="font-size:11px;color:#1D9E75;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Connecte</div>
+        <div style="font-size:16px;font-weight:600;" id="auth-user-name"></div>
+        <div style="font-size:13px;color:#666;margin-top:2px;" id="auth-user-email"></div>
+      </div>
+      <div class="field">
+        <label class="label-required">SIRET de votre organisme</label>
+        <div class="siret-row">
+          <input type="text" id="siret-input" placeholder="14 chiffres" maxlength="14">
+          <button class="btn-search" id="btn-search" onclick="searchSiret()">Rechercher</button>
+        </div>
+      </div>
+      <div class="org-card" id="org-card">
+        <div class="found">Organisme trouve</div>
+        <div class="org-name" id="o-name"></div>
+        <div class="org-meta" id="o-meta"></div>
+        <div class="attrs" id="o-attrs"></div>
+      <div class="sep"></div>
+      <div class="detail-grid" id="o-details"></div>
+    </div>
+    </div><!-- /auth-connected -->
+  </div><!-- /step-identification -->
+
+  <!-- STEP 2 — Actions + certifications search + accordion -->
+  <div class="card">
+    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Quels types de formations souhaitez-vous proposer sur EDOF ?</h3><p>Selectionnez une ou plusieurs categories</p></div></div>
+    <div class="info-bubble">L'acces EDOF necessite au minimum une habilitation RS/RNCP, une certification RS/RNCP, et/ou une activite de bilan de competences ou de VAE.</div>
+    <div class="action-grid">
+      <div class="action-card" data-type="habilitation" onclick="toggleAction(this)"><div class="cb"></div><div><b>Habilitation RS/RNCP</b><span>Vous formez sur un titre existant</span></div></div>
+      <div class="action-card" data-type="certification" onclick="toggleAction(this)"><div class="cb"></div><div><b>Certification RS/RNCP</b><span>Vous etes le certificateur</span></div></div>
+      <div class="action-card" data-type="bilan" onclick="toggleAction(this)"><div class="cb"></div><div><b>Bilan de competences</b><span>Mention requise sur le Qualiopi</span></div></div>
+      <div class="action-card" data-type="vae" onclick="toggleAction(this)"><div class="cb"></div><div><b>VAE</b><span>Mention requise sur le Qualiopi</span></div></div>
+      <div class="action-card" data-type="permis" onclick="toggleAction(this)"><div class="cb"></div><div><b>Permis de conduire</b><span>Pour les auto-ecoles</span></div></div>
+      <div class="action-card no-formations" data-type="aucune" onclick="toggleNoFormations(this)"><div class="cb"></div><div><b>Je n'ai aucune de ces formations</b><span>Decouvrez les habilitations RS/RNCP disponibles ci-dessous</span></div></div>
+    </div>
+
+    <!-- MODE A : J'ai deja mes habilitations/certifications (pas de surcoût) -->
+    <div id="edof-existing-certs" style="display:none;margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+      <h4 style="font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px;">Vos habilitations / certifications existantes</h4>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">Recherchez et ajoutez les RS/RNCP que vous possedez deja. Un justificatif sera demande pour chacune.</p>
+      <div style="position:relative;margin-bottom:12px;">
+        <input type="text" id="edof-exist-search" placeholder="Rechercher par code (RS1234, RNCP5678) ou intitule..." style="width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;" oninput="edofSearchExisting(this.value)">
+        <div id="edof-exist-results" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:0 0 10px 10px;max-height:200px;overflow-y:auto;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,.06);"></div>
+      </div>
+      <div id="edof-exist-list"></div>
+    </div>
+
+    <!-- MODE B : Je n'ai aucune formation (avec pricing + recherche IA) -->
+    <div id="edof-no-formations" style="display:none;margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+      <h4 style="font-size:15px;font-weight:700;color:#D85A30;margin-bottom:4px;">Recherche d'habilitation</h4>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">Trouvez la certification RS/RNCP adapt&eacute;e &agrave; votre activit&eacute;. Nous montons le dossier pour vous.</p>
+
+      <!-- Onglets -->
+      <div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border);">
+        <div id="hab-tab-btn-ia" onclick="switchHabTab('ia')" style="padding:10px 20px;font-size:13px;font-weight:500;color:#D85A30;cursor:pointer;border-bottom:2px solid #D85A30;">Recherche par IA</div>
+        <div id="hab-tab-btn-cat" onclick="switchHabTab('cat')" style="padding:10px 20px;font-size:13px;font-weight:500;color:#9CA3AF;cursor:pointer;border-bottom:2px solid transparent;">Parcourir le catalogue</div>
+      </div>
+
+      <!-- Onglet Recherche IA -->
+      <div id="hab-tab-ia" style="padding:16px;background:#F9FAFB;border-radius:8px;margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;"><circle cx="8" cy="8" r="6" stroke="#D85A30" stroke-width="1"/><path d="M8 5v3M6.5 10h3" stroke="#D85A30" stroke-width="0.8" stroke-linecap="round"/></svg>
+          <span style="font-size:13px;font-weight:500;">D&eacute;crivez votre activit&eacute; de formation</span>
+        </div>
+        <textarea id="edof-ia-query" placeholder="Ex: Je forme des professionnels au coaching en entreprise, &agrave; la gestion du stress et au leadership..." style="width:100%;min-height:80px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;resize:vertical;margin-bottom:8px;font-family:inherit;"></textarea>
+        <button onclick="edofIASearch()" style="width:100%;padding:10px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">Rechercher par IA</button>
+        <div id="edof-ia-results" style="margin-top:12px;"></div>
+      </div>
+
+      <!-- Onglet Catalogue -->
+      <div id="hab-tab-cat" style="display:none;margin-bottom:16px;">
+        <div style="display:flex;gap:8px;margin-bottom:12px;">
+          <input type="text" id="edof-new-search" placeholder="Rechercher par code RS/RNCP ou mot-cl&eacute;..." style="flex:1;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;" oninput="edofFilterCerts()">
+          <button onclick="edofFilterCerts()" style="padding:10px 18px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">Rechercher</button>
+        </div>
+      </div>
+
+      <!-- Filtres (communs) -->
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+        <select id="edof-filter-domain" onchange="edofFilterCerts()" style="padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:inherit;background:#fff;flex:1;min-width:150px;">
+          <option value="">Tous les domaines</option>
+        </select>
+        <select id="edof-filter-level" onchange="edofFilterCerts()" style="padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:inherit;background:#fff;">
+          <option value="">Tous niveaux</option>
+          <option value="RS">RS uniquement</option>
+          <option value="RNCP3-4">RNCP 3-4 (CAP/Bac)</option>
+          <option value="RNCP5-6">RNCP 5-6 (BTS/Licence)</option>
+          <option value="RNCP7-8">RNCP 7-8 (Master+)</option>
+        </select>
+        <select id="edof-filter-sort" onchange="edofFilterCerts()" style="padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:inherit;background:#fff;">
+          <option value="cheap">Moins cher d'abord</option>
+          <option value="expensive">Plus cher d'abord</option>
+          <option value="alpha">A-Z</option>
+        </select>
+      </div>
+
+      <div id="edof-new-list" style="max-height:400px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--radius);"></div>
+      <div id="edof-new-selected" style="margin-top:12px;"></div>
+    </div>
+  </div>
+
+  <!-- STEP 3 — Site internet -->
+  <div class="card">
+    <div class="card-head"><div class="card-num">3</div><div class="card-title"><h3>Avez-vous un site internet pour votre organisme ?</h3><p>Un site professionnel est recommande pour valider EDOF</p></div></div>
+    <div class="radio-grid">
+      <div class="radio-card" onclick="setSite('oui')"><div class="rb"></div><span>Oui</span></div>
+      <div class="radio-card" onclick="setSite('non')"><div class="rb"></div><span>Non</span></div>
+    </div>
+    <div class="url-field" id="url-field"><label class="label-required">URL de votre site</label><input type="url" id="site-url" placeholder="https://monorganisme.fr"></div>
+    <div class="site-block" id="site-block">
+      <div class="site-head"><div class="site-head-left"><h5>Creez votre site professionnel avec LFO</h5><p>Sans site, EDOF peut refuser votre dossier. Nous vous proposons un site vitrine complet.</p></div><div class="site-price-block"><div class="price">990 EUR</div><div class="price-sub">ou 3 x 330 EUR</div></div></div>
+      <div class="site-features"><span class="site-feature">Vitrine 3-5 pages</span><span class="site-feature">Design responsive</span><span class="site-feature">Mentions legales + CGV</span><span class="site-feature">Livret d'accueil</span><span class="site-feature">Hebergement 1 an</span></div>
+      <div class="site-toggle" id="site-toggle" onclick="toggleSiteOffer()"><div class="cb"></div><b>Ajouter le site a ma commande</b><span>(+ 990 EUR)</span></div>
+    </div>
+  </div>
+
+  <!-- Hidden fields for auth data -->
+  <input type="hidden" id="first-name"><input type="hidden" id="last-name"><input type="hidden" id="email"><input type="hidden" id="phone"><input type="hidden" id="password"><input type="hidden" id="client-email">
+
+  <!-- Bloc Premium -->
+  <div class="premium-block" id="premium-block" style="display:none;">
+    <div id="premium-content"></div>
+  </div>
+
+  <!-- Recapitulatif -->
+  <div class="summary">
+    <h3>Recapitulatif de votre commande</h3>
+    <div class="summary-lines" id="summary-lines"><div class="summary-line"><span class="label">Acces EDOF <span class="count">(inclus)</span></span><span class="amount">490 EUR</span></div></div>
+    <div class="summary-total"><span class="label">Total a payer</span><span class="amount" id="total-amount">490 EUR</span></div>
+  </div>
+
+  <div class="card" id="payment-card">
+    <div class="card-head"><div class="card-num">4</div><div class="card-title"><h3>Mode de paiement</h3><p>Securise par Stripe — 3x sans frais disponible selon options</p></div></div>
+    <div class="payment-modes" id="payment-modes"></div>
+    <div class="virement-info" id="virement-info"><b>Paiement par virement bancaire</b>Apres validation, vous recevrez les informations bancaires par email.<div class="iban"><b>Beneficiaire :</b> Experience Prod SASU<br><b>IBAN :</b> FR76 1695 8000 0120 5470 6950 597</div></div>
+  </div>
+
+  <button class="btn-submit" id="submit-btn" onclick="submitForm()">Creer mon compte et finaliser la commande</button>
+
+  </div><!-- /step-0 -->
+
+  <!-- Step 1: Guide Formulaire EDOF -->
+  <div class="step-content" id="step-1">
+    <div style="max-width:820px;margin:0 auto;padding:20px 0;">
+
+      <!-- Title + Download -->
+      <div style="text-align:center;margin-bottom:20px;">
+        <h2 style="font-size:22px;font-weight:700;margin-bottom:6px;">Guide du formulaire EDOF</h2>
+        <p style="font-size:13px;color:#666;max-width:560px;margin:0 auto;line-height:1.6;margin-bottom:16px;">Suivez ce guide section par section pour remplir votre demande de r&eacute;f&eacute;rencement. Notre IA pr&eacute;-remplira le formulaire pour vous.</p>
+        <a href="docs/formulaire-edof.html" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#1a1a1a;color:#fff;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          T&eacute;l&eacute;charger le formulaire vierge (PDF)
+        </a>
+      </div>
+
+      <!-- Sub-stepper -->
+      <div class="ef-stepper" id="ef-stepper"></div>
+
+      <!-- Sub-step contents -->
+      <div id="ef-content"></div>
+
+      <!-- Nav -->
+      <div class="ef-nav">
+        <button class="ef-btn-prev" id="ef-prev" onclick="efPrev()">&larr; Pr&eacute;c&eacute;dent</button>
+        <button class="ef-btn-next" id="ef-next" onclick="efNext()">Suivant &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2: Dépôt -->
+  <div class="step-content" id="step-2">
+    <div style="max-width:700px;margin:0 auto;padding:40px 20px;">
+      <div style="text-align:center;margin-bottom:32px;">
+        <svg viewBox="0 0 200 160" fill="none" style="width:200px;margin:0 auto;">
+          <rect x="40" y="35" width="120" height="90" rx="6" fill="#FFF8F3" stroke="#D85A30" stroke-width="1.5"/>
+          <path d="M40 50h120" stroke="#D85A30" stroke-width="1" opacity="0.3"/>
+          <rect x="40" y="30" width="50" height="20" rx="4" fill="#FAECE7" stroke="#D85A30" stroke-width="1.5"/>
+          <rect x="55" y="58" width="40" height="52" rx="3" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+          <rect x="60" y="64" width="20" height="2" rx="1" fill="#D85A30" opacity="0.6"/>
+          <rect x="60" y="70" width="30" height="1.5" rx="0.75" fill="#E5E7EB"/>
+          <rect x="60" y="75" width="25" height="1.5" rx="0.75" fill="#E5E7EB"/>
+          <rect x="60" y="80" width="28" height="1.5" rx="0.75" fill="#E5E7EB"/>
+          <circle cx="85" cy="100" r="7" fill="#1D9E75"/>
+          <path d="M82 100l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="105" y="55" width="40" height="52" rx="3" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+          <rect x="110" y="61" width="20" height="2" rx="1" fill="#378ADD" opacity="0.6"/>
+          <rect x="110" y="67" width="30" height="1.5" rx="0.75" fill="#E5E7EB"/>
+          <rect x="110" y="72" width="25" height="1.5" rx="0.75" fill="#E5E7EB"/>
+          <circle cx="135" cy="97" r="7" fill="#C9A84C"/>
+          <path d="M135 94v3h2.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="100" cy="138" r="12" fill="#D85A30" opacity="0.1"/>
+          <path d="M100 145v-14M94 137l6-6 6 6" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3 style="font-size:22px;font-weight:700;text-align:center;margin-bottom:8px;">D&eacute;p&ocirc;t du dossier</h3>
+      <p style="font-size:14px;color:#6B7280;text-align:center;line-height:1.7;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto;">Veuillez saisir l'ensemble des documents &agrave; contr&ocirc;ler ou &agrave; cr&eacute;er. Vos documents sont v&eacute;rifi&eacute;s ou cr&eacute;&eacute;s sous <strong style="color:#D85A30;">24 heures</strong>.</p>
+      <div style="border:2px dashed #E5E7EB;border-radius:12px;padding:32px;text-align:center;margin-bottom:24px;cursor:pointer;background:#FAFAFA;transition:all .3s;" id="dropzone-edof" ondragover="this.style.borderColor='#D85A30';this.style.background='#FFF8F3';event.preventDefault();" ondragleave="this.style.borderColor='#E5E7EB';this.style.background='#FAFAFA';" ondrop="edofHandleDrop(event)" onclick="document.getElementById('file-input-edof').click();">
+        <svg viewBox="0 0 24 24" fill="none" style="width:32px;margin:0 auto 12px;display:block;"><path d="M12 16V4M12 4l-4 4M12 4l4 4" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <p style="font-size:14px;font-weight:600;margin-bottom:4px;">Glissez vos documents ici</p>
+        <p style="font-size:12px;color:#9CA3AF;">ou cliquez pour s&eacute;lectionner &mdash; PDF, JPG, PNG (max 10 Mo)</p>
+        <input type="file" id="file-input-edof" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display:none;" onchange="edofHandleFiles(this.files)">
+      </div>
+      <div id="uploaded-docs-list" style="margin-bottom:24px;"></div>
+      <button id="btn-submit-docs" style="display:none;width:100%;padding:14px;background:#D85A30;color:white;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;" onclick="edofSubmitDocs()">Soumettre mes documents pour v&eacute;rification</button>
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:14px;background:#E1F5EE;border-radius:10px;margin-top:16px;">
+        <svg viewBox="0 0 16 16" fill="none" style="width:16px;flex-shrink:0;margin-top:2px;"><circle cx="8" cy="8" r="7" stroke="#1D9E75" stroke-width="1"/><path d="M8 5v3h2.5" stroke="#1D9E75" stroke-width="1" stroke-linecap="round"/></svg>
+        <div><p style="font-size:12px;font-weight:600;color:#085041;margin-bottom:2px;">D&eacute;lai de traitement : 24 heures</p><p style="font-size:11px;color:#0F6E56;line-height:1.5;">Nos experts v&eacute;rifient la conformit&eacute; de chaque document. Les documents manquants ou incorrects sont cr&eacute;&eacute;s ou corrig&eacute;s pour vous.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3: Webinaire -->
+  <div class="step-content" id="step-3">
+    <div style="max-width:700px;margin:0 auto;padding:40px 20px;">
+      <div style="text-align:center;margin-bottom:32px;">
+        <svg viewBox="0 0 240 180" fill="none" style="width:240px;margin:0 auto;">
+          <rect x="35" y="15" width="170" height="110" rx="8" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+          <rect x="42" y="22" width="156" height="96" rx="4" fill="#0F172A"/>
+          <rect x="48" y="28" width="72" height="52" rx="3" fill="#1E293B"/>
+          <circle cx="84" cy="46" r="10" fill="#D85A30" opacity="0.2"/><circle cx="84" cy="43" r="6" fill="#FAECE7"/><rect x="76" y="52" width="16" height="10" rx="3" fill="#FAECE7"/>
+          <circle cx="70" cy="72" r="4" fill="#1D9E75"/><rect x="69" y="68" width="2" height="4" rx="1" fill="white"/>
+          <rect x="78" y="70" width="30" height="6" rx="3" fill="rgba(255,255,255,0.1)"/>
+          <rect x="124" y="28" width="68" height="24" rx="3" fill="#1E293B"/><circle cx="148" cy="37" r="5" fill="#378ADD" opacity="0.3"/><circle cx="148" cy="36" r="3.5" fill="#E6F1FB"/><rect x="144" y="41" width="8" height="5" rx="2" fill="#E6F1FB"/>
+          <rect x="124" y="56" width="68" height="24" rx="3" fill="#1E293B"/><circle cx="148" cy="65" r="5" fill="#1D9E75" opacity="0.3"/><circle cx="148" cy="64" r="3.5" fill="#E1F5EE"/><rect x="144" y="69" width="8" height="5" rx="2" fill="#E1F5EE"/>
+          <rect x="48" y="84" width="36" height="28" rx="3" fill="#1E293B" stroke="#D85A30" stroke-width="1"/><circle cx="66" cy="93" r="4" fill="#D85A30" opacity="0.2"/><circle cx="66" cy="92" r="3" fill="#FAECE7"/><rect x="63" y="96" width="6" height="4" rx="2" fill="#FAECE7"/><rect x="54" y="106" width="16" height="4" rx="2" fill="#D85A30" opacity="0.6"/>
+          <rect x="88" y="84" width="36" height="28" rx="3" fill="#1E293B"/><circle cx="106" cy="93" r="4" fill="#C9A84C" opacity="0.3"/><circle cx="106" cy="92" r="3" fill="#FAEEDA"/>
+          <rect x="128" y="84" width="36" height="28" rx="3" fill="#1E293B"/><circle cx="146" cy="93" r="4" fill="#534AB7" opacity="0.3"/><circle cx="146" cy="92" r="3" fill="#EEEDFE"/>
+          <rect x="168" y="84" width="24" height="28" rx="3" fill="#1E293B"/><rect x="171" y="88" width="18" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/><rect x="171" y="93" width="14" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/><rect x="171" y="98" width="16" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/><rect x="171" y="103" width="18" height="5" rx="2.5" fill="#D85A30" opacity="0.3"/>
+          <rect x="100" y="125" width="40" height="6" rx="2" fill="#D1D5DB"/><rect x="90" y="131" width="60" height="4" rx="2" fill="#E5E7EB"/>
+          <path d="M205 30 Q210 25 215 30" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.4"/><path d="M202 24 Q210 17 218 24" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.25"/><path d="M199 18 Q210 9 221 18" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.15"/>
+          <rect x="20" y="55" width="10" height="10" rx="5" fill="#E24B4A"/><circle cx="25" cy="60" r="2" fill="white"/>
+          <rect x="20" y="140" width="22" height="20" rx="3" fill="#FFF8F3" stroke="#D85A30" stroke-width="1"/><rect x="20" y="140" width="22" height="7" rx="3" fill="#D85A30"/>
+        </svg>
+      </div>
+      <h3 style="font-size:22px;font-weight:700;text-align:center;margin-bottom:8px;">Webinaire obligatoire</h3>
+      <p style="font-size:14px;color:#6B7280;text-align:center;line-height:1.7;margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto;">La Caisse des D&eacute;p&ocirc;ts organise un webinaire de pr&eacute;sentation obligatoire pour finaliser l'activation de votre acc&egrave;s EDOF. Un lien d'inscription vous sera envoy&eacute; par email.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
+        <div style="padding:16px;background:#FFF8F3;border-radius:10px;border:1px solid rgba(216,90,48,0.1);">
+          <div style="font-size:11px;font-weight:600;color:#993C1D;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Dur&eacute;e</div>
+          <div style="font-size:18px;font-weight:700;color:#D85A30;">~1 heure</div>
+          <div style="font-size:11px;color:#993C1D;opacity:0.7;margin-top:2px;">Pr&eacute;sentation + questions</div>
+        </div>
+        <div style="padding:16px;background:#E1F5EE;border-radius:10px;border:1px solid rgba(29,158,117,0.1);">
+          <div style="font-size:11px;font-weight:600;color:#085041;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Format</div>
+          <div style="font-size:18px;font-weight:700;color:#1D9E75;">En ligne</div>
+          <div style="font-size:11px;color:#085041;opacity:0.7;margin-top:2px;">Via votre navigateur</div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid #F3F4F6;border-radius:12px;padding:20px;margin-bottom:24px;">
+        <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Ce qu'il faut savoir :</div>
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F9FAFB;">
+          <svg viewBox="0 0 16 16" fill="none" style="width:16px;flex-shrink:0;"><circle cx="8" cy="8" r="7" fill="#E1F5EE"/><path d="M5 8l2 2 4-4" stroke="#1D9E75" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <span style="font-size:13px;color:#6B7280;">Inscription via le lien envoy&eacute; par la Caisse des D&eacute;p&ocirc;ts</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F9FAFB;">
+          <svg viewBox="0 0 16 16" fill="none" style="width:16px;flex-shrink:0;"><circle cx="8" cy="8" r="7" fill="#E1F5EE"/><path d="M5 8l2 2 4-4" stroke="#1D9E75" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <span style="font-size:13px;color:#6B7280;">Pr&eacute;sence obligatoire pour valider l'acc&egrave;s EDOF</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F9FAFB;">
+          <svg viewBox="0 0 16 16" fill="none" style="width:16px;flex-shrink:0;"><circle cx="8" cy="8" r="7" fill="#E1F5EE"/><path d="M5 8l2 2 4-4" stroke="#1D9E75" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <span style="font-size:13px;color:#6B7280;">Sessions organis&eacute;es chaque semaine</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;">
+          <svg viewBox="0 0 16 16" fill="none" style="width:16px;flex-shrink:0;"><circle cx="8" cy="8" r="7" fill="#FAEEDA"/><path d="M8 5v3M8 10.5v.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <span style="font-size:13px;color:#6B7280;">Votre expert LFO peut vous accompagner si besoin</span>
+        </div>
+      </div>
+      <button onclick="if(typeof showExpertPopup==='function')showExpertPopup();else alert('Contactez-nous');" style="width:100%;padding:14px;background:white;border:1px solid #E5E7EB;border-radius:10px;font-size:14px;font-weight:600;color:#6B7280;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;">
+        <svg viewBox="0 0 16 16" fill="none" style="width:16px;"><circle cx="8" cy="6" r="3" stroke="#6B7280" stroke-width="1"/><path d="M3 14c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="#6B7280" stroke-width="1" stroke-linecap="round"/></svg>
+        Prendre RDV avec un expert pour le webinaire
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 4: Terminée -->
+  <div class="step-content" id="step-4">
+    <div style="max-width:700px;margin:0 auto;padding:50px 20px;text-align:center;">
+      <div style="margin-bottom:28px;">
+        <svg viewBox="0 0 240 200" fill="none" style="width:240px;margin:0 auto;">
+          <rect x="30" y="20" width="8" height="8" rx="1" fill="#D85A30" opacity="0.6" transform="rotate(25 34 24)"/>
+          <rect x="55" y="10" width="6" height="6" rx="1" fill="#1D9E75" opacity="0.5" transform="rotate(-15 58 13)"/>
+          <rect x="180" y="15" width="7" height="7" rx="1" fill="#C9A84C" opacity="0.6" transform="rotate(40 183 18)"/>
+          <rect x="200" y="35" width="5" height="5" rx="1" fill="#534AB7" opacity="0.5" transform="rotate(-30 202 37)"/>
+          <rect x="20" y="55" width="5" height="5" rx="1" fill="#378ADD" opacity="0.4" transform="rotate(50 22 57)"/>
+          <rect x="215" y="70" width="6" height="6" rx="1" fill="#D85A30" opacity="0.4" transform="rotate(20 218 73)"/>
+          <circle cx="45" cy="40" r="3" fill="#1D9E75" opacity="0.3"/><circle cx="195" cy="25" r="2.5" fill="#D85A30" opacity="0.4"/><circle cx="210" cy="55" r="2" fill="#C9A84C" opacity="0.5"/><circle cx="25" cy="80" r="2" fill="#534AB7" opacity="0.3"/>
+          <path d="M170 8l1.5 3 3 .5-2.2 2 .5 3-2.8-1.5-2.8 1.5.5-3-2.2-2 3-.5z" fill="#C9A84C" opacity="0.5"/>
+          <path d="M65 30l1 2 2 .3-1.5 1.3.3 2-1.8-1-1.8 1 .3-2-1.5-1.3 2-.3z" fill="#D85A30" opacity="0.4"/>
+          <path d="M210 90l1 2 2 .3-1.5 1.3.3 2-1.8-1-1.8 1 .3-2-1.5-1.3 2-.3z" fill="#1D9E75" opacity="0.3"/>
+          <circle cx="120" cy="95" r="55" fill="#E1F5EE" stroke="#1D9E75" stroke-width="2" opacity="0.3"/>
+          <circle cx="120" cy="95" r="42" fill="#E1F5EE"/><circle cx="120" cy="95" r="42" stroke="#1D9E75" stroke-width="2.5"/>
+          <path d="M100 95l12 12 25-28" stroke="#1D9E75" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="80" y="148" width="80" height="26" rx="13" fill="#D85A30"/>
+          <text x="120" y="165" text-anchor="middle" font-size="11" fill="white" font-weight="600" font-family="sans-serif">EDOF ACTIV&Eacute;</text>
+          <g transform="translate(30, 100) rotate(-10)"><rect width="32" height="42" rx="3" fill="white" stroke="#E5E7EB" stroke-width="1"/><rect x="5" y="6" width="15" height="2" rx="1" fill="#1D9E75" opacity="0.5"/><rect x="5" y="12" width="22" height="1.5" rx="0.75" fill="#E5E7EB"/><rect x="5" y="16" width="18" height="1.5" rx="0.75" fill="#E5E7EB"/><rect x="5" y="20" width="20" height="1.5" rx="0.75" fill="#E5E7EB"/><circle cx="24" cy="34" r="5" fill="#1D9E75"/><path d="M21.5 34l1.5 1.5 3-3" stroke="white" stroke-width="1.2" stroke-linecap="round"/></g>
+          <g transform="translate(185, 95) rotate(8)"><rect width="32" height="42" rx="3" fill="white" stroke="#E5E7EB" stroke-width="1"/><rect x="5" y="6" width="15" height="2" rx="1" fill="#378ADD" opacity="0.5"/><rect x="5" y="12" width="22" height="1.5" rx="0.75" fill="#E5E7EB"/><rect x="5" y="16" width="18" height="1.5" rx="0.75" fill="#E5E7EB"/><rect x="5" y="20" width="20" height="1.5" rx="0.75" fill="#E5E7EB"/><circle cx="24" cy="34" r="5" fill="#1D9E75"/><path d="M21.5 34l1.5 1.5 3-3" stroke="white" stroke-width="1.2" stroke-linecap="round"/></g>
+          <g transform="translate(15, 130)"><rect x="3" y="0" width="10" height="12" rx="2" fill="#FAEEDA" stroke="#C9A84C" stroke-width="0.8"/><path d="M3 3Q0 3 0 6Q0 9 3 9" stroke="#C9A84C" stroke-width="0.8" fill="none"/><path d="M13 3Q16 3 16 6Q16 9 13 9" stroke="#C9A84C" stroke-width="0.8" fill="none"/><rect x="5" y="12" width="6" height="3" fill="#FAEEDA"/><rect x="3" y="15" width="10" height="2" rx="1" fill="#C9A84C"/></g>
+        </svg>
+      </div>
+      <h3 style="font-size:26px;font-weight:800;margin-bottom:8px;color:#1a1a1a;">F&eacute;licitations !</h3>
+      <p style="font-size:18px;font-weight:600;color:#1D9E75;margin-bottom:16px;">Votre d&eacute;marche EDOF est termin&eacute;e</p>
+      <p style="font-size:14px;color:#6B7280;line-height:1.7;max-width:480px;margin:0 auto 32px;">Votre acc&egrave;s Mon Compte Formation est activ&eacute;. Vous pouvez d&eacute;sormais publier vos formations et recevoir des inscriptions via le CPF. Votre expert reste disponible pour toute question.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:32px;">
+        <div style="padding:16px;background:#E1F5EE;border-radius:10px;"><div style="font-size:22px;font-weight:800;color:#1D9E75;">&check;</div><div style="font-size:11px;color:#085041;margin-top:4px;">Dossier valid&eacute;</div></div>
+        <div style="padding:16px;background:#E6F1FB;border-radius:10px;"><div style="font-size:22px;font-weight:800;color:#378ADD;">&check;</div><div style="font-size:11px;color:#0C447C;margin-top:4px;">Webinaire termin&eacute;</div></div>
+        <div style="padding:16px;background:#FAEEDA;border-radius:10px;"><div style="font-size:22px;font-weight:800;color:#C9A84C;">&check;</div><div style="font-size:11px;color:#633806;margin-top:4px;">Acc&egrave;s EDOF actif</div></div>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button onclick="if(typeof showExpertPopup==='function')showExpertPopup();else window.location.href='/dashboard.html#messagerie'" style="display:flex;align-items:center;gap:8px;padding:14px 24px;background:white;border:1px solid #E5E7EB;border-radius:10px;font-size:14px;font-weight:600;color:#6B7280;cursor:pointer;font-family:inherit;">
+          <svg viewBox="0 0 18 18" fill="none" style="width:16px;"><circle cx="9" cy="9" r="7.5" stroke="#6B7280" stroke-width="1.3"/><path d="M9 6v4M9 12.5v.5" stroke="#6B7280" stroke-width="1.3" stroke-linecap="round"/></svg>
+          Signaler un probl&egrave;me
+        </button>
+      </div>
+      <div style="margin-top:32px;padding:16px;background:#FFF8F3;border-radius:10px;border:1px solid rgba(216,90,48,0.1);">
+        <p style="font-size:13px;color:#993C1D;line-height:1.6;">Merci d'avoir choisi <strong>lesformateurs.online</strong>. N'h&eacute;sitez pas &agrave; nous laisser un avis ou &agrave; nous recommander aupr&egrave;s de vos confr&egrave;res. Votre satisfaction est notre priorit&eacute;.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blocker for future steps -->
+
+</div><!-- /container -->
+
+<!-- Popup Login -->
+<div id="popup-login" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;border-radius:14px;padding:32px 28px;max-width:420px;width:90%;position:relative;">
+    <button onclick="document.getElementById('popup-login').style.display='none'" style="position:absolute;top:12px;right:12px;border:none;background:none;font-size:18px;cursor:pointer;color:#888;">&#x2715;</button>
+    <h3 style="font-size:20px;font-weight:800;margin-bottom:4px;">Connectez-vous</h3>
+    <p style="font-size:13px;color:#6B7280;margin-bottom:16px;">Un compte existe pour <b id="popup-login-email"></b></p>
+    <div class="field"><label>Mot de passe</label><input type="password" id="popup-login-pwd" placeholder="Votre mot de passe" style="width:100%;padding:12px;border:1px solid #E5E7EB;border-radius:8px;font-size:14px;"></div>
+    <div id="popup-login-err" style="display:none;color:#e94560;font-size:12px;margin:8px 0;"></div>
+    <button onclick="doPopupLogin()" style="width:100%;padding:14px;background:#D85A30;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;">Se connecter</button>
+    <p style="text-align:center;margin-top:12px;font-size:12px;"><a href="#" onclick="doPopupForgot();return false;" style="color:#6B7280;">Mot de passe oubli&eacute; ?</a></p>
+  </div>
+</div>
+
+<!-- Popup Signup -->
+<div id="popup-signup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;border-radius:14px;padding:32px 28px;max-width:420px;width:90%;position:relative;">
+    <button onclick="document.getElementById('popup-signup').style.display='none'" style="position:absolute;top:12px;right:12px;border:none;background:none;font-size:18px;cursor:pointer;color:#888;">&#x2715;</button>
+    <h3 style="font-size:20px;font-weight:800;margin-bottom:4px;">Cr&eacute;er un compte</h3>
+    <p style="font-size:13px;color:#6B7280;margin-bottom:16px;">Compl&eacute;tez vos informations pour <b id="popup-signup-email"></b></p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div class="field"><label>Pr&eacute;nom</label><input type="text" id="popup-signup-fn" placeholder="Pr&eacute;nom" style="width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;font-size:14px;"></div>
+      <div class="field"><label>Nom</label><input type="text" id="popup-signup-ln" placeholder="Nom" style="width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;font-size:14px;"></div>
+    </div>
+    <div class="field"><label>T&eacute;l&eacute;phone</label><input type="tel" id="popup-signup-phone" placeholder="06 12 34 56 78" style="width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;font-size:14px;"></div>
+    <div class="field"><label>Type d&#x2019;organisme</label>
+      <select id="popup-signup-type" style="width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;font-size:14px;">
+        <option value="formateur">Formateur ind&eacute;pendant</option>
+        <option value="gerant_of">Organisme de formation</option>
+        <option value="association">Association</option>
+        <option value="creation_of">Porteur de projet</option>
+        <option value="demandeur_emploi">Demandeur d&#x2019;emploi</option>
+      </select>
+    </div>
+    <div class="field"><label>Mot de passe</label><input type="password" id="popup-signup-pwd" placeholder="Minimum 8 caract&egrave;res" minlength="8" style="width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;font-size:14px;"></div>
+    <div id="popup-signup-err" style="display:none;color:#e94560;font-size:12px;margin:8px 0;"></div>
+    <button onclick="doPopupSignup()" style="width:100%;padding:14px;background:#D85A30;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;">Cr&eacute;er mon compte</button>
+  </div>
+</div>
+
+<!-- Popup Premium -->
+<div id="popup-premium" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:14px;padding:32px 28px;max-width:480px;width:90%;position:relative;color:#fff;">
+    <button onclick="document.getElementById('popup-premium').style.display='none'" style="position:absolute;top:12px;right:12px;border:none;background:none;font-size:18px;cursor:pointer;color:rgba(255,255,255,.6);">&#x2715;</button>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;">&#x2605; Premium</div>
+    <h3 style="font-size:22px;font-weight:800;margin-bottom:6px;">Devenez membre Premium</h3>
+    <p style="font-size:13px;color:rgba(255,255,255,.7);margin-bottom:20px;">-10% sur toutes vos commandes, &agrave; vie.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;" id="premium-plans">
+      <div onclick="selectPremiumPlan('monthly')" id="plan-monthly" style="flex:1;min-width:180px;border:2px solid rgba(255,255,255,.2);border-radius:12px;padding:20px;cursor:pointer;text-align:center;transition:border-color .2s;">
+        <div style="font-size:28px;font-weight:800;color:#FFD700;">29&euro;</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.7);">par mois</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:4px;">Sans engagement</div>
+      </div>
+      <div onclick="selectPremiumPlan('yearly')" id="plan-yearly" style="flex:1;min-width:180px;border:2px solid #FFD700;border-radius:12px;padding:20px;cursor:pointer;text-align:center;position:relative;transition:border-color .2s;">
+        <div style="position:absolute;top:-10px;right:10px;background:#10B981;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">RECOMMAND&Eacute;</div>
+        <div style="font-size:28px;font-weight:800;color:#FFD700;">290&euro;</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.7);">par an</div>
+        <div style="font-size:11px;color:#10B981;margin-top:4px;">2 mois offerts</div>
+      </div>
+    </div>
+    <button onclick="openPremiumStripe()" id="premium-pay-btn" style="width:100%;padding:14px;background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:16px;">Souscrire &mdash; 290&euro;/an</button>
+    <p style="text-align:center;font-size:11px;color:rgba(255,255,255,.4);margin-top:10px;">Paiement s&eacute;curis&eacute; par Stripe. Annulable &agrave; tout moment.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/auth-modal.js"></script>
+<script src="js/edof-help.js"></script>
+<script src="js/certifications-data.js"></script>
+<script src="js/cert-selector.js"></script>
+<script>
+// sb est deja initialise par supabase-config.js avec la bonne cle anon
+
+var DOMAINES=[{id:'btp',name:'Batiment & Travaux Publics',icon:'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l5-3 5 3v14M9 9h4m-4 4h4m-4 4h4M15 21V11l3-2v12"/></svg>',certs:[{code:'RS5186',label:'CACES R489 — Chariots elevateurs',tag:'3 sem.'},{code:'RS5674',label:'Habilitation electrique BR/BC',tag:'2 sem.'},{code:'RS6219',label:'Travaux en hauteur & port du harnais',tag:'2 sem.'},{code:'RS4618',label:'Echafaudage R408',tag:'3 sem.'},{code:'RS6398',label:'Amiante sous-section 4',tag:'5 sem.'},{code:'RS5187',label:'CACES R482 — Engins de chantier',tag:'3 sem.'},{code:'RS5990',label:'CACES R486 — PEMP',tag:'3 sem.'},{code:'RS5991',label:'Habilitation electrique H0B0',tag:'1 sem.'},{code:'RS6400',label:'Soudure TIG / MIG-MAG',tag:'6 sem.'}]},{id:'securite',name:'Securite & Prevention',icon:'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"/></svg>',certs:[{code:'RS4731',label:'SST — Sauveteur Secouriste du Travail',tag:'2 sem.'},{code:'RS2533',label:'SSIAP 1',tag:'4 sem.'},{code:'RS2534',label:'SSIAP 2',tag:'4 sem.'},{code:'RS2535',label:'SSIAP 3',tag:'5 sem.'},{code:'RS5042',label:'PRAP',tag:'3 sem.'},{code:'RS2536',label:'CQP APS',tag:'6 sem.'},{code:'RS3113',label:'MAC APS',tag:'1 sem.'},{code:'RS6120',label:'Gestes et postures',tag:'1 sem.'},{code:'RS5900',label:'Formateur SST',tag:'2 sem.'}]},{id:'transport',name:'Transport & Logistique',icon:'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',certs:[{code:'RS5617',label:'FIMO Marchandises',tag:'6 sem.'},{code:'RS5618',label:'FIMO Voyageurs',tag:'6 sem.'},{code:'RS5619',label:'FCO Marchandises',tag:'1 sem.'},{code:'RS5620',label:'FCO Voyageurs',tag:'1 sem.'},{code:'RS6033',label:'ADR — Matieres dangereuses',tag:'4 sem.'},{code:'RS6034',label:'Taxi — Examen pro',tag:'5 sem.'},{code:'RS6035',label:'VTC — Examen pro',tag:'4 sem.'},{code:'RS6036',label:'Ambulancier — DEA',tag:'8 sem.'}]},{id:'numerique',name:'Numerique & Bureautique',icon:'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',certs:[{code:'RS6168',label:'TOSA Excel',tag:'2 sem.'},{code:'RS6169',label:'TOSA Word',tag:'2 sem.'},{code:'RS6170',label:'TOSA PowerPoint',tag:'2 sem.'},{code:'RS6200',label:'PIX — Competences numeriques',tag:'3 sem.'},{code:'RS5191',label:'ENI — PAO',tag:'3 sem.'},{code:'RS6452',label:'Outils IA generative',tag:'2 sem.'},{code:'RS6171',label:'TOSA DigComp',tag:'2 sem.'},{code:'RS6500',label:'Dev web HTML/CSS/JS',tag:'5 sem.'},{code:'RS6501',label:'Python data',tag:'6 sem.'},{code:'RS6502',label:'Cybersecurite',tag:'4 sem.'},{code:'RS6503',label:'Gestion projet agile',tag:'3 sem.'}]},{id:'langues',name:'Langues',icon:'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',certs:[{code:'RS5552',label:'TOEIC (anglais)',tag:'4 sem.'},{code:'RS6204',label:'Linguaskill (anglais pro)',tag:'3 sem.'},{code:'RS5633',label:'Bright — Anglais',tag:'3 sem.'},{code:'RS5608',label:'DCL — Espagnol',tag:'4 sem.'},{code:'RS5609',label:'DCL — Allemand',tag:'4 sem.'},{code:'RS5610',label:'DCL — Italien',tag:'4 sem.'},{code:'RS5611',label:'FLE — Francais Langue Etrangere',tag:'6 sem.'}]},{id:'sante',name:'Sante & Social',icon:'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>',certs:[{code:'RS6132',label:'AFGSU niveau 1',tag:'2 sem.'},{code:'RS6133',label:'AFGSU niveau 2',tag:'3 sem.'},{code:'RS5567',label:'ADVF — Aide aux familles',tag:'8 sem.'},{code:'RS4495',label:'HACCP — Hygiene alimentaire',tag:'2 sem.'},{code:'RS5300',label:'Aide-soignant DEAS',tag:'8 sem.'},{code:'RS5301',label:'Auxiliaire puericulture',tag:'8 sem.'},{code:'RS5302',label:'CAP AEPE petite enfance',tag:'7 sem.'},{code:'RS5303',label:'Accompagnement educatif et social',tag:'7 sem.'}]},{id:'commerce',name:'Commerce & Vente',icon:'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>',certs:[{code:'RS5900',label:'Techniques de vente B2C',tag:'4 sem.'},{code:'RS5901',label:'Negociation B2B',tag:'5 sem.'},{code:'RS5902',label:'Management equipe commerciale',tag:'6 sem.'},{code:'RS5903',label:'Relation client & UX',tag:'4 sem.'},{code:'RS5904',label:'Community manager',tag:'5 sem.'},{code:'RS5905',label:'Marketing digital SEO/SEA',tag:'5 sem.'},{code:'RS5906',label:'E-commerce boutique en ligne',tag:'5 sem.'}]},{id:'creatif',name:'Creation & Design',icon:'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-5.52-4.48-10-10-10z"/></svg>',certs:[{code:'RS6000',label:'Styliste ongulaire',tag:'3 sem.'},{code:'RS6001',label:'Maquillage professionnel',tag:'4 sem.'},{code:'RS6002',label:'Barbier',tag:'5 sem.'},{code:'RS6003',label:'Photographe pro',tag:'6 sem.'},{code:'RS6004',label:'Graphiste identite visuelle',tag:'6 sem.'},{code:'RS6005',label:'Decoration interieur',tag:'7 sem.'}]},{id:'sport',name:'Sport & Animation',icon:'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"/></svg>',certs:[{code:'RS5800',label:'BPJEPS Activites de la forme',tag:'8 sem.'},{code:'RS5801',label:'BPJEPS Animation sociale',tag:'8 sem.'},{code:'RS5802',label:'Coach sportif entreprise',tag:'5 sem.'},{code:'RS5803',label:'Moniteur sports de combat',tag:'7 sem.'},{code:'RS5804',label:'BAFA — Animateur',tag:'3 sem.'}]},{id:'finance',name:'Finance & RH',icon:'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',certs:[{code:'RS6100',label:'Comptabilite generale',tag:'6 sem.'},{code:'RS6101',label:'Gestion de la paie',tag:'5 sem.'},{code:'RS6102',label:'Analyse financiere',tag:'6 sem.'},{code:'RS6103',label:'Recrutement et entretiens',tag:'4 sem.'},{code:'RS6104',label:'Droit du travail pratique',tag:'5 sem.'},{code:'RS6105',label:'Controle de gestion',tag:'7 sem.'}]},{id:'restauration',name:'Restauration & Hotellerie',icon:'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 2v7a2 2 0 0 0 2 2h1v10M7 2v9M11 2v20M15 2v20c0 1.1.9 2 2 2s2-.9 2-2V2"/></svg>',certs:[{code:'RS6200',label:'CAP Cuisine',tag:'8 sem.'},{code:'RS6201',label:'Mixologie barman',tag:'5 sem.'},{code:'RS6202',label:'Sommellerie vins',tag:'6 sem.'},{code:'RS6203',label:'Patisserie boutique',tag:'8 sem.'},{code:'RS6209',label:'Service en restauration',tag:'4 sem.'}]}];
+
+var mockCerts = [
+  { code:'RNCP37674', title:'Developpeur Web et Web mobile', org:'Ministere du Travail' },
+  { code:'RNCP37873', title:'Concepteur developpeur d\'applications', org:'Ministere du Travail' },
+  { code:'RNCP36012', title:'Manager de projet', org:'CESI' },
+  { code:'RNCP35634', title:'Expert en strategie digitale', org:'EIML Paris' },
+  { code:'RS5131', title:'Utilisation d\'un logiciel de PAO', org:'ICDL France' },
+  { code:'RS6289', title:'Accompagner la transformation digitale', org:'Simplon' },
+  { code:'RS5592', title:'TOEIC - Tests d\'anglais', org:'ETS Global' },
+  { code:'RS6265', title:'Certification Voltaire', org:'Woonoz' },
+  { code:'RNCP38654', title:'Formateur professionnel d\'adultes', org:'Ministere du Travail' },
+  { code:'RS6493', title:'CleA Numerique', org:'Certif Pro' },
+  { code:'RNCP37098', title:'Gestionnaire de paie', org:'Ministere du Travail' },
+  { code:'RS5875', title:'Certification PIX', org:'GIP PIX' }
+];
+
+var addedCerts = [];
+
+var STATE = {
+  actionsSelected: new Set(),
+  noFormations: false,
+  habilitations: new Set(),
+  site: null,
+  siteOffer: false,
+  paymentMode: null,
+  organisme: null,
+  email: '',
+  isPremium: false
+};
+
+var EDOF_PRICE = 490, HABIL_PRICE = 990, SITE_PRICE = 990;
+
+function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function initSteps(){
+  document.querySelectorAll('.step-pill').forEach(function(pill,i){
+    if(i===0) pill.classList.add('active');
+  });
+  document.querySelectorAll('.step-content').forEach(function(c,i){
+    if(i>0 && c.id!=='step-0'){
+      c.style.opacity='.35';
+      c.style.pointerEvents='none';
+      c.style.userSelect='none';
+    }
+  });
+}
+
+function switchStep(idx){
+  document.querySelectorAll('.step-pill').forEach(function(p,i){p.classList.toggle('active',i===idx);});
+  document.querySelectorAll('.step-content').forEach(function(c){c.classList.remove('active');});
+  var el=document.getElementById('step-'+idx);
+  if(el) el.classList.add('active');
+}
+
+/* ========== SIRET MODULE ========== */
+
+async function dgefpSearch(siret) {
+  var siren = String(siret).slice(0, 9);
+  var urls = [
+    'https://dgefp.opendatasoft.com/api/explore/v2.1/catalog/datasets/liste-publique-des-of-v2/records?where=siret_etablissement_declarant%3D%22' + siret + '%22&limit=1',
+    'https://dgefp.opendatasoft.com/api/explore/v2.1/catalog/datasets/liste-publique-des-of-v2/records?where=siren%3D%22' + siren + '%22&limit=1',
+    'https://dgefp.opendatasoft.com/api/explore/v2.1/catalog/datasets/liste-publique-des-of/records?where=siret%3D%22' + siret + '%22&limit=1',
+    'https://dgefp.opendatasoft.com/api/explore/v2.1/catalog/datasets/liste-publique-des-of-v2/records?where=search(records%2C%22' + siren + '%22)&limit=1'
+  ];
+  for (var i = 0; i < urls.length; i++) {
+    try {
+      var r = await fetch(urls[i]);
+      if (!r.ok) { console.log('[DGEFP] essai ' + (i+1) + ':', urls[i], 'resultats: 0 (HTTP ' + r.status + ')'); continue; }
+      var data = await r.json();
+      console.log('[DGEFP] essai ' + (i+1) + ':', urls[i], 'resultats:', data.results && data.results.length);
+      if (data && data.results && data.results.length) return data.results[0];
+    } catch(e) {
+      console.warn('[DGEFP] essai ' + (i+1) + ' err', e);
+    }
+  }
+  return null;
+}
+
+function normalizeDgefp(raw) {
+  if (!raw) return null;
+  var g = function(a, b) { return (raw[a] !== undefined && raw[a] !== null && raw[a] !== '') ? raw[a] : raw[b]; };
+  return {
+    numero_da: g('numerodeclarationactivite', 'numero_da') || g('numero_da', 'numerodeclarationactivite') || '',
+    certifications_actions_de_formation: g('certifications_actionsdeformation', 'certifications_actions_de_formation'),
+    certifications_bilans_de_competences: g('certifications_bilansdecompetences', 'certifications_bilans_de_competences'),
+    certifications_actions_vae: g('certifications_vae', 'certifications_actions_vae'),
+    certifications_actions_de_formation_par_apprentissage: g('certifications_actionsdeformationparapprentissage', 'certifications_actions_de_formation_par_apprentissage'),
+    date_declaration: raw.informationsdeclarees_datedernieredeclaration || raw.date_derniere_declaration || raw.datedernieredeclaration || ''
+  };
+}
+
+async function searchSiret() {
+  var siret = document.getElementById('siret-input').value.replace(/\s/g, '');
+  if (siret.length !== 14) { alert('Le SIRET doit contenir 14 chiffres'); return; }
+  var btn = document.getElementById('btn-search');
+  btn.textContent = 'Recherche...'; btn.disabled = true;
+  try {
+    var resp = await fetch('https://recherche-entreprises.api.gouv.fr/search?q=' + siret);
+    var data = await resp.json();
+    var ent = data.results && data.results[0];
+    if (!ent) { alert('SIRET introuvable dans le registre national.'); btn.textContent = 'Rechercher'; btn.disabled = false; return; }
+    var siege = ent.siege || {};
+    var adresse = (siege.adresse || '') + ' ' + (siege.code_postal || '') + ' ' + (siege.commune || '');
+    var dirigeant = ent.dirigeants && ent.dirigeants[0] ? ((ent.dirigeants[0].prenom || '') + ' ' + (ent.dirigeants[0].nom || '')).trim() : '';
+    STATE.organisme = {
+      siret: siret,
+      siren: ent.siren || '',
+      raison_sociale: ent.nom_complet || '',
+      adresse: adresse,
+      dirigeant: dirigeant,
+      forme_juridique: ent.nature_juridique || '',
+      date_creation: ent.date_creation || '',
+      etat: ent.etat_administratif || ''
+    };
+    var nda = '', qualiActions = [];
+    try {
+      var of_result = await dgefpSearch(siret);
+      if (of_result) {
+        var n = normalizeDgefp(of_result);
+        nda = n.numero_da || '';
+        STATE.organisme.nda = nda;
+        var b = function(v) { return v === 'true' || v === true || v === 'Oui' || v === 1 || v === '1'; };
+        if (b(n.certifications_actions_de_formation)) qualiActions.push('AF');
+        if (b(n.certifications_bilans_de_competences)) qualiActions.push('Bilan');
+        if (b(n.certifications_actions_vae)) qualiActions.push('VAE');
+        if (b(n.certifications_actions_de_formation_par_apprentissage)) qualiActions.push('Apprentissage');
+      }
+    } catch(e) {}
+    STATE.organisme.qualiopi_actions = qualiActions;
+
+    var card = document.getElementById('org-card');
+    card.classList.add('show');
+    document.getElementById('o-name').textContent = STATE.organisme.raison_sociale;
+    document.getElementById('o-meta').textContent = adresse;
+    var attrsHtml = nda ? '<span class="attr on">NDA : ' + nda + '</span>' : '<span class="attr off">NDA non trouve</span>';
+    attrsHtml += qualiActions.length ? '<span class="attr on">Qualiopi : ' + qualiActions.join(', ') + '</span>' : '<span class="attr off">Qualiopi non detecte</span>';
+    document.getElementById('o-attrs').innerHTML = attrsHtml;
+    var etatLabel = (STATE.organisme.etat === 'F') ? '<span class="dv" style="color:#E24B4A;">Ferme</span>' : '<span class="dv" style="color:#1D9E75;">Actif</span>';
+    document.getElementById('o-details').innerHTML =
+      '<div class="detail"><span class="dl">SIRET</span><br><span class="dv">' + siret + '</span></div>' +
+      '<div class="detail"><span class="dl">SIREN</span><br><span class="dv">' + STATE.organisme.siren + '</span></div>' +
+      '<div class="detail"><span class="dl">Dirigeant</span><br><span class="dv">' + dirigeant + '</span></div>' +
+      '<div class="detail"><span class="dl">Forme juridique</span><br><span class="dv">' + STATE.organisme.forme_juridique + '</span></div>' +
+      '<div class="detail"><span class="dl">Etat</span><br>' + etatLabel + '</div>' +
+      '<div class="detail"><span class="dl">Creation</span><br><span class="dv">' + STATE.organisme.date_creation + '</span></div>';
+  } catch(e) { alert('Erreur : ' + e.message); }
+  btn.textContent = 'Rechercher'; btn.disabled = false;
+}
+
+/* ========== CERTIFICATIONS SEARCH MODULE ========== */
+
+function searchCerts(q) {
+  var box = document.getElementById('cert-results');
+  if (q.length < 2) { box.classList.remove('show'); return; }
+  var ql = q.toLowerCase();
+  var matches = mockCerts.filter(function(c) { return c.code.toLowerCase().indexOf(ql) !== -1 || c.title.toLowerCase().indexOf(ql) !== -1; });
+  if (!matches.length) { box.innerHTML = '<div class="result-item" style="color:#999;">Aucun resultat</div>'; box.classList.add('show'); return; }
+  box.innerHTML = matches.slice(0, 6).map(function(c) {
+    return '<div class="result-item" onclick="addCert(\'' + c.code + '\',\'' + c.title.replace(/'/g, "\\'") + '\',\'' + c.org.replace(/'/g, "\\'") + '\')">' +
+      '<span class="code">' + c.code + '</span> — ' + c.title + '<br><span class="org">' + c.org + '</span></div>';
+  }).join('');
+  box.classList.add('show');
+}
+
+function addCert(code, title, org) {
+  if (addedCerts.find(function(c) { return c.code === code; })) return;
+  var defaultType = STATE.actionsSelected.has('certification') && !STATE.actionsSelected.has('habilitation') ? 'certification' : 'habilitation';
+  addedCerts.push({ code: code, title: title, org: org, habOrCert: defaultType });
+  STATE.habilitations.add(code);
+  renderCerts();
+  document.getElementById('cert-input').value = '';
+  document.getElementById('cert-results').classList.remove('show');
+  refreshSummary();
+}
+
+function removeCert(i) {
+  var removed = addedCerts[i];
+  if (removed) { STATE.habilitations.delete(removed.code); }
+  addedCerts.splice(i, 1);
+  renderCerts();
+  refreshSummary();
+}
+
+function updateCertType(i, val) { addedCerts[i].habOrCert = val; }
+
+function renderCerts() {
+  document.getElementById('cert-added').innerHTML = addedCerts.map(function(c, i) {
+    return '<div class="cert-tag"><strong>' + c.code + '</strong>&nbsp;-&nbsp;<span style="flex:1">' + c.title + '</span>' +
+      '<select onchange="updateCertType(' + i + ',this.value)">' +
+      '<option value="habilitation"' + (c.habOrCert === 'habilitation' ? ' selected' : '') + '>Habilitation</option>' +
+      '<option value="certification"' + (c.habOrCert === 'certification' ? ' selected' : '') + '>Certification</option></select>' +
+      '<span class="remove" onclick="removeCert(' + i + ')">x</span></div>';
+  }).join('');
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.cert-search')) {
+    var cr = document.getElementById('cert-results');
+    if (cr) cr.classList.remove('show');
+  }
+});
+
+/* ========== ACCORDION ========== */
+
+function renderAccordion() {
+  var el = document.getElementById('accordion');
+  el.innerHTML = DOMAINES.map(function(d, i) {
+    return '<div class="accord-item' + (i === 0 ? ' open' : '') + '" data-domain="' + d.id + '">' +
+      '<div class="accord-head" onclick="toggleAccord(\'' + d.id + '\')">' +
+      '<div class="accord-title"><div class="accord-icon">' + d.icon + '</div><div class="accord-title-text"><b>' + esc(d.name) + '</b><span>' + d.certs.length + ' habilitation' + (d.certs.length > 1 ? 's' : '') + '</span></div></div>' +
+      '<div class="accord-meta"><span class="accord-selected-count">0</span><span class="accord-chevron">&#9660;</span></div></div>' +
+      '<div class="accord-body">' + d.certs.map(function(c) {
+        return '<label class="cert-row"><input type="checkbox" data-code="' + c.code + '" onchange="toggleHabil(\'' + c.code + '\',\'' + d.id + '\',this.checked)">' +
+          '<span class="cert-code">' + c.code + '</span><span class="cert-label">' + esc(c.label) + '</span><span class="cert-tag-inline">' + c.tag + '</span></label>';
+      }).join('') + '</div></div>';
+  }).join('');
+}
+
+function toggleAccord(id) { var it = document.querySelector('[data-domain="' + id + '"]'); if (it) it.classList.toggle('open'); }
+
+/* ========== ACTIONS ========== */
+
+function toggleAction(el) {
+  var type = el.dataset.type;
+  el.classList.toggle('selected');
+  if (el.classList.contains('selected')) {
+    STATE.actionsSelected.add(type);
+    // Décocher "aucune" si on coche une formation
+    var aucuneEl = document.querySelector('.action-card[data-type="aucune"]');
+    if (aucuneEl && aucuneEl.classList.contains('selected')) {
+      aucuneEl.classList.remove('selected');
+      STATE.noFormations = false;
+      document.getElementById('edof-no-formations').style.display = 'none';
+    }
+  } else {
+    STATE.actionsSelected.delete(type);
+  }
+  updateCertSearchVisibility();
+  refreshSummary();
+}
+
+function switchHabTab(tab){
+  document.getElementById('hab-tab-ia').style.display=tab==='ia'?'block':'none';
+  document.getElementById('hab-tab-cat').style.display=tab==='cat'?'block':'none';
+  document.getElementById('hab-tab-btn-ia').style.color=tab==='ia'?'#D85A30':'#9CA3AF';
+  document.getElementById('hab-tab-btn-ia').style.borderBottomColor=tab==='ia'?'#D85A30':'transparent';
+  document.getElementById('hab-tab-btn-cat').style.color=tab==='cat'?'#D85A30':'#9CA3AF';
+  document.getElementById('hab-tab-btn-cat').style.borderBottomColor=tab==='cat'?'#D85A30':'transparent';
+}
+
+function toggleNoFormations(el) {
+  el.classList.toggle('selected');
+  STATE.noFormations = el.classList.contains('selected');
+  if (STATE.noFormations) {
+    STATE.actionsSelected.clear();
+    document.querySelectorAll('.action-card[data-type]').forEach(function(c) {
+      if (c.dataset.type !== 'aucune') c.classList.remove('selected');
+    });
+    // Hide existing certs block
+    document.getElementById('edof-existing-certs').style.display = 'none';
+  }
+  updateCertSearchVisibility();
+  refreshSummary();
+}
+
+function updateCertSearchVisibility() {
+  var hasExisting = STATE.actionsSelected.has('habilitation') || STATE.actionsSelected.has('certification');
+  var hasNone = STATE.noFormations;
+  document.getElementById('edof-existing-certs').style.display = hasExisting ? 'block' : 'none';
+  document.getElementById('edof-no-formations').style.display = hasNone ? 'block' : 'none';
+  if (hasNone && !document.getElementById('edof-filter-domain').dataset.inited) {
+    edofInitFilters();
+  }
+}
+
+/* ========== MODE A : Existing certs (no pricing) ========== */
+STATE.existingCerts = [];
+
+function edofSearchExisting(q) {
+  var box = document.getElementById('edof-exist-results');
+  if (!q || q.length < 2 || !window.LFO_CERTS) { box.style.display = 'none'; return; }
+  var ql = q.toLowerCase();
+  var matches = window.LFO_CERTS.certs.filter(function(c){ return c.c.toLowerCase().indexOf(ql) !== -1 || c.n.toLowerCase().indexOf(ql) !== -1; }).slice(0, 8);
+  if (!matches.length) { box.innerHTML = '<div style="padding:12px;color:#999;font-size:12px;">Aucun resultat</div>'; box.style.display = 'block'; return; }
+  box.innerHTML = matches.map(function(c){
+    return '<div onclick="edofAddExisting(\''+c.c+'\',\''+c.n.replace(/'/g,"\\'")+'\')" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid #F3F4F6;font-size:12px;" onmouseenter="this.style.background=\'#FFF8F3\'" onmouseleave="this.style.background=\'#fff\'"><span style="font-weight:700;color:#D85A30;">'+c.c+'</span> — '+c.n+'</div>';
+  }).join('');
+  box.style.display = 'block';
+}
+
+function edofAddExisting(code, name) {
+  if (STATE.existingCerts.find(function(c){ return c.code === code; })) return;
+  STATE.existingCerts.push({ code: code, name: name, file: null });
+  document.getElementById('edof-exist-search').value = '';
+  document.getElementById('edof-exist-results').style.display = 'none';
+  edofRenderExisting();
+}
+
+function edofRemoveExisting(i) {
+  STATE.existingCerts.splice(i, 1);
+  edofRenderExisting();
+}
+
+function edofRenderExisting() {
+  var el = document.getElementById('edof-exist-list');
+  if (!STATE.existingCerts.length) { el.innerHTML = ''; return; }
+  el.innerHTML = STATE.existingCerts.map(function(c, i){
+    return '<div style="border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;background:#fff;">' +
+      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
+      '<span style="font-weight:700;color:#D85A30;font-size:12px;">'+c.code+'</span>' +
+      '<span style="flex:1;font-size:12px;">'+c.name+'</span>' +
+      '<span style="font-size:11px;color:#1D9E75;font-weight:600;">Deja obtenu — 0 EUR</span>' +
+      '<span onclick="edofRemoveExisting('+i+')" style="cursor:pointer;color:#E24B4A;font-size:16px;font-weight:700;">x</span>' +
+      '</div>' +
+      '<div style="display:flex;align-items:center;gap:8px;">' +
+      '<label style="font-size:11px;color:var(--text-muted);margin:0;white-space:nowrap;">Justificatif :</label>' +
+      '<input type="file" accept=".pdf,.jpg,.jpeg,.png" style="font-size:11px;flex:1;" onchange="STATE.existingCerts['+i+'].file=this.files[0]">' +
+      '</div></div>';
+  }).join('');
+}
+
+document.addEventListener('click', function(e){
+  if (!e.target.closest('#edof-existing-certs')) {
+    var r = document.getElementById('edof-exist-results');
+    if (r) r.style.display = 'none';
+  }
+});
+
+/* ========== MODE B : No formations (with pricing + IA) ========== */
+STATE.newCerts = [];
+STATE.certSelectorTotal = 0;
+
+function edofInitFilters() {
+  var sel = document.getElementById('edof-filter-domain');
+  sel.dataset.inited = '1';
+  if (!window.LFO_CERTS) return;
+  var domains = {};
+  window.LFO_CERTS.certs.forEach(function(c){ if(c.h) domains[c.d] = (domains[c.d]||0)+1; });
+  var sorted = Object.keys(domains).sort(function(a,b){ return domains[b]-domains[a]; });
+  sorted.forEach(function(d){ sel.innerHTML += '<option value="'+d+'">'+d+' ('+domains[d]+')</option>'; });
+  edofFilterCerts();
+}
+
+function edofFilterCerts() {
+  if (!window.LFO_CERTS) return;
+  var domain = document.getElementById('edof-filter-domain').value;
+  var level = document.getElementById('edof-filter-level').value;
+  var sort = document.getElementById('edof-filter-sort').value;
+  var q = (document.getElementById('edof-new-search').value || '').toLowerCase();
+
+  var filtered = window.LFO_CERTS.certs.filter(function(c){
+    if (!c.h) return false; // Only habilitables
+    if (domain && c.d !== domain) return false;
+    if (level === 'RS' && c.t !== 'RS') return false;
+    if (level === 'RNCP3-4' && (c.t !== 'RNCP' || (c.nv.indexOf('3') < 0 && c.nv.indexOf('4') < 0))) return false;
+    if (level === 'RNCP5-6' && (c.t !== 'RNCP' || (c.nv.indexOf('5') < 0 && c.nv.indexOf('6') < 0))) return false;
+    if (level === 'RNCP7-8' && (c.t !== 'RNCP' || (c.nv.indexOf('7') < 0 && c.nv.indexOf('8') < 0))) return false;
+    if (q && c.c.toLowerCase().indexOf(q) < 0 && c.n.toLowerCase().indexOf(q) < 0) return false;
+    return true;
+  });
+
+  if (sort === 'cheap') filtered.sort(function(a,b){ return a.ph - b.ph; });
+  else if (sort === 'expensive') filtered.sort(function(a,b){ return b.ph - a.ph; });
+  else filtered.sort(function(a,b){ return a.n.localeCompare(b.n); });
+
+  var el = document.getElementById('edof-new-list');
+  var selectedCodes = STATE.newCerts.map(function(c){ return c.code; });
+  el.innerHTML = filtered.slice(0, 50).map(function(c){
+    var isSel = selectedCodes.indexOf(c.c) >= 0;
+    return '<div onclick="edofToggleNew(\''+c.c+'\')" style="display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;border-bottom:1px solid #F3F4F6;background:'+(isSel?'#FFF8F3':'#fff')+';transition:background .1s;" onmouseenter="if(!this.classList.contains(\'sel\'))this.style.background=\'#FAFAFA\'" onmouseleave="this.style.background='+(isSel?'\'#FFF8F3\'':'\'#fff\'')+'">' +
+      '<input type="checkbox" '+(isSel?'checked':'')+' style="accent-color:#D85A30;width:16px;height:16px;pointer-events:none;">' +
+      '<span style="font-size:11px;font-weight:700;color:#D85A30;min-width:75px;">'+c.c+'</span>' +
+      '<span style="flex:1;font-size:12px;">'+c.n+'</span>' +
+      (c.nv ? '<span style="font-size:10px;color:#9CA3AF;white-space:nowrap;">'+c.nv+'</span>' : '') +
+      '<span style="font-size:11px;font-weight:700;color:#D85A30;white-space:nowrap;">'+c.ph.toLocaleString('fr-FR')+' EUR</span>' +
+      '</div>';
+  }).join('');
+  if (filtered.length > 50) el.innerHTML += '<div style="padding:10px;text-align:center;font-size:11px;color:#9CA3AF;">'+filtered.length+' resultats — affinez votre recherche</div>';
+  if (!filtered.length) el.innerHTML = '<div style="padding:16px;text-align:center;font-size:12px;color:#999;">Aucun resultat avec ces filtres</div>';
+}
+
+function edofToggleNew(code) {
+  var idx = STATE.newCerts.findIndex(function(c){ return c.code === code; });
+  if (idx >= 0) {
+    STATE.newCerts.splice(idx, 1);
+  } else {
+    var cert = window.LFO_CERTS.certs.find(function(c){ return c.c === code; });
+    if (cert) STATE.newCerts.push({ code: cert.c, name: cert.n, prix: cert.ph, niveau: cert.nv });
+  }
+  edofRenderNewSelected();
+  edofFilterCerts(); // refresh checkboxes in list
+  edofRefreshIACheckboxes(); // refresh checkboxes in IA results
+  // Update pricing
+  STATE.certSelectorTotal = 0;
+  STATE.newCerts.forEach(function(c){ STATE.certSelectorTotal += c.prix; });
+  refreshSummary();
+}
+
+function edofRefreshIACheckboxes() {
+  var container = document.getElementById('edof-ia-results');
+  if (!container) return;
+  var selectedCodes = STATE.newCerts.map(function(c){ return c.code; });
+  container.querySelectorAll('[onclick]').forEach(function(el){
+    var match = el.getAttribute('onclick').match(/edofToggleNew\('([^']+)'\)/);
+    if (!match) return;
+    var code = match[1];
+    var isSel = selectedCodes.indexOf(code) >= 0;
+    el.style.background = isSel ? '#FFF8F3' : '#fff';
+    el.style.borderColor = isSel ? '#D85A30' : '#E5E7EB';
+    var cb = el.querySelector('input[type=checkbox]');
+    if (cb) cb.checked = isSel;
+  });
+}
+
+function edofRenderNewSelected() {
+  var el = document.getElementById('edof-new-selected');
+  if (!STATE.newCerts.length) { el.innerHTML = ''; return; }
+  el.innerHTML = '<p style="font-size:12px;font-weight:600;margin-bottom:8px;">Habilitations selectionnees :</p>' +
+    STATE.newCerts.map(function(c, i){
+      // Get full cert data for info
+      var full = window.LFO_CERTS ? window.LFO_CERTS.certs.find(function(x){ return x.c === c.code; }) : null;
+      return '<div style="border:1px solid var(--orange-soft);border-radius:8px;background:#FFF8F3;margin-bottom:6px;">' +
+        '<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;">' +
+        '<span style="font-weight:700;color:#D85A30;font-size:12px;">'+c.code+'</span>' +
+        '<span style="flex:1;font-size:12px;">'+c.name+'</span>' +
+        '<span onclick="edofToggleInfo('+i+')" style="cursor:pointer;width:22px;height:22px;border-radius:50%;background:#EFF6FF;color:#3B82F6;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;" title="Conditions">i</span>' +
+        '<span style="font-size:12px;font-weight:700;color:#D85A30;">'+c.prix.toLocaleString('fr-FR')+' EUR</span>' +
+        '<span onclick="edofToggleNew(\''+c.code+'\')" style="cursor:pointer;color:#E24B4A;font-size:16px;font-weight:700;">x</span>' +
+        '</div>' +
+        '<div id="edof-info-'+i+'" style="padding:0 12px 12px;font-size:11px;color:#6B7280;line-height:1.6;border-top:1px solid #FFEDE3;margin-top:0;padding-top:10px;">' +
+        (full ? edofBuildInfoNew(full) : '<em>Informations non disponibles</em>') +
+        '</div></div>';
+    }).join('');
+}
+
+function edofToggleInfo(idx) {
+  var el = document.getElementById('edof-info-' + idx);
+  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+/* ========== PANNEAUX INFO : 2 modes ========== */
+
+// MODE EXISTANT : infos de base, pas de nb OF, pas de recommandations
+function edofBuildInfoExisting(c) {
+  var html = '';
+  html += '<div style="margin-bottom:6px;"><b style="color:#1a1a1a;">Certificateur :</b> ' + (c.ct || 'Non renseigne') + '</div>';
+  html += '<div style="margin-bottom:6px;"><b style="color:#1a1a1a;">Type :</b> ' + c.t + (c.nv ? ' — ' + c.nv : '') + '</div>';
+  if (c.va) html += '<div style="margin-bottom:6px;"><b style="color:#1a1a1a;">Voies d\'acces :</b> ' + c.va.replace(/,/g, ', ') + '</div>';
+  if (c.pr) html += '<div style="margin-bottom:6px;"><b style="color:#1a1a1a;">Prerequis apprenants :</b> ' + c.pr + '</div>';
+  return html;
+}
+
+// MODE NOUVEAU : recommandations détaillées pour monter le dossier
+function edofBuildInfoNew(c) {
+  var html = '';
+  html += '<div style="margin-bottom:6px;"><b style="color:#1a1a1a;">Certificateur :</b> ' + (c.ct || 'Non renseigne') + '</div>';
+  html += '<div style="margin-bottom:6px;"><b style="color:#1a1a1a;">Type :</b> ' + c.t + (c.nv ? ' — ' + c.nv : '') + '</div>';
+  if (c.va) html += '<div style="margin-bottom:6px;"><b style="color:#1a1a1a;">Voies d\'acces :</b> ' + c.va.replace(/,/g, ', ') + '</div>';
+  if (c.pr) html += '<div style="margin-bottom:6px;"><b style="color:#1a1a1a;">Prerequis apprenants :</b> ' + c.pr + '</div>';
+
+  // Recommandations personnalisées
+  var recos = edofGetRecommendations(c);
+  if (recos.required.length || recos.recommended.length || recos.warnings.length) {
+    html += '<div style="margin-top:10px;border-top:1px solid #E5E7EB;padding-top:10px;">';
+    html += '<b style="color:#1a1a1a;font-size:12px;">Recommandations pour obtenir cette habilitation</b>';
+
+    if (recos.required.length) {
+      html += '<div style="margin-top:8px;padding:8px 10px;background:#FEE2E2;border:1px solid #FECACA;border-radius:6px;">';
+      html += '<b style="color:#991B1B;font-size:11px;">Conditions obligatoires :</b><ul style="margin:4px 0 0 16px;padding:0;">';
+      recos.required.forEach(function(r){ html += '<li style="color:#7F1D1D;margin-bottom:3px;">' + r + '</li>'; });
+      html += '</ul></div>';
+    }
+
+    if (recos.recommended.length) {
+      html += '<div style="margin-top:6px;padding:8px 10px;background:#E1F5EE;border:1px solid #A7F3D0;border-radius:6px;">';
+      html += '<b style="color:#065F46;font-size:11px;">Fortement recommande :</b><ul style="margin:4px 0 0 16px;padding:0;">';
+      recos.recommended.forEach(function(r){ html += '<li style="color:#064E3B;margin-bottom:3px;">' + r + '</li>'; });
+      html += '</ul></div>';
+    }
+
+    if (recos.warnings.length) {
+      html += '<div style="margin-top:6px;padding:8px 10px;background:#FEF3C7;border:1px solid #FCD34D;border-radius:6px;">';
+      html += '<b style="color:#92400E;font-size:11px;">Points d\'attention :</b><ul style="margin:4px 0 0 16px;padding:0;">';
+      recos.warnings.forEach(function(w){ html += '<li style="color:#78350F;margin-bottom:3px;">' + w + '</li>'; });
+      html += '</ul></div>';
+    }
+
+    html += '</div>';
+  }
+  return html;
+}
+
+function edofGetRecommendations(c) {
+  var required = [];
+  var recommended = [];
+  var warnings = [];
+  var intitule = (c.n || '').toLowerCase();
+  var domaine = (c.d || '').toLowerCase();
+  var nv = (c.nv || '').toLowerCase();
+  var isRS = c.t === 'RS';
+  var isRNCP = c.t === 'RNCP';
+
+  // ─── CONDITIONS OBLIGATOIRES (toujours) ───
+  required.push('Certification Qualiopi valide et a jour');
+  required.push('Numero de Declaration d\'Activite (NDA) actif');
+
+  // ─── PAR TYPE RS / RNCP ───
+  if (isRS) {
+    required.push('Formateur(s) qualifie(s) dans le domaine de la certification');
+    recommended.push('Avoir deja dispense des formations dans ce domaine (experience demontrable)');
+  }
+
+  if (isRNCP) {
+    required.push('Formateurs titulaires d\'un diplome superieur au niveau vise');
+    required.push('Programme pedagogique conforme au referentiel de competences');
+    recommended.push('Disposer d\'un responsable pedagogique dedie');
+  }
+
+  // ─── PAR NIVEAU RNCP ───
+  if (nv.indexOf('3') >= 0 || nv.indexOf('4') >= 0) {
+    // CAP / Bac
+    recommended.push('Formateurs avec au minimum un Bac+2 et 2 ans d\'experience professionnelle');
+    recommended.push('Locaux adaptes aux travaux pratiques si formation technique');
+    recommended.push('Capacite d\'accueil d\'au moins 10 apprenants');
+  }
+
+  if (nv.indexOf('5') >= 0 || nv.indexOf('6') >= 0) {
+    // BTS / Licence
+    required.push('Formateurs titulaires d\'un Master (Bac+5) minimum');
+    recommended.push('Au moins 3 ans d\'experience dans la formation professionnelle');
+    recommended.push('Partenariats avec des entreprises pour les stages/alternances');
+    recommended.push('Conseil de perfectionnement ou comite pedagogique en place');
+  }
+
+  if (nv.indexOf('7') >= 0 || nv.indexOf('8') >= 0) {
+    // Master / Doctorat
+    required.push('Formateurs avec Doctorat ou expertise reconnue de haut niveau');
+    required.push('Structure pedagogique solide (direction des etudes, coordination)');
+    required.push('Capacite de suivi de memoires/projets de recherche');
+    recommended.push('Etre un etablissement d\'enseignement superieur ou equivalent');
+    recommended.push('Partenariats academiques et/ou de recherche');
+    recommended.push('Anciennete de l\'organisme : minimum 5 ans d\'activite');
+    warnings.push('Niveau Master/Doctorat : les certificateurs sont tres selectifs — les independants et petits OF sont rarement acceptes');
+  }
+
+  // ─── PAR DOMAINE (NSF / intitulé) ───
+  // Sécurité
+  if (domaine.indexOf('securite') >= 0 || domaine.indexOf('prevention') >= 0 || intitule.indexOf('sst') >= 0 || intitule.indexOf('ssiap') >= 0 || intitule.indexOf('incendie') >= 0) {
+    required.push('Formateurs certifies SST / SSIAP selon le niveau vise');
+    required.push('Materiel de securite conforme aux normes en vigueur');
+    recommended.push('Locaux avec zone de mise en situation pratique');
+    recommended.push('Assurance RC Pro couvrant les activites de formation securite');
+  }
+
+  // BTP / CACES
+  if (domaine.indexOf('batiment') >= 0 || domaine.indexOf('travaux') >= 0 || intitule.indexOf('caces') >= 0 || intitule.indexOf('echafaudage') >= 0 || intitule.indexOf('hauteur') >= 0 || intitule.indexOf('amiante') >= 0) {
+    required.push('Plateaux techniques conformes aux referentiels (engins, echafaudages, EPI)');
+    required.push('Formateurs titulaires des certifications visees + experience terrain');
+    recommended.push('Piste d\'exercice / aire de manoeuvre pour les CACES');
+    recommended.push('Conformite aux normes de securite sur les sites de formation');
+  }
+
+  // Transport
+  if (domaine.indexOf('transport') >= 0 || intitule.indexOf('fimo') >= 0 || intitule.indexOf('fco') >= 0 || intitule.indexOf('taxi') >= 0 || intitule.indexOf('vtc') >= 0 || intitule.indexOf('ambulan') >= 0) {
+    required.push('Vehicules conformes et assures pour la formation');
+    required.push('Formateurs avec permis et autorisations d\'enseigner valides');
+    recommended.push('Piste privee ou convention avec un circuit d\'entrainement');
+    warnings.push('Secteur transport reglemente : agrements prefectoraux possibles en complement');
+  }
+
+  // Santé
+  if (domaine.indexOf('sante') >= 0 || domaine.indexOf('medical') >= 0 || domaine.indexOf('paramedic') >= 0 || intitule.indexOf('soignant') >= 0 || intitule.indexOf('afgsu') >= 0 || intitule.indexOf('infirmier') >= 0) {
+    required.push('Formateurs professionnels de sante en exercice ou recemment en activite');
+    required.push('Locaux aux normes sanitaires avec materiel de simulation');
+    recommended.push('Convention avec un etablissement de sante pour les stages cliniques');
+    warnings.push('Secteur sante reglemente : verifiez les agrements ARS/ministere necessaires');
+  }
+
+  // Langues
+  if (domaine.indexOf('langue') >= 0 || intitule.indexOf('anglais') >= 0 || intitule.indexOf('toeic') >= 0 || intitule.indexOf('linguaskill') >= 0 || intitule.indexOf('fle') >= 0 || intitule.indexOf('espagnol') >= 0 || intitule.indexOf('allemand') >= 0) {
+    required.push('Formateurs natifs ou titulaires d\'un diplome de langue niveau C1/C2 minimum');
+    recommended.push('Centre d\'examen agree pour faire passer la certification sur place');
+    recommended.push('Outils pedagogiques numeriques (plateforme e-learning, laboratoire de langues)');
+  }
+
+  // Bureautique / numérique
+  if (domaine.indexOf('informatique') >= 0 || domaine.indexOf('numerique') >= 0 || intitule.indexOf('tosa') >= 0 || intitule.indexOf('pix') >= 0 || intitule.indexOf('excel') >= 0 || intitule.indexOf('word') >= 0 || intitule.indexOf('develop') >= 0) {
+    required.push('Salle informatique equipee avec un poste par apprenant');
+    required.push('Formateurs certifies sur les outils concernes');
+    recommended.push('Licences logicielles a jour pour chaque poste');
+    recommended.push('Accessible en formation a distance si le referentiel le permet');
+  }
+
+  // Commerce / vente
+  if (domaine.indexOf('commerce') >= 0 || domaine.indexOf('vente') >= 0 || intitule.indexOf('commercial') >= 0 || intitule.indexOf('negociation') >= 0) {
+    required.push('Formateurs avec experience significative en entreprise dans le domaine commercial');
+    recommended.push('Etudes de cas et mises en situation reelles');
+    recommended.push('Partenariats entreprises pour les periodes d\'application pratique');
+  }
+
+  // Management / RH
+  if (domaine.indexOf('gestion') >= 0 || domaine.indexOf('management') >= 0 || intitule.indexOf('manager') >= 0 || intitule.indexOf('ressources humaines') >= 0 || intitule.indexOf('rh') >= 0) {
+    required.push('Formateurs avec experience manageriale de minimum 5 ans');
+    recommended.push('Utilisation d\'outils de diagnostic (360, MBTI, DISC) si pertinent');
+    recommended.push('Reseau d\'intervenants professionnels en activite');
+  }
+
+  // Comptabilité / finance
+  if (domaine.indexOf('comptab') >= 0 || domaine.indexOf('finance') >= 0 || intitule.indexOf('comptab') >= 0 || intitule.indexOf('paie') >= 0 || intitule.indexOf('audit') >= 0) {
+    required.push('Formateurs experts-comptables, comptables ou equivalent avec diplome');
+    recommended.push('Logiciels comptables professionnels (Sage, Cegid, EBP) installes');
+    recommended.push('Cas pratiques sur des donnees reelles anonymisees');
+  }
+
+  // Beauté / esthétique
+  if (domaine.indexOf('coiffure') >= 0 || domaine.indexOf('esthetique') >= 0 || intitule.indexOf('ongulaire') >= 0 || intitule.indexOf('maquillage') >= 0 || intitule.indexOf('barbier') >= 0) {
+    required.push('Plateau technique equipe (postes de travail, materiel professionnel)');
+    required.push('Formateurs titulaires du diplome vise + experience en salon');
+    recommended.push('Modeles disponibles pour les travaux pratiques');
+    recommended.push('Respect des normes d\'hygiene et de securite sanitaire');
+  }
+
+  // Restauration
+  if (domaine.indexOf('restauration') >= 0 || domaine.indexOf('cuisine') >= 0 || intitule.indexOf('cuisine') >= 0 || intitule.indexOf('patisserie') >= 0 || intitule.indexOf('haccp') >= 0) {
+    required.push('Cuisine pedagogique aux normes HACCP');
+    required.push('Formateurs avec experience en restauration professionnelle');
+    recommended.push('Materiel professionnel de cuisine complet');
+    warnings.push('Controle sanitaire obligatoire des locaux de formation');
+  }
+
+  // Sport
+  if (domaine.indexOf('sport') >= 0 || domaine.indexOf('animation') >= 0 || intitule.indexOf('bpjeps') >= 0 || intitule.indexOf('coach') >= 0 || intitule.indexOf('fitness') >= 0) {
+    required.push('Formateurs titulaires d\'un BPJEPS ou diplome superieur dans la discipline');
+    required.push('Installations sportives conformes et assurees');
+    recommended.push('Convention avec des structures sportives pour les mises en situation');
+    warnings.push('Secteur sport reglemente : carte professionnelle d\'educateur sportif obligatoire');
+  }
+
+  // Immobilier
+  if (domaine.indexOf('immobilier') >= 0 || intitule.indexOf('immobilier') >= 0 || intitule.indexOf('transaction') >= 0) {
+    required.push('Formateurs titulaires de la carte professionnelle d\'agent immobilier ou equivalent');
+    recommended.push('Connaissance a jour de la loi ALUR et des obligations de formation continue');
+  }
+
+  // Social / éducatif
+  if (domaine.indexOf('social') >= 0 || domaine.indexOf('educati') >= 0 || intitule.indexOf('educateur') >= 0 || intitule.indexOf('accompagnement') >= 0 || intitule.indexOf('insertion') >= 0) {
+    required.push('Formateurs diplomes du travail social (DEES, DEASS, CAFERUIS ou equivalent)');
+    recommended.push('Conventions de stage avec des etablissements sociaux et medico-sociaux');
+    recommended.push('Experience dans l\'accompagnement de publics fragiles');
+  }
+
+  // Droit
+  if (domaine.indexOf('droit') >= 0 || domaine.indexOf('juridique') >= 0 || intitule.indexOf('juridique') >= 0 || intitule.indexOf('avocat') >= 0) {
+    required.push('Formateurs juristes avec diplome Bac+5 en droit et experience professionnelle');
+    warnings.push('Certaines certifications juridiques sont reservees aux universites et ecoles de droit');
+  }
+
+  // ─── ENREGISTREMENT DE DROIT ───
+  if (c.te === 'Enregistrement de droit') {
+    warnings.push('Certification enregistree de droit (souvent par un ministere ou une universite) — verifiez que le certificateur accepte des OF prives avant de commander');
+  }
+
+  // ─── SECTEUR RÉGLEMENTÉ ───
+  if (c.r) {
+    warnings.push('Secteur reglemente — des agrements complementaires (prefectoraux, ministeriels, ARS) peuvent etre necessaires en plus de l\'habilitation');
+  }
+
+  // ─── FAIBLE NOMBRE DE PARTENAIRES ───
+  if (c.nh <= 3) {
+    warnings.push('Tres peu d\'OF habilites (' + (c.nh || 0) + ') — le certificateur peut etre tres selectif ou l\'habilitation recente');
+  } else if (c.nh <= 10) {
+    recommended.push('Certificateur selectif (' + c.nh + ' OF habilites) — preparez un dossier solide avec references');
+  }
+
+  return { required: required, recommended: recommended, warnings: warnings };
+}
+
+function edofRenderExisting() {
+  var el = document.getElementById('edof-exist-list');
+  if (!STATE.existingCerts.length) { el.innerHTML = ''; return; }
+  el.innerHTML = STATE.existingCerts.map(function(c, i){
+    var full = window.LFO_CERTS ? window.LFO_CERTS.certs.find(function(x){ return x.c === c.code; }) : null;
+    return '<div style="border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;background:#fff;">' +
+      '<div style="display:flex;align-items:center;gap:8px;padding:12px 14px;">' +
+      '<span style="font-weight:700;color:#D85A30;font-size:12px;">'+c.code+'</span>' +
+      '<span style="flex:1;font-size:12px;">'+c.name+'</span>' +
+      '<span onclick="edofToggleInfoExist('+i+')" style="cursor:pointer;width:22px;height:22px;border-radius:50%;background:#EFF6FF;color:#3B82F6;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;" title="Conditions">i</span>' +
+      '<span style="font-size:11px;color:#1D9E75;font-weight:600;">Deja obtenu</span>' +
+      '<span onclick="edofRemoveExisting('+i+')" style="cursor:pointer;color:#E24B4A;font-size:16px;font-weight:700;">x</span>' +
+      '</div>' +
+      '<div id="edof-info-exist-'+i+'" style="padding:0 14px 12px;font-size:11px;color:#6B7280;line-height:1.6;border-top:1px solid #F3F4F6;padding-top:10px;">' +
+      (full ? edofBuildInfoExisting(full) : '<em>Informations non disponibles</em>') +
+      '</div>' +
+      '<div style="padding:0 14px 12px;display:flex;align-items:center;gap:8px;">' +
+      '<label style="font-size:11px;color:var(--text-muted);margin:0;white-space:nowrap;">Justificatif :</label>' +
+      '<input type="file" accept=".pdf,.jpg,.jpeg,.png" style="font-size:11px;flex:1;" onchange="STATE.existingCerts['+i+'].file=this.files[0]">' +
+      '</div></div>';
+  }).join('');
+}
+
+function edofToggleInfoExist(idx) {
+  var el = document.getElementById('edof-info-exist-' + idx);
+  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+/* ========== RECHERCHE IA ========== */
+async function edofIASearch() {
+  var query = document.getElementById('edof-ia-query').value.trim();
+  if (!query || query.length < 3) { showToast('Decrivez votre activite (au moins 3 caracteres)'); return; }
+  var el = document.getElementById('edof-ia-results');
+  el.innerHTML = '<p style="font-size:12px;color:var(--text-muted);">Recherche en cours...</p>';
+
+  if (!window.LFO_CERTS) { el.innerHTML = '<p style="color:#E24B4A;font-size:12px;">Donnees non chargees</p>'; return; }
+
+  // Synonymes métier — matching EXACT par clé (pas de sous-chaîne)
+  var SYNONYMES = {
+    'management': ['manager','pilotage','direction','encadrement','equipe','leadership'],
+    'psychologie': ['psychologue','psycho','therapeute','therapie','clinique','comportement','cogniti','mental','counseling','soutien psychologique'],
+    'informatique': ['developpeur','logiciel','programmation','numerique','digital','data','cyber'],
+    'comptabilite': ['comptable','paie','finance','facturation','audit'],
+    'commerce': ['vente','commercial','negociation','prospection'],
+    'securite': ['sst','ssiap','incendie','prevention','risques','caces'],
+    'langue': ['anglais','francais','espagnol','allemand','fle','toeic','linguaskill'],
+    'bureautique': ['excel','word','powerpoint','tosa','office','pix'],
+    'sante': ['soignant','infirmier','medical','soin','hygiene','afgsu','paramedical'],
+    'coaching': ['coach','accompagnement','bilan competences'],
+    'transport': ['chauffeur','conducteur','fimo','fco','vtc','taxi'],
+    'beaute': ['esthetique','coiffure','maquillage','ongle','barbier'],
+    'restauration': ['cuisine','cuisinier','patisserie','haccp'],
+    'batiment': ['construction','chantier','echafaudage','electricite','btp'],
+    'ressources humaines': ['recrutement','entretien','droit travail'],
+    'immobilier': ['agent immobilier','transaction','copropriete'],
+    'sport': ['sportif','fitness','animation','bpjeps'],
+    'pedagogie': ['formateur','formation','enseignement','educati','pedagogique'],
+    'social': ['social','educateur','accompagnement social','insertion','mediation'],
+    'droit': ['juridique','avocat','notaire','juriste'],
+    'marketing': ['marketing','communication','publicite','reseaux sociaux','community'],
+    'environnement': ['environnement','ecologie','developpement durable','energie'],
+  };
+
+  var ql = query.toLowerCase().split(/[\s,;.']+/).filter(function(w){ return w.length > 2; });
+
+  // Enrichir avec synonymes — matching EXACT sur la clé
+  var enriched = ql.slice();
+  ql.forEach(function(w){
+    Object.keys(SYNONYMES).forEach(function(key){
+      // Match exact : le mot doit être la clé ou commencer par la clé (pas de sous-chaîne aléatoire)
+      if (w === key || key.indexOf(w) === 0 || w.indexOf(key) === 0) {
+        SYNONYMES[key].forEach(function(syn){ if (enriched.indexOf(syn) < 0) enriched.push(syn); });
+      }
+    });
+  });
+
+  var scored = [];
+  window.LFO_CERTS.certs.forEach(function(c){
+    if (!c.h) return;
+    // Vérifier que c'est vraiment habilitable (nb partenaires > 0 dans les données)
+    var intitule = c.n.toLowerCase();
+    var domaine = c.d.toLowerCase();
+    var score = 0;
+    var originalMatch = 0;
+
+    // D'abord scorer les mots ORIGINAUX (pas les synonymes) — poids fort
+    ql.forEach(function(w){
+      if (intitule.indexOf(w) >= 0) { score += 25; originalMatch++; }
+      else if (domaine.indexOf(w) >= 0) { score += 10; originalMatch++; }
+    });
+
+    // Ensuite scorer les synonymes — poids moyen
+    enriched.forEach(function(w){
+      if (ql.indexOf(w) >= 0) return; // déjà compté
+      if (intitule.indexOf(w) >= 0) score += 8;
+      else if (domaine.indexOf(w) >= 0) score += 4;
+    });
+
+    // Pas de match original = très faible pertinence
+    if (originalMatch === 0 && score > 0) score = Math.min(score, 7);
+
+    if (score > 0) scored.push({ cert: c, score: score });
+  });
+
+  scored.sort(function(a,b){ return b.score - a.score; });
+
+  var proches = scored.filter(function(s){ return s.score >= 20; }).slice(0, 10);
+  var eloignes = scored.filter(function(s){ return s.score >= 8 && s.score < 20; }).slice(0, 6);
+
+  var html = '';
+  if (proches.length) {
+    html += '<div style="margin-bottom:12px;"><p style="font-size:12px;font-weight:700;color:#1D9E75;margin-bottom:6px;">Proche de votre activite (' + proches.length + ')</p>';
+    proches.forEach(function(s){
+      var c = s.cert;
+      var isSel = STATE.newCerts.findIndex(function(x){ return x.code === c.c; }) >= 0;
+      html += '<div onclick="edofToggleNew(\''+c.c+'\')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;border:1px solid '+(isSel?'#D85A30':'#E5E7EB')+';border-radius:8px;margin-bottom:4px;background:'+(isSel?'#FFF8F3':'#fff')+';font-size:12px;">' +
+        '<input type="checkbox" '+(isSel?'checked':'')+' style="accent-color:#D85A30;pointer-events:none;">' +
+        '<span style="font-weight:700;color:#D85A30;min-width:70px;">'+c.c+'</span>' +
+        '<span style="flex:1;">'+c.n+'</span>' +
+        '<span style="font-weight:700;color:#D85A30;">'+c.ph.toLocaleString('fr-FR')+' EUR</span></div>';
+    });
+    html += '</div>';
+  }
+  if (eloignes.length) {
+    html += '<div><p style="font-size:12px;font-weight:700;color:#F59E0B;margin-bottom:6px;">Partiellement eloigne (' + eloignes.length + ')</p>';
+    eloignes.forEach(function(s){
+      var c = s.cert;
+      var isSel = STATE.newCerts.findIndex(function(x){ return x.code === c.c; }) >= 0;
+      html += '<div onclick="edofToggleNew(\''+c.c+'\')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;border:1px solid '+(isSel?'#D85A30':'#E5E7EB')+';border-radius:8px;margin-bottom:4px;background:'+(isSel?'#FFF8F3':'#fff')+';font-size:12px;opacity:.85;">' +
+        '<input type="checkbox" '+(isSel?'checked':'')+' style="accent-color:#D85A30;pointer-events:none;">' +
+        '<span style="font-weight:700;color:#D85A30;min-width:70px;">'+c.c+'</span>' +
+        '<span style="flex:1;">'+c.n+'</span>' +
+        '<span style="font-weight:700;color:#D85A30;">'+c.ph.toLocaleString('fr-FR')+' EUR</span></div>';
+    });
+    html += '</div>';
+  }
+  if (!proches.length && !eloignes.length) {
+    html = '<p style="font-size:12px;color:#999;">Aucune certification trouvee pour "'+query+'". Essayez d\'autres termes.</p>';
+  }
+  el.innerHTML = html;
+}
+
+function toggleHabil(code, domainId, checked) {
+  if (checked) {
+    STATE.habilitations.add(code);
+    // Sync to addedCerts
+    var domaine = DOMAINES.find(function(d) { return d.id === domainId; });
+    var cert = domaine ? domaine.certs.find(function(c) { return c.code === code; }) : null;
+    if (cert && !addedCerts.find(function(c) { return c.code === code; })) {
+      addedCerts.push({ code: code, title: cert.label, org: 'Accordion', habOrCert: 'habilitation' });
+    }
+  } else {
+    STATE.habilitations.delete(code);
+    // Remove from addedCerts
+    for (var idx = addedCerts.length - 1; idx >= 0; idx--) {
+      if (addedCerts[idx].code === code) { addedCerts.splice(idx, 1); break; }
+    }
+  }
+  renderCerts();
+  var dom = DOMAINES.find(function(d) { return d.id === domainId; });
+  var sel = dom.certs.filter(function(c) { return STATE.habilitations.has(c.code); }).length;
+  var ai = document.querySelector('[data-domain="' + domainId + '"]');
+  var cnt = ai.querySelector('.accord-selected-count');
+  if (sel > 0) { ai.classList.add('has-selected'); cnt.textContent = sel + ' selectionnee' + (sel > 1 ? 's' : ''); }
+  else { ai.classList.remove('has-selected'); }
+  refreshSummary();
+}
+
+/* ========== SITE ========== */
+
+function setSite(choice) {
+  STATE.site = choice;
+  document.querySelectorAll('.radio-grid .radio-card').forEach(function(c, i) { c.classList.toggle('selected', (i === 0 ? 'oui' : 'non') === choice); });
+  document.getElementById('url-field').classList.toggle('show', choice === 'oui');
+  document.getElementById('site-block').classList.toggle('show', choice === 'non');
+  if (choice !== 'non') { STATE.siteOffer = false; document.getElementById('site-toggle').classList.remove('selected'); }
+  refreshSummary();
+}
+
+function toggleSiteOffer() {
+  var el = document.getElementById('site-toggle');
+  el.classList.toggle('selected');
+  STATE.siteOffer = el.classList.contains('selected');
+  refreshSummary();
+}
+
+/* ========== PRICING ========== */
+
+function calcTotal() {
+  var t = EDOF_PRICE;
+  // Habilitations from CertSelector (replaces old flat price)
+  var certTotal = STATE.certSelectorTotal || 0;
+  if (certTotal > 0) {
+    t += certTotal;
+  } else {
+    t += STATE.habilitations.size * HABIL_PRICE;
+  }
+  if (STATE.siteOffer) t += SITE_PRICE;
+  return t;
+}
+
+function hasExtras() { return (STATE.newCerts && STATE.newCerts.length > 0) || STATE.habilitations.size > 0 || STATE.siteOffer; }
+
+function refreshSummary() {
+  var lines = [];
+  lines.push('<div class="summary-line"><span class="label">Acces EDOF <span class="count">(inclus)</span></span><span class="amount">' + EDOF_PRICE + ' EUR</span></div>');
+  // Existing certs (free)
+  if (STATE.existingCerts && STATE.existingCerts.length > 0) {
+    lines.push('<div class="summary-line"><span class="label">Habilitations/certifications existantes <span class="count">(x' + STATE.existingCerts.length + ')</span></span><span class="amount" style="color:#1D9E75;">Inclus</span></div>');
+  }
+  // New certs (paid)
+  if (STATE.newCerts && STATE.newCerts.length > 0) {
+    STATE.newCerts.forEach(function(c){
+      lines.push('<div class="summary-line"><span class="label">' + c.code + ' — ' + c.name.substring(0,40) + '</span><span class="amount">' + c.prix.toLocaleString('fr-FR') + ' EUR</span></div>');
+    });
+  }
+  if (STATE.siteOffer) lines.push('<div class="summary-line"><span class="label">Site internet professionnel</span><span class="amount">' + SITE_PRICE + ' EUR</span></div>');
+  // Premium -10%
+  var premiumDiscount = 0;
+  if(STATE.isPremium){
+    var subtotal = calcTotal();
+    premiumDiscount = Math.round(subtotal * 0.10);
+    lines.push('<div class="summary-line" style="color:#10B981;"><span class="label">\u2605 Reduction Premium -10%</span><span class="amount" style="color:#10B981;font-weight:700;">-'+premiumDiscount.toLocaleString('fr-FR')+' EUR</span></div>');
+  }
+  document.getElementById('summary-lines').innerHTML = lines.join('');
+  var total = calcTotal();
+  if(STATE.isPremium) total = Math.max(0, total - premiumDiscount);
+  renderPremiumBlock();
+  var submitBtn = document.getElementById('submit-btn');
+  var payCard = document.getElementById('payment-card');
+
+  // Admin override
+  var ap = ADMIN_STATE.isAdmin ? ADMIN_STATE.paymentOverride : null;
+  if (ap === 'paid_offline') {
+    document.getElementById('total-amount').innerHTML = '<span style="text-decoration:line-through;color:#9CA3AF;font-size:18px;">' + total.toLocaleString('fr-FR') + ' EUR</span> <span style="color:#1D9E75;font-size:28px;font-weight:700;">Paye</span>';
+    if (payCard) payCard.style.display = 'none';
+    if (submitBtn) submitBtn.textContent = 'Creer la demarche';
+  } else if (ap === 'offert') {
+    document.getElementById('total-amount').innerHTML = '<span style="text-decoration:line-through;color:#9CA3AF;font-size:18px;">' + total.toLocaleString('fr-FR') + ' EUR</span> <span style="color:#1D9E75;font-size:28px;font-weight:700;">Offert</span>';
+    if (payCard) payCard.style.display = 'none';
+    if (submitBtn) submitBtn.textContent = 'Creer la demarche';
+  } else {
+    document.getElementById('total-amount').textContent = total.toLocaleString('fr-FR') + ' EUR';
+    if (payCard) payCard.style.display = 'block';
+    if (submitBtn) submitBtn.textContent = 'Creer mon compte et finaliser la commande';
+    renderPaymentModes();
+  }
+}
+
+function getFinalTotal(){
+  var t = calcTotal();
+  if(STATE.isPremium) t = Math.max(0, t - Math.round(calcTotal() * 0.10));
+  return t;
+}
+
+function renderPaymentModes() {
+  var total = getFinalTotal();
+  var canPay2x = total <= 500;
+  var canPay3x = total > 500;
+  var vir2x = total >= 2000;
+  var vir3x = total >= 10000;
+
+  var modes = [];
+  // CB comptant
+  modes.push({ id: 'comptant', title: 'CB — Comptant', sub: 'Paiement unique par carte bancaire', amount: total.toLocaleString('fr-FR') + ' EUR' });
+  // CB 2x (si <= 500)
+  if (canPay2x) modes.push({ id: '2x', title: 'CB — 2 x ' + Math.ceil(total / 2).toLocaleString('fr-FR') + ' EUR', sub: 'Sans frais — carte bancaire', amount: Math.ceil(total / 2).toLocaleString('fr-FR') + ' EUR puis 1 mois' });
+  // CB 3x (si > 500)
+  if (canPay3x) modes.push({ id: '3x', title: 'CB — 3 x ' + Math.ceil(total / 3).toLocaleString('fr-FR') + ' EUR', sub: 'Sans frais — carte bancaire', amount: Math.ceil(total / 3).toLocaleString('fr-FR') + ' EUR/mois x 3' });
+  // Virement comptant
+  modes.push({ id: 'virement', title: 'Virement bancaire — Comptant', sub: 'Vous recevrez l\'IBAN par email', amount: total.toLocaleString('fr-FR') + ' EUR' });
+  // Virement 2x (si >= 2000)
+  if (vir2x) modes.push({ id: 'virement_2x', title: 'Virement — 2 x ' + Math.ceil(total / 2).toLocaleString('fr-FR') + ' EUR', sub: '2 virements a 30 jours d\'intervalle', amount: Math.ceil(total / 2).toLocaleString('fr-FR') + ' EUR x 2' });
+  // Virement 3x (si >= 10000)
+  if (vir3x) modes.push({ id: 'virement_3x', title: 'Virement — 3 x ' + Math.ceil(total / 3).toLocaleString('fr-FR') + ' EUR', sub: '3 virements mensuels', amount: Math.ceil(total / 3).toLocaleString('fr-FR') + ' EUR x 3' });
+
+  var current = modes.find(function(m) { return m.id === STATE.paymentMode; });
+  if (!current) STATE.paymentMode = null;
+  var el = document.getElementById('payment-modes');
+  el.innerHTML = modes.map(function(m) {
+    return '<div class="payment-option ' + (STATE.paymentMode === m.id ? 'selected' : '') + '" onclick="setPaymentMode(\'' + m.id + '\')">' +
+      '<div class="payment-option-left"><div class="rb"></div><div><div class="payment-option-title">' + m.title + '</div><div class="payment-option-sub">' + m.sub + '</div></div></div>' +
+      '<div class="payment-option-amount">' + m.amount + '</div></div>';
+  }).join('');
+  var isVir = STATE.paymentMode && STATE.paymentMode.indexOf('virement') === 0;
+  document.getElementById('virement-info').classList.toggle('show', isVir);
+}
+
+function setPaymentMode(mode) { STATE.paymentMode = mode; renderPaymentModes(); }
+function showToast(msg, dur) { var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(function() { t.classList.remove('show'); }, dur || 3000); }
+
+/* ========== SUBMIT ========== */
+
+async function submitForm() {
+  // Validations
+  if (!ADMIN_STATE.isAdmin && !STATE.authUser) return showToast('Veuillez vous connecter');
+  if (!STATE.organisme && !ADMIN_STATE.isAdmin) return showToast('Veuillez rechercher votre SIRET');
+  if (STATE.actionsSelected.size === 0 && !STATE.noFormations) return showToast('Selectionnez au moins un type de formation');
+  if (!STATE.site && !ADMIN_STATE.isAdmin) return showToast('Indiquez si vous avez un site');
+
+  // Admin: skip payment validation if paid/offert
+  var adminPay = ADMIN_STATE.isAdmin ? ADMIN_STATE.paymentOverride : null;
+  if (!adminPay || adminPay === 'en_attente') {
+    if (!STATE.paymentMode) return showToast('Choisissez un mode de paiement');
+  }
+
+  var btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'Creation en cours...';
+
+  try {
+    var userId = null;
+    var email = STATE.email;
+
+    // Admin mode
+    if (ADMIN_STATE.isAdmin && ADMIN_STATE.accountMode === 'existing' && ADMIN_STATE.foundUser) {
+      userId = ADMIN_STATE.foundUser.id;
+      email = ADMIN_STATE.foundUser.email;
+    } else if (ADMIN_STATE.isAdmin && ADMIN_STATE.accountMode === 'new') {
+      var aFn = document.getElementById('admin-fn').value.trim();
+      var aLn = document.getElementById('admin-ln').value.trim();
+      var aEmail = document.getElementById('admin-email').value.trim();
+      var aPw = document.getElementById('admin-password').value;
+      if (!aFn || !aLn || !aEmail) return showToast('Remplissez prenom, nom et email du client');
+      if (!aPw || aPw.length < 8) return showToast('Mot de passe client : 8 caracteres minimum');
+      var signRes = await sb.auth.signUp({email: aEmail, password: aPw, options: {data: {first_name: aFn, last_name: aLn}}});
+      if (signRes.error) {
+        if (signRes.error.message && signRes.error.message.indexOf('already') >= 0) {
+          var look = await sb.from('profiles').select('id').eq('email', aEmail).maybeSingle();
+          if (look.data) userId = look.data.id;
+          else throw new Error('Compte existant mais profil introuvable');
+        } else throw signRes.error;
+      } else {
+        userId = (signRes.data && signRes.data.user) ? signRes.data.user.id : null;
+      }
+      if (!userId) throw new Error('Impossible de creer le compte client');
+      await sb.from('profiles').upsert({id: userId, first_name: aFn, last_name: aLn, email: aEmail, phone: document.getElementById('admin-phone').value.trim() || null});
+      email = aEmail;
+    } else {
+      // Normal user — already connected
+      if (STATE.authUser) {
+        userId = STATE.authUser.id;
+      } else {
+        return showToast('Veuillez vous connecter');
+      }
+    }
+
+    // INSERT organisme (if SIRET provided)
+    var orgId = null;
+    if (STATE.organisme && STATE.organisme.siret) {
+      var orgRes = await sb.from('user_organismes').insert({
+        user_id: userId, siren: STATE.organisme.siren, siret: STATE.organisme.siret,
+        raison_sociale: STATE.organisme.raison_sociale, forme_juridique: STATE.organisme.forme_juridique || null, adresse: STATE.organisme.adresse
+      }).select().single();
+      orgId = (orgRes.data && orgRes.data.id) || null;
+    }
+
+    // INSERT demarche
+    var totalCents = getFinalTotal() * 100;
+    var pm = STATE.paymentMode || 'comptant';
+    var installTotal = (pm === '3x' || pm === 'virement_3x') ? 3 : ((pm === '2x' || pm === 'virement_2x') ? 2 : 1);
+    var installCents = Math.round(totalCents / installTotal);
+
+    // Admin payment override
+    var demStatus = 'en_attente_paiement';
+    var demPaid = false;
+    if (ADMIN_STATE.isAdmin && adminPay) {
+      if (adminPay === 'paid_offline') { demStatus = 'en_cours'; demPaid = true; }
+      else if (adminPay === 'offert') { demStatus = 'en_cours'; demPaid = true; totalCents = 0; }
+    }
+
+    var demPayload = {
+      user_id: userId, organisme_id: orgId,
+      type: 'edof', category: 'demarche',
+      status: demStatus, current_step: 1, total_steps: 5,
+      amount_cents: totalCents,
+      payment_mode: pm.indexOf('virement') === 0 ? 'virement' : pm,
+      installment_amount_cents: installCents, installments_paid: 0, installments_total: installTotal,
+      paid: demPaid,
+      config: {
+        actions: Array.from(STATE.actionsSelected),
+        existing_certs: STATE.existingCerts || [],
+        new_certs: STATE.newCerts || [],
+        habilitations: Array.from(STATE.habilitations),
+        site_status: STATE.site,
+        site_url: STATE.site === 'oui' ? (document.getElementById('site-url') ? document.getElementById('site-url').value.trim() : null) : null,
+        site_offer: STATE.siteOffer,
+        no_formations: STATE.noFormations,
+        organisme: STATE.organisme
+      },
+      options: []
+    };
+    var demRes = await sb.from('demarches').insert(demPayload).select().single();
+    if (demRes.error) throw demRes.error;
+    var dem = demRes.data;
+
+    // Admin: skip payment
+    if (ADMIN_STATE.isAdmin && (adminPay === 'paid_offline' || adminPay === 'offert')) {
+      showToast('Demarche EDOF creee !', 3000);
+      setTimeout(function() { window.location.href = 'dashboard.html?demarche_created=' + dem.id; }, 1500);
+      return;
+    }
+
+    // Paiement
+    if (pm.indexOf('virement') === 0) {
+      showToast('Demarche creee ! Informations par email.', 5000);
+      setTimeout(function() { window.location.href = 'dashboard.html?demarche_created=' + dem.id; }, 2000);
+    } else {
+      showToast('Redirection vers le paiement...');
+      try {
+        var label = 'Acces EDOF';
+        if (STATE.newCerts && STATE.newCerts.length > 0) label += ' + ' + STATE.newCerts.length + ' habilitation(s)';
+        if (STATE.siteOffer) label += ' + Site internet';
+        var stripeRes = await fetch('https://webhook.lesformateurs.online/create-stripe-link', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            entity: 'demarche', entity_id: dem.id,
+            amount_cents: totalCents, payment_mode: pm,
+            installment_cents: installCents, installments_total: installTotal,
+            label: label, type: 'edof', user_email: email
+          })
+        });
+        var j = await stripeRes.json();
+        if (j && j.url) { window.location.href = j.url; return; }
+      } catch(e) { console.warn('stripe err', e); }
+      window.location.href = 'dashboard.html?demarche_created=' + dem.id;
+    }
+  } catch(e) {
+    console.error('Submit error:', e);
+    showToast('Erreur : ' + (e.message || e));
+    btn.disabled = false; btn.textContent = 'Creer mon compte et finaliser la commande';
+  }
+}
+
+/* ========== ADMIN BLOC 0 ========== */
+/* ========== EMAIL-FIRST AUTH ========== */
+var _selectedPremiumPlan = 'yearly';
+
+async function checkEmailAndAuth(){
+  var email = (document.getElementById('auth-email-input').value||'').trim().toLowerCase();
+  if(!email || email.indexOf('@') < 0){ showToast('Saisissez un email valide'); return; }
+  try{
+    var { data } = await sb.from('profiles').select('id,email').ilike('email', email).maybeSingle();
+    if(data){
+      document.getElementById('popup-login-email').textContent = email;
+      document.getElementById('popup-login-pwd').value = '';
+      document.getElementById('popup-login-err').style.display = 'none';
+      document.getElementById('popup-login').style.display = 'flex';
+      document.getElementById('popup-login')._email = email;
+    } else {
+      document.getElementById('popup-signup-email').textContent = email;
+      document.getElementById('popup-signup-fn').value = '';
+      document.getElementById('popup-signup-ln').value = '';
+      document.getElementById('popup-signup-phone').value = '';
+      document.getElementById('popup-signup-pwd').value = '';
+      document.getElementById('popup-signup-err').style.display = 'none';
+      document.getElementById('popup-signup').style.display = 'flex';
+      document.getElementById('popup-signup')._email = email;
+    }
+  }catch(e){
+    document.getElementById('popup-signup-email').textContent = email;
+    document.getElementById('popup-signup').style.display = 'flex';
+    document.getElementById('popup-signup')._email = email;
+  }
+}
+
+async function doPopupLogin(){
+  var email = document.getElementById('popup-login')._email;
+  var pwd = document.getElementById('popup-login-pwd').value;
+  var errDiv = document.getElementById('popup-login-err');
+  if(!pwd){ errDiv.textContent='Saisissez votre mot de passe'; errDiv.style.display='block'; return; }
+  errDiv.style.display='none';
+  try{
+    var res = await sb.auth.signInWithPassword({email:email,password:pwd});
+    if(res.error){
+      errDiv.textContent = res.error.message === 'Invalid login credentials' ? 'Mot de passe incorrect.' : res.error.message;
+      errDiv.style.display='block';
+      return;
+    }
+    location.reload();
+  }catch(e){ errDiv.textContent='Erreur de connexion'; errDiv.style.display='block'; }
+}
+
+async function doPopupForgot(){
+  var email = document.getElementById('popup-login')._email;
+  if(!email) return;
+  await sb.auth.resetPasswordForEmail(email, {redirectTo: window.location.origin + '/dashboard.html'});
+  var errDiv = document.getElementById('popup-login-err');
+  errDiv.textContent = 'Un email de r\u00e9initialisation a \u00e9t\u00e9 envoy\u00e9.';
+  errDiv.style.display = 'block';
+  errDiv.style.color = '#10B981';
+}
+
+async function doPopupSignup(){
+  var email = document.getElementById('popup-signup')._email;
+  var fn = document.getElementById('popup-signup-fn').value.trim();
+  var ln = document.getElementById('popup-signup-ln').value.trim();
+  var phone = document.getElementById('popup-signup-phone').value.trim();
+  var type = document.getElementById('popup-signup-type').value;
+  var pwd = document.getElementById('popup-signup-pwd').value;
+  var errDiv = document.getElementById('popup-signup-err');
+  if(!fn||!ln){ errDiv.textContent='Saisissez votre nom et pr\u00e9nom'; errDiv.style.display='block'; return; }
+  if(!pwd||pwd.length<8){ errDiv.textContent='Le mot de passe doit contenir au moins 8 caract\u00e8res'; errDiv.style.display='block'; return; }
+  errDiv.style.display='none';
+  try{
+    var res = await sb.auth.signUp({email:email,password:pwd,options:{data:{first_name:fn,last_name:ln,phone:phone,profile_type:type}}});
+    if(res.error){
+      var msg=res.error.message;
+      if(msg.includes('already registered')) msg='Cet email est d\u00e9j\u00e0 utilis\u00e9. Essayez de vous connecter.';
+      errDiv.textContent=msg; errDiv.style.display='block';
+      return;
+    }
+    location.reload();
+  }catch(e){ errDiv.textContent='Erreur lors de la cr\u00e9ation du compte'; errDiv.style.display='block'; }
+}
+
+function selectPremiumPlan(plan){
+  _selectedPremiumPlan = plan;
+  var m = document.getElementById('plan-monthly');
+  var y = document.getElementById('plan-yearly');
+  m.style.borderColor = plan==='monthly' ? '#FFD700' : 'rgba(255,255,255,.2)';
+  y.style.borderColor = plan==='yearly' ? '#FFD700' : 'rgba(255,255,255,.2)';
+  var btn = document.getElementById('premium-pay-btn');
+  btn.textContent = plan==='monthly' ? 'Souscrire \u2014 29\u20ac/mois' : 'Souscrire \u2014 290\u20ac/an';
+}
+
+function openPremiumPopup(){
+  document.getElementById('popup-premium').style.display='flex';
+  selectPremiumPlan('yearly');
+}
+
+async function openPremiumStripe(){
+  var btn = document.getElementById('premium-pay-btn');
+  btn.textContent = 'Chargement...';
+  btn.disabled = true;
+  try{
+    var res = await fetch('https://webhook.lesformateurs.online/premium-checkout',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        plan: _selectedPremiumPlan,
+        email: STATE.email || '',
+        user_id: (STATE.authUser && STATE.authUser.id) || '',
+        return_url: window.location.href.split('?')[0]
+      })
+    });
+    var data = await res.json();
+    if(data.url){
+      window.location.href = data.url;
+    } else {
+      showToast(data.error || 'Erreur lors de la cr\u00e9ation du paiement');
+      btn.disabled = false;
+      selectPremiumPlan(_selectedPremiumPlan);
+    }
+  }catch(e){
+    showToast('Erreur de connexion au serveur');
+    btn.disabled = false;
+    selectPremiumPlan(_selectedPremiumPlan);
+  }
+}
+
+/* ========== ADMIN BLOC 0 ========== */
+var ADMIN_STATE = { userId: null, isAdmin: false, accountMode: 'existing', foundUser: null, paymentOverride: null };
+
+function selectAdminPay(el, val){
+  document.querySelectorAll('[data-admpay]').forEach(function(c){c.classList.remove('selected');});
+  el.classList.add('selected');
+  ADMIN_STATE.paymentOverride = val;
+  refreshSummary();
+}
+
+function selectAdminAcct(el, val){
+  document.querySelectorAll('[data-admacct]').forEach(function(c){c.classList.remove('selected');});
+  el.classList.add('selected');
+  ADMIN_STATE.accountMode = val;
+  document.getElementById('admin-existing').style.display = val === 'existing' ? 'block' : 'none';
+  document.getElementById('admin-new').style.display = val === 'new' ? 'block' : 'none';
+}
+
+async function adminSearchUser(){
+  var email = document.getElementById('admin-search-email').value.trim().toLowerCase();
+  if(!email || email.indexOf('@') < 0){ showToast('Email invalide'); return; }
+  document.getElementById('admin-user-found').style.display = 'none';
+  document.getElementById('admin-user-notfound').style.display = 'none';
+  try{
+    var r = await sb.from('profiles').select('*').ilike('email', email).maybeSingle();
+    if(r.data){
+      ADMIN_STATE.foundUser = r.data;
+      document.getElementById('admin-user-info').textContent = (r.data.first_name||'') + ' ' + (r.data.last_name||'') + ' — ' + r.data.email;
+      document.getElementById('admin-user-found').style.display = 'block';
+      STATE.email = r.data.email;
+      document.getElementById('client-email').value = r.data.email;
+      document.getElementById('email').value = r.data.email;
+      document.getElementById('first-name').value = r.data.first_name || '';
+      document.getElementById('last-name').value = r.data.last_name || '';
+      document.getElementById('phone').value = r.data.phone || '';
+    } else {
+      ADMIN_STATE.foundUser = null;
+      document.getElementById('admin-user-notfound').style.display = 'block';
+    }
+  }catch(e){
+    ADMIN_STATE.foundUser = null;
+    document.getElementById('admin-user-notfound').style.display = 'block';
+  }
+}
+
+async function getAuthUser(){
+  try{
+    var sess = await sb.auth.getSession();
+    if(sess.data && sess.data.session && sess.data.session.user) return sess.data.session.user;
+  }catch(e){ console.warn('[AUTH] getSession failed:', e); }
+  try{
+    var r = await sb.auth.getUser();
+    if(r.data && r.data.user) return r.data.user;
+  }catch(e){ console.warn('[AUTH] getUser failed:', e); }
+  return null;
+}
+
+async function checkAdmin(){
+  try{
+    if(typeof sb==='undefined'||!sb){ console.warn('[ADMIN] sb not defined'); return; }
+    var user = await getAuthUser();
+    console.log('[ADMIN] user found:', user ? user.email : 'null');
+    if(!user) return;
+    ADMIN_STATE.userId = user.id;
+    var isAdmin = false;
+    try{
+      var p = await sb.from('profiles').select('*').eq('id', user.id).maybeSingle();
+      console.log('[ADMIN] profile:', p.data ? 'found, is_admin=' + p.data.is_admin + ', role=' + p.data.role : 'not found');
+      if(p.data && (p.data.is_admin === true || p.data.role === 'admin')) isAdmin = true;
+    }catch(e){}
+    if(!isAdmin){ var meta = user.user_metadata || {}; if(meta.role === 'admin') isAdmin = true; }
+    if(!isAdmin){ var app = user.app_metadata || {}; if(app.role === 'admin') isAdmin = true; }
+    if(!isAdmin){ if(['lfoadmin@gmail.com','formations2024@gmail.com'].indexOf(user.email) >= 0) isAdmin = true; }
+    console.log('[ADMIN] final isAdmin:', isAdmin);
+    if(isAdmin){
+      ADMIN_STATE.isAdmin = true;
+      document.getElementById('admin-block').style.display = 'block';
+      var firstCard = document.querySelector('[data-admpay="en_attente"]');
+      if(firstCard){ firstCard.classList.add('selected'); ADMIN_STATE.paymentOverride = 'en_attente'; }
+    }
+  }catch(e){ console.error('[ADMIN] error:', e); }
+}
+
+document.addEventListener('DOMContentLoaded', async function() {
+  refreshSummary();
+  await checkAdmin();
+  // Auth state
+  try {
+    if (typeof sb !== 'undefined' && sb) {
+      var user = await getAuthUser();
+      console.log('[AUTH] initAuth user:', user ? user.email : 'null');
+      if (user) {
+        STATE.authUser = user;
+        STATE.email = user.email;
+        // Header: Connexion → Mon compte
+        var l = document.getElementById('btn-login');
+        var c = document.getElementById('btn-compte');
+        if (l) l.style.display = 'none';
+        if (c) c.style.display = 'inline-block';
+        // Bloc 1
+        // Check premium for ALL users (admin included)
+        try {
+          var pp = await sb.from('profiles').select('is_premium,premium_plan,premium_since').eq('id', user.id).maybeSingle();
+          if (pp.data && (pp.data.is_premium === true || (pp.data.premium_plan && pp.data.premium_since))){
+            STATE.isPremium = true;
+            var apt=document.getElementById('admin-premium-toggle');
+            if(apt) apt.style.display='block';
+          }
+        } catch(e) {}
+
+        document.getElementById('auth-not-connected').style.display = 'none';
+        if (ADMIN_STATE.isAdmin) {
+          document.getElementById('auth-connected').style.display = 'block';
+          var userInfoBlock = document.querySelector('#auth-connected > div:first-child');
+          if (userInfoBlock) userInfoBlock.style.display = 'none';
+        } else {
+          var meta = user.user_metadata || {};
+          var fn = meta.first_name || '';
+          var ln = meta.last_name || '';
+          try {
+            var p = await sb.from('profiles').select('*').eq('id', user.id).maybeSingle();
+            if (p.data) { fn = p.data.first_name || fn; ln = p.data.last_name || ln; }
+          } catch(e) {}
+          document.getElementById('auth-not-connected').style.display = 'none';
+          document.getElementById('auth-connected').style.display = 'block';
+          document.getElementById('auth-user-name').textContent = fn + ' ' + ln;
+          document.getElementById('auth-user-email').textContent = user.email;
+          document.getElementById('client-email').value = user.email;
+          document.getElementById('email').value = user.email;
+        }
+      }
+    }
+  } catch(e) { console.warn('auth err', e); }
+  renderPremiumBlock();
+  refreshSummary();
+  initSteps();
+});
+function renderPremiumBlock(){
+  var block = document.getElementById('premium-block');
+  var content = document.getElementById('premium-content');
+  if(!block||!content) return;
+  var total = calcTotal();
+  if(total <= 0){ block.style.display='none'; return; }
+  block.style.display='block';
+  var saving = Math.round(total * 0.10);
+  if(STATE.isPremium){
+    block.className = 'premium-block is-member';
+    content.innerHTML = '<div class="pm-badge">\u2605 Membre Premium</div><h4>Votre r\u00e9duction de -10% est appliqu\u00e9e</h4><p class="pm-sub">Merci pour votre fid\u00e9lit\u00e9. La r\u00e9duction est automatiquement incluse dans votre total.</p><div class="pm-row"><div class="pm-saving">-' + saving.toLocaleString('fr-FR') + ' EUR<small>\u00e9conomis\u00e9 sur cette commande</small></div></div>';
+  } else {
+    block.className = 'premium-block';
+    content.innerHTML = '<div class="pm-badge">\u2605 Premium</div><h4>Devenez membre Premium et \u00e9conomisez 10%</h4><p class="pm-sub">Souscrivez \u00e0 l\u2019abonnement Premium (29 EUR/mois ou 290 EUR/an) et b\u00e9n\u00e9ficiez de -10% sur toutes vos commandes.</p><div class="pm-row"><div class="pm-saving">-' + saving.toLocaleString('fr-FR') + ' EUR<small>d\u2019\u00e9conomie sur cette commande</small></div><button class="pm-btn" onclick="openPremiumPopup()">Souscrire au Premium</button></div>';
+  }
+}
+
+// Reload page after auth modal success
+window.addEventListener('lfo-auth-success', function(){ location.reload(); });
+
+/* ========== EDOF DOCUMENT UPLOAD (Step 2) ========== */
+var _edofUploadedFiles=[];
+function edofHandleDrop(e){e.preventDefault();var dz=e.target.closest('#dropzone-edof');if(dz){dz.style.borderColor='#E5E7EB';dz.style.background='#FAFAFA';}edofHandleFiles(e.dataTransfer.files);}
+function edofHandleFiles(files){for(var i=0;i<files.length;i++){if(files[i].size>10*1024*1024){showToast('Le fichier '+files[i].name+' d\u00e9passe 10 Mo');continue;}_edofUploadedFiles.push(files[i]);}edofRenderFileList();}
+function edofRemoveFile(idx){_edofUploadedFiles.splice(idx,1);edofRenderFileList();}
+function edofRenderFileList(){
+  var list=document.getElementById('uploaded-docs-list');
+  var btn=document.getElementById('btn-submit-docs');
+  if(!list)return;
+  if(!_edofUploadedFiles.length){list.innerHTML='';if(btn)btn.style.display='none';return;}
+  if(btn)btn.style.display='block';
+  var colors={PDF:{bg:'#FCEBEB',tx:'#E24B4A'},JPG:{bg:'#E6F1FB',tx:'#378ADD'},JPEG:{bg:'#E6F1FB',tx:'#378ADD'},PNG:{bg:'#EEEDFE',tx:'#534AB7'},DOC:{bg:'#E1F5EE',tx:'#1D9E75'},DOCX:{bg:'#E1F5EE',tx:'#1D9E75'}};
+  list.innerHTML=_edofUploadedFiles.map(function(f,i){
+    var ext=f.name.split('.').pop().toUpperCase();
+    var sz=(f.size/1024).toFixed(0)+' Ko';
+    var c=colors[ext]||{bg:'#F3F4F6',tx:'#6B7280'};
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:white;border:1px solid #F3F4F6;border-radius:10px;margin-bottom:6px;"><div style="display:flex;align-items:center;gap:10px;"><div style="padding:4px 8px;border-radius:6px;font-size:10px;font-weight:700;background:'+c.bg+';color:'+c.tx+';">'+ext+'</div><div><div style="font-size:13px;font-weight:500;">'+esc(f.name)+'</div><div style="font-size:11px;color:#9CA3AF;">'+sz+'</div></div></div><button onclick="edofRemoveFile('+i+')" style="background:none;border:none;cursor:pointer;color:#9CA3AF;font-size:16px;padding:4px;">\u2715</button></div>';
+  }).join('');
+}
+async function edofSubmitDocs(){
+  if(!_edofUploadedFiles.length)return;
+  var user=await getAuthUser();
+  if(!user){showToast('Connectez-vous d\'abord');return;}
+  var btn=document.getElementById('btn-submit-docs');
+  btn.textContent='Envoi en cours...';btn.disabled=true;
+  for(var i=0;i<_edofUploadedFiles.length;i++){
+    var f=_edofUploadedFiles[i];
+    var path=user.id+'/'+Date.now()+'_'+f.name;
+    await sb.storage.from('documents').upload(path,f,{contentType:f.type});
+  }
+  btn.textContent='Documents envoy\u00e9s !';btn.style.background='#1D9E75';
+  showToast('Documents envoy\u00e9s avec succ\u00e8s');
+  setTimeout(function(){btn.textContent='Soumettre mes documents pour v\u00e9rification';btn.style.background='#D85A30';btn.disabled=false;_edofUploadedFiles=[];edofRenderFileList();},3000);
+}
+
+/* ========== EDOF FORM (Step 1) ========== */
+var _efStep=0;
+var EF_STEPS=[
+  {id:1,label:'Organisme',svg:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="CCC" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22V12h6v10"/><path d="M8 6h.01M16 6h.01M8 10h.01M16 10h.01" stroke-width="2.5"/></svg>'},
+  {id:2,label:'Actions',svg:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="CCC" stroke-width="1.8"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 2h6v3a1 1 0 01-1 1h-4a1 1 0 01-1-1V2z"/><path d="M9 12h6M9 16h4"/></svg>'},
+  {id:3,label:'Offres',svg:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="CCC" stroke-width="1.8"><path d="M12 2l9 5v10l-9 5-9-5V7l9-5z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg>'},
+  {id:4,label:'Coordonn\u00e9es',svg:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="CCC" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>'},
+  {id:5,label:'Pi\u00e8ces',svg:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="CCC" stroke-width="1.8"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>'}
+];
+
+function efIcon(svg,active){return svg.replace(/CCC/g,active?'#fff':'#999');}
+
+function efRenderStepper(){
+  var h='';
+  EF_STEPS.forEach(function(s,i){
+    var active=_efStep===i;var done=_efStep>i;
+    var bg=active?'#D85A30':(done?'#4CAF50':'#ddd');
+    var ic=done?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>':efIcon(s.svg,active);
+    h+='<div class="ef-step-btn" onclick="efGo('+i+')">';
+    h+='<div class="ef-step-circle'+(active?' active':'')+'" style="background:'+bg+'">'+ic+'</div>';
+    h+='<span class="ef-step-label'+(active?' active':'')+'">'+s.label+'</span></div>';
+    if(i<EF_STEPS.length-1) h+='<div class="ef-step-line'+(done?' done':'')+'"></div>';
+  });
+  document.getElementById('ef-stepper').innerHTML=h;
+  var prev=document.getElementById('ef-prev');
+  var next=document.getElementById('ef-next');
+  if(prev){prev.style.opacity=_efStep===0?'.4':'1';prev.style.cursor=_efStep===0?'default':'pointer';}
+  if(next){next.textContent=_efStep===4?'ENVOYER LA DEMANDE \u2192':'Suivant \u2192';next.className=_efStep===4?'ef-btn-next final':'ef-btn-next';}
+}
+
+function efAccord(title,svgHtml,body,open){
+  return '<div class="ef-accord'+(open?' open':'')+'"><button class="ef-accord-head" onclick="this.parentElement.classList.toggle(\'open\')">'+
+    (svgHtml?'<span style="flex-shrink:0;display:flex">'+svgHtml+'</span>':'')+
+    '<span style="flex:1">'+title+'</span><span class="arr">\u25be</span></button>'+
+    '<div class="ef-accord-body">'+body+'</div></div>';
+}
+function efField(label,input,req,hint){
+  return '<div><label class="ef-lbl">'+label+(req?'<span class="req">*</span>':'')+'</label>'+input+(hint?'<div class="ef-hint">'+hint+'</div>':'')+'</div>';
+}
+function efInput(ph,type,extra){return '<input class="ef-input" type="'+(type||'text')+'" placeholder="'+ph+'"'+(extra||'')+'>';}
+function efTextarea(ph,rows){return '<textarea class="ef-textarea" placeholder="'+ph+'" rows="'+(rows||4)+'"></textarea>';}
+function efSelect(ph,opts){return '<select class="ef-select"><option value="">'+ph+'</option>'+opts.map(function(o){return '<option value="'+o+'">'+o+'</option>';}).join('')+'</select>';}
+function efRadio(name,opts){return '<div style="display:flex;gap:16px;flex-wrap:wrap">'+opts.map(function(o){return '<label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px"><input type="radio" name="'+name+'" value="'+o+'" style="accent-color:#D85A30">'+o+'</label>';}).join('')+'</div>';}
+function efCheckboxes(opts){return '<div style="display:flex;flex-direction:column;gap:8px">'+opts.map(function(o){return '<label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px"><input type="checkbox" style="accent-color:#D85A30">'+o+'</label>';}).join('')+'</div>';}
+function efUpload(label){return '<div class="ef-upload"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#D85A30" stroke-width="1.5"><rect x="8" y="4" width="24" height="32" rx="3" fill="rgba(216,90,48,.03)"/><path d="M15 22l5-5 5 5M20 17v12" stroke-width="2"/></svg><div style="font-size:13px;color:#666;margin-top:8px">'+label+'</div><div style="font-size:11px;color:#999;margin-top:4px">PDF, PNG, JPG — 10 Mo max</div></div>';}
+function efAlert(txt,type){return '<div class="ef-alert"><span style="flex-shrink:0;margin-top:1px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="2"><circle cx="12" cy="12" r="10" fill="rgba(216,90,48,.05)"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><div>'+txt+'</div></div>';}
+
+function efRenderContent(){
+  var h='';
+  if(_efStep===0) h=efStepOrganisme();
+  else if(_efStep===1) h=efStepActions();
+  else if(_efStep===2) h=efStepOffres();
+  else if(_efStep===3) h=efStepCoordonnees();
+  else if(_efStep===4) h=efStepPieces();
+  document.getElementById('ef-content').innerHTML='<div style="animation:fadeIn .3s ease">'+h+'</div>';
+}
+
+function efHelp(html){return '<div class="ef-help">'+html+'</div>';}
+function efEx(title,txt){return '<div class="ef-example"><b>'+title+'</b><br>'+txt+'</div>';}
+function efErr(txt){return '<div class="ef-error">'+txt+'</div>';}
+function efStat(txt){return '<span class="ef-stat">'+txt+'</span>';}
+function efHelpToggle(id,label){return '<button class="ef-help-toggle" onclick="var e=document.getElementById(\''+id+'\');e.style.display=e.style.display===\'none\'?\'block\':\'none\';">\u2139\ufe0f '+label+'</button>';}
+function efHelpBlock(id,html){return '<div id="'+id+'" style="display:none">'+html+'</div>';}
+
+function efBuildMediateurs(){
+  if(!window.EDOF_HELP) return '';
+  var m=EDOF_HELP.mediateurs;
+  var h=efHelp('<b>\u2696\ufe0f M\u00e9diateur de la consommation — Obligatoire</b><br>'+m.intro);
+  h+='<div style="margin:12px 0"><b style="font-size:13px">Comparatif des m\u00e9diateurs :</b></div>';
+  h+='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:8px;overflow:hidden;border:1px solid #E5E7EB">';
+  h+='<tr style="background:#F3F4F6"><th style="padding:8px;text-align:left">M\u00e9diateur</th><th style="padding:8px">Adh\u00e9sion</th><th style="padding:8px">Par m\u00e9diation</th><th style="padding:8px">Note</th></tr>';
+  m.liste.forEach(function(med){
+    h+='<tr style="border-top:1px solid #E5E7EB"><td style="padding:8px"><a href="'+med.url+'" target="_blank" style="color:#D85A30;font-weight:600">'+med.nom+'</a></td><td style="padding:8px;text-align:center">'+med.prix+'</td><td style="padding:8px;text-align:center">'+med.mediation+'</td><td style="padding:8px;font-size:11px;color:#666">'+med.note+'</td></tr>';
+  });
+  h+='</table></div>';
+  h+=efHelp('<b>Conseil :</b> '+m.conseil);
+  return h;
+}
+
+function efBuildSousTraitance(){
+  if(!window.EDOF_HELP) return '';
+  var s=EDOF_HELP.soustraitance;
+  var h=efHelp('<b>\ud83d\udce6 R\u00e8gles de sous-traitance CPF</b><ul>'+s.regles.map(function(r){return '<li>'+r+'</li>';}).join('')+'</ul>');
+  h+=efHelpToggle('st-exemples','Voir des exemples de r\u00e9ponses');
+  h+=efHelpBlock('st-exemples',s.exemples_reponses.map(function(e){return efEx(e.contexte,e.texte);}).join(''));
+  return h;
+}
+
+function efSection(title,icon,body){return '<div style="background:#fff;border:1px solid #f0f0f0;border-radius:10px;padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.03)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><span style="font-size:20px">'+icon+'</span><h3 style="font-size:15px;font-weight:700;margin:0">'+title+'</h3></div>'+body+'</div>';}
+function efQ(question,pourquoi,exemples){
+  var h='<div style="margin-bottom:14px;padding:12px 14px;background:#FAFAFA;border-radius:8px;border-left:3px solid #D85A30">';
+  h+='<div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:4px">'+question+'</div>';
+  h+='<div style="font-size:12px;color:#666;line-height:1.6;margin-bottom:8px"><b>Pourquoi ?</b> '+pourquoi+'</div>';
+  if(exemples&&exemples.length){
+    h+='<div style="font-size:11px;font-weight:600;color:#D85A30;margin-bottom:4px">Exemples de r\u00e9ponses accept\u00e9es :</div>';
+    exemples.forEach(function(e,i){h+='<div style="font-size:11px;color:#444;background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:8px 10px;margin-bottom:4px;line-height:1.5"><b>'+(i+1)+'.</b> '+e+'</div>';});
+  }
+  h+='</div>';
+  return h;
+}
+
+function efStepOrganisme(){
+  return efHelp(efStat('14 109 OF r\u00e9f\u00e9renc\u00e9s sur EDOF')+efStat('79% RS')+efStat('21% RNCP')+efStat('673 539 entr\u00e9es en 2025')+'<br>Renseignez les informations administratives de votre organisme. SIREN, SIRET et NDA se trouvent sur votre Kbis et votre r\u00e9c\u00e9piss\u00e9 DREETS.')+
+  efSection('Effectifs \u2014 Ce que d\u00e9clarent les OF accept\u00e9s','\ud83d\udc65',
+    efHelp(efStat('Majorit\u00e9 des OF : 1-5 salari\u00e9s')+efStat('1-3 formateurs en moyenne')+'<br>EDOF v\u00e9rifie la coh\u00e9rence entre votre effectif et votre volume d\'offres. Soyez coh\u00e9rent avec votre BPF.')+
+    efQ('Combien d\u00e9clarer ?','Si vous \u00eates seul, d\u00e9clarez 0 salari\u00e9 et 1 formateur. Si vous avez des ind\u00e9pendants, ils ne comptent pas comme salari\u00e9s.',['0 salari\u00e9, 1 formateur \u2014 micro-entrepreneur qui forme lui-m\u00eame','1 salari\u00e9, 1 formateur \u2014 g\u00e9rant-formateur en SASU','3 salari\u00e9s, 2 formateurs \u2014 petit OF avec 1 admin + 2 formateurs','5 salari\u00e9s, 4 formateurs \u2014 OF de taille moyenne','12 salari\u00e9s, 8 formateurs \u2014 centre de formation structur\u00e9']))+
+  efSection('Sous-traitance \u2014 R\u00e8gles et exemples de r\u00e9ponses','\ud83d\udce6',efBuildSousTraitance())+
+  efSection('M\u00e9diateur \u2014 Obligatoire, comparatif et liens','\u2696\ufe0f',efBuildMediateurs())+
+  efSection('Coordonn\u00e9es bancaires \u2014 Attention','\ud83c\udfe6',
+    efHelp('<b>Le titulaire du compte DOIT correspondre exactement \u00e0 votre raison sociale</b> (celle inscrite sur le Kbis). Si ce n\'est pas le cas, le virement CPF sera rejet\u00e9. V\u00e9rifiez votre RIB avant de saisir.'));
+}
+
+function efStepActions(){
+  var H=window.EDOF_HELP||{};
+  return efHelp(efStat('Actions de formation : 72%')+efStat('Bilans : 12%')+efStat('Permis : 8%')+efStat('VAE : 5%')+efStat('Apprentissage : 2%')+efStat('\u00c9lus : 1%')+'<br>Cause n\u00b01 de rejet : cat\u00e9gorie d\'action incoh\u00e9rente avec le certificat Qualiopi.')+
+  efSection('Cat\u00e9gories d\'actions','\ud83d\udcca',
+    efHelp('<b>Top certifications EDOF :</b> TOEIC (273K), Permis B (166K), Excel (139K), CACES (58K), English 360 (56K), CLOE anglais (54K), Voltaire (45K).')+
+    efQ('Quelles cat\u00e9gories cocher ?','Chaque cat\u00e9gorie DOIT correspondre \u00e0 votre certificat Qualiopi. V\u00e9rifiez votre certificat.',['Actions de formation \u2014 si vous dispensez des formations certifiantes (RS/RNCP)','Bilans de comp\u00e9tences \u2014 si votre Qualiopi couvre la cat\u00e9gorie BC','Permis de conduire \u2014 si vous \u00eates auto-\u00e9cole certifi\u00e9e','VAE \u2014 si votre Qualiopi couvre l\'accompagnement VAE','Ne cochez JAMAIS une cat\u00e9gorie non couverte par votre Qualiopi \u2014 rejet garanti']))+
+  efSection('Modalit\u00e9s d\'\u00e9valuation','\ud83d\udcdd',
+    efHelp('<b>Qualiopi indicateurs 8-10 :</b> D\u00e9crivez comment vous \u00e9valuez le besoin AVANT la formation et comment les r\u00e9sultats adaptent le parcours.')+
+    efQ('Comment \u00e9valuez-vous le besoin de formation ?','EDOF veut savoir que vous personnalisez le parcours.',(H.evaluation?H.evaluation.exemples:[]).slice(0,5)));
+}
+
+function efStepOffres(){
+  var H=window.EDOF_HELP||{};
+  return efHelp('Vous devez cr\u00e9er au moins une offre t\u00e9moin pour \u00e9valuation. Voici comment remplir chaque champ.')+
+  efSection('Intitul\u00e9 de l\'offre','\ud83c\udff7\ufe0f',
+    efHelp('Seuls les <b>90 premiers caract\u00e8res</b> sont visibles sur Mon Compte Formation. Soyez pr\u00e9cis et mentionnez la certification.')+
+    efQ('Intitul\u00e9','Doit contenir : type de formation + certification + dur\u00e9e. Pas de titre commercial.',
+      (H.intitules?H.intitules.exemples:[]).map(function(e){return e.bon;}))+
+    efHelp('<b>Erreurs fr\u00e9quentes :</b>'+(H.intitules?H.intitules.erreurs:[]).map(function(e){return '<br>\u2022 '+e;}).join('')))+
+  efSection('Objectifs p\u00e9dagogiques','\ud83c\udfaf',
+    efHelp('Utilisez des <b>verbes d\'action</b> (Bloom) : identifier, appliquer, analyser, \u00e9valuer, cr\u00e9er. L\'objectif doit \u00eatre SMART.')+
+    efQ('Formation certifiante RS/RNCP','L\'objectif doit correspondre aux comp\u00e9tences \u00e9valu\u00e9es par la certification.',
+      (H.objectifs?H.objectifs.exemples_par_type.formation_certifiante:[]))+
+    efQ('Bilan de comp\u00e9tences','Focus sur l\'analyse des comp\u00e9tences et la d\u00e9finition du projet.',
+      (H.objectifs?H.objectifs.exemples_par_type.bilan_competences:[]))+
+    efQ('Permis de conduire','Conform\u00e9ment au REMC.',
+      (H.objectifs?H.objectifs.exemples_par_type.permis_conduire:[]))+
+    efHelp('<b>Erreurs \u00e0 \u00e9viter :</b>'+(H.objectifs?H.objectifs.erreurs:[]).map(function(e){return '<br>\u2022 '+e;}).join('')))+
+  efSection('Contenu & Points forts','\ud83d\udcdd',
+    efQ('Contenu de la formation','D\u00e9coupez en modules avec dur\u00e9e. M\u00e9thodes p\u00e9dagogiques incluses.',
+      [H.contenu?H.contenu.exemple:'','Module 1 (7h) : Fondamentaux. Module 2 (14h) : Pratique. Module 3 (7h) : Certification.','Alternance th\u00e9orie/pratique, cas concrets, mises en situation, \u00e9valuations formatives.','E-learning + classes virtuelles + ateliers pratiques en pr\u00e9sentiel.','Formation individualis\u00e9e avec un formateur d\u00e9di\u00e9, supports num\u00e9riques accessibles 24/7.'])+
+    efQ('Points forts','Ce qui diff\u00e9rencie votre offre.',
+      (H.contenu?H.contenu.points_forts_exemples:[])))+
+  efSection('R\u00e9sultats attendus','\u2705',
+    efQ('R\u00e9sultats','Ce que le stagiaire obtiendra concr\u00e8tement.',
+      (H.resultats?H.resultats.exemples:[])))+
+  efSection('Action & Session','\ud83d\udcc5',
+    efHelp('<b>Action :</b> Modalit\u00e9 d\'enseignement + dur\u00e9e + prix + rythme.<br><b>Session :</b> Dates + garantie + contacts. Si entr\u00e9es permanentes, cochez "Pas de dates".'));
+}
+
+function efStepCoordonnees(){
+  var H=window.EDOF_HELP||{};
+  return efHelp('Renseignez les coordonn\u00e9es du demandeur et du signataire. L\'e-mail du demandeur sera utilis\u00e9 pour <b>tous les \u00e9changes</b> avec la Caisse des D\u00e9p\u00f4ts.')+
+  efSection('Motivations & Engagement','\ud83d\udcdd',
+    efHelp('<b>La motivation doit montrer :</b> un projet s\u00e9rieux, coh\u00e9rent avec votre activit\u00e9, conforme \u00e0 la r\u00e9glementation. Mentionnez toujours : Qualiopi, domaine, anciennet\u00e9, engagement.')+
+    efQ('Description des motivations','Pourquoi voulez-vous \u00eatre r\u00e9f\u00e9renc\u00e9 sur EDOF ?',
+      (H.motivations?H.motivations.exemples:[])));
+}
+
+function efStepPieces(){
+  var pHelp='';
+  if(window.EDOF_HELP){
+    var p=EDOF_HELP.pieces;
+    pHelp=efHelp('<b>\ud83d\udccb Checklist compl\u00e8te des documents \u00e0 pr\u00e9parer :</b><ul>'+
+      p.obligatoires.map(function(d){return '<li><b>'+d.doc+'</b> ('+d.type+') \u2014 '+d.conseil+'</li>';}).join('')+
+      '</ul><b>Si association :</b><ul>'+
+      p.association.map(function(d){return '<li>'+d.doc+' \u2014 '+d.conseil+'</li>';}).join('')+
+      '</ul><b>Cas sp\u00e9cifiques :</b><ul>'+
+      p.specifiques.map(function(d){return '<li>'+d.doc+' ('+d.type+') \u2014 '+d.conseil+'</li>';}).join('')+
+      '</ul><b>Pi\u00e8ces compl\u00e9mentaires possibles :</b> '+p.complementaires+'<br><br><b>\u26a0\ufe0f '+p.conseil+'</b>');
+  }
+  return efHelp('<b>Formats accept\u00e9s :</b> PDF, PNG, JPG, GIF, BMP \u2014 <b>10 Mo max</b> par fichier. Pr\u00e9parez tout AVANT de remplir le formulaire.')+pHelp+
+  efSection('Entreprise','\ud83c\udfe2',
+    efQ('Kbis ou RNE','Extrait de moins de 3 mois. T\u00e9l\u00e9chargez-le sur <a href="https://www.infogreffe.fr" target="_blank">infogreffe.fr</a> ou <a href="https://www.monidenum.fr" target="_blank">monidenum.fr</a>.',['Kbis de moins de 3 mois (le plus courant)','Extrait RNE si votre greffe le propose','Pour les associations : r\u00e9c\u00e9piss\u00e9 JOAFE + statuts + PV AG','Le document doit \u00eatre lisible et non tronqu\u00e9','Format PDF recommand\u00e9']))+
+  efSection('Formations interdites / erreurs de rejet','\u26a0\ufe0f',
+    efHelp('<b>Formations refus\u00e9es syst\u00e9matiquement :</b><ul>'+(window.EDOF_HELP?EDOF_HELP.interdits.formations:[]).map(function(f){return '<li>'+f+'</li>';}).join('')+'</ul><b>Erreurs courantes de rejet :</b><ul>'+(window.EDOF_HELP?EDOF_HELP.interdits.erreurs_rejet:[]).map(function(e){return '<li>'+e+'</li>';}).join('')+'</ul>'));
+}
+
+function efGo(i){_efStep=i;efRenderStepper();efRenderContent();}
+function efPrev(){if(_efStep>0){_efStep--;efRenderStepper();efRenderContent();}}
+function efNext(){if(_efStep<4){_efStep++;efRenderStepper();efRenderContent();}}
+
+// Init form when step-1 is shown
+var _efInited=false;
+var _origSwitchStep=switchStep;
+switchStep=function(idx){
+  _origSwitchStep(idx);
+  if(idx===1&&!_efInited){_efInited=true;efRenderStepper();efRenderContent();}
+};
+</script>
+</body>
+</html>

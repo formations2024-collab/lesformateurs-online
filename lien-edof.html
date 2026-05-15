@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B6XVYRVT9D');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ouverture EDOF — Mon Compte Formation · 490€</title>
@@ -14,7 +23,7 @@
 <meta name="twitter:title" content="Ouverture EDOF — Mon Compte Formation · 490€">
 <meta name="twitter:description" content="Ouvrez votre espace EDOF sans erreur. Dossier complet, zéro rejet, 490€.">
 <meta name="description" content="Rendez vos formations visibles aux 40 millions d'actifs sur Mon Compte Formation. Ouverture EDOF sans erreur.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
 
@@ -228,6 +237,22 @@ h1,h2,h3,.quote-text{font-family:'DM Serif Text',Georgia,serif}
 .hf-guarantee p{font-size:13px;color:var(--muted)}
 .hf-ribbon{display:inline-flex;align-items:center;gap:6px;background:rgba(233,69,96,.06);color:var(--accent);font-size:13px;font-weight:600;padding:8px 18px;border-radius:50px;margin-bottom:24px}
 
+
+/* ========== OVERFLOW FIX ========== */
+html,body{max-width:100vw;overflow-x:hidden}
+.hero::before{max-width:100vw}
+.hero-inner{overflow:hidden}
+.hero h1{word-wrap:break-word;overflow-wrap:break-word}
+@media(max-width:768px){
+  .hero::before{width:100% !important;left:0 !important;transform:none !important}
+  .hero-inner{max-width:100%;padding:0}
+  .section-inner{max-width:100%;overflow:hidden}
+  .comparison-table{overflow-x:auto;display:block;max-width:100%}
+  table{min-width:500px}
+  img{max-width:100%;height:auto}
+}
+/* ========== END OVERFLOW FIX ========== */
+
 </style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -241,6 +266,65 @@ h1,h2,h3,.quote-text{font-family:'DM Serif Text',Georgia,serif}
   },
   "url": "https://lesformateurs.online/lien-edof"
 }</script>
+<style>
+#acces-checkout-overlay {
+  padding: 8px !important;
+}
+#acces-checkout-overlay > div {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 20px 14px !important;
+  border-radius: 16px !important;
+  max-height: 92vh !important;
+  box-sizing: border-box !important;
+  margin: 0 auto !important;
+}
+#acces-checkout-overlay h3 {
+  font-size: 20px !important;
+  word-wrap: break-word !important;
+}
+#acces-checkout-overlay p {
+  word-wrap: break-word !important;
+}
+#acces-checkout-overlay input,
+#acces-checkout-overlay button,
+#acces-checkout-overlay a {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+#acces-checkout-overlay button,
+#acces-checkout-overlay a[style*="border-radius:50px"] {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+@media(max-width:520px){
+  #acces-checkout-overlay > div {
+    padding: 18px 12px !important;
+    border-radius: 12px !important;
+    max-height: 95vh !important;
+  }
+  #acces-checkout-overlay h3 {
+    font-size: 18px !important;
+  }
+  #acces-checkout-overlay input {
+    padding: 12px !important;
+    font-size: 14px !important;
+  }
+  #acces-checkout-overlay button {
+    padding: 14px 10px !important;
+    font-size: 14px !important;
+  }
+  #acces-checkout-overlay label {
+    font-size: 12px !important;
+  }
+  #acces-checkout-overlay [style*="display:flex;gap:12px"] {
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+}
+</style>
 </head>
 <body>
 <div class="hero">
@@ -254,7 +338,7 @@ h1,h2,h3,.quote-text{font-family:'DM Serif Text',Georgia,serif}
 
   </div>
 <div class="trust">
-  <div class="trust-item"><span class="trust-check">✓</span> <strong>2 847+</strong> formateurs accompagnés</div>
+  <div class="trust-item"><span class="trust-check">✓</span> <strong>200+</strong> formateurs accompagnés</div>
   <div class="trust-item"><span class="trust-check">✓</span> <strong>98%</strong> de satisfaction</div>
   <div class="trust-item"><span class="trust-check">✓</span> <strong>48h</strong> délai moyen</div>
 </div>
@@ -348,7 +432,7 @@ h1,h2,h3,.quote-text{font-family:'DM Serif Text',Georgia,serif}
   <h2>Ouvrez votre espace EDOF</h2>
   <p class="section-sub">Dossier sans erreur. Programme conforme. Fiches optimisées. Zéro rejet.</p>
   <div class="hf-price">
-    <span class="hf-price-old">490€</span>
+    <span class="hf-price-old">1 990€</span>
     <span class="hf-price-new">490€</span>
   </div>
   
@@ -368,6 +452,7 @@ h1,h2,h3,.quote-text{font-family:'DM Serif Text',Georgia,serif}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src="js/referral.js"></script>
 <script>
 async function sendLead(source){
   var n=document.getElementById('lead-nom').value.trim();
@@ -382,10 +467,10 @@ async function sendLead(source){
 }
 </script>
 
-<div id="acces-checkout-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
-  <div style="background:#fff;border-radius:20px;max-width:480px;width:100%;padding:40px;position:relative;max-height:90vh;overflow-y:auto;">
+<div id="acces-checkout-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:10px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#fff;border-radius:20px;max-width:480px;width:100%;padding:24px 16px;position:relative;max-height:90vh;overflow-y:auto;box-sizing:border-box;">
     <button onclick="document.getElementById('acces-checkout-overlay').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#6b7080;">×</button>
-    <h3 style="font-family:'DM Serif Text',serif;font-size:28px;margin-bottom:8px;text-align:center;">Finalisez votre commande</h3>
+    <h3 style="font-family:'DM Serif Text',serif;font-size:22px;margin-bottom:8px;text-align:center;">Finalisez votre commande</h3>
     <p style="font-size:14px;color:#6b7080;text-align:center;margin-bottom:28px;">Créez votre compte et accédez à votre espace.</p>
     <div id="fco-form">
       <div style="display:flex;gap:12px;margin-bottom:14px;"><div style="flex:1;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Prénom</label><input type="text" id="fco-firstname" placeholder="Sophie" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;box-sizing:border-box;"/></div><div style="flex:1;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Nom</label><input type="text" id="fco-lastname" placeholder="Martin" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;box-sizing:border-box;"/></div></div>
@@ -408,7 +493,7 @@ async function sendLead(source){
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;color:#1a1d23;user-select:none;">
           <input type="checkbox" id="fco-toggle-rs" style="display:none;"/>
           <span onclick="toggleFcoCheck('fco-toggle-rs')" id="fco-track-rs" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;cursor:pointer;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
-          J'ai une habilitation ou une certification RS ou RNCP
+          J'ai une habilitation, certification RS/RNCP, bilan de compétence ou VAE
         </div>
       </div>
       <div id="fco-error" style="display:none;color:#e94560;font-size:13px;margin-bottom:12px;text-align:center;"></div>
@@ -417,6 +502,24 @@ async function sendLead(source){
       <p style="font-size:12px;color:#6b7080;text-align:center;margin-top:14px;">Déjà un compte ? <a href="#" onclick="toggleFcoLogin(event)" style="color:#e94560;font-weight:600;">Se connecter</a></p>
     </div>
     <div id="fco-login" style="display:none;">
+      <div style="margin-bottom:18px;margin-top:4px;">
+        <p style="font-size:13px;font-weight:700;margin-bottom:10px;color:#1a1d23;">Prérequis obligatoires :</p>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;color:#1a1d23;user-select:none;">
+          <input type="checkbox" id="fco-login-toggle-nda" style="display:none;"/>
+          <span onclick="toggleFcoLoginCheck('fco-login-toggle-nda')" id="fco-login-track-nda" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;cursor:pointer;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
+          J'ai mon NDA
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;color:#1a1d23;user-select:none;">
+          <input type="checkbox" id="fco-login-toggle-qualiopi" style="display:none;"/>
+          <span onclick="toggleFcoLoginCheck('fco-login-toggle-qualiopi')" id="fco-login-track-qualiopi" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;cursor:pointer;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
+          J'ai un certificat Qualiopi valide
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;color:#1a1d23;user-select:none;">
+          <input type="checkbox" id="fco-login-toggle-rs" style="display:none;"/>
+          <span onclick="toggleFcoLoginCheck('fco-login-toggle-rs')" id="fco-login-track-rs" style="width:40px;height:22px;background:#ccc;border-radius:11px;position:relative;display:inline-block;transition:background .2s;flex-shrink:0;cursor:pointer;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;display:block;"></span></span>
+          J'ai une habilitation, certification RS/RNCP, bilan de compétence ou VAE
+        </div>
+      </div>
       <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Email</label><input type="email" id="fco-login-email" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;"/></div>
       <div style="margin-bottom:14px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Mot de passe</label><input type="password" id="fco-login-pass" style="width:100%;padding:14px 16px;border:1.5px solid #e9e7e2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;"/></div>
       <div id="fco-login-error" style="display:none;color:#e94560;font-size:13px;margin-bottom:12px;text-align:center;"></div>
@@ -441,6 +544,31 @@ async function loginFunnelCheckout(){var e=document.getElementById('fco-login-em
 <script>
 const observer=new IntersectionObserver(e=>{e.forEach(t=>{if(t.isIntersecting){t.target.classList.add('visible');observer.unobserve(t.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+<script>
+function toggleFcoLoginCheck(id){
+  var cb=document.getElementById(id);
+  cb.checked=!cb.checked;
+  var track=document.getElementById(id.replace('toggle','track'));
+  var knob=track.querySelector('span');
+  if(cb.checked){track.style.background='#e94560';knob.style.transform='translateX(18px)';}
+  else{track.style.background='#ccc';knob.style.transform='translateX(0)';}
+  checkFcoLoginReady();
+}
+function checkFcoLoginReady(){
+  var ids=['fco-login-toggle-nda','fco-login-toggle-qualiopi','fco-login-toggle-rs'];
+  var allOn=true;
+  ids.forEach(function(id){if(!document.getElementById(id).checked)allOn=false;});
+  var btn=document.querySelector('#fco-login button[onclick="loginFunnelCheckout()"]');
+  if(btn){
+    if(allOn){btn.disabled=false;btn.style.opacity='1';btn.style.cursor='pointer';}
+    else{btn.disabled=true;btn.style.opacity='.4';btn.style.cursor='not-allowed';}
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var btn=document.querySelector('#fco-login button[onclick="loginFunnelCheckout()"]');
+  if(btn){btn.disabled=true;btn.style.opacity='.4';btn.style.cursor='not-allowed';}
+});
 </script>
 </body>
 </html>

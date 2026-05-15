@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulaire EDOF — lesformateurs.online</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-B6XVYRVT9D');</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',-apple-system,sans-serif;background:#FEFEFE;color:#1a1a1a;line-height:1.6;}
+.navbar{position:sticky;top:0;z-index:100;background:#fff;border-bottom:0.5px solid #f0f0f0;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.navbar .logo{font-size:16px;}.navbar .logo span{color:#D85A30;font-weight:600;}
+.navbar .badge{font-size:11px;background:#E1F5EE;color:#0F6E56;padding:3px 10px;border-radius:12px;font-weight:500;}
+.container{max-width:680px;margin:0 auto;padding:30px 20px 80px;}
+.banner{background:#f4f4f2;border:0.5px solid #e0e0e0;border-radius:12px;padding:20px 22px;margin-bottom:24px;display:flex;gap:14px;align-items:flex-start;}
+.banner svg{flex-shrink:0;margin-top:2px;}
+.banner p{font-size:13px;color:#555;line-height:1.6;}
+.section{background:#fff;border:0.5px solid #f0f0f0;border-radius:14px;padding:24px;margin-bottom:14px;}
+.section h3{font-size:15px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:10px;}
+.section h3 .num{width:24px;height:24px;background:#D85A30;color:white;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.section .sub{font-size:12px;color:#888;margin-bottom:16px;}
+.note{font-size:11px;color:#888;padding:10px 14px;background:#fafaf8;border-radius:8px;margin-top:12px;border-left:3px solid #378ADD;line-height:1.5;background:#f4f8fd;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12px;color:#555;margin-bottom:4px;font-weight:500;}
+.field label .req{color:#E24B4A;}
+.field input,.field select,.field textarea{width:100%;padding:10px 14px;border:0.5px solid #e0e0e0;border-radius:8px;font-size:14px;font-family:inherit;background:#fafaf8;transition:border-color 0.15s;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#D85A30;background:white;}
+.field .hint{font-size:11px;color:#bbb;margin-top:3px;}
+.siret-row{display:flex;gap:10px;}
+.siret-row input{flex:1;padding:12px 16px;border:0.5px solid #e0e0e0;border-radius:8px;font-size:15px;font-family:inherit;background:#fafaf8;letter-spacing:1px;}
+.siret-row input:focus{outline:none;border-color:#D85A30;background:white;}
+.btn-search{background:#1a1a1a;color:white;border:none;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;}
+.btn-search:disabled{opacity:0.5;cursor:not-allowed;}
+.org-card{border:0.5px solid #c0dd97;border-radius:12px;padding:18px;margin-top:16px;display:none;background:#f8fdf6;}
+.org-card.show{display:block;}
+.org-card .found{font-size:11px;color:#1D9E75;font-weight:500;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;}
+.org-card .org-name{font-size:17px;font-weight:600;margin-bottom:4px;}
+.org-card .org-meta{font-size:12px;color:#666;line-height:1.6;}
+.org-card .attrs{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
+.org-card .attr{font-size:10px;padding:3px 8px;border-radius:4px;font-weight:500;}
+.org-card .attr.on{background:#E1F5EE;color:#0F6E56;}
+.org-card .attr.off{background:#f5f4f0;color:#999;}
+.org-card .sep{height:0.5px;background:#e0e0e0;margin:12px 0;}
+.org-card .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.org-card .detail{font-size:11px;}
+.org-card .detail .dl{color:#999;}
+.org-card .detail .dv{color:#1a1a1a;font-weight:500;}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.choice{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:0.5px solid #f0f0f0;border-radius:8px;cursor:pointer;font-size:13px;transition:all 0.15s;user-select:none;background:#fff;}
+.choice:hover{border-color:#D85A30;}
+.choice.checked{background:#FFF5F2;border-color:#D85A30;color:#D85A30;}
+.choice .cb{width:16px;height:16px;border:1.5px solid #ccc;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all 0.15s;margin-top:2px;}
+.choice.checked .cb{background:#D85A30;border-color:#D85A30;color:white;}
+.choice.radio .cb{border-radius:50%;}
+.choice.radio.checked .cb::after{content:'';width:8px;height:8px;background:#D85A30;border-radius:50%;}
+.choice.radio.checked .cb{background:white;}
+.choice-text strong{display:block;font-weight:500;}
+.choice-text small{display:block;font-size:11px;color:#999;margin-top:2px;}
+.choice.checked .choice-text small{color:#D85A30;opacity:0.8;}
+.cert-search{position:relative;margin-top:16px;display:none;}
+.cert-search.show{display:block;}
+.cert-search input{width:100%;padding:10px 14px;border:0.5px solid #e0e0e0;border-radius:8px;font-size:13px;font-family:inherit;background:#fafaf8;}
+.cert-search input:focus{outline:none;border-color:#D85A30;background:white;}
+.cert-search .results{position:absolute;top:100%;left:0;right:0;background:white;border:0.5px solid #e0e0e0;border-radius:0 0 8px 8px;max-height:200px;overflow-y:auto;z-index:10;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.06);}
+.cert-search .results.show{display:block;}
+.cert-search .result-item{padding:10px 14px;cursor:pointer;border-bottom:0.5px solid #f5f5f5;font-size:12px;}
+.cert-search .result-item:hover{background:#FFF8F5;}
+.cert-search .result-item .code{font-weight:600;color:#D85A30;}
+.cert-search .result-item .org{color:#999;font-size:11px;}
+.cert-added{margin-top:10px;}
+.cert-tag{display:flex;align-items:center;gap:8px;padding:8px 12px;border:0.5px solid #f0f0f0;border-radius:8px;font-size:12px;margin-top:6px;background:#fafaf8;}
+.cert-tag strong{color:#D85A30;}
+.cert-tag select{font-size:11px;border:0.5px solid #e0e0e0;border-radius:4px;padding:4px 8px;background:#fff;font-family:inherit;}
+.cert-tag .remove{cursor:pointer;color:#E24B4A;font-size:16px;margin-left:auto;}
+.site-url{margin-top:12px;display:none;}
+.site-url.show{display:block;}
+.upload-zone{border:1.5px dashed #e0e0e0;border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:border-color 0.2s;background:#fafaf8;}
+.upload-zone:hover{border-color:#D85A30;}
+.upload-zone p{font-size:12px;color:#888;margin-top:6px;}
+.upload-zone .format{font-size:10px;color:#bbb;margin-top:2px;}
+.uploads-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.submit-section{text-align:center;padding-top:16px;display:none;}
+.submit-section.show{display:block;}
+.submit-btn{background:#D85A30;color:white;border:none;padding:16px 48px;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;width:100%;}
+.submit-btn:hover{background:#c04828;}
+.submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.submit-note{font-size:11px;color:#bbb;margin-top:10px;}
+.success-screen{text-align:center;padding:80px 20px;}
+.success-screen h2{font-size:22px;font-weight:600;margin:20px 0 8px;}
+.success-screen p{font-size:14px;color:#888;margin:4px 0;}
+.success-screen .email-highlight{color:#D85A30;font-weight:500;}
+.success-screen .btn-back{display:inline-block;margin-top:24px;background:#1a1a1a;color:white;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:500;}
+.hidden-section{display:none;}
+@media(max-width:600px){.choice-grid,.uploads-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="logo">les<span>formateurs</span>.online</div>
+  <div class="badge">Formulaire EDOF</div>
+</div>
+
+<div class="container" id="main-container">
+
+  <div class="banner">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#378ADD" fill-opacity="0.12" stroke="#378ADD" stroke-width="1"/><path d="M12 8V13" stroke="#378ADD" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="16" r="1" fill="#378ADD"/></svg>
+    <p>Notre site pourrait être encore en maintenance quelques jours pour améliorer nos services. En attendant, vous pouvez remplir ce formulaire pour préparer votre dossier EDOF. Nous proposons les tarifs les plus bas du marché et les délais les plus rapides.</p>
+  </div>
+
+  <div class="section">
+    <h3><span class="num">1</span> Identification</h3>
+    <div class="sub">Votre email et le SIRET suffisent — on récupère le reste automatiquement</div>
+    <div class="field">
+      <label>Votre email <span class="req">*</span></label>
+      <input type="email" id="client-email" placeholder="votre@email.com">
+      <div class="hint">Utilisez l'email lié à votre compte EFP Connect</div>
+    </div>
+    <div class="field">
+      <label>SIRET de votre organisme <span class="req">*</span></label>
+      <div class="siret-row">
+        <input type="text" id="siret-input" placeholder="14 chiffres" maxlength="14">
+        <button class="btn-search" id="btn-search" onclick="searchSiret()">Rechercher</button>
+      </div>
+    </div>
+    <div class="org-card" id="org-card">
+      <div class="found">Organisme trouvé</div>
+      <div class="org-name" id="o-name"></div>
+      <div class="org-meta" id="o-meta"></div>
+      <div class="attrs" id="o-attrs"></div>
+      <div class="sep"></div>
+      <div class="detail-grid" id="o-details"></div>
+    </div>
+  </div>
+
+  <div class="section hidden-section" id="sec-actions">
+    <h3><span class="num">2</span> Actions EDOF</h3>
+    <div class="sub">Que souhaitez-vous proposer sur Mon Compte Formation ?</div>
+    <div class="note">L'accès EDOF nécessite au minimum une habilitation RS/RNCP, une certification RS/RNCP, et/ou une activité de bilan de compétences ou de VAE.</div>
+    <div class="choice-grid" id="actions-grid" style="margin-top:14px;">
+      <div class="choice" onclick="toggleAction(this,'habilitation')" data-type="habilitation">
+        <span class="cb"></span>
+        <div class="choice-text"><strong>Habilitation RS/RNCP</strong><small>Vous formez sur un titre existant</small></div>
+      </div>
+      <div class="choice" onclick="toggleAction(this,'certification')" data-type="certification">
+        <span class="cb"></span>
+        <div class="choice-text"><strong>Certification RS/RNCP</strong><small>Vous êtes le certificateur</small></div>
+      </div>
+      <div class="choice" onclick="toggleAction(this,'bilan')" data-type="bilan">
+        <span class="cb"></span>
+        <div class="choice-text"><strong>Bilan de compétences</strong><small>Mention requise sur le Qualiopi</small></div>
+      </div>
+      <div class="choice" onclick="toggleAction(this,'vae')" data-type="vae">
+        <span class="cb"></span>
+        <div class="choice-text"><strong>VAE</strong><small>Mention requise sur le Qualiopi</small></div>
+      </div>
+      <div class="choice" onclick="toggleAction(this,'permis')" data-type="permis">
+        <span class="cb"></span>
+        <div class="choice-text"><strong>Permis de conduire</strong><small>Pour les auto-écoles</small></div>
+      </div>
+    </div>
+
+    <div class="cert-search" id="cert-module">
+      <h4 style="font-size:16px;font-weight:600;color:#D85A30;margin:16px 0 10px;">Certifications visées</h4>
+      <input type="text" id="cert-input" placeholder="Rechercher par code ou intitulé (ex: RNCP37674, Développeur...)" oninput="searchCerts(this.value)">
+      <div class="results" id="cert-results"></div>
+      <div class="cert-added" id="cert-added"></div>
+    </div>
+  </div>
+
+  <div class="section hidden-section" id="sec-site">
+    <h3><span class="num">3</span> Site internet</h3>
+    <div class="sub">Avez-vous un site internet pour votre organisme ?</div>
+    <div class="choice-grid" style="grid-template-columns:1fr 1fr;">
+      <div class="choice radio checked" onclick="selectSite(this,'oui')" data-val="oui"><span class="cb"></span><div class="choice-text"><strong>Oui</strong></div></div>
+      <div class="choice radio" onclick="selectSite(this,'non')" data-val="non"><span class="cb"></span><div class="choice-text"><strong>Non</strong></div></div>
+    </div>
+    <div class="site-url show" id="site-url-block">
+      <div class="field" style="margin-top:12px;margin-bottom:0;">
+        <label>URL du site</label>
+        <input type="url" id="site-url" placeholder="https://votre-site.com">
+      </div>
+    </div>
+  </div>
+
+  <div class="section hidden-section" id="sec-docs">
+    <h3><span class="num">4</span> Documents</h3>
+    <div class="sub">PDF, PNG, JPG — 1 Mo max — datés de moins de 3 mois</div>
+    <p style="font-size:13px;color:#555;margin-bottom:12px;">Ces documents sont nécessaires pour constituer votre dossier, rédiger les contrats et les programmes de formation manquants.</p>
+    <div class="uploads-grid">
+      <div class="upload-zone" onclick="triggerUpload(this)" data-doc="kbis">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" fill="#D85A30" fill-opacity="0.1" stroke="#D85A30" stroke-width="0.8"/><rect x="7" y="6" width="10" height="1.5" rx="0.75" fill="#D85A30" opacity="0.3"/><rect x="7" y="10" width="7" height="1.5" rx="0.75" fill="#D85A30" opacity="0.2"/></svg>
+        <p>Kbis ou RNE <span style="color:#E24B4A;">*</span></p><div class="format">Moins de 3 mois</div>
+        <input type="file" accept=".pdf,.png,.jpg,.jpeg" style="display:none;" onchange="fileSelected(this)">
+      </div>
+      <div class="upload-zone" onclick="triggerUpload(this)" data-doc="cni">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" fill="#378ADD" fill-opacity="0.1" stroke="#378ADD" stroke-width="0.8"/><circle cx="12" cy="10" r="4" fill="#378ADD" fill-opacity="0.15" stroke="#378ADD" stroke-width="0.6"/></svg>
+        <p>Pièce d'identité <span style="color:#E24B4A;">*</span></p><div class="format">CNI recto-verso ou passeport</div>
+        <input type="file" accept=".pdf,.png,.jpg,.jpeg" style="display:none;" onchange="fileSelected(this)">
+      </div>
+      <div class="upload-zone" onclick="triggerUpload(this)" data-doc="noncondamnation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" fill="#1D9E75" fill-opacity="0.1" stroke="#1D9E75" stroke-width="0.8"/><path d="M9 12L11 14L15 10" stroke="#1D9E75" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <p>Non-condamnation <span style="color:#E24B4A;">*</span></p><div class="format">Signée, moins de 3 mois</div>
+        <input type="file" accept=".pdf,.png,.jpg,.jpeg" style="display:none;" onchange="fileSelected(this)">
+      </div>
+      <div class="upload-zone" onclick="triggerUpload(this)" data-doc="qualiopi">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" fill="#1D9E75" fill-opacity="0.08" stroke="#1D9E75" stroke-width="0.8"/><path d="M9 12L11 14L15 10" stroke="#1D9E75" stroke-width="1" stroke-linecap="round"/></svg>
+        <p>Certificat Qualiopi</p><div class="format">En cours de validité</div>
+        <input type="file" accept=".pdf,.png,.jpg,.jpeg" style="display:none;" onchange="fileSelected(this)">
+      </div>
+      <div class="upload-zone" onclick="triggerUpload(this)" data-doc="nda">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" fill="#BA7517" fill-opacity="0.1" stroke="#BA7517" stroke-width="0.8"/><path d="M8 16L10 14L12 16L14 14L16 16" stroke="#BA7517" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/></svg>
+        <p>Récépissé NDA</p><div class="format">Déclaration d'activité</div>
+        <input type="file" accept=".pdf,.png,.jpg,.jpeg" style="display:none;" onchange="fileSelected(this)">
+      </div>
+      <div class="upload-zone" onclick="triggerUpload(this)" data-doc="autre">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" fill="#7F77DD" fill-opacity="0.1" stroke="#7F77DD" stroke-width="0.8"/><rect x="7" y="6" width="10" height="1.5" rx="0.75" fill="#7F77DD" opacity="0.3"/><rect x="7" y="10" width="7" height="1.5" rx="0.75" fill="#7F77DD" opacity="0.2"/></svg>
+        <p>Autre document</p><div class="format">Optionnel</div>
+        <input type="file" accept=".pdf,.png,.jpg,.jpeg" style="display:none;" onchange="fileSelected(this)">
+      </div>
+    </div>
+    <div style="background:#FFF9C4;border-left:3px solid #BA7517;border-radius:8px;padding:14px;margin-top:16px;">
+      <p style="font-size:12px;color:#854F0B;line-height:1.5;margin:0;">Vérifiez avec votre compte EFP Connect que votre formulaire EDOF est bien ouvert. Pour certains organismes et certaines spécialités, la demande d'ouverture du formulaire peut prendre jusqu'à 48h. Assurez-vous que votre demande de formulaire est ouverte avant de soumettre.</p>
+    </div>
+  </div>
+
+  <div class="submit-section" id="sec-submit">
+    <button class="submit-btn" id="submit-btn" onclick="submitForm()">Envoyer mon formulaire</button>
+    <div class="submit-note">Vos données sont sécurisées. Notre expert vérifie et prépare votre dossier sous 48h.</div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/analytics.js" defer></script>
+<script>
+var orgData = null;
+var selectedActions = [];
+var siteHasWeb = 'oui';
+var addedCerts = [];
+var selectedFiles = {};
+
+function toggleAction(el, type) {
+  el.classList.toggle('checked');
+  el.querySelector('.cb').textContent = el.classList.contains('checked') ? '✓' : '';
+  if (el.classList.contains('checked')) {
+    if (selectedActions.indexOf(type) < 0) selectedActions.push(type);
+  } else {
+    selectedActions = selectedActions.filter(function(t){ return t !== type; });
+  }
+  var needCerts = selectedActions.indexOf('habilitation') >= 0 || selectedActions.indexOf('certification') >= 0;
+  document.getElementById('cert-module').classList.toggle('show', needCerts);
+}
+
+function selectSite(el, val) {
+  var parent = el.parentElement;
+  parent.querySelectorAll('.choice').forEach(function(c){ c.classList.remove('checked'); c.querySelector('.cb').textContent = ''; });
+  el.classList.add('checked');
+  siteHasWeb = val;
+  document.getElementById('site-url-block').classList.toggle('show', val === 'oui');
+}
+
+function triggerUpload(zone) { zone.querySelector('input[type=file]').click(); }
+
+function fileSelected(input) {
+  var zone = input.closest('.upload-zone');
+  if (input.files && input.files[0]) {
+    var name = input.files[0].name;
+    var doc = zone.dataset.doc;
+    selectedFiles[doc] = input.files[0];
+    zone.querySelector('p').innerHTML = '<span style="color:#1D9E75;font-weight:500;">' + name + '</span>';
+    zone.style.borderColor = '#1D9E75';
+    zone.style.background = '#f8fdf6';
+  }
+}
+
+function showSections() {
+  document.querySelectorAll('.hidden-section').forEach(function(el){ el.classList.remove('hidden-section'); el.style.display = 'block'; });
+  document.getElementById('sec-submit').classList.add('show');
+  setTimeout(function(){ document.getElementById('sec-actions').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 200);
+}
+
+async function dgefpSearch(siret) {
+  var siren = String(siret).slice(0, 9);
+  var urls = [
+    'https://dgefp.opendatasoft.com/api/explore/v2.1/catalog/datasets/liste-publique-des-of-v2/records?where=siret_etablissement_declarant%3D%22' + siret + '%22&limit=1',
+    'https://dgefp.opendatasoft.com/api/explore/v2.1/catalog/datasets/liste-publique-des-of-v2/records?where=siren%3D%22' + siren + '%22&limit=1',
+    'https://dgefp.opendatasoft.com/api/explore/v2.1/catalog/datasets/liste-publique-des-of/records?where=siret%3D%22' + siret + '%22&limit=1',
+    'https://dgefp.opendatasoft.com/api/explore/v2.1/catalog/datasets/liste-publique-des-of-v2/records?where=search(records%2C%22' + siren + '%22)&limit=1'
+  ];
+  for (var i = 0; i < urls.length; i++) {
+    try {
+      var r = await fetch(urls[i]);
+      if (!r.ok) { console.log('[DGEFP] essai ' + (i+1) + ':', urls[i], 'résultats: 0 (HTTP ' + r.status + ')'); continue; }
+      var data = await r.json();
+      console.log('[DGEFP] essai ' + (i+1) + ':', urls[i], 'résultats:', data.results && data.results.length);
+      if (data && data.results && data.results.length) return data.results[0];
+    } catch(e) {
+      console.warn('[DGEFP] essai ' + (i+1) + ' err', e);
+    }
+  }
+  return null;
+}
+
+function normalizeDgefp(raw) {
+  if (!raw) return null;
+  var g = function(a, b) { return (raw[a] !== undefined && raw[a] !== null && raw[a] !== '') ? raw[a] : raw[b]; };
+  return {
+    numero_da: g('numerodeclarationactivite', 'numero_da') || g('numero_da', 'numerodeclarationactivite') || '',
+    certifications_actions_de_formation: g('certifications_actionsdeformation', 'certifications_actions_de_formation'),
+    certifications_bilans_de_competences: g('certifications_bilansdecompetences', 'certifications_bilans_de_competences'),
+    certifications_actions_vae: g('certifications_vae', 'certifications_actions_vae'),
+    certifications_actions_de_formation_par_apprentissage: g('certifications_actionsdeformationparapprentissage', 'certifications_actions_de_formation_par_apprentissage'),
+    date_declaration: raw.informationsdeclarees_datedernieredeclaration || raw.date_derniere_declaration || raw.datedernieredeclaration || ''
+  };
+}
+
+async function searchSiret() {
+  var siret = document.getElementById('siret-input').value.replace(/\s/g, '');
+  if (siret.length !== 14) { alert('Le SIRET doit contenir 14 chiffres'); return; }
+  var btn = document.getElementById('btn-search');
+  btn.textContent = 'Recherche...'; btn.disabled = true;
+  try {
+    var resp = await fetch('https://recherche-entreprises.api.gouv.fr/search?q=' + siret);
+    var data = await resp.json();
+    var ent = data.results && data.results[0];
+    if (!ent) { alert('SIRET introuvable dans le registre national.'); btn.textContent = 'Rechercher'; btn.disabled = false; return; }
+    var siege = ent.siege || {};
+    var adresse = (siege.adresse || '') + ' ' + (siege.code_postal || '') + ' ' + (siege.commune || '');
+    var dirigeant = ent.dirigeants && ent.dirigeants[0] ? ((ent.dirigeants[0].prenom || '') + ' ' + (ent.dirigeants[0].nom || '')).trim() : '';
+    orgData = { siret:siret, siren:ent.siren || '', raison_sociale:ent.nom_complet || '', adresse:adresse, dirigeant:dirigeant, forme_juridique:ent.nature_juridique || '', date_creation:ent.date_creation || '', etat:ent.etat_administratif || '' };
+    var nda = '', qualiActions = [];
+    try {
+      var of = await dgefpSearch(siret);
+      if (of) {
+        var n = normalizeDgefp(of);
+        nda = n.numero_da || '';
+        orgData.nda = nda;
+        var b = function(v){ return v === 'true' || v === true || v === 'Oui' || v === 1 || v === '1'; };
+        if (b(n.certifications_actions_de_formation)) qualiActions.push('AF');
+        if (b(n.certifications_bilans_de_competences)) qualiActions.push('Bilan');
+        if (b(n.certifications_actions_vae)) qualiActions.push('VAE');
+        if (b(n.certifications_actions_de_formation_par_apprentissage)) qualiActions.push('Apprentissage');
+      }
+    } catch(e) {}
+    orgData.qualiopi_actions = qualiActions;
+
+    var card = document.getElementById('org-card');
+    card.classList.add('show');
+    document.getElementById('o-name').textContent = orgData.raison_sociale;
+    document.getElementById('o-meta').textContent = adresse;
+    var attrsHtml = nda ? '<span class="attr on">NDA : ' + nda + '</span>' : '<span class="attr off">NDA non trouvé</span>';
+    attrsHtml += qualiActions.length ? '<span class="attr on">Qualiopi : ' + qualiActions.join(', ') + '</span>' : '<span class="attr off">Qualiopi non détecté</span>';
+    document.getElementById('o-attrs').innerHTML = attrsHtml;
+    var etatLabel = (orgData.etat === 'F') ? '<span class="dv" style="color:#E24B4A;">Fermé</span>' : '<span class="dv" style="color:#1D9E75;">Actif</span>';
+    document.getElementById('o-details').innerHTML =
+      '<div class="detail"><span class="dl">SIRET</span><br><span class="dv">' + siret + '</span></div>' +
+      '<div class="detail"><span class="dl">SIREN</span><br><span class="dv">' + orgData.siren + '</span></div>' +
+      '<div class="detail"><span class="dl">Dirigeant</span><br><span class="dv">' + dirigeant + '</span></div>' +
+      '<div class="detail"><span class="dl">Forme juridique</span><br><span class="dv">' + orgData.forme_juridique + '</span></div>' +
+      '<div class="detail"><span class="dl">État</span><br>' + etatLabel + '</div>' +
+      '<div class="detail"><span class="dl">Création</span><br><span class="dv">' + orgData.date_creation + '</span></div>';
+    showSections();
+  } catch(e) { alert('Erreur : ' + e.message); }
+  btn.textContent = 'Rechercher'; btn.disabled = false;
+}
+
+var mockCerts = [
+  { code:'RNCP37674', title:'Développeur Web et Web mobile', org:'Ministère du Travail' },
+  { code:'RNCP37873', title:'Concepteur développeur d\'applications', org:'Ministère du Travail' },
+  { code:'RNCP36012', title:'Manager de projet', org:'CESI' },
+  { code:'RNCP35634', title:'Expert en stratégie digitale', org:'EIML Paris' },
+  { code:'RS5131', title:'Utilisation d\'un logiciel de PAO', org:'ICDL France' },
+  { code:'RS6289', title:'Accompagner la transformation digitale', org:'Simplon' },
+  { code:'RS5592', title:'TOEIC - Tests d\'anglais', org:'ETS Global' },
+  { code:'RS6265', title:'Certification Voltaire', org:'Woonoz' },
+  { code:'RNCP38654', title:'Formateur professionnel d\'adultes', org:'Ministère du Travail' },
+  { code:'RS6493', title:'CléA Numérique', org:'Certif Pro' },
+  { code:'RNCP37098', title:'Gestionnaire de paie', org:'Ministère du Travail' },
+  { code:'RS5875', title:'Certification PIX', org:'GIP PIX' }
+];
+
+function searchCerts(q) {
+  var box = document.getElementById('cert-results');
+  if (q.length < 2) { box.classList.remove('show'); return; }
+  var ql = q.toLowerCase();
+  var matches = mockCerts.filter(function(c){ return c.code.toLowerCase().indexOf(ql) !== -1 || c.title.toLowerCase().indexOf(ql) !== -1; });
+  if (!matches.length) { box.innerHTML = '<div class="result-item" style="color:#999;">Aucun résultat</div>'; box.classList.add('show'); return; }
+  box.innerHTML = matches.slice(0, 6).map(function(c) {
+    return '<div class="result-item" onclick="addCert(\'' + c.code + '\',\'' + c.title.replace(/'/g, "\\'") + '\',\'' + c.org.replace(/'/g, "\\'") + '\')">' +
+      '<span class="code">' + c.code + '</span> — ' + c.title + '<br><span class="org">' + c.org + '</span></div>';
+  }).join('');
+  box.classList.add('show');
+}
+
+function addCert(code, title, org) {
+  if (addedCerts.find(function(c){ return c.code === code; })) return;
+  var defaultType = selectedActions.indexOf('certification') >= 0 && selectedActions.indexOf('habilitation') < 0 ? 'certification' : 'habilitation';
+  addedCerts.push({ code:code, title:title, org:org, habOrCert:defaultType });
+  renderCerts();
+  document.getElementById('cert-input').value = '';
+  document.getElementById('cert-results').classList.remove('show');
+}
+function removeCert(i) { addedCerts.splice(i, 1); renderCerts(); }
+function updateCertType(i, val) { addedCerts[i].habOrCert = val; }
+function renderCerts() {
+  document.getElementById('cert-added').innerHTML = addedCerts.map(function(c, i) {
+    return '<div class="cert-tag"><strong>' + c.code + '</strong>&nbsp;—&nbsp;<span style="flex:1">' + c.title + '</span>' +
+      '<select onchange="updateCertType(' + i + ',this.value)">' +
+      '<option value="habilitation"' + (c.habOrCert === 'habilitation' ? ' selected' : '') + '>Habilitation</option>' +
+      '<option value="certification"' + (c.habOrCert === 'certification' ? ' selected' : '') + '>Certification</option></select>' +
+      '<span class="remove" onclick="removeCert(' + i + ')">✕</span></div>';
+  }).join('');
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.cert-search')) document.getElementById('cert-results').classList.remove('show');
+});
+
+async function submitForm() {
+  var email = document.getElementById('client-email').value.trim();
+  if (!email) { alert('Veuillez saisir votre email'); return; }
+  if (!orgData) { alert('Veuillez rechercher votre SIRET'); return; }
+  if (!selectedActions.length) { alert('Cochez au moins une action EDOF'); return; }
+
+  var btn = document.getElementById('submit-btn');
+  btn.textContent = 'Envoi en cours...'; btn.disabled = true;
+
+  // Upload files to Storage bucket 'formulaires'
+  var emailSlug = email.replace(/[^a-z0-9]/gi,'_').toLowerCase();
+  var ts = Date.now();
+  var uploadedDocs = [];
+  for (var k in selectedFiles) {
+    if (!selectedFiles.hasOwnProperty(k)) continue;
+    var file = selectedFiles[k];
+    var safeName = file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+    var path = emailSlug + '/' + ts + '/' + k + '-' + safeName;
+    try {
+      var up = await sb.storage.from('formulaires').upload(path, file, { contentType: file.type, upsert: false });
+      if (up.error) {
+        // fallback bucket 'demarches'
+        var up2 = await sb.storage.from('demarches').upload('formulaires/' + path, file, { contentType: file.type, upsert: false });
+        if (up2.error) { console.warn('upload fail', k, up.error.message); continue; }
+        uploadedDocs.push({ type:k, name:file.name, path:'demarches/formulaires/'+path });
+      } else {
+        uploadedDocs.push({ type:k, name:file.name, path:'formulaires/'+path });
+      }
+    } catch(e) { console.warn('upload exc', k, e); }
+  }
+
+  var formData = {
+    email: email,
+    org: orgData,
+    actions: selectedActions,
+    certifications: addedCerts,
+    site: { has: siteHasWeb, url: siteHasWeb === 'oui' ? (document.getElementById('site-url').value || '') : '' },
+    documents: uploadedDocs
+  };
+
+  try {
+    var result = await sb.rpc('submit_edof_form', {
+      p_email: email,
+      p_siren: orgData.siren,
+      p_org_name: orgData.raison_sociale,
+      p_form_data: formData,
+      p_metadata: { source: 'formulaire-maintenance', form_type: 'edof' }
+    });
+    if (result.error) throw result.error;
+
+    document.getElementById('main-container').innerHTML =
+      '<div class="success-screen">' +
+      '<svg width="80" height="80" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="36" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/><path d="M24 40L35 51L56 30" stroke="#1D9E75" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '<h2>Formulaire envoyé avec succès</h2>' +
+      '<p>Notre expert prépare votre dossier sous 48h.</p>' +
+      '<p>Un email de confirmation a été envoyé à <span class="email-highlight">' + email + '</span></p>' +
+      '<a href="https://lesformateurs.online" class="btn-back">Retour au site</a>' +
+      '</div>';
+  } catch(e) {
+    alert('Erreur : ' + (e.message || e));
+    btn.textContent = 'Envoyer mon formulaire'; btn.disabled = false;
+  }
+}
+</script>
+
+</body>
+</html>

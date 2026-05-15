@@ -1,6 +1,25 @@
 // Auth Modal — shared across all public pages
 (function(){
 
+// Inject self-contained styles (no dependency on page CSS)
+var styleEl = document.createElement('style');
+styleEl.textContent = `
+#auth-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:10000;display:none;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);}
+#auth-modal.open{display:flex;}
+#auth-modal .modal-box{position:relative;background:#FEFEFE;border:0.5px solid #f0f0f0;border-radius:12px;padding:32px 28px;max-width:420px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.15);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',sans-serif;color:#1a1a1a;}
+#auth-modal .modal-close{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;border:none;background:transparent;font-size:18px;line-height:1;cursor:pointer;color:#888;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;}
+#auth-modal .modal-close:hover{background:#f0f0f0;color:#1a1a1a;}
+#auth-modal .form-group{margin-bottom:14px;}
+#auth-modal .form-group label{display:block;margin-bottom:6px;color:#1a1a1a;}
+#auth-modal input,#auth-modal select{font-family:inherit;outline:none;transition:border-color .15s;}
+#auth-modal input:focus,#auth-modal select:focus{border-color:#D85A30;}
+#auth-modal .btn-primary{background:#D85A30;color:#fff;border:none;cursor:pointer;transition:opacity .15s;}
+#auth-modal .btn-primary:hover{opacity:.88;}
+#auth-modal .btn-primary:disabled{opacity:.6;cursor:not-allowed;}
+#auth-modal h3{color:#1a1a1a;letter-spacing:-0.3px;}
+`;
+document.head.appendChild(styleEl);
+
 var modalHTML = `
 <div class="modal" id="auth-modal">
   <div class="modal-box" style="max-width:460px;">
@@ -81,8 +100,9 @@ var modalHTML = `
           <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Vous êtes</label>
           <select id="auth-type" style="padding:12px;border-radius:10px;border:1px solid #e0e0e0;font-size:14px;width:100%;box-sizing:border-box;">
             <option value="formateur">Formateur indépendant</option>
-            <option value="of">Organisme de formation</option>
-            <option value="porteur">Porteur de projet</option>
+            <option value="gerant_of">Organisme de formation</option>
+            <option value="creation_of">Porteur de projet</option>
+            <option value="demandeur_emploi">Demandeur d'emploi</option>
           </select>
         </div>
         <div id="auth-signup-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;"></div>
@@ -99,13 +119,25 @@ var modalHTML = `
 document.body.insertAdjacentHTML('beforeend', modalHTML);
 
 // Open / Close
+var _prevBodyOverflow = '';
 window.openAuthModal = function(){
   showAuthLogin();
   document.getElementById('auth-modal').classList.add('open');
+  _prevBodyOverflow = document.body.style.overflow;
+  document.body.style.overflow = 'hidden';
 };
 window.closeAuthModal = function(){
   document.getElementById('auth-modal').classList.remove('open');
+  document.body.style.overflow = _prevBodyOverflow || '';
 };
+
+// Close on Escape
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    var m = document.getElementById('auth-modal');
+    if(m && m.classList.contains('open')) closeAuthModal();
+  }
+});
 
 // Toggle views
 window.showAuthLogin = function(){
@@ -180,7 +212,14 @@ window.doAuthLogin = async function(){
       btn.disabled = false;
       return;
     }
-    window.location.href = 'dashboard.html';
+    try {
+      var _p = (window.location.pathname || '').toLowerCase();
+      if (_p === '/' || _p === '' || _p.endsWith('/index.html')) {
+        window.location.href = 'dashboard.html';
+      } else {
+        window.location.reload();
+      }
+    } catch(_e){ window.location.reload(); }
   } catch(e){
     errDiv.textContent = 'Erreur de connexion. Réessayez.';
     errDiv.style.display = '';
@@ -206,7 +245,7 @@ window.doAuthSignup = async function(){
     var result = await signUp(email, password, {
       first_name: prenom,
       last_name: nom,
-      full_name: prenom + ' ' + nom,
+      
       phone: phone,
       profile_type: type
     });
@@ -220,7 +259,27 @@ window.doAuthSignup = async function(){
       btn.disabled = false;
       return;
     }
-    window.location.href = 'dashboard.html';
+    // Link referrer via referral code captured by js/referral.js
+    try {
+      var _refCode = null;
+      try { _refCode = localStorage.getItem('lfo_ref') || localStorage.getItem('lfo_referral'); } catch(_e){}
+      var _newUserId = result.data && result.data.user && result.data.user.id;
+      if(_refCode && _newUserId){
+        var _r = await sb.from('profiles').select('id').eq('referral_code', _refCode).maybeSingle();
+        var _parrain = _r && _r.data;
+        if(_parrain && _parrain.id && _parrain.id !== _newUserId){
+          await sb.from('profiles').update({ referred_by: _parrain.id }).eq('id', _newUserId);
+        }
+      }
+    } catch(_e){}
+    try {
+      var _p = (window.location.pathname || '').toLowerCase();
+      if (_p === '/' || _p === '' || _p.endsWith('/index.html')) {
+        window.location.href = 'dashboard.html';
+      } else {
+        window.location.reload();
+      }
+    } catch(_e){ window.location.reload(); }
   } catch(e){
     errDiv.textContent = 'Erreur lors de l\'inscription. Réessayez.';
     errDiv.style.display = '';

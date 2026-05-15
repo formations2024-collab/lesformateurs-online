@@ -1,650 +1,122 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B6XVYRVT9D');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-<title>Missions de formation - lesformateurs.online</title>
-<meta name="description" content="Trouvez des missions de formation partout en France. Postulez ou déposez vos annonces sur lesformateurs.online.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Gérez vos apprenants, financements et formateurs. 60 000+ organismes référencés.">
+<title>Gérer mon activité — lesformateurs.online</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<style>html,body{overflow-x:hidden;max-width:100%;} img,video,iframe{max-width:100%;}</style>
+<style>.nav-links a.active{background:var(--accent);color:#fff !important;border-radius:8px;padding:8px 14px !important;}</style>
 </head>
 <body>
+<nav class="navbar"><div class="nav-inner">
+<a href="index.html" class="logo">les<span>formateurs</span>.online</a>
+<div class="nav-links">
+<a href="missions.html" class="active">Gérer mon activité</a>
+<a href="conformite.html">Conformité</a>
+<a href="creer-of.html">Créer mon OF</a>
+<a href="se-former.html">Se former</a>
+<a href="#" class="btn-login" onclick="openAuthModal()">Connexion</a>
+<a href="dashboard.html" class="btn btn-primary btn-dashboard" style="display:none;">Mon espace</a>
+</div></div></nav>
 
-<nav class="navbar">
-  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
-  <div class="nav-links" id="navLinks">
-    <a href="index.html">Accueil</a>
-    <a href="missions.html" style="color:#fff;background:rgba(255,255,255,.1);">Missions</a>
-    <a href="conformite.html">Conformité</a>
-    <a href="creer-of.html">Créer mon OF</a>
-    <a href="se-former.html">Se former</a>
-    <a href="#" class="nav-cta btn-login" onclick="openAuthModal();return false;">Connexion</a>
-    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon compte</a>
-  </div>
-  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<div class="page-header">
-  <h1>110+ missions disponibles</h1>
-  <p>Formations en entreprise, en centre, en distanciel — partout en France.</p>
+<div class="hero" style="min-height:auto;padding:44px 20px 28px;">
+<div style="position:relative;z-index:1;max-width:640px;margin:0 auto;text-align:center;">
+  <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Espace professionnel</p>
+  <h1 style="font-size:clamp(22px,4vw,32px);margin-bottom:8px;">Gérez votre activité de formation</h1>
+  <p class="hero-sub" style="margin-bottom:0;font-size:14px;">Apprenants, contrats, QCM, financements, formateurs — tout au même endroit</p>
+</div>
 </div>
 
-<div class="trust-bar">
-  <div class="trust-item">🎯 110+ missions actives</div>
-  <div class="trust-item">⭐ Annonces mises en avant disponibles</div>
-  <div class="trust-item">📍 Toutes régions de France</div>
+<section style="max-width:880px;margin:0 auto;padding:32px 20px 60px;">
+
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px;">
+
+  <a href="dashboard.html#apprenants" style="text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px 20px;transition:all .2s;display:block;">
+    <div style="width:38px;height:38px;border-radius:8px;background:#EEEDFE;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </div>
+    <h3 style="font-size:15px;font-weight:700;margin:0 0 4px;color:var(--text);">Mes apprenants</h3>
+    <p style="font-size:12px;color:var(--muted);margin:0;line-height:1.5;">Suivez la progression, envoyez les contrats et QCM à vos stagiaires</p>
+  </a>
+
+  <a href="dashboard.html#formateurs" style="text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px 20px;transition:all .2s;display:block;">
+    <div style="width:38px;height:38px;border-radius:8px;background:#E6F1FB;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    <h3 style="font-size:15px;font-weight:700;margin:0 0 4px;color:var(--text);">Trouver un formateur</h3>
+    <p style="font-size:12px;color:var(--muted);margin:0;line-height:1.5;">Recherchez parmi 60 000+ organismes et formateurs indépendants</p>
+  </a>
+
+  <a href="dashboard.html#financements" style="text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px 20px;transition:all .2s;display:block;">
+    <div style="width:38px;height:38px;border-radius:8px;background:#EAF3DE;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B6D11" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+    </div>
+    <h3 style="font-size:15px;font-weight:700;margin:0 0 4px;color:var(--text);">Dossiers de financement</h3>
+    <p style="font-size:12px;color:var(--muted);margin:0;line-height:1.5;">Montez vos dossiers OPCO, EDOF, France Travail en express</p>
+  </a>
+
 </div>
 
-<section>
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
-      <h2 style="font-size:20px;font-weight:800;">Toutes les missions</h2>
-      <a href="#" onclick="deposerAnnonce();return false;" class="btn btn-outline" style="padding:8px 20px;font-size:13px;">+ Déposer une annonce</a>
+<div style="display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:14px;max-width:50%;">
+  <a href="dashboard.html#demarches" style="text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;transition:all .2s;display:flex;align-items:center;gap:14px;">
+    <div style="width:38px;height:38px;border-radius:8px;background:#FAEEDA;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#854F0B" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
     </div>
-    <div class="filter-bar">
-      <input type="text" id="filterSearch" placeholder="🔍 Rechercher une mission..." onkeyup="filterMissions()">
-      <select id="filterRegion" onchange="filterMissions()">
-        <option value="">📍 Toutes les régions</option>
-        <option>Distanciel</option>
-        <optgroup label="── Régions métropolitaines ──">
-        <option>Auvergne-Rhône-Alpes</option>
-        <option>Bourgogne-Franche-Comté</option>
-        <option>Bretagne</option>
-        <option>Centre-Val de Loire</option>
-        <option>Corse</option>
-        <option>Grand Est</option>
-        <option>Hauts-de-France</option>
-        <option>Île-de-France</option>
-        <option>Normandie</option>
-        <option>Nouvelle-Aquitaine</option>
-        <option>Occitanie</option>
-        <option>Pays de la Loire</option>
-        <option>Provence-Alpes-Côte d'Azur</option>
-        </optgroup>
-        <optgroup label="── DOM-TOM ──">
-        <option>Guadeloupe</option>
-        <option>Martinique</option>
-        <option>Guyane</option>
-        <option>La Réunion</option>
-        <option>Mayotte</option>
-        <option>Saint-Pierre-et-Miquelon</option>
-        <option>Saint-Barthélemy</option>
-        <option>Saint-Martin</option>
-        <option>Wallis-et-Futuna</option>
-        <option>Polynésie française</option>
-        <option>Nouvelle-Calédonie</option>
-        </optgroup>
-        <optgroup label="── Grandes villes ──">
-        <option>Paris</option>
-        <option>Lyon</option>
-        <option>Marseille</option>
-        <option>Toulouse</option>
-        <option>Bordeaux</option>
-        <option>Lille</option>
-        <option>Nantes</option>
-        <option>Strasbourg</option>
-        <option>Nice</option>
-        <option>Montpellier</option>
-        <option>Rennes</option>
-        <option>Rouen</option>
-        <option>Grenoble</option>
-        <option>Toulon</option>
-        <option>Dijon</option>
-        </optgroup>
-      </select>
-      <select id="filterCat" onchange="filterMissions()">
-        <option value="">📂 Toutes catégories</option>
-        <option>Bureautique</option><option>Communication</option><option>Digital</option>
-        <option>Management</option><option>Langues</option><option>Sécurité</option>
-        <option>RH</option><option>Comptabilité</option><option>Informatique</option>
-        <option>Gestion de projets</option><option>Vente</option><option>Qualité</option>
-        <option>Logistique</option><option>Santé</option><option>Immobilier</option>
-        <option>BTP</option><option>Restauration</option><option>Coaching</option>
-        <option>Droit</option><option>Esthétique</option><option>Soft Skills</option>
-        <option>Autre</option>
-      </select>
+    <div>
+      <h3 style="font-size:14px;font-weight:700;margin:0 0 2px;color:var(--text);">Mes démarches</h3>
+      <p style="font-size:12px;color:var(--muted);margin:0;">NDA, Qualiopi, EDOF — suivi en temps réel</p>
     </div>
-    <div class="grid-3" id="missionsGrid">
-      <div style="grid-column:1/-1;text-align:center;padding:40px;color:#666;">Chargement des annonces...</div>
-    </div>
+  </a>
+  
+</div>
+
+<div style="background:var(--light);border-radius:10px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+  <div style="display:flex;gap:28px;">
+    <div style="text-align:center;"><span style="font-size:20px;font-weight:800;color:var(--accent);">60 000+</span><br><span style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600;">Formateurs</span></div>
+    <div style="text-align:center;"><span style="font-size:20px;font-weight:800;color:var(--accent);">11</span><br><span style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600;">OPCO</span></div>
+    <div style="text-align:center;"><span style="font-size:20px;font-weight:800;color:var(--accent);">48h</span><br><span style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600;">Dossiers express</span></div>
   </div>
+  <a href="#" onclick="openAuthModal();return false;" style="font-size:13px;padding:10px 22px;background:var(--accent);color:#fff;border-radius:8px;font-weight:600;text-decoration:none;">Essayer gratuitement</a>
+</div>
+
 </section>
 
-<footer>
-  <div class="footer-inner">
-    <div><div class="footer-brand">lesformateurs.online</div><div>La plateforme des professionnels de la formation</div></div>
-    <div class="footer-links">
-    <div class="footer-links" style="margin-top:8px;font-size:11px;opacity:.6;">
-      <a href="mentions-legales.html">Mentions légales</a>
-      <a href="cgv.html">CGV</a>
-      <a href="politique-confidentialite.html">Politique de confidentialité</a>
-    </div>
-    <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
-      <a href="creer-of.html">Créer mon OF</a><a href="se-former.html">Se former</a>
-    </div>
-  </div>
-</footer>
-
-<!-- Auth handled by auth-modal.js -->
-
-<!-- MODAL DEPOSER ANNONCE -->
-<!-- MODAL POSTULER -->
-<div class="modal" id="modal-postuler">
-  <div class="modal-box" style="max-width:500px;">
-    <button class="modal-close" onclick="closeAllModals()">✕</button>
-    <h3 style="font-size:22px;font-weight:800;">Postuler</h3>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:6px;">Candidature pour :</p>
-    <p style="font-size:15px;font-weight:700;margin-bottom:20px;color:var(--accent);" id="postuler-title"></p>
-
-    <div class="form-group">
-      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Message de motivation *</label>
-      <textarea id="postuler-msg" rows="4" maxlength="2000" placeholder="Présentez-vous, décrivez votre expérience et pourquoi cette mission vous intéresse..." required></textarea>
-    </div>
-
-    <div class="form-group">
-      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Disponibilités *</label>
-      <select id="postuler-dispo">
-        <option value="immediat">🟢 Immédiatement</option>
-        <option value="moins_1_mois">🟡 Moins d'un mois</option>
-        <option value="plus_1_mois">🔴 Plus d'un mois</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Profil LinkedIn <span style="font-weight:400;color:var(--muted);font-size:10px;">(facultatif)</span></label>
-      <input type="url" id="postuler-linkedin" placeholder="https://linkedin.com/in/votre-profil">
-    </div>
-
-    <div class="form-group">
-      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">CV <span style="font-weight:400;color:var(--muted);font-size:10px;">(facultatif — PDF recommandé)</span></label>
-      <input type="file" id="postuler-cv" accept=".pdf,.doc,.docx">
-    </div>
-
-    <div id="postuler-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;font-weight:600;"></div>
-
-    <button class="btn btn-primary btn-block" id="postuler-submit-btn" onclick="submitCandidature()" style="padding:14px;font-size:15px;font-weight:700;">Envoyer ma candidature →</button>
-
-    <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:12px;">📌 Votre candidature sera visible par le recruteur. Il pourra accepter, refuser ou vous contacter.</p>
-  </div>
-</div>
-
-<div class="modal" id="modal-deposer">
-  <div class="modal-box" style="max-width:540px;">
-    <button class="modal-close" onclick="closeAllModals()">✕</button>
-    <h3 style="font-size:22px;font-weight:800;">Déposer une annonce</h3>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Publiez votre offre de mission — gratuite ou mise en avant.</p>
-
-    <div class="form-group">
-      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Titre de la mission *</label>
-      <input type="text" id="dep-titre" placeholder="Ex: Formateur Excel" required>
-    </div>
-
-    <div class="form-group">
-      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Catégorie *</label>
-      <select id="dep-categorie" required>
-        <option value="">Choisissez une catégorie...</option>
-        <option>Bureautique</option><option>Communication</option><option>Digital / Web</option>
-        <option>Management</option><option>Langues</option><option>Sécurité</option>
-        <option>RH / Formation</option><option>Comptabilité / Gestion</option>
-        <option>Informatique / Dev</option><option>Soft Skills</option><option>Autre</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Lieu *</label>
-      <select id="dep-lieu" required>
-        <option value="">Choisissez un lieu...</option>
-        <option>Distanciel</option>
-        <optgroup label="── Régions métropolitaines ──">
-        <option>Auvergne-Rhône-Alpes</option>
-        <option>Bourgogne-Franche-Comté</option>
-        <option>Bretagne</option>
-        <option>Centre-Val de Loire</option>
-        <option>Corse</option>
-        <option>Grand Est</option>
-        <option>Hauts-de-France</option>
-        <option>Île-de-France</option>
-        <option>Normandie</option>
-        <option>Nouvelle-Aquitaine</option>
-        <option>Occitanie</option>
-        <option>Pays de la Loire</option>
-        <option>Provence-Alpes-Côte d'Azur</option>
-        </optgroup>
-        <optgroup label="── DOM-TOM ──">
-        <option>Guadeloupe</option>
-        <option>Martinique</option>
-        <option>Guyane</option>
-        <option>La Réunion</option>
-        <option>Mayotte</option>
-        <option>Saint-Pierre-et-Miquelon</option>
-        <option>Saint-Barthélemy</option>
-        <option>Saint-Martin</option>
-        <option>Wallis-et-Futuna</option>
-        <option>Polynésie française</option>
-        <option>Nouvelle-Calédonie</option>
-        </optgroup>
-        <optgroup label="── Grandes villes ──">
-        <option>Paris</option>
-        <option>Lyon</option>
-        <option>Marseille</option>
-        <option>Toulouse</option>
-        <option>Bordeaux</option>
-        <option>Lille</option>
-        <option>Nantes</option>
-        <option>Strasbourg</option>
-        <option>Nice</option>
-        <option>Montpellier</option>
-        <option>Rennes</option>
-        <option>Rouen</option>
-        <option>Grenoble</option>
-        <option>Toulon</option>
-        <option>Dijon</option>
-        </optgroup>
-      </select>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-      <div class="form-group">
-        <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Type de tarif *</label>
-        <select id="dep-tarif-type" onchange="updateTarifLabel()">
-          <option value="jour">Tarif journalier (€/jour)</option>
-          <option value="heure">Tarif horaire (€/heure)</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;" id="dep-tarif-label">Montant (€/jour) *</label>
-        <input type="number" id="dep-tarif" placeholder="450" min="1" required>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Description *</label>
-      <textarea id="dep-desc" rows="4" maxlength="3000" placeholder="Décrivez la mission, le public visé, les prérequis..." required oninput="updateCharCount()"></textarea>
-      <p style="font-size:11px;color:var(--muted);text-align:right;margin-top:4px;"><span id="dep-char-count">0</span> / 3 000 caractères</p>
-    </div>
-
-    <div class="form-group">
-      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Date d'expiration *</label>
-      <input type="date" id="dep-expiration" required>
-    </div>
-
-    <div class="form-group">
-      <label style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Type d'annonce</label>
-      <select id="dep-type">
-        <option value="gratuite">Gratuite — annonce standard</option>
-        <option value="premium">⭐ Premium — mise en avant (29€)</option>
-      </select>
-      <p id="dep-premium-hint" style="display:none;font-size:11px;color:var(--accent);margin-top:4px;">💳 Vous serez redirigé vers Stripe pour payer 29€ (paiement unique).</p>
-    </div>
-
-    <div id="dep-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;font-weight:600;"></div>
-    <button class="btn btn-primary btn-block" onclick="submitDeposer()" id="dep-submit-btn">Publier l'annonce →</button>
-  </div>
-</div>
+<footer class="footer"><div class="footer-inner">
+<div><h3>lesformateurs.online</h3><p>La plateforme des professionnels de la formation</p><p style="font-size:11px;color:rgba(255,255,255,.3);">Experience Prod SASU · SIREN 982 828 774</p></div>
+<div><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a><a href="politique-confidentialite.html">Politique de confidentialité</a></div>
+<div><a href="missions.html" class="active">Gérer mon activité</a><a href="conformite.html">Conformité</a><a href="creer-of.html">Créer mon OF</a><a href="se-former.html">Se former</a></div>
+</div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src="js/referral.js"></script>
 <script src="js/auth-modal.js"></script>
+
 <script>
-if(typeof window.supabase === 'undefined'){
-  document.addEventListener('DOMContentLoaded',function(){
-    var err = document.getElementById('auth-error');
-    if(err){err.textContent='Erreur chargement. Rechargez la page.';err.style.display='block';}
-  });
-}
-function togglePass(el){
-  var input = el.parentNode.querySelector('input');
-  if(input.type === 'password'){
-    input.type = 'text';
-    el.textContent = '🙈';
-    el.classList.add('active');
-  } else {
-    input.type = 'password';
-    el.textContent = '👁️';
-    el.classList.remove('active');
-  }
-}
-
-// === DEPOSER ANNONCE ===
-function updateTarifLabel(){
-  var type = document.getElementById('dep-tarif-type').value;
-  document.getElementById('dep-tarif-label').textContent = type === 'jour' ? 'Montant (€/jour) *' : 'Montant (€/heure) *';
-}
-function updateCharCount(){
-  var desc = document.getElementById('dep-desc').value;
-  document.getElementById('dep-char-count').textContent = desc.length;
-}
-// Show premium hint
-document.addEventListener('DOMContentLoaded', function(){
-  var depType = document.getElementById('dep-type');
-  if(depType) depType.addEventListener('change', function(){
-    document.getElementById('dep-premium-hint').style.display = this.value === 'premium' ? '' : 'none';
-  });
-  // Set min date to today
-  var expInput = document.getElementById('dep-expiration');
-  if(expInput){
-    var today = new Date().toISOString().split('T')[0];
-    expInput.setAttribute('min', today);
-  }
-});
-
-async function submitDeposer(){
-  var titre = document.getElementById('dep-titre').value.trim();
-  var categorie = document.getElementById('dep-categorie').value;
-  var lieu = document.getElementById('dep-lieu').value;
-  var tarifType = document.getElementById('dep-tarif-type').value;
-  var tarif = document.getElementById('dep-tarif').value;
-  var desc = document.getElementById('dep-desc').value.trim();
-  var expiration = document.getElementById('dep-expiration').value;
-  var type = document.getElementById('dep-type').value;
-  var errDiv = document.getElementById('dep-error');
-  var btn = document.getElementById('dep-submit-btn');
-
-  // Validation
-  if(!titre || !categorie || !lieu || !tarif || !desc || !expiration){
-    errDiv.textContent = '⚠️ Tous les champs sont obligatoires.';
-    errDiv.style.display = '';
-    return;
-  }
-  if(desc.length > 3000){
-    errDiv.textContent = '⚠️ La description ne doit pas dépasser 3 000 caractères.';
-    errDiv.style.display = '';
-    return;
-  }
-  errDiv.style.display = 'none';
-  btn.textContent = 'Publication en cours...';
-  btn.disabled = true;
-
-  var user = await getUser();
-  if(!user){ closeAllModals(); openAuthModal(); btn.textContent = 'Publier l\'annonce →'; btn.disabled = false; return; }
-
-  var isPremium = type === 'premium';
-
-  var { data: newAnnonce, error } = await sb.from('annonces').insert({
-    author_id: user.id,
-    title: titre,
-    category: categorie,
-    city: lieu,
-    description: desc,
-    tarif_type: tarifType,
-    tarif_montant: parseInt(tarif),
-    daily_rate: tarif + '€/' + tarifType,
-    is_premium: isPremium,
-    status: 'active',
-    expires_at: expiration
-  }).select().single();
-
-  if(error){
-    errDiv.textContent = '❌ Erreur : ' + (error.message || 'Impossible de publier.');
-    errDiv.style.display = '';
-    btn.textContent = 'Publier l\'annonce →';
-    btn.disabled = false;
-    return;
-  }
-
-  btn.textContent = 'Publier l\'annonce →';
-  btn.disabled = false;
-  closeAllModals();
-
-  if(isPremium){
-    window.open('https://buy.stripe.com/9B628r6rogXHfiK506ffy0X','_blank');
-  }
-
-  alert('✅ Annonce publiée avec succès !');
-  // Reload to show the new annonce
-  if(typeof loadRealAnnonces === 'function') loadRealAnnonces();
-}
-
-async function deposerAnnonce(){
-  var user = await getUser();
-  if(!user){ openAuthModal(); return; }
-  closeAllModals();
-  document.getElementById('modal-deposer').classList.add('open');
-}
-
-function openModal(type){
-  closeAllModals();
-  if(type === 'login' || type === 'signup'){
+async function essayerGratuit(){
+  try{
+    var {data} = await sb.auth.getSession();
+    if(data && data.session && data.session.user){
+      window.location.href='dashboard.html';
+    } else {
+      openAuthModal();
+    }
+  }catch(e){
     openAuthModal();
-    return;
-  }
-  var modal = document.getElementById('modal-'+type);
-  if(modal) modal.classList.add('open');
-}
-function closeAllModals(){
-  document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));
-}
-document.querySelectorAll('.modal').forEach(m=>{
-  m.addEventListener('click',function(e){if(e.target===this)closeAllModals();});
-});
-
-var postulerAnnonceTitle = '';
-
-var postulerAnnonceId = null;
-
-async function postuler(btn){
-  var user = await getUser();
-  if(!user){ openAuthModal(); return; }
-  
-  // Get annonce title and ID from the card
-  var card = btn.closest('.mission-card');
-  var titleEl = card ? (card.querySelector('h3') || card.querySelector('h4')) : null;
-  postulerAnnonceTitle = titleEl ? titleEl.textContent : 'Cette mission';
-  postulerAnnonceId = card ? card.getAttribute('data-db-id') : null;
-  
-  // If no DB id (hardcoded static annonce), show info message
-  if(!postulerAnnonceId){
-    alert('ℹ️ Cette mission est un exemple. Les nouvelles missions sont publiées régulièrement par des recruteurs.\n\nPour postuler à de vraies missions, consultez les annonces marquées "Premium" ou les annonces récentes en haut de page.');
-    return;
-  }
-  
-  document.getElementById('postuler-title').textContent = postulerAnnonceTitle;
-  document.getElementById('postuler-msg').value = '';
-  document.getElementById('postuler-linkedin').value = '';
-  document.getElementById('postuler-cv').value = '';
-  document.getElementById('postuler-dispo').value = 'immediat';
-  document.getElementById('postuler-error').style.display = 'none';
-  document.getElementById('postuler-submit-btn').textContent = 'Envoyer ma candidature →';
-  document.getElementById('postuler-submit-btn').disabled = false;
-  document.getElementById('modal-postuler').classList.add('open');
-}
-
-async function submitCandidature(){
-  var msg = document.getElementById('postuler-msg').value.trim();
-  var dispo = document.getElementById('postuler-dispo').value;
-  var linkedin = document.getElementById('postuler-linkedin').value.trim();
-  var cvFile = document.getElementById('postuler-cv').files[0];
-  var errDiv = document.getElementById('postuler-error');
-  var btn = document.getElementById('postuler-submit-btn');
-  
-  if(!msg){
-    errDiv.textContent = '⚠️ Veuillez écrire un message de motivation.';
-    errDiv.style.display = '';
-    return;
-  }
-  
-  errDiv.style.display = 'none';
-  btn.textContent = 'Envoi en cours...';
-  btn.disabled = true;
-  
-  // Upload CV if provided
-  var cvPath = null;
-  if(cvFile){
-    try {
-      cvPath = await uploadDocument(cvFile, 'cv');
-    } catch(e){
-      console.log('CV upload error:', e);
-    }
-  }
-  
-  // Save candidature to Supabase
-  var user = await getUser();
-  if(!user){ btn.textContent = 'Envoyer ma candidature →'; btn.disabled = false; return; }
-  
-  var candidature = {
-    annonce_id: postulerAnnonceId,
-    user_id: user.id,
-    message: msg,
-    disponibilite: dispo,
-    linkedin: linkedin || null,
-    cv_url: cvPath || null,
-    status: 'en_attente'
-  };
-  
-  if(postulerAnnonceId){
-    var { error: saveErr } = await sb.from('candidatures').insert(candidature);
-    if(saveErr){
-      if(saveErr.message && saveErr.message.includes('unique')){
-        errDiv.textContent = '⚠️ Vous avez déjà postulé à cette annonce.';
-      } else {
-        errDiv.textContent = '❌ Erreur : ' + saveErr.message;
-      }
-      errDiv.style.display = '';
-      btn.textContent = 'Envoyer ma candidature →';
-      btn.disabled = false;
-      return;
-    }
-  }
-  
-  closeAllModals();
-  
-  // Update the button on the card to show "Candidature envoyée"
-  if(postulerAnnonceId){
-    var card = document.querySelector('[data-db-id="' + postulerAnnonceId + '"]');
-    if(card){
-      var postulerBtn = card.querySelector('.btn-primary');
-      if(postulerBtn){
-        postulerBtn.outerHTML = '<span style="font-size:12px;color:#f59e0b;margin-top:10px;display:inline-block;">⏳ Candidature envoyée</span>';
-      }
-    }
-  }
-  
-  alert('✅ Candidature envoyée pour "' + postulerAnnonceTitle + '" !\n\nVotre candidature est en attente de réponse du recruteur.');
-}
-
-// Auth handled by auth-modal.js (shared)
-
-function filterMissions(){
-  var search=document.getElementById('filterSearch').value.toLowerCase();
-  var region=document.getElementById('filterRegion').value;
-  var cat=document.getElementById('filterCat').value;
-  var cards=document.querySelectorAll('.mission-card');
-  cards.forEach(function(c){
-    var text=c.textContent.toLowerCase();
-    var show=true;
-    if(search && !text.includes(search)) show=false;
-    if(region && !text.includes(region.toLowerCase())) show=false;
-    if(cat && !text.includes(cat.toLowerCase())) show=false;
-    c.style.display=show?'':'none';
-  });
-}
-
-// === CHARGER ANNONCES RÉELLES DEPUIS SUPABASE ===
-var currentUserId = null;
-
-async function loadRealAnnonces(){
-  try {
-    var user = await getUser();
-    if(user) currentUserId = user.id;
-    
-    var { data: annonces, error } = await sb.from('annonces')
-      .select('*')
-      .eq('paused', false)
-      .order('created_at', { ascending: false });
-    
-    var grid = document.getElementById('missionsGrid');
-    grid.innerHTML = '';
-
-    if(error || !annonces || annonces.length === 0){
-      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#666;"><p style="font-size:16px;font-weight:600;">Aucune mission disponible pour le moment.</p><p style="font-size:13px;margin-top:8px;">Revenez bientôt ou déposez votre annonce !</p></div>';
-      return;
-    }
-    
-    // Check user's existing candidatures
-    var myCandidatures = {};
-    if(currentUserId){
-      var { data: cands } = await sb.from('candidatures')
-        .select('annonce_id, status')
-        .eq('user_id', currentUserId);
-      if(cands){
-        cands.forEach(function(c){ myCandidatures[c.annonce_id] = c.status; });
-      }
-    }
-    
-    annonces.forEach(function(a){
-      var card = document.createElement('div');
-      card.className = a.is_premium ? 'mission-card featured' : 'mission-card';
-      card.setAttribute('data-db-id', a.id);
-      card.setAttribute('data-author-id', a.author_id);
-      
-      var tarifLabel = (a.tarif_montant || '') + '€/' + (a.tarif_type === 'heure' ? 'h' : 'j');
-      var dateLabel = a.expires_at ? '🗓 ' + new Date(a.expires_at).toLocaleDateString('fr-FR', {month:'long', year:'numeric'}) : '';
-      var typeTag = a.is_premium ? '<span style="position:absolute;top:8px;right:8px;background:var(--accent);color:#fff;font-size:10px;padding:2px 8px;border-radius:12px;">⭐ Premium</span>' : '';
-      
-      // Determine button
-      var btnHtml = '';
-      var isOwner = currentUserId && a.author_id === currentUserId;
-      
-      if(isOwner){
-        btnHtml = '<button class="btn btn-outline" style="margin-top:10px;padding:8px 16px;font-size:12px;border-color:var(--accent);color:var(--accent);" onclick="window.location.href=\'dashboard.html\'">📋 Voir mes annonces</button>';
-      } else {
-        var candStatus = myCandidatures[a.id];
-        if(candStatus === 'bloquee'){
-          btnHtml = '<span style="font-size:12px;color:var(--muted);margin-top:10px;display:inline-block;">🚫 Candidature impossible</span>';
-        } else if(candStatus === 'en_attente'){
-          btnHtml = '<span style="font-size:12px;color:#f59e0b;margin-top:10px;display:inline-block;">⏳ Candidature envoyée</span>';
-        } else if(candStatus === 'acceptee'){
-          btnHtml = '<span style="font-size:12px;color:var(--success);margin-top:10px;display:inline-block;">✅ Candidature acceptée</span>';
-        } else {
-          btnHtml = '<button class="btn btn-primary" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="postuler(this)">Postuler →</button>';
-        }
-      }
-      
-      card.innerHTML = '<div style="position:relative;">' + typeTag +
-        '<span class="mission-tag">' + (a.category || 'Mission') + '</span>' +
-        '<h4>' + a.title + '</h4>' +
-        '<p>' + (a.description || '').substring(0, 100) + (a.description && a.description.length > 100 ? '...' : '') + '</p>' +
-        '<div class="mission-meta">' +
-        '<span>📍 ' + (a.city || 'France') + '</span>' +
-        (a.tarif_montant ? '<span>💶 ' + tarifLabel + '</span>' : '') +
-        (dateLabel ? '<span>' + dateLabel + '</span>' : '') +
-        '</div>' +
-        btnHtml +
-        '</div>';
-      
-      if(a.is_premium || a.is_premium){
-        // Premium: insert at the very top
-        grid.insertBefore(card, grid.firstChild);
-      } else {
-        // Gratuite: insert after all featured cards
-        var allCards = grid.querySelectorAll('.mission-card');
-        var insertPoint = null;
-        for(var i = 0; i < allCards.length; i++){
-          if(!allCards[i].classList.contains('featured')){
-            insertPoint = allCards[i];
-            break;
-          }
-        }
-        if(insertPoint){
-          grid.insertBefore(card, insertPoint);
-        } else {
-          grid.appendChild(card);
-        }
-      }
-    });
-  } catch(e){
-    console.log('Erreur chargement annonces:', e);
   }
 }
-
-// Charger au démarrage
-document.addEventListener('DOMContentLoaded', function(){
-  if(typeof sb !== 'undefined') loadRealAnnonces();
-});
 </script>
 </body>
 </html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B6XVYRVT9D');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Créer / Certifier — lesformateurs.online</title>
+<link rel="canonical" href="https://lesformateurs.online/creer-certifier">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lesformateurs.online/creer-certifier">
+<meta property="og:title" content="De la formation à la certification — lesformateurs.online">
+<meta property="og:description" content="3 niveaux pour faire grandir votre activité de formateur : créer ma formation, habiliter RS/RNCP, devenir certificateur.">
+<meta property="og:site_name" content="lesformateurs.online">
+<meta name="description" content="De la formation à la certification : 3 niveaux pour faire grandir votre activité de formateur. Créer une formation, faire habiliter RS/RNCP, créer sa propre certification.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/mono-light.css">
+<style>
+  body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+  /* ===== LADDER ===== */
+  .ladder-wrap { max-width: 980px; margin: 0 auto; padding: 16px 24px 60px; }
+  .ladder { position: relative; padding: 20px 0 20px 56px; }
+  .ladder::before {
+    content: '';
+    position: absolute;
+    left: 19px; top: 30px; bottom: 30px;
+    width: 2px; background: #ececec;
+    z-index: 0;
+  }
+  .ladder-step { position: relative; margin-bottom: 36px; }
+  .ladder-step:last-child { margin-bottom: 0; }
+  .ladder-dot {
+    position: absolute;
+    left: -56px; top: 6px;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 17px;
+    box-shadow: 0 0 0 4px #FEFEFE, 0 2px 6px rgba(0,0,0,0.08);
+    z-index: 1;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .ladder-dot.n1 { background: #1D9E75; }
+  .ladder-dot.n2 { background: #BA7517; }
+  .ladder-dot.n3 { background: #D85A30; }
+
+  .ladder-card {
+    background: #fff;
+    border: 0.5px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 28px 30px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .ladder-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  }
+
+  .ladder-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .ladder-badge.n1 { background: #E1F5EE; color: #0F6E56; }
+  .ladder-badge.n2 { background: #FBEED4; color: #8C5500; }
+  .ladder-badge.n3 { background: #FBEEE6; color: #9F3F1C; }
+
+  .ladder-card h3 {
+    font-size: 22px; font-weight: 600; color: #1a1a1a;
+    margin: 0 0 10px;
+    letter-spacing: -0.3px;
+  }
+  .ladder-card .desc {
+    font-size: 14px; color: #555; line-height: 1.65;
+    margin: 0 0 18px;
+  }
+
+  .ladder-meta {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin: 0 0 20px;
+  }
+  .ladder-meta .price, .ladder-meta .delay {
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: #fafaf8;
+    border: 0.5px solid #ececec;
+    color: #333;
+    font-weight: 500;
+  }
+  .ladder-meta .price strong { color: #1a1a1a; font-weight: 600; }
+  .ladder-meta .price .old { text-decoration: line-through; color: #bbb; margin-left: 6px; font-weight: 400; }
+
+  .ladder-incl {
+    list-style: none;
+    padding: 16px 18px;
+    margin: 0 0 22px;
+    background: #fafaf8;
+    border-radius: 10px;
+    border-left: 3px solid #ececec;
+  }
+  .ladder-step.s1 .ladder-incl { border-left-color: #1D9E75; }
+  .ladder-step.s2 .ladder-incl { border-left-color: #BA7517; }
+  .ladder-step.s3 .ladder-incl { border-left-color: #D85A30; }
+  .ladder-incl li {
+    font-size: 13px; color: #444;
+    padding: 4px 0 4px 24px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .ladder-incl li::before {
+    content: '✓';
+    position: absolute;
+    left: 0; top: 4px;
+    color: #1D9E75;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .ladder-ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+  .ladder-btn {
+    display: inline-block;
+    padding: 11px 22px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.15s, background 0.15s;
+    border: 0.5px solid transparent;
+    line-height: 1.2;
+  }
+  .ladder-btn.primary { color: #fff; }
+  .ladder-btn.primary.n1 { background: #1D9E75; }
+  .ladder-btn.primary.n2 { background: #BA7517; }
+  .ladder-btn.primary.n3 { background: #D85A30; }
+  .ladder-btn.primary:hover { opacity: 0.88; }
+  .ladder-btn.ghost {
+    background: #fff;
+    color: #333;
+    border-color: #e0e0e0;
+  }
+  .ladder-btn.ghost:hover { border-color: #1a1a1a; color: #1a1a1a; }
+
+  /* ===== COMPARISON TABLE ===== */
+  .compare-section { max-width: 1100px; margin: 40px auto 60px; padding: 0 24px; }
+  .compare-section h2 {
+    font-size: 28px; font-weight: 600;
+    text-align: center;
+    margin: 0 0 8px;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+  }
+  .compare-section .sub {
+    font-size: 14px; color: #888;
+    text-align: center;
+    margin: 0 0 30px;
+  }
+  .compare-wrap {
+    background: #fff;
+    border: 0.5px solid #f0f0f0;
+    border-radius: 14px;
+    overflow: hidden;
+    overflow-x: auto;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 680px;
+    font-size: 13px;
+  }
+  .compare-table thead th {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 18px 16px;
+    text-align: center;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: #fff;
+    border-right: 0.5px solid rgba(255,255,255,0.2);
+  }
+  .compare-table thead th:first-child {
+    background: #fafaf8;
+    color: #555;
+    text-align: left;
+    border-right: 0.5px solid #f0f0f0;
+    text-transform: none;
+    font-size: 11px;
+  }
+  .compare-table thead th.n1 { background: #1D9E75; }
+  .compare-table thead th.n2 { background: #BA7517; }
+  .compare-table thead th.n3 { background: #D85A30; }
+  .compare-table tbody tr { border-bottom: 0.5px solid #f0f0f0; }
+  .compare-table tbody tr:last-child { border-bottom: 0; }
+  .compare-table tbody td {
+    padding: 14px 16px;
+    text-align: center;
+    color: #444;
+    border-right: 0.5px solid #f0f0f0;
+  }
+  .compare-table tbody td:first-child {
+    text-align: left;
+    font-weight: 500;
+    color: #333;
+    background: #fafaf8;
+  }
+  .compare-table .yes { color: #1D9E75; font-size: 17px; font-weight: 700; }
+  .compare-table .no { color: #bbb; font-size: 17px; }
+
+  /* ===== CTA FINAL ===== */
+  .final-cta { max-width: 880px; margin: 0 auto 80px; padding: 0 24px; }
+  .final-cta-inner {
+    background: linear-gradient(135deg, #1D9E75 0%, #BA7517 50%, #D85A30 100%);
+    border-radius: 16px;
+    padding: 48px 32px;
+    text-align: center;
+    color: #fff;
+  }
+  .final-cta h2 { font-size: 26px; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.3px; }
+  .final-cta p { font-size: 14px; opacity: 0.92; margin: 0 0 22px; }
+  .final-cta .btn {
+    display: inline-block;
+    padding: 13px 32px;
+    background: #fff;
+    color: #1a1a1a;
+    font-size: 14px; font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .final-cta .btn:hover { opacity: 0.9; }
+  .btn-with-avatar{display:inline-flex;align-items:center;gap:12px;justify-content:center;}
+  .btn-avatar{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(0,0,0,0.08);flex-shrink:0;}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 700px) {
+    .ladder-wrap { padding: 8px 16px 40px; }
+    .ladder { padding: 10px 0 10px 48px; }
+    .ladder::before { left: 15px; }
+    .ladder-dot { left: -48px; width: 32px; height: 32px; font-size: 14px; }
+    .ladder-card { padding: 22px 20px; }
+    .ladder-card h3 { font-size: 18px; }
+    .ladder-ctas { flex-direction: column; }
+    .ladder-btn { width: 100%; text-align: center; }
+    .compare-section h2 { font-size: 22px; }
+    .final-cta-inner { padding: 36px 22px; }
+    .final-cta h2 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="ml-nav">
+  <a href="index.html" class="ml-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="ml-nav-links" id="navLinks">
+    <a href="formation.html">Services</a>
+    <a href="creer-of.html">Créer mon OF</a>
+    <a href="creer-certifier.html" class="active">Créer / Certifier</a>
+    <a href="se-former.html">Se former</a>
+    <a href="devenir-expert.html" style="color:#D85A30;font-weight:600;">Recrutement</a>
+    <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;">Connexion</a>
+    <a href="dashboard.html" class="ml-nav-cta btn-dashboard hidden">Mon espace</a>
+  </div>
+  <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="ml-hero">
+  <span class="ml-badge">Parcours certifiant</span>
+  <h1 class="ml-h1">De la formation à la certification</h1>
+  <p class="ml-sub">3 niveaux pour faire grandir votre activité de formateur — choisissez le vôtre, on vous accompagne.</p>
+</section>
+
+<!-- LADDER 3 NIVEAUX -->
+<section class="ladder-wrap">
+  <div class="ladder">
+
+    <!-- NIVEAU 1 — DÉMARRER -->
+    <div class="ladder-step s1">
+      <div class="ladder-dot n1">1</div>
+      <div class="ladder-card">
+        <span class="ladder-badge n1">Niveau 1 — Démarrer</span>
+        <h3>Créer ma formation</h3>
+        <p class="desc">Vous avez une expertise mais pas encore de formation structurée ? On vous aide à la transformer en programme professionnel vendable, conforme aux exigences Qualiopi.</p>
+        <div class="ladder-meta">
+          <span class="price"><strong>À partir de 990€</strong></span>
+          <span class="delay">Livraison sous 3 semaines</span>
+        </div>
+        <ul class="ladder-incl">
+          <li>Programme pédagogique structuré</li>
+          <li>Supports de formation</li>
+          <li>Modalités d'évaluation</li>
+          <li>Conformité Qualiopi</li>
+          <li>Mise en ligne catalogue</li>
+        </ul>
+        <div class="ladder-ctas">
+          <a href="/dashboard.html#nouvelle-demarche-creation_formation" class="ladder-btn primary n1">Créer ma formation</a>
+          <a href="se-former.html" class="ladder-btn ghost">Voir des exemples</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIVEAU 2 — FAIRE FINANCER -->
+    <div class="ladder-step s2">
+      <div class="ladder-dot n2">2</div>
+      <div class="ladder-card">
+        <span class="ladder-badge n2">Niveau 2 — Faire financer</span>
+        <h3>Habiliter mes formations sur RS/RNCP</h3>
+        <p class="desc">Pour ouvrir le financement CPF/OPCO et faire passer vos formations à l'échelle, on vous habilite sur une certification existante au RS ou RNCP. Le plus rapide pour démarrer sur Mon Compte Formation.</p>
+        <div class="ladder-meta">
+          <span class="price"><strong>À partir de 490€</strong></span>
+          <span class="delay">6-8 semaines</span>
+        </div>
+        <ul class="ladder-incl">
+          <li>Recherche certifications adaptées</li>
+          <li>Constitution du dossier</li>
+          <li>Dépôt auprès du certificateur</li>
+          <li>Suivi jusqu'à validation</li>
+          <li>Ouverture financements CPF</li>
+        </ul>
+        <div class="ladder-ctas">
+          <a href="/dashboard.html" class="ladder-btn primary n2">Faire habiliter</a>
+          <a href="#tableau-compare" class="ladder-btn ghost">Comparer RS et RNCP</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIVEAU 3 — DEVENIR LEADER -->
+    <div class="ladder-step s3">
+      <div class="ladder-dot n3">3</div>
+      <div class="ladder-card">
+        <span class="ladder-badge n3">Niveau 3 — Devenir leader</span>
+        <h3>Créer ma propre certification</h3>
+        <p class="desc">Vous voulez devenir certificateur officiel auprès de France Compétences et habiliter d'autres centres ? On vous accompagne sur tout le process : analyse, rédaction, dépôt, commission. Démarche premium.</p>
+        <div class="ladder-meta">
+          <span class="price"><strong>À partir de 5 990€</strong><span class="old">12 990€</span></span>
+          <span class="delay">8-12 mois — analyse IA gratuite incluse</span>
+        </div>
+        <ul class="ladder-incl">
+          <li>Analyse de faisabilité IA gratuite</li>
+          <li>Rédaction des référentiels</li>
+          <li>Constitution dossier complet</li>
+          <li>Dépôt France Compétences</li>
+          <li>Accompagnement commission</li>
+        </ul>
+        <div class="ladder-ctas">
+          <a href="/dashboard.html" class="ladder-btn primary n3">Lancer mon analyse gratuite</a>
+          <a href="#tableau-compare" class="ladder-btn ghost">Voir le process</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TABLEAU COMPARATIF -->
+<section class="compare-section" id="tableau-compare">
+  <h2>Quel niveau choisir ?</h2>
+  <p class="sub">Les 3 parcours comparés, critère par critère</p>
+  <div class="compare-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Critère</th>
+          <th class="n1">Créer formation</th>
+          <th class="n2">Habiliter</th>
+          <th class="n3">Certifier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Vente sur catalogue propre</td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Financement CPF (MCF)</td>
+          <td><span class="no">—</span></td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Financement OPCO</td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Habiliter d'autres centres</td>
+          <td><span class="no">—</span></td>
+          <td><span class="no">—</span></td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Reconnaissance officielle FC</td>
+          <td><span class="no">—</span></td>
+          <td><span class="no">—</span></td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Délai</td>
+          <td>3 semaines</td>
+          <td>6-8 semaines</td>
+          <td>8-12 mois</td>
+        </tr>
+        <tr>
+          <td>Investissement</td>
+          <td>À partir de 990€</td>
+          <td>À partir de 490€</td>
+          <td>À partir de 5 990€</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <h2>Pas sûr du niveau qu'il vous faut ?</h2>
+    <p>Parlons-en 20 minutes — on vous aide à choisir le parcours le plus rentable pour vous.</p>
+    <a href="https://www.cal.eu/formation2024-fubqzo/15min" target="_blank" rel="noopener" class="btn btn-with-avatar">
+      <img src="/team/philippe.png" alt="Philippe" class="btn-avatar">
+      <span>Réserver un appel avec Philippe</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- TEAM BAND (copie de /qui-sommes-nous.html) -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+.qsn-team-band{max-width:1100px;margin:60px auto 80px;padding:0 20px;}
+.qsn-team-band h2{font-family:'Lora',serif;font-weight:600;font-size:38px;color:#1a1a1a;text-align:center;margin:0 0 40px;}
+.qsn-team-band .qsn-team-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:20px;}
+.qsn-team-band .qsn-member{text-align:center;}
+.qsn-team-band .qsn-member-photo{width:80px;height:80px;border-radius:50%;object-fit:cover;background:#f5f5f5;margin:0 auto 14px;display:block;}
+.qsn-team-band .qsn-member-name{font-size:12px;font-weight:700;color:#1a1a1a;margin:0 0 2px;}
+.qsn-team-band .qsn-member-role{font-size:11px;color:#D85A30;font-weight:500;margin:0;line-height:1.3;}
+@media (max-width:1024px){.qsn-team-band .qsn-team-grid{grid-template-columns:repeat(4,1fr);gap:24px;}.qsn-team-band .qsn-member-photo{width:90px;height:90px;}.qsn-team-band .qsn-member-name{font-size:13px;}.qsn-team-band .qsn-member-role{font-size:12px;}}@media (max-width:600px){.qsn-team-band .qsn-team-grid{grid-template-columns:repeat(2,1fr);gap:20px;}.qsn-team-band h2{font-size:30px;}.qsn-team-band .qsn-member-photo{width:100px;height:100px;}}
+</style>
+<a class="qsn-team-link" href="/qui-sommes-nous.html" style="display:block;text-decoration:none;color:inherit;"><section class="qsn-team-band">
+  <h2>Notre équipe</h2>
+  <div class="qsn-team-grid">
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/yohan.png" alt="Yohan" loading="lazy"><p class="qsn-member-name">Yohan</p><p class="qsn-member-role">Expert Tech &amp; IA</p></div>
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/philippe.png" alt="Philippe" loading="lazy"><p class="qsn-member-name">Philippe</p><p class="qsn-member-role">Ancien directeur OPCO</p></div>
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/amina.png" alt="Amina" loading="lazy"><p class="qsn-member-name">Amina</p><p class="qsn-member-role">Experte Pédagogique</p></div>
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/karim.png" alt="Karim" loading="lazy"><p class="qsn-member-name">Karim</p><p class="qsn-member-role">Expert conformité</p></div>
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/marie.png" alt="Marie" loading="lazy"><p class="qsn-member-name">Marie</p><p class="qsn-member-role">Assistante pédagogique</p></div>
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/josh.png" alt="Josh" loading="lazy"><p class="qsn-member-name">Josh</p><p class="qsn-member-role">Auditeur Qualiopi</p></div>
+    <div class="qsn-member"><img class="qsn-member-photo" src="/team/laurent.png" alt="Laurent" loading="lazy"><p class="qsn-member-name">Laurent</p><p class="qsn-member-role">Expert Achat / Revente</p></div>
+  </div>
+</section>
+<!-- /TEAM BAND --></a>
+
+<footer class="ml-footer">
+  <div class="ml-footer-inner">
+    <div>
+      <div class="ml-footer-brand">les<span class="accent">formateurs</span>.online</div>
+      <p>La plateforme des professionnels de la formation.<br>EDOF, Qualiopi, NDA, RS/RNCP — prix cassés grâce à l'IA.</p>
+      <p class="siren">Experience Prod SASU · SIREN 982 828 774</p>
+    </div>
+    <div class="ml-footer-col">
+      <h4>Services</h4>
+      <a href="formation.html">Gérer mon activité</a>
+      <a href="conformite.html">Conformité</a>
+      <a href="creer-of.html">Créer mon OF</a>
+      <a href="creer-certifier.html">Créer / Certifier</a>
+      <a href="se-former.html">Se former</a>
+    </div>
+    <div class="ml-footer-col">
+      <h4>Légal</h4>
+      <a href="qui-sommes-nous.html">Qui sommes-nous</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="cgv.html">CGV</a>
+      <a href="politique-confidentialite.html">Confidentialité</a>
+    </div>
+  </div>
+  <div class="ml-partners" style="text-align:left;padding:16px 0 12px;">
+    <div style="font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Partenaires certifiés</div>
+    <div style="display:flex;justify-content:flex-start;align-items:center;gap:24px;flex-wrap:wrap;">
+      <img src="img/logo-qualiopi.png" alt="Qualiopi" style="height:72px;background:transparent;">
+    </div>
+  </div>
+  <div class="ml-footer-bottom">© 2026 lesformateurs.online — Tous droits réservés · <span style="color:#6C5CE7;font-weight:500;">Membres : -10% sur tous nos services</span></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/referral.js"></script>
+<script src="js/analytics.js"></script>
+<script src="js/auth-modal.js"></script>
+<script>
+(async function(){
+  try {
+    var user = await getUser();
+    if(user){
+      var loginBtn = document.querySelector('.btn-login');
+      var dashBtn = document.querySelector('.btn-dashboard');
+      if(loginBtn) loginBtn.classList.add('hidden');
+      if(dashBtn) dashBtn.classList.remove('hidden');
+    }
+  } catch(e){}
+})();
+</script>
+<script src="/expert-popup.js"></script>
+</body>
+</html>

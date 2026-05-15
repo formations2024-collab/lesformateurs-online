@@ -1,90 +1,137 @@
 {
-  "conformite": {
-    "nda": "https://buy.stripe.com/fZu7sL8zw5eZ5Ia2RYffy0E",
-    "uai": "https://buy.stripe.com/00weVd3fc7n76Me64affy0F",
-    "qualiopi": "https://buy.stripe.com/6oU9AT5nkePz7Qibouffy0G",
-    "edof": "https://buy.stripe.com/14AfZh6ro9vfdaC1NUffy0H",
-    "francetravail": "https://buy.stripe.com/28EbJ14jggXH9Yqakqffy0I",
-    "rs": "https://buy.stripe.com/bJe6oHdTQ4aV9YqgIOffy0J"
+  "_meta": {
+    "generated_at": "2026-04-14T08:05:48.668Z",
+    "grid_version": "pricing_v1"
   },
-  "opco": {
-    "unit": "https://buy.stripe.com/bJe7sL5nk9vfgmOakqffy1t",
-    "pack11": "https://buy.stripe.com/28E4gz030cHrfiKbouffy0L"
+  "links": {
+    "nda_1x": "https://buy.stripe.com/dRm9AT5nk22N1rU64affy2v",
+    "nda_2x": "https://buy.stripe.com/aFa7sL5nkgXH9YqdwCffy2w",
+    "nda_3x": "https://buy.stripe.com/5kQ7sLeXU0YJ1rU506ffy2x",
+    "edof_1x": "https://buy.stripe.com/6oUfZhaHEgXH6Me64affy2y",
+    "edof_2x": "https://buy.stripe.com/00w8wPeXUePz1rUdwCffy2z",
+    "edof_3x": "https://buy.stripe.com/6oU3cvcPM36RdaCakqffy2A",
+    "qualiopi_1x": "https://buy.stripe.com/6oU5kD5nk6j33A2csyffy2B",
+    "qualiopi_2x": "https://buy.stripe.com/6oU14n1745eZ4E664affy2C",
+    "qualiopi_3x": "https://buy.stripe.com/4gM6oH7vsazj3A2fEKffy2D",
+    "creation_of_1x": "https://buy.stripe.com/eVqeVd3fcdLv0nQ0JQffy2E",
+    "creation_of_2x": "https://buy.stripe.com/dRm8wP8zw6j30nQ9gmffy2F",
+    "creation_of_3x": "https://buy.stripe.com/eVqaEX4jgazj7Qibouffy2G",
+    "creation_of_cfa_1x": "https://buy.stripe.com/6oUaEX7vsbDnb2u0JQffy2H",
+    "creation_of_cfa_2x": "https://buy.stripe.com/14AdR9cPMcHreeGgIOffy2I",
+    "creation_of_cfa_3x": "https://buy.stripe.com/7sY28r3fc7n78Umbouffy2J",
+    "habilitation_1x": "https://buy.stripe.com/5kQ3cv6rogXHc6ybouffy2K",
+    "habilitation_2x": "https://buy.stripe.com/9B6dR96rocHr5Ia3W2ffy2L",
+    "habilitation_3x": "https://buy.stripe.com/5kQdR98zwfTDc6ydwCffy2M",
+    "certification_1x": "https://buy.stripe.com/6oUaEX3fcfTDdaC8ciffy2N",
+    "certification_2x": "https://buy.stripe.com/fZu00jcPM9vf3A278effy2O",
+    "certification_3x": "https://buy.stripe.com/eVqeVd7vs0YJ8Umcsyffy2P",
+    "opco_1x": "https://buy.stripe.com/aFabJ1bLI5eZ8UmgIOffy2Q",
+    "opco_2x": "https://buy.stripe.com/14A5kD4jg5eZ4E69gmffy2R",
+    "opco_3x": "https://buy.stripe.com/eVq6oH174cHr6Me9gmffy2S",
+    "france_travail_1x": "https://buy.stripe.com/5kQcN56ro4aVb2ueAGffy2T",
+    "france_travail_2x": "https://buy.stripe.com/4gMfZh2b87n7eeGgIOffy2U",
+    "france_travail_3x": "https://buy.stripe.com/9B66oH5nkcHr6MedwCffy2V",
+    "controle_1x": "https://buy.stripe.com/5kQeVdbLI6j30nQcsyffy2W",
+    "controle_2x": "https://buy.stripe.com/bJedR9cPM8rb3A2dwCffy2X",
+    "controle_3x": "https://buy.stripe.com/bJe7sLeXUdLvdaCbouffy2Y",
+    "creation_formation_1x": "https://buy.stripe.com/8x27sLg1Y7n75Ia8ciffy2Z",
+    "creation_formation_2x": "https://buy.stripe.com/cNiaEXaHEdLveeG506ffy30",
+    "creation_formation_3x": "https://buy.stripe.com/9B6bJ1g1YbDn2vY506ffy31",
+    "uai_1x": "https://buy.stripe.com/6oUeVd9DAbDn2vY2RYffy32",
+    "uai_2x": "https://buy.stripe.com/6oUbJ16ro0YJ0nQ64affy33",
+    "uai_3x": "https://buy.stripe.com/4gM7sLg1Y36R0nQ1NUffy34",
+    "centre_examen_1x": "https://buy.stripe.com/bJeeVd030bDn9Yq2RYffy35",
+    "centre_examen_2x": "https://buy.stripe.com/aFabJ17vsazjc6y1NUffy36",
+    "centre_examen_3x": "https://buy.stripe.com/dRm3cv2b87n76Me3W2ffy37",
+    "formation_elus_1x": "https://buy.stripe.com/14A9AT2b8bDngmOakqffy38",
+    "formation_elus_2x": "https://buy.stripe.com/28E28r5nkdLvdaC78effy39",
+    "formation_elus_3x": "https://buy.stripe.com/dRm8wP9DA36RgmO506ffy3a",
+    "agrement_prefectoral_1x": "https://buy.stripe.com/bJebJ103036R0nQ78effy3b",
+    "agrement_prefectoral_2x": "https://buy.stripe.com/aFa9AT8zw9vf2vY9gmffy3c",
+    "agrement_prefectoral_3x": "https://buy.stripe.com/bJe14n8zwfTD3A2eAGffy3d",
+    "site_web_1x": "https://buy.stripe.com/cNidR92b89vfgmOgIOffy3e",
+    "site_web_2x": "https://buy.stripe.com/6oU00j3fcePz5Ia78effy3f",
+    "site_web_3x": "https://buy.stripe.com/4gM00j3fcdLvb2u3W2ffy3g",
+    "lms_1x": "https://buy.stripe.com/8x25kD6ro8rbb2u0JQffy3h",
+    "lms_2x": "https://buy.stripe.com/9B65kD9DAgXHb2u78effy3i",
+    "lms_3x": "https://buy.stripe.com/8x2aEXaHEgXH5Ia2RYffy3j",
+    "funnel_1x": "https://buy.stripe.com/4gM7sL3fc9vfeeGbouffy3k",
+    "funnel_2x": "https://buy.stripe.com/5kQ00jcPMePz2vY1NUffy3l",
+    "funnel_3x": "https://buy.stripe.com/dRm28r6ro0YJ2vYdwCffy3m",
+    "app_mobile_1x": "https://buy.stripe.com/8x200jg1YgXH3A264affy3n",
+    "app_mobile_2x": "https://buy.stripe.com/fZucN58zwdLvfiKbouffy3o",
+    "app_mobile_3x": "https://buy.stripe.com/14A28rg1Y8rb4E6eAGffy3p",
+    "pack_presence_1x": "https://buy.stripe.com/7sYbJ14jgazjb2u2RYffy3q",
+    "pack_presence_2x": "https://buy.stripe.com/dRmcN5eXUdLv0nQfEKffy3r",
+    "pack_presence_3x": "https://buy.stripe.com/cNi4gz8zwfTDc6y3W2ffy3s",
+    "pack_digital_1x": "https://buy.stripe.com/14A8wP174gXH4E6akqffy3t",
+    "pack_digital_2x": "https://buy.stripe.com/bJe28r4jg36R2vY3W2ffy3u",
+    "pack_digital_3x": "https://buy.stripe.com/aFaaEXcPM36RfiKbouffy3v",
+    "pack_premium_1x": "https://buy.stripe.com/9B68wP0305eZ2vY2RYffy3w",
+    "pack_premium_2x": "https://buy.stripe.com/9B69ATcPM4aV5Iaakqffy3x",
+    "pack_premium_3x": "https://buy.stripe.com/fZubJ117436R3A264affy3y",
+    "pack_enterprise_1x": "https://buy.stripe.com/dRm6oH3fc9vf4E6dwCffy3z",
+    "pack_enterprise_2x": "https://buy.stripe.com/fZu6oHdTQ4aV0nQfEKffy3A",
+    "pack_enterprise_3x": "https://buy.stripe.com/4gM6oH03022NfiKcsyffy3B"
   },
-  "creer_of": {
-    "action": "https://buy.stripe.com/bJe4gz7vs9vffiKgIOffy0M",
-    "cfa": "https://buy.stripe.com/00wbJ1aHEazjgmO9gmffy0N",
-    "bilan": "https://buy.stripe.com/cNi4gz2b86j39Yq506ffy0O",
-    "vae": "https://buy.stripe.com/dRm8wPdTQ0YJ2vY2RYffy0P",
-    "elus": "https://buy.stripe.com/fZu4gz030dLvgmO3W2ffy0Q",
-    "agents_ia": "https://buy.stripe.com/8x29ATeXU5eZgmO3W2ffy0R"
+  "products": {
+    "nda": "prod_UKhNwUfi79DBPs",
+    "edof": "prod_UKhNIg68PIa9j2",
+    "qualiopi": "prod_UKhNDAFQACNTrS",
+    "creation_of": "prod_UKhNmElaOYPcFc",
+    "creation_of_cfa": "prod_UKhNI0r6Bm3vow",
+    "habilitation": "prod_UKhNTC4D2jkQXQ",
+    "certification": "prod_UKhNEv8xxY6zFH",
+    "opco": "prod_UKhNobnIw9Zgd9",
+    "france_travail": "prod_UKhNoPSYLcu0Ph",
+    "controle": "prod_UKhNrQ4dktowBY",
+    "creation_formation": "prod_UKhNvjlgNkUvor",
+    "uai": "prod_UKhOQiMfE28EW0",
+    "centre_examen": "prod_UKhOW9qbqSNr8Y",
+    "formation_elus": "prod_UKhOShHCiWUKPr",
+    "agrement_prefectoral": "prod_UKhOEKyBxZcMSF",
+    "site_web": "prod_UKhOco0cu9Mpa0",
+    "lms": "prod_UKhOW3UaF1gDgu",
+    "funnel": "prod_UKhOeS3yfAyjWK",
+    "app_mobile": "prod_UKhOo1e7lMFK1l",
+    "pack_presence": "prod_UKhO5jpafGrVbU",
+    "pack_digital": "prod_UKhOabc8mRSRYm",
+    "pack_premium": "prod_UKhO9ot4QGCChT",
+    "pack_enterprise": "prod_UKhOximbb8PmJi"
   },
-  "options_of": {
-    "qualiopi": "https://buy.stripe.com/00w8wP3fcgXH3A2csyffy0S",
-    "agents_ia": "https://buy.stripe.com/9B68wP6roePz9Yq78effy0T",
-    "edof": "https://buy.stripe.com/9B6cN57vs22N3A2eAGffy0U",
-    "opco": "https://buy.stripe.com/00w28r2b87n7daCdwCffy1w",
-    "site_web": "https://buy.stripe.com/8x2aEX17422NgmOakqffy0W"
-  },
-  "annonces": {
-    "premium": "https://buy.stripe.com/9B628r6rogXHfiK506ffy0X"
-  },
-  "formation": {
-    "formateur": "https://buy.stripe.com/8x2eVd3fc6j3c6y0JQffy0Y"
-  },
-  "agent_ia": {
-    "creation_formations": "https://buy.stripe.com/00w3cvcPM22N9Yqbouffy0Z",
-    "depots_dossiers": "https://buy.stripe.com/dRm4gz5nkazj5Ia506ffy10",
-    "gestion_stagiaires": "https://buy.stripe.com/5kQ7sLdTQ6j38Umcsyffy11",
-    "facturation": "https://buy.stripe.com/00w7sL6ro0YJ5Ia8ciffy12",
-    "prospection": "https://buy.stripe.com/4gMcN53fc5eZ1rU8ciffy13",
-    "cpf_edof": "https://buy.stripe.com/dRmbJ19DAgXH1rU9gmffy14",
-    "veille": "https://buy.stripe.com/cNicN52b89vf9Yq2RYffy15",
-    "community": "https://buy.stripe.com/00w4gz8zwgXHfiK0JQffy16",
-    "reporting": "https://buy.stripe.com/5kQ5kD6rodLvgmO8ciffy17",
-    "planification": "https://buy.stripe.com/8x2aEX6ro4aV5IaeAGffy18"
-  },
-  "domiciliation": "https://buy.stripe.com/7sYdR9bLIcHrgmO0JQffy1u",
-  "premium_annonce": "https://buy.stripe.com/9B67sL4jg0YJ8Um0JQffy1v",
-  "premium_subscription": {
-    "product_id": "prod_UByOo84Qg3WOwI",
-    "price_id": "price_1TDaRNDnwFniOSFLxoz0r8G6",
-    "payment_link": "https://buy.stripe.com/7sY7sL7vs22N4E69gmffy1x"
-  },
-  "coupon_id": "PREMIUM10",
-  "premium_links": {
-    "conformite": {
-      "nda": "https://buy.stripe.com/aFa8wPdTQ4aV2vYbouffy1y",
-      "uai": "https://buy.stripe.com/3cIdR96rofTD6Me3W2ffy1z",
-      "qualiopi": "https://buy.stripe.com/8x27sLdTQbDndaC2RYffy1A",
-      "edof": "https://buy.stripe.com/4gMdR93fcazjb2u64affy1B",
-      "francetravail": "https://buy.stripe.com/bJeeVd9DA7n7b2u64affy1C",
-      "rs": "https://buy.stripe.com/4gMaEX4jg4aV2vYeAGffy1D",
-      "opco_unit": "https://buy.stripe.com/9B6fZh7vs22N6Me2RYffy1E",
-      "opco_pack11": "https://buy.stripe.com/4gM5kDaHE36RgmO64affy1F",
-      "bpf": "https://buy.stripe.com/aFafZh8zwePzb2u2RYffy1G"
+  "orders": {
+    "_meta": {
+      "generated_at": "2026-04-13T00:00:00.000Z",
+      "origin": "mes-commandes",
+      "products": {
+        "site":     "prod_ULSnop3UvbHCrj",
+        "app":      "prod_ULSn1WuM1QSF66",
+        "lms":      "prod_ULSnHFoyfBAU0w",
+        "agent_ia": "prod_ULSntRDdaUwHZS"
+      },
+      "pricing_cents": {
+        "site":     { "comptant": 99000,  "mensuel_3x": 35000  },
+        "app":      { "comptant": 499000, "mensuel_3x": 169000 },
+        "lms":      { "comptant": 290000, "mensuel_3x": 105000 },
+        "agent_ia": { "comptant": 39000,  "mensuel_3x": 14900  }
+      }
     },
-    "creer_of": {
-      "action_1x": "https://buy.stripe.com/4gMcN53fc6j3gmO8ciffy1H",
-      "cfa_1x": "https://buy.stripe.com/fZuaEX2b822Nc6y8ciffy1I",
-      "bilan_1x": "https://buy.stripe.com/6oU9AT4jg22N8UmfEKffy1J",
-      "vae_1x": "https://buy.stripe.com/5kQ9AT2b88rb4E60JQffy1K",
-      "elus_1x": "https://buy.stripe.com/cNi14n5nkazjeeG2RYffy1L",
-      "agents_ia_1x": "https://buy.stripe.com/4gM8wP174bDn5Iacsyffy1M",
-      "action_2x": "https://buy.stripe.com/3cI6oHbLI36RdaC78effy1P",
-      "action_3x": "https://buy.stripe.com/aFa14ncPM0YJ1rUfEKffy1Q",
-      "cfa_2x": "https://buy.stripe.com/00w14n8zwePz3A28ciffy1R",
-      "cfa_3x": "https://buy.stripe.com/bJe28r7vs8rbeeG9gmffy1S",
-      "bilan_2x": "https://buy.stripe.com/aFa7sL3fcfTDfiKeAGffy1T",
-      "bilan_3x": "https://buy.stripe.com/4gM6oHaHE36RfiK9gmffy1U",
-      "vae_2x": "https://buy.stripe.com/fZu28rg1Y9vfeeGdwCffy1V",
-      "vae_3x": "https://buy.stripe.com/28E7sL8zw5eZgmOdwCffy1W",
-      "elus_2x": "https://buy.stripe.com/7sY28rcPM22Nb2u3W2ffy1X",
-      "elus_3x": "https://buy.stripe.com/eVqaEX17436R5Ia1NUffy1Y",
-      "agents_ia_2x": "https://buy.stripe.com/cNibJ17vsazjeeGgIOffy1Z",
-      "agents_ia_3x": "https://buy.stripe.com/7sYeVd6ro5eZ1rUdwCffy20"
+    "site": {
+      "comptant": "https://buy.stripe.com/28E00j6ro0YJ9Yq9gmffy3C",
+      "3x":       "https://buy.stripe.com/bJedR99DA6j3daCdwCffy3D"
     },
-    "formation": "https://buy.stripe.com/3cIdR93fc8rb4E63W2ffy1N",
-    "premium_annonce": "https://buy.stripe.com/00w14n8zwgXHdaC0JQffy1O"
-  }
+    "app": {
+      "comptant": "https://buy.stripe.com/dRm3cveXU22NgmO64affy3E",
+      "3x":       "https://buy.stripe.com/cNi4gz5nk0YJ5IafEKffy3F"
+    },
+    "lms": {
+      "comptant": "https://buy.stripe.com/14A3cveXU7n75Ia78effy3G",
+      "3x":       "https://buy.stripe.com/aFa4gz8zw0YJ0nQ506ffy3H"
+    },
+    "agent_ia": {
+      "comptant": "https://buy.stripe.com/3cI5kD9DA22NgmOcsyffy3I",
+      "3x":       "https://buy.stripe.com/5kQ14ng1Y7n77Qicsyffy3J"
+    }
+  },
+  "errors": []
 }

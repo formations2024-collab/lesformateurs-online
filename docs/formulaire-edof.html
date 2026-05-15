@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Formulaire EDOF — Demande de référencement</title>
+<style>
+@page{size:A4;margin:20mm 18mm;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,'Segoe UI',sans-serif;color:#1a1a1a;font-size:11px;line-height:1.5;}
+h1{font-size:20px;font-weight:800;text-align:center;margin-bottom:4px;color:#D85A30;}
+.subtitle{text-align:center;font-size:11px;color:#666;margin-bottom:20px;}
+h2{font-size:14px;font-weight:700;color:#fff;background:#D85A30;padding:8px 14px;border-radius:6px;margin:18px 0 10px;page-break-after:avoid;}
+h3{font-size:12px;font-weight:700;color:#1a1a1a;margin:12px 0 6px;padding:6px 10px;background:#FFF8F3;border-left:3px solid #D85A30;border-radius:4px;}
+.field{margin-bottom:10px;}
+.field label{display:block;font-weight:600;font-size:10px;color:#333;margin-bottom:3px;}
+.field label .req{color:#D85A30;}
+.field .input{border:1.5px solid #ddd;border-radius:5px;padding:7px 10px;min-height:28px;background:#FAFAFA;font-size:10px;}
+.field .input.tall{min-height:60px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.note{background:#F0F7FF;border:1px solid #BFDBFE;border-radius:5px;padding:8px 10px;font-size:10px;color:#1E40AF;margin:8px 0;}
+.warn{background:#FEF3C7;border-left:3px solid #F59E0B;border-radius:5px;padding:8px 10px;font-size:10px;color:#92400E;margin:8px 0;}
+.check{margin:6px 0;}
+.check label{font-size:10px;display:flex;align-items:flex-start;gap:6px;}
+.check label .box{width:12px;height:12px;border:1.5px solid #999;border-radius:2px;flex-shrink:0;margin-top:1px;}
+.sep{border-top:1px dashed #ddd;margin:14px 0;}
+.footer{text-align:center;font-size:9px;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;}
+.logo{font-size:16px;font-weight:300;text-align:center;margin-bottom:2px;}
+.logo b{color:#D85A30;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="logo">les<b>formateurs</b>.online</div>
+<h1>Formulaire de r&eacute;f&eacute;rencement EDOF</h1>
+<div class="subtitle">Demande d'acc&egrave;s &agrave; l'Espace des Organismes de Formation — Mon Compte Formation</div>
+
+<h2>1. Organisme</h2>
+
+<h3>Entreprise (SIREN)</h3>
+<div class="field"><label>SIREN de l'entreprise <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Raison sociale <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Forme juridique <span class="req">*</span></label><div class="input"></div></div>
+
+<h3>&Eacute;tablissement (SIRET)</h3>
+<div class="field"><label>SIRET de l'&eacute;tablissement <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Changement de SIRET suite &agrave; un d&eacute;m&eacute;nagement</label><div class="input">&#9744; Oui &nbsp;&nbsp; &#9744; Non</div></div>
+<div class="row2">
+<div class="field"><label>Code postal <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Ville <span class="req">*</span></label><div class="input"></div></div>
+</div>
+<div class="field"><label>Adresse de l'&eacute;tablissement <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Num&eacute;ro NDA <span class="req">*</span></label><div class="input"></div></div>
+
+<h3>Personnes</h3>
+<div class="row2">
+<div class="field"><label>Nombre de salari&eacute;s <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Nombre de formateurs <span class="req">*</span></label><div class="input"></div></div>
+</div>
+
+<h3>Sous-traitance</h3>
+<div class="field"><label>Recours &agrave; la sous-traitance ? <span class="req">*</span></label><div class="input">&#9744; Oui &nbsp;&nbsp; &#9744; Non</div></div>
+<div class="field"><label>D&eacute;tails sur la sous-traitance</label><div class="input tall"></div></div>
+
+<h3>M&eacute;diateur de la consommation</h3>
+<div class="field"><label>Nom du m&eacute;diateur <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>URL du m&eacute;diateur <span class="req">*</span></label><div class="input"></div></div>
+
+<h3>Repr&eacute;sentant(s) l&eacute;gal(aux)</h3>
+<div class="row2">
+<div class="field"><label>Nom <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Pr&eacute;nom <span class="req">*</span></label><div class="input"></div></div>
+</div>
+<div class="field"><label>Fonction <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Type</label><div class="input">&#9744; Personne physique &nbsp;&nbsp; &#9744; Personne morale</div></div>
+
+<h3>Coordonn&eacute;es bancaires</h3>
+<div class="warn">Saisir l'IBAN avec attention. Ces coordonn&eacute;es seront utilis&eacute;es pour les versements CPF.</div>
+<div class="field"><label>IBAN <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>BIC / SWIFT <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Titulaire du compte <span class="req">*</span></label><div class="input"></div></div>
+
+<h2>2. Actions</h2>
+
+<h3>Responsable p&eacute;dagogique</h3>
+<div class="row2">
+<div class="field"><label>Nom <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Pr&eacute;nom <span class="req">*</span></label><div class="input"></div></div>
+</div>
+<div class="field"><label>E-mail <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>T&eacute;l&eacute;phone</label><div class="input"></div></div>
+
+<h3>Cat&eacute;gories d'actions</h3>
+<div class="check"><label><span class="box"></span>Actions de formation</label></div>
+<div class="check"><label><span class="box"></span>Bilans de comp&eacute;tences</label></div>
+<div class="check"><label><span class="box"></span>Actions de VAE</label></div>
+<div class="check"><label><span class="box"></span>Actions par apprentissage</label></div>
+<div class="check"><label><span class="box"></span>Permis de conduire</label></div>
+<div class="check"><label><span class="box"></span>Formation des &eacute;lus locaux</label></div>
+
+<h3>Modalit&eacute;s d'&eacute;valuation du besoin de formation</h3>
+<div class="field"><label>Comment &eacute;valuez-vous le besoin de formation ? <span class="req">*</span></label><div class="input tall"></div></div>
+
+<h2>3. Offres</h2>
+
+<h3>Cr&eacute;er une offre</h3>
+<div class="field"><label>Type d'offre <span class="req">*</span></label><div class="input">&#9744; Formation certifiante &nbsp; &#9744; Bilan &nbsp; &#9744; Permis &nbsp; &#9744; VAE</div></div>
+<div class="field"><label>R&eacute;pertoire <span class="req">*</span></label><div class="input">&#9744; RS &nbsp;&nbsp; &#9744; RNCP</div></div>
+<div class="field"><label>Code RS/RNCP <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Identifiant interne <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Intitul&eacute; de l'offre (90 caract&egrave;res visibles) <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Objectif g&eacute;n&eacute;ral <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Objectif p&eacute;dagogique <span class="req">*</span></label><div class="input tall"></div></div>
+<div class="field"><label>Contenu <span class="req">*</span></label><div class="input tall"></div></div>
+<div class="field"><label>Points forts <span class="req">*</span></label><div class="input tall"></div></div>
+<div class="field"><label>R&eacute;sultats attendus <span class="req">*</span></label><div class="input tall"></div></div>
+<div class="field"><label>Type de parcours <span class="req">*</span></label><div class="input"></div></div>
+
+<h3>Action</h3>
+<div class="field"><label>Modalit&eacute; d'enseignement <span class="req">*</span></label><div class="input">&#9744; Pr&eacute;sentielle &nbsp; &#9744; Mixte &nbsp; &#9744; Distance</div></div>
+<div class="row3">
+<div class="field"><label>Dur&eacute;e totale (h)</label><div class="input"></div></div>
+<div class="field"><label>Heures en centre</label><div class="input"></div></div>
+<div class="field"><label>Heures en entreprise</label><div class="input"></div></div>
+</div>
+<div class="field"><label>Prix TTC (&euro;) <span class="req">*</span></label><div class="input"></div></div>
+
+<h2>4. Coordonn&eacute;es</h2>
+
+<h3>Personne en charge de la demande</h3>
+<div class="row2">
+<div class="field"><label>Nom <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Pr&eacute;nom <span class="req">*</span></label><div class="input"></div></div>
+</div>
+<div class="field"><label>Fonction <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>E-mail <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>T&eacute;l&eacute;phone <span class="req">*</span></label><div class="input"></div></div>
+
+<h3>Signataire</h3>
+<div class="row2">
+<div class="field"><label>Nom <span class="req">*</span></label><div class="input"></div></div>
+<div class="field"><label>Pr&eacute;nom <span class="req">*</span></label><div class="input"></div></div>
+</div>
+<div class="field"><label>E-mail du signataire <span class="req">*</span></label><div class="input"></div></div>
+
+<h3>Engagement &amp; Motivations</h3>
+<div class="field"><label>Description des motivations <span class="req">*</span></label><div class="input tall"></div></div>
+<div class="check"><label><span class="box"></span>Je certifie l'exactitude des informations fournies</label></div>
+<div class="check"><label><span class="box"></span>J'ai pris connaissance des CGU</label></div>
+<div class="check"><label><span class="box"></span>J'ai pris connaissance des CPOF v14</label></div>
+<div class="check"><label><span class="box"></span>Je m'engage &agrave; suivre l'accompagnement obligatoire</label></div>
+
+<h2>5. Pi&egrave;ces justificatives</h2>
+<div class="note">Format accept&eacute; : PDF, PNG, JPG, GIF, BMP — 10 Mo max par fichier.</div>
+
+<h3>Entreprise</h3>
+<div class="check"><label><span class="box"></span>Extrait Kbis de moins de 3 mois OU Extrait RNE</label></div>
+
+<h3>Repr&eacute;sentant l&eacute;gal (personne physique)</h3>
+<div class="check"><label><span class="box"></span>Copie CNI ou passeport (recto/verso) en cours de validit&eacute;</label></div>
+<div class="check"><label><span class="box"></span>D&eacute;claration de non-condamnation et filiation sign&eacute;e (&lt; 3 mois)</label></div>
+
+<h3>Association (si applicable)</h3>
+<div class="check"><label><span class="box"></span>Statuts &agrave; jour avec membres du bureau</label></div>
+<div class="check"><label><span class="box"></span>Dernier PV d'Assembl&eacute;e G&eacute;n&eacute;rale</label></div>
+<div class="check"><label><span class="box"></span>R&eacute;c&eacute;piss&eacute; JOAFE</label></div>
+
+<h3>Cas sp&eacute;cifiques</h3>
+<div class="check"><label><span class="box"></span>Agr&eacute;ment pr&eacute;fectoral (auto-&eacute;cole)</label></div>
+<div class="check"><label><span class="box"></span>Agr&eacute;ment CNFEL (&eacute;lus locaux)</label></div>
+<div class="check"><label><span class="box"></span>D&eacute;l&eacute;gation de pouvoir (si demandeur &ne; RL)</label></div>
+
+<div class="footer">
+lesformateurs.online — Formulaire de r&eacute;f&eacute;rencement EDOF — &Agrave; remplir en ligne sur of.moncompteformation.gouv.fr
+</div>
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>L'Art de la Couturière — Centre de formation couture · Saint-Pierre, La Réunion</title>
+<link rel="canonical" href="https://lesformateurs.online/client/lartdelacouturiere">
+<link rel="icon" type="image/x-icon" href="/favicon-couturiere.ico">
+<link rel="icon" type="image/png" sizes="256x256" href="/client/favicon-256.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/client/favicon-256.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FDF8F0; --card:#FFFFFF;
+  --terracotta:#C2724A; --terracotta-pale:#F5E2D6;
+  --moutarde:#D4A44C; --moutarde-pale:#FBF0D9;
+  --sage:#7A8B6E; --sage-pale:#E8EDE4;
+  --brun:#2E2118; --brun-mid:#5C4F42; --brun-light:#9A8C7E;
+  --accent:#6B8191;
+  --line:rgba(194,114,74,0.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Fraunces',serif;color:var(--brun);background:var(--bg);overflow-x:hidden;min-height:100vh}
+a{text-decoration:none;color:inherit}
+.hidden{display:none !important}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(2deg)}}
+@keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@keyframes blob{0%,100%{border-radius:45% 55% 60% 40% / 50% 45% 55% 50%}50%{border-radius:55% 45% 40% 60% / 45% 55% 50% 45%}}
+
+/* NAV */
+.nav-sol{position:fixed;top:0;left:0;right:0;z-index:100;transition:all 0.4s;padding:14px 0}
+.nav-sol.active{background:rgba(253,248,240,0.92);backdrop-filter:blur(16px);box-shadow:0 1px 12px rgba(46,33,24,0.04)}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.logo-link{display:flex;align-items:center;gap:10px}
+.logo-link img{height:42px}
+.logo-text{font-family:'Fraunces',serif;font-size:15px;font-weight:500;color:var(--brun)}
+.nav-desk{display:flex;gap:24px;align-items:center}
+.nav-desk a{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:var(--brun-mid);font-weight:500;transition:color 0.3s}
+.nav-desk a:hover{color:var(--terracotta)}
+.nav-mob{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.nav-mob span{width:22px;height:2px;background:var(--brun);transition:0.3s}
+.nav-mob.open span:nth-child(1){transform:rotate(45deg) translateY(7px)}
+.nav-mob.open span:nth-child(2){opacity:0}
+.nav-mob.open span:nth-child(3){transform:rotate(-45deg) translateY(-7px)}
+.nav-mobile-menu{background:rgba(253,248,240,0.98);padding:20px;border-top:1px solid var(--line);display:none}
+.nav-mobile-menu.open{display:block}
+.nav-mobile-menu a{display:block;padding:10px 0;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--brun)}
+
+/* BUTTONS */
+.btn-sol{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--terracotta);color:#fff;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all 0.35s;letter-spacing:0.3px}
+.btn-sol:hover{background:var(--brun);transform:translateY(-2px);box-shadow:0 8px 20px rgba(194,114,74,0.2)}
+.btn-sol-out{background:transparent;color:var(--terracotta);border:2px solid var(--terracotta)}
+.btn-sol-out:hover{background:var(--terracotta);color:#fff}
+.btn-sol-sm{padding:8px 18px;font-size:11px}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.organic-shape{position:absolute;border-radius:50%;pointer-events:none}
+.shape-1{width:300px;height:300px;background:var(--terracotta-pale);top:-5%;right:-3%;opacity:0.5;filter:blur(60px)}
+.shape-2{width:220px;height:220px;background:var(--sage-pale);bottom:10%;left:-2%;opacity:0.6;filter:blur(50px)}
+.shape-3{width:160px;height:160px;background:var(--moutarde-pale);top:35%;left:20%;opacity:0.3;filter:blur(40px)}
+.hero-g{max-width:1140px;margin:0 auto;padding:130px 24px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%;position:relative}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:var(--card);border-radius:50px;margin-bottom:28px;box-shadow:0 2px 8px rgba(46,33,24,0.04);animation:fadeUp 0.5s ease-out}
+.hero-tag-dot{width:8px;height:8px;border-radius:50%;background:var(--sage)}
+.hero-tag-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--sage);font-weight:600}
+.hero-tag-sep{width:1px;height:14px;background:var(--line)}
+.hero-tag-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--brun-light)}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(34px,5vw,56px);font-weight:300;line-height:1.15;margin-bottom:20px;animation:fadeUp 0.5s ease-out 0.1s both}
+.hero h1 em{font-style:normal;font-weight:600;color:var(--terracotta)}
+.hero h1 .italic{font-style:italic;color:var(--moutarde)}
+.hero-desc{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.8;color:var(--brun-mid);max-width:460px;margin-bottom:28px;animation:fadeUp 0.5s ease-out 0.2s both}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp 0.5s ease-out 0.3s both}
+.hero-stats{display:flex;gap:28px;margin-top:40px;animation:fadeUp 0.5s ease-out 0.4s both;flex-wrap:wrap}
+.hero-stat{display:flex;align-items:center;gap:10px}
+.hero-stat-num{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:20px;font-weight:700}
+.hero-stat-label{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--brun-light);line-height:1.3}
+
+/* HERO right card */
+.hero-right{display:flex;justify-content:center;animation:fadeUp 0.6s ease-out 0.2s both}
+.hero-card-wrap{position:relative}
+.hero-card-blob{position:absolute;inset:-20px;background:linear-gradient(135deg,var(--terracotta-pale) 0%,var(--moutarde-pale) 50%,var(--sage-pale) 100%);animation:sway 8s ease-in-out infinite,blob 12s ease-in-out infinite}
+.hero-card{position:relative;width:clamp(280px,28vw,380px);aspect-ratio:3/4;background:transparent;display:flex;align-items:center;justify-content:center;padding:8px}
+.hero-card img{width:100%;height:auto;object-fit:contain;filter:drop-shadow(0 20px 40px rgba(46,33,24,0.18))}
+.logo-link img{height:46px;width:auto;object-fit:contain}
+.footer-brand img{height:36px;width:auto;object-fit:contain}
+.hero-badge-1{position:absolute;top:10px;right:-30px;padding:8px 14px;background:var(--terracotta);border-radius:12px;box-shadow:0 4px 12px rgba(194,114,74,0.25);animation:float 4s ease-in-out infinite;font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;color:#fff;font-weight:700;letter-spacing:0.5px}
+.hero-badge-2{position:absolute;bottom:20px;left:-24px;padding:6px 14px;background:var(--sage);border-radius:10px;box-shadow:0 4px 12px rgba(122,139,110,0.2);font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;color:#fff;font-weight:600}
+
+/* SECTIONS */
+.section{padding:90px 24px}
+.section.alt{background:var(--card)}
+.section-inner{max-width:900px;margin:0 auto}
+.section-inner-lg{max-width:1140px}
+.section-head{text-align:center;margin-bottom:44px}
+.section-eyebrow{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--terracotta);font-weight:600}
+.section-head h2{font-family:'Fraunces',serif;font-size:clamp(26px,3.5vw,38px);font-weight:300;margin-top:8px}
+.section-head h2 em{font-style:normal;font-weight:600;color:var(--terracotta)}
+.section-head h2 .italic{font-style:italic;color:var(--terracotta)}
+
+/* PROPOS */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.propos-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.9;color:var(--brun-mid)}
+.propos-quote{padding:24px;background:var(--terracotta-pale);border-radius:16px;margin-bottom:16px}
+.propos-quote p{font-family:'Fraunces',serif;font-size:17px;font-style:italic;color:var(--brun);line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{padding:6px 14px;background:var(--bg);border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:var(--brun-mid);font-weight:500}
+
+/* FORMATIONS — Accordion */
+.formations-list{border-top:1px solid var(--line)}
+.accord-row{padding:20px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:padding 0.3s;display:flex;align-items:center;gap:16px}
+.accord-row:hover{padding-left:8px}
+.accord-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.accord-title{flex:1;font-family:'Fraunces',serif;font-size:clamp(16px,2.5vw,20px);font-weight:400}
+.accord-dur{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--brun-light);font-weight:500;letter-spacing:0.5px}
+.accord-plus{font-size:18px;color:var(--terracotta);transition:transform 0.3s}
+.accord-content{display:none;padding:8px 0 24px 24px;animation:fadeUp 0.3s ease-out}
+.accord-item.open .accord-content{display:block}
+.accord-item.open .accord-plus{transform:rotate(45deg)}
+.accord-desc{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;line-height:1.8;color:var(--brun-mid);margin-bottom:12px}
+.accord-meta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.accord-level{padding:4px 12px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600}
+.accord-cta{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:var(--terracotta);font-weight:600}
+.funding-tag{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--sage-pale);border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:var(--sage);font-weight:500;margin-top:32px}
+
+/* ATELIER */
+.atelier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.atelier-card{border-radius:18px;padding:24px;transition:transform 0.3s}
+.atelier-card:hover{transform:translateY(-3px)}
+.atelier-dot{width:10px;height:10px;border-radius:50%;margin-bottom:14px}
+.atelier-card h4{font-family:'Fraunces',serif;font-size:16px;font-weight:500;color:var(--brun);margin-bottom:6px}
+.atelier-card p{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;line-height:1.6;color:var(--brun-mid)}
+.partners{display:flex;justify-content:center;gap:32px;margin-top:36px;flex-wrap:wrap}
+.partner{text-align:center}
+.partner-name{font-family:'Fraunces',serif;font-size:15px;font-style:italic;color:var(--terracotta)}
+.partner-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;color:var(--brun-light);margin-top:3px}
+
+/* TEMOIGNAGES */
+.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+.testi{padding:28px;border-radius:18px}
+.testi-stars{display:flex;gap:2px;margin-bottom:10px}
+.testi-stars span{color:var(--moutarde);font-size:12px}
+.testi-txt{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;line-height:1.8;color:var(--brun-mid);font-style:italic}
+.testi-name{margin-top:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;color:var(--brun)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:44px}
+.contact-item{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.contact-icon{width:36px;height:36px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.contact-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--brun-mid)}
+.contact-legal{margin-top:24px;padding:18px;background:var(--terracotta-pale);border-radius:14px}
+.contact-legal-label{font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--terracotta);margin-bottom:6px}
+.contact-legal-info{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;line-height:1.8;color:var(--brun-mid)}
+.contact-form{display:flex;flex-direction:column;gap:12px}
+.inp-sol{width:100%;padding:14px 18px;background:var(--card);border:2px solid transparent;border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--brun);outline:none;transition:border-color 0.3s;box-shadow:0 2px 8px rgba(46,33,24,0.03)}
+.inp-sol:focus{border-color:var(--terracotta)}
+.inp-sol::placeholder{color:var(--brun-light)}
+textarea.inp-sol{resize:vertical;min-height:100px}
+.form-disclaimer{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--brun-light);text-align:center}
+
+/* FOOTER */
+.footer{padding:36px 24px 16px;border-top:2px solid var(--terracotta-pale)}
+.footer-inner{max-width:960px;margin:0 auto;text-align:center}
+.footer-brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px}
+.footer-brand img{height:32px}
+.footer-brand span{font-family:'Fraunces',serif;font-size:15px;color:var(--brun)}
+.footer-brand span em{font-style:italic;color:var(--terracotta);font-weight:normal}
+.footer-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--brun-light);margin-bottom:14px}
+.footer-divider{height:1px;background:var(--line);margin-bottom:14px}
+.footer-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer-row span{font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;color:var(--brun-light)}
+
+/* ACCÈS REFUSÉ */
+.denied{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
+.denied-icon{font-size:64px;margin-bottom:14px}
+.denied h1{font-family:'Fraunces',serif;font-size:24px;font-weight:800;margin-bottom:8px}
+.denied p{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--brun-mid);max-width:400px;line-height:1.6;margin-bottom:24px}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-desk{display:none}
+  .nav-mob{display:flex}
+  .hero-g{grid-template-columns:1fr;text-align:center}
+  .hero-right{order:-1}
+  .hero-stats{justify-content:center}
+  .split{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- BLOC ACCÈS REFUSÉ (caché par défaut) -->
+<div id="denied" class="hidden">
+  <div class="denied">
+    <div class="denied-icon">🔒</div>
+    <h1>Accès restreint</h1>
+    <p>Cette page est réservée à un client de lesformateurs.online.<br>
+    Si vous pensez devoir y avoir accès, contactez votre expert dédié pour obtenir le lien complet.</p>
+    <a href="/dashboard" style="padding:12px 24px;background:#D85A30;color:white;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;">Accéder à mon dashboard</a>
+  </div>
+</div>
+
+<!-- CONTENU SITE — caché par défaut, affiché si token valide -->
+<div id="content" class="hidden">
+
+<!-- NAV -->
+<nav id="navbar" class="nav-sol">
+  <div class="nav-inner">
+    <a href="#accueil" class="logo-link">
+      <img src="/client/logo-couturiere.png" alt="L'Art de la Couturière">
+      <span class="logo-text">L'Art de la Couturière</span>
+    </a>
+    <div class="nav-desk">
+      <a href="#accueil">Accueil</a>
+      <a href="#propos">À propos</a>
+      <a href="#formations">Formations</a>
+      <a href="#atelier">Atelier</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn-sol btn-sol-sm">Devis gratuit</a>
+    </div>
+    <div class="nav-mob" id="navMob" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="#accueil" onclick="closeMenu()">Accueil</a>
+    <a href="#propos" onclick="closeMenu()">À propos</a>
+    <a href="#formations" onclick="closeMenu()">Formations</a>
+    <a href="#atelier" onclick="closeMenu()">Atelier</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="accueil" class="hero">
+  <div class="organic-shape shape-1"></div>
+  <div class="organic-shape shape-2"></div>
+  <div class="organic-shape shape-3"></div>
+  <div class="hero-g">
+    <div>
+      <div class="hero-tag">
+        <div class="hero-tag-dot"></div>
+        <span class="hero-tag-text">Certifié Qualiopi</span>
+        <div class="hero-tag-sep"></div>
+        <span class="hero-tag-sub">Éligible CPF</span>
+      </div>
+      <h1>Votre <em>reconversion</em> commence ici, <span class="italic">fil après fil</span></h1>
+      <p class="hero-desc">Centre de formation professionnelle aux métiers de la couture à Saint-Pierre, La Réunion. 30 ans d'expertise et de passion avec Marie Mourgapamodely.</p>
+      <div class="hero-btns">
+        <a href="#formations" class="btn-sol">Nos Formations →</a>
+        <a href="#contact" class="btn-sol btn-sol-out">Nous Contacter</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num" style="background:rgba(194,114,74,0.06);color:var(--terracotta)">30+</div>
+          <span class="hero-stat-label">ans<br>d'expérience</span>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num" style="background:rgba(122,139,110,0.06);color:var(--sage)">100%</div>
+          <span class="hero-stat-label">réussite<br>élèves</span>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num" style="background:rgba(212,164,76,0.06);color:var(--moutarde)">6</div>
+          <span class="hero-stat-label">formations</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card-wrap">
+        <div class="hero-card-blob"></div>
+        <div class="hero-card">
+          <img src="/client/logo-couturiere.png" alt="L'Art de la Couturière">
+        </div>
+        <div class="hero-badge-1">QUALIOPI ✓</div>
+        <div class="hero-badge-2">CPF · OPCO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="propos" class="section alt">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="section-eyebrow">Votre formatrice</span>
+      <h2>Marie <span class="italic">Mourgapamodely</span></h2>
+    </div>
+    <div class="split">
+      <div>
+        <p class="propos-text">Styliste, modéliste et formatrice passionnée depuis plus de 30 ans. Formée à Paris auprès des plus grandes maisons, enseignante à l'Éducation nationale, directrice d'AGC Fashion — Marie a consacré sa vie à la transmission du savoir-faire couture.</p>
+      </div>
+      <div>
+        <div class="propos-quote"><p>« Transmettre, c'est aimer deux fois. »</p></div>
+        <div class="tags">
+          <span class="tag">Accompagnement individualisé</span>
+          <span class="tag">Couture durable</span>
+          <span class="tag">Accessible PMR</span>
+          <span class="tag">100% réussite</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATIONS -->
+<section id="formations" class="section">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="section-eyebrow">Nos programmes</span>
+      <h2>Formations <span class="italic">professionnelles</span></h2>
+    </div>
+    <div class="formations-list" id="formationsList">
+      <div class="accord-item">
+        <div class="accord-row" onclick="toggleAccord(this)">
+          <div class="accord-dot" style="background:var(--sage)"></div>
+          <div class="accord-title">Couture Initiation</div>
+          <span class="accord-dur">5 jours · 35h</span>
+          <span class="accord-plus">+</span>
+        </div>
+        <div class="accord-content">
+          <p class="accord-desc">Découvrez les bases de la couture : prise de mesures, coupe, assemblage et finitions.</p>
+          <div class="accord-meta">
+            <span class="accord-level" style="background:rgba(122,139,110,0.12);color:var(--sage)">Débutant</span>
+            <a href="#contact" class="accord-cta">Demander un devis →</a>
+          </div>
+        </div>
+      </div>
+      <div class="accord-item">
+        <div class="accord-row" onclick="toggleAccord(this)">
+          <div class="accord-dot" style="background:var(--terracotta)"></div>
+          <div class="accord-title">Styliste Modéliste</div>
+          <span class="accord-dur">3 mois</span>
+          <span class="accord-plus">+</span>
+        </div>
+        <div class="accord-content">
+          <p class="accord-desc">Du croquis au vêtement : patronage, modélisme, création de votre collection personnelle.</p>
+          <div class="accord-meta">
+            <span class="accord-level" style="background:rgba(194,114,74,0.12);color:var(--terracotta)">Intermédiaire</span>
+            <a href="#contact" class="accord-cta">Demander un devis →</a>
+          </div>
+        </div>
+      </div>
+      <div class="accord-item">
+        <div class="accord-row" onclick="toggleAccord(this)">
+          <div class="accord-dot" style="background:var(--accent)"></div>
+          <div class="accord-title">Broderie Industrielle</div>
+          <span class="accord-dur">2 semaines</span>
+          <span class="accord-plus">+</span>
+        </div>
+        <div class="accord-content">
+          <p class="accord-desc">Broderie sur machines professionnelles : motifs, production en série, contrôle qualité.</p>
+          <div class="accord-meta">
+            <span class="accord-level" style="background:rgba(107,129,145,0.12);color:var(--accent)">Tous niveaux</span>
+            <a href="#contact" class="accord-cta">Demander un devis →</a>
+          </div>
+        </div>
+      </div>
+      <div class="accord-item">
+        <div class="accord-row" onclick="toggleAccord(this)">
+          <div class="accord-dot" style="background:var(--sage)"></div>
+          <div class="accord-title">Upcycling & Mode Durable</div>
+          <span class="accord-dur">1 semaine</span>
+          <span class="accord-plus">+</span>
+        </div>
+        <div class="accord-content">
+          <p class="accord-desc">Recyclage créatif, économie circulaire et couture écoresponsable.</p>
+          <div class="accord-meta">
+            <span class="accord-level" style="background:rgba(122,139,110,0.12);color:var(--sage)">Tous niveaux</span>
+            <a href="#contact" class="accord-cta">Demander un devis →</a>
+          </div>
+        </div>
+      </div>
+      <div class="accord-item">
+        <div class="accord-row" onclick="toggleAccord(this)">
+          <div class="accord-dot" style="background:var(--moutarde)"></div>
+          <div class="accord-title">Décoration Textile</div>
+          <span class="accord-dur">2 semaines</span>
+          <span class="accord-plus">+</span>
+        </div>
+        <div class="accord-content">
+          <p class="accord-desc">Rideaux, coussins, revêtements — sublimez un intérieur par le textile.</p>
+          <div class="accord-meta">
+            <span class="accord-level" style="background:rgba(212,164,76,0.12);color:var(--moutarde)">Intermédiaire</span>
+            <a href="#contact" class="accord-cta">Demander un devis →</a>
+          </div>
+        </div>
+      </div>
+      <div class="accord-item">
+        <div class="accord-row" onclick="toggleAccord(this)">
+          <div class="accord-dot" style="background:var(--terracotta)"></div>
+          <div class="accord-title">Reconversion Professionnelle</div>
+          <span class="accord-dur">Sur mesure</span>
+          <span class="accord-plus">+</span>
+        </div>
+        <div class="accord-content">
+          <p class="accord-desc">Parcours individualisé pour lancer votre activité dans les métiers de la couture.</p>
+          <div class="accord-meta">
+            <span class="accord-level" style="background:rgba(194,114,74,0.12);color:var(--terracotta)">Personnalisé</span>
+            <a href="#contact" class="accord-cta">Demander un devis →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <div class="funding-tag">Éligible CPF · OPCO · Pôle Emploi</div>
+    </div>
+  </div>
+</section>
+
+<!-- ATELIER -->
+<section id="atelier" class="section alt">
+  <div class="section-inner section-inner-lg">
+    <div class="section-head">
+      <span class="section-eyebrow">L'espace</span>
+      <h2>Un lieu où le tissu <span class="italic">prend vie</span></h2>
+    </div>
+    <div class="atelier-grid">
+      <div class="atelier-card" style="background:var(--terracotta-pale)">
+        <div class="atelier-dot" style="background:var(--terracotta)"></div>
+        <h4>Salle de Formation</h4>
+        <p>53 m² · Machines · Tables de coupe</p>
+      </div>
+      <div class="atelier-card" style="background:var(--sage-pale)">
+        <div class="atelier-dot" style="background:var(--sage)"></div>
+        <h4>Accessibilité PMR</h4>
+        <p>Accès PMR complet et aménagé</p>
+      </div>
+      <div class="atelier-card" style="background:var(--moutarde-pale)">
+        <div class="atelier-dot" style="background:var(--moutarde)"></div>
+        <h4>Cuisine Équipée</h4>
+        <p>Frigo, micro-ondes, espace repas</p>
+      </div>
+      <div class="atelier-card" style="background:rgba(107,129,145,0.08)">
+        <div class="atelier-dot" style="background:var(--accent)"></div>
+        <h4>Sécurité</h4>
+        <p>Sortie secours, extincteurs, conforme</p>
+      </div>
+    </div>
+    <div class="partners">
+      <div class="partner">
+        <div class="partner-name">Maison SAIFY</div>
+        <div class="partner-sub">Machines industrielles</div>
+      </div>
+      <div class="partner">
+        <div class="partner-name">Maison Banian</div>
+        <div class="partner-sub">Tissus & mercerie</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section id="temoignages" class="section">
+  <div class="section-inner section-inner-lg">
+    <div class="section-head">
+      <span class="section-eyebrow">Témoignages</span>
+      <h2>La parole à nos <span class="italic">élèves</span></h2>
+    </div>
+    <div class="testimonials">
+      <div class="testi" style="background:var(--terracotta-pale)">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-txt">Marie m'a redonné confiance en moi. Grâce à sa patience et son expertise, j'ai pu me reconvertir.</p>
+        <div class="testi-name">— Sarah L.</div>
+      </div>
+      <div class="testi" style="background:var(--sage-pale)">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-txt">Un lieu magique où l'on apprend bien plus que la couture. C'est une famille.</p>
+        <div class="testi-name">— Fatima B.</div>
+      </div>
+      <div class="testi" style="background:var(--moutarde-pale)">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-txt">Formation de qualité exceptionnelle. Marie transmet son savoir avec une passion communicative.</p>
+        <div class="testi-name">— Julie M.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section alt">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="section-eyebrow">Parlons de votre projet</span>
+      <h2>Contactez-<em>nous</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <span class="contact-text">0692 77 84 78</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <span class="contact-text">lartdelacouturiere@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <span class="contact-text">Saint-Pierre, 97410 · La Réunion</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🌐</div>
+          <span class="contact-text">www.lartdelacouturiere.re</span>
+        </div>
+        <div class="contact-legal">
+          <div class="contact-legal-label">Informations légales</div>
+          <div class="contact-legal-info">
+            SIRET : 453 267 395 00060<br>
+            N° Déclaration d'Activité : 04973668569<br>
+            Certifié Qualiopi · Exonéré de TVA
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault();alert('Merci ! Votre demande a bien été enregistrée. Nous revenons vers vous sous 24h.')">
+        <input class="inp-sol" placeholder="Votre nom" required>
+        <input class="inp-sol" type="email" placeholder="Votre email" required>
+        <input class="inp-sol" placeholder="Votre téléphone">
+        <textarea class="inp-sol" rows="4" placeholder="Votre message ou demande de devis..." required></textarea>
+        <button type="submit" class="btn-sol" style="width:100%;justify-content:center">Envoyer ma demande →</button>
+        <p class="form-disclaimer">Réponse sous 24h · Devis gratuit</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/client/logo-couturiere.png" alt="">
+      <span>L'Art de la <em>Couturière</em></span>
+    </div>
+    <p class="footer-sub">Centre de Formation Professionnelle · Saint-Pierre, La Réunion</p>
+    <div class="footer-divider"></div>
+    <div class="footer-row">
+      <span>© 2026 L'Art de la Couturière — Tous droits réservés</span>
+      <span>Mentions légales · Confidentialité</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /content -->
+
+<script>
+(function(){
+  var TOKEN_VALIDE = "SQUIr5eb3-F5_re9802GMn1jttTGf02c";
+  var params = new URLSearchParams(window.location.search);
+  var tokenFourni = params.get("token");
+  if (tokenFourni === TOKEN_VALIDE) {
+    document.getElementById("content").classList.remove("hidden");
+  } else {
+    document.getElementById("denied").classList.remove("hidden");
+  }
+})();
+
+// Nav scroll
+window.addEventListener('scroll', function(){
+  var nav = document.getElementById('navbar');
+  if (!nav) return;
+  if (window.scrollY > 50) nav.classList.add('active');
+  else nav.classList.remove('active');
+});
+
+// Mobile menu
+function toggleMenu(){
+  document.getElementById('navMob').classList.toggle('open');
+  document.getElementById('navMobileMenu').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('navMob').classList.remove('open');
+  document.getElementById('navMobileMenu').classList.remove('open');
+}
+
+// Accordion formations
+function toggleAccord(el){
+  var item = el.parentElement;
+  var wasOpen = item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.accord-item').forEach(function(i){ i.classList.remove('open'); });
+  // Open clicked if was closed
+  if (!wasOpen) item.classList.add('open');
+}
+</script>
+
+</body>
+</html>

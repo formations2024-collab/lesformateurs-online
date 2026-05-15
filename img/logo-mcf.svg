@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 80" role="img" aria-label="Mon Compte Formation">
+  <rect x="2" y="2" width="136" height="76" rx="8" fill="#1A237E"/>
+  <g fill="#ffffff" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <text x="70" y="26" font-size="13">MON</text>
+    <text x="70" y="46" font-size="13">COMPTE</text>
+    <text x="70" y="66" font-size="13">FORMATION</text>
+  </g>
+</svg>

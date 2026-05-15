@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>PAM OI — Centre de Formation à Saint-Leu</title>
+<link rel="canonical" href="https://lesformateurs.online/client/pamoi">
+<link rel="icon" type="image/x-icon" href="/pamoi-favicon.ico">
+<link rel="icon" type="image/png" sizes="256x256" href="/client/pamoi-favicon-256.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/client/pamoi-favicon-256.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Bricolage+Grotesque:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--t:#0B5394;--g:#38BDF8;--tl:#34D399;--gl:#FB7185;--bg:#F0F7FF;--cr:#E0EFFF;--dk:#1A1A2E;--tx:#2D2D3F;--mu:#6B7280;--w:#fff}
+html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;color:var(--tx);background:var(--bg);overflow-x:hidden;line-height:1.6}
+.hidden{display:none !important}
+.svg-ic{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.svg-ic-lg{width:32px;height:32px}
+.svg-ic-xl{width:42px;height:42px}
+.svg-ic-fill{fill:currentColor;stroke:none}
+.denied-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#F0F7FF,#E0EFFF)}
+.denied-card{max-width:480px;background:#fff;padding:48px 36px;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.08);text-align:center}
+.denied-card .ic{font-size:48px;margin-bottom:20px}
+.denied-card h1{font-family:'Bricolage Grotesque',sans-serif;font-size:1.8rem;color:#1A1A2E;margin-bottom:14px}
+.denied-card p{color:#6B7280;line-height:1.7;margin-bottom:24px;font-size:.95rem}
+.denied-card a{display:inline-block;padding:12px 28px;background:#0B5394;color:#fff;border-radius:50px;font-weight:600;text-decoration:none;font-size:.9rem;transition:all .3s}
+.denied-card a:hover{background:#1A1A2E;transform:translateY(-2px)}
+
+.rv{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.22,1,.36,1)}.rv.v{opacity:1;transform:translateY(0)}
+.rr{opacity:0;transform:translateX(50px);transition:all .8s cubic-bezier(.22,1,.36,1)}.rr.v{opacity:1;transform:translateX(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes sp{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes pd{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+
+.bgd{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bgd .b{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15}
+.b1{width:380px;height:380px;background:#38BDF8;top:-80px;right:-60px;animation:fl 22s ease-in-out infinite}
+.b2{width:260px;height:260px;background:#0B5394;bottom:12%;left:-40px;animation:fl 18s ease-in-out infinite;animation-delay:-6s}
+.b3{width:160px;height:160px;background:#34D399;top:42%;right:6%;animation:fl 20s ease-in-out infinite;animation-delay:-3s}
+.b4{width:300px;height:300px;background:#FB7185;bottom:-50px;left:28%;animation:fl 25s ease-in-out infinite;animation-delay:-9s;opacity:.08}
+
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;padding:14px 0;transition:all .4s}
+nav.sc{background:rgba(240,247,255,.9);backdrop-filter:blur(20px);box-shadow:0 2px 30px rgba(0,0,0,.06)}
+.ni{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo img{height:46px;width:auto;display:block}
+.logo span{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.5rem;color:var(--dk)}
+.nl{display:flex;gap:24px;align-items:center}.nl a{color:var(--tx);text-decoration:none;font-weight:500;font-size:.9rem;transition:color .3s}.nl a:hover{color:var(--t)}
+.nb{background:var(--t);color:#fff;padding:10px 22px;border-radius:50px;font-weight:600;font-size:.88rem;text-decoration:none;transition:all .3s}.nb:hover{background:#158578;transform:translateY(-2px);box-shadow:0 6px 20px rgba(11,83,148,.3)}
+.hm{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}.hm span{width:22px;height:2.5px;background:var(--dk);border-radius:2px}
+
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}.hbl{position:absolute;border-radius:50%;filter:blur(80px);opacity:.22;animation:fl 20s ease-in-out infinite}
+.hb1{width:500px;height:500px;background:var(--g);top:-100px;right:-100px}.hb2{width:400px;height:400px;background:var(--t);bottom:-50px;left:-50px;animation-delay:-7s}
+.hi{max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cr);border:1px solid rgba(56,189,248,.2);padding:8px 18px;border-radius:50px;font-size:.84rem;font-weight:500;color:var(--g);margin-bottom:20px}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--t);animation:pd 2s ease infinite;display:inline-block}
+h1{font-family:'Bricolage Grotesque';font-size:3.4rem;font-weight:800;line-height:1.08;color:var(--dk);margin-bottom:20px}
+h1 em{font-style:normal;background:linear-gradient(135deg,var(--t),var(--tl));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hp{font-size:1.12rem;color:var(--mu);max-width:480px;margin-bottom:32px;line-height:1.7}
+.ha{display:flex;gap:14px;flex-wrap:wrap}
+.bp{background:var(--t);color:#fff;padding:14px 32px;border-radius:50px;font-weight:600;font-size:1rem;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:8px}.bp:hover{background:#158578;transform:translateY(-3px);box-shadow:0 10px 30px rgba(11,83,148,.3)}
+.bs2{background:0;color:var(--dk);padding:14px 32px;border-radius:50px;font-weight:600;font-size:1rem;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:8px;border:2px solid var(--dk)}.bs2:hover{background:var(--dk);color:#fff;transform:translateY(-3px)}
+.hv{position:relative}.hcard{background:#fff;border-radius:24px;padding:32px;box-shadow:0 20px 60px rgba(0,0,0,.07);position:relative;overflow:hidden}
+.hcard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--t),var(--g),var(--tl))}
+.hcard-t{font-family:'Bricolage Grotesque';font-weight:700;font-size:1.05rem;color:var(--dk);display:flex;align-items:center;gap:10px}
+.hcard-ill{position:absolute;top:-20px;right:-20px;width:120px;height:120px;opacity:.18;pointer-events:none}
+.hcard-ill img{width:100%;height:100%;object-fit:contain}
+.hcg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.hs{background:var(--bg);border-radius:14px;padding:18px;text-align:center;transition:transform .3s}.hs:hover{transform:translateY(-4px)}
+.hs .n{font-family:'Bricolage Grotesque';font-size:1.9rem;font-weight:800;color:var(--t)}.hs .l{font-size:.78rem;color:var(--mu);margin-top:3px}
+.fb{position:absolute;background:#fff;border-radius:14px;padding:10px 16px;box-shadow:0 8px 28px rgba(0,0,0,.09);display:flex;align-items:center;gap:8px;animation:fl 6s ease-in-out infinite;font-size:.82rem;font-weight:600;z-index:2}
+.fb svg{width:20px;height:20px}
+.f1{top:-18px;right:-18px}.f2{bottom:-14px;left:-18px;animation-delay:-3s}
+
+section{padding:100px 24px;position:relative;z-index:1}.sec{max-width:1200px;margin:0 auto}
+.sb{display:inline-flex;align-items:center;gap:6px;background:var(--cr);border:1px solid rgba(11,83,148,.12);padding:6px 16px;border-radius:50px;font-size:.78rem;font-weight:600;color:var(--t);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
+.st{font-family:'Bricolage Grotesque';font-size:2.5rem;font-weight:800;color:var(--dk);margin-bottom:14px;line-height:1.14}
+.ss{font-size:1.05rem;color:var(--mu);max-width:560px;line-height:1.7}
+
+.pillars{background:var(--w)}.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.pc{background:var(--bg);border-radius:20px;padding:34px 26px;position:relative;overflow:hidden;transition:all .4s cubic-bezier(.22,1,.36,1)}
+.pc:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(0,0,0,.07)}
+.pc-i{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;padding:8px}
+.pc-i img{max-width:100%;max-height:100%;object-fit:contain}
+.pc-i.ct{background:rgba(11,83,148,.1)}.pc-i.cg{background:rgba(56,189,248,.1)}.pc-i.cl{background:rgba(52,211,153,.1)}
+.pc h3{font-family:'Bricolage Grotesque';font-size:1.2rem;font-weight:700;color:var(--dk);margin-bottom:8px}.pc p{color:var(--mu);font-size:.92rem;line-height:1.6}
+.pln{position:absolute;bottom:0;left:0;width:100%;height:3px;transform:scaleX(0);transition:transform .4s;transform-origin:left}.pc:hover .pln{transform:scaleX(1)}
+
+.fg{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.fc{background:var(--w);border-radius:20px;overflow:hidden;transition:all .4s cubic-bezier(.22,1,.36,1);border:1px solid rgba(0,0,0,.04)}
+.fc:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.07)}
+.fct{padding:26px 26px 0;position:relative}
+.ft{display:inline-block;padding:4px 12px;border-radius:50px;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:12px}
+.ft-a{background:rgba(11,83,148,.08);color:var(--t)}.ft-c{background:rgba(56,189,248,.08);color:var(--g)}
+.fc h3{font-family:'Bricolage Grotesque';font-size:1.1rem;font-weight:700;color:var(--dk);margin-bottom:8px}.fc p{color:var(--mu);font-size:.88rem;line-height:1.6}
+.fcb{padding:18px 26px;display:flex;align-items:center;justify-content:space-between;margin-top:18px;border-top:1px solid rgba(0,0,0,.04)}
+.fce{font-size:.78rem;color:var(--mu)}.fa{width:34px;height:34px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:all .3s;font-size:.85rem;color:var(--dk)}
+.fc:hover .fa{background:var(--t);color:#fff}
+
+.env{background:var(--w)}.eg{display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:48px;align-items:center}
+.eil{display:flex;flex-direction:column;gap:14px}
+.ei{display:flex;align-items:flex-start;gap:14px;padding:16px;border-radius:14px;transition:background .3s}.ei:hover{background:var(--bg)}
+.eic{width:42px;height:42px;border-radius:12px;background:rgba(11,83,148,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#0B5394}
+.eic svg{width:22px;height:22px}
+.ei h4{font-weight:600;color:var(--dk);margin-bottom:3px;font-size:.95rem}.ei p{font-size:.86rem;color:var(--mu)}
+.ev{background:linear-gradient(135deg,var(--cr),rgba(11,83,148,.04));border-radius:24px;padding:40px;min-height:380px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden;text-align:center}
+.ev .evic{margin-bottom:18px}
+.ev .evic img{width:140px;height:140px;object-fit:contain}
+.ev h3{font-family:'Bricolage Grotesque';font-size:1.4rem;font-weight:700;color:var(--dk);margin-bottom:10px}.ev p{color:var(--mu);max-width:280px;font-size:.95rem}
+
+.ab{background:linear-gradient(135deg,var(--dk),#2D2855);border-radius:24px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:48px;position:relative;overflow:hidden}
+.ab::before{content:'';position:absolute;width:280px;height:280px;border-radius:50%;background:var(--g);filter:blur(120px);opacity:.1;top:-50px;right:-50px}
+.ab-ill{position:absolute;bottom:-30px;left:-30px;width:180px;opacity:.08;pointer-events:none}
+.ab-ill img{width:100%;height:auto}
+.ab h3{font-family:'Bricolage Grotesque';font-size:1.9rem;font-weight:700;color:#fff;margin-bottom:12px}
+.ab>div:first-child>p{color:rgba(255,255,255,.65);line-height:1.7}
+.agb{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.ag{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:9px 18px;border-radius:12px;color:#fff;font-weight:600;font-size:.88rem}
+.asl{display:flex;flex-direction:column;gap:14px}
+.as{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.05);border-radius:14px;padding:16px 20px;border:1px solid rgba(255,255,255,.07);transition:all .3s}
+.as:hover{background:rgba(255,255,255,.1);transform:translateX(6px)}
+.asi{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff}
+.asi svg{width:20px;height:20px}
+.asi-t{background:rgba(11,83,148,.22)}.asi-g{background:rgba(56,189,248,.22)}.asi-m{background:rgba(52,211,153,.22)}
+.as h4{color:#fff;font-weight:600;font-size:.92rem}.as p{color:rgba(255,255,255,.55);font-size:.8rem}
+
+.blg{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.bc{background:var(--w);border-radius:20px;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:all .4s cubic-bezier(.22,1,.36,1)}
+.bc:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.07)}
+.bci{height:170px;display:flex;align-items:center;justify-content:center;color:#0B5394}
+.bci svg{width:64px;height:64px;opacity:.6}
+.bc:nth-child(1) .bci{background:linear-gradient(135deg,var(--cr),rgba(56,189,248,.06))}
+.bc:nth-child(2) .bci{background:linear-gradient(135deg,rgba(11,83,148,.05),var(--cr))}
+.bc:nth-child(3) .bci{background:linear-gradient(135deg,rgba(52,211,153,.05),var(--cr))}
+.bcb{padding:22px}.bcd{font-size:.76rem;color:var(--mu);margin-bottom:8px}
+.bc h3{font-family:'Bricolage Grotesque';font-size:1rem;font-weight:700;color:var(--dk);margin-bottom:8px;line-height:1.4}
+.bc p{font-size:.86rem;color:var(--mu);line-height:1.6}
+.bcl{display:inline-flex;align-items:center;gap:6px;color:var(--t);font-weight:600;font-size:.86rem;text-decoration:none;margin-top:12px;transition:gap .3s}.bcl:hover{gap:10px}
+
+.ql{background:var(--w)}
+.qb{background:linear-gradient(135deg,rgba(11,83,148,.04),rgba(56,189,248,.04));border:1px solid rgba(11,83,148,.08);border-radius:24px;padding:48px;display:flex;align-items:center;gap:36px;margin-top:48px;position:relative;overflow:hidden}
+.qb .qi{width:88px;height:88px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.qb .qi img{width:100%;height:100%;object-fit:contain}
+.qb h3{font-family:'Bricolage Grotesque';font-size:1.2rem;font-weight:700;color:var(--dk);margin-bottom:8px}.qb p{color:var(--mu);line-height:1.7;font-size:.92rem}
+
+.ctas{background:var(--bg)}
+.ctab{background:linear-gradient(135deg,var(--t),var(--tl));border-radius:24px;padding:68px 48px;text-align:center;position:relative;overflow:hidden}
+.ctab::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.08);top:-50px;left:-50px}
+.ctab h2{font-family:'Bricolage Grotesque';font-size:2.3rem;font-weight:800;color:#fff;margin-bottom:12px;position:relative;z-index:1}
+.ctab>p{color:rgba(255,255,255,.8);font-size:1.08rem;margin-bottom:28px;position:relative;z-index:1}
+.bw{background:#fff;color:var(--t);padding:16px 34px;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:8px;position:relative;z-index:1;border:none;cursor:pointer;font-family:inherit}
+.bw:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.12)}
+
+.contact{background:var(--w)}.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.cc{background:var(--bg);border-radius:20px;padding:30px;text-align:center;transition:all .3s}.cc:hover{transform:translateY(-4px)}
+.cci{width:56px;height:56px;margin:0 auto 14px;border-radius:16px;background:linear-gradient(135deg,rgba(11,83,148,.12),rgba(56,189,248,.08));display:flex;align-items:center;justify-content:center;color:#0B5394}
+.cci svg{width:28px;height:28px}
+.cc h4{font-family:'Bricolage Grotesque';font-weight:700;color:var(--dk);margin-bottom:5px}
+.cc p{color:var(--mu);font-size:.88rem}.cc a{color:var(--t);text-decoration:none;font-weight:600}
+
+footer{background:var(--dk);color:rgba(255,255,255,.55);padding:48px 24px 28px;position:relative;overflow:hidden}
+.fti{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;position:relative;z-index:1}
+.ftb{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ftb img{height:38px;width:auto;display:block}
+.ftb span{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.3rem;color:#fff}
+.ftde{font-size:.85rem;line-height:1.7;max-width:300px}
+.ftc h4{color:#fff;font-weight:700;font-size:.88rem;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.ftc a{display:block;color:rgba(255,255,255,.55);text-decoration:none;font-size:.85rem;margin-bottom:7px;transition:color .3s}.ftc a:hover{color:var(--g)}
+.fbo{max-width:1200px;margin:28px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;position:relative;z-index:1}
+.fso{display:flex;gap:10px}.fso a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55);text-decoration:none;transition:all .3s}.fso a:hover{background:var(--t);color:#fff}
+.fso svg{width:16px;height:16px}
+
+@media(max-width:768px){
+  .nl{display:none}.hm{display:flex}.hi{grid-template-columns:1fr;text-align:center}h1{font-size:2.2rem}.hp{margin:0 auto 32px}.ha{justify-content:center}.hv{display:none}
+  .pg,.fg,.blg,.cg{grid-template-columns:1fr}.eg{grid-template-columns:1fr}.ab{grid-template-columns:1fr;padding:32px 22px}
+  .qb{flex-direction:column;text-align:center;padding:32px 22px}.ctab{padding:40px 24px}.ctab h2{font-size:1.8rem}.st{font-size:2rem}
+  .fti{grid-template-columns:1fr}.fbo{flex-direction:column;gap:10px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- BLOC ACCÈS REFUSÉ -->
+<div id="denied" class="hidden">
+  <div class="denied-wrap">
+    <div class="denied-card">
+      <div class="ic"><svg class="svg-ic" style="width:48px;height:48px;color:#0B5394" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <h1>Accès restreint</h1>
+      <p>Cette page est réservée à un client de lesformateurs.online.<br>Si vous pensez devoir y avoir accès, contactez votre expert dédié pour obtenir le lien complet.</p>
+      <a href="/dashboard">Accéder à mon dashboard</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENU SITE — caché par défaut -->
+<div id="content" class="hidden">
+
+<div class="bgd">
+  <div class="b b1"></div>
+  <div class="b b2"></div>
+  <div class="b b3"></div>
+  <div class="b b4"></div>
+</div>
+
+<nav id="nv"><div class="ni">
+  <a href="#" class="logo"><img src="/client/pamoi-logo.png" alt="PAM OI"><span>PAM OI</span></a>
+  <div class="nl"><a href="#f">Formations</a><a href="#e">Environnement</a><a href="#a">Apprentissage</a><a href="#bl">Actualités</a><a href="#c">Contact</a><a href="#" class="nb">S'inscrire</a></div>
+  <button class="hm" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></nav>
+
+<section class="hero"><div class="hero-bg"><div class="hbl hb1"></div><div class="hbl hb2"></div></div>
+<div class="hi"><div class="rv">
+  <div class="badge"><i></i> Certifié Qualiopi — Saint-Leu, La Réunion</div>
+  <h1>Formez-vous,<br>devient <em>possible.</em></h1>
+  <p class="hp">Formation en alternance ou en continu, vous choisissez votre rythme d'apprentissage. Intégrez nos formations tout au long de l'année au CFA PAM OI.</p>
+  <div class="ha"><a href="#f" class="bp">Nos formations →</a><a href="#c" class="bs2">Nous contacter</a></div>
+</div>
+<div class="hv rv d2">
+  <div class="fb f1"><svg class="svg-ic" style="color:#D4A44C" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> <span>Certifié Qualiopi</span></div>
+  <div class="hcard">
+    <div class="hcard-ill"><img src="/client/pamoi-logo.png" alt=""></div>
+    <div class="hcard-t"><svg class="svg-ic" style="color:#0B5394" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg> Vos résultats</div>
+    <div class="hcg">
+      <div class="hs"><div class="n" data-t="14">0</div><div class="l">Années d'expérience</div></div>
+      <div class="hs"><div class="n" data-t="6">0</div><div class="l">Formations proposées</div></div>
+      <div class="hs"><div class="n" data-t="95">0</div><div class="l">% de satisfaction</div></div>
+      <div class="hs"><div class="n" data-t="100">0</div><div class="l">% de réussite visé</div></div>
+    </div>
+  </div>
+  <div class="fb f2"><svg class="svg-ic" style="color:#38BDF8" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span>16 — 29 ans</span></div>
+</div></div></section>
+
+<section class="pillars"><div class="sec"><div class="rv"><div class="sb">Notre philosophie</div><div class="st">Se former dans une dynamique positive</div><div class="ss">Le partage et le respect sont les piliers de l'apprentissage chez PAM OI.</div></div>
+<div class="pg">
+  <div class="pc rv d1"><div class="pc-i ct"><img src="/client/pamoi-etoile.png" alt=""></div><h3>Apprentissage flexible</h3><p>En formation continue ou en alternance, vous choisissez votre rythme. Intégrez nos formations tout au long de l'année.</p><div class="pln" style="background:var(--t)"></div></div>
+  <div class="pc rv d2"><div class="pc-i cg"><img src="/client/pamoi-mains-coeur.png" alt=""></div><h3>Écoute & Partage</h3><p>Votre bien-être passe par l'écoute et le partage. Accompagnement en orientation et soutien humain tout au long du cursus.</p><div class="pln" style="background:var(--g)"></div></div>
+  <div class="pc rv d3"><div class="pc-i cl"><img src="/client/pamoi-cercle.png" alt=""></div><h3>Environnement propice</h3><p>Un environnement d'apprentissage confortable, moderne et propice à la réussite.</p><div class="pln" style="background:var(--tl)"></div></div>
+</div></div></section>
+
+<section id="f"><div class="sec"><div class="rv"><div class="sb">Nos formations</div><div class="st">Des parcours certifiants reconnus</div><div class="ss">Certificateur : Ministère du Travail. 14 années d'expertise en gestion comptable et commerciale.</div></div>
+<div class="fg">
+  <div class="fc rv d1"><div class="fct"><div class="ft ft-a">Alternance</div><h3>Secrétaire Comptable</h3><p>Combinaison d'activités administratives et comptables, actions relatives au commercial et à la comptabilité.</p></div><div class="fcb"><span class="fce">Titre Professionnel</span><div class="fa">→</div></div></div>
+  <div class="fc rv d2"><div class="fct"><div class="ft ft-a">Alternance</div><h3>Assistant(e) de Direction</h3><p>Au cœur de la communication, l'organisation et la décision de l'entreprise.</p></div><div class="fcb"><span class="fce">Titre Professionnel</span><div class="fa">→</div></div></div>
+  <div class="fc rv d3"><div class="fct"><div class="ft ft-a">Alternance</div><h3>Gestionnaire Comptable et Fiscal</h3><p>Tenue de la comptabilité et déclarations fiscales. Élaboration des documents de gestion.</p></div><div class="fcb"><span class="fce">Titre Professionnel</span><div class="fa">→</div></div></div>
+  <div class="fc rv d1"><div class="fct"><div class="ft ft-a">Alternance</div><h3>Formateur(rice) Professionnel d'Adultes</h3><p>Concevoir, organiser et dispenser des formations pour le développement de compétences.</p></div><div class="fcb"><span class="fce">Titre Professionnel</span><div class="fa">→</div></div></div>
+  <div class="fc rv d2"><div class="fct"><div class="ft ft-a">Alternance</div><h3>Assistant(e) Ressources Humaines</h3><p>Gestion administrative du personnel, déclarations sociales, paie, contrats et recrutements.</p></div><div class="fcb"><span class="fce">Titre Professionnel</span><div class="fa">→</div></div></div>
+  <div class="fc rv d3"><div class="fct"><div class="ft ft-c">Continue</div><h3>Employé(e) Commercial(e)</h3><p>Accueil clientèle, accompagnement dans ses choix et conseil avec des produits adaptés.</p></div><div class="fcb"><span class="fce">Titre Professionnel</span><div class="fa">→</div></div></div>
+</div></div></section>
+
+<section id="e" class="env"><div class="sec"><div class="rv"><div class="sb">Notre espace</div><div class="st">Un cadre pensé pour votre réussite</div><div class="ss">Nos apprentis bénéficient d'espaces pensés pour la concentration, l'autonomie et la collaboration.</div></div>
+<div class="eg"><div class="eil">
+  <div class="ei rv d1"><div class="eic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div><div><h4>Espace cuisine équipé</h4><p>Micro-ondes, cafetière, bouilloire et réfrigérateur.</p></div></div>
+  <div class="ei rv d2"><div class="eic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 11v5a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H7v-2a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg></div><div><h4>Espaces conviviaux</h4><p>Tables et chaises confortables pour moments détendus.</p></div></div>
+  <div class="ei rv d3"><div class="eic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><div><h4>Salles modernes</h4><p>Environnement confortable et propice à la réussite.</p></div></div>
+  <div class="ei rv d4"><div class="eic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h4>Saint-Leu, La Réunion</h4><p>1 Chemin Dubuisson. Derrière "Au Bon Coin".</p></div></div>
+</div>
+<div class="ev rr">
+  <div class="evic"><img src="/client/pamoi-arbre.png" alt=""></div>
+  <h3>Apprendre à Saint-Leu</h3><p>Tout a été pensé pour que vous puissiez vous concentrer sur votre parcours.</p>
+</div></div></div></section>
+
+<section id="a"><div class="sec"><div class="rv"><div class="sb">L'alternance</div><div class="st">L'apprentissage, une voie d'excellence</div></div>
+<div class="ab rv">
+  <div class="ab-ill"><img src="/client/pamoi-arbre.png" alt=""></div>
+  <div><h3>Dès 16 ans, lancez votre carrière</h3><p>De 16 à 29 ans, acquérez des compétences professionnelles tout en bénéficiant d'une rémunération.</p>
+  <div class="agb"><div class="ag">16 — 29 ans</div><div class="ag">Rémunéré</div><div class="ag">Diplômant</div></div></div>
+  <div class="asl">
+    <div class="as rr d1"><div class="asi asi-t"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M8 6v6"/><path d="M16 6v6"/><path d="M2 12h20"/><path d="M18 18h2a1 1 0 0 0 1-1v-2.34a2 2 0 0 0-.59-1.42l-2.83-2.83A2 2 0 0 1 17 9V6a4 4 0 0 0-4-4H5a3 3 0 0 0-3 3v13a1 1 0 0 0 1 1h2"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg></div><div><h4>Transport gratuit</h4><p>Réuni'Pass gratuit pour tous les apprentis</p></div></div>
+    <div class="as rr d2"><div class="asi asi-g"><svg class="svg-ic" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div><h4>Aide à l'embauche 2026</h4><p>Reconduite pour les entreprises -250 salariés</p></div></div>
+    <div class="as rr d3"><div class="asi asi-m"><svg class="svg-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div><h4>Suivi personnalisé</h4><p>Orientation & accompagnement continu</p></div></div>
+  </div>
+</div></div></section>
+
+<section id="bl"><div class="sec"><div class="rv"><div class="sb">Actualités</div><div class="st">Restez informés</div><div class="ss">Les dernières nouvelles de PAM OI et de la formation professionnelle.</div></div>
+<div class="blg">
+  <div class="bc rv d1"><div class="bci"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6z"/></svg></div><div class="bcb"><div class="bcd">Janvier 2026</div><h3>L'aide exceptionnelle pour l'apprentissage reconduite en 2026</h3><p>Entreprises de moins de 250 salariés éligibles à l'aide en apprentissage.</p><a href="#" class="bcl">Lire plus →</a></div></div>
+  <div class="bc rv d2"><div class="bci"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M11 17a2 2 0 0 1-2-2v-4l-3.5 3.5a2.121 2.121 0 0 1-3-3L8 6h3l4 4"/><path d="m13 11 5 5"/><path d="m22 18-5-5-2.5 2.5"/></svg></div><div class="bcb"><div class="bcd">Février 2024</div><h3>Construire Votre Réseau Professionnel chez PAM.OI</h3><p>Un réseau solide est indispensable. Commencez tôt pour une longueur d'avance.</p><a href="#" class="bcl">Lire plus →</a></div></div>
+  <div class="bc rv d3"><div class="bci"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><div class="bcb"><div class="bcd">Février 2024</div><h3>Stratégies d'Apprentissage Efficaces pour les Apprentis</h3><p>Stratégies éprouvées pour booster votre apprentissage.</p><a href="#" class="bcl">Lire plus →</a></div></div>
+</div></div></section>
+
+<section class="ql"><div class="sec"><div class="rv"><div class="sb">Certification</div><div class="st">Certifié Qualiopi</div></div>
+<div class="qb rv"><div class="qi"><img src="/client/pamoi-cercle.png" alt=""></div>
+<div><h3>Actions de formation par apprentissage</h3><p>La certification Qualiopi démontre que PAM OI réalise des actions conformes aux obligations en formation professionnelle. Gage de qualité pour nos apprentis et partenaires.</p></div></div></div></section>
+
+<section class="ctas"><div class="sec"><div class="ctab rv">
+<h2>Prêt à construire votre avenir ?</h2><p>Rejoignez PAM OI et formez-vous dans un cadre bienveillant, à votre rythme.</p>
+<a href="#c" class="bw">Contactez-nous →</a></div></div></section>
+
+<section id="c" class="contact"><div class="sec"><div class="rv"><div class="sb">Contact</div><div class="st">Venez nous rencontrer</div><div class="ss">Situés à l'angle, juste derrière le restaurant "Au Bon Coin".</div></div>
+<div class="cg">
+  <div class="cc rv d1"><div class="cci"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Adresse</h4><p>1 Chemin Dubuisson<br>97436 Saint-Leu, La Réunion</p></div>
+  <div class="cc rv d2"><div class="cci"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><h4>Téléphone</h4><p><a href="tel:0693556492">06 93 55 64 92</a><br><a href="tel:0693556497">06 93 55 64 97</a></p></div>
+  <div class="cc rv d3"><div class="cci"><svg class="svg-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h4>En ligne</h4><p><a href="https://www.pamoi.re">www.pamoi.re</a><br>Facebook · LinkedIn · Instagram</p></div>
+</div></div></section>
+
+<footer>
+  <div class="fti">
+    <div><div class="ftb"><img src="/client/pamoi-logo.png" alt="PAM OI"><span>PAM OI</span></div><div class="ftde">Centre de formation à Saint-Leu, La Réunion. Alternance et continue depuis 2020. SIRET 88127939200024 · NAF 8532Z</div></div>
+    <div class="ftc"><h4>Formations</h4><a href="#">Secrétaire Comptable</a><a href="#">Assistant(e) Direction</a><a href="#">Gestionnaire Comptable</a><a href="#">Assistant(e) RH</a><a href="#">Employé(e) Commercial(e)</a></div>
+    <div class="ftc"><h4>Centre</h4><a href="#">Philosophie</a><a href="#">Environnement</a><a href="#">Actualités</a><a href="#">Qualiopi</a></div>
+    <div class="ftc"><h4>Contact</h4><a href="#">Saint-Leu</a><a href="tel:0693556492">06 93 55 64 92</a><a href="#">Nous écrire</a></div>
+  </div>
+  <div class="fbo"><span>© 2026 PAM OI — Tous droits réservés</span><div class="fso">
+    <a href="#" aria-label="Facebook"><svg class="svg-ic-fill" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.378 14.192 5 15.115 5H18V0h-3.808C10.596 0 9 1.583 9 4.615V8z"/></svg></a>
+    <a href="#" aria-label="LinkedIn"><svg class="svg-ic-fill" viewBox="0 0 24 24"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></a>
+    <a href="#" aria-label="Instagram"><svg class="svg-ic" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+  </div></div>
+</footer>
+
+</div><!-- /content -->
+
+<script>
+(function(){
+  var TOKEN_VALIDE = "JaIG8G8mi6HOxWLw0a34f0GC6wTIqoKJ";
+  var params = new URLSearchParams(window.location.search);
+  var tokenFourni = params.get("token");
+  if (tokenFourni === TOKEN_VALIDE) {
+    document.getElementById("content").classList.remove("hidden");
+  } else {
+    document.getElementById("denied").classList.remove("hidden");
+  }
+})();
+
+const nv=document.getElementById('nv');
+window.addEventListener('scroll',()=>{if(nv)nv.classList.toggle('sc',scrollY>50)});
+
+const o=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('v');o.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv,.rr').forEach(el=>o.observe(el));
+
+const c=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){const el=x.target,t=+el.dataset.t;let v=0;const s=Math.max(1,Math.floor(t/40));const i=setInterval(()=>{v+=s;if(v>=t){v=t;clearInterval(i)}el.textContent=v+(t>=90?'%':'+')},30);c.unobserve(el)}}),{threshold:.5});
+document.querySelectorAll('[data-t]').forEach(el=>c.observe(el));
+</script>
+</body>
+</html>

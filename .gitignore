@@ -1,0 +1,24 @@
+# Cloudflare Pages local build artifacts
+.wrangler/
+
+# Factures clients (PII / sensible)
+factures/
+
+# Listes de prospection (sensibles, hors repo)
+_lfo_listes/
+
+# Notes d'audit internes
+AUDIT-*.md
+
+# Editeur / OS
+.DS_Store
+*.swp
+*.swo
+node_modules/
+
+# Logs
+*.log
+
+# Sauvegardes
+*.bak
+*-backup-*.html

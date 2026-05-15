@@ -23,7 +23,6 @@ const SERVICES = [
     steps: [
       { title: 'Configuration', desc: 'Vérification SIRET, upload documents, choix options' },
       { title: 'Dépôt du dossier', desc: 'Chatbot IA génère Cerfa + convention + programme, expert dépose à la DREETS' },
-      { title: 'Réception courrier', desc: 'La DREETS envoie le récépissé (~30 jours), vous uploadez le courrier' },
       { title: 'Terminée', desc: 'Numéro NDA enregistré, badge activé sur votre organisme' },
     ],
     includes: [
@@ -425,13 +424,12 @@ const SERVICES = [
     category: 'Démarches spécialisées', categoryColor: '#7F77DD', categoryLight: '#EEEDFE',
     shortDesc: 'Être habilité par un certificateur à dispenser une certification enregistrée.',
     longDesc: 'L\'habilitation vous permet de dispenser une certification inscrite au RS ou au RNCP. Notre expert analyse la certification visée, propose 2-3 certificateurs, constitue le dossier de candidature et négocie la convention.',
-    price: '490€+', oldPrice: '1 990€', time: '2 à 8 semaines',
-    paymentModes: 'Comptant ou 2 x 245€ (base)', tag: 'Nouveau',
+    price: '990€+', oldPrice: '1 990€', time: '2 à 8 semaines',
+    paymentModes: 'Comptant ou en 3x', tag: 'Nouveau',
     steps: [
-      { title: 'Configuration', desc: 'Organisme + Qualiopi + CV formateurs + certification visée + paiement 490€' },
-      { title: 'Analyse', desc: 'Expert analyse faisabilité + propose 2-3 certificateurs + devis' },
-      { title: 'Paiement complémentaire', desc: 'Si devis accepté, paiement avant constitution dossier' },
-      { title: 'Constitution dossier', desc: 'Candidature + CV formatés + programme conforme + convention' },
+      { title: 'Configuration', desc: 'Organisme + certification visée + paiement' },
+      { title: 'Constitution du dossier', desc: 'Candidature + pièces justificatives + programme conforme' },
+      { title: 'Convention signée', desc: 'Signature de la convention avec le certificateur' },
       { title: 'Terminée', desc: 'Habilitation active, badge activé' },
     ],
     includes: [
@@ -755,6 +753,9 @@ function generatePage(svc) {
   const cl = svc.categoryLight;
   const svgFn = CAT_SVG[svc.category] || CAT_SVG["Procédures d'ouverture"];
   const heroSvg = svgFn(c);
+  // Override ctaLink: service-xxx → acces-xxx (or monaccesedof for edof)
+  const accesLink = svc.id === 'edof' ? '/monaccesedof' : '/acces-' + svc.slug.replace('service-', '');
+  svc.ctaLink = accesLink;
 
   const stepsHtml = svc.steps.map((s, i) => `
       <div class="sp-step" style="animation:fadeUp .4s ${(0.1*i).toFixed(2)}s both">
@@ -820,6 +821,18 @@ function generatePage(svc) {
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',-apple-system,sans-serif;color:#1a1a1a;background:#FAFAFA;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hidden{display:none !important;}
+/* Nav overrides for service pages */
+.ml-nav{background:#fff;border-bottom:1px solid #E5E7EB;padding:12px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+.ml-logo{font-size:17px;font-weight:700;text-decoration:none;color:#1a1a1a;}
+.ml-logo .accent{color:#D85A30;}
+.ml-nav-links{display:flex;align-items:center;gap:20px;}
+.ml-nav-links a{text-decoration:none;color:#6B7280;font-size:13px;font-weight:500;}
+.ml-nav-links a:hover{color:#1a1a1a;}
+.ml-nav-cta{padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;}
+.ml-burger{display:none;background:none;border:none;cursor:pointer;padding:4px;}
+.ml-burger span{display:block;width:22px;height:2px;background:#1a1a1a;margin:5px 0;border-radius:2px;}
+@media(max-width:768px){.ml-nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:#fff;padding:16px;border-bottom:1px solid #E5E7EB;gap:12px;z-index:99;}.ml-nav-links.open{display:flex;}.ml-burger{display:block;}}
 /* Breadcrumb */
 .sp-bread{max-width:960px;margin:0 auto;padding:16px 24px;font-size:12px;color:#9CA3AF;}
 .sp-bread a{color:#6B7280;text-decoration:none;}
@@ -899,6 +912,7 @@ body{font-family:'DM Sans',-apple-system,sans-serif;color:#1a1a1a;background:#FA
   .sp-time{justify-content:center;}
   .sp-incl-grid{grid-template-columns:1fr;}
   .sp-footer-inner{flex-direction:column;}
+  .steps-nav{flex-wrap:nowrap;overflow-x:auto;}
 }
 </style>
 </head>
@@ -912,8 +926,8 @@ body{font-family:'DM Sans',-apple-system,sans-serif;color:#1a1a1a;background:#FA
     <a href="creer-certifier.html">Cr&eacute;er / Certifier</a>
     <a href="se-former.html">Se former</a>
     <a href="devenir-expert.html" style="color:#D85A30;font-weight:600;">Recrutement</a>
-    <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;">Connexion</a>
-    <a href="dashboard.html" class="ml-nav-cta btn-dashboard hidden">Mon espace</a>
+    <a href="#" id="lfo-btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;">Connexion</a>
+    <a href="dashboard.html" id="lfo-btn-compte" style="display:none;background:#1a1a1a;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;">Mon compte</a>
   </div>
   <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
@@ -1005,11 +1019,10 @@ ${optionsHtml}
 <script>
 (async function(){
   try {
-    var sb = window.__lfoSupabase; if(!sb) return;
-    var r = await sb.auth.getUser();
-    if(r.data && r.data.user){
-      var l=document.querySelector('.btn-login'),d=document.querySelector('.btn-dashboard');
-      if(l)l.classList.add('hidden');if(d)d.classList.remove('hidden');
+    var user = await getUser();
+    if(user){
+      document.getElementById('lfo-btn-login').style.display = 'none';
+      document.getElementById('lfo-btn-compte').style.display = 'inline-block';
     }
   } catch(e){}
 })();

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-B6XVYRVT9D');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <title>Qui sommes-nous — lesformateurs.online</title>
+  <meta name="description" content="Découvrez l'équipe et l'histoire de lesformateurs.online — la plateforme qui accompagne les organismes de formation français.">
+  <link rel="stylesheet" href="css/mono-light.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
+    .qsn-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      align-items: center;
+    }
+    .qsn-photo-wrap {
+      position: relative;
+    }
+    .qsn-photo {
+      width: 100%;
+      height: 520px;
+      aspect-ratio: 4/5;
+      border-radius: 20px;
+      object-fit: cover;
+      display: block;
+      background: #f0ece6;
+    }
+    .qsn-quote-badge {
+      position: absolute;
+      bottom: 20px;
+      right: -20px;
+      max-width: 260px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+    .qsn-quote-badge .qsn-mark {
+      font-family: 'Lora', serif;
+      font-size: 60px;
+      line-height: 1;
+      color: #D85A30;
+      opacity: 0.6;
+      position: absolute;
+      top: 6px;
+      left: 12px;
+      pointer-events: none;
+    }
+    .qsn-quote-badge p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #1a1a1a;
+      margin: 0;
+      padding-top: 24px;
+      position: relative;
+    }
+
+    .qsn-eyebrow {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #D85A30;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .qsn-h1 {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 48px;
+      line-height: 1.15;
+      color: #1a1a1a;
+      margin: 0 0 22px;
+    }
+    .qsn-h1 em { font-style: italic; color: #D85A30; }
+    .qsn-lead {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #555;
+      margin: 0 0 28px;
+    }
+    .qsn-signature {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .qsn-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #1a1a1a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+    .qsn-sig-name { font-weight: 700; font-size: 14px; color: #1a1a1a; margin: 0; line-height: 1.3; }
+    .qsn-sig-role { font-size: 13px; color: #888; margin: 2px 0 0; }
+
+    /* MOT DU PRÉSIDENT */
+    .qsn-word {
+      max-width: 900px;
+      margin: 80px auto;
+      background: #fafaf8;
+      border-radius: 20px;
+      padding: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .qsn-word-mark {
+      position: absolute;
+      top: -20px;
+      left: 30px;
+      font-family: 'Lora', serif;
+      font-size: 180px;
+      line-height: 1;
+      color: #1a1a1a;
+      opacity: 0.08;
+      pointer-events: none;
+      user-select: none;
+    }
+    .qsn-word .qsn-eyebrow { position: relative; z-index: 1; }
+    .qsn-word p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #2a2a2a;
+      margin: 0 0 18px;
+      position: relative;
+      z-index: 1;
+    }
+    .qsn-word-sep {
+      border-top: 1px solid #e5e5e5;
+      margin: 40px 0 20px;
+    }
+    .qsn-word-sign-name { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 15px; color: #1a1a1a; margin: 0; }
+    .qsn-word-sign-role { font-size: 13px; color: #888; margin: 2px 0 0; }
+
+    /* VALEURS */
+    .qsn-values {
+      max-width: 1100px;
+      margin: 100px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    .qsn-value {
+      text-align: center;
+      padding: 32px 20px;
+    }
+    .qsn-value-ico {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #FFF5F2;
+      color: #D85A30;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .qsn-value-ico svg { width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .qsn-value h3 { font-size: 17px; font-weight: 700; color: #1a1a1a; margin: 0 0 10px; }
+    .qsn-value p { font-size: 14px; color: #666; line-height: 1.6; margin: 0; }
+
+    /* ÉQUIPE */
+    .qsn-team {
+      max-width: 1100px;
+      margin: 60px auto 100px;
+      padding: 0 20px;
+    }
+    .qsn-team h2 {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 38px;
+      color: #1a1a1a;
+      text-align: center;
+      margin: 0 0 40px;
+    }
+    .qsn-team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+    .qsn-member {
+      text-align: center;
+    }
+    .qsn-member-photo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #f5f5f5;
+      margin: 0 auto 14px;
+      display: block;
+    }
+    .qsn-member-name { font-size: 15px; font-weight: 700; color: #1a1a1a; margin: 0 0 4px; }
+    .qsn-member-role { font-size: 13px; color: #D85A30; font-weight: 500; margin: 0; }
+
+    @media (max-width: 768px) {
+      .qsn-hero { grid-template-columns: 1fr; gap: 40px; padding: 50px 20px; }
+      .qsn-photo-wrap { padding-bottom: 0; }
+      .qsn-photo { height: 400px; }
+      .qsn-quote-badge { position: static; max-width: 100%; right: auto; bottom: auto; margin-top: 16px; }
+      .qsn-h1 { font-size: 34px; }
+      .qsn-word { padding: 40px 24px; margin: 50px 16px; }
+      .qsn-word-mark { font-size: 120px; top: -10px; left: 16px; }
+      .qsn-values { grid-template-columns: 1fr; gap: 20px; margin: 60px auto; }
+      .qsn-team-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .qsn-team h2 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="ml-nav">
+  <a href="index.html" class="ml-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="ml-nav-links" id="navLinks">
+    <a href="formation.html">Services</a>
+    <a href="creer-of.html">Créer mon OF</a>
+    <a href="recherche-habilitation.html" style="color:#1D9E75;font-weight:600;">Habilitation</a>
+    <a href="se-former.html">Se former</a>
+    <a href="devenir-expert.html" style="color:#D85A30;font-weight:600;">Recrutement</a>
+    <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;">Connexion</a>
+    <a href="dashboard.html" class="ml-nav-cta btn-dashboard hidden">Mon espace</a>
+  </div>
+  <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="qsn-hero">
+  <div class="qsn-photo-wrap">
+    <img class="qsn-photo" src="/team/president-prashan.png" alt="Prashan Sithi, Président de lesformateurs.online" onerror="this.style.display='none'">
+    <div class="qsn-quote-badge">
+      <span class="qsn-mark" aria-hidden="true">«</span>
+      <p>La formation professionnelle est un levier puissant de transformation. Chaque organisme que nous aidons, c'est une compétence de plus qui circule dans l'économie.</p>
+    </div>
+  </div>
+  <div class="qsn-intro">
+    <span class="qsn-eyebrow">Notre histoire</span>
+    <h1 class="qsn-h1">Au service des <em>formateurs</em> qui font bouger la France</h1>
+    <p class="qsn-lead">lesformateurs.online est née d'une conviction : les organismes de formation français méritent une plateforme qui leur simplifie enfin la vie. Un seul endroit pour piloter démarches, conformité, formations et développement.</p>
+    <div class="qsn-signature">
+      <div class="qsn-avatar" aria-hidden="true">PS</div>
+      <div>
+        <p class="qsn-sig-name">Prashan Sithi</p>
+        <p class="qsn-sig-role">Président — Experience Prod SASU</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOT DU PRÉSIDENT -->
+<section class="qsn-word">
+  <span class="qsn-word-mark" aria-hidden="true">"</span>
+  <span class="qsn-eyebrow">Le mot du président</span>
+  <p>J'ai créé lesformateurs.online parce que j'ai vu trop de formateurs talentueux perdre un temps précieux dans des démarches administratives labyrinthiques. NDA, Qualiopi, EDOF, OPCO, RS/RNCP — chaque organisme devait jongler avec dix interlocuteurs différents, pour des semaines d'attente et des coûts prohibitifs.</p>
+  <p>Notre mission est simple : redonner du temps aux formateurs pour qu'ils fassent ce qu'ils savent faire le mieux — transmettre. Nous industrialisons la partie administrative grâce à l'IA et à une équipe d'experts qui connaissent chaque rouage du secteur.</p>
+  <p>Nous ne sommes pas une marketplace anonyme de plus. Nous sommes un partenaire de proximité : 48h pour traiter vos dossiers, un conseiller humain joignable, et des prix pensés pour que la conformité ne soit plus un frein à votre développement.</p>
+  <p>Chaque semaine, de nouveaux organismes rejoignent la plateforme. Chacun d'entre eux nous rappelle pourquoi nous faisons ce métier : accompagner les professionnels qui forment la France de demain.</p>
+  <div class="qsn-word-sep"></div>
+  <p class="qsn-word-sign-name">Prashan Sithi</p>
+  <p class="qsn-word-sign-role">Président &amp; Fondateur — Experience Prod SASU</p>
+</section>
+
+<!-- 3 VALEURS -->
+<section class="qsn-values">
+  <div class="qsn-value">
+    <div class="qsn-value-ico">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+    </div>
+    <h3>Expertise</h3>
+    <p>Notre équipe cumule plus de 50 ans d'expérience dans la formation professionnelle, les OPCO et la conformité Qualiopi.</p>
+  </div>
+  <div class="qsn-value">
+    <div class="qsn-value-ico">
+      <svg viewBox="0 0 24 24"><polygon points="12 2 22 12 12 22 2 12 12 2"/></svg>
+    </div>
+    <h3>Simplicité</h3>
+    <p>Une plateforme unique pour toutes vos démarches. Fini les allers-retours entre les administrations.</p>
+  </div>
+  <div class="qsn-value">
+    <div class="qsn-value-ico">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </div>
+    <h3>Réactivité</h3>
+    <p>48h pour traiter vos dossiers. Un accompagnement humain, pas un ticket dans un système automatisé.</p>
+  </div>
+</section>
+
+<!-- ÉQUIPE -->
+<section class="qsn-team">
+  <h2>Notre équipe</h2>
+  <div class="qsn-team-grid">
+    <div class="qsn-member">
+      <img class="qsn-member-photo" src="/team/yohan.png" alt="Yohan" loading="lazy" onerror="this.style.visibility='hidden'">
+      <p class="qsn-member-name">Yohan</p>
+      <p class="qsn-member-role">Expert Tech &amp; IA</p>
+    </div>
+    <div class="qsn-member">
+      <img class="qsn-member-photo" src="/team/philippe.png" alt="Philippe" loading="lazy" onerror="this.style.visibility='hidden'">
+      <p class="qsn-member-name">Philippe</p>
+      <p class="qsn-member-role">Ancien directeur OPCO</p>
+    </div>
+    <div class="qsn-member">
+      <img class="qsn-member-photo" src="/team/amina.png" alt="Amina" loading="lazy" onerror="this.style.visibility='hidden'">
+      <p class="qsn-member-name">Amina</p>
+      <p class="qsn-member-role">Experte Pédagogique</p>
+    </div>
+    <div class="qsn-member">
+      <img class="qsn-member-photo" src="/team/karim.png" alt="Karim" loading="lazy" onerror="this.style.visibility='hidden'">
+      <p class="qsn-member-name">Karim</p>
+      <p class="qsn-member-role">Expert conformité</p>
+    </div>
+    <div class="qsn-member">
+      <img class="qsn-member-photo" src="/team/marie.png" alt="Marie" loading="lazy" onerror="this.style.visibility='hidden'">
+      <p class="qsn-member-name">Marie</p>
+      <p class="qsn-member-role">Assistante pédagogique</p>
+    </div>
+    <div class="qsn-member">
+      <img class="qsn-member-photo" src="/team/josh.png" alt="Josh" loading="lazy" onerror="this.style.visibility='hidden'">
+      <p class="qsn-member-name">Josh</p>
+      <p class="qsn-member-role">Auditeur Qualiopi</p>
+    </div>
+    <div class="qsn-member">
+      <img class="qsn-member-photo" src="/team/laurent.png" alt="Laurent" loading="lazy" onerror="this.style.visibility='hidden'">
+      <p class="qsn-member-name">Laurent</p>
+      <p class="qsn-member-role">Expert Achat / Revente</p>
+    </div>
+  </div>
+</section>
+
+<footer class="ml-footer">
+  <div class="ml-footer-inner">
+    <div>
+      <div class="ml-footer-brand">les<span class="accent">formateurs</span>.online</div>
+      <p>La plateforme des professionnels de la formation.</p>
+      <p class="siren">Experience Prod SASU · SIREN 982 828 774</p>
+    </div>
+    <div class="ml-footer-col">
+      <h4>Services</h4>
+      <a href="formation.html">Gérer mon activité</a>
+      <a href="conformite.html">Conformité</a>
+      <a href="creer-of.html">Créer mon OF</a>
+      <a href="se-former.html">Se former</a>
+    </div>
+    <div class="ml-footer-col">
+      <h4>Légal</h4>
+      <a href="qui-sommes-nous.html">Qui sommes-nous</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="cgv.html">CGV</a>
+      <a href="politique-confidentialite.html">Confidentialité</a>
+    </div>
+  </div>
+  <div class="ml-partners" style="text-align:left;padding:16px 0 12px;">
+    <div style="font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Partenaires certifiés</div>
+    <div style="display:flex;justify-content:flex-start;align-items:center;gap:24px;flex-wrap:wrap;">
+      <img src="img/logo-qualiopi.png" alt="Qualiopi" style="height:72px;background:transparent;">
+    </div>
+  </div>
+  <div class="ml-footer-bottom">© 2026 lesformateurs.online · <span style="color:#6C5CE7;font-weight:500;">Membres : -10% sur tous nos services</span></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js" defer></script>
+<script src="js/referral.js" defer></script>
+<script src="js/analytics.js" defer></script>
+<script src="js/auth-modal.js" defer></script>
+<script>
+(async function(){
+  try {
+    if (typeof getUser === 'function') {
+      var user = await getUser();
+      if(user){
+        var loginBtn = document.querySelector('.btn-login');
+        var dashBtn = document.querySelector('.btn-dashboard');
+        if(loginBtn) loginBtn.classList.add('hidden');
+        if(dashBtn) dashBtn.classList.remove('hidden');
+      }
+    }
+  } catch(e){}
+})();
+</script>
+<script src="js/cart.js" defer></script>
+<script src="js/cart-nav.js" defer></script>
+</body>
+</html>

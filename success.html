@@ -1,339 +1,233 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B6XVYRVT9D');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-<title>Paiement confirmé - lesformateurs.online</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Paiement confirmé — lesformateurs.online</title>
 <meta name="description" content="Confirmation de paiement — lesformateurs.online">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<style>
-.success-container{
-  min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;
-  background:var(--light);padding:40px 20px;
-}
-.success-card{
-  background:#fff;border-radius:16px;padding:48px 40px;max-width:560px;width:100%;
-  text-align:center;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.06);
-}
-.success-icon{font-size:64px;margin-bottom:16px;}
-.success-card h1{font-size:24px;font-weight:800;margin-bottom:8px;}
-.success-card p{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.6;}
-.order-summary{
-  background:var(--light);border-radius:10px;padding:16px 20px;margin:20px 0;
-  text-align:left;font-size:13px;
-}
-.order-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);}
-.order-row:last-child{border-bottom:none;font-weight:700;font-size:14px;padding-top:10px;}
-.loading-spinner{
-  display:inline-block;width:32px;height:32px;border:3px solid var(--border);
-  border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;
-  margin-bottom:16px;
-}
-@keyframes spin{to{transform:rotate(360deg);}}
-.step-indicator{
-  display:flex;justify-content:center;gap:8px;margin:24px 0 16px;
-}
-.step-dot{
-  width:10px;height:10px;border-radius:50%;background:var(--border);
-}
-.step-dot.done{background:var(--success);}
-.step-dot.current{background:var(--accent);animation:pulse 1s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
-</style>
+<link rel="stylesheet" href="css/mono-light.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/referral.js"></script>
+<script src="js/pricing.js"></script>
 </head>
 <body>
 
-<nav class="navbar">
-  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
-  <div class="nav-links" id="navLinks">
-    <a href="missions.html">Missions</a>
-    <a href="conformite.html">Conformité</a>
+<nav class="ml-nav">
+  <a href="index.html" class="ml-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="ml-nav-links" id="navLinks">
+    <a href="formation.html">Services</a>
     <a href="creer-of.html">Créer mon OF</a>
+    <a href="recherche-habilitation.html" style="color:#1D9E75;font-weight:600;">Habilitation</a>
     <a href="se-former.html">Se former</a>
-    <a href="dashboard.html" class="nav-cta">Mon espace</a>
+    <a href="dashboard.html" class="ml-nav-cta">Mon espace</a>
   </div>
-  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+  <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="success-container">
-  <!-- ÉTAT : CHARGEMENT -->
-  <div class="success-card" id="state-loading">
-    <div class="loading-spinner"></div>
+<div class="ml-success-wrap">
+  <div class="ml-success-card" id="state-loading">
+    <div class="ml-spinner"></div>
     <h1>Vérification du paiement...</h1>
     <p>Merci de patienter, nous confirmons votre commande.</p>
-    <div class="step-indicator">
-      <div class="step-dot done"></div>
-      <div class="step-dot current"></div>
-      <div class="step-dot"></div>
-    </div>
   </div>
 
-  <!-- ÉTAT : SUCCÈS -->
-  <div class="success-card" id="state-success" style="display:none;">
-    <div class="success-icon">✅</div>
-    <h1>Paiement confirmé !</h1>
-    <p id="success-message">Votre commande a été enregistrée avec succès. Un expert va prendre en charge votre dossier.</p>
-    
-    <div class="order-summary" id="order-summary" style="display:none;">
-      <div class="order-row">
-        <span>Commande</span>
-        <span id="summary-type">—</span>
-      </div>
-      <div class="order-row">
-        <span>Référence</span>
-        <span id="summary-ref">—</span>
-      </div>
-      <div class="order-row">
-        <span>Total payé</span>
-        <span id="summary-amount">—</span>
-      </div>
+  <div class="ml-success-card hidden" id="state-success">
+    <div class="ml-success-icon">✓</div>
+    <h1>Paiement confirmé</h1>
+    <p id="success-message">Votre commande a été enregistrée. Un expert va prendre en charge votre dossier.</p>
+    <div class="ml-order hidden" id="order-summary">
+      <div class="ml-order-row"><span>Commande</span><span id="summary-type">—</span></div>
+      <div class="ml-order-row"><span>Référence</span><span id="summary-ref">—</span></div>
+      <div class="ml-order-row"><span>Total payé</span><span id="summary-amount">—</span></div>
     </div>
-
-    <div style="margin-top:20px;">
-      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">📧 Un email de confirmation vous a été envoyé.<br>Vous pouvez suivre l'avancement depuis votre espace.</p>
-    </div>
-
-    <a href="dashboard.html" class="btn btn-primary btn-lg" style="margin-top:8px;" id="btn-dashboard">Accéder à mon espace →</a>
+    <p style="font-size:12px;color:var(--muted);margin:16px 0;">Un email de confirmation vous a été envoyé. Suivez l'avancement depuis votre espace.<br><span style="color:#6C5CE7;font-weight:500;">Membres : -10% sur tous nos services.</span></p>
+    <a href="dashboard.html" class="ml-btn ml-btn-lg" id="btn-dashboard">Accéder à mon espace</a>
   </div>
 
-  <!-- ÉTAT : ERREUR / PAS DE COMMANDE -->
-  <div class="success-card" id="state-error" style="display:none;">
-    <div class="success-icon">⚠️</div>
+  <div class="ml-success-card hidden" id="state-error">
+    <div class="ml-success-icon">!</div>
     <h1>Paiement en attente</h1>
     <p>Nous n'avons pas pu confirmer votre paiement automatiquement. Si vous avez bien payé, votre commande sera validée sous quelques minutes.</p>
-    <div style="background:rgba(233,69,96,.05);border:1px solid rgba(233,69,96,.15);border-radius:8px;padding:14px;margin:16px 0;font-size:13px;">
-      <strong>Que faire ?</strong><br>
-      1. Vérifiez votre email pour la confirmation Stripe<br>
-      2. Accédez à votre espace pour voir le statut<br>
-      3. Si le problème persiste, contactez-nous
-    </div>
-    <a href="dashboard.html" class="btn btn-primary" style="margin-top:8px;">Accéder à mon espace</a>
+    <a href="dashboard.html" class="ml-btn ml-btn-lg">Accéder à mon espace</a>
   </div>
 
-  <!-- ÉTAT : NON CONNECTÉ -->
-  <div class="success-card" id="state-noauth" style="display:none;">
-    <div class="success-icon">🔒</div>
-    <h1>Connectez-vous pour voir votre commande</h1>
+  <div class="ml-success-card hidden" id="state-noauth">
+    <div class="ml-success-icon">🔒</div>
+    <h1>Connectez-vous</h1>
     <p>Votre paiement a été reçu. Connectez-vous pour accéder à votre espace et suivre votre dossier.</p>
-    <button class="btn btn-primary btn-lg" style="margin-top:8px;" onclick="openAuthModal()">Se connecter →</button>
+    <button class="ml-btn ml-btn-lg" onclick="openAuthModal()">Se connecter</button>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src="js/referral.js"></script>
+<script src="js/analytics.js" defer></script>
 <script src="js/auth-modal.js"></script>
 <script>
-// Labels pour les types de commande
 var typeLabels = {
-  nda: 'NDA — Numéro de Déclaration d\'Activité',
-  uai: 'UAI — Numéro UAI',
-  qualiopi: 'Qualiopi — Certification qualité',
-  edof: 'EDOF — Mon Compte Formation',
-  francetravail: 'France Travail — Référencement',
-  rs_rncp: 'RS/RNCP — Enregistrement certification',
-  rs: 'RS/RNCP — Enregistrement certification',
-  opco: 'OPCO — Connexion',
-  bpf: 'BPF — Bilan Pédagogique et Financier',
-  agent: 'Agent IA — Configuration',
-  action: 'Créer un OF — Action de formation',
-  cfa: 'Créer un OF — CFA',
-  bilan: 'Créer un OF — Bilan de compétences',
-  vae: 'Créer un OF — VAE',
-  elus: 'Créer un OF — Formation des élus',
-  agents_ia: 'Créer un OF — OF Agents IA',
-  formation: 'Formation Formateur Professionnel',
-  premium: 'Annonce Premium',
-  premium_subscription: 'Abonnement Premium Financement',
-  pack_pedagogique: 'Pack Pédagogique',
-  pack_commercial: 'Pack Commercial OF',
-  pack_cfa_docs: 'Pack CFA / Apprentissage',
-  pack_complet_3en1: 'Pack Complet 3-en-1'
+  nda:"NDA — Numéro de Déclaration d'Activité", uai:'UAI — Numéro UAI', qualiopi:'Qualiopi — Certification qualité',
+  edof:'EDOF — Mon Compte Formation', francetravail:'France Travail — Référencement',
+  rs_rncp:'RS/RNCP — Enregistrement certification', rs:'RS/RNCP — Enregistrement certification',
+  opco:'OPCO — Connexion', bpf:'BPF — Bilan Pédagogique et Financier',
+  agent:'Agent IA — Configuration', action:"Créer un OF — Action de formation",
+  cfa:'Créer un OF — CFA', bilan:'Créer un OF — Bilan de compétences',
+  vae:'Créer un OF — VAE', elus:'Créer un OF — Formation des élus',
+  agents_ia:'Créer un OF — OF Agents IA', formation:'Formation Formateur Professionnel',
+  premium:'Annonce Premium', premium_subscription:'Abonnement Premium Financement',
+  pack_pedagogique:'Pack Pédagogique', pack_commercial:'Pack Commercial OF',
+  pack_cfa_docs:'Pack CFA / Apprentissage', pack_complet_3en1:'Pack Complet 3-en-1'
 };
-
 var dashboardTabs = {
-  nda: 'demarches', uai: 'demarches', qualiopi: 'demarches', edof: 'demarches',
-  francetravail: 'demarches', rs_rncp: 'demarches', rs: 'demarches', opco: 'demarches',
-  bpf: 'demarches', agent: 'demarches',
-  action: 'of', cfa: 'of', bilan: 'of', vae: 'of', elus: 'of', agents_ia: 'of',
-  formation: 'formation',
-  premium: 'annonces',
-  premium_subscription: 'financement',
-  pack_pedagogique: 'demarches',
-  pack_commercial: 'demarches',
-  pack_cfa_docs: 'demarches',
-  pack_complet_3en1: 'demarches'
+  nda:'demarches', uai:'demarches', qualiopi:'demarches', edof:'demarches',
+  francetravail:'demarches', rs_rncp:'demarches', rs:'demarches', opco:'demarches',
+  bpf:'demarches', agent:'demarches',
+  action:'of', cfa:'of', bilan:'of', vae:'of', elus:'of', agents_ia:'of',
+  formation:'formation', premium:'annonces', premium_subscription:'financement',
+  pack_pedagogique:'demarches', pack_commercial:'demarches',
+  pack_cfa_docs:'demarches', pack_complet_3en1:'demarches'
 };
+function hideAll(){ ['state-loading','state-success','state-error','state-noauth'].forEach(function(id){ document.getElementById(id).classList.add('hidden'); }); }
+function showState(s){ hideAll(); document.getElementById('state-'+s).classList.remove('hidden'); }
 
-function hideAll(){
-  ['state-loading','state-success','state-error','state-noauth'].forEach(function(id){
-    document.getElementById(id).style.display = 'none';
-  });
-}
-
-function showState(state){
-  hideAll();
-  document.getElementById('state-' + state).style.display = '';
+function getStripeSessionFromUrl(){
+  try {
+    var u = new URL(window.location.href);
+    return u.searchParams.get('session_id') || u.searchParams.get('checkout_session') || null;
+  } catch(e){ return null; }
 }
 
 (async function(){
-  // 1. Vérifier l'auth
   var user = await getUser();
-  if(!user){
-    showState('noauth');
-    return;
-  }
-
-  // 2. Lire la commande en attente depuis localStorage
+  if(!user){ showState('noauth'); return; }
   var pendingOrder = null;
-  try {
-    pendingOrder = JSON.parse(localStorage.getItem('lfo_pending_order'));
-  } catch(e){}
+  try { pendingOrder = JSON.parse(localStorage.getItem('lfo_pending_order')); } catch(e){}
+  if(!pendingOrder){ showState('error'); document.getElementById('state-error').querySelector('p').textContent = "Erreur : commande non trouvée"; return; }
 
-  if(!pendingOrder || !pendingOrder.type){
-    // Pas de commande en attente — peut-être un retour direct
-    showState('error');
+  // New-format flow: demarche_id present → UPDATE demarches + referral_earnings
+  if(pendingOrder.demarche_id){
+    var sessionId = getStripeSessionFromUrl();
+    try {
+      var upd = { paid:true, current_step:2, updated_at:new Date().toISOString() };
+      if(pendingOrder.payment_mode) upd.payment_mode = pendingOrder.payment_mode;
+      if(sessionId) upd.stripe_checkout_session = sessionId;
+      await sb.from('demarches').update(upd).eq('id', pendingOrder.demarche_id);
+    } catch(e){}
+    if(pendingOrder.referrer_id){
+      try {
+        // Garde-fou anti-doublon : ne pas créer deux earnings pour la même démarche
+        var { data: existEarn } = await sb.from('referral_earnings').select('id').eq('demarche_id', pendingOrder.demarche_id).limit(1);
+        if(!existEarn || existEarn.length === 0){
+          var commCents = Math.round(((pendingOrder.amount_cents)||0) * 0.05);
+          await sb.from('referral_earnings').insert({
+            referrer_id: pendingOrder.referrer_id,
+            referred_id: pendingOrder.user_id || user.id,
+            demarche_id: pendingOrder.demarche_id,
+            amount_cents: pendingOrder.amount_cents || 0,
+            commission_cents: commCents,
+            type: 'referral',
+            status: 'pending'
+          });
+          // Increment balance + total
+          var { data: refProf } = await sb.from('profiles').select('referral_balance_cents,referral_total_cents').eq('id', pendingOrder.referrer_id).single();
+          var newBal = ((refProf && refProf.referral_balance_cents) || 0) + commCents;
+          var newTot = ((refProf && refProf.referral_total_cents) || 0) + commCents;
+          await sb.from('profiles').update({ referral_balance_cents: newBal, referral_total_cents: newTot }).eq('id', pendingOrder.referrer_id);
+        }
+      } catch(e){}
+    }
+    // Vider le panier si c'était un achat panier
+    if(pendingOrder.clear_cart){
+      try { localStorage.removeItem('lfo_cart_v1'); } catch(e){}
+    }
+    localStorage.removeItem('lfo_pending_order');
+    showState('success');
+    document.getElementById('success-message').textContent = "Paiement confirmé ✅ Redirection vers votre espace...";
+    setTimeout(function(){ window.location.href = 'dashboard.html'; }, 3000);
     return;
   }
 
-  // 3. Marquer la commande comme payée en Supabase
-  var orderType = pendingOrder.type;
-  var orderId = pendingOrder.order_id;
-  var table = pendingOrder.table; // 'demarches', 'creations_of', 'formations', 'annonces'
-  var amount = pendingOrder.amount;
-  var productType = pendingOrder.product_type;
+  if(!pendingOrder.type){ showState('error'); return; }
 
-  // Handle premium subscription (no orderId needed)
+  var orderType = pendingOrder.type, orderId = pendingOrder.order_id, table = pendingOrder.table;
+  var amount = pendingOrder.amount, productType = pendingOrder.product_type;
+
   if(orderType === 'premium_subscription'){
     try {
-      await sb.from('profiles').update({
-        is_premium: true,
-        premium_since: new Date().toISOString()
-      }).eq('id', user.id);
-      await sb.from('payments').insert({
-        user_id: user.id, amount_cents: 6900, payment_type: 'premium_subscription',
-        status: 'completed', metadata: { source: 'stripe_redirect' }
-      });
-    } catch(e){ console.log('Erreur premium:', e); }
+      await sb.from('profiles').update({ is_premium:true, premium_since:new Date().toISOString() }).eq('id', user.id);
+      await sb.from('payments').insert({ user_id:user.id, amount_cents:6900, payment_type:'premium_subscription', status:'completed', metadata:{source:'stripe_redirect'} });
+    } catch(e){}
   }
 
   if(orderId && table){
     try {
-      var updateData = {
-        paid: true,
-        status: table === 'annonces' ? 'active' : 'en_cours',
-        updated_at: new Date().toISOString()
-      };
-      
-      // Premium annonce: also mark as premium
-      if(pendingOrder.type === 'premium' && table === 'annonces'){
-        updateData.is_premium = true;
-      }
-      
-      var { error } = await sb.from(table).update(updateData).eq('id', orderId);
-
-      if(error){
-        console.log('Erreur mise à jour commande:', error);
-      }
-
-      // Enregistrer le paiement dans la table payments
+      var updateData = { paid:true, status: table==='annonces'?'active':'en_cours', updated_at:new Date().toISOString() };
+      if(pendingOrder.type==='premium' && table==='annonces') updateData.is_premium = true;
+      await sb.from(table).update(updateData).eq('id', orderId);
       await sb.from('payments').insert({
-        user_id: user.id,
-        amount_cents: (amount || 0) * 100,
-        payment_type: table === 'demarches' ? 'demarche' : table === 'creations_of' ? 'creation_of' : table === 'formations' ? 'formation' : 'annonce_premium',
-        reference_id: orderId,
-        status: 'completed',
-        metadata: { product_type: productType, source: 'stripe_redirect' }
+        user_id:user.id, amount_cents:(amount||0)*100,
+        payment_type: table==='demarches'?(pendingOrder.type==='creation_of'?'creation_of':'demarche'):table==='formations'?'formation':'annonce_premium',
+        reference_id:orderId, status:'completed', metadata:{product_type:productType, source:'stripe_redirect'}
       });
-
-      // Si c'est une formation, mettre à jour le profil
-      if(table === 'formations'){
-        await sb.from('profiles').update({
-          formation_purchased: true,
-          formation_progress: 0
-        }).eq('id', user.id);
+      if(table==='formations'){
+        await sb.from('profiles').update({ formation_purchased:true, formation_progress:0 }).eq('id', user.id);
       }
-
-      // Si c'est un abonnement premium
-      if(pendingOrder.type === 'premium_subscription'){
-        await sb.from('profiles').update({
-          is_premium: true,
-          premium_since: new Date().toISOString()
-        }).eq('id', user.id);
-      }
-
-    } catch(e){
-      console.log('Erreur post-paiement:', e);
-    }
+    } catch(e){}
   }
 
-  // 4b. Enregistrer l'achat + commission parrainage
   try {
     var saleLabel = typeLabels[productType] || productType || 'Achat';
-    var saleCents = (amount || 0) * 100;
-    
-    // Record achat (even without referral)
-    var refCode = getActiveReferral();
+    var saleCents = (amount||0)*100;
+    var refCode = typeof getActiveReferral === 'function' ? getActiveReferral() : null;
     var referrerId = null;
     if(refCode){
       var { data: referrer } = await sb.from('profiles').select('id').eq('referral_code', refCode).single();
       if(referrer && referrer.id !== user.id) referrerId = referrer.id;
     }
-    var commCents = referrerId ? Math.round(saleCents * 0.10) : 0;
-    
+    var commCents = referrerId ? Math.round(saleCents*0.05) : 0;
     await sb.from('achats').insert({
-      user_id: user.id,
-      product_type: productType || orderType,
-      product_label: saleLabel,
-      amount_cents: saleCents,
-      referrer_id: referrerId,
-      referral_code: refCode || null,
-      commission_cents: commCents
+      user_id:user.id, product_type:productType||orderType, product_label:saleLabel,
+      amount_cents:saleCents, referrer_id:referrerId, referral_code:refCode||null, commission_cents:commCents
     });
-    
-    // Record commission for referrer
     if(referrerId){
       await sb.from('referrals').insert({
-        referrer_id: referrerId,
-        buyer_id: user.id,
-        product_type: productType || orderType,
-        product_label: saleLabel,
-        sale_amount_cents: saleCents,
-        commission_cents: commCents,
-        is_recurring: orderType === 'premium_subscription',
-        commission_status: 'pending'
+        referrer_id:referrerId, buyer_id:user.id, product_type:productType||orderType,
+        product_label:saleLabel, sale_amount_cents:saleCents, commission_cents:commCents,
+        is_recurring: orderType==='premium_subscription', commission_status:'pending'
       });
     }
-  } catch(e){ console.log('Achat/referral error:', e); }
+  } catch(e){}
 
-  // 5. Afficher le succès
   showState('success');
-
-  // Remplir le résumé
   var label = typeLabels[productType] || productType || 'Commande';
   document.getElementById('summary-type').textContent = label;
-  document.getElementById('summary-ref').textContent = orderId ? orderId.substring(0, 8).toUpperCase() : '—';
-  document.getElementById('summary-amount').textContent = amount ? amount + '€' : '—';
-  document.getElementById('order-summary').style.display = '';
-
-  // Message personnalisé selon le type
+  document.getElementById('summary-ref').textContent = orderId ? orderId.substring(0,8).toUpperCase() : '—';
+  document.getElementById('summary-amount').textContent = amount ? amount+'€' : '—';
+  document.getElementById('order-summary').classList.remove('hidden');
   var tab = dashboardTabs[productType] || 'resume';
-  if(tab === 'demarches'){
-    document.getElementById('success-message').textContent = 'Votre démarche a été enregistrée. Un expert va prendre en charge votre dossier et vous pourrez suivre l\'avancement depuis votre espace.';
-  } else if(tab === 'of'){
-    document.getElementById('success-message').textContent = 'Votre demande de création d\'organisme est enregistrée. Un expert va vous accompagner dans toutes les étapes.';
-  } else if(tab === 'formation'){
-    document.getElementById('success-message').textContent = 'Bienvenue dans la formation ! Vous pouvez commencer les modules dès maintenant depuis votre espace.';
+  if(tab==='demarches'){
+    document.getElementById('success-message').textContent = "Votre démarche a été enregistrée. Un expert va prendre en charge votre dossier.";
+  } else if(tab==='of'){
+    document.getElementById('success-message').textContent = "Votre demande de création d'organisme est enregistrée. Un expert va vous accompagner.";
+  } else if(tab==='formation'){
+    document.getElementById('success-message').textContent = "Bienvenue dans la formation ! Accédez aux modules depuis votre espace.";
   }
-
-  // Lien dashboard vers le bon onglet
-  document.getElementById('btn-dashboard').href = 'dashboard.html#' + tab;
-
-  // 5. Nettoyer localStorage
+  document.getElementById('btn-dashboard').href = 'dashboard.html#'+tab;
   localStorage.removeItem('lfo_pending_order');
-
 })();
 </script>
+<script src="js/cart.js" defer></script>
+<script src="js/cart-nav.js" defer></script>
 </body>
 </html>

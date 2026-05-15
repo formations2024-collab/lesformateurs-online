@@ -62,7 +62,7 @@ async function signUp(email, password, meta) {
     userData = {
       first_name: meta || '',
       last_name: arguments[3] || '',
-      full_name: (meta || '') + ' ' + (arguments[3] || ''),
+      
       phone: arguments[4] || '',
       profile_type: arguments[5] || ''
     };
@@ -112,7 +112,7 @@ async function updateAuthUI() {
     dashBtns.forEach(b => b.style.display = '');
     logoutBtns.forEach(b => b.style.display = '');
     userNameEls.forEach(el => {
-      if (profile) el.textContent = profile.full_name;
+      if (profile) el.textContent = (profile.first_name||'') + ' ' + (profile.last_name||'');
     });
   } else {
     loginBtns.forEach(b => b.style.display = '');

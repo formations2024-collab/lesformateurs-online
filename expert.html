@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B6XVYRVT9D');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Espace Expert - lesformateurs.online</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
@@ -170,16 +179,23 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src="js/referral.js"></script>
 <script>
 var typeLabels={nda:'NDA',uai:'UAI',qualiopi:'Qualiopi',edof:'EDOF',francetravail:'France Travail',rs_rncp:'RS/RNCP',rs:'RS/RNCP',opco:'OPCO',bpf:'BPF',agent:'Agent IA',action_formation:'OF — Action',cfa:'OF — CFA',bilan:'OF — Bilan',vae:'OF — VAE',elus:'OF — Élus',agents_ia:'OF — Agents IA',pack_pedagogique:'Pack Pédagogique',pack_commercial:'Pack Commercial',pack_cfa_docs:'Pack CFA',pack_complet_3en1:'Pack Complet'};
-var demarcheSteps={_u:['En attente d\'assignation','Constitution du dossier','Soumission pour validation','Validation client','Terminé']};
-['nda','uai','qualiopi','edof','francetravail','rs_rncp','rs','opco','bpf','agent'].forEach(function(k){demarcheSteps[k]=demarcheSteps._u;});
+var demarcheSteps={
+  _u:['Documents & Infos','Verification','Traitement','Termine'],
+  edof:['Documents & Infos','Verification','Depot formulaire','Depot dossier','Webinaire','Acces EDOF'],
+  qualiopi:['Documents','Audit initial','Corrections','Certification'],
+  rsrncp:['Documents','Verification','Depot','Habilitation'],
+  rs_rncp:['Documents','Verification','Depot','Habilitation']
+};
+['nda','uai','francetravail','opco','bpf','agent','domiciliation'].forEach(function(k){if(!demarcheSteps[k])demarcheSteps[k]=demarcheSteps._u;});
 var ofSteps={};
 function getOfSteps(type,hasKbis){var s=['Assignation expert','Vérification des documents'];if(type==='agents_ia'){if(!hasKbis){s.push('Constitution dossier KBIS');s.push('Obtention KBIS');s.push('Validation client (KBIS)');}s.push('Configuration Agent IA + RDV');s.push('Validation client (Agent IA)');s.push('Terminé');return s;}if(!hasKbis){s.push('Constitution dossier KBIS');s.push('Obtention KBIS');s.push('Validation client (KBIS)');}s.push('Obtention NDA');s.push('Validation client (NDA)');s.push('Certification Qualiopi');s.push('Validation client (Qualiopi)');if(type==='cfa'){s.push('Obtention UAI (mention CFA)');s.push('Validation client (UAI)');}s.push('Terminé');return s;}
 function isValidationStep(n){return n&&n.indexOf('Validation client')===0;}
 var demarcheChecklist={nda:['KBIS','Casier judiciaire','Convention formation','Programme formation','CV formateurs','Pièce identité'],qualiopi:['NDA','KBIS','Programmes (min.3)','Conventions signées','CV formateurs','Questionnaires satisfaction'],edof:['NDA','Qualiopi','SIRET','RIB','Programmes formation'],uai:['NDA','KBIS','Formation visée'],francetravail:['NDA','KBIS','Programmes','Références clients'],rs_rncp:['NDA+KBIS','Référentiel compétences','Programmes détaillés','Preuves insertion','Partenariats'],rs:['NDA+KBIS','Référentiel compétences','Programmes détaillés','Preuves insertion','Partenariats'],opco:['NDA','KBIS','Programmes','Grille tarifaire'],bpf:['NDA','Nb stagiaires','CA formation','Heures formation','Données financières'],agent:['RDV effectué']};
 
-var expertId=null,allDemarches=[],allCreations=[],allDocs={};
+var expertId=null,allDemarches=[],allCreations=[],allDocs={},allFormations={};
 function showTab(n){document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.sidebar a, .mobile-nav a').forEach(function(a){a.classList.remove('active');});var e=document.getElementById('tab-'+n);if(e)e.classList.add('active');document.querySelectorAll('.sidebar a, .mobile-nav a').forEach(function(a){if(a.getAttribute('onclick')&&a.getAttribute('onclick').indexOf("'"+n+"'")>-1)a.classList.add('active');});window.scrollTo(0,0);}
 function openLogoutModal(){document.getElementById('modal-logout').classList.add('open');}
 async function confirmLogout(){await signOut();}
@@ -191,22 +207,24 @@ function fmtAmount(c){return c?(c/100)+'€':'';}
 document.addEventListener('click',function(e){if(e.target.classList.contains('modal'))e.target.classList.remove('open');});
 
 async function loadAllDossiers(){
-  var {data:dem}=await sb.from('demarches').select('*, profiles:user_id(full_name, email, phone)').eq('paid',true).order('created_at',{ascending:false});
+  var {data:dem}=await sb.from('demarches').select('*, profiles:user_id(first_name, last_name, email, phone), organisme:organisme_id(raison_sociale, siret, ville)').eq('paid',true).order('created_at',{ascending:false});
   allDemarches=dem||[];
-  var {data:cre}=await sb.from('creations_of').select('*, profiles:user_id(full_name, email, phone), creation_of_options(*)').eq('paid',true).order('created_at',{ascending:false});
-  allCreations=cre||[];
+  // TODO: la table `creations_of` n'existe plus — les créations d'OF sont maintenant dans `demarches` avec type='creation_of'.
+  // Ce dashboard expert (ancien design) devra être refondu pour les afficher depuis `demarches`. Pour l'instant on neutralise.
+  allCreations=[];
   allDocs={};
   var demIds=allDemarches.map(function(d){return d.id;});
-  var creIds=allCreations.map(function(c){return c.id;});
-  if(demIds.length>0){var{data:dd}=await sb.from('documents').select('*').in('demarche_id',demIds);if(dd)dd.forEach(function(d){if(!allDocs[d.demarche_id])allDocs[d.demarche_id]=[];allDocs[d.demarche_id].push(d);});}
-  if(creIds.length>0){var{data:cd}=await sb.from('documents').select('*').in('creation_of_id',creIds);if(cd)cd.forEach(function(d){if(!allDocs[d.creation_of_id])allDocs[d.creation_of_id]=[];allDocs[d.creation_of_id].push(d);});}
+  if(demIds.length>0){var{data:dd}=await sb.from('demarche_documents').select('*').in('demarche_id',demIds);if(dd)dd.forEach(function(d){if(!allDocs[d.demarche_id])allDocs[d.demarche_id]=[];allDocs[d.demarche_id].push(d);});}
+  // Load formations for demarches
+  allFormations={};
+  if(demIds.length>0){var{data:ff}=await sb.from('demarche_formations').select('*').in('demarche_id',demIds);if(ff)ff.forEach(function(f){if(!allFormations[f.demarche_id])allFormations[f.demarche_id]=[];allFormations[f.demarche_id].push(f);});}
 }
 
 function renderCard(item,source,mode){
   var isDem=source==='demarche';var type=isDem?item.type:item.of_type;var label=typeLabels[type]||type;
   var steps=isDem?(demarcheSteps[type]||[]):(getOfSteps(type, item.has_kbis));var total=steps.length;var cur=item.current_step||1;
   var pct=item.status==='termine'?100:Math.round((cur/total)*100);var p=item.profiles||{};
-  var name=p.full_name||item.client_name||'Client';var email=p.email||'';var amount=isDem?fmtAmount(item.amount_cents):fmtAmount(item.total_price_cents);
+  var name=((p.first_name||'')+'  '+(p.last_name||'')).trim()||item.client_name||'Client';var email=p.email||'';var amount=isDem?fmtAmount(item.amount_cents):fmtAmount(item.total_price_cents);
   var date=fmtDate(item.created_at);var docs=allDocs[item.id]||[];var pending=docs.filter(function(d){return d.status==='en_attente';}).length;
   var stCls=item.status==='termine'?'status-done':item.status==='nouveau'?'status-new':'status-progress';
   var stTxt=item.status==='termine'?'Terminé':item.status==='nouveau'?'Nouveau':'Étape '+cur+'/'+total;
@@ -223,7 +241,7 @@ function renderCard(item,source,mode){
   if(mode==='pool'){
     h+='<button class="action-btn assign" onclick="assignDossier(\''+item.id+'\',\''+source+'\')">🙋 Prendre en charge</button>';
     h+='<button class="action-btn" onclick="openDossierDetail(\''+item.id+'\',\''+source+'\')">👁 Détail</button>';
-    h+='<button class="action-btn" onclick="expertContactBeforeAssign(\''+item.id+'\',\''+source+'\',\''+(p.full_name||'Client').replace(/'/g,"\\'")+'\')">💬 Contacter</button>';
+    h+='<button class="action-btn" onclick="expertContactBeforeAssign(\''+item.id+'\',\''+source+'\',\''+(((p.first_name||'')+'  '+(p.last_name||'')).trim()||'Client').replace(/'/g,"\\'")+'\')">💬 Contacter</button>';
   } else if(mode==='encours'){
     h+='<button class="action-btn" onclick="openDossierDetail(\''+item.id+'\',\''+source+'\')">📄 Ouvrir</button>';
     h+='<button class="action-btn" onclick="openExpertMessages(\''+item.id+'\',\''+source+'\')">💬 Messages</button>';
@@ -238,8 +256,8 @@ function renderCard(item,source,mode){
 
 function renderPool(){
   var pool=[];
-  allDemarches.forEach(function(d){if(!d.expert_id&&d.status!=='termine')pool.push({i:d,s:'demarche'});});
-  allCreations.forEach(function(c){if(!c.expert_id&&c.status!=='termine')pool.push({i:c,s:'creation'});});
+  allDemarches.forEach(function(d){if(!d.assigned_expert_id&&d.status!=='termine'&&d.current_step>=2&&d.paid===true)pool.push({i:d,s:'demarche'});});
+  allCreations.forEach(function(c){if(!c.assigned_expert_id&&c.status!=='termine'&&c.current_step>=2&&c.paid===true)pool.push({i:c,s:'creation'});});
   document.getElementById('stat-pool').textContent=pool.length;
   var b=document.getElementById('pool-count-badge');if(b)b.textContent=pool.length;
   var list=document.getElementById('pool-list');
@@ -249,8 +267,8 @@ function renderPool(){
 
 function renderMesDossiers(){
   var mine=[];
-  allDemarches.forEach(function(d){if(d.expert_id===expertId&&d.status!=='termine')mine.push({i:d,s:'demarche'});});
-  allCreations.forEach(function(c){if(c.expert_id===expertId&&c.status!=='termine')mine.push({i:c,s:'creation'});});
+  allDemarches.forEach(function(d){if(d.assigned_expert_id===expertId&&d.status!=='termine')mine.push({i:d,s:'demarche'});});
+  allCreations.forEach(function(c){if(c.assigned_expert_id===expertId&&c.status!=='termine')mine.push({i:c,s:'creation'});});
   document.getElementById('mes-dossiers-count').textContent=mine.length;
   document.getElementById('stat-encours').textContent=mine.length;
   var mdb=document.querySelectorAll('#mes-dossiers-badge');mdb.forEach(function(b){b.textContent=mine.length;});
@@ -261,15 +279,15 @@ function renderMesDossiers(){
   document.getElementById('stat-docs').textContent=pd;
   // Urgent
   var uh='';mine.forEach(function(m){var docs=allDocs[m.i.id]||[];var p=docs.filter(function(d){return d.status==='en_attente';}).length;
-    if(p>0){var pr=m.i.profiles||{};uh+='<div class="dossier-card" style="border-left:3px solid var(--accent);"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;"><div><h4>'+(pr.full_name||'Client')+' — '+(typeLabels[m.i.type||m.i.of_type]||'')+'</h4><p>'+p+' document(s) à vérifier</p></div><button class="action-btn" onclick="openDossierDetail(\''+m.i.id+'\',\''+m.s+'\')">📄 Ouvrir</button></div></div>';}
+    if(p>0){var pr=m.i.profiles||{};uh+='<div class="dossier-card" style="border-left:3px solid var(--accent);"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;"><div><h4>'+(((pr.first_name||'')+' '+(pr.last_name||'')).trim()||'Client')+' — '+(typeLabels[m.i.type||m.i.of_type]||'')+'</h4><p>'+p+' document(s) à vérifier</p></div><button class="action-btn" onclick="openDossierDetail(\''+m.i.id+'\',\''+m.s+'\')">📄 Ouvrir</button></div></div>';}
   });
   document.getElementById('urgent-list').innerHTML=uh||'<p style="color:var(--muted);font-size:13px;">Aucune action urgente.</p>';
 }
 
 function renderHistorique(){
   var done=[];
-  allDemarches.forEach(function(d){if(d.expert_id===expertId&&d.status==='termine')done.push({i:d,s:'demarche'});});
-  allCreations.forEach(function(c){if(c.expert_id===expertId&&c.status==='termine')done.push({i:c,s:'creation'});});
+  allDemarches.forEach(function(d){if(d.assigned_expert_id===expertId&&d.status==='termine')done.push({i:d,s:'demarche'});});
+  allCreations.forEach(function(c){if(c.assigned_expert_id===expertId&&c.status==='termine')done.push({i:c,s:'creation'});});
   document.getElementById('stat-termines').textContent=done.length;
   var hb=document.querySelectorAll('#historique-badge');hb.forEach(function(b){b.textContent=done.length;});
   var list=document.getElementById('historique-list');
@@ -293,10 +311,10 @@ function expertContactBeforeAssign(dossierId, source, clientName){
 
 async function assignDossier(id,source){
   if(!confirm('Prendre en charge ce dossier ?'))return;
-  var table=source==='demarche'?'demarches':'creations_of';
-  var col=source==='demarche'?'demarche_id':'creation_of_id';
+  var table=source==='demarche'?'demarches':'demarches';
+  var col=source==='demarche'?'demarche_id':'demarche_id';
   // Assign + advance to step 2 (Constitution du dossier)
-  var{error}=await sb.from(table).update({expert_id:expertId, current_step:2, status:'en_cours', updated_at:new Date().toISOString()}).eq('id',id);
+  var{error}=await sb.from(table).update({assigned_expert_id:expertId, current_step:2, status:'en_cours', updated_at:new Date().toISOString()}).eq('id',id);
   if(error){alert('❌ '+error.message);return;}
   // Send intro message
   var msgData={sender_id:expertId, content:'👋 Bonjour ! Je suis l\'expert en charge de votre dossier. Je vais constituer votre dossier. Si j\'ai besoin de documents complémentaires, je vous contacterai ici.\n\nN\'hésitez pas à envoyer tous les documents utiles via le bouton "Envoyer un document".'};
@@ -306,8 +324,8 @@ async function assignDossier(id,source){
   await loadAllDossiers();renderPool();renderMesDossiers();renderHistorique();showTab('mes-dossiers');
 }
 async function advanceStep(id,source,cur,total,stepNames){
-  var t=source==='demarche'?'demarches':'creations_of';
-  var col=source==='demarche'?'demarche_id':'creation_of_id';
+  var t=source==='demarche'?'demarches':'demarches';
+  var col=source==='demarche'?'demarche_id':'demarche_id';
   var nextStep = cur + 1;
   var nextStepName = stepNames ? stepNames[nextStep - 1] : '';
   var curStepName = stepNames ? stepNames[cur - 1] : '';
@@ -347,31 +365,102 @@ async function openDossierDetail(id,source){
   if(!item){alert('Introuvable.');return;}
   var type=source==='demarche'?item.type:item.of_type;var label=typeLabels[type]||type;
   var steps=source==='demarche'?(demarcheSteps[type]||[]):(getOfSteps(type, item.has_kbis));var cur=item.current_step||1;
-  var p=item.profiles||{};var docs=allDocs[id]||[];var cl=source==='demarche'?(demarcheChecklist[type]||[]):[];
+  var p=item.profiles||{};var docs=allDocs[id]||[];var formations=allFormations[id]||[];var org=item.organisme||null;var cl=source==='demarche'?(demarcheChecklist[type]||[]):[];
   var h='<h3 style="font-size:20px;font-weight:800;margin-bottom:4px;">'+label+'</h3>';
-  h+='<p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Client : <strong>'+(p.full_name||'—')+'</strong> · '+(p.email||'')+(p.phone?' · '+p.phone:'')+'</p>';
+  h+='<p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Client : <strong>'+(((p.first_name||'')+'  '+(p.last_name||'')).trim()||'—')+'</strong> · '+(p.email||'')+(p.phone?' · '+p.phone:'')+'</p>';
   // Steps
   h+='<h4 style="font-size:14px;font-weight:700;margin-bottom:8px;">📋 Étapes</h4><div style="margin-bottom:16px;">';
   steps.forEach(function(s,i){var ic='🔒';if(i+1<cur||item.status==='termine')ic='✅';else if(i+1===cur)ic='⏳';h+='<div style="padding:3px 0;font-size:13px;">'+ic+' Étape '+(i+1)+' : '+s+'</div>';});
   h+='</div>';
-  // Checklist
-  if(cl.length>0){h+='<h4 style="font-size:14px;font-weight:700;margin-bottom:8px;">📎 Checklist documents client</h4><div style="margin-bottom:16px;">';
-    cl.forEach(function(c){var f=docs.find(function(d){return d.name&&d.name.toLowerCase().indexOf(c.toLowerCase().substring(0,8))>-1;});var ic=f?(f.status==='valide'?'✅':f.status==='refuse'?'❌':'⏳'):'⬜';h+='<div class="checklist-item">'+ic+' '+c+'</div>';});
-    h+='</div>';}
-  // Documents
-  h+='<h4 style="font-size:14px;font-weight:700;margin-bottom:8px;">📄 Documents ('+docs.length+')</h4>';
+  // Organisme
+  if(source==='demarche' && org){
+    h+='<div style="margin-top:16px;padding:12px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;margin-bottom:12px;">';
+    h+='<p style="font-size:11px;font-weight:600;color:var(--muted);margin:0 0 2px;">ORGANISME</p>';
+    h+='<p style="font-size:14px;font-weight:700;margin:0;">'+org.raison_sociale+'</p>';
+    h+='<p style="font-size:11px;color:var(--muted);margin:2px 0 0;">SIRET: '+(org.siret||'--')+' | '+(org.ville||'')+'</p></div>';
+  }
+
+  // Documents deposes
+  if(source==='demarche' && docs.length>0){
+    h+='<p style="font-size:13px;font-weight:700;margin:12px 0 6px;">Documents deposes</p>';
+    docs.forEach(function(doc){
+      var color=doc.status==='valide'?'#3B6D11':doc.status==='envoye'?'#854F0B':'#A32D2D';
+      var bg=doc.status==='valide'?'#EAF3DE':doc.status==='envoye'?'#FAEEDA':'#FCEBEB';
+      var label=doc.status==='valide'?'Valide':doc.status==='envoye'?'En verification':'Manquant';
+      h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border:1px solid var(--border);border-radius:6px;margin-bottom:4px;">';
+      h+='<span style="font-size:13px;">'+(doc.doc_label||doc.label||doc.name||'Document')+'</span>';
+      h+='<span style="font-size:11px;padding:2px 8px;background:'+bg+';color:'+color+';border-radius:20px;">'+label+'</span>';
+      h+='</div>';
+    });
+  }
+
+  // Formations deposees
+  if(source==='demarche' && formations.length>0){
+    h+='<p style="font-size:13px;font-weight:700;margin:12px 0 6px;">Formations deposees</p>';
+    formations.forEach(function(f){
+      h+='<div style="padding:8px 12px;background:var(--light);border-radius:6px;margin-bottom:4px;">';
+      h+='<p style="font-size:13px;font-weight:600;margin:0;">'+f.titre+'</p>';
+      h+='<p style="font-size:11px;color:var(--muted);margin:0;">'+(f.type_certification||'').toUpperCase()+' '+(f.numero_certification||'')+' - '+(f.modalite||'')+'</p>';
+      if(f.justificatif_path) h+='<p style="font-size:10px;margin:2px 0 0;color:#2563eb;">Justificatif depose</p>';
+      h+='</div>';
+    });
+  }
+
+  // Documents + Formations (unified review)
+  h+='<h4 style="font-size:14px;font-weight:700;margin-bottom:8px;">Documents legaux</h4>';
   if(docs.length===0)h+='<p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Aucun document.</p>';
   else docs.forEach(function(doc){
-    var bg=doc.status==='valide'?'rgba(16,185,129,.08)':doc.status==='refuse'?'rgba(233,69,96,.08)':'var(--light)';
+    var bg=(doc.status==='valide')?'rgba(16,185,129,.08)':(doc.status==='refuse')?'rgba(233,69,96,.08)':'var(--light)';
     h+='<div class="doc-item" style="background:'+bg+';">';
-    h+='<div><span class="doc-name">'+doc.name+'</span><span style="font-size:10px;color:var(--muted);margin-left:8px;">'+fmtDate(doc.uploaded_at)+'</span>';
-    if(doc.expert_comment)h+='<div style="font-size:11px;font-style:italic;color:var(--muted);margin-top:2px;">💬 '+doc.expert_comment+'</div>';
-    h+='</div><div style="display:flex;gap:4px;">';
-    if(doc.file_path)h+='<button class="action-btn" onclick="viewDoc(\''+doc.file_path+'\')">👁</button>';
-    if(doc.status==='en_attente')h+='<button class="action-btn validate" onclick="validateDoc(\''+doc.id+'\',true)">✅</button><button class="action-btn reject" onclick="validateDoc(\''+doc.id+'\',false)">❌</button>';
-    else h+='<span style="font-size:11px;padding:4px 8px;border-radius:4px;background:'+(doc.status==='valide'?'rgba(16,185,129,.1)':'rgba(233,69,96,.1)')+';color:'+(doc.status==='valide'?'var(--success)':'var(--accent)')+';">'+(doc.status==='valide'?'✅ Validé':'❌ Refusé')+'</span>';
-    h+='</div></div>';});
-  // Form data
+    h+='<div><span class="doc-name">'+(doc.doc_label||'Document')+'</span>';
+    if(doc.expert_comment)h+='<div style="font-size:11px;font-style:italic;color:var(--muted);margin-top:2px;">'+doc.expert_comment+'</div>';
+    h+='</div><div style="display:flex;gap:4px;align-items:center;">';
+    if(doc.file_path)h+='<button class="action-btn" onclick="viewDoc(\''+doc.file_path+'\')">Voir</button>';
+    if(doc.status==='envoye'||doc.status==='en_attente')h+='<button class="action-btn validate" onclick="validateDoc(\''+doc.id+'\',true)">Valider</button><button class="action-btn reject" onclick="validateDoc(\''+doc.id+'\',false)">Refuser</button>';
+    else h+='<span style="font-size:11px;padding:4px 8px;border-radius:4px;background:'+(doc.status==='valide'?'rgba(16,185,129,.1)':'rgba(233,69,96,.1)')+';color:'+(doc.status==='valide'?'var(--success)':'var(--accent)')+';">'+(doc.status==='valide'?'Valide':'Refuse')+'</span>';
+    h+='</div></div>';
+  });
+
+  // Formations review
+  if(formations.length>0){
+    h+='<h4 style="font-size:14px;font-weight:700;margin:16px 0 8px;">Formations deposees</h4>';
+    formations.forEach(function(f){
+      var fbg=(f.justificatif_status==='valide')?'rgba(16,185,129,.08)':(f.justificatif_status==='refuse')?'rgba(233,69,96,.08)':'var(--light)';
+      h+='<div class="doc-item" style="background:'+fbg+';">';
+      h+='<div><span class="doc-name">'+f.titre+'</span>';
+      h+='<div style="font-size:11px;color:var(--muted);">'+(f.type_certification||'').toUpperCase()+' '+(f.numero_certification||'')+' - '+(f.modalite||'')+'</div>';
+      h+='</div><div style="display:flex;gap:4px;align-items:center;">';
+      if(f.justificatif_path)h+='<button class="action-btn" onclick="viewDoc(\''+f.justificatif_path+'\')">Voir justif</button>';
+      if(f.justificatif_status==='envoye'||f.justificatif_status==='manquant'){
+        if(f.justificatif_path)h+='<button class="action-btn validate" onclick="validateFormation(\''+f.id+'\',true)">Valider</button><button class="action-btn reject" onclick="validateFormation(\''+f.id+'\',false)">Refuser</button>';
+        else h+='<span style="font-size:11px;color:var(--muted);">Pas de justificatif requis</span>';
+      } else {
+        h+='<span style="font-size:11px;padding:4px 8px;border-radius:4px;background:'+(f.justificatif_status==='valide'?'rgba(16,185,129,.1)':'rgba(233,69,96,.1)')+';color:'+(f.justificatif_status==='valide'?'var(--success)':'var(--accent)')+';">'+(f.justificatif_status==='valide'?'Valide':'Refuse')+'</span>';
+      }
+      h+='</div></div>';
+    });
+  }
+
+  // Expert action: all validated -> generate form, any refused -> back to step 1
+  if(source==='demarche' && type==='edof' && item.assigned_expert_id===expertId && item.current_step===2){
+    var allDocsOk=docs.every(function(d){return d.status==='valide';});
+    var anyRefused=docs.some(function(d){return d.status==='refuse';});
+    var allFormationsOk=formations.length>0 && formations.every(function(f){return !f.justificatif_path || f.justificatif_status==='valide';});
+    var anyFormRefused=formations.some(function(f){return f.justificatif_status==='refuse';});
+    h+='<div style="margin:16px 0;padding:14px;border-radius:8px;'+(anyRefused||anyFormRefused?'background:#fef2f2;border:1px solid #fecaca;':'allDocsOk&&allFormationsOk'?'background:#f0fdf4;border:1px solid #bbf7d0;':'background:var(--light);border:1px solid var(--border);')+'">';
+    if(anyRefused||anyFormRefused){
+      h+='<p style="font-size:13px;font-weight:700;color:#991b1b;margin:0 0 8px;">Des documents/formations ont ete refuses</p>';
+      h+='<button class="btn" style="background:#ef4444;color:#fff;padding:10px 20px;font-size:13px;border:none;border-radius:8px;cursor:pointer;" onclick="rejectDossierToStep1(\''+item.id+'\')">Renvoyer en etape 1 (correction client)</button>';
+    } else if(allDocsOk && allFormationsOk){
+      h+='<p style="font-size:13px;font-weight:700;color:#166534;margin:0 0 8px;">Tous les documents et formations sont valides</p>';
+      h+='<button class="btn" style="background:#10b981;color:#fff;padding:10px 20px;font-size:13px;border:none;border-radius:8px;cursor:pointer;" onclick="advanceToStep3(\''+item.id+'\')">Generer le formulaire et passer en etape 3</button>';
+    } else {
+      h+='<p style="font-size:13px;color:var(--muted);margin:0;">Validez ou refusez tous les documents et formations pour continuer.</p>';
+    }
+    h+='</div>';
+  }
+
+    // Form data
   if(item.form_data&&Object.keys(item.form_data).length>0){h+='<h4 style="font-size:14px;font-weight:700;margin:16px 0 8px;">📝 Infos formulaire</h4><div style="background:var(--light);border-radius:8px;padding:12px;font-size:12px;">';
     Object.keys(item.form_data).forEach(function(k){var v=item.form_data[k];if(v&&typeof v!=='object')h+='<div><strong>'+k.replace(/_/g,' ')+'</strong> : '+v+'</div>';});h+='</div>';}
   // Actions
@@ -379,7 +468,7 @@ async function openDossierDetail(id,source){
   var nextStepName = steps[cur] || '';
   var isCurValidation = isValidationStep(curStepName);
   h+='<div class="action-btns" style="margin-top:16px;">';
-  if(item.expert_id===expertId&&item.status!=='termine'){
+  if(item.assigned_expert_id===expertId&&item.status!=='termine'){
     if(isCurValidation){
       h+='<div style="background:#f3e8ff;border:1px solid #7c3aed;border-radius:8px;padding:12px;font-size:13px;color:#7c3aed;font-weight:600;">⏳ En attente de validation client : ' + curStepName + '</div>';
     } else if(curStepName !== 'Terminé'){
@@ -400,28 +489,49 @@ async function viewDoc(fp){try{var url=await getDocumentUrl(fp);if(url)window.op
 async function validateDoc(docId,ok){
   var comment='';
   if(!ok){
-    comment=prompt('Motif du refus (sera visible par le client) :');
+    comment=prompt('Motif du refus (visible par le client) :');
     if(comment===null)return;
-    if(!comment.trim()){alert('⚠️ Vous devez indiquer un motif de refus.');return;}
+    if(!comment.trim()){alert('Indiquez un motif de refus.');return;}
   }
-  var{data:doc}=await sb.from('documents').select('*').eq('id',docId).single();
-  var{error}=await sb.from('documents').update({status:ok?'valide':'refuse',expert_comment:comment||null}).eq('id',docId);
-  if(error){alert('❌ '+error.message);return;}
-  
-  // Send message in the dossier thread
-  if(doc){
-    var msgData={sender_id:expertId, content: ok 
-      ? '✅ Document accepté : "' + (doc.name||'document') + '"'
-      : '❌ Document refusé : "' + (doc.name||'document') + '"\n\nMotif : ' + comment + '\n\nMerci de renvoyer le document corrigé.'
-    };
-    if(doc.demarche_id) msgData.demarche_id = doc.demarche_id;
-    if(doc.creation_of_id) msgData.creation_of_id = doc.creation_of_id;
-    await sb.from('messages').insert(msgData);
-  }
-  
-  alert(ok?'✅ Document validé.':'❌ Document refusé — le client a été notifié.');
-  await loadAllDossiers();renderMesDossiers();closeDossierModal();
+  var{error}=await sb.from('demarche_documents').update({status:ok?'valide':'refuse',expert_comment:comment||null}).eq('id',docId);
+  if(error){alert(error.message);return;}
+  alert(ok?'Document valide.':'Document refuse.');
+  await loadAllDossiers();
+  var item=allDemarches.find(function(d){return d.assigned_expert_id===expertId;});
+  if(item) openDossierDetail(item.id,'demarche');
+  else closeDossierModal();
 }
+
+async function validateFormation(fId,ok){
+  var comment='';
+  if(!ok){
+    comment=prompt('Motif du refus :');
+    if(comment===null)return;
+    if(!comment.trim()){alert('Indiquez un motif.');return;}
+  }
+  var{error}=await sb.from('demarche_formations').update({justificatif_status:ok?'valide':'refuse'}).eq('id',fId);
+  if(error){alert(error.message);return;}
+  alert(ok?'Formation validee.':'Formation refusee.');
+  await loadAllDossiers();
+  var item=allDemarches.find(function(d){return d.assigned_expert_id===expertId;});
+  if(item) openDossierDetail(item.id,'demarche');
+  else closeDossierModal();
+}
+
+async function rejectDossierToStep1(demId){
+  if(!confirm('Renvoyer ce dossier en etape 1 pour correction client ?')) return;
+  await sb.from('demarches').update({current_step:1,status:'en_cours',updated_at:new Date().toISOString()}).eq('id',demId);
+  alert('Dossier renvoye au client pour correction.');
+  await loadAllDossiers();renderPool();renderMesDossiers();closeDossierModal();
+}
+
+async function advanceToStep3(demId){
+  if(!confirm('Confirmer : tous les documents sont valides. Passer en etape 3 (Depot formulaire) ?')) return;
+  await sb.from('demarches').update({current_step:3,status:'en_cours',updated_at:new Date().toISOString()}).eq('id',demId);
+  alert('Dossier passe en etape 3 !');
+  await loadAllDossiers();renderPool();renderMesDossiers();closeDossierModal();
+}
+
 
 // MESSAGERIE
 var expMsgCtx={id:null,s:null};
@@ -429,7 +539,7 @@ async function openExpertMessages(id,source){expMsgCtx={id:id,s:source};document
   document.getElementById('exp-msg-list').innerHTML='<p style="text-align:center;color:var(--muted);">Chargement...</p>';
   document.getElementById('modal-exp-messages').classList.add('open');
   var col=source==='demarche'?'demarche_id':'creation_of_id';
-  var{data:msgs}=await sb.from('messages').select('*, profiles:sender_id(full_name,is_pro)').eq(col,id).order('created_at',{ascending:true});
+  var{data:msgs}=await sb.from('messages').select('*, profiles:sender_id(first_name,last_name,is_pro)').eq(col,id).order('created_at',{ascending:true});
   
   // Check if dossier is closed
   var item = null;
@@ -445,7 +555,7 @@ async function openExpertMessages(id,source){expMsgCtx={id:id,s:source};document
   
   var c=document.getElementById('exp-msg-list');
   if(!msgs||msgs.length===0){c.innerHTML='<p style="text-align:center;color:var(--muted);padding:20px;">Aucun message.</p>';return;}
-  var h='';msgs.forEach(function(m){var me=m.sender_id===expertId;var nm=me?'Vous (Expert)':(m.profiles?(m.profiles.full_name||'Client'):'Client');
+  var h='';msgs.forEach(function(m){var me=m.sender_id===expertId;var nm=me?'Vous (Expert)':(m.profiles?(((m.profiles.first_name||'')+' '+(m.profiles.last_name||'')).trim()||'Client'):'Client');
     var dt=new Date(m.created_at).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
     var al=me?'flex-end':'flex-start';
     var bg=me?'rgba(99,102,241,.08)':'rgba(233,69,96,.08)';
@@ -476,7 +586,7 @@ async function submitExpertUpload(){
 // PROFIL
 async function saveExpertProfile(){
   var pr=document.getElementById('exp-prenom').value.trim();var nm=document.getElementById('exp-nom').value.trim();var tel=document.getElementById('exp-tel').value.trim();
-  var{error}=await sb.from('profiles').update({first_name:pr,last_name:nm,full_name:pr+' '+nm,phone:tel}).eq('id',expertId);
+  var{error}=await sb.from('profiles').update({first_name:pr,last_name:nm,phone:tel}).eq('id',expertId);
   if(error){alert('❌ '+error.message);return;}document.getElementById('exp-success').style.display='';document.getElementById('expert-name').textContent=pr+' '+nm;
   setTimeout(function(){document.getElementById('exp-success').style.display='none';},3000);}
 
@@ -486,7 +596,7 @@ async function saveExpertProfile(){
   var profile=await getProfile();
   if(!profile||(!profile.is_pro&&profile.profile_type!=='expert'&&profile.profile_type!=='admin')){alert('⚠️ Accès réservé aux experts.');window.location.href='dashboard.html';return;}
   expertId=user.id;
-  var fn=profile.full_name||(profile.first_name||'')+' '+(profile.last_name||'');
+  var fn=((profile.first_name||'')+' '+(profile.last_name||'')).trim();
   document.getElementById('expert-name').textContent=fn;
   document.getElementById('expert-role').textContent=profile.profile_type==='admin'?'⚡ Super Admin':'Expert conformité';
   document.getElementById('expert-welcome').textContent=profile.first_name||fn;
@@ -508,9 +618,9 @@ async function saveExpertProfile(){
 // ============================
 async function loadPoolStagiaires(){
   var { data: dossiers } = await sb.from('dossiers_financement')
-    .select('*, stagiaire:stagiaire_id(nom, prenom, email), formateur:user_id(full_name, email)')
+    .select('*, stagiaire:stagiaire_id(nom, prenom, email), formateur:user_id(first_name, last_name, email)')
     .eq('expert_requested', true)
-    .is('expert_id', null)
+    .is('assigned_expert_id', null)
     .order('created_at',{ascending:false});
 
   var badge = document.querySelectorAll('#pool-stag-badge');
@@ -531,7 +641,7 @@ async function loadPoolStagiaires(){
     h += '<div class="dossier-card" style="border-left:3px solid #7c3aed;">' +
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
       '<div><h4>🎓 ' + stag.prenom + ' ' + stag.nom + ' — ' + dispName + '</h4>' +
-      '<p>Formateur : ' + (form.full_name || form.email) + ' · ' + date + '</p>' +
+      '<p>Formateur : ' + (((form.first_name||'')+' '+(form.last_name||'')).trim() || form.email) + ' · ' + date + '</p>' +
       (d.formation_title ? '<p style="font-size:12px;color:var(--muted);">📚 ' + d.formation_title + '</p>' : '') + '</div>' +
       '<span class="status-badge status-review">Expert demandé</span></div>' +
       '<div class="action-btns" style="margin-top:10px;">' +
@@ -544,7 +654,7 @@ async function loadPoolStagiaires(){
 
 async function takeFinDossier(dossierId){
   if(!confirm('Prendre en charge ce dossier de financement ?')) return;
-  await sb.from('dossiers_financement').update({ expert_id: expertId, status: 'en_preparation' }).eq('id', dossierId);
+  await sb.from('dossiers_financement').update({ assigned_expert_id: expertId, status: 'en_preparation' }).eq('id', dossierId);
   await sb.from('messages_financement').insert({
     dossier_id: dossierId, sender_type: 'expert', sender_name: 'Expert',
     content: '👋 Un expert a pris en charge la préparation de vos documents de financement.'
@@ -565,7 +675,7 @@ var expertMessages = [];
 
 async function loadExpertMessages(){
   var { data: msgs } = await sb.from('admin_messages')
-    .select('*, sender:sender_id(full_name, email), recipient:recipient_id(full_name, email)')
+    .select('*, sender:sender_id(first_name, last_name, email), recipient:recipient_id(first_name, last_name, email)')
     .or('sender_id.eq.' + expertId + ',recipient_id.eq.' + expertId)
     .order('created_at',{ascending:false});
   expertMessages = msgs || [];
@@ -580,7 +690,7 @@ async function loadExpertMessages(){
   var html = '';
   expertMessages.forEach(function(m){
     var isReceived = m.recipient_id === expertId;
-    var otherName = isReceived ? (m.sender ? m.sender.full_name || m.sender.email : 'Admin') : (m.recipient ? m.recipient.full_name || m.recipient.email : 'Admin');
+    var otherName = isReceived ? (m.sender ? ((m.sender.first_name||'')+' '+(m.sender.last_name||'')).trim() || m.sender.email : 'Admin') : (m.recipient ? ((m.recipient.first_name||'')+' '+(m.recipient.last_name||'')).trim() || m.recipient.email : 'Admin');
     var date = new Date(m.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
     var unread = isReceived && !m.is_read;
 
@@ -602,7 +712,7 @@ async function openExpertMsgDetail(msgId){
     msg.is_read = true;
   }
   var isReceived = msg.recipient_id === expertId;
-  var otherName = isReceived ? (msg.sender ? msg.sender.full_name || msg.sender.email : 'Admin') : (msg.recipient ? msg.recipient.full_name || msg.recipient.email : 'Admin');
+  var otherName = isReceived ? (msg.sender ? ((msg.sender.first_name||'')+' '+(msg.sender.last_name||'')).trim() || msg.sender.email : 'Admin') : (msg.recipient ? ((msg.recipient.first_name||'')+' '+(msg.recipient.last_name||'')).trim() || msg.recipient.email : 'Admin');
   var date = new Date(msg.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
 
   document.getElementById('expert-msg-detail-body').innerHTML =

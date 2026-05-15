@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Services — lesformateurs.online</title>
-<meta name="description" content="27 services pour les organismes de formation : création OF, Qualiopi, NDA, EDOF, habilitations, sites, LMS, agents IA. Prix bas, exécution rapide.">
+<meta name="description" content="22 services pour les organismes de formation : création OF, Qualiopi, NDA, EDOF, habilitations, sites, LMS, agents IA. Prix bas, exécution rapide.">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -135,18 +135,18 @@ body{font-family:'DM Sans',-apple-system,sans-serif;color:#1a1a1a;background:#FA
   <div class="ml-nav-links" id="navLinks">
     <a href="formation.html" class="active">Services</a>
     <a href="creer-of.html">Cr&eacute;er mon OF</a>
-    <a href="creer-certifier.html">Cr&eacute;er / Certifier</a>
+    <a href="recherche-habilitation.html" style="color:#1D9E75;font-weight:600;">Habilitation</a>
     <a href="se-former.html">Se former</a>
     <a href="devenir-expert.html" style="color:#D85A30;font-weight:600;">Recrutement</a>
-    <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;">Connexion</a>
-    <a href="dashboard.html" class="ml-nav-cta btn-dashboard hidden">Mon espace</a>
+    <a href="#" id="lfo-btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;">Connexion</a>
+    <a href="dashboard.html" id="lfo-btn-compte" style="display:none;background:#1a1a1a;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;">Mon compte</a>
   </div>
   <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- Hero compact -->
 <div class="hero">
-  <div class="hero-eyebrow">27 services pour votre organisme</div>
+  <div class="hero-eyebrow">22 services pour votre organisme</div>
   <h1>Des prix bas. Une ex&eacute;cution <span>rapide et pr&eacute;cise</span>.</h1>
   <p>Chaque d&eacute;marche est trait&eacute;e par un expert d&eacute;di&eacute; avec un taux de r&eacute;ussite de 97%.</p>
 </div>
@@ -154,20 +154,20 @@ body{font-family:'DM Sans',-apple-system,sans-serif;color:#1a1a1a;background:#FA
 <!-- Stats band -->
 <div class="stats-band" id="stats-band">
   <div class="stat" style="animation-delay:.2s">
-    <div class="stat-value" data-target="27">0</div>
+    <div class="stat-value" data-target="22">0</div>
     <div class="stat-label">services disponibles</div>
   </div>
   <div class="stat" style="animation-delay:.26s">
-    <div class="stat-value" data-target="6">0</div>
-    <div class="stat-label">semaines en moyenne</div>
+    <div class="stat-value" data-target="44">0</div>
+    <div class="stat-label">+ experts</div>
   </div>
   <div class="stat" style="animation-delay:.32s">
-    <div class="stat-value" data-target="149">0</div>
-    <div class="stat-label">&euro; &mdash; &agrave; partir de</div>
+    <div class="stat-value" data-target="349">0</div>
+    <div class="stat-label">+ clients trait&eacute;s</div>
   </div>
   <div class="stat" style="animation-delay:.38s">
     <div class="stat-value" data-target="97">0</div>
-    <div class="stat-label">% de taux de r&eacute;ussite</div>
+    <div class="stat-label">% de taux de satisfaction</div>
   </div>
 </div>
 
@@ -377,7 +377,7 @@ body{font-family:'DM Sans',-apple-system,sans-serif;color:#1a1a1a;background:#FA
   <p>Cr&eacute;ez votre compte et lancez votre premi&egrave;re d&eacute;marche en quelques minutes. Paiement s&eacute;curis&eacute;, expert d&eacute;di&eacute;, r&eacute;sultat garanti.</p>
   <div class="cta-buttons">
     <a href="creer-of.html" class="cta-btn-primary" style="text-decoration:none;display:inline-block;">Cr&eacute;er mon OF</a>
-    <a href="https://cal.com/lesformateurs" target="_blank" class="cta-btn-secondary" style="text-decoration:none;display:inline-block;">Prendre RDV</a>
+    <a href="#" onclick="showExpertPopup();return false;" class="cta-btn-secondary" style="text-decoration:none;display:inline-block;cursor:pointer;">Prendre RDV</a>
   </div>
 </div>
 
@@ -392,15 +392,17 @@ body{font-family:'DM Sans',-apple-system,sans-serif;color:#1a1a1a;background:#FA
     <div class="ml-footer-col">
       <h4>Services</h4>
       <a href="formation.html">Services</a>
-      <a href="conformite.html">Conformit&eacute;</a>
-      <a href="creer-of.html">Cr&eacute;er mon OF</a>
+      <a href="creer-of.html">Créer mon OF</a>
+      <a href="recherche-habilitation.html" style="color:#1D9E75;font-weight:600;">Habilitation</a>
       <a href="se-former.html">Se former</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="devenir-expert.html">Recrutement</a>
     </div>
     <div class="ml-footer-col">
-      <h4>L&eacute;gal</h4>
-      <a href="mentions-legales.html">Mentions l&eacute;gales</a>
+      <h4>Légal</h4>
+      <a href="mentions-legales.html">Mentions légales</a>
       <a href="cgv.html">CGV</a>
-      <a href="politique-confidentialite.html">Confidentialit&eacute;</a>
+      <a href="politique-confidentialite.html">Confidentialité</a>
     </div>
   </div>
   <div class="ml-footer-bottom">&copy; 2026 lesformateurs.online</div>
@@ -429,8 +431,8 @@ var CATEGORIES = [
   {
     id: 'demarches', color: '#7F77DD', colorLight: '#EEEDFE',
     items: [
-      { name: "Habilitation RS/RNCP", desc: "\u00catre habilit\u00e9 par un certificateur \u00e0 dispenser une certification", price: "490\u20ac+", time: "2 \u00e0 8 semaines", tag: "Nouveau", link: "service-habilitation.html" },
-      { name: "Centre certifi\u00e9", desc: "Devenir certificateur enregistr\u00e9 aupr\u00e8s de France Comp\u00e9tences", price: "5 990\u20ac+", time: "6 mois", tag: null, link: "service-centre-certifie.html" },
+      { name: "Habilitation RS/RNCP", desc: "\u00catre habilit\u00e9 par un certificateur \u00e0 dispenser une certification", price: "990\u20ac+", time: "2 \u00e0 8 semaines", tag: "Nouveau", link: "service-habilitation.html" },
+      { name: "Devenir certificateur RS/RNCP", desc: "Cr\u00e9ez votre propre certification \u2014 dossier mont\u00e9 sur 12 mois, 24 domaines couverts", price: "6 990 \u2192 25 000\u20ac", time: "12 mois", tag: null, link: "creer-certifier.html" },
       { name: "Centre d\u2019examen", desc: "Devenir centre d\u2019examen agr\u00e9\u00e9 pour des certifications", price: "1 990\u20ac", time: "3 mois", tag: null, link: "service-centre-examen.html" },
       { name: "Agr\u00e9ment pr\u00e9fectoral", desc: "Auto-\u00e9cole, SSIAP, CACES, habilitations \u00e9lectriques", price: "690\u20ac", time: "2 mois", tag: null, link: "service-agrement-prefectoral.html" },
       { name: "Contr\u00f4le DREETS", desc: "Mise en conformit\u00e9 suite \u00e0 un contr\u00f4le \u2014 r\u00e9actif ou anticip\u00e9", price: "890\u20ac", time: "4 semaines", tag: null, link: "service-controle.html" },
@@ -582,26 +584,34 @@ var statsObserver = new IntersectionObserver(function(entries){
 statsObserver.observe(document.getElementById('stats-band'));
 
 // =====================================================================
-// AUTH STATE
-// =====================================================================
-(async function(){
-  try {
-    var sb = window.__lfoSupabase;
-    if(!sb) return;
-    var r = await sb.auth.getUser();
-    if(r.data && r.data.user){
-      var login = document.querySelector('.btn-login');
-      var dash = document.querySelector('.btn-dashboard');
-      if(login) login.classList.add('hidden');
-      if(dash) dash.classList.remove('hidden');
-    }
-  } catch(e){}
-})();
-
-// =====================================================================
 // INIT
 // =====================================================================
 renderCards();
 </script>
+<script>
+// AUTH STATE
+(async function(){
+  try {
+    var user = await getUser();
+    var btnLogin = document.getElementById('lfo-btn-login');
+    var btnCompte = document.getElementById('lfo-btn-compte');
+    console.log('[LFO AUTH] user:', user ? user.email : 'null');
+    console.log('[LFO AUTH] btnLogin:', btnLogin);
+    console.log('[LFO AUTH] btnCompte:', btnCompte);
+    if(user){
+      if(btnLogin) btnLogin.style.display = 'none';
+      if(btnCompte) btnCompte.style.display = 'inline-block';
+      console.log('[LFO AUTH] switched to Mon compte');
+    } else {
+      if(btnLogin) btnLogin.style.display = 'inline-block';
+      if(btnCompte) btnCompte.style.display = 'none';
+      console.log('[LFO AUTH] showing Connexion');
+    }
+  } catch(e){ console.warn('[LFO AUTH] error:', e); }
+})();
+</script>
+<script src="/expert-popup.js"></script>
+<script src="js/cart.js" defer></script>
+<script src="js/cart-nav.js" defer></script>
 </body>
 </html>

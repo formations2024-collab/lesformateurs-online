@@ -1,137 +1,256 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B6XVYRVT9D');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Conditions Générales de Vente — lesformateurs.online</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<meta name="description" content="Conditions Générales de Vente — services de conformité, création d'organismes, marketplace et formation.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/mono-light.css">
 <style>
-.legal-content{max-width:860px;margin:0 auto;padding:60px 24px 80px;}
-.legal-content h1{font-size:32px;font-weight:900;color:var(--primary);margin-bottom:8px;}
-.legal-content .subtitle{font-size:14px;color:var(--muted);margin-bottom:40px;}
-.legal-content h2{font-size:20px;font-weight:800;color:var(--primary);margin:36px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--light);}
-.legal-content h3{font-size:16px;font-weight:700;color:var(--primary);margin:24px 0 8px;}
-.legal-content p,.legal-content li{font-size:15px;line-height:1.8;color:var(--text);margin-bottom:10px;}
-.legal-content ul{padding-left:20px;margin-bottom:16px;}
-.legal-content a{color:var(--accent);}
-.legal-content table{width:100%;border-collapse:collapse;margin:16px 0;}
-.legal-content th,.legal-content td{padding:10px 14px;border:1px solid #e0e0e0;font-size:13px;text-align:left;}
-.legal-content th{background:var(--light);font-weight:700;}
+  body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; background:#FEFEFE; }
+  .legal-article { max-width: 860px; margin: 0 auto; padding: 60px 20px; }
+  .legal-article h1 { font-size: 36px; font-weight: 800; color: #1a1a1a; letter-spacing: -0.5px; }
+  .legal-article .legal-sub { color: #888; font-size: 14px; margin-top: 8px; margin-bottom: 40px; }
+  .legal-article h2 { font-size: 22px; font-weight: 700; color: #1a1a1a; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; margin: 40px 0 16px; }
+  .legal-article h3 { font-size: 16px; font-weight: 600; color: #1a1a1a; margin: 24px 0 12px; }
+  .legal-article p, .legal-article li { color: #333; font-size: 15px; line-height: 1.7; margin-bottom: 10px; }
+  .legal-article ul { padding-left: 22px; margin-bottom: 14px; }
+  .legal-article a { color: #D85A30; text-decoration: none; }
+  .legal-article a:hover { text-decoration: underline; }
+  .legal-article strong { color: #1a1a1a; }
+  .legal-article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; }
+  .legal-article th { background: #fafaf8; font-weight: 600; padding: 12px 16px; text-align: left; font-size: 14px; color: #1a1a1a; border-bottom: 1px solid #f0f0f0; }
+  .legal-article td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #333; vertical-align: top; }
 </style>
 </head>
 <body>
-<nav class="navbar">
-  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
-  <div class="nav-links" id="navLinks">
-    <a href="missions.html">Missions</a>
-    <a href="conformite.html">Conformité</a>
+
+<nav class="ml-nav">
+  <a href="index.html" class="ml-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="ml-nav-links" id="navLinks">
+    <a href="formation.html">Services</a>
     <a href="creer-of.html">Créer mon OF</a>
+    <a href="recherche-habilitation.html" style="color:#1D9E75;font-weight:600;">Habilitation</a>
     <a href="se-former.html">Se former</a>
+    <a href="devenir-expert.html" style="color:#D85A30;font-weight:600;">Recrutement</a>
+
+    <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;">Connexion</a>
+    <a href="dashboard.html" class="ml-nav-cta btn-dashboard hidden">Mon espace</a>
   </div>
+  <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="legal-content">
+<article class="legal-article">
   <h1>Conditions Générales de Vente</h1>
-  <p class="subtitle">Dernière mise à jour : 20 mars 2026</p>
+  <p class="legal-sub">Dernière mise à jour : 16 avril 2026</p>
 
   <h2>Article 1 — Objet</h2>
-  <p>Les présentes Conditions Générales de Vente (CGV) régissent les relations contractuelles entre la société EXPERIENCE PROD, SASU au capital de 15 000 €, immatriculée au RCS de Nanterre sous le numéro 982 828 774, dont le siège social est situé au 99 avenue Achille Peretti, 92200 Neuilly-sur-Seine (ci-après « le Prestataire »), et toute personne physique ou morale effectuant un achat sur le site lesformateurs.online (ci-après « le Client »).</p>
-  <p>Les services proposés comprennent : des prestations d'accompagnement à la conformité des organismes de formation, la création d'organismes de formation, la formation professionnelle en ligne, la mise en relation entre formateurs et entreprises, et des services connexes.</p>
+  <p>Les présentes Conditions Générales de Vente (CGV) régissent les relations contractuelles entre la société <strong>EXPERIENCE PROD</strong>, SASU au capital de 15 000 €, immatriculée au RCS de Nanterre sous le numéro 982 828 774, dont le siège social est situé au 99 avenue Achille Peretti, 92200 Neuilly-sur-Seine (ci-après « le Prestataire »), et toute personne physique ou morale (ci-après « le Client ») effectuant un achat ou utilisant les services proposés sur le site <a href="https://lesformateurs.online">lesformateurs.online</a>.</p>
+  <p>Les services proposés comprennent notamment : l'accompagnement à la conformité des organismes de formation (NDA, EDOF, Qualiopi, OPCO, France Travail, UAI, DREETS), la création d'organismes de formation et de formations, l'accompagnement RS/RNCP auprès de France Compétences, la marketplace d'achat et de revente de services entre organismes, la formation professionnelle en ligne, et les services connexes d'expertise, d'audit et de mise en relation.</p>
 
   <h2>Article 2 — Acceptation des CGV</h2>
-  <p>Toute commande passée sur le site implique l'acceptation pleine et entière des présentes CGV. Le Client reconnaît en avoir pris connaissance avant de passer commande.</p>
+  <p>Toute commande, souscription ou utilisation d'un service proposé par le Prestataire implique l'acceptation pleine, entière et sans réserve des présentes CGV. Le Client reconnaît avoir pris connaissance des CGV avant toute commande et déclare les accepter en cochant la case prévue à cet effet lors de la validation du paiement ou de la signature du devis.</p>
+  <p>Les présentes CGV prévalent sur toutes autres conditions générales ou particulières non expressément agréées par le Prestataire. Le Prestataire se réserve le droit de modifier les CGV à tout moment ; les conditions applicables sont celles en vigueur à la date de la commande.</p>
 
   <h2>Article 3 — Services et tarifs</h2>
+  <p>Les tarifs sont indiqués en euros TTC. Le Prestataire applique une remise de <strong>-10%</strong> sur l'ensemble de ses services aux membres actifs de la communauté LFO (adhésion annuelle en cours de validité).</p>
+
   <h3>3.1 Prestations de conformité</h3>
   <table>
-    <tr><th>Service</th><th>Tarif TTC</th></tr>
-    <tr><td>Obtention du NDA (Numéro de Déclaration d'Activité)</td><td>199 €</td></tr>
-    <tr><td>Obtention du numéro UAI</td><td>149 €</td></tr>
-    <tr><td>Accompagnement certification Qualiopi</td><td>490 €</td></tr>
-    <tr><td>Inscription EDOF / Mon Compte Formation</td><td>290 €</td></tr>
-    <tr><td>Référencement France Travail</td><td>129 €</td></tr>
-    <tr><td>Inscription RS/RNCP</td><td>390 €</td></tr>
-    <tr><td>Référencement OPCO (unitaire)</td><td>290 €</td></tr>
-    <tr><td>Référencement OPCO (pack 11 OPCO)</td><td>2 990 €</td></tr>
-    <tr><td>Agent IA de gestion d'OF</td><td>À partir de 399 €</td></tr>
+    <thead>
+      <tr><th>Service</th><th>Tarif TTC</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Obtention du NDA (Numéro de Déclaration d'Activité)</td><td>290 €</td></tr>
+      <tr><td>Inscription EDOF / Mon Compte Formation</td><td>490 €</td></tr>
+      <tr><td>Accompagnement certification Qualiopi</td><td>990 €</td></tr>
+      <tr><td>Référencement OPCO (unitaire)</td><td>290 €</td></tr>
+      <tr><td>Référencement France Travail</td><td>290 €</td></tr>
+      <tr><td>Obtention du numéro UAI</td><td>149 €</td></tr>
+      <tr><td>Habilitation Centre d'examen</td><td>Sur devis</td></tr>
+      <tr><td>Agrément préfectoral</td><td>Sur devis</td></tr>
+      <tr><td>Accompagnement Contrôle DREETS</td><td>890 €</td></tr>
+    </tbody>
   </table>
 
-  <h3>3.2 Création d'organisme de formation</h3>
+  <h3>3.2 Création et développement</h3>
   <table>
-    <tr><th>Type d'OF</th><th>Tarif TTC</th></tr>
-    <tr><td>Action de formation</td><td>990 €</td></tr>
-    <tr><td>CFA</td><td>2 990 €</td></tr>
-    <tr><td>Bilan de compétences</td><td>990 €</td></tr>
-    <tr><td>VAE</td><td>990 €</td></tr>
-    <tr><td>Formation des élus</td><td>1 490 €</td></tr>
-    <tr><td>OF spécialisé Agents IA</td><td>2 790 €</td></tr>
-  </table>
-  <p>Options complémentaires disponibles : Pack Agents IA (500 €), Inscription EDOF (290 €), Domiciliation spécialisée (190 €/mois), Pack 11 OPCO (2 990 €), Site web vitrine (390 €).</p>
-
-  <h3>3.3 Formation professionnelle</h3>
-  <table>
-    <tr><th>Formation</th><th>Tarif TTC</th></tr>
-    <tr><td>Formation Formateur Professionnel (7 modules, 42 leçons, ~21h)</td><td>1 490 €</td></tr>
+    <thead>
+      <tr><th>Service</th><th>Tarif TTC</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Création d'organisme de formation</td><td>À partir de 1 490 €</td></tr>
+      <tr><td>Création de formation (ingénierie pédagogique complète)</td><td>À partir de 990 €</td></tr>
+      <tr><td>Packs conformité (combinés NDA + EDOF + Qualiopi + OPCO)</td><td>Prix remisé selon pack</td></tr>
+    </tbody>
   </table>
 
-  <h3>3.4 Annonces de missions</h3>
+  <h3>3.3 RS / RNCP — France Compétences</h3>
   <table>
-    <tr><th>Service</th><th>Tarif TTC</th></tr>
-    <tr><td>Publication d'annonce (gratuite)</td><td>0 €</td></tr>
-    <tr><td>Mise en avant Premium</td><td>29 €</td></tr>
+    <thead>
+      <tr><th>Service</th><th>Tarif TTC</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Analyse de faisabilité par agent IA</td><td>Gratuit</td></tr>
+      <tr><td>Habilitation à délivrer une certification</td><td>À partir de 990 €</td></tr>
+      <tr><td>Création et enregistrement d'une certification RS ou RNCP</td><td>À partir de 5 990 €</td></tr>
+    </tbody>
   </table>
-  <p>Les tarifs sont indiqués en euros TTC. Le Prestataire bénéficie d'une exonération de TVA au titre de l'article 261.4.4° du Code Général des Impôts (sous réserve d'obtention de l'attestation). Les tarifs peuvent être modifiés à tout moment ; les tarifs applicables sont ceux en vigueur au moment de la commande.</p>
+
+  <h3>3.4 Marketplace — Achat / Revente</h3>
+  <p>Le Prestataire opère une marketplace permettant aux organismes de formation d'acheter ou de céder des services, des certifications habilitées, des parcours pédagogiques et des portefeuilles clients.</p>
+  <p>Commissions appliquées par le Prestataire :</p>
+  <ul>
+    <li><strong>7%</strong> du montant brut de la transaction côté acheteur</li>
+    <li><strong>10%</strong> du montant brut de la transaction côté vendeur</li>
+    <li><strong>+4%</strong> optionnels pour le service de mise sous séquestre (escrow sécurisé jusqu'à la levée des conditions suspensives)</li>
+  </ul>
+  <p>Une commission plancher de <strong>800 € TTC</strong> s'applique à toute transaction dont le calcul serait inférieur à ce seuil.</p>
+  <p>Les commissions marketplace incluent : la rédaction et le contrôle du contrat de cession, le séquestre des fonds (si option activée), l'accompagnement juridique à la signature, la bascule administrative auprès des administrations concernées (DREETS, France Compétences, Qualiopi), le contrôle des pièces KYC/KYB, l'assistance à la passation et le suivi post-transaction pendant 90 jours.</p>
 
   <h2>Article 4 — Commande et paiement</h2>
-  <p>Le Client passe commande en ligne sur le site lesformateurs.online. Le paiement s'effectue par carte bancaire via la plateforme sécurisée Stripe. Certaines prestations proposent un paiement en 2 ou 3 fois sans frais.</p>
-  <p>La commande est considérée comme définitive après confirmation du paiement par Stripe. Un email de confirmation est envoyé au Client.</p>
+  <h3>4.1 Processus de commande</h3>
+  <p>Le Client passe commande en ligne sur le site lesformateurs.online via son espace utilisateur, ou sur la base d'un devis signé pour les prestations sur devis. La commande est considérée comme définitive après confirmation du paiement (ou à réception de l'acompte pour les prestations sur devis). Un email de confirmation et une facture sont envoyés automatiquement au Client.</p>
+
+  <h3>4.2 Modes de paiement</h3>
+  <p>Le paiement s'effectue par carte bancaire via la plateforme sécurisée Stripe, par virement SEPA, ou par prélèvement automatique pour les abonnements. Certaines prestations proposent un paiement en 2, 3 ou 4 fois sans frais. Pour les prestations supérieures à 5 000 €, un échelonnement personnalisé peut être accordé sur demande écrite.</p>
+
+  <h3>4.3 Facturation</h3>
+  <p>Les factures sont émises à la date de commande et mises à disposition dans l'espace client. Le Prestataire applique les règles de TVA en vigueur : exonération de TVA sur les actions de formation au titre de l'article 261.4.4° du CGI (sous réserve d'attestation), TVA de 20% sur les autres prestations. Tout retard de paiement entraîne de plein droit des intérêts au taux légal majoré de 10 points ainsi qu'une indemnité forfaitaire de 40 € pour frais de recouvrement (art. L.441-10 du Code de commerce).</p>
 
   <h2>Article 5 — Exécution des prestations</h2>
-  <h3>5.1 Prestations de conformité et création d'OF</h3>
-  <p>Après validation du paiement, le Prestataire engage les démarches dans un délai de 48 heures ouvrées. Le Client est tenu de fournir les documents et informations nécessaires dans les délais indiqués. Le suivi de l'avancement est accessible depuis l'espace client (dashboard).</p>
-  <p>Les délais de réalisation sont indicatifs et dépendent notamment de la réactivité du Client, des délais de traitement des administrations concernées (DREETS, COFRAC, France Compétences, etc.) et de la complétude du dossier.</p>
+  <h3>5.1 Délais</h3>
+  <p>Après validation du paiement, le Prestataire engage les démarches dans un délai de 48 heures ouvrées. Les délais de réalisation indiqués sont donnés à titre indicatif et dépendent de la réactivité du Client, des délais de traitement des administrations (DREETS, COFRAC, France Compétences, OPCO, France Travail, Caisse des Dépôts), et de la complétude du dossier. Aucun retard imputable à ces tiers ne peut engager la responsabilité du Prestataire.</p>
 
-  <h3>5.2 Formation en ligne</h3>
-  <p>L'accès à la formation est ouvert immédiatement après validation du paiement, pour une durée illimitée. Le contenu est accessible 24h/24 depuis l'espace formation. Le Client peut suivre la formation à son rythme.</p>
+  <h3>5.2 Collaboration du Client</h3>
+  <p>Le Client s'engage à fournir les documents et informations nécessaires à l'exécution de la prestation dans les délais indiqués par le Prestataire. Toute demande restée sans réponse pendant plus de 60 jours entraîne la suspension de la prestation ; au-delà de 120 jours, la prestation est considérée comme réalisée et ne peut plus faire l'objet d'un remboursement. Le suivi de l'avancement est accessible depuis le tableau de bord du Client.</p>
 
-  <h2>Article 6 — Obligations du Client</h2>
-  <p>Le Client s'engage à fournir des informations exactes et complètes lors de son inscription et de ses commandes. Il est responsable de la confidentialité de ses identifiants de connexion. Il s'engage à ne pas utiliser le site à des fins illicites ou contraires aux bonnes mœurs.</p>
+  <h3>5.3 Obligations légales du Client</h3>
+  <p>Le Client s'engage à respecter l'intégralité des obligations légales et réglementaires qui incombent aux organismes de formation, notamment celles issues du Code du travail (6e partie), du référentiel national qualité (Qualiopi), des règles CPF/EDOF et des textes relatifs à la certification. Le Prestataire intervient en tant qu'accompagnateur ; il ne se substitue en aucun cas au Client dans ses obligations propres.</p>
+
+  <h2>Article 6 — Obligations du Prestataire</h2>
+  <p>Le Prestataire s'engage à mettre en œuvre tous les moyens humains, techniques et méthodologiques nécessaires à la bonne exécution des prestations. Il s'agit d'une <strong>obligation de moyens</strong> et non d'une obligation de résultat. Le Prestataire ne saurait être tenu responsable de la non-obtention d'une certification, d'un agrément, d'un enregistrement, d'une habilitation ou d'un référencement auprès d'une administration ou d'un organisme tiers.</p>
+  <p>Le Prestataire s'engage également à respecter la confidentialité des informations transmises par le Client, à traiter les données personnelles conformément au RGPD, et à maintenir un niveau de qualité conforme aux standards du marché de la formation professionnelle.</p>
 
   <h2>Article 7 — Droit de rétractation</h2>
   <p>Conformément aux articles L.221-18 et suivants du Code de la consommation, le Client consommateur dispose d'un délai de <strong>14 jours</strong> à compter de la conclusion du contrat pour exercer son droit de rétractation, sans avoir à justifier de motifs ni à payer de pénalités.</p>
-  <p>Toutefois, conformément à l'article L.221-28, le droit de rétractation ne peut être exercé pour les prestations pleinement exécutées avant la fin du délai de rétractation si l'exécution a commencé avec l'accord préalable exprès du Client et la reconnaissance par celui-ci de la perte de son droit de rétractation.</p>
-  <p>Pour les formations en ligne, l'accès immédiat au contenu constitue le début d'exécution. Si le Client souhaite renoncer à son droit de rétractation pour bénéficier d'un accès immédiat, il en sera informé lors du processus de commande.</p>
+  <p>Toutefois, conformément à l'article L.221-28 du Code de la consommation, le droit de rétractation ne peut être exercé pour les prestations pleinement exécutées avant la fin du délai de rétractation si l'exécution a commencé avec l'accord préalable exprès du Client et la reconnaissance par celui-ci de la perte de son droit de rétractation.</p>
+  <p>Pour les formations en ligne, l'accès immédiat au contenu constitue le début d'exécution : si le Client souhaite renoncer à son droit de rétractation pour bénéficier d'un accès immédiat, il en est informé lors du processus de commande et donne son accord exprès.</p>
+  <p>Pour les prestations B2B conclues entre professionnels, le droit de rétractation n'est pas applicable sauf mention expresse contraire au devis.</p>
   <p>Pour exercer son droit de rétractation, le Client doit adresser sa demande par email à <a href="mailto:contact@lesformateurs.online">contact@lesformateurs.online</a>. Le remboursement sera effectué dans un délai de 14 jours par le même moyen de paiement que celui utilisé pour la commande.</p>
 
-  <h2>Article 8 — Obligation de moyens</h2>
-  <p>Le Prestataire s'engage à mettre en œuvre tous les moyens nécessaires à la bonne exécution des prestations. Il s'agit d'une <strong>obligation de moyens</strong> et non de résultat. Le Prestataire ne saurait être tenu responsable de la non-obtention d'une certification, d'un agrément ou d'un enregistrement auprès d'une administration tierce.</p>
+  <h2>Article 8 — Commissions marketplace</h2>
+  <p>Dans le cadre des transactions opérées via la marketplace, les commissions définies à l'article 3.4 sont prélevées automatiquement lors de la finalisation de la transaction. Le vendeur et l'acheteur acceptent expressément le barème en validant leur annonce ou leur offre.</p>
+  <p>Le Prestataire peut, à sa discrétion, appliquer des grilles de commission négociées pour les volumes supérieurs à 50 000 € ou pour les partenaires stratégiques, sur la base d'un avenant écrit. En cas de contestation sur une transaction, le service de séquestre (option +4%) permet de conserver les fonds jusqu'à résolution amiable ou arbitrale du litige.</p>
+  <p>Les commissions marketplace sont acquises au Prestataire dès la validation de la transaction et ne sont pas remboursables, sauf en cas d'annulation à l'initiative du Prestataire ou d'échec avéré du transfert administratif.</p>
 
-  <h2>Article 9 — Responsabilité</h2>
-  <p>La responsabilité du Prestataire ne saurait être engagée en cas de force majeure, de fait d'un tiers, ou de faute du Client. En tout état de cause, la responsabilité du Prestataire est limitée au montant de la commande concernée.</p>
+  <h2>Article 9 — Parrainage et cooptation</h2>
+  <h3>9.1 Parrainage — 5% pendant 12 mois</h3>
+  <p>Tout Client actif peut parrainer un nouveau Client via son lien de parrainage unique disponible dans son espace. Le parrain perçoit une récompense équivalente à <strong>5% du montant HT</strong> des achats effectués par son filleul pendant les <strong>12 premiers mois</strong> suivant l'inscription du filleul. Le montant minimum de versement est fixé à <strong>50 € TTC</strong> ; en deçà de ce seuil, les récompenses sont cumulées jusqu'à atteinte du seuil. Les récompenses sont versées sous forme d'avoir utilisable sur les services du Prestataire, ou par virement bancaire sur demande du parrain (dans la limite de la conformité fiscale applicable à son statut).</p>
 
-  <h2>Article 10 — Protection des données personnelles</h2>
-  <p>Les données personnelles collectées sont traitées conformément à la réglementation en vigueur (RGPD). Pour plus d'informations, consultez notre <a href="politique-confidentialite.html">Politique de confidentialité</a>.</p>
+  <h3>9.2 Cooptation — 50 € par expert recruté</h3>
+  <p>Tout membre de la communauté peut recommander un expert (formateur, consultant conformité, juriste spécialisé) candidat à rejoindre le réseau de prestataires du Prestataire. La cooptation donne lieu au versement d'une prime de <strong>50 € TTC</strong> par expert effectivement recruté et ayant réalisé au moins une mission facturée.</p>
+  <p>Le cumul des primes de cooptation n'est pas plafonné. Les primes sont soumises aux obligations déclaratives fiscales du bénéficiaire.</p>
 
-  <h2>Article 11 — Propriété intellectuelle</h2>
-  <p>L'ensemble des contenus de formation (textes, vidéos, quiz, supports) mis à disposition du Client restent la propriété exclusive d'EXPERIENCE PROD. Le Client bénéficie d'un droit d'utilisation personnel et non cessible. Toute reproduction, diffusion ou revente est strictement interdite.</p>
+  <h2>Article 10 — Propriété intellectuelle</h2>
+  <p>L'ensemble des contenus mis à disposition par le Prestataire (plateforme, code, interfaces, textes, vidéos, quiz, supports de formation, modèles de documents, trames pédagogiques, agents IA, bases de données) restent la propriété exclusive d'EXPERIENCE PROD ou de ses partenaires licenciés. Le Client bénéficie d'un droit d'utilisation personnel, non cessible et non exclusif, limité à l'usage prévu par la prestation souscrite.</p>
+  <p>Toute reproduction, diffusion, revente, adaptation, traduction ou exploitation non expressément autorisée est strictement interdite et fera l'objet de poursuites au titre du Code de la propriété intellectuelle.</p>
+  <p>Les contenus produits par le Client dans le cadre de sa propre activité (formations qu'il crée, supports qu'il rédige) demeurent sa propriété. Le Client accorde toutefois au Prestataire une licence non exclusive d'hébergement et de diffusion, strictement limitée à l'exécution du service.</p>
 
-  <h2>Article 12 — Médiation</h2>
-  <p>Conformément aux articles L.612-1 et suivants du Code de la consommation, en cas de litige, le Client consommateur peut recourir gratuitement à un médiateur de la consommation. Le Prestataire communiquera les coordonnées du médiateur compétent sur simple demande.</p>
-  <p>Plateforme de règlement en ligne des litiges de la Commission européenne : <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a></p>
+  <h2>Article 11 — Confidentialité</h2>
+  <p>Chaque partie s'engage à traiter comme strictement confidentielles toutes les informations échangées dans le cadre de l'exécution des présentes, qu'elles soient de nature technique, commerciale, financière, stratégique ou personnelle. Cette obligation de confidentialité s'applique pendant toute la durée du contrat et pendant <strong>5 ans</strong> après son terme.</p>
+  <p>Sont exclues de cette obligation les informations déjà publiques, celles que la partie concernée peut démontrer avoir connues antérieurement de manière légitime, et celles dont la divulgation est imposée par la loi, une juridiction ou une autorité administrative compétente.</p>
 
-  <h2>Article 13 — Droit applicable et juridiction compétente</h2>
-  <p>Les présentes CGV sont régies par le droit français. En cas de litige, et après tentative de résolution amiable, les tribunaux compétents de Nanterre seront seuls compétents, sauf dispositions impératives contraires du Code de la consommation.</p>
-</div>
+  <h2>Article 12 — Protection des données personnelles</h2>
+  <p>Les données personnelles collectées dans le cadre de l'exécution des présentes sont traitées conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi « Informatique et Libertés » modifiée. Les finalités, bases légales, destinataires, durées de conservation et modalités d'exercice des droits sont détaillés dans la <a href="politique-confidentialite.html">Politique de confidentialité</a> accessible sur le site.</p>
+  <p>Pour toute question relative à ses données, le Client peut contacter le DPO à l'adresse <a href="mailto:dpo@lesformateurs.online">dpo@lesformateurs.online</a>.</p>
 
-<footer style="background:var(--primary);color:rgba(255,255,255,.6);text-align:center;padding:24px;font-size:12px;">
-  <p>© 2026 EXPERIENCE PROD — lesformateurs.online</p>
-  <p style="margin-top:8px;">
-    <a href="mentions-legales.html" style="color:rgba(255,255,255,.8);margin:0 8px;">Mentions légales</a>
-    <a href="cgv.html" style="color:rgba(255,255,255,.8);margin:0 8px;">CGV</a>
-    <a href="politique-confidentialite.html" style="color:rgba(255,255,255,.8);margin:0 8px;">Politique de confidentialité</a>
+  <h2>Article 13 — Responsabilité</h2>
+  <p>La responsabilité du Prestataire ne saurait être engagée en cas de force majeure, de fait d'un tiers, de faute du Client, d'interruption ou de défaillance des services des administrations ou sous-traitants (DREETS, France Compétences, OPCO, Caisse des Dépôts, Stripe, Supabase, Cloudflare).</p>
+  <p>En tout état de cause et sauf faute lourde ou dolosive, la responsabilité financière totale du Prestataire est expressément limitée au <strong>montant de la commande concernée</strong> sur les 12 mois précédant le fait générateur. Le Prestataire ne saurait être tenu responsable des dommages indirects (perte de chiffre d'affaires, perte de clientèle, manque à gagner, atteinte à l'image).</p>
+
+  <h2>Article 14 — Résiliation</h2>
+  <p>En cas de manquement grave de l'une des parties à ses obligations, non réparé dans un délai de 30 jours après mise en demeure adressée par lettre recommandée avec accusé de réception, l'autre partie pourra résilier le contrat de plein droit, sans préjudice de tous dommages et intérêts.</p>
+  <p>Les prestations déjà exécutées à la date de la résiliation restent dues. Les abonnements en cours peuvent être résiliés par le Client moyennant un préavis de 30 jours avant la date d'échéance, via l'espace client ou par email à <a href="mailto:contact@lesformateurs.online">contact@lesformateurs.online</a>.</p>
+
+  <h2>Article 15 — Médiation</h2>
+  <p>Conformément aux articles L.612-1 et suivants du Code de la consommation, en cas de litige et après tentative de résolution amiable, le Client consommateur peut recourir gratuitement à un médiateur de la consommation. Le Prestataire communiquera les coordonnées du médiateur compétent sur simple demande écrite.</p>
+  <p>Plateforme européenne de règlement en ligne des litiges : <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a></p>
+
+  <h2>Article 16 — Droit applicable et juridiction</h2>
+  <p>Les présentes CGV sont régies par le droit français. En cas de litige, et après épuisement des voies de résolution amiable et, le cas échéant, de médiation, les <strong>tribunaux compétents de Nanterre</strong> seront seuls compétents, sauf dispositions impératives contraires du Code de la consommation relatives au consommateur.</p>
+
+  <h2>Article 17 — Contact</h2>
+  <p>
+    <strong>EXPERIENCE PROD SASU</strong><br>
+    99 avenue Achille Peretti, 92200 Neuilly-sur-Seine<br>
+    SIREN 982 828 774 — RCS Nanterre<br>
+    Email : <a href="mailto:contact@lesformateurs.online">contact@lesformateurs.online</a><br>
+    Site : <a href="https://lesformateurs.online">lesformateurs.online</a>
   </p>
+</article>
+
+<footer class="ml-footer">
+  <div class="ml-footer-inner">
+    <div>
+      <div class="ml-footer-brand">les<span class="accent">formateurs</span>.online</div>
+      <p>La plateforme des professionnels de la formation.</p>
+      <p class="siren">Experience Prod SASU · SIREN 982 828 774</p>
+    </div>
+    <div class="ml-footer-col">
+      <h4>Services</h4>
+      <a href="formation.html">Gérer mon activité</a>
+      <a href="conformite.html">Conformité</a>
+      <a href="creer-of.html">Créer mon OF</a>
+      <a href="se-former.html">Se former</a>
+    </div>
+    <div class="ml-footer-col">
+      <h4>Légal</h4>
+      <a href="qui-sommes-nous.html">Qui sommes-nous</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="cgv.html">CGV</a>
+      <a href="politique-confidentialite.html">Confidentialité</a>
+    </div>
+  </div>
+  <div class="ml-partners" style="text-align:left;padding:16px 0 12px;">
+    <div style="font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Partenaires certifiés</div>
+    <div style="display:flex;justify-content:flex-start;align-items:center;gap:24px;flex-wrap:wrap;">
+      <img src="img/logo-qualiopi.png" alt="Qualiopi" style="height:72px;background:transparent;">
+    </div>
+  </div>
+  <div class="ml-footer-bottom">© 2026 lesformateurs.online · <span style="color:#6C5CE7;font-weight:500;">Membres : -10% sur tous nos services</span></div>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/referral.js"></script>
+<script src="js/analytics.js" defer></script>
+<script src="js/auth-modal.js"></script>
+<script>
+(async function(){
+  try {
+    var user = await getUser();
+    if(user){
+      var loginBtn = document.querySelector('.btn-login');
+      var dashBtn = document.querySelector('.btn-dashboard');
+      if(loginBtn) loginBtn.classList.add('hidden');
+      if(dashBtn) dashBtn.classList.remove('hidden');
+    }
+  } catch(e){}
+})();
+</script>
+<script src="js/cart.js" defer></script>
+<script src="js/cart-nav.js" defer></script>
 </body>
 </html>

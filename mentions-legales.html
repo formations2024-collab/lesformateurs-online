@@ -1,37 +1,59 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B6XVYRVT9D');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Mentions légales — lesformateurs.online</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<meta name="description" content="Mentions légales — Experience Prod SASU, éditeur de lesformateurs.online.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/mono-light.css">
 <style>
-.legal-content{max-width:860px;margin:0 auto;padding:60px 24px 80px;}
-.legal-content h1{font-size:32px;font-weight:900;color:var(--primary);margin-bottom:8px;}
-.legal-content .subtitle{font-size:14px;color:var(--muted);margin-bottom:40px;}
-.legal-content h2{font-size:20px;font-weight:800;color:var(--primary);margin:36px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--light);}
-.legal-content h3{font-size:16px;font-weight:700;color:var(--primary);margin:24px 0 8px;}
-.legal-content p,.legal-content li{font-size:15px;line-height:1.8;color:var(--text);margin-bottom:10px;}
-.legal-content ul{padding-left:20px;margin-bottom:16px;}
-.legal-content a{color:var(--accent);}
+  body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; background:#FEFEFE; }
+  .legal-article { max-width: 860px; margin: 0 auto; padding: 60px 20px; }
+  .legal-article h1 { font-size: 36px; font-weight: 800; color: #1a1a1a; letter-spacing: -0.5px; }
+  .legal-article .legal-sub { color: #888; font-size: 14px; margin-top: 8px; margin-bottom: 40px; }
+  .legal-article h2 { font-size: 22px; font-weight: 700; color: #1a1a1a; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; margin: 40px 0 16px; }
+  .legal-article h3 { font-size: 16px; font-weight: 600; color: #1a1a1a; margin: 24px 0 12px; }
+  .legal-article p, .legal-article li { color: #333; font-size: 15px; line-height: 1.7; margin-bottom: 10px; }
+  .legal-article ul { padding-left: 22px; margin-bottom: 14px; }
+  .legal-article a { color: #D85A30; text-decoration: none; }
+  .legal-article a:hover { text-decoration: underline; }
+  .legal-article strong { color: #1a1a1a; }
+  .legal-article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; }
+  .legal-article th { background: #fafaf8; font-weight: 600; padding: 12px 16px; text-align: left; font-size: 14px; color: #1a1a1a; border-bottom: 1px solid #f0f0f0; }
+  .legal-article td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #333; vertical-align: top; }
 </style>
 </head>
 <body>
-<nav class="navbar">
-  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
-  <div class="nav-links" id="navLinks">
-    <a href="missions.html">Missions</a>
-    <a href="conformite.html">Conformité</a>
+
+<nav class="ml-nav">
+  <a href="index.html" class="ml-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="ml-nav-links" id="navLinks">
+    <a href="formation.html">Services</a>
     <a href="creer-of.html">Créer mon OF</a>
+    <a href="recherche-habilitation.html" style="color:#1D9E75;font-weight:600;">Habilitation</a>
     <a href="se-former.html">Se former</a>
+    <a href="devenir-expert.html" style="color:#D85A30;font-weight:600;">Recrutement</a>
+
+    <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;">Connexion</a>
+    <a href="dashboard.html" class="ml-nav-cta btn-dashboard hidden">Mon espace</a>
   </div>
+  <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="legal-content">
+<article class="legal-article">
   <h1>Mentions légales</h1>
-  <p class="subtitle">Dernière mise à jour : 20 mars 2026</p>
+  <p class="legal-sub">Dernière mise à jour : 16 avril 2026</p>
 
   <h2>1. Éditeur du site</h2>
   <p>Le site <strong>lesformateurs.online</strong> est édité par :</p>
@@ -59,7 +81,7 @@
   <p>
     <strong>Cloudflare, Inc.</strong><br>
     101 Townsend Street, San Francisco, CA 94107, États-Unis<br>
-    Site web : <a href="https://www.cloudflare.com" target="_blank">www.cloudflare.com</a>
+    Site web : <a href="https://www.cloudflare.com" target="_blank" rel="noopener">www.cloudflare.com</a>
   </p>
 
   <h2>4. Activité de formation professionnelle</h2>
@@ -79,15 +101,58 @@
 
   <h2>8. Droit applicable</h2>
   <p>Les présentes mentions légales sont régies par le droit français. Tout litige relatif à l'utilisation du site lesformateurs.online sera soumis à la compétence exclusive des tribunaux compétents de Nanterre.</p>
-</div>
+</article>
 
-<footer style="background:var(--primary);color:rgba(255,255,255,.6);text-align:center;padding:24px;font-size:12px;">
-  <p>© 2026 EXPERIENCE PROD — lesformateurs.online</p>
-  <p style="margin-top:8px;">
-    <a href="mentions-legales.html" style="color:rgba(255,255,255,.8);margin:0 8px;">Mentions légales</a>
-    <a href="cgv.html" style="color:rgba(255,255,255,.8);margin:0 8px;">CGV</a>
-    <a href="politique-confidentialite.html" style="color:rgba(255,255,255,.8);margin:0 8px;">Politique de confidentialité</a>
-  </p>
+<footer class="ml-footer">
+  <div class="ml-footer-inner">
+    <div>
+      <div class="ml-footer-brand">les<span class="accent">formateurs</span>.online</div>
+      <p>La plateforme des professionnels de la formation.</p>
+      <p class="siren">Experience Prod SASU · SIREN 982 828 774</p>
+    </div>
+    <div class="ml-footer-col">
+      <h4>Services</h4>
+      <a href="formation.html">Gérer mon activité</a>
+      <a href="conformite.html">Conformité</a>
+      <a href="creer-of.html">Créer mon OF</a>
+      <a href="se-former.html">Se former</a>
+    </div>
+    <div class="ml-footer-col">
+      <h4>Légal</h4>
+      <a href="qui-sommes-nous.html">Qui sommes-nous</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="cgv.html">CGV</a>
+      <a href="politique-confidentialite.html">Confidentialité</a>
+    </div>
+  </div>
+  <div class="ml-partners" style="text-align:left;padding:16px 0 12px;">
+    <div style="font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Partenaires certifiés</div>
+    <div style="display:flex;justify-content:flex-start;align-items:center;gap:24px;flex-wrap:wrap;">
+      <img src="img/logo-qualiopi.png" alt="Qualiopi" style="height:72px;background:transparent;">
+    </div>
+  </div>
+  <div class="ml-footer-bottom">© 2026 lesformateurs.online · <span style="color:#6C5CE7;font-weight:500;">Membres : -10% sur tous nos services</span></div>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/referral.js"></script>
+<script src="js/analytics.js" defer></script>
+<script src="js/auth-modal.js"></script>
+<script>
+(async function(){
+  try {
+    var user = await getUser();
+    if(user){
+      var loginBtn = document.querySelector('.btn-login');
+      var dashBtn = document.querySelector('.btn-dashboard');
+      if(loginBtn) loginBtn.classList.add('hidden');
+      if(dashBtn) dashBtn.classList.remove('hidden');
+    }
+  } catch(e){}
+})();
+</script>
+<script src="js/cart.js" defer></script>
+<script src="js/cart-nav.js" defer></script>
 </body>
 </html>

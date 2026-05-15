@@ -41,7 +41,7 @@
   <div class="ml-nav-links" id="navLinks">
     <a href="formation.html">Services</a>
     <a href="creer-of.html" class="active">Créer mon OF</a>
-    <a href="creer-certifier.html">Créer / Certifier</a>
+    <a href="recherche-habilitation.html" style="color:#1D9E75;font-weight:600;">Habilitation</a>
     <a href="se-former.html">Se former</a>
     <a href="devenir-expert.html" style="color:#D85A30;font-weight:600;">Recrutement</a>
     <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;">Connexion</a>
@@ -203,6 +203,7 @@
       <p style="font-size:12px;color:var(--muted);">Statuts juridiques + greffe + SIRET + NDA + Qualiopi + expert dédié</p>
     </div>
   </div>
+  <p style="text-align:center;font-size:14px;color:#6B7280;margin-top:16px;font-weight:500;">* Ces tarifs ne prennent pas en compte l'annonce légale et les frais d'audit</p>
 
   <button onclick="goStep(2)" id="btn-step1" class="ml-btn ml-btn-lg ml-btn-block" style="margin-top:16px;opacity:.4;pointer-events:none;" disabled>Continuer</button>
 </div>
@@ -240,7 +241,7 @@
     <div class="ml-opt-price">+290€</div>
   </div>
 
-  <div class="ml-opt" onclick="toggleOption(this,'site_web',990)">
+  <div class="ml-opt" id="opt-site-web" onclick="toggleOption(this,'site_web',990)">
     <div style="display:flex;align-items:center;gap:12px;"><input type="checkbox"><div><h4 style="font-size:14px;font-weight:500;">Site vitrine complet pour votre OF</h4><p style="font-size:12px;color:var(--muted);">Site professionnel clé en main</p></div></div>
     <div class="ml-opt-price">+990€</div>
   </div>
@@ -300,10 +301,12 @@
     </div>
     <div class="ml-footer-col">
       <h4>Services</h4>
-      <a href="formation.html">Gérer mon activité</a>
-      <a href="conformite.html">Conformité</a>
+      <a href="formation.html">Services</a>
       <a href="creer-of.html">Créer mon OF</a>
+      <a href="recherche-habilitation.html" style="color:#1D9E75;font-weight:600;">Habilitation</a>
       <a href="se-former.html">Se former</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="devenir-expert.html">Recrutement</a>
     </div>
     <div class="ml-footer-col">
       <h4>Légal</h4>
@@ -345,6 +348,18 @@ function selectType(el, type, price){
   selectedType = type; basePrice = price; updateTotal();
   var btn = document.getElementById('btn-step1');
   btn.disabled = false; btn.style.opacity = '1'; btn.style.pointerEvents = 'auto';
+  // Masquer option site si centre 100% en ligne (site inclus)
+  var optSite = document.getElementById('opt-site-web');
+  if (optSite) {
+    if (type === 'centre_online') {
+      optSite.style.display = 'none';
+      // Décocher si était coché
+      var cb = optSite.querySelector('input[type=checkbox]');
+      if (cb && cb.checked) { cb.checked = false; optSite.classList.remove('checked'); delete options['site_web']; updateTotal(); }
+    } else {
+      optSite.style.display = '';
+    }
+  }
 }
 
 function selectKbis(has){
@@ -494,5 +509,9 @@ async function payerCreation(){
   } catch(e){}
 })();
 </script>
+<script src="/expert-popup.js"></script>
+<script src="js/service-check.js"></script>
+<script src="js/cart.js" defer></script>
+<script src="js/cart-nav.js" defer></script>
 </body>
 </html>

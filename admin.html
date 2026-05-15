@@ -1,82 +1,63 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B6XVYRVT9D');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-<title>Administration - lesformateurs.online</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Administration — lesformateurs.online</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <style>
+:root{--primary:#1a1a2e;--accent:#e94560;--success:#10b981;--muted:#999;--border:#e5e7eb;--light:#f8f9fb;--text:#333;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--light);color:var(--text);}
 .admin-layout{display:flex;min-height:calc(100vh - 64px);}
 .sidebar{width:240px;background:#2c2c2e;color:#fff;padding:24px 0;flex-shrink:0;}
 .sidebar a{display:block;padding:10px 24px;font-size:13px;color:rgba(255,255,255,.7);transition:all .2s;cursor:pointer;}
 .sidebar a:hover,.sidebar a.active{background:rgba(255,255,255,.08);color:#fff;}
 .sidebar .sidebar-title{padding:10px 24px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:16px;}
 .main-content{flex:1;padding:32px;background:var(--light);overflow-y:auto;}
-
-/* Mobile nav tabs */
-.mobile-nav{display:none;overflow-x:auto;white-space:nowrap;background:var(--primary);padding:8px 12px;gap:6px;}
-.mobile-nav a{display:inline-block;padding:8px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:rgba(255,255,255,.08);border-radius:20px;cursor:pointer;white-space:nowrap;}
-.mobile-nav a.active{background:var(--accent);color:#fff;}
-
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:32px;}
 .stat-card{background:#fff;border-radius:10px;padding:20px;border:1px solid var(--border);cursor:pointer;transition:all .2s;}
 .stat-card:hover{border-color:var(--accent);transform:translateY(-2px);}
 .stat-card .stat-value{font-size:28px;font-weight:900;color:var(--primary);margin-bottom:4px;}
 .stat-card .stat-label{font-size:12px;color:var(--muted);}
 .stat-card .stat-link{font-size:11px;color:var(--accent);margin-top:6px;display:block;}
-
-.admin-table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;border:1px solid var(--border);display:block;}
-.admin-table thead{display:none;}
-.admin-table tbody{display:block;}
-.admin-table tr{display:block;padding:14px 16px;border-bottom:1px solid var(--border);}
-.admin-table tr:last-child{border-bottom:none;}
-.admin-table td{display:block;padding:2px 0;font-size:13px;}
-.admin-table td:first-child{font-weight:700;font-size:14px;margin-bottom:4px;}
-.admin-table td::before{content:attr(data-label);font-size:11px;color:var(--muted);display:inline-block;width:auto;margin-right:6px;}
-.admin-table td:first-child::before{display:none;}
-
-/* Desktop table */
-@media(min-width:769px){
-  .admin-table{display:table;}
-  .admin-table thead{display:table-header-group;}
-  .admin-table tbody{display:table-row-group;}
-  .admin-table tr{display:table-row;padding:0;}
-  .admin-table td{display:table-cell;padding:12px 16px;}
-  .admin-table td::before{display:none!important;}
-  .admin-table th{background:var(--primary);color:#fff;padding:12px 16px;font-size:12px;text-align:left;font-weight:600;}
-}
-
-.status-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;}
-.status-new{background:rgba(233,69,96,.1);color:var(--accent);}
-.status-progress{background:rgba(200,169,110,.15);color:#b8860b;}
-.status-done{background:rgba(16,185,129,.1);color:var(--success);}
-
 .tab-content{display:none;}
 .tab-content.active{display:block;}
-
-.action-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;}
+.card h4{font-size:14px;font-weight:700;margin-bottom:4px;}
+.card p{font-size:12px;color:var(--muted);}
+.action-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
 .action-btn{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;border:1px solid var(--border);background:#fff;cursor:pointer;transition:all .2s;}
 .action-btn:hover{border-color:var(--accent);color:var(--accent);}
-.action-btn.danger{color:var(--accent);border-color:rgba(233,69,96,.3);}
-.action-btn.danger:hover{background:var(--accent);color:#fff;}
-
-.detail-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;}
-.detail-card h4{font-size:14px;font-weight:700;margin-bottom:6px;}
-.detail-card p{font-size:12px;color:var(--muted);}
-.detail-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:12px;}
-.detail-tag{padding:3px 8px;background:var(--light);border-radius:6px;font-size:11px;}
-
-.progress-bar{width:100%;height:8px;background:var(--border);border-radius:4px;margin-top:8px;overflow:hidden;}
+.btn-accent{background:var(--accent);color:#fff;border:none;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;}
+.btn-accent:hover{opacity:.9;}
+.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;}
+.badge-new{background:rgba(233,69,96,.1);color:var(--accent);}
+.badge-progress{background:rgba(200,169,110,.15);color:#b8860b;}
+.badge-done{background:rgba(16,185,129,.1);color:var(--success);}
+.progress-bar{width:100%;height:6px;background:var(--border);border-radius:4px;overflow:hidden;}
 .progress-fill{height:100%;background:var(--accent);border-radius:4px;}
-
-@media(max-width:768px){
-  .sidebar{display:none;}
-  .mobile-nav{display:flex;}
-  .main-content{padding:16px;}
-  .stat-grid{grid-template-columns:1fr 1fr;}
-}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal.open{display:flex;}
+.modal-box{background:#fff;border-radius:14px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;padding:28px;position:relative;}
+.modal-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);}
+.font-size-toggle{padding:12px 24px;}
+.fst-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.4);display:block;margin-bottom:6px;}
+.fst-btns{display:flex;gap:4px;}
+.fst-btn{width:32px;height:32px;border-radius:6px;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:13px;cursor:pointer;}
+.fst-btn.active{background:var(--accent);}
+@media(max-width:768px){.sidebar{display:none;}.main-content{padding:16px;}.stat-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
@@ -86,53 +67,27 @@
   <div class="nav-links">
     <a href="admin.html" style="color:#fff;">🔧 Admin</a>
     <a href="expert.html" id="nav-expert-btn" style="display:none;color:#fff;">⚡ Expert</a>
-    <a href="dashboard.html" id="nav-dashboard-btn" style="color:#fff;">👤 Dashboard</a>
+    <a href="dashboard.html" style="color:#fff;">👤 Dashboard</a>
     <a href="index.html" class="nav-cta">Retour au site</a>
   </div>
 </nav>
 
-<!-- MOBILE NAV -->
-<div class="mobile-nav" id="mobileNav">
-  <a class="active" onclick="showTab('dashboard')">📊 Dashboard</a>
-  <a onclick="showTab('offres')">📋 Offres</a>
-  <a onclick="showTab('demarches')">📄 Démarches</a>
-  <a onclick="showTab('of')">🏛 OF</a>
-  <a onclick="showTab('formations')">🎓 Inscriptions</a>
-  <a onclick="showTab('contenu')">📹 Contenu</a>
-  <a onclick="showTab('users')">👥 Utilisateurs</a>
-  <a onclick="showTab('stagiaires')">🎓 Stagiaires</a>
-  <a onclick="showTab('achats')">💳 Achats</a>
-  <a onclick="showTab('events')">📅 Events</a>
-  <a onclick="showTab('funnels')">🚀 Funnels</a>
-  <a onclick="showTab('messagerie')">💬 Messages</a>
-</div>
-<div id="admin-mobile-nav-links" style="padding:8px 12px;background:#2c2c2e;gap:8px;display:none;flex-wrap:wrap;">
-  <a href="dashboard.html" style="flex:1;text-align:center;padding:10px;background:rgba(255,255,255,.12);color:#fff;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;">👤 Mon espace</a>
-  <a href="expert.html" id="admin-mobile-expert-btn" style="display:none;flex:1;text-align:center;padding:10px;background:var(--accent);color:#fff;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;">⚡ Expert</a>
-</div>
-
 <div class="admin-layout">
   <div class="sidebar">
-    <div class="font-size-toggle" id="fontSizeToggle" style="margin-bottom:12px;">
+    <div class="font-size-toggle">
       <span class="fst-label">Taille du texte</span>
       <div class="fst-btns">
-        <button class="fst-btn active" onclick="setFontSize('normal')" title="Normal">A</button>
-        <button class="fst-btn" onclick="setFontSize('large')" title="Grand" style="font-size:16px;">A</button>
-        <button class="fst-btn" onclick="setFontSize('xlarge')" title="Très grand" style="font-size:19px;">A</button>
+        <button class="fst-btn active" onclick="setFontSize('normal')">A</button>
+        <button class="fst-btn" onclick="setFontSize('large')" style="font-size:16px;">A</button>
+        <button class="fst-btn" onclick="setFontSize('xlarge')" style="font-size:19px;">A</button>
       </div>
     </div>
     <div class="sidebar-title">Navigation</div>
     <a class="active" onclick="showTab('dashboard')">📊 Tableau de bord</a>
-    <a onclick="showTab('offres')">📋 Offres de missions</a>
     <a onclick="showTab('demarches')">📄 Commandes démarches</a>
-    <a onclick="showTab('of')">🏛 Créations d'OF</a>
-    <a onclick="showTab('formations')">🎓 Inscriptions formation</a>
-    <a onclick="showTab('contenu')">📹 Contenu formation</a>
     <a onclick="showTab('users')">👥 Utilisateurs</a>
-    <a onclick="showTab('stagiaires')">🎓 Stagiaires</a>
-    <a onclick="showTab('achats')">💳 Achats</a>
     <a onclick="showTab('events')">📅 Events</a>
-  <a onclick="showTab('funnels')">🚀 Funnels</a>
+    <a onclick="showTab('funnels')">🚀 Funnels</a>
     <a onclick="showTab('messagerie')">💬 Messagerie</a>
   </div>
 
@@ -142,297 +97,107 @@
     <div class="tab-content active" id="tab-dashboard">
       <h2 style="font-size:22px;font-weight:800;margin-bottom:24px;">Tableau de bord</h2>
       <div class="stat-grid">
-        <div class="stat-card" onclick="showTab('offres')">
-          <div class="stat-value">110</div>
-          <div class="stat-label">Offres actives</div>
-          <span class="stat-link">Voir les offres →</span>
-        </div>
         <div class="stat-card" onclick="showTab('demarches')">
-          <div class="stat-value">47</div>
+          <div class="stat-value" id="tb-demarches">—</div>
           <div class="stat-label">Commandes démarches</div>
           <span class="stat-link">Voir les commandes →</span>
         </div>
-        <div class="stat-card" onclick="showTab('of')">
-          <div class="stat-value">12</div>
-          <div class="stat-label">Créations d'OF en cours</div>
-          <span class="stat-link">Voir les créations →</span>
-        </div>
-        <div class="stat-card" onclick="showTab('formations')">
-          <div class="stat-value">89</div>
-          <div class="stat-label">Inscriptions formation</div>
-          <span class="stat-link">Voir les inscriptions →</span>
-        </div>
         <div class="stat-card" onclick="showTab('users')">
-          <div class="stat-value">234</div>
+          <div class="stat-value" id="tb-users">—</div>
           <div class="stat-label">Utilisateurs inscrits</div>
           <span class="stat-link">Voir les utilisateurs →</span>
         </div>
         <div class="stat-card">
-          <div class="stat-value" style="color:var(--success);">18 430€</div>
-          <div class="stat-label">CA ce mois</div>
+          <div class="stat-value" style="color:var(--success);" id="tb-ca">—</div>
+          <div class="stat-label">CA (démarches payées)</div>
         </div>
       </div>
     </div>
 
-    <!-- ========== OFFRES ========== -->
-    <div class="tab-content" id="tab-offres">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
-        <h2 style="font-size:20px;font-weight:800;" id="offres-title">📋 Offres de missions</h2>
-      </div>
-      <div style="margin-bottom:16px;">
-        <input type="text" id="admin-offre-search" placeholder="🔍 Rechercher une offre..." oninput="filterAdminOffres()" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;">
-      </div>
-      <div id="admin-offres-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
-    </div>
-
-    <!-- ========== DEMARCHES ========== -->
+    <!-- ========== DÉMARCHES ========== -->
     <div class="tab-content" id="tab-demarches">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
         <h2 style="font-size:20px;font-weight:800;" id="admin-dem-title">📄 Commandes démarches</h2>
+        <button class="btn-accent" onclick="openNewDemarcheForm()">+ Nouvelle démarche</button>
       </div>
       <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;" id="admin-dem-filters"></div>
       <div id="admin-dem-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
 
-    <!-- ========== CREATIONS OF ========== -->
-    <div class="tab-content" id="tab-of">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
-        <h2 style="font-size:20px;font-weight:800;" id="admin-of-title">🏛 Créations d'OF</h2>
+    <!-- FORMULAIRE NOUVELLE DÉMARCHE -->
+    <div id="admin-new-dem" style="display:none;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+        <button onclick="closeNewDemarcheForm()" style="background:none;border:none;font-size:13px;color:var(--accent);cursor:pointer;">← Retour</button>
+        <h2 style="font-size:20px;font-weight:800;margin:0;">Créer une démarche</h2>
       </div>
-      <div id="admin-of-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
-    </div>
-
-    <!-- ========== FORMATIONS ========== -->
-    <div class="tab-content" id="tab-formations">
-      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🎓 Inscriptions formation (89)</h2>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Emma Petit</h4>
-            <p>📧 emma@email.fr · Indépendante</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div>
+          <div class="card" style="margin-bottom:14px;">
+            <p style="font-size:14px;font-weight:700;margin:0 0 10px;">Utilisateur</p>
+            <input type="text" id="nd-search" placeholder="Rechercher par email ou nom..." oninput="searchUserForDem(this.value)" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;margin-bottom:8px;">
+            <div id="nd-user-results" style="max-height:180px;overflow-y:auto;"></div>
+            <div id="nd-user-selected" style="display:none;margin-top:8px;padding:10px;background:rgba(233,69,96,.04);border:2px solid var(--accent);border-radius:8px;"></div>
           </div>
-          <span class="status-badge status-progress">En formation — 75%</span>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:75%;"></div></div>
-        <div class="detail-meta">
-          <span class="detail-tag">📅 Inscrite le 18/03</span>
-          <span class="detail-tag">💰 FIF PL : dossier déposé</span>
-          <span class="detail-tag">Module 3/5 en cours</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir progression</button>
-          <button class="action-btn">💬 Contacter</button>
-          <button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">⚡ Promouvoir Pro</button>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Thomas Roux</h4>
-            <p>📧 thomas@email.fr · Salarié en reconversion</p>
-          </div>
-          <span class="status-badge status-done">✅ Certifié</span>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:100%;background:var(--success);"></div></div>
-        <div class="detail-meta">
-          <span class="detail-tag">📅 Inscrit le 15/03</span>
-          <span class="detail-tag">💰 Paiement direct</span>
-          <span class="detail-tag">🎯 3 missions envoyées</span>
-        </div>
-      </div>
-
-      <div class="detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <h4>Julie Lambert</h4>
-            <p>📧 julie@email.fr · Indépendante</p>
-          </div>
-          <span class="status-badge status-new">Débutant — 30%</span>
-        </div>
-        <div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:30%;"></div></div>
-        <div class="detail-meta">
-          <span class="detail-tag">📅 Inscrite le 12/03</span>
-          <span class="detail-tag">💰 FIF PL : en attente</span>
-          <span class="detail-tag">Module 2/5 en cours</span>
-        </div>
-        <div class="action-btns">
-          <button class="action-btn">📄 Voir progression</button>
-          <button class="action-btn">💬 Relancer</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ========== CONTENU FORMATION ========== -->
-    <div class="tab-content" id="tab-contenu">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
-        <h2 style="font-size:20px;font-weight:800;">📹 Contenu des formations</h2>
-        <button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);padding:8px 16px;" onclick="addModuleModal()">+ Ajouter un module</button>
-      </div>
-      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
-        <button class="action-btn" id="admin-f1-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="switchAdminFormation(1)">🎓 Formateur Pro</button>
-        <button class="action-btn" id="admin-f2-btn" onclick="switchAdminFormation(2)">🤖 Agents IA (gratuite)</button>
-      </div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;" id="admin-formation-desc">Gérez les modules et leçons de la formation Formateur Professionnel.</p>
-
-      <div id="admin-modules-list">
-        <p style="text-align:center;padding:40px 0;color:var(--muted);">Chargement des modules...</p>
-      </div>
-    </div>
-
-    <!-- MODAL : Ajouter/Éditer Module -->
-    <div class="modal" id="modal-module">
-      <div class="modal-box" style="max-width:480px;">
-        <button class="modal-close" onclick="document.getElementById('modal-module').classList.remove('open')">✕</button>
-        <h3 id="module-modal-title" style="font-size:20px;font-weight:800;margin-bottom:16px;">Ajouter un module</h3>
-        <div class="form-group"><label>Numéro du module</label><input type="number" id="mod-number" min="1" placeholder="Ex: 6"></div>
-        <div class="form-group"><label>Titre</label><input type="text" id="mod-title" placeholder="Ex: Financement OPCO"></div>
-        <div class="form-group"><label>Module bonus ?</label>
-          <select id="mod-bonus"><option value="false">Non — Module principal</option><option value="true">Oui — Module bonus 🎁</option></select>
-        </div>
-        <div class="form-group"><label>Auteur bonus (si applicable)</label><input type="text" id="mod-author" placeholder="Ex: Philippe Guez"></div>
-        <div class="form-group"><label>Description bonus</label><textarea id="mod-desc" rows="2" placeholder="Courte description..."></textarea></div>
-        <input type="hidden" id="mod-edit-id" value="">
-        <button class="btn btn-primary btn-block" onclick="saveModule()">Enregistrer</button>
-      </div>
-    </div>
-
-    <!-- MODAL : Ajouter/Éditer Leçon -->
-    <div class="modal" id="modal-lesson">
-      <div class="modal-box" style="max-width:640px;max-height:90vh;overflow-y:auto;">
-        <button class="modal-close" onclick="document.getElementById('modal-lesson').classList.remove('open')">✕</button>
-        <h3 id="lesson-modal-title" style="font-size:20px;font-weight:800;margin-bottom:16px;">Ajouter une leçon</h3>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div class="form-group"><label>Clé unique (ex: 6-1)</label><input type="text" id="les-key" placeholder="6-1"></div>
-          <div class="form-group"><label>Type</label>
-            <select id="les-type" onchange="toggleLessonFields()">
-              <option value="video">📹 Vidéo</option>
-              <option value="lecture">📄 Lecture</option>
-              <option value="atelier">🛠 Atelier</option>
-              <option value="quiz">✏️ Quiz</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group"><label>Titre</label><input type="text" id="les-title" placeholder="Titre de la leçon"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div class="form-group"><label>Durée (minutes)</label><input type="number" id="les-dur" min="5" value="30"></div>
-          <div class="form-group"><label>Ordre d'affichage</label><input type="number" id="les-order" min="1" value="1"></div>
-        </div>
-
-        <!-- VIDEO UPLOAD -->
-        <div id="les-video-section">
-          <div class="form-group">
-            <label>📹 Vidéo</label>
-            <div id="les-video-current" style="display:none;margin-bottom:8px;padding:10px;background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;">
-              <span style="font-size:12px;color:var(--success);font-weight:600;" id="les-video-name">✅ Vidéo uploadée</span>
-              <button class="action-btn" style="margin-left:8px;font-size:10px;" onclick="document.getElementById('les-video-current').style.display='none'">Remplacer</button>
+          <div class="card">
+            <p style="font-size:14px;font-weight:700;margin:0 0 10px;">Type de démarche</p>
+            <div style="display:flex;flex-direction:column;gap:6px;" id="nd-types">
+              <label class="nd-type-label" style="display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;" onclick="selectDemType(this,'edof')"><input type="radio" name="nd-type" value="edof"> Ouverture EDOF <span style="margin-left:auto;font-size:12px;color:var(--accent);font-weight:600;">490€</span></label>
+              <label class="nd-type-label" style="display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;" onclick="selectDemType(this,'action_formation')"><input type="radio" name="nd-type" value="action_formation"> Création OF <span style="margin-left:auto;font-size:12px;color:var(--muted);">990€</span></label>
+              <label class="nd-type-label" style="display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;" onclick="selectDemType(this,'qualiopi')"><input type="radio" name="nd-type" value="qualiopi"> Qualiopi <span style="margin-left:auto;font-size:12px;color:var(--muted);">Devis</span></label>
+              <label class="nd-type-label" style="display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;" onclick="selectDemType(this,'rsrncp')"><input type="radio" name="nd-type" value="rsrncp"> Habilitation RS/RNCP <span style="margin-left:auto;font-size:12px;color:var(--muted);">990€</span></label>
+              <label class="nd-type-label" style="display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;" onclick="selectDemType(this,'domiciliation')"><input type="radio" name="nd-type" value="domiciliation"> Domiciliation Champs-Élysées <span style="margin-left:auto;font-size:12px;color:var(--muted);">390€/mois</span></label>
+              <label class="nd-type-label" style="display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;" onclick="selectDemType(this,'pack_complet')"><input type="radio" name="nd-type" value="pack_complet"> Pack Centre complet <span style="margin-left:auto;font-size:12px;color:var(--muted);">Devis</span></label>
+              <label class="nd-type-label" style="display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;" onclick="selectDemType(this,'agents_ia')"><input type="radio" name="nd-type" value="agents_ia"> Agents IA <span style="margin-left:auto;font-size:12px;color:var(--muted);">Devis</span></label>
+              <label class="nd-type-label" style="display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;" onclick="selectDemType(this,'opco_ft_region')"><input type="radio" name="nd-type" value="opco_ft_region"> Ouverture OPCO/FT/Région <span style="margin-left:auto;font-size:12px;color:var(--muted);">Devis</span></label>
             </div>
-            <input type="file" id="les-video-file" accept="video/mp4,video/webm,video/mov,.mp4,.webm,.mov">
-            <p style="font-size:11px;color:var(--muted);margin-top:4px;">MP4, WebM ou MOV. Max 500 Mo.</p>
-          </div>
-          <div class="form-group"><label>OU URL vidéo externe (YouTube, Vimeo...)</label><input type="url" id="les-video-url" placeholder="https://www.youtube.com/embed/..."></div>
-        </div>
-
-        <!-- CONTENU HTML -->
-        <div id="les-body-section">
-          <div class="form-group">
-            <label>Contenu de la leçon (HTML)</label>
-            <textarea id="les-body" rows="12" style="font-family:monospace;font-size:12px;line-height:1.5;" placeholder="<h2>Titre de section</h2>
-<p>Contenu de la leçon...</p>"></textarea>
-            <p style="font-size:11px;color:var(--muted);margin-top:4px;">Utilisez les classes : highlight-box, info-box, success-box, example-box, key-points, schema-box</p>
           </div>
         </div>
-
-        <!-- QUIZ EDITOR -->
-        <div id="les-quiz-section" style="display:none;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-            <label style="font-weight:700;font-size:12px;">Questions du quiz</label>
-            <button class="action-btn" onclick="addQuizQuestion()">+ Question</button>
+        <div>
+          <div class="card">
+            <p style="font-size:14px;font-weight:700;margin:0 0 12px;">Récapitulatif</p>
+            <div style="background:var(--light);border-radius:8px;padding:16px;margin-bottom:16px;">
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;"><span style="color:var(--muted);">Client</span><span style="font-weight:600;" id="nd-recap-client">—</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;"><span style="color:var(--muted);">Email</span><span style="font-weight:600;" id="nd-recap-email">—</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;"><span style="color:var(--muted);">Démarche</span><span style="font-weight:600;" id="nd-recap-type">—</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;"><span style="color:var(--muted);">Étapes</span><span style="font-weight:600;" id="nd-recap-steps">—</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;border-top:1px solid var(--border);padding-top:8px;margin-top:4px;"><span style="color:var(--muted);">Montant</span><span style="font-weight:800;font-size:18px;color:var(--accent);" id="nd-recap-amount">—</span></div>
+            </div>
+            <div style="margin-bottom:14px;"><label style="font-size:12px;font-weight:600;display:block;margin-bottom:6px;">Statut paiement</label><select id="nd-paid" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;"><option value="true">Payé</option><option value="false" selected>En attente</option><option value="offert">Offert</option></select></div>
+            <div style="margin-bottom:14px;"><label style="font-size:12px;font-weight:600;display:block;margin-bottom:6px;">Montant personnalisé (€)</label><input type="number" id="nd-amount" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;" placeholder="Laisser vide = prix par défaut"></div>
+            <div style="margin-bottom:14px;"><label style="font-size:12px;font-weight:600;display:block;margin-bottom:6px;">Note interne</label><textarea id="nd-note" rows="2" placeholder="Note pour l'equipe..." style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;resize:vertical;"></textarea></div>
+            <button class="btn-accent" onclick="submitNewDemarche()" style="width:100%;padding:14px;font-size:14px;border-radius:8px;">Créer la démarche</button>
+            <p style="font-size:11px;color:var(--muted);text-align:center;margin:6px 0 0;">La démarche apparaîtra dans le dashboard utilisateur</p>
           </div>
-          <div id="quiz-questions-list"></div>
-        </div>
-
-        <div class="form-group" style="margin-top:12px;">
-          <label class="toggle-switch" style="font-size:13px;">
-            <input type="checkbox" id="les-published" checked> Publié (visible par les étudiants)
-          </label>
-        </div>
-
-        <input type="hidden" id="les-edit-id" value="">
-        <input type="hidden" id="les-module-id" value="">
-        <div id="les-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;"></div>
-        <div style="display:flex;gap:10px;">
-          <button class="btn btn-primary" style="flex:1;" id="les-save-btn" onclick="saveLesson()">Enregistrer</button>
-          <button class="btn" style="background:var(--light);border:1px solid var(--border);padding:12px 20px;" onclick="previewLesson()">👁 Aperçu</button>
         </div>
       </div>
     </div>
 
-    <!-- ========== USERS ========== -->
+    <!-- ========== UTILISATEURS ========== -->
     <div class="tab-content" id="tab-users">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
-        <h2 style="font-size:20px;font-weight:800;" id="admin-users-title">👥 Utilisateurs</h2>
-      </div>
-      <div style="margin-bottom:16px;">
-        <input type="text" id="admin-user-search" placeholder="🔍 Rechercher un utilisateur..." oninput="filterAdminUsers()" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;">
-      </div>
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;" id="admin-users-title">👥 Utilisateurs</h2>
+      <input type="text" id="admin-user-search" placeholder="🔍 Rechercher un utilisateur..." oninput="filterAdminUsers()" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;margin-bottom:16px;">
       <div id="admin-users-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
 
-    <!-- ========== FUNNELS ========== -->
-    <!-- ========== EVENTS ADMIN ========== -->
+    <!-- ========== EVENTS ========== -->
     <div class="tab-content" id="tab-events">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
-        <h2 style="font-size:20px;font-weight:800;">📅 Gestion des événements</h2>
-      </div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Funnel de vente : <a href="funnel-events.html" target="_blank" style="color:var(--accent);font-weight:600;">funnel-events.html</a></p>
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">📅 Événements</h2>
       <div id="admin-events-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
 
     <!-- ========== FUNNELS ========== -->
     <div class="tab-content" id="tab-funnels">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🚀 Pages de vente (Funnels)</h2>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Ces pages ne sont pas visibles depuis l'accueil. Partagez-les directement ou via des campagnes publicitaires.</p>
-      
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:32px;">
-        <div class="detail-card"><h4>🎓 Webinaire IA gratuit</h4><p style="font-size:12px;color:var(--muted);">Lead → Email → Webinaire</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-webinaire.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-webinaire.html');alert('Copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>✦ Audit Qualiopi</h4><p style="font-size:12px;color:var(--muted);">Lead → Paiement 490€</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-qualiopi.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-qualiopi.html');alert('Copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>📋 RS/RNCP Certifications</h4><p style="font-size:12px;color:var(--muted);">Lead → Paiement 390€</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-rs-rncp.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-rs-rncp.html');alert('Copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>€ Espace EDOF</h4><p style="font-size:12px;color:var(--muted);">Paiement direct 290€</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-edof.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-edof.html');alert('Copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>🤖 Agent IA</h4><p style="font-size:12px;color:var(--muted);">Lead → RDV/Demo</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-agent-ia.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-agent-ia.html');alert('Copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>📄 NDA Déclaration</h4><p style="font-size:12px;color:var(--muted);">Paiement direct 199€</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-nda.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-nda.html');alert('Copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>🔗 Connexion OPCO</h4><p style="font-size:12px;color:var(--muted);">Paiement 290€/OPCO ou 2 990€ pack</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-opco.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-opco.html');alert('Copié !')">📋 Copier</button></div></div>
-        <div class="detail-card"><h4>👑 Abonnement Premium</h4><p style="font-size:12px;color:var(--muted);">Abonnement 69€/mois</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-premium.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-premium.html');alert('Copié !')">📋 Copier</button></div></div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Partagez ces liens directement ou via des campagnes.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;">
+        <div class="card"><h4>🎓 Webinaire IA gratuit</h4><p>Lead → Webinaire</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/funnel-webinaire.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/funnel-webinaire.html');this.textContent='Copié ✅'">📋 Copier</button></div></div>
+        <div class="card"><h4>€ Espace EDOF</h4><p>Paiement 490€</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/lien-edof.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/lien-edof.html');this.textContent='Copié ✅'">📋 Copier</button></div></div>
+        <div class="card"><h4>🏛 Créer mon OF</h4><p>Paiement 990€</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/creer-of.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/creer-of.html');this.textContent='Copié ✅'">📋 Copier</button></div></div>
+        <div class="card"><h4>📋 Conformité</h4><p>Marketplace services</p><div style="margin-top:8px;"><input type="text" readonly value="https://lesformateurs.online/conformite.html" style="width:100%;font-size:11px;padding:6px 8px;border:1px solid #e0e0e0;border-radius:6px;" onclick="this.select()"><button class="action-btn" style="margin-top:6px;" onclick="navigator.clipboard.writeText('https://lesformateurs.online/conformite.html');this.textContent='Copié ✅'">📋 Copier</button></div></div>
       </div>
-
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">📧 Leads collectés</h3>
-      <div id="admin-leads-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
 
-    <!-- ========== ACHATS ADMIN ========== -->
-    <div class="tab-content" id="tab-achats">
-      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">💳 Historique des achats</h2>
-      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
-        <button class="action-btn" id="achats-filter-all" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="filterAchats('all')">Tous</button>
-        <button class="action-btn" id="achats-filter-parrain" onclick="filterAchats('parrain')">🎁 Avec parrain</button>
-      </div>
-      <div style="margin-bottom:16px;">
-        <input type="text" id="admin-achats-search" placeholder="🔍 Rechercher un achat..." oninput="filterAchatsSearch()" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;">
-      </div>
-      <div id="admin-achats-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
-    </div>
-
-    <!-- ========== STAGIAIRES ADMIN ========== -->
-    <div class="tab-content" id="tab-stagiaires">
-      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">🎓 Stagiaires & Financement</h2>
-      <div style="margin-bottom:16px;">
-        <input type="text" id="admin-stag-search" placeholder="🔍 Rechercher un stagiaire..." oninput="filterAdminStagiaires()" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;">
-      </div>
-      <div id="admin-stagiaires-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
-    </div>
-
-    <!-- ========== MESSAGERIE ADMIN ========== -->
+    <!-- ========== MESSAGERIE ========== -->
     <div class="tab-content" id="tab-messagerie">
       <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;">💬 Messagerie</h2>
       <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
@@ -440,1308 +205,798 @@
         <button class="action-btn" id="btn-msg-unread" onclick="filterAdminMsg('unread')">Non lus</button>
         <button class="action-btn" id="btn-msg-sent" onclick="filterAdminMsg('sent')">Envoyés</button>
       </div>
-      <button class="btn btn-primary" style="margin-bottom:16px;padding:8px 16px;font-size:13px;" onclick="openAdminComposeMsg()">✉️ Nouveau message</button>
+      <button class="btn-accent" style="margin-bottom:16px;padding:8px 16px;font-size:13px;" onclick="openComposeMsg()">✉️ Nouveau message</button>
       <div id="admin-msg-list"><p style="text-align:center;padding:40px;color:var(--muted);">Chargement...</p></div>
     </div>
 
   </div>
 </div>
 
-<script>
-function showTab(name){
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.sidebar a, .mobile-nav a').forEach(a=>a.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  // highlight correct nav items
-  document.querySelectorAll('.sidebar a, .mobile-nav a').forEach(a=>{
-    if(a.getAttribute('onclick') && a.getAttribute('onclick').includes("'"+name+"'")) a.classList.add('active');
-  });
-  window.scrollTo(0,0);
-}
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase-config.js"></script>
-<script>
-// Auth guard
-(async function(){
-  var user = await getUser();
-  if(!user){ window.location.href = 'missions.html'; return; }
-  var profile = await getProfile();
-  if(!profile || profile.profile_type !== 'admin'){
-    alert('⚠️ Accès réservé aux administrateurs.');
-    window.location.href = 'dashboard.html';
-    return;
-  }
-  // Show expert nav if user is also pro/expert
-  if(profile.is_pro){
-    var eb = document.getElementById('nav-expert-btn');
-    if(eb) eb.style.display = '';
-    var aeb = document.getElementById('admin-mobile-expert-btn');
-    if(aeb) aeb.style.display = '';
-  }
-  // Show mobile nav links
-  var amnl = document.getElementById('admin-mobile-nav-links');
-  if(amnl) amnl.style.display = 'flex';
-  // Load course content
-  await loadCourseContent();
-  // Load offres
-  await loadAdminOffres();
-  // Load demarches + OF
-  await loadAdminDemarches();
-  await loadAdminOF();
-  await loadAdminUsers();
-  await loadAdminMessages();
-  await loadAdminStagiaires();
-  await loadAdminAchats();
-  await loadAdminLeads();
-  await loadAdminEvents();
-})();
-
-// ============================
-// COURSE CONTENT MANAGEMENT
-// ============================
-
-var adminModules = [];
-var adminLessons = [];
-var quizQuestionsCount = 0;
-var adminFormationId = 1;
-
-function switchAdminFormation(fId){
-  adminFormationId = fId;
-  document.getElementById('admin-f1-btn').style.background = fId === 1 ? 'var(--accent)' : '';
-  document.getElementById('admin-f1-btn').style.color = fId === 1 ? '#fff' : '';
-  document.getElementById('admin-f2-btn').style.background = fId === 2 ? '#7c3aed' : '';
-  document.getElementById('admin-f2-btn').style.color = fId === 2 ? '#fff' : '';
-  document.getElementById('admin-formation-desc').textContent = fId === 1 ? 'Gérez les modules et leçons de la formation Formateur Professionnel.' : 'Gérez les modules et leçons de la formation Agents IA (gratuite).';
-  loadCourseContent();
-}
-
-async function loadCourseContent(){
-  var { data: modules } = await sb.from('course_modules').select('*').eq('formation_id', adminFormationId).order('sort_order',{ascending:true});
-  adminModules = modules || [];
-  
-  var modIds = adminModules.map(function(m){ return m.id; });
-  var adminLessonsAll = [];
-  if(modIds.length > 0){
-    var { data: lessons } = await sb.from('course_lessons').select('*').in('module_id', modIds).order('sort_order',{ascending:true});
-    adminLessonsAll = lessons || [];
-  }
-  adminLessons = adminLessonsAll;
-  
-  renderAdminModules();
-}
-
-function renderAdminModules(){
-  var container = document.getElementById('admin-modules-list');
-  
-  if(adminModules.length === 0){
-    container.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--muted);"><div style="font-size:48px;margin-bottom:12px;">📹</div><p style="font-size:14px;">Aucun module créé.</p><p style="font-size:13px;">Les modules existants dans formation.html fonctionnent toujours. Créez des modules ici pour les remplacer dynamiquement.</p><button class="btn btn-primary" style="margin-top:16px;" onclick="seedFromHardcoded()">📥 Importer les modules existants</button></div>';
-    return;
-  }
-  
-  var html = '';
-  adminModules.forEach(function(m){
-    var moduleLessons = adminLessons.filter(function(l){ return l.module_id === m.id; });
-    var hasVideo = moduleLessons.some(function(l){ return l.video_url || l.video_path; });
-    
-    html += '<div class="detail-card" style="border-left:3px solid '+(m.is_bonus?'#6366f1':'var(--accent)')+';">';
-    html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">';
-    html += '<div><h4>'+(m.is_bonus?'🎁 ':'')+'Module '+m.module_number+' — '+m.title+'</h4>';
-    html += '<p>'+moduleLessons.length+' leçons'+(m.bonus_author?' · Par '+m.bonus_author:'')+'</p></div>';
-    html += '<div class="action-btns">';
-    html += '<button class="action-btn" onclick="editModule('+m.id+')">✏️ Modifier</button>';
-    html += '<button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="addLessonToModule('+m.id+','+m.module_number+')">+ Leçon</button>';
-    html += '<button class="action-btn danger" onclick="deleteModule('+m.id+')">🗑</button>';
-    html += '</div></div>';
-    
-    // Lessons list
-    if(moduleLessons.length > 0){
-      html += '<div style="margin-top:12px;">';
-      moduleLessons.forEach(function(l){
-        var typeIcon = {video:'📹',lecture:'📄',atelier:'🛠',quiz:'✏️'}[l.type] || '📄';
-        var videoStatus = '';
-        if(l.type === 'video'){
-          if(l.video_url || l.video_path) videoStatus = '<span style="color:var(--success);font-size:10px;margin-left:6px;">✅ Vidéo</span>';
-          else videoStatus = '<span style="color:var(--accent);font-size:10px;margin-left:6px;">⚠️ Pas de vidéo</span>';
-        }
-        var publishStatus = l.is_published ? '' : '<span style="color:var(--muted);font-size:10px;margin-left:6px;">🔒 Masqué</span>';
-        
-        html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:'+(l.is_published?'var(--light)':'rgba(233,69,96,.05)')+';border-radius:6px;margin-bottom:4px;font-size:13px;">';
-        html += '<div style="display:flex;align-items:center;gap:8px;">';
-        html += '<span>'+typeIcon+'</span>';
-        html += '<strong>'+l.lesson_key+'</strong> '+l.title;
-        html += videoStatus + publishStatus;
-        html += '<span style="color:var(--muted);font-size:11px;margin-left:8px;">'+l.duration_minutes+'min</span>';
-        html += '</div>';
-        html += '<div style="display:flex;gap:4px;">';
-        html += '<button class="action-btn" style="font-size:10px;padding:3px 8px;" onclick="editLesson(\''+l.id+'\')">✏️</button>';
-        html += '<button class="action-btn danger" style="font-size:10px;padding:3px 8px;" onclick="deleteLesson(\''+l.id+'\')">🗑</button>';
-        html += '</div></div>';
-      });
-      html += '</div>';
-    }
-    
-    html += '</div>';
-  });
-  
-  container.innerHTML = html;
-}
-
-// === MODULE CRUD ===
-
-function addModuleModal(){
-  document.getElementById('module-modal-title').textContent = 'Ajouter un module';
-  document.getElementById('mod-number').value = adminModules.length + 1;
-  document.getElementById('mod-title').value = '';
-  document.getElementById('mod-bonus').value = 'false';
-  document.getElementById('mod-author').value = '';
-  document.getElementById('mod-desc').value = '';
-  document.getElementById('mod-edit-id').value = '';
-  document.getElementById('modal-module').classList.add('open');
-}
-
-function editModule(id){
-  var m = adminModules.find(function(x){ return x.id === id; });
-  if(!m) return;
-  document.getElementById('module-modal-title').textContent = 'Modifier le module';
-  document.getElementById('mod-number').value = m.module_number;
-  document.getElementById('mod-title').value = m.title;
-  document.getElementById('mod-bonus').value = m.is_bonus ? 'true' : 'false';
-  document.getElementById('mod-author').value = m.bonus_author || '';
-  document.getElementById('mod-desc').value = m.bonus_description || '';
-  document.getElementById('mod-edit-id').value = id;
-  document.getElementById('modal-module').classList.add('open');
-}
-
-async function saveModule(){
-  var editId = document.getElementById('mod-edit-id').value;
-  var data = {
-    module_number: parseInt(document.getElementById('mod-number').value),
-    title: document.getElementById('mod-title').value.trim(),
-    is_bonus: document.getElementById('mod-bonus').value === 'true',
-    bonus_author: document.getElementById('mod-author').value.trim() || null,
-    bonus_description: document.getElementById('mod-desc').value.trim() || null,
-    sort_order: parseInt(document.getElementById('mod-number').value),
-    formation_id: adminFormationId,
-    updated_at: new Date().toISOString()
-  };
-  if(!data.title){ alert('⚠️ Titre requis.'); return; }
-  
-  var error;
-  if(editId){
-    var res = await sb.from('course_modules').update(data).eq('id', parseInt(editId));
-    error = res.error;
-  } else {
-    var res = await sb.from('course_modules').insert(data);
-    error = res.error;
-  }
-  if(error){ alert('❌ '+error.message); return; }
-  document.getElementById('modal-module').classList.remove('open');
-  await loadCourseContent();
-}
-
-async function deleteModule(id){
-  if(!confirm('Supprimer ce module et toutes ses leçons ?')) return;
-  await sb.from('course_lessons').delete().eq('module_id', id);
-  await sb.from('course_modules').delete().eq('id', id);
-  await loadCourseContent();
-}
-
-// === LESSON CRUD ===
-
-function addLessonToModule(moduleId, moduleNum){
-  var existing = adminLessons.filter(function(l){ return l.module_id === moduleId; });
-  var nextNum = existing.length + 1;
-  
-  document.getElementById('lesson-modal-title').textContent = 'Ajouter une leçon';
-  document.getElementById('les-key').value = moduleNum + '-' + nextNum;
-  document.getElementById('les-type').value = 'video';
-  document.getElementById('les-title').value = '';
-  document.getElementById('les-dur').value = 30;
-  document.getElementById('les-order').value = nextNum;
-  document.getElementById('les-body').value = '';
-  document.getElementById('les-video-url').value = '';
-  document.getElementById('les-video-file').value = '';
-  document.getElementById('les-video-current').style.display = 'none';
-  document.getElementById('les-published').checked = true;
-  document.getElementById('les-edit-id').value = '';
-  document.getElementById('les-module-id').value = moduleId;
-  document.getElementById('les-error').style.display = 'none';
-  quizQuestionsCount = 0;
-  document.getElementById('quiz-questions-list').innerHTML = '';
-  toggleLessonFields();
-  document.getElementById('modal-lesson').classList.add('open');
-}
-
-function editLesson(id){
-  var l = adminLessons.find(function(x){ return x.id === id; });
-  if(!l) return;
-  
-  document.getElementById('lesson-modal-title').textContent = 'Modifier la leçon';
-  document.getElementById('les-key').value = l.lesson_key;
-  document.getElementById('les-type').value = l.type;
-  document.getElementById('les-title').value = l.title;
-  document.getElementById('les-dur').value = l.duration_minutes;
-  document.getElementById('les-order').value = l.sort_order;
-  document.getElementById('les-body').value = l.body_html || '';
-  document.getElementById('les-video-url').value = l.video_url || '';
-  document.getElementById('les-video-file').value = '';
-  document.getElementById('les-published').checked = l.is_published;
-  document.getElementById('les-edit-id').value = id;
-  document.getElementById('les-module-id').value = l.module_id;
-  document.getElementById('les-error').style.display = 'none';
-  
-  // Show current video if exists
-  if(l.video_url || l.video_path){
-    document.getElementById('les-video-current').style.display = '';
-    document.getElementById('les-video-name').textContent = '✅ Vidéo : '+(l.video_url || l.video_path).split('/').pop();
-  } else {
-    document.getElementById('les-video-current').style.display = 'none';
-  }
-  
-  // Load quiz questions
-  quizQuestionsCount = 0;
-  var qList = document.getElementById('quiz-questions-list');
-  qList.innerHTML = '';
-  if(l.type === 'quiz' && l.quiz_json){
-    var questions = typeof l.quiz_json === 'string' ? JSON.parse(l.quiz_json) : l.quiz_json;
-    questions.forEach(function(q){ addQuizQuestion(q); });
-  }
-  
-  toggleLessonFields();
-  document.getElementById('modal-lesson').classList.add('open');
-}
-
-function toggleLessonFields(){
-  var type = document.getElementById('les-type').value;
-  document.getElementById('les-video-section').style.display = (type === 'video') ? '' : 'none';
-  document.getElementById('les-body-section').style.display = (type !== 'quiz') ? '' : 'none';
-  document.getElementById('les-quiz-section').style.display = (type === 'quiz') ? '' : 'none';
-}
-
-function addQuizQuestion(prefill){
-  var idx = quizQuestionsCount++;
-  var q = prefill || {q:'', opts:['','','',''], ans:0};
-  var html = '<div class="detail-card" style="padding:12px;" id="quiz-q-'+idx+'">';
-  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">';
-  html += '<strong style="font-size:12px;">Question '+(idx+1)+'</strong>';
-  html += '<button class="action-btn danger" style="font-size:10px;padding:2px 8px;" onclick="document.getElementById(\'quiz-q-'+idx+'\').remove()">✕</button>';
-  html += '</div>';
-  html += '<div class="form-group" style="margin-bottom:8px;"><input type="text" id="qq-'+idx+'" value="'+escHtml(q.q)+'" placeholder="Question..." style="font-size:13px;"></div>';
-  for(var i=0; i<4; i++){
-    var checked = (q.ans === i) ? 'checked' : '';
-    html += '<div style="display:flex;gap:6px;align-items:center;margin-bottom:4px;">';
-    html += '<input type="radio" name="qa-'+idx+'" value="'+i+'" '+checked+' style="accent-color:var(--success);">';
-    html += '<input type="text" id="qo-'+idx+'-'+i+'" value="'+escHtml(q.opts[i]||'')+'" placeholder="Option '+(i+1)+'" style="flex:1;font-size:12px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;">';
-    html += '</div>';
-  }
-  html += '</div>';
-  document.getElementById('quiz-questions-list').insertAdjacentHTML('beforeend', html);
-}
-
-function escHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
-
-function collectQuizQuestions(){
-  var questions = [];
-  for(var i=0; i<quizQuestionsCount; i++){
-    var el = document.getElementById('quiz-q-'+i);
-    if(!el) continue;
-    var qText = document.getElementById('qq-'+i).value.trim();
-    if(!qText) continue;
-    var opts = [];
-    for(var j=0; j<4; j++){
-      opts.push(document.getElementById('qo-'+i+'-'+j).value.trim());
-    }
-    var ans = 0;
-    var radios = document.querySelectorAll('input[name="qa-'+i+'"]:checked');
-    if(radios.length > 0) ans = parseInt(radios[0].value);
-    questions.push({q:qText, opts:opts, ans:ans});
-  }
-  return questions;
-}
-
-async function saveLesson(){
-  var editId = document.getElementById('les-edit-id').value;
-  var moduleId = parseInt(document.getElementById('les-module-id').value);
-  var type = document.getElementById('les-type').value;
-  var title = document.getElementById('les-title').value.trim();
-  var key = document.getElementById('les-key').value.trim();
-  var errDiv = document.getElementById('les-error');
-  var btn = document.getElementById('les-save-btn');
-  
-  if(!title || !key){ errDiv.textContent = '⚠️ Clé et titre requis.'; errDiv.style.display = ''; return; }
-  errDiv.style.display = 'none';
-  btn.textContent = 'Enregistrement...'; btn.disabled = true;
-  
-  var data = {
-    module_id: moduleId,
-    lesson_key: key,
-    title: title,
-    type: type,
-    duration_minutes: parseInt(document.getElementById('les-dur').value) || 30,
-    sort_order: parseInt(document.getElementById('les-order').value) || 1,
-    is_published: document.getElementById('les-published').checked,
-    updated_at: new Date().toISOString()
-  };
-  
-  // Body HTML
-  if(type !== 'quiz'){
-    data.body_html = document.getElementById('les-body').value;
-  }
-  
-  // Quiz JSON
-  if(type === 'quiz'){
-    data.quiz_json = collectQuizQuestions();
-  }
-  
-  // Video URL
-  if(type === 'video'){
-    var extUrl = document.getElementById('les-video-url').value.trim();
-    if(extUrl) data.video_url = extUrl;
-  }
-  
-  // Video file upload
-  var videoFile = document.getElementById('les-video-file').files[0];
-  if(videoFile && type === 'video'){
-    try {
-      var user = await getUser();
-      var ext = videoFile.name.split('.').pop();
-      var path = 'course-videos/'+key.replace(/-/g,'_')+'_'+Date.now()+'.'+ext;
-      var { data: uploadData, error: uploadErr } = await sb.storage
-        .from('course-videos')
-        .upload(path, videoFile, { contentType: videoFile.type });
-      if(uploadErr) throw uploadErr;
-      
-      // Get public URL
-      var { data: urlData } = sb.storage.from('course-videos').getPublicUrl(path);
-      data.video_path = path;
-      data.video_url = urlData.publicUrl;
-    } catch(e){
-      errDiv.textContent = '❌ Erreur upload vidéo : '+e.message;
-      errDiv.style.display = '';
-      btn.textContent = 'Enregistrer'; btn.disabled = false;
-      return;
-    }
-  }
-  
-  var error;
-  if(editId){
-    var res = await sb.from('course_lessons').update(data).eq('id', editId);
-    error = res.error;
-  } else {
-    var res = await sb.from('course_lessons').insert(data);
-    error = res.error;
-  }
-  
-  if(error){
-    errDiv.textContent = '❌ '+error.message;
-    errDiv.style.display = '';
-    btn.textContent = 'Enregistrer'; btn.disabled = false;
-    return;
-  }
-  
-  btn.textContent = 'Enregistrer'; btn.disabled = false;
-  document.getElementById('modal-lesson').classList.remove('open');
-  await loadCourseContent();
-  alert('✅ Leçon enregistrée !');
-}
-
-async function deleteLesson(id){
-  if(!confirm('Supprimer cette leçon ?')) return;
-  await sb.from('course_lessons').delete().eq('id', id);
-  await loadCourseContent();
-}
-
-function previewLesson(){
-  var body = document.getElementById('les-body').value;
-  var title = document.getElementById('les-title').value;
-  var w = window.open('','_blank','width=900,height=700');
-  w.document.write('<html><head><title>Aperçu : '+title+'</title><style>body{font-family:system-ui;padding:40px;max-width:800px;margin:0 auto;line-height:1.7;color:#333;}h2{margin-top:32px;}h3{margin-top:24px;}.highlight-box{border-left:4px solid #e94560;background:#fef0f3;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;}.info-box{background:#e3f2fd;border-left:4px solid #1565c0;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;}.success-box{background:#e8f8f0;border-left:4px solid #27ae60;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;}.key-points{background:#1a1a2e;color:#fff;border-radius:12px;padding:28px;margin:32px 0;}.key-points h3{color:#e94560;}.key-points li{color:rgba(255,255,255,.85);}.example-box{background:#fffde7;border:1px solid #f9a825;border-radius:8px;padding:18px;margin:20px 0;}.example-box .ex-title{font-size:12px;font-weight:700;text-transform:uppercase;color:#f9a825;margin-bottom:8px;}</style></head><body><h1>'+title+'</h1>'+body+'</body></html>');
-  w.document.close();
-}
-
-// === SEED FROM HARDCODED (import existing content) ===
-
-async function seedFromHardcoded(){
-  if(!confirm('Importer les 7 modules et 42 leçons existants depuis le code ? Cela va créer toutes les entrées en base.')) return;
-  
-  var modulesData = [
-    {module_number:1, title:"L'adulte apprenant", is_bonus:false, sort_order:1},
-    {module_number:2, title:"Concevoir une formation", is_bonus:false, sort_order:2},
-    {module_number:3, title:"Animer une formation", is_bonus:false, sort_order:3},
-    {module_number:4, title:"Évaluer les apprentissages", is_bonus:false, sort_order:4},
-    {module_number:5, title:"Cadre légal & administratif", is_bonus:false, sort_order:5},
-    {module_number:6, title:"Financement OPCO", is_bonus:true, bonus_author:"Philippe Guez", bonus_description:"Ancien Secrétaire Général Constructys IdF, Directeur AKTO", sort_order:6},
-    {module_number:7, title:"Personal Branding", is_bonus:true, bonus_author:"Agence Personnelle", bonus_description:"Caroline Mignaux & Arnaud Gazet — agence n°1 du personal branding, +1M abonnés", sort_order:7},
-  ];
-  
-  for(var i=0; i<modulesData.length; i++){
-    var { error } = await sb.from('course_modules').insert(modulesData[i]);
-    if(error && !error.message.includes('unique')){
-      alert('Erreur module '+modulesData[i].module_number+': '+error.message);
-    }
-  }
-  
-  alert('✅ Modules importés ! Ajoutez maintenant les leçons individuellement ou en batch.');
-  await loadCourseContent();
-}
-
-// Close modals on backdrop
-document.addEventListener('click',function(e){if(e.target.classList.contains('modal'))e.target.classList.remove('open');});
-
-// ============================
-// ADMIN OFFRES MANAGEMENT
-// ============================
-
-var allAdminOffres = [];
-
-async function loadAdminOffres(){
-  var { data: offres } = await sb.from('annonces')
-    .select('*, candidatures(count)')
-    .order('created_at',{ascending:false});
-  allAdminOffres = offres || [];
-  renderAdminOffres(allAdminOffres);
-}
-
-function renderAdminOffres(offres){
-  document.getElementById('offres-title').textContent = '📋 Offres de missions (' + offres.length + ')';
-  var container = document.getElementById('admin-offres-list');
-  if(offres.length === 0){
-    container.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucune annonce.</p>';
-    return;
-  }
-  var html = '';
-  offres.forEach(function(a){
-    var isPremium = a.is_premium;
-    var nbCands = a.candidatures && a.candidatures[0] ? a.candidatures[0].count : 0;
-    var date = new Date(a.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'});
-    var statusCls = a.status === 'active' ? 'status-done' : a.status === 'expired' ? 'status-new' : 'status-progress';
-    var statusTxt = a.status === 'active' ? 'Active' : a.status === 'expired' ? 'Expirée' : a.paused ? 'En pause' : 'Active';
-    if(a.paused){ statusCls = 'status-progress'; statusTxt = 'En pause'; }
-
-    html += '<div class="detail-card" id="admin-a-'+a.id+'">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
-      '<div><h4>'+(isPremium?'⭐ ':'')+a.title+' — '+a.category+'</h4>' +
-      '<p>'+a.city+' · '+(a.tarif_montant||'—')+'€/'+(a.tarif_type||'jour')+' · '+a.description.substring(0,60)+'</p></div>' +
-      '<span class="status-badge '+statusCls+'">'+statusTxt+'</span></div>' +
-      '<div class="detail-meta">' +
-      '<span class="detail-tag">'+(isPremium?'⭐ Premium (29€)':'Gratuite')+'</span>' +
-      '<span class="detail-tag">👥 '+nbCands+' candidature'+(nbCands>1?'s':'')+'</span>' +
-      '<span class="detail-tag">📅 '+date+'</span></div>' +
-      '<div class="action-btns">' +
-      '<button class="action-btn" onclick="adminVoirCandidatures(\''+a.id+'\',\''+a.title.replace(/'/g,"\\'")+'\')">👁 Voir candidatures ('+nbCands+')</button>' +
-      '<button class="action-btn danger" onclick="adminRetirerAnnonce(\''+a.id+'\')">🗑 Retirer</button>' +
-      '</div></div>';
-  });
-  container.innerHTML = html;
-}
-
-function filterAdminOffres(){
-  var q = document.getElementById('admin-offre-search').value.toLowerCase();
-  if(!q){ renderAdminOffres(allAdminOffres); return; }
-  var filtered = allAdminOffres.filter(function(a){
-    return (a.title||'').toLowerCase().includes(q) || (a.category||'').toLowerCase().includes(q) || (a.city||'').toLowerCase().includes(q);
-  });
-  renderAdminOffres(filtered);
-}
-
-async function adminVoirCandidatures(annonceId, titre){
-  document.getElementById('admin-cand-title').textContent = 'Candidatures — ' + titre;
-  document.getElementById('admin-cand-list').innerHTML = '<p style="text-align:center;padding:20px;color:var(--muted);">Chargement...</p>';
-  document.getElementById('modal-admin-candidatures').classList.add('open');
-
-  var { data: cands } = await sb.from('candidatures')
-    .select('*, profiles:user_id(full_name, email, phone, address, first_name, last_name)')
-    .eq('annonce_id', annonceId)
-    .order('created_at',{ascending:false});
-
-  if(!cands || cands.length === 0){
-    document.getElementById('admin-cand-list').innerHTML = '<p style="text-align:center;padding:30px;color:var(--muted);">Aucune candidature pour cette annonce.</p>';
-    return;
-  }
-
-  var html = '<p style="font-size:13px;color:var(--muted);margin-bottom:16px;">'+cands.length+' candidature'+(cands.length>1?'s':'')+'</p>';
-  cands.forEach(function(c){
-    var p = c.profiles || {};
-    var stBadge = c.status === 'acceptee' ? '<span class="status-badge status-done">Acceptée</span>' :
-                  c.status === 'refusee' ? '<span class="status-badge status-new">Refusée</span>' :
-                  c.status === 'bloquee' ? '<span class="status-badge" style="background:#333;color:#fff;">Bloquée</span>' :
-                  '<span class="status-badge status-progress">En attente</span>';
-    var date = new Date(c.created_at).toLocaleDateString('fr-FR');
-
-    html += '<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:10px;padding:16px;margin-bottom:12px;">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:8px;">' +
-      '<div>' +
-      '<h4 style="font-size:15px;font-weight:700;margin-bottom:4px;">'+(p.full_name||'Candidat inconnu')+'</h4>' +
-      '<div style="font-size:12px;color:var(--muted);">' +
-      '📧 '+(p.email||'—')+' · 📞 '+(p.phone||'—')+'</div>' +
-      (p.address ? '<div style="font-size:11px;color:var(--muted);margin-top:2px;">📍 '+p.address+'</div>' : '') +
-      '</div>' +
-      stBadge +
-      '</div>' +
-      (c.disponibilite ? '<div style="font-size:12px;margin-bottom:6px;"><strong>Disponibilité :</strong> '+c.disponibilite+'</div>' : '') +
-      (c.linkedin ? '<div style="font-size:12px;margin-bottom:6px;"><a href="'+c.linkedin+'" target="_blank" style="color:var(--accent);">🔗 Profil LinkedIn</a></div>' : '') +
-      (c.message ? '<div style="font-size:13px;line-height:1.5;background:#fff;border-radius:8px;padding:10px;margin-top:8px;border:1px solid #eee;">💬 '+c.message+'</div>' : '') +
-      '<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">' +
-      '<span style="font-size:11px;color:var(--muted);">Reçue le '+date+'</span>' +
-      (c.status === 'en_attente' ? 
-        '<button class="action-btn" style="font-size:11px;padding:4px 10px;background:var(--success);color:#fff;border-color:var(--success);" onclick="adminUpdateCandStatus(\''+c.id+'\',\'acceptee\',this)">✅ Accepter</button>' +
-        '<button class="action-btn" style="font-size:11px;padding:4px 10px;" onclick="adminUpdateCandStatus(\''+c.id+'\',\'refusee\',this)">❌ Refuser</button>'
-        : '') +
-      '</div></div>';
-  });
-  document.getElementById('admin-cand-list').innerHTML = html;
-}
-
-async function adminUpdateCandStatus(candId, status, btn){
-  var { error } = await sb.from('candidatures').update({ status: status }).eq('id', candId);
-  if(error){ alert('❌ ' + error.message); return; }
-  // Refresh — find parent card and reload
-  var card = btn.closest('[style*="background:#f8f9fa"]');
-  if(card){
-    var badge = card.querySelector('.status-badge');
-    if(status === 'acceptee'){
-      badge.className = 'status-badge status-done';
-      badge.textContent = 'Acceptée';
-    } else {
-      badge.className = 'status-badge status-new';
-      badge.textContent = 'Refusée';
-    }
-    var btns = card.querySelectorAll('button');
-    btns.forEach(function(b){ b.remove(); });
-  }
-}
-
-async function adminRetirerAnnonce(id){
-  if(!confirm('Retirer cette annonce ? Elle ne sera plus visible sur le site.')) return;
-  var { error } = await sb.from('annonces').update({ status: 'expired', paused: true }).eq('id', id);
-  if(error){ alert('❌ ' + error.message); return; }
-  var card = document.getElementById('admin-a-' + id);
-  if(card) card.style.opacity = '0.4';
-  alert('✅ Annonce retirée.');
-  await loadAdminOffres();
-}
-
-// ============================
-// ADMIN — DEMARCHES
-// ============================
-
-var allAdminDem = [];
-var adminDemFilter = 'all';
-
-var STEP_LABELS = {
-  _universal:['En attente d\'assignation','Constitution du dossier','Soumission pour validation','Validation client','Terminé']
-};
-// All types use same steps
-['nda','uai','qualiopi','edof','francetravail','rs','rs_rncp','opco','bpf','agent'].forEach(function(k){ STEP_LABELS[k] = STEP_LABELS._universal; });
-
-async function loadAdminDemarches(){
-  var { data: dems } = await sb.from('demarches')
-    .select('*, profiles:user_id(full_name, email, phone)')
-    .eq('paid', true)
-    .order('created_at',{ascending:false});
-  allAdminDem = dems || [];
-  renderAdminDemFilters();
-  renderAdminDem(allAdminDem);
-}
-
-function renderAdminDemFilters(){
-  var all = allAdminDem.length;
-  var news = allAdminDem.filter(function(d){ return (d.current_step||1)<=1; }).length;
-  var encours = allAdminDem.filter(function(d){ return (d.current_step||1)>1 && d.status!=='terminee'; }).length;
-  var done = allAdminDem.filter(function(d){ return d.status==='terminee'; }).length;
-
-  document.getElementById('admin-dem-title').textContent = '📄 Commandes démarches ('+all+')';
-  document.getElementById('admin-dem-filters').innerHTML =
-    '<button class="action-btn'+(adminDemFilter==='all'?' style="background:var(--accent);color:#fff;border-color:var(--accent);"':'')+'" onclick="filterAdminDem(\'all\')">Toutes ('+all+')</button>' +
-    '<button class="action-btn'+(adminDemFilter==='new'?' style="background:var(--accent);color:#fff;border-color:var(--accent);"':'')+'" onclick="filterAdminDem(\'new\')">🆕 Nouvelles ('+news+')</button>' +
-    '<button class="action-btn'+(adminDemFilter==='progress'?' style="background:var(--accent);color:#fff;border-color:var(--accent);"':'')+'" onclick="filterAdminDem(\'progress\')">⏳ En cours ('+encours+')</button>' +
-    '<button class="action-btn'+(adminDemFilter==='done'?' style="background:var(--accent);color:#fff;border-color:var(--accent);"':'')+'" onclick="filterAdminDem(\'done\')">✅ Terminées ('+done+')</button>';
-}
-
-function filterAdminDem(f){
-  adminDemFilter = f;
-  var filtered = allAdminDem;
-  if(f==='new') filtered = allAdminDem.filter(function(d){ return (d.current_step||1)<=1; });
-  if(f==='progress') filtered = allAdminDem.filter(function(d){ return (d.current_step||1)>1 && d.status!=='terminee'; });
-  if(f==='done') filtered = allAdminDem.filter(function(d){ return d.status==='terminee'; });
-  renderAdminDemFilters();
-  renderAdminDem(filtered);
-}
-
-function renderAdminDem(dems){
-  var container = document.getElementById('admin-dem-list');
-  if(dems.length===0){ container.innerHTML='<p style="text-align:center;padding:40px;color:var(--muted);">Aucune démarche.</p>'; return; }
-
-  var html='';
-  dems.forEach(function(d){
-    var p = d.profiles || {};
-    var steps = STEP_LABELS[d.type] || STEP_LABELS['nda'];
-    var cur = d.current_step || 1;
-    var total = steps.length;
-    var pct = Math.round((cur/total)*100);
-    var isDone = d.status === 'terminee' || cur >= total;
-    var amount = d.amount_cents ? (d.amount_cents/100) : '—';
-    var date = new Date(d.created_at).toLocaleDateString('fr-FR');
-    var stCls = isDone ? 'status-done' : cur<=1 ? 'status-new' : 'status-progress';
-    var stTxt = isDone ? 'Terminé' : cur<=1 ? 'Nouveau' : 'En cours';
-    var typeName = (d.type||'').toUpperCase().replace('_',' ').replace('FRANCETRAVAIL','France Travail').replace('RS RNCP','RS/RNCP');
-
-    html += '<div class="detail-card" id="admin-dem-'+d.id+'">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
-      '<div><h4>'+(p.full_name||'Client')+ ' — '+ typeName +'</h4>' +
-      '<p>📧 '+(p.email||'—')+' · 📞 '+(p.phone||'—')+'</p></div>' +
-      '<div style="text-align:right;"><div style="font-size:18px;font-weight:800;color:var(--accent);">'+amount+'€</div>' +
-      '<span class="status-badge '+stCls+'">'+stTxt+'</span></div></div>' +
-      '<div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:'+pct+'%;'+(isDone?'background:var(--success);':'')+'"></div></div>' +
-      '<p style="font-size:11px;color:'+(isDone?'var(--success)':'var(--muted)')+';">'+(isDone?'✅ '+steps[total-1]+' · Terminé':'Étape '+cur+'/'+total+' : '+steps[cur-1])+' · Commandé le '+date+'</p>' +
-      '<div class="action-btns">' +
-      '<button class="action-btn" onclick="adminVoirDossier(\''+d.id+'\',\'demarche\')">📄 Voir dossier</button>';
-
-    if(!isDone){
-      html += '<button class="action-btn" onclick="adminAdvanceStep(\''+d.id+'\',\'demarches\','+cur+','+total+')">➡️ Passer à l\'étape '+(cur+1)+'</button>';
-      html += '<button class="action-btn" onclick="adminContactClient(\''+((p.email||''))+'\',\''+(p.full_name||'Client').replace(/'/g,"\\'")+'\')">💬 Contacter client</button>';
-    }
-    html += '</div></div>';
-  });
-  container.innerHTML = html;
-}
-
-// ============================
-// ADMIN — CREATIONS OF
-// ============================
-
-async function loadAdminOF(){
-  var { data: ofs } = await sb.from('creations_of')
-    .select('*, profiles:user_id(full_name, email, phone), creation_of_options(*)')
-    .eq('paid', true)
-    .order('created_at',{ascending:false});
-  ofs = ofs || [];
-  document.getElementById('admin-of-title').textContent = '🏛 Créations d\'OF ('+ofs.length+')';
-
-  var container = document.getElementById('admin-of-list');
-  if(ofs.length===0){ container.innerHTML='<p style="text-align:center;padding:40px;color:var(--muted);">Aucune création d\'OF.</p>'; return; }
-
-  var OF_STEPS = {
-    action:['Réception dossier','Création société','Obtention NDA','Préparation Qualiopi','OF opérationnel'],
-    cfa:['Réception dossier','Création société','Obtention NDA','Demande UAI','Préparation Qualiopi','CFA opérationnel'],
-    bilan:['Réception dossier','Création société','Obtention NDA','Agrément bilan','OF opérationnel'],
-    vae:['Réception dossier','Création société','Obtention NDA','Habilitation VAE','OF opérationnel'],
-    elus:['Réception dossier','Création société','Agrément préfectoral','Obtention NDA','OF opérationnel'],
-    agent:['Configuration','Intégration données','OF opérationnel']
-  };
-
-  var html='';
-  ofs.forEach(function(c){
-    var p = c.profiles || {};
-    var steps = OF_STEPS[c.of_type] || OF_STEPS['action'];
-    var cur = c.current_step || 1;
-    var total = steps.length;
-    var pct = Math.round((cur/total)*100);
-    var isDone = c.status === 'terminee' || cur >= total;
-    var amount = c.total_price_cents ? (c.total_price_cents/100) : (c.base_price_cents ? c.base_price_cents/100 : '—');
-    var date = new Date(c.created_at).toLocaleDateString('fr-FR');
-    var stCls = isDone ? 'status-done' : cur<=1 ? 'status-new' : 'status-progress';
-    var stTxt = isDone ? 'Terminé' : cur<=1 ? 'Nouveau' : 'En cours';
-    var typeNames = {action:'Action de formation',cfa:'CFA',bilan:'Bilan de compétences',vae:'VAE',elus:'Formation élus',agent:'OF Agents IA'};
-    var typeName = typeNames[c.of_type] || c.of_type;
-
-    // Options
-    var opts = (c.creation_of_options||[]).map(function(o){ return o.option_type; });
-
-    html += '<div class="detail-card">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
-      '<div><h4>'+(p.full_name||'Client')+' — '+typeName+'</h4>' +
-      '<p>📧 '+(p.email||'—')+' · 📞 '+(p.phone||'—')+'</p></div>' +
-      '<div style="text-align:right;"><div style="font-size:18px;font-weight:800;color:var(--accent);">'+amount+'€</div>' +
-      '<span class="status-badge '+stCls+'">'+stTxt+'</span></div></div>' +
-      '<div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:'+pct+'%;'+(isDone?'background:var(--success);':'')+'"></div></div>' +
-      '<p style="font-size:11px;color:'+(isDone?'var(--success)':'var(--muted)')+';">'+(isDone?'✅ '+steps[total-1]:'Étape '+cur+'/'+total+' : '+steps[cur-1])+' · Commandé le '+date+'</p>' +
-      '<div class="detail-meta">' +
-      '<span class="detail-tag">📋 '+typeName+'</span>' +
-      (opts.length ? opts.map(function(o){ return '<span class="detail-tag">+ '+o+'</span>'; }).join('') : '') +
-      '<span class="detail-tag">💳 Payé en '+(c.payment_mode||1)+'x</span>' +
-      (c.has_kbis ? '<span class="detail-tag">🔖 KBIS existant (-100€)</span>' : '') +
-      '</div>' +
-      '<div class="action-btns">' +
-      '<button class="action-btn" onclick="adminVoirDossier(\''+c.id+'\',\'creation\')">📄 Voir dossier</button>';
-
-    if(!isDone){
-      html += '<button class="action-btn" onclick="adminAdvanceStep(\''+c.id+'\',\'creations_of\','+cur+','+total+')">➡️ Étape suivante</button>';
-      html += '<button class="action-btn" onclick="adminContactClient(\''+((p.email||''))+'\',\''+(p.full_name||'Client').replace(/'/g,"\\'")+'\')">💬 Contacter</button>';
-    }
-    html += '</div></div>';
-  });
-  container.innerHTML = html;
-}
-
-// ============================
-// ADMIN — SHARED ACTIONS
-// ============================
-
-async function adminAdvanceStep(id, table, currentStep, totalSteps){
-  var next = currentStep + 1;
-  if(next > totalSteps){
-    alert('Ce dossier est déjà à la dernière étape.');
-    return;
-  }
-  var isLast = next >= totalSteps;
-  var updateData = { current_step: next };
-  if(isLast) updateData.status = 'terminee';
-
-  var { error } = await sb.from(table).update(updateData).eq('id', id);
-  if(error){ alert('❌ ' + error.message); return; }
-
-  alert('✅ Dossier passé à l\'étape ' + next + (isLast ? ' — Terminé !' : ''));
-
-  // Reload the relevant list
-  if(table === 'demarches') await loadAdminDemarches();
-  else await loadAdminOF();
-}
-
-function adminContactClient(email, name){
-  if(!email){ alert('Pas d\'email pour ce client.'); return; }
-  var subject = encodeURIComponent('Votre dossier — lesformateurs.online');
-  var body = encodeURIComponent('Bonjour ' + name + ',\n\nConcernant votre dossier sur lesformateurs.online, ...\n\nCordialement,\nL\'équipe LFO');
-  window.open('mailto:' + email + '?subject=' + subject + '&body=' + body, '_blank');
-}
-
-function adminVoirDossier(id, type){
-  var source = type === 'creation' ? 'creation' : 'demarche';
-  window.open('expert.html#dossier-' + id + '-' + source, '_blank');
-}
-
-// ============================
-// ADMIN — USERS
-// ============================
-
-var allAdminUsers = [];
-
-async function loadAdminUsers(){
-  var { data: users } = await sb.from('profiles')
-    .select('*')
-    .order('created_at',{ascending:false});
-  allAdminUsers = users || [];
-  renderAdminUsers(allAdminUsers);
-}
-
-function renderAdminUsers(users){
-  document.getElementById('admin-users-title').textContent = '👥 Utilisateurs (' + users.length + ')';
-  var container = document.getElementById('admin-users-list');
-  if(users.length === 0){ container.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucun utilisateur.</p>'; return; }
-
-  var html = '';
-  users.forEach(function(u){
-    var date = u.created_at ? new Date(u.created_at).toLocaleDateString('fr-FR') : '—';
-    var isAdmin = u.profile_type === 'admin';
-    var isPro = u.is_pro === true;
-    var isBlocked = u.is_blocked === true;
-    var typeBadge = isAdmin ? '⚡ Admin' : isPro ? '🏆 Expert/Pro' : (u.profile_type || 'formateur');
-
-    html += '<div class="detail-card" id="admin-user-' + u.id + '" style="' + (isBlocked ? 'opacity:.5;border-left:3px solid #e94560;' : '') + '">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
-      '<div><h4>' + (u.full_name || u.email) + (isBlocked ? ' <span style="color:#e94560;font-size:11px;">🚫 BLOQUÉ</span>' : '') + '</h4>' +
-      '<p>📧 ' + (u.email || '—') + ' · 📞 ' + (u.phone || '—') + '</p></div>' +
-      '<span class="detail-tag">' + typeBadge + '</span></div>' +
-      '<div class="detail-meta">' +
-      '<span class="detail-tag">📅 Inscrit le ' + date + '</span>' +
-      (u.formation_purchased ? '<span class="detail-tag">🎓 Formation</span>' : '') +
-      (u.siren ? '<span class="detail-tag">🏢 SIREN: ' + u.siren + '</span>' : '') +
-      (u.address ? '<span class="detail-tag">📍 ' + u.address.substring(0, 40) + '</span>' : '') +
-      '</div>' +
-      '<div class="action-btns">' +
-      '<button class="action-btn" onclick="adminSendMsgTo(\'' + u.id + '\',\'' + (u.full_name || u.email).replace(/'/g, "\\'") + '\')">💬 Contacter</button>';
-
-    // Expert button
-    if(isPro && !isAdmin){
-      html += '<button class="action-btn" style="background:#aaa;color:#fff;border-color:#aaa;" onclick="adminDemotePro(\'' + u.id + '\')">↩️ Retirer Expert</button>';
-    } else if(!isPro && !isAdmin){
-      html += '<button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;" onclick="adminPromouvoirPro(\'' + u.id + '\')">⚡ Promouvoir Expert</button>';
-    }
-
-    // Admin button
-    if(isAdmin){
-      html += '<button class="action-btn" style="background:#e94560;color:#fff;border-color:#e94560;" onclick="adminDemoteAdmin(\'' + u.id + '\',\'' + (u.email||'').replace(/'/g,"\\'") + '\')">↩️ Retirer Admin</button>';
-    } else {
-      html += '<button class="action-btn" style="background:#1a1a2e;color:#fff;border-color:#1a1a2e;" onclick="adminPromoteAdmin(\'' + u.id + '\',\'' + (u.email||'').replace(/'/g,"\\'") + '\')">👑 Promouvoir Admin</button>';
-    }
-
-    // Block/unblock button (not for self)
-    if(isBlocked){
-      html += '<button class="action-btn" style="background:var(--success);color:#fff;border-color:var(--success);" onclick="adminDebloquer(\'' + u.id + '\')">✅ Réactiver</button>';
-    } else {
-      html += '<button class="action-btn danger" onclick="adminDesactiver(\'' + u.id + '\')">🚫 Désactiver</button>';
-    }
-
-    html += '</div></div>';
-  });
-  container.innerHTML = html;
-}
-
-function filterAdminUsers(){
-  var q = document.getElementById('admin-user-search').value.toLowerCase();
-  if(!q){ renderAdminUsers(allAdminUsers); return; }
-  var filtered = allAdminUsers.filter(function(u){
-    return (u.full_name || '').toLowerCase().includes(q) || (u.email || '').toLowerCase().includes(q) || (u.phone || '').includes(q);
-  });
-  renderAdminUsers(filtered);
-}
-
-async function adminPromouvoirPro(userId){
-  if(!confirm('Promouvoir cet utilisateur en Expert/Pro ?\n\nIl aura accès à l\'espace expert et pourra gérer des dossiers.')) return;
-  var { error } = await sb.from('profiles').update({ is_pro: true, profile_type: 'expert' }).eq('id', userId);
-  if(error){ alert('❌ Erreur : ' + error.message + '\n\nVérifiez que la policy RLS admin est en place.'); return; }
-  alert('✅ Utilisateur promu Expert/Pro !');
-  await loadAdminUsers();
-}
-
-async function adminDemotePro(userId){
-  if(!confirm('Retirer le statut Expert/Pro de cet utilisateur ?')) return;
-  var { error } = await sb.from('profiles').update({ is_pro: false, profile_type: 'formateur' }).eq('id', userId);
-  if(error){ alert('❌ Erreur : ' + error.message); return; }
-  alert('✅ Statut Expert retiré.');
-  await loadAdminUsers();
-}
-
-async function adminPromoteAdmin(userId, email){
-  if(!confirm('⚠️ Promouvoir ' + email + ' en ADMIN ?\n\nCet utilisateur aura un accès total au dashboard admin, aux utilisateurs et à tous les dossiers.')) return;
-  var { error } = await sb.from('profiles').update({ profile_type: 'admin', is_pro: true }).eq('id', userId);
-  if(error){ alert('❌ Erreur : ' + error.message); return; }
-  alert('✅ ' + email + ' est maintenant Admin !');
-  await loadAdminUsers();
-}
-
-async function adminDemoteAdmin(userId, email){
-  if(email === 'LFOadmin@gmail.com'){
-    alert('⚠️ Impossible de retirer les droits admin du compte principal.');
-    return;
-  }
-  if(!confirm('Retirer les droits admin de ' + email + ' ?\n\nIl redeviendra un utilisateur normal.')) return;
-  var { error } = await sb.from('profiles').update({ profile_type: 'formateur', is_pro: false }).eq('id', userId);
-  if(error){ alert('❌ Erreur : ' + error.message); return; }
-  alert('✅ Droits admin retirés pour ' + email);
-  await loadAdminUsers();
-}
-
-async function adminDesactiver(userId){
-  if(!confirm('⚠️ Désactiver ce compte ?\n\nL\'utilisateur sera bloqué et ne pourra plus accéder au site.')) return;
-  var { error } = await sb.from('profiles').update({ is_blocked: true }).eq('id', userId);
-  if(error){ alert('❌ Erreur : ' + error.message); return; }
-  alert('✅ Compte désactivé.');
-  await loadAdminUsers();
-}
-
-async function adminDebloquer(userId){
-  if(!confirm('Réactiver ce compte ?')) return;
-  var { error } = await sb.from('profiles').update({ is_blocked: false }).eq('id', userId);
-  if(error){ alert('❌ Erreur : ' + error.message); return; }
-  alert('✅ Compte réactivé.');
-  await loadAdminUsers();
-}
-
-// ============================
-// ADMIN — STAGIAIRES
-// ============================
-
-var allAdminStagiaires = [];
-
-async function loadAdminStagiaires(){
-  var { data: dossiers } = await sb.from('dossiers_financement')
-    .select('*, stagiaire:stagiaire_id(nom, prenom, email, telephone), formateur:user_id(full_name, email)')
-    .order('created_at',{ascending:false});
-  allAdminStagiaires = dossiers || [];
-  renderAdminStagiaires(allAdminStagiaires);
-}
-
-function renderAdminStagiaires(dossiers){
-  var c = document.getElementById('admin-stagiaires-list');
-  if(dossiers.length === 0){ c.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucun dossier de financement.</p>'; return; }
-
-  var statusMap = {en_attente_candidat:'En attente candidat',docs_recus:'Docs reçus',verification:'Vérification',en_preparation:'Préparation',en_attente_expert:'Expert demandé',soumis:'Soumis',termine:'Terminé'};
-  var h = '';
-  dossiers.forEach(function(d){
-    var stag = d.stagiaire || {};
-    var form = d.formateur || {};
-    var st = statusMap[d.status] || d.status;
-    var date = new Date(d.created_at).toLocaleDateString('fr-FR');
-    h += '<div class="detail-card"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
-      '<div><h4>🎓 ' + stag.prenom + ' ' + stag.nom + ' — ' + d.dispositif + '</h4>' +
-      '<p>📧 ' + stag.email + (stag.telephone ? ' · 📞 ' + stag.telephone : '') + '</p>' +
-      '<p style="font-size:12px;color:var(--muted);">Formateur : ' + (form.full_name || form.email || '—') + ' · ' + date + '</p>' +
-      (d.formation_title ? '<p style="font-size:12px;color:var(--muted);">📚 ' + d.formation_title + '</p>' : '') + '</div>' +
-      '<span class="detail-tag">' + st + '</span></div></div>';
-  });
-  c.innerHTML = h;
-}
-
-function filterAdminStagiaires(){
-  var q = document.getElementById('admin-stag-search').value.toLowerCase();
-  if(!q){ renderAdminStagiaires(allAdminStagiaires); return; }
-  var filtered = allAdminStagiaires.filter(function(d){
-    var s = d.stagiaire || {};
-    var f = d.formateur || {};
-    return (s.nom||'').toLowerCase().includes(q) || (s.prenom||'').toLowerCase().includes(q) || (s.email||'').toLowerCase().includes(q) || (f.full_name||'').toLowerCase().includes(q) || (d.dispositif||'').toLowerCase().includes(q);
-  });
-  renderAdminStagiaires(filtered);
-}
-
-// ============================
-// ADMIN — LEADS
-// ============================
-
-async function loadAdminLeads(){
-  var { data: leads } = await sb.from('leads').select('*').order('created_at',{ascending:false}).limit(100);
-  var c = document.getElementById('admin-leads-list');
-  if(!leads || leads.length === 0){ c.innerHTML = '<p style="text-align:center;padding:20px;color:var(--muted);">Aucun lead pour le moment.</p>'; return; }
-  var h = '<div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:8px;">' + leads.length + ' lead' + (leads.length > 1 ? 's' : '') + ' collectés</div>';
-  leads.forEach(function(l){
-    var date = new Date(l.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
-    var src = l.source || '—';
-    h += '<div class="detail-card" style="padding:12px 16px;"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">' +
-      '<div><strong>' + (l.name||'Sans nom') + '</strong> · ' + l.email + (l.phone ? ' · ' + l.phone : '') + '</div>' +
-      '<div><span class="detail-tag" style="font-size:10px;">' + src + '</span> <span style="font-size:11px;color:var(--muted);">' + date + '</span></div></div></div>';
-  });
-  c.innerHTML = h;
-}
-
-// ============================
-// ADMIN — EVENTS
-// ============================
-
-async function loadAdminEvents(){
-  var { data: events } = await sb.from('events').select('*').order('sort_order',{ascending:true});
-  var c = document.getElementById('admin-events-list');
-  if(!events || events.length === 0){ c.innerHTML = '<p style="text-align:center;padding:20px;color:var(--muted);">Aucun événement.</p>'; return; }
-  var typeLabels = { workshop:'Workshop', retreat:'Retraite', conference:'Conférence' };
-  var h = '';
-  events.forEach(function(e){
-    var d = new Date(e.event_date).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});
-    var full = e.is_full;
-    h += '<div class="detail-card" style="border-left:3px solid '+(full?'var(--muted)':'var(--accent)')+';">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
-      '<div><h4>'+(typeLabels[e.event_type]||'Event')+' — '+e.title+'</h4>' +
-      '<p>📍 '+e.location+' · 📅 '+d+' · '+e.price+'€ · '+(e.current_attendees||0)+'/'+(e.max_attendees||'∞')+' places</p></div>' +
-      '<div style="display:flex;gap:6px;">' +
-      '<span class="detail-tag" style="background:'+(full?'rgba(239,68,68,.08);color:#ef4444':'rgba(16,185,129,.08);color:#10b981')+';">'+(full?'COMPLET':'OUVERT')+'</span>' +
-      '<button class="action-btn" onclick="toggleEventFull(\''+e.id+'\','+(!full)+')">'+(full?'Rouvrir':'Fermer')+'</button>' +
-      '</div></div></div>';
-  });
-  // Event registrations from leads
-  var { data: evtLeads } = await sb.from('leads').select('*').like('source','event-%').order('created_at',{ascending:false}).limit(50);
-  if(evtLeads && evtLeads.length > 0){
-    h += '<h3 style="font-size:16px;font-weight:700;margin:24px 0 12px;">📧 Inscriptions événements ('+evtLeads.length+')</h3>';
-    evtLeads.forEach(function(l){
-      var date = new Date(l.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
-      var meta = l.metadata || {};
-      h += '<div class="detail-card" style="padding:12px 16px;"><strong>'+(l.name||'—')+'</strong> · '+l.email+' · '+(meta.event_title||l.source)+' · <span style="font-size:11px;color:var(--muted);">'+date+'</span></div>';
-    });
-  }
-  c.innerHTML = h;
-}
-
-async function toggleEventFull(id, isFull){
-  await sb.from('events').update({ is_full: isFull }).eq('id', id);
-  await loadAdminEvents();
-}
-
-// ============================
-// ADMIN — ACHATS
-// ============================
-
-var allAdminAchats = [];
-var achatsFilterMode = 'all';
-
-async function loadAdminAchats(){
-  var { data: achats } = await sb.from('achats')
-    .select('*, buyer:user_id(full_name, email), referrer:referrer_id(full_name, email, iban, iban_name)')
-    .order('created_at',{ascending:false});
-  allAdminAchats = achats || [];
-  renderAdminAchats(allAdminAchats);
-}
-
-function filterAchats(mode){
-  achatsFilterMode = mode;
-  document.getElementById('achats-filter-all').style.background = mode === 'all' ? 'var(--accent)' : '';
-  document.getElementById('achats-filter-all').style.color = mode === 'all' ? '#fff' : '';
-  document.getElementById('achats-filter-parrain').style.background = mode === 'parrain' ? 'var(--accent)' : '';
-  document.getElementById('achats-filter-parrain').style.color = mode === 'parrain' ? '#fff' : '';
-  var filtered = mode === 'parrain' ? allAdminAchats.filter(function(a){ return a.referrer_id; }) : allAdminAchats;
-  renderAdminAchats(filtered);
-}
-
-function filterAchatsSearch(){
-  var q = document.getElementById('admin-achats-search').value.toLowerCase();
-  var base = achatsFilterMode === 'parrain' ? allAdminAchats.filter(function(a){ return a.referrer_id; }) : allAdminAchats;
-  if(!q){ renderAdminAchats(base); return; }
-  var filtered = base.filter(function(a){
-    var b = a.buyer || {};
-    var r = a.referrer || {};
-    return (b.full_name||'').toLowerCase().includes(q) || (b.email||'').toLowerCase().includes(q) || (r.full_name||'').toLowerCase().includes(q) || (a.product_label||'').toLowerCase().includes(q) || (a.product_type||'').toLowerCase().includes(q);
-  });
-  renderAdminAchats(filtered);
-}
-
-function renderAdminAchats(achats){
-  var c = document.getElementById('admin-achats-list');
-  if(achats.length === 0){ c.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucun achat.</p>'; return; }
-
-  var totalCA = 0;
-  var totalCommissions = 0;
-  achats.forEach(function(a){ totalCA += (a.amount_cents||0); totalCommissions += (a.commission_cents||0); });
-
-  var h = '<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">' +
-    '<div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 16px;"><div style="font-size:20px;font-weight:900;color:var(--success);">' + (totalCA/100).toLocaleString('fr-FR') + '€</div><div style="font-size:11px;color:var(--muted);">CA total (' + achats.length + ' achats)</div></div>' +
-    '<div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 16px;"><div style="font-size:20px;font-weight:900;color:var(--accent);">' + (totalCommissions/100).toFixed(2) + '€</div><div style="font-size:11px;color:var(--muted);">Commissions à verser</div></div></div>';
-
-  achats.forEach(function(a){
-    var buyer = a.buyer || {};
-    var referrer = a.referrer || {};
-    var date = new Date(a.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-    var amount = ((a.amount_cents||0)/100);
-    var hasRef = !!a.referrer_id;
-    var commAmount = ((a.commission_cents||0)/100);
-
-    h += '<div class="detail-card" style="' + (hasRef ? 'border-left:3px solid #7c3aed;' : '') + '">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
-      '<div><h4>' + (a.product_label || a.product_type) + '</h4>' +
-      '<p style="font-size:12px;">Acheteur : <strong>' + (buyer.full_name || buyer.email || '—') + '</strong> · ' + date + '</p></div>' +
-      '<div style="text-align:right;"><div style="font-size:18px;font-weight:800;color:var(--success);">' + amount.toFixed(2) + '€</div></div></div>';
-
-    if(hasRef){
-      h += '<div style="background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.12);border-radius:8px;padding:10px 14px;margin-top:8px;font-size:12px;">' +
-        '<strong style="color:#7c3aed;">🎁 Parrain à payer :</strong> ' + (referrer.full_name || referrer.email || '—') +
-        ' · <strong style="color:var(--accent);">' + commAmount.toFixed(2) + '€</strong>' +
-        (referrer.iban ? ' · IBAN: ' + referrer.iban.substring(0,12) + '...' : ' · <span style="color:#e94560;">⚠️ Pas d\'IBAN</span>') +
-        (referrer.iban_name ? ' · Titulaire: ' + referrer.iban_name : '') +
-        '</div>';
-    }
-    h += '</div>';
-  });
-  c.innerHTML = h;
-}
-
-// ============================
-// ADMIN — MESSAGERIE
-// ============================
-
-var allAdminMsg = [];
-var adminMsgFilter = 'all';
-var adminUserId = null;
-
-async function loadAdminMessages(){
-  var user = await getUser();
-  adminUserId = user ? user.id : null;
-  var { data: msgs } = await sb.from('admin_messages')
-    .select('*, sender:sender_id(full_name, email), recipient:recipient_id(full_name, email)')
-    .order('created_at',{ascending:false});
-  allAdminMsg = msgs || [];
-  renderAdminMsg(allAdminMsg);
-}
-
-function filterAdminMsg(f){
-  adminMsgFilter = f;
-  document.querySelectorAll('#tab-messagerie .action-btn').forEach(function(b){ b.style.background=''; b.style.color=''; b.style.borderColor=''; });
-  document.getElementById('btn-msg-' + f).style.background = 'var(--accent)';
-  document.getElementById('btn-msg-' + f).style.color = '#fff';
-  document.getElementById('btn-msg-' + f).style.borderColor = 'var(--accent)';
-
-  var filtered = allAdminMsg;
-  if(f === 'unread') filtered = allAdminMsg.filter(function(m){ return m.recipient_id === adminUserId && !m.is_read; });
-  if(f === 'sent') filtered = allAdminMsg.filter(function(m){ return m.sender_id === adminUserId; });
-  renderAdminMsg(filtered);
-}
-
-function renderAdminMsg(msgs){
-  var container = document.getElementById('admin-msg-list');
-  if(msgs.length === 0){ container.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">Aucun message.</p>'; return; }
-
-  var html = '';
-  msgs.forEach(function(m){
-    var isReceived = m.recipient_id === adminUserId;
-    var otherName = isReceived ? (m.sender ? m.sender.full_name || m.sender.email : 'Inconnu') : (m.recipient ? m.recipient.full_name || m.recipient.email : 'Inconnu');
-    var date = new Date(m.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
-    var unread = isReceived && !m.is_read;
-
-    html += '<div class="detail-card" style="' + (unread ? 'border-left:3px solid var(--accent);background:#fef0f3;' : '') + 'cursor:pointer;" onclick="openAdminMsgDetail(\'' + m.id + '\')">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">' +
-      '<div><h4 style="font-size:14px;">' + (isReceived ? '📩 De : ' : '📤 À : ') + otherName + '</h4>' +
-      '<p style="font-size:13px;font-weight:' + (unread ? '700' : '400') + ';">' + (m.subject || 'Sans objet') + '</p></div>' +
-      '<span style="font-size:11px;color:var(--muted);">' + date + '</span></div>' +
-      '<p style="font-size:12px;color:var(--muted);margin-top:6px;">' + (m.content || '').substring(0, 100) + '...</p></div>';
-  });
-  container.innerHTML = html;
-}
-
-async function openAdminMsgDetail(msgId){
-  var msg = allAdminMsg.find(function(m){ return m.id === msgId; });
-  if(!msg) return;
-
-  // Mark as read
-  if(msg.recipient_id === adminUserId && !msg.is_read){
-    await sb.from('admin_messages').update({ is_read: true }).eq('id', msgId);
-    msg.is_read = true;
-  }
-
-  var isReceived = msg.recipient_id === adminUserId;
-  var otherName = isReceived ? (msg.sender ? msg.sender.full_name || msg.sender.email : 'Inconnu') : (msg.recipient ? msg.recipient.full_name || msg.recipient.email : 'Inconnu');
-  var date = new Date(msg.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-
-  document.getElementById('admin-msg-detail-content').innerHTML =
-    '<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #e0e0e0;">' +
-    '<p style="font-size:12px;color:var(--muted);">' + (isReceived ? 'De : ' : 'À : ') + '<strong>' + otherName + '</strong> · ' + date + '</p>' +
-    '<h3 style="font-size:18px;font-weight:700;margin-top:8px;">' + (msg.subject || 'Sans objet') + '</h3></div>' +
-    '<div style="font-size:14px;line-height:1.8;white-space:pre-wrap;">' + (msg.content || '') + '</div>' +
-    (isReceived ? '<div style="margin-top:20px;"><button class="btn btn-primary" style="padding:8px 20px;font-size:13px;" onclick="adminReplyTo(\'' + msg.sender_id + '\',\'' + otherName.replace(/'/g, "\\'") + '\',\'' + (msg.subject || '').replace(/'/g, "\\'") + '\')">↩️ Répondre</button></div>' : '');
-
-  document.getElementById('modal-admin-msg-detail').classList.add('open');
-}
-
-function openAdminComposeMsg(){
-  document.getElementById('compose-recipient-id').value = '';
-  document.getElementById('compose-search').value = '';
-  document.getElementById('compose-subject').value = '';
-  document.getElementById('compose-body').value = '';
-  document.getElementById('compose-error').style.display = 'none';
-  document.getElementById('compose-results').style.display = 'none';
-  document.getElementById('compose-selected').style.display = 'none';
-  document.getElementById('compose-search').style.display = '';
-  document.getElementById('modal-admin-compose').classList.add('open');
-}
-
-function searchComposeRecipient(){
-  var q = document.getElementById('compose-search').value.toLowerCase().trim();
-  var results = document.getElementById('compose-results');
-  if(q.length < 1){ results.style.display = 'none'; return; }
-
-  var filtered = allAdminUsers.filter(function(u){
-    return (u.full_name||'').toLowerCase().includes(q) || (u.email||'').toLowerCase().includes(q);
-  }).slice(0, 10);
-
-  if(filtered.length === 0){
-    results.innerHTML = '<div style="padding:10px 14px;font-size:13px;color:var(--muted);">Aucun résultat</div>';
-  } else {
-    var h = '';
-    filtered.forEach(function(u){
-      var role = u.profile_type === 'admin' ? '👑 Admin' : u.is_pro ? '⚡ Expert' : '👤 Utilisateur';
-      var roleColor = u.profile_type === 'admin' ? '#7c3aed' : u.is_pro ? '#6366f1' : 'var(--muted)';
-      h += '<div style="padding:10px 14px;cursor:pointer;border-bottom:1px solid #f0f0f0;transition:background .1s;" onmouseover="this.style.background=\'#f8f8f8\'" onmouseout="this.style.background=\'#fff\'" onclick="selectComposeRecipient(\'' + u.id + '\',\'' + (u.full_name||u.email).replace(/'/g,"\\'") + '\',\'' + (u.email||'').replace(/'/g,"\\'") + '\')">' +
-        '<div style="font-size:13px;font-weight:600;">' + (u.full_name || 'Sans nom') + '</div>' +
-        '<div style="font-size:11px;color:var(--muted);">' + u.email + ' · <span style="color:' + roleColor + ';">' + role + '</span></div></div>';
-    });
-    results.innerHTML = h;
-  }
-  results.style.display = '';
-}
-
-function selectComposeRecipient(id, name, email){
-  document.getElementById('compose-recipient-id').value = id;
-  document.getElementById('compose-search').style.display = 'none';
-  document.getElementById('compose-results').style.display = 'none';
-  document.getElementById('compose-selected').style.display = '';
-  document.getElementById('compose-selected-name').innerHTML = '<strong>' + name + '</strong> · ' + email;
-}
-
-function clearComposeRecipient(){
-  document.getElementById('compose-recipient-id').value = '';
-  document.getElementById('compose-search').value = '';
-  document.getElementById('compose-search').style.display = '';
-  document.getElementById('compose-selected').style.display = 'none';
-  document.getElementById('compose-search').focus();
-}
-
-// Close search results when clicking outside
-document.addEventListener('click', function(e){
-  if(!e.target.closest('#compose-search') && !e.target.closest('#compose-results')){
-    var r = document.getElementById('compose-results');
-    if(r) r.style.display = 'none';
-  }
-});
-
-function adminSendMsgTo(userId, name){
-  openAdminComposeMsg();
-  selectComposeRecipient(userId, name, '');
-  document.getElementById('compose-subject').value = '';
-  document.getElementById('compose-body').value = '';
-}
-
-function adminReplyTo(userId, name, subject){
-  document.getElementById('modal-admin-msg-detail').classList.remove('open');
-  openAdminComposeMsg();
-  selectComposeRecipient(userId, name, '');
-  document.getElementById('compose-subject').value = 'Re: ' + subject;
-  document.getElementById('compose-body').focus();
-}
-
-async function sendAdminCompose(){
-  var recipientId = document.getElementById('compose-recipient-id').value;
-  var subject = document.getElementById('compose-subject').value.trim();
-  var body = document.getElementById('compose-body').value.trim();
-  var errDiv = document.getElementById('compose-error');
-
-  if(!recipientId){ errDiv.textContent = '⚠️ Recherchez et sélectionnez un destinataire.'; errDiv.style.display = ''; return; }
-  if(!body){ errDiv.textContent = '⚠️ Le message ne peut pas être vide.'; errDiv.style.display = ''; return; }
-  errDiv.style.display = 'none';
-
-  var { error } = await sb.from('admin_messages').insert({
-    sender_id: adminUserId,
-    recipient_id: recipientId,
-    subject: subject || 'Message de l\'administration',
-    content: body
-  });
-  if(error){ errDiv.textContent = '❌ ' + error.message; errDiv.style.display = ''; return; }
-
-  document.getElementById('modal-admin-compose').classList.remove('open');
-  alert('✅ Message envoyé !');
-  await loadAdminMessages();
-}
-</script>
-
-<!-- MODAL CANDIDATURES ADMIN -->
-<div class="modal" id="modal-admin-candidatures">
-  <div class="modal-box" style="max-width:700px;max-height:85vh;overflow-y:auto;">
-    <button class="modal-close" onclick="document.getElementById('modal-admin-candidatures').classList.remove('open')">✕</button>
-    <h3 style="font-size:20px;font-weight:800;margin-bottom:4px;" id="admin-cand-title">Candidatures</h3>
-    <div id="admin-cand-list"></div>
-  </div>
-</div>
-
 <!-- MODAL MESSAGE DETAIL -->
-<div class="modal" id="modal-admin-msg-detail">
-  <div class="modal-box" style="max-width:600px;">
-    <button class="modal-close" onclick="document.getElementById('modal-admin-msg-detail').classList.remove('open')">✕</button>
-    <div id="admin-msg-detail-content"></div>
+<div class="modal" id="modal-msg-detail">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal-msg-detail').classList.remove('open')">✕</button>
+    <div id="msg-detail-content"></div>
   </div>
 </div>
 
-<!-- MODAL COMPOSE MESSAGE -->
-<div class="modal" id="modal-admin-compose">
-  <div class="modal-box" style="max-width:600px;">
-    <button class="modal-close" onclick="document.getElementById('modal-admin-compose').classList.remove('open')">✕</button>
+<!-- MODAL COMPOSE -->
+<div class="modal" id="modal-compose">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal-compose').classList.remove('open')">✕</button>
     <h3 style="font-size:18px;font-weight:800;margin-bottom:16px;">✉️ Nouveau message</h3>
     <div style="margin-bottom:12px;">
       <label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px;">Destinataire</label>
       <div style="position:relative;">
-        <input type="text" id="compose-search" placeholder="🔍 Rechercher un utilisateur ou expert..." oninput="searchComposeRecipient()" onfocus="document.getElementById('compose-results').style.display=''" style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;">
-        <div id="compose-results" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #e0e0e0;border-top:none;border-radius:0 0 8px 8px;max-height:200px;overflow-y:auto;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.1);"></div>
+        <input type="text" id="compose-search" placeholder="🔍 Rechercher..." oninput="searchComposeRecipient()" style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;">
+        <div id="compose-results" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #e0e0e0;border-top:none;border-radius:0 0 8px 8px;max-height:200px;overflow-y:auto;z-index:100;"></div>
       </div>
-      <div id="compose-selected" style="display:none;margin-top:8px;padding:8px 12px;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.15);border-radius:8px;font-size:13px;display:none;">
+      <div id="compose-selected" style="display:none;margin-top:8px;padding:8px 12px;background:rgba(233,69,96,.06);border:1px solid rgba(233,69,96,.15);border-radius:8px;font-size:13px;">
         <span id="compose-selected-name"></span>
         <button onclick="clearComposeRecipient()" style="float:right;border:none;background:none;color:var(--accent);cursor:pointer;font-weight:700;">✕</button>
       </div>
     </div>
     <div style="margin-bottom:12px;">
       <label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px;">Objet</label>
-      <input type="text" id="compose-subject" placeholder="Objet du message" style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;">
+      <input type="text" id="compose-subject" placeholder="Objet" style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;">
     </div>
     <div style="margin-bottom:12px;">
       <label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px;">Message</label>
-      <textarea id="compose-body" rows="6" placeholder="Votre message..." style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;resize:vertical;"></textarea>
+      <textarea id="compose-body" rows="5" placeholder="Votre message..." style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;resize:vertical;font-family:inherit;"></textarea>
     </div>
     <input type="hidden" id="compose-recipient-id">
-    <div id="compose-error" style="display:none;color:#e94560;font-size:12px;margin-bottom:10px;"></div>
-    <button class="btn btn-primary" onclick="sendAdminCompose()" style="padding:10px 24px;">📤 Envoyer</button>
+    <div id="compose-error" style="display:none;color:var(--accent);font-size:12px;margin-bottom:10px;"></div>
+    <button class="btn-accent" onclick="sendCompose()" style="padding:10px 24px;">📤 Envoyer</button>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/referral.js"></script>
+<script>
+// ============================
+// GLOBALS
+// ============================
+var adminUserId = null;
+var allAdminDem = [];
+var allAdminUsers = [];
+var allAdminMsg = [];
+var adminDemFilter = 'all';
+var adminMsgFilter = 'all';
+
+var ndSelectedUser = null;
+var ndSelectedType = null;
+var ndTypeInfo = {
+  edof:{label:'Ouverture EDOF',steps:6,price:490,stripe:'https://buy.stripe.com/fZubJ1g1Y0YJ7Qiakqffy2r'},
+  action_formation:{label:'Création OF',steps:4,price:990,stripe:'https://buy.stripe.com/3cI28rdTQcHr8Um78effy2s'},
+  qualiopi:{label:'Qualiopi',steps:4,price:0},
+  rsrncp:{label:'Habilitation RS/RNCP',steps:4,price:990,stripe:'https://buy.stripe.com/8x2aEX6ro22NdaC9gmffy2t'},
+  domiciliation:{label:'Domiciliation',steps:2,price:390,stripe:'https://buy.stripe.com/dRm9AT4jg5eZ2vY1NUffy2u'},
+  pack_complet:{label:'Pack Centre complet',steps:6,price:0},
+  agents_ia:{label:'Agents IA',steps:3,price:0},
+  opco_ft_region:{label:'OPCO/FT/Région',steps:4,price:0}
+};
+
+var STEP_LABELS = {
+  edof:['Documents & Infos','Vérification','Dépôt formulaire','Dépôt dossier','Webinaire','Accès EDOF'],
+  action_formation:['Documents','Vérification','Traitement','Terminé'],
+  qualiopi:['Documents','Audit initial','Corrections','Certification'],
+  rsrncp:['Documents','Vérification','Dépôt','Habilitation'],
+  domiciliation:['Documents','Activation'],
+  pack_complet:['Documents','Création société','NDA','Qualiopi','EDOF','Terminé'],
+  agents_ia:['Configuration','Intégration','Opérationnel'],
+  opco_ft_region:['Documents','Référencement','Validation','Terminé']
+};
+
+// ============================
+// NAV
+// ============================
+function showTab(name){
+  document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.sidebar a').forEach(function(a){a.classList.remove('active');});
+  var tab = document.getElementById('tab-'+name);
+  if(tab) tab.classList.add('active');
+  document.querySelectorAll('.sidebar a').forEach(function(a){
+    if(a.getAttribute('onclick') && a.getAttribute('onclick').indexOf("'"+name+"'") > -1) a.classList.add('active');
+  });
+  window.scrollTo(0,0);
+}
+
+function setFontSize(s){
+  var sizes = {normal:'15px',large:'17px',xlarge:'20px'};
+  document.body.style.fontSize = sizes[s] || '15px';
+  document.querySelectorAll('.fst-btn').forEach(function(b){b.classList.remove('active');});
+  event.target.classList.add('active');
+}
+
+// ============================
+// AUTH GUARD
+// ============================
+(async function(){
+  var user = await getUser();
+  if(!user){ window.location.href='index.html'; return; }
+  adminUserId = user.id;
+  var profile = await getProfile();
+  if(!profile || (profile.profile_type !== 'admin' && profile.is_admin !== true)){
+    alert('Accès réservé aux administrateurs.');
+    window.location.href='dashboard.html';
+    return;
+  }
+  if(profile.is_pro){
+    var eb = document.getElementById('nav-expert-btn');
+    if(eb) eb.style.display='';
+  }
+  await loadAdminDashboard();
+  await loadAdminDemarches();
+  await loadAdminUsers();
+  await loadAdminMessages();
+  await loadAdminEvents();
+})();
+
+// ============================
+// DASHBOARD STATS
+// ============================
+async function loadAdminDashboard(){
+  try{
+    var {data:dems} = await sb.from('demarches').select('id,paid,amount_cents');
+    dems = dems || [];
+    document.getElementById('tb-demarches').textContent = dems.length;
+    var {data:users} = await sb.from('profiles').select('id');
+    document.getElementById('tb-users').textContent = (users||[]).length;
+    var ca = 0;
+    dems.forEach(function(d){ if(d.paid && d.amount_cents) ca += d.amount_cents; });
+    document.getElementById('tb-ca').textContent = (ca/100).toLocaleString('fr-FR') + '€';
+  }catch(e){console.log('stats error',e);}
+}
+
+// ============================
+// DÉMARCHES
+// ============================
+async function loadAdminDemarches(){
+  var {data:dems} = await sb.from('demarches')
+    .select('*, profiles:user_id(first_name, last_name, email, phone)')
+    .order('created_at',{ascending:false});
+  allAdminDem = dems || [];
+  renderDemFilters();
+  renderDemList(allAdminDem);
+}
+
+function renderDemFilters(){
+  var all = allAdminDem.length;
+  var news = allAdminDem.filter(function(d){return !d.assigned_expert_id && (d.current_step||1)<=1;}).length;
+  var encours = allAdminDem.filter(function(d){return d.assigned_expert_id && d.status!=='terminee';}).length;
+  var done = allAdminDem.filter(function(d){return d.status==='terminee';}).length;
+  document.getElementById('admin-dem-title').textContent = '📄 Commandes démarches ('+all+')';
+  var h = '';
+  h += '<button class="action-btn" style="'+(adminDemFilter==='all'?'background:var(--accent);color:#fff;border-color:var(--accent);':'')+'" onclick="filterDem(\'all\')">Toutes ('+all+')</button>';
+  h += '<button class="action-btn" style="'+(adminDemFilter==='unassigned'?'background:var(--accent);color:#fff;border-color:var(--accent);':'')+'" onclick="filterDem(\'unassigned\')">🆕 Non assignées ('+news+')</button>';
+  h += '<button class="action-btn" style="'+(adminDemFilter==='progress'?'background:var(--accent);color:#fff;border-color:var(--accent);':'')+'" onclick="filterDem(\'progress\')">⏳ En cours ('+encours+')</button>';
+  h += '<button class="action-btn" style="'+(adminDemFilter==='done'?'background:var(--accent);color:#fff;border-color:var(--accent);':'')+'" onclick="filterDem(\'done\')">✅ Terminées ('+done+')</button>';
+  document.getElementById('admin-dem-filters').innerHTML = h;
+}
+
+function filterDem(f){
+  adminDemFilter = f;
+  var filtered = allAdminDem;
+  if(f==='unassigned') filtered = allAdminDem.filter(function(d){return !d.assigned_expert_id && (d.current_step||1)<=1;});
+  if(f==='progress') filtered = allAdminDem.filter(function(d){return d.assigned_expert_id && d.status!=='terminee';});
+  if(f==='done') filtered = allAdminDem.filter(function(d){return d.status==='terminee';});
+  renderDemFilters();
+  renderDemList(filtered);
+}
+
+function renderDemList(dems){
+  var c = document.getElementById('admin-dem-list');
+  if(dems.length===0){c.innerHTML='<p style="text-align:center;padding:40px;color:var(--muted);">Aucune démarche.</p>';return;}
+  var h = '';
+  dems.forEach(function(d){
+    var p = d.profiles || {};
+    var name = ((p.first_name||'')+' '+(p.last_name||'')).trim() || p.email || 'Client';
+    var type = d.type || 'edof';
+    var typeName = (ndTypeInfo[type]||{label:type}).label;
+    var steps = STEP_LABELS[type] || ['Documents','Vérification','Traitement','Terminé'];
+    var cur = d.current_step || 1;
+    var total = steps.length;
+    var pct = Math.round((cur/total)*100);
+    var isDone = d.status==='terminee' || cur>=total;
+    var amount = d.amount_cents ? (d.amount_cents/100) : '—';
+    var date = new Date(d.created_at).toLocaleDateString('fr-FR');
+    var badgeCls = isDone ? 'badge-done' : !d.assigned_expert_id ? 'badge-new' : 'badge-progress';
+    var badgeTxt = isDone ? 'Terminé' : !d.assigned_expert_id ? 'Non assigné' : 'En cours';
+    var isAdminCreated = d.metadata && d.metadata.created_by === 'admin';
+
+    h += '<div class="card">';
+    h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">';
+    h += '<div><h4>'+name+' — '+typeName+'</h4>';
+    h += '<p>📧 '+(p.email||'—')+' · 📞 '+(p.phone||'—')+'</p></div>';
+    h += '<div style="text-align:right;"><div style="font-size:18px;font-weight:800;color:var(--accent);">'+amount+'€</div>';
+    h += '<span class="badge '+badgeCls+'">'+badgeTxt+'</span></div></div>';
+    h += '<div class="progress-bar" style="margin:10px 0;"><div class="progress-fill" style="width:'+pct+'%;'+(isDone?'background:var(--success);':'')+'"></div></div>';
+    h += '<p style="font-size:11px;color:'+(isDone?'var(--success)':'var(--muted)')+';">'+(isDone?'✅ Terminé':'Étape '+cur+'/'+total+' : '+steps[cur-1])+' · Commandé le '+date+'</p>';
+    if(d.assigned_expert_name) h += '<p style="font-size:11px;color:#7c3aed;margin-top:4px;">⚡ Expert : '+d.assigned_expert_name+'</p>';
+    h += '<div class="action-btns">';
+    h += '<button class="action-btn" onclick="adminVoirDossier(\''+d.id+'\')">📄 Voir dossier</button>';
+    h += '<button class="action-btn" onclick="adminMsgClient(\''+d.user_id+'\',\''+name.replace(/'/g,'')+'\')">💬 Contacter</button>';
+    if(isAdminCreated) h += '<button class="action-btn" style="color:#A32D2D;border-color:#FCEBEB;" onclick="adminDeleteDemarche(\''+d.id+'\')">🗑 Supprimer</button>';
+    h += '</div></div>';
+  });
+  c.innerHTML = h;
+}
+
+// NEW DEMARCHE FORM
+function openNewDemarcheForm(){
+  document.getElementById('tab-demarches').style.display='none';
+  document.getElementById('admin-new-dem').style.display='block';
+  ndSelectedUser=null; ndSelectedType=null;
+  document.getElementById('nd-search').value='';
+  document.getElementById('nd-user-results').innerHTML='';
+  document.getElementById('nd-user-selected').style.display='none';
+  document.querySelectorAll('.nd-type-label').forEach(function(l){l.style.borderColor='var(--border)';l.style.background='';});
+  ['nd-recap-client','nd-recap-email','nd-recap-type','nd-recap-steps','nd-recap-amount'].forEach(function(id){document.getElementById(id).textContent='—';});
+}
+function closeNewDemarcheForm(){
+  document.getElementById('admin-new-dem').style.display='none';
+  document.getElementById('tab-demarches').style.display='block';
+}
+
+async function searchUserForDem(q){
+  if(q.length<2){document.getElementById('nd-user-results').innerHTML='';return;}
+  var {data}=await sb.from('profiles').select('id,first_name,last_name,email,phone').or('email.ilike.%'+q+'%,first_name.ilike.%'+q+'%,last_name.ilike.%'+q+'%').limit(8);
+  if(!data||!data.length){document.getElementById('nd-user-results').innerHTML='<p style="padding:10px;font-size:12px;color:var(--muted);">Aucun résultat</p>';return;}
+  var h='';
+  data.forEach(function(u){
+    var n=((u.first_name||'')+' '+(u.last_name||'')).trim()||u.email;
+    var ini=((u.first_name||'?')[0]+(u.last_name||'?')[0]).toUpperCase();
+    h+='<div style="display:flex;align-items:center;gap:10px;padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--border);" onclick="selectUserForDem(\''+u.id+'\',\''+n.replace(/'/g,'')+'\',\''+u.email+'\',\''+ini+'\')">';
+    h+='<div style="width:32px;height:32px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#534AB7;">'+ini+'</div>';
+    h+='<div><p style="font-size:13px;font-weight:600;margin:0;">'+n+'</p><p style="font-size:11px;color:var(--muted);margin:0;">'+u.email+'</p></div></div>';
+  });
+  document.getElementById('nd-user-results').innerHTML=h;
+}
+
+function selectUserForDem(id,name,email,ini){
+  ndSelectedUser={id:id,name:name,email:email};
+  document.getElementById('nd-user-results').innerHTML='';
+  document.getElementById('nd-search').value='';
+  var sel=document.getElementById('nd-user-selected');
+  sel.style.display='flex';sel.style.alignItems='center';sel.style.gap='10px';
+  sel.innerHTML='<div style="width:32px;height:32px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#534AB7;">'+ini+'</div><div><p style="font-size:13px;font-weight:600;margin:0;">'+name+'</p><p style="font-size:11px;color:var(--muted);margin:0;">'+email+'</p></div>';
+  document.getElementById('nd-recap-client').textContent=name;
+  document.getElementById('nd-recap-email').textContent=email;
+  updateNdRecap();
+}
+
+function selectDemType(el,type){
+  ndSelectedType=type;
+  document.querySelectorAll('.nd-type-label').forEach(function(l){l.style.borderColor='var(--border)';l.style.background='';});
+  el.style.borderColor='var(--accent)';el.style.background='rgba(233,69,96,.03)';
+  updateNdRecap();
+}
+
+function updateNdRecap(){
+  if(!ndSelectedType)return;
+  var info=ndTypeInfo[ndSelectedType];
+  document.getElementById('nd-recap-type').textContent=info.label;
+  document.getElementById('nd-recap-steps').textContent=info.steps+' étapes';
+  document.getElementById('nd-recap-amount').textContent=info.price?info.price+'€':'Devis';
+}
+
+async function submitNewDemarche(){
+  if(!ndSelectedUser){alert('Sélectionnez un utilisateur');return;}
+  if(!ndSelectedType){alert('Sélectionnez un type');return;}
+  var info=ndTypeInfo[ndSelectedType];
+  var paidVal=document.getElementById('nd-paid').value;
+  var customAmount=parseInt(document.getElementById('nd-amount').value);
+  var amount=customAmount||info.price;
+  var note=document.getElementById('nd-note').value.trim();
+  var isPaid=paidVal==='true'||paidVal==='offert';
+  var {data:newDem,error}=await sb.from('demarches').insert({
+    user_id:ndSelectedUser.id,
+    type:ndSelectedType,
+    status:'nouveau',
+    current_step:1,
+    amount_cents:amount*100,
+    paid:isPaid,
+    for_self:true,
+    client_name:ndSelectedUser.name,
+    client_email:ndSelectedUser.email,
+    expert_comment:note||null,
+    metadata:{created_by:'admin',payment_status:paidVal,payment_link:'',custom_amount:customAmount||0}
+  }).select().single();
+  if(error){alert('Erreur: '+error.message);return;}
+
+  var paymentLink='';
+  if(amount>0 && !isPaid){
+    try{
+      var sr=await fetch('https://webhook.lesformateurs.online/create-stripe-link',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          entity:'demarche',
+          entity_id:newDem.id,
+          amount_cents:amount*100,
+          payment_mode:'comptant',
+          installment_cents:0,
+          installments_total:1,
+          label:info.label,
+          type:ndSelectedType,
+          user_email:ndSelectedUser.email
+        })
+      });
+      var j=await sr.json();
+      if(j&&j.url){
+        paymentLink=j.url;
+        await sb.from('demarches').update({
+          metadata:{created_by:'admin',payment_status:paidVal,payment_link:paymentLink,custom_amount:customAmount||0}
+        }).eq('id',newDem.id);
+      }
+    }catch(e){console.error('Stripe link error:',e);}
+  }
+
+  alert('Démarche créée !'+(paymentLink?'\n\nLien de paiement (montant: '+amount+'€):\n'+paymentLink:''));
+  closeNewDemarcheForm();
+  await loadAdminDemarches();
+  await loadAdminDashboard();
+}
+
+async function adminDeleteDemarche(id){
+  if(!confirm('Supprimer cette démarche ? Action irréversible.'))return;
+  await sb.from('demarche_documents').delete().eq('demarche_id',id);
+  await sb.from('demarche_formations').delete().eq('demarche_id',id);
+  var {error}=await sb.from('demarches').delete().eq('id',id);
+  if(error){alert('Erreur: '+error.message);return;}
+  alert('Démarche supprimée.');
+  await loadAdminDemarches();
+  await loadAdminDashboard();
+}
+
+async function adminVoirDossier(id){
+  var d = allAdminDem.find(function(x){return x.id===id;});
+  if(!d) return;
+  var p = d.profiles||{};
+  var name=((p.first_name||'')+' '+(p.last_name||'')).trim()||p.email||'Client';
+  var type=d.type||'edof';
+  var typeName=(ndTypeInfo[type]||{label:type}).label;
+  var steps=STEP_LABELS[type]||['Documents','Vérification','Traitement','Terminé'];
+  var cur=d.current_step||1;
+
+  // Charger les documents
+  var {data:docs}=await sb.from('demarche_documents').select('*').eq('demarche_id',id);
+  docs=docs||[];
+
+  // Charger les formations
+  var {data:formations}=await sb.from('demarche_formations').select('*').eq('demarche_id',id);
+  formations=formations||[];
+
+  var h='<h3 style="font-size:18px;font-weight:800;margin-bottom:4px;">'+name+' — '+typeName+'</h3>';
+  h+='<p style="font-size:12px;color:var(--muted);margin-bottom:16px;">📧 '+(p.email||'')+' · 📞 '+(p.phone||'')+' · Étape '+cur+'/'+steps.length+' · '+(d.paid?'Payé':'Non payé')+'</p>';
+
+  if(d.assigned_expert_name) h+='<p style="font-size:12px;color:#7c3aed;margin-bottom:12px;">⚡ Expert assigné : '+d.assigned_expert_name+'</p>';
+
+  // Documents
+  h+='<p style="font-size:14px;font-weight:700;margin:0 0 8px;">Documents légaux</p>';
+  if(docs.length===0) h+='<p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Aucun document initialisé.</p>';
+  else{
+    docs.forEach(function(doc){
+      var color=doc.status==='valide'?'#3B6D11':doc.status==='envoye'?'#854F0B':'#A32D2D';
+      var bg=doc.status==='valide'?'#EAF3DE':doc.status==='envoye'?'#FAEEDA':'#FCEBEB';
+      var label=doc.status==='valide'?'Validé':doc.status==='envoye'?'En vérification':'Manquant';
+      h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border:1px solid var(--border);border-radius:6px;margin-bottom:4px;">';
+      h+='<span style="font-size:13px;">'+doc.doc_label+'</span>';
+      h+='<span style="font-size:11px;padding:2px 8px;background:'+bg+';color:'+color+';border-radius:20px;">'+label+'</span>';
+      h+='</div>';
+    });
+  }
+
+  // Formations
+  if(formations.length>0){
+    h+='<p style="font-size:14px;font-weight:700;margin:16px 0 8px;">Formations à déposer</p>';
+    formations.forEach(function(f){
+      h+='<div style="padding:8px 12px;background:var(--light);border-radius:6px;margin-bottom:4px;">';
+      h+='<p style="font-size:13px;font-weight:600;margin:0;">'+f.titre+'</p>';
+      h+='<p style="font-size:11px;color:var(--muted);margin:0;">'+(f.type_certification||'RS').toUpperCase()+' '+(f.numero_certification||'')+' · '+(f.modalite||'')+'</p>';
+      h+='</div>';
+    });
+  }
+
+  // Note interne
+  if(d.expert_comment) h+='<p style="font-size:14px;font-weight:700;margin:16px 0 4px;">Note interne</p><p style="font-size:13px;padding:8px 12px;background:var(--light);border-radius:6px;">'+d.expert_comment+'</p>';
+
+  document.getElementById('msg-detail-content').innerHTML=h;
+  document.getElementById('modal-msg-detail').classList.add('open');
+}
+
+function adminMsgClient(userId,name){
+  openComposeMsg();
+  selectComposeRecipient(userId,name,'');
+}
+
+// ============================
+// UTILISATEURS
+// ============================
+async function loadAdminUsers(){
+  var {data:users}=await sb.from('profiles').select('*').order('created_at',{ascending:false});
+  allAdminUsers=users||[];
+  renderUsers(allAdminUsers);
+}
+
+function renderUsers(users){
+  document.getElementById('admin-users-title').textContent='👥 Utilisateurs ('+users.length+')';
+  var c=document.getElementById('admin-users-list');
+  if(users.length===0){c.innerHTML='<p style="text-align:center;padding:40px;color:var(--muted);">Aucun utilisateur.</p>';return;}
+  var h='';
+  users.forEach(function(u){
+    var name=((u.first_name||'')+' '+(u.last_name||'')).trim()||u.email;
+    var date=u.created_at?new Date(u.created_at).toLocaleDateString('fr-FR'):'—';
+    var isAdmin=u.is_admin===true||u.profile_type==='admin';
+    var isPro=u.is_pro===true;
+    var isBlocked=u.is_blocked===true;
+    var roleBadge=isAdmin?'<span class="badge" style="background:#EEEDFE;color:#534AB7;">Admin</span>':isPro?'<span class="badge" style="background:#E6F1FB;color:#185FA5;">Expert</span>':'<span class="badge" style="background:var(--light);color:var(--muted);">'+( u.profile_type||'formateur')+'</span>';
+
+    h+='<div class="card" style="'+(isBlocked?'opacity:.5;border-left:3px solid var(--accent);':'')+'">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">';
+    h+='<div><h4>'+name+(isBlocked?' <span style="color:var(--accent);font-size:11px;">🚫 BLOQUÉ</span>':'')+'</h4>';
+    h+='<p>📧 '+(u.email||'—')+' · 📞 '+(u.phone||'—')+' · 📅 '+date+'</p></div>';
+    h+=roleBadge+'</div>';
+    h+='<div class="action-btns">';
+    h+='<button class="action-btn" onclick="adminMsgClient(\''+u.id+'\',\''+name.replace(/'/g,'')+'\')">💬 Contacter</button>';
+    if(!isAdmin && !isPro) h+='<button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;" onclick="togglePro(\''+u.id+'\',true)">⚡ Promouvoir Expert</button>';
+    if(isPro && !isAdmin) h+='<button class="action-btn" style="background:#aaa;color:#fff;border-color:#aaa;" onclick="togglePro(\''+u.id+'\',false)">↩️ Retirer Expert</button>';
+    if(!isAdmin) h+='<button class="action-btn" style="background:#1a1a2e;color:#fff;border-color:#1a1a2e;" onclick="toggleAdmin(\''+u.id+'\',true,\''+u.email.replace(/'/g,'')+'\')">👑 Promouvoir Admin</button>';
+    if(isAdmin) h+='<button class="action-btn" style="background:var(--accent);color:#fff;border-color:var(--accent);" onclick="toggleAdmin(\''+u.id+'\',false,\''+u.email.replace(/'/g,'')+'\')">↩️ Retirer Admin</button>';
+    if(isBlocked) h+='<button class="action-btn" style="background:var(--success);color:#fff;border-color:var(--success);" onclick="toggleBlock(\''+u.id+'\',false)">✅ Réactiver</button>';
+    else h+='<button class="action-btn" style="color:var(--accent);border-color:rgba(233,69,96,.3);" onclick="toggleBlock(\''+u.id+'\',true)">🚫 Désactiver</button>';
+    h+='</div></div>';
+  });
+  c.innerHTML=h;
+}
+
+function filterAdminUsers(){
+  var q=document.getElementById('admin-user-search').value.toLowerCase();
+  if(!q){renderUsers(allAdminUsers);return;}
+  var f=allAdminUsers.filter(function(u){
+    return ((u.first_name||'')+' '+(u.last_name||'')+' '+u.email+' '+(u.phone||'')).toLowerCase().indexOf(q)>-1;
+  });
+  renderUsers(f);
+}
+
+async function togglePro(id,val){
+  if(!confirm(val?'Promouvoir en Expert ?':'Retirer le statut Expert ?'))return;
+  await sb.from('profiles').update({is_pro:val}).eq('id',id);
+  await loadAdminUsers();
+}
+async function toggleAdmin(id,val,email){
+  if(email==='lfoadmin@gmail.com'&&!val){alert('Impossible de retirer le compte principal.');return;}
+  if(!confirm(val?'Promouvoir '+email+' en Admin ?':'Retirer admin de '+email+' ?'))return;
+  await sb.from('profiles').update({is_admin:val}).eq('id',id);
+  await loadAdminUsers();
+}
+async function toggleBlock(id,val){
+  if(!confirm(val?'Désactiver ce compte ?':'Réactiver ce compte ?'))return;
+  await sb.from('profiles').update({is_blocked:val}).eq('id',id);
+  await loadAdminUsers();
+}
+
+// ============================
+// EVENTS
+// ============================
+async function loadAdminEvents(){
+  var {data:events}=await sb.from('events').select('*').order('sort_order',{ascending:true});
+  var c=document.getElementById('admin-events-list');
+  var h='<button class="btn-accent" onclick="openAddEventModal()" style="margin-bottom:16px;">+ Ajouter un \u00e9v\u00e9nement</button>';
+  if(!events||events.length===0){c.innerHTML=h+'<p style="text-align:center;padding:40px;color:var(--muted);">Aucun \u00e9v\u00e9nement.</p>';return;}
+  var {data:regCounts}=await sb.from('event_registrations').select('event_id');
+  var countMap={};(regCounts||[]).forEach(function(r){countMap[r.event_id]=(countMap[r.event_id]||0)+1;});
+  events.forEach(function(e){
+    var d=new Date(e.event_date).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});
+    var nbReg=countMap[e.id]||0;
+    h+='<div class="card" style="border-left:3px solid '+(e.is_full?'var(--muted)':'var(--accent)')+';">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">';
+    h+='<div style="flex:1;"><h4 style="margin:0 0 4px;">'+e.title+'</h4>';
+    if(e.description) h+='<p style="font-size:12px;color:var(--text);margin:0 0 6px;line-height:1.5;">'+e.description+'</p>';
+    h+='<p style="font-size:12px;color:var(--muted);margin:0;">\ud83d\udccd '+e.location+' \u00b7 \ud83d\udcc5 '+d+' \u00b7 '+(e.price?e.price+'\u20ac':'Gratuit')+' \u00b7 '+(e.current_attendees||0)+'/'+(e.max_attendees||'\u221e')+' places</p></div>';
+    h+='<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">';
+    h+='<span class="badge" style="background:'+(e.is_full?'rgba(239,68,68,.08);color:#ef4444':'rgba(16,185,129,.08);color:#10b981')+';">'+(e.is_full?'COMPLET':'OUVERT')+'</span>';
+    h+='<button class="action-btn" onclick="toggleEventFull(\''+e.id+'\','+(!e.is_full)+')">'+(e.is_full?'Rouvrir':'Fermer')+'</button>';
+    h+='<button class="action-btn" style="background:#3b82f6;color:#fff;border-color:#3b82f6;" onclick="openEditEventModal(\''+e.id+'\')">\u270f\ufe0f Modifier</button>';
+    h+='<button class="action-btn" style="background:#ef4444;color:#fff;border-color:#ef4444;" onclick="deleteEvent(\''+e.id+'\')">\ud83d\uddd1 Supprimer</button>';
+    if(nbReg>0) h+='<button class="action-btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;" onclick="viewEventRegs(\''+e.id+'\',\''+e.title.replace(/'/g,'')+'\')">\ud83d\udc65 '+nbReg+' inscrit'+(nbReg>1?'s':'')+'</button>';
+    h+='</div></div></div>';
+  });
+  c.innerHTML=h;
+}
+async function toggleEventFull(id,val){
+  await sb.from('events').update({is_full:val}).eq('id',id);
+  await loadAdminEvents();
+}
+async function deleteEvent(id){
+  if(!confirm('Supprimer cet \u00e9v\u00e9nement et toutes ses inscriptions ?')) return;
+  await sb.from('event_registrations').delete().eq('event_id',id);
+  await sb.from('events').delete().eq('id',id);
+  await loadAdminEvents();
+}
+function buildEventFormHTML(prefix, defaults){
+  var d = defaults || {};
+  return '<div style="display:grid;gap:12px;">'
+    +'<div><label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px;">Titre *</label><input type="text" id="'+prefix+'-title" value="'+(d.title||'').replace(/"/g,'&quot;')+'" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;" placeholder="Ex: Workshop IA Paris"></div>'
+    +'<div><label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px;">Description</label><textarea id="'+prefix+'-desc" rows="3" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;resize:vertical;" placeholder="D\u00e9crivez l evenement...">'+(d.description||'')+'</textarea></div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px;">Date</label><input type="date" id="'+prefix+'-date" value="'+(d.event_date||'')+'" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;"></div><div><label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px;">Heure</label><input type="time" id="'+prefix+'-time" value="'+(d.event_time||'')+'" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;"></div></div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px;">Lieu</label><input type="text" id="'+prefix+'-location" value="'+(d.location||'')+'" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;" placeholder="Paris"></div><div><label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px;">Adresse</label><input type="text" id="'+prefix+'-address" value="'+(d.address||'')+'" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;" placeholder="123 rue..."></div></div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px;">Prix (0=gratuit)</label><input type="number" id="'+prefix+'-price" value="'+(d.price!=null?d.price:0)+'" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;"></div><div><label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px;">Places max</label><input type="number" id="'+prefix+'-max" value="'+(d.max_attendees||50)+'" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;"></div></div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px;">Type</label><select id="'+prefix+'-type" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;"><option value="workshop"'+(d.event_type==='workshop'?' selected':'')+'>Workshop</option><option value="conference"'+(d.event_type==='conference'?' selected':'')+'>Conf\u00e9rence</option><option value="retreat"'+(d.event_type==='retreat'?' selected':'')+'>Retraite</option><option value="webinaire"'+(d.event_type==='webinaire'?' selected':'')+'>Webinaire</option></select></div><div><label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px;">Dur\u00e9e</label><input type="text" id="'+prefix+'-duration" value="'+(d.duration||'')+'" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;" placeholder="1h30, Journ\u00e9e..."></div></div>'
+    +'</div>';
+}
+function openAddEventModal(){
+  var m=document.createElement('div');m.className='modal open';m.id='modal-add-event';
+  m.innerHTML='<div class="modal-box" style="max-width:540px;"><button class="modal-close" onclick="document.getElementById(\'modal-add-event\').remove()">\u2715</button><h3 style="font-size:18px;font-weight:800;margin-bottom:16px;">Ajouter un \u00e9v\u00e9nement</h3>'+buildEventFormHTML('evt',{})+'<button class="btn-accent" onclick="submitNewEvent()" style="width:100%;padding:14px;font-size:14px;margin-top:12px;">Cr\u00e9er</button></div>';
+  document.body.appendChild(m);
+  m.onclick=function(ev){if(ev.target===m)m.remove();};
+}
+function getEventFormData(prefix){
+  return {
+    title: document.getElementById(prefix+'-title').value.trim(),
+    description: document.getElementById(prefix+'-desc').value.trim(),
+    event_date: document.getElementById(prefix+'-date').value||null,
+    event_time: document.getElementById(prefix+'-time').value||null,
+    location: document.getElementById(prefix+'-location').value.trim()||'En ligne',
+    address: document.getElementById(prefix+'-address').value.trim()||null,
+    price: parseInt(document.getElementById(prefix+'-price').value)||0,
+    max_attendees: parseInt(document.getElementById(prefix+'-max').value)||50,
+    event_type: document.getElementById(prefix+'-type').value,
+    duration: document.getElementById(prefix+'-duration').value.trim()||null
+  };
+}
+async function submitNewEvent(){
+  var d=getEventFormData('evt');
+  if(!d.title){alert('Titre requis');return;}
+  d.current_attendees=0;d.is_full=false;d.sort_order=99;d.is_published=true;
+  var {error}=await sb.from('events').insert(d);
+  if(error){alert('Erreur: '+error.message);return;}
+  document.getElementById('modal-add-event').remove();
+  alert('\u00c9v\u00e9nement cr\u00e9\u00e9 !');await loadAdminEvents();
+}
+async function openEditEventModal(id){
+  var {data:e}=await sb.from('events').select('*').eq('id',id).single();
+  if(!e){alert('Event introuvable');return;}
+  var m=document.createElement('div');m.className='modal open';m.id='modal-edit-event';
+  m.innerHTML='<div class="modal-box" style="max-width:540px;"><button class="modal-close" onclick="document.getElementById(\'modal-edit-event\').remove()">\u2715</button><h3 style="font-size:18px;font-weight:800;margin-bottom:16px;">Modifier l\'\u00e9v\u00e9nement</h3>'+buildEventFormHTML('evtedit',e)+'<button class="btn-accent" onclick="submitEditEvent(\''+id+'\')" style="width:100%;padding:14px;font-size:14px;margin-top:12px;">Enregistrer</button></div>';
+  document.body.appendChild(m);
+  m.onclick=function(ev){if(ev.target===m)m.remove();};
+}
+async function submitEditEvent(id){
+  var d=getEventFormData('evtedit');
+  if(!d.title){alert('Titre requis');return;}
+  var {error}=await sb.from('events').update(d).eq('id',id);
+  if(error){alert('Erreur: '+error.message);return;}
+  document.getElementById('modal-edit-event').remove();
+  alert('\u00c9v\u00e9nement mis \u00e0 jour !');await loadAdminEvents();
+}
+async function viewEventRegs(eventId,eventTitle){
+  var {data:regs}=await sb.from('event_registrations').select('*').eq('event_id',eventId).order('created_at',{ascending:false});
+  regs=regs||[];
+  var h='<h3 style="font-size:18px;font-weight:800;margin-bottom:4px;">'+eventTitle+'</h3><p style="font-size:12px;color:var(--muted);margin-bottom:16px;">'+regs.length+' inscription'+(regs.length>1?'s':'')+'</p>';
+  if(regs.length===0) h+='<p style="text-align:center;padding:20px;color:var(--muted);">Aucune inscription.</p>';
+  else regs.forEach(function(r){
+    var date=new Date(r.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;"><div><p style="font-size:13px;font-weight:600;margin:0;">'+(r.user_name||'Sans nom')+'</p><p style="font-size:11px;color:var(--muted);margin:0;">'+(r.user_email||'')+'</p></div><span style="font-size:11px;color:var(--muted);">'+date+'</span></div>';
+  });
+  document.getElementById('msg-detail-content').innerHTML=h;
+  document.getElementById('modal-msg-detail').classList.add('open');
+}
+
+// ============================
+// MESSAGERIE
+// ============================
+async function loadAdminMessages(){
+  var {data:msgs}=await sb.from('admin_messages')
+    .select('*, sender:sender_id(first_name,last_name,email), recipient:recipient_id(first_name,last_name,email)')
+    .order('created_at',{ascending:false});
+  allAdminMsg=msgs||[];
+  renderMsg(allAdminMsg);
+}
+
+function filterAdminMsg(f){
+  adminMsgFilter=f;
+  ['all','unread','sent'].forEach(function(k){
+    var b=document.getElementById('btn-msg-'+k);
+    b.style.background=k===f?'var(--accent)':'';
+    b.style.color=k===f?'#fff':'';
+    b.style.borderColor=k===f?'var(--accent)':'';
+  });
+  var filtered=allAdminMsg;
+  if(f==='unread') filtered=allAdminMsg.filter(function(m){return m.recipient_id===adminUserId&&!m.is_read;});
+  if(f==='sent') filtered=allAdminMsg.filter(function(m){return m.sender_id===adminUserId;});
+  renderMsg(filtered);
+}
+
+function renderMsg(msgs){
+  var container=document.getElementById('admin-msg-list');
+  if(msgs.length===0){container.innerHTML='<p style="text-align:center;padding:40px;color:var(--muted);">Aucun message.</p>';return;}
+  // Group by other user
+  var convos={};
+  msgs.forEach(function(m){
+    var isReceived=m.recipient_id===adminUserId;
+    var otherId=isReceived?m.sender_id:m.recipient_id;
+    if(!convos[otherId]) convos[otherId]={msgs:[],other:isReceived?m.sender:m.recipient,unread:0,otherId:otherId};
+    convos[otherId].msgs.push(m);
+    if(isReceived&&!m.is_read) convos[otherId].unread++;
+  });
+  // Sort convos by latest message
+  var sorted=Object.values(convos).sort(function(a,b){return new Date(b.msgs[0].created_at)-new Date(a.msgs[0].created_at);});
+  var h='';
+  sorted.forEach(function(cv){
+    var other=cv.other;
+    var otherName=other?((other.first_name||'')+' '+(other.last_name||'')).trim()||other.email:'Inconnu';
+    var last=cv.msgs[0];
+    var date=new Date(last.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    var lastIsReceived=last.recipient_id===adminUserId;
+    var preview=(lastIsReceived?'':'Vous : ')+(last.content||'').substring(0,80);
+    h+='<div class="card" style="'+(cv.unread>0?'border-left:3px solid var(--accent);background:#fef0f3;':'')+'cursor:pointer;" onclick="openConversation(\''+cv.otherId+'\',\''+otherName.replace(/'/g,'')+'\')">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">';
+    h+='<div><h4 style="font-size:14px;">'+otherName;
+    if(cv.unread>0) h+=' <span style="background:var(--accent);color:#fff;font-size:10px;padding:1px 8px;border-radius:10px;">'+cv.unread+'</span>';
+    h+='</h4>';
+    h+='<p style="font-size:12px;color:var(--muted);margin-top:2px;">'+preview+'...</p></div>';
+    h+='<div style="text-align:right;"><span style="font-size:11px;color:var(--muted);">'+date+'</span>';
+    h+='<p style="font-size:10px;color:var(--muted);margin:2px 0 0;">'+cv.msgs.length+' message'+(cv.msgs.length>1?'s':'')+'</p></div>';
+    h+='</div></div>';
+  });
+  container.innerHTML=h;
+}
+
+async function openConversation(otherId,otherName){
+  // Mark all unread as read
+  var unreadIds=allAdminMsg.filter(function(m){return m.sender_id===otherId&&m.recipient_id===adminUserId&&!m.is_read;}).map(function(m){return m.id;});
+  for(var i=0;i<unreadIds.length;i++){
+    await sb.from('admin_messages').update({is_read:true}).eq('id',unreadIds[i]);
+    var found=allAdminMsg.find(function(m){return m.id===unreadIds[i];});
+    if(found) found.is_read=true;
+  }
+  // Get all messages with this user
+  var thread=allAdminMsg.filter(function(m){return m.sender_id===otherId||m.recipient_id===otherId;}).sort(function(a,b){return new Date(a.created_at)-new Date(b.created_at);});
+  var h='<div style="margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">';
+  h+='<h3 style="font-size:18px;font-weight:700;margin:0;">Conversation avec '+otherName+'</h3>';
+  h+='<span style="font-size:12px;color:var(--muted);">'+thread.length+' message'+(thread.length>1?'s':'')+'</span></div>';
+  h+='<div style="max-height:400px;overflow-y:auto;margin-bottom:16px;">';
+  thread.forEach(function(m){
+    var isMe=m.sender_id===adminUserId;
+    var date=new Date(m.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    h+='<div style="margin-bottom:10px;padding:10px 14px;border-radius:10px;max-width:85%;'+(isMe?'margin-left:auto;background:#e8f4fd;':'background:var(--light);')+'">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">';
+    h+='<span style="font-size:11px;font-weight:600;color:'+(isMe?'#2563eb':'var(--text)')+';">'+(isMe?'Vous':otherName)+'</span>';
+    h+='<span style="font-size:10px;color:var(--muted);">'+date+'</span></div>';
+    if(m.subject) h+='<p style="font-size:11px;color:var(--muted);margin:0 0 2px;">'+m.subject+'</p>';
+    h+='<p style="font-size:13px;margin:0;white-space:pre-wrap;">'+(m.content||'')+'</p></div>';
+  });
+  h+='</div>';
+  // Reply box
+  h+='<div style="border-top:1px solid var(--border);padding-top:12px;">';
+  h+='<textarea id="convo-reply-body" rows="3" placeholder="Votre reponse..." style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;resize:vertical;margin-bottom:8px;"></textarea>';
+  h+='<button class="btn-accent" style="padding:8px 20px;" onclick="sendConvoReply(\''+otherId+'\',\''+otherName.replace(/'/g,'')+'\')">Envoyer</button></div>';
+  document.getElementById('msg-detail-content').innerHTML=h;
+  document.getElementById('modal-msg-detail').classList.add('open');
+  // Scroll to bottom
+  var scrollDiv=document.getElementById('msg-detail-content').querySelector('div[style*=overflow]');
+  if(scrollDiv) scrollDiv.scrollTop=scrollDiv.scrollHeight;
+  // Re-render list
+  renderMsg(adminMsgFilter==='unread'?allAdminMsg.filter(function(m){return m.recipient_id===adminUserId&&!m.is_read;}):adminMsgFilter==='sent'?allAdminMsg.filter(function(m){return m.sender_id===adminUserId;}):allAdminMsg);
+}
+
+async function sendConvoReply(otherId,otherName){
+  var body=document.getElementById('convo-reply-body').value.trim();
+  if(!body){alert('Ecrivez votre message');return;}
+  var {error}=await sb.from('admin_messages').insert({sender_id:adminUserId,recipient_id:otherId,subject:'',content:body});
+  if(error){alert('Erreur: '+error.message);return;}
+  await loadAdminMessages();
+  openConversation(otherId,otherName);
+}
+
+async function openMsgDetail(id){
+  var msg=allAdminMsg.find(function(m){return m.id===id;});
+  if(!msg)return;
+  if(msg.recipient_id===adminUserId&&!msg.is_read){
+    await sb.from('admin_messages').update({is_read:true}).eq('id',id);
+    msg.is_read=true;
+  }
+  var isReceived=msg.recipient_id===adminUserId;
+  var other=isReceived?msg.sender:msg.recipient;
+  var otherName=other?((other.first_name||'')+' '+(other.last_name||'')).trim()||other.email:'Inconnu';
+  var date=new Date(msg.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('msg-detail-content').innerHTML=
+    '<p style="font-size:12px;color:var(--muted);margin-bottom:8px;">'+(isReceived?'De':'À')+' : <strong>'+otherName+'</strong> · '+date+'</p>'+
+    '<h3 style="font-size:18px;font-weight:700;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);">'+(msg.subject||'Sans objet')+'</h3>'+
+    '<div style="font-size:14px;line-height:1.8;white-space:pre-wrap;">'+(msg.content||'')+'</div>'+
+    (isReceived?'<button class="btn-accent" style="margin-top:20px;padding:8px 20px;" onclick="replyTo(\''+msg.sender_id+'\',\''+otherName.replace(/'/g,'')+'\',\''+( msg.subject||'').replace(/'/g,'')+'\')">↩️ Répondre</button>':'');
+  document.getElementById('modal-msg-detail').classList.add('open');
+}
+
+function replyTo(userId,name,subject){
+  document.getElementById('modal-msg-detail').classList.remove('open');
+  openComposeMsg();
+  selectComposeRecipient(userId,name,'');
+  document.getElementById('compose-subject').value='Re: '+subject;
+  document.getElementById('compose-body').focus();
+}
+
+// COMPOSE
+function openComposeMsg(){
+  document.getElementById('compose-recipient-id').value='';
+  document.getElementById('compose-search').value='';
+  document.getElementById('compose-subject').value='';
+  document.getElementById('compose-body').value='';
+  document.getElementById('compose-error').style.display='none';
+  document.getElementById('compose-results').style.display='none';
+  document.getElementById('compose-selected').style.display='none';
+  document.getElementById('compose-search').style.display='';
+  document.getElementById('modal-compose').classList.add('open');
+}
+
+function searchComposeRecipient(){
+  var q=document.getElementById('compose-search').value.toLowerCase().trim();
+  var results=document.getElementById('compose-results');
+  if(q.length<1){results.style.display='none';return;}
+  var filtered=allAdminUsers.filter(function(u){
+    return ((u.first_name||'')+' '+(u.last_name||'')+' '+u.email).toLowerCase().indexOf(q)>-1;
+  }).slice(0,10);
+  if(filtered.length===0){results.innerHTML='<div style="padding:10px 14px;font-size:13px;color:var(--muted);">Aucun résultat</div>';}
+  else{
+    var h='';
+    filtered.forEach(function(u){
+      var n=((u.first_name||'')+' '+(u.last_name||'')).trim()||u.email;
+      h+='<div style="padding:10px 14px;cursor:pointer;border-bottom:1px solid #f0f0f0;" onmouseover="this.style.background=\'#f8f8f8\'" onmouseout="this.style.background=\'#fff\'" onclick="selectComposeRecipient(\''+u.id+'\',\''+n.replace(/'/g,'')+'\',\''+u.email.replace(/'/g,'')+'\')">';
+      h+='<div style="font-size:13px;font-weight:600;">'+n+'</div>';
+      h+='<div style="font-size:11px;color:var(--muted);">'+u.email+'</div></div>';
+    });
+    results.innerHTML=h;
+  }
+  results.style.display='';
+}
+
+function selectComposeRecipient(id,name,email){
+  document.getElementById('compose-recipient-id').value=id;
+  document.getElementById('compose-search').style.display='none';
+  document.getElementById('compose-results').style.display='none';
+  document.getElementById('compose-selected').style.display='';
+  document.getElementById('compose-selected-name').innerHTML='<strong>'+name+'</strong>'+(email?' · '+email:'');
+}
+
+function clearComposeRecipient(){
+  document.getElementById('compose-recipient-id').value='';
+  document.getElementById('compose-search').value='';
+  document.getElementById('compose-search').style.display='';
+  document.getElementById('compose-selected').style.display='none';
+}
+
+async function sendCompose(){
+  var recipientId=document.getElementById('compose-recipient-id').value;
+  var subject=document.getElementById('compose-subject').value.trim();
+  var body=document.getElementById('compose-body').value.trim();
+  var errDiv=document.getElementById('compose-error');
+  if(!recipientId){errDiv.textContent='Sélectionnez un destinataire.';errDiv.style.display='';return;}
+  if(!body){errDiv.textContent='Le message ne peut pas être vide.';errDiv.style.display='';return;}
+  errDiv.style.display='none';
+  var {error}=await sb.from('admin_messages').insert({
+    sender_id:adminUserId,
+    recipient_id:recipientId,
+    subject:subject||'Message de l\'administration',
+    content:body
+  });
+  if(error){errDiv.textContent='Erreur: '+error.message;errDiv.style.display='';return;}
+  document.getElementById('modal-compose').classList.remove('open');
+  alert('Message envoyé !');
+  await loadAdminMessages();
+}
+
+// Close modals on backdrop
+document.addEventListener('click',function(e){
+  if(e.target.classList.contains('modal')) e.target.classList.remove('open');
+});
+document.addEventListener('click',function(e){
+  if(!e.target.closest('#compose-search')&&!e.target.closest('#compose-results')){
+    var r=document.getElementById('compose-results');
+    if(r)r.style.display='none';
+  }
+});
+</script>
 </body>
 </html>

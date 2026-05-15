@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LFO — Démarches v8</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',-apple-system,sans-serif;min-height:100vh;transition:background .2s}
+body.view-user{background:#F7F5F3;color:#1a1a1a}
+body.view-expert{background:#F4F3FA;color:#1a1a1a}
+body.view-admin{background:#EFF1F3;color:#1a1a1a}
+
+.hdr{background:#fff;border-bottom:.5px solid #f0f0f0;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.hdr-l{display:flex;align-items:center;gap:14px}
+.logo{font-weight:700;font-size:16px;letter-spacing:-.3px}
+body.view-user .logo span{color:#D85A30}
+body.view-expert .logo span{color:#534AB7}
+body.view-admin .logo span{color:#2B5F8A}
+.ctx{font-size:11px;color:#888}
+.ctx b{color:#1a1a1a;font-weight:500}
+.switcher{display:flex;gap:4px;background:#f5f5f5;padding:3px;border-radius:10px}
+.sw-btn{padding:7px 14px;font-family:inherit;font-size:11px;font-weight:500;border:none;background:transparent;cursor:pointer;border-radius:7px;color:#888;transition:all .15s;display:flex;align-items:center;gap:6px}
+.sw-btn:hover{color:#1a1a1a}
+.sw-btn.a{background:#2B5F8A;color:#fff}
+.sw-btn.e{background:#534AB7;color:#fff}
+.sw-btn.u{background:#D85A30;color:#fff}
+.sw-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+.pw{max-width:1100px;margin:0 auto;padding:24px}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:12px;flex-wrap:wrap}
+.pt{font-size:22px;font-weight:700;letter-spacing:-.3px}
+.psub{font-size:12px;color:#888;margin-bottom:20px}
+.add-btn{padding:9px 16px;color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .15s}
+.add-btn:hover{opacity:.9}
+body.view-admin .add-btn{background:#2B5F8A}
+body.view-user .add-btn{background:#D85A30}
+body.view-expert .add-btn{background:#534AB7}
+
+/* Bouton retour */
+.back-btn{display:flex;align-items:center;gap:6px;background:none;border:none;font-family:inherit;font-size:12px;color:#666;cursor:pointer;padding:6px 0;margin-bottom:6px}
+.back-btn:hover{color:#1a1a1a}
+
+/* Filtres admin */
+.admin-filters{background:#fff;border:.5px solid #f0f0f0;border-radius:12px;padding:14px 16px;margin-bottom:16px}
+.admin-filters-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search-wrap{flex:1;min-width:240px;position:relative}
+.search-input{width:100%;padding:9px 12px 9px 32px;border:.5px solid #e0e0e0;border-radius:8px;font-family:inherit;font-size:12px;background:#FAFAFA}
+.search-input:focus{outline:none;border-color:#2B5F8A;background:#fff}
+.search-ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#888}
+.filter-select{padding:9px 12px;border:.5px solid #e0e0e0;border-radius:8px;font-family:inherit;font-size:12px;background:#FAFAFA;cursor:pointer;min-width:130px}
+.filter-select:focus{outline:none;border-color:#2B5F8A;background:#fff}
+.filter-clear{padding:7px 12px;background:#fff;border:.5px solid #e0e0e0;border-radius:8px;font-family:inherit;font-size:11px;color:#666;cursor:pointer}
+.filter-clear:hover{background:#FAFAFA;color:#1a1a1a}
+.filter-active-count{font-size:10px;color:#888;margin-top:8px}
+.filter-active-count b{color:#2B5F8A;font-weight:600}
+
+.cl{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#aaa;font-weight:600;margin:22px 0 8px;padding-left:4px}
+
+.cc{background:#fff;border-radius:11px;border:.5px solid #f0f0f0;margin-bottom:4px;cursor:pointer;transition:all .12s;position:relative;scroll-margin-top:80px}
+.cc:hover{border-color:#ddd}
+.ci{display:flex;align-items:center;padding:11px 16px;gap:10px}
+.cb2{width:3px;height:28px;border-radius:2px;flex-shrink:0}
+.ct{font-size:9px;letter-spacing:.4px;text-transform:uppercase;padding:2px 6px;border-radius:3px;font-weight:600;flex-shrink:0}
+.cn{flex:1;min-width:0}
+.cnn{font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px}
+.cm{font-size:10px;color:#999;margin-top:1px}
+
+.ts{font-size:8px;padding:1px 5px;border-radius:3px;font-weight:500;text-transform:uppercase;letter-spacing:.3px}
+.tw{background:#FFF9E6;color:#854F0B}
+.tg{background:#E9F7F1;color:#0F6E56}
+.tp{background:#EEEDFE;color:#3C3489}
+.tb{background:#E6F1FB;color:#0C447C}
+
+.prg{display:flex;flex-direction:column;gap:2px;min-width:90px}
+.prg-bar{height:4px;background:#f0f0f0;border-radius:2px;overflow:hidden}
+.prg-fill{height:100%;border-radius:2px;transition:width .3s}
+body.view-user .prg-fill{background:#D85A30}
+body.view-expert .prg-fill{background:#534AB7}
+body.view-admin .prg-fill{background:#2B5F8A}
+.prg-t{font-size:9px;color:#888;display:flex;justify-content:space-between}
+body.view-user .prg-t b{color:#D85A30;font-weight:600}
+body.view-expert .prg-t b{color:#534AB7;font-weight:600}
+body.view-admin .prg-t b{color:#2B5F8A;font-weight:600}
+
+.sb{display:flex;align-items:center;gap:6px;flex-shrink:0;padding:4px 9px;border-radius:7px}
+.sb .sn{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:600;color:#fff}
+.sb .sl{font-size:10px;font-weight:500;white-space:nowrap}
+
+/* Bouton détails (sur card fermée) */
+.details-btn{padding:5px 10px;background:#FAFAFA;border:.5px solid #e0e0e0;border-radius:6px;font-family:inherit;font-size:10px;font-weight:500;color:#666;cursor:pointer;flex-shrink:0;transition:all .12s}
+.details-btn:hover{background:#fff;border-color:#aaa;color:#1a1a1a}
+
+.ca{width:20px;height:20px;border-radius:50%;background:#f5f5f5;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ca svg{transition:transform .2s}
+.cc.op .ca svg{transform:rotate(180deg)}
+
+.ce{display:none;background:#fff;border-radius:0 0 11px 11px;border:.5px solid #f0f0f0;border-top:none;margin-top:-5px;margin-bottom:4px}
+.cc.op+.ce{display:block}
+.cc.op{border-radius:11px 11px 0 0;margin-bottom:0;border-bottom-color:transparent}
+
+.cs{display:flex;border-bottom:.5px solid #f0f0f0;overflow-x:auto}
+.cs>div{flex:1;text-align:center;padding:10px 3px;cursor:pointer;position:relative;min-width:60px;transition:background .12s}
+.cs>div:hover{background:#FAFAFA}
+.cs>div:not(:last-child)::after{content:'';position:absolute;right:0;top:22%;height:56%;width:.5px;background:#f0f0f0}
+.cs .d{border-bottom:2px solid #1D9E75}
+.cs .p{border-bottom:2px solid transparent}
+body.view-user .cs .c{border-bottom:2px solid #D85A30;background:#FFF9F5}
+body.view-expert .cs .c{border-bottom:2px solid #534AB7;background:#F1F0FD}
+body.view-admin .cs .c{border-bottom:2px solid #2B5F8A;background:#EDF3F9}
+
+.sd{width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:600;margin-bottom:1px}
+.cs .d .sd{background:#1D9E75;color:#fff}
+.cs .p .sd{background:#f0f0f0;color:#aaa}
+body.view-user .cs .c .sd{background:#D85A30;color:#fff}
+body.view-expert .cs .c .sd{background:#534AB7;color:#fff}
+body.view-admin .cs .c .sd{background:#2B5F8A;color:#fff}
+.sn3{font-size:9px;font-weight:500;display:block}
+.cs .d .sn3{color:#0F6E56}
+.cs .p .sn3{color:#aaa}
+body.view-user .cs .c .sn3{color:#D85A30;font-weight:600}
+body.view-expert .cs .c .sn3{color:#534AB7;font-weight:600}
+body.view-admin .cs .c .sn3{color:#2B5F8A;font-weight:600}
+
+.eb{padding:16px 20px}
+.eh{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.ecb{font-size:8px;padding:2px 7px;border-radius:16px;text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+body.view-user .ecb{background:#FFF2EC;color:#993C1D}
+body.view-expert .ecb{background:#F1F0FD;color:#3C3489}
+body.view-admin .ecb{background:#EDF3F9;color:#234E70}
+.ect{font-size:16px;font-weight:700}
+body.view-user .ect{color:#D85A30}
+body.view-expert .ect{color:#534AB7}
+body.view-admin .ect{color:#2B5F8A}
+.ect.dt{color:#1D9E75 !important}
+
+.cfg{background:#FAFAFA;border-radius:10px;padding:16px 18px;margin-bottom:14px}
+.cfg-t{font-size:13px;font-weight:600;margin-bottom:6px}
+.cfg-h{font-size:11px;color:#888;margin-bottom:12px;line-height:1.5}
+
+.pay-info{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:#E9F7F1;border:.5px solid #9FE1CB;border-radius:8px;font-size:11px;color:#0F6E56;font-weight:500;margin-right:6px}
+.pay-info.pending{background:#FFF9E6;border-color:#f0d989;color:#854F0B}
+.pay-info.unpaid{background:#FCEBEB;border-color:#FBD5D5;color:#C53030}
+
+.crosssell-block{padding:14px 16px;background:#FCEBEB;border:.5px solid #FBD5D5;border-radius:10px;margin-bottom:12px}
+.crosssell-block p{font-size:12px;color:#791F1F;margin-bottom:8px;line-height:1.5}
+.crosssell-btn{padding:8px 14px;background:#E24B4A;color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:11px;font-weight:500;cursor:pointer}
+
+.pricing-box{background:#fff;border:.5px solid #e8e8e8;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.pricing-row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;color:#666}
+.pricing-total{display:flex;justify-content:space-between;padding:8px 0 0;margin-top:6px;border-top:.5px solid #eee;font-size:13px;font-weight:600;color:#1a1a1a}
+.pricing-installments{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
+.install-pill{padding:4px 10px;border:.5px solid #e0e0e0;border-radius:6px;font-size:10px;cursor:pointer;background:#fff}
+.install-pill.sel{border-color:#D85A30;background:#FFF9F5;color:#D85A30;font-weight:600}
+body.view-expert .install-pill.sel{border-color:#534AB7;background:#F1F0FD;color:#534AB7}
+body.view-admin .install-pill.sel{border-color:#2B5F8A;background:#EDF3F9;color:#2B5F8A}
+
+.opt-list{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.opt-item{display:flex;align-items:center;gap:10px;padding:9px 12px;background:#fff;border:.5px solid #e8e8e8;border-radius:8px;cursor:pointer;transition:all .12s}
+.opt-item:hover{border-color:#ccc}
+.opt-item.sel{border-color:#D85A30;background:#FFF9F5}
+body.view-expert .opt-item.sel{border-color:#534AB7;background:#F1F0FD}
+body.view-admin .opt-item.sel{border-color:#2B5F8A;background:#EDF3F9}
+.opt-chk{width:16px;height:16px;border:2px solid #ddd;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.opt-item.sel .opt-chk{background:#D85A30;border-color:#D85A30}
+body.view-expert .opt-item.sel .opt-chk{background:#534AB7;border-color:#534AB7}
+body.view-admin .opt-item.sel .opt-chk{background:#2B5F8A;border-color:#2B5F8A}
+.opt-info{flex:1}
+.opt-info b{font-size:12px;font-weight:500}
+.opt-info span{font-size:10px;color:#888;display:block}
+.opt-price{font-size:11px;font-weight:600;color:#1a1a1a}
+
+.ep{background:#FAFAFA;border-radius:8px;padding:10px;margin-top:14px}
+.ept{font-size:8px;text-transform:uppercase;letter-spacing:.8px;color:#aaa;margin-bottom:6px}
+.epr{display:flex;justify-content:space-between;padding:4px 0;border-bottom:.5px solid #eee;font-size:10px}
+.epr:last-child{border-bottom:none}
+.epk{color:#888}
+.epv{font-weight:500}
+
+.ea{display:flex;gap:4px;padding:10px 20px;border-top:.5px solid #f0f0f0;background:#FAFAFA;border-radius:0 0 11px 11px;flex-wrap:wrap}
+.eb4{padding:6px 11px;border-radius:7px;font-family:inherit;font-size:10px;font-weight:500;cursor:pointer;border:none;transition:all .12s;display:flex;align-items:center;gap:5px}
+.pr2{color:#fff}
+body.view-user .pr2{background:#D85A30}
+body.view-expert .pr2{background:#534AB7}
+body.view-admin .pr2{background:#2B5F8A}
+.sc3{background:#fff;border:.5px solid #e0e0e0;color:#1a1a1a}
+.dan{background:#fff;border:.5px solid #FBD5D5;color:#C53030}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:10px;font-size:12px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:300}
+
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);align-items:center;justify-content:center;z-index:500;padding:20px}
+.modal-card{background:#fff;border-radius:14px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;padding:24px}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.modal-head h2{font-size:18px;font-weight:700;margin-bottom:4px}
+.modal-head p{font-size:12px;color:#888}
+.modal-close{background:#f5f5f5;border:none;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;color:#666}
+.modal-close:hover{background:#e0e0e0}
+.rdv-grid{display:grid;gap:10px}
+.rdv-card{display:flex;align-items:center;gap:12px;padding:14px;border:.5px solid #e8e8e8;border-radius:11px;cursor:pointer;transition:all .12s}
+.rdv-card:hover{border-color:#1a1a1a;transform:translateY(-1px);box-shadow:0 4px 8px rgba(0,0,0,.04)}
+.rdv-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;flex-shrink:0}
+.rdv-info{flex:1;min-width:0}
+.rdv-info b{font-size:13px;font-weight:600;display:block}
+.rdv-info span{font-size:10px;color:#888;display:block;margin-bottom:3px}
+.rdv-spe{font-size:10px;color:#666;line-height:1.3}
+.rdv-btn{padding:8px 14px;color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;flex-shrink:0;white-space:nowrap}
+.toast.show{opacity:1}
+
+.empty{text-align:center;padding:60px 20px;color:#888;font-size:12px}
+.filter-bar{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px}
+.fb-btn{padding:6px 12px;background:#fff;border:.5px solid #f0f0f0;border-radius:8px;font-family:inherit;font-size:10px;font-weight:500;cursor:pointer;white-space:nowrap}
+.fb-btn.act{color:#fff}
+body.view-user .fb-btn.act{background:#D85A30;border-color:#D85A30}
+body.view-expert .fb-btn.act{background:#534AB7;border-color:#534AB7}
+body.view-admin .fb-btn.act{background:#2B5F8A;border-color:#2B5F8A}
+
+/* Catalogue page (mode catalogue) */
+.catalogue-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px;margin-top:16px}
+.cat-card{background:#fff;border:.5px solid #f0f0f0;border-radius:11px;padding:16px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden}
+.cat-card:hover{border-color:#aaa;transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.cat-card-bar{position:absolute;left:0;top:0;bottom:0;width:3px}
+.cat-card-head{display:flex;align-items:center;gap:8px;margin-left:6px}
+.cat-tag{font-size:9px;letter-spacing:.4px;text-transform:uppercase;padding:2px 6px;border-radius:3px;font-weight:600}
+.cat-card-title{font-size:14px;font-weight:600;color:#1a1a1a;margin-left:6px;letter-spacing:-.2px}
+.cat-card-desc{font-size:11px;color:#888;line-height:1.5;margin-left:6px;min-height:32px}
+.cat-card-meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;margin-left:6px;padding-top:10px;border-top:.5px solid #f5f5f5}
+.cat-price{font-size:14px;font-weight:700;color:#D85A30}
+.cat-pay{font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.3px}
+.cat-steps{font-size:10px;color:#666}
+.cat-start-btn{padding:6px 12px;border:none;border-radius:7px;font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;color:#fff;background:#D85A30;display:flex;align-items:center;gap:5px}
+.cat-start-btn:hover{opacity:.9}
+
+@media(max-width:700px){
+  .hdr{flex-direction:column;gap:10px;padding:12px 16px}
+  .cs{min-width:max-content}
+  .catalogue-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body class="view-user">
+
+<div class="hdr">
+  <div class="hdr-l">
+    <div class="logo">LFO<span>.</span></div>
+    <div class="ctx">Connecté : <b id="ctx-user">Pamela Maillot</b></div>
+  </div>
+  <div class="switcher">
+    <button class="sw-btn" data-view="admin" onclick="setView('admin')"><span class="sw-dot"></span>Admin</button>
+    <button class="sw-btn" data-view="expert" onclick="setView('expert')"><span class="sw-dot"></span>Expert</button>
+    <button class="sw-btn u" data-view="user" onclick="setView('user')"><span class="sw-dot"></span>Utilisateur</button>
+  </div>
+</div>
+
+<div class="pw">
+<div class="toast" id="toast"></div>
+
+<div id="catalogue-mode" style="display:none">
+  <button class="back-btn" onclick="exitCatalogue()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Retour à mes démarches
+  </button>
+  <div class="ph">
+    <div>
+      <div class="pt">Démarrer une nouvelle démarche</div>
+      <div class="psub">Choisissez parmi 22 démarches disponibles</div>
+    </div>
+  </div>
+  <div class="filter-bar" id="cat-filter-bar"></div>
+  <div id="catalogue-grid"></div>
+</div>
+
+<div id="list-mode">
+  <div class="ph">
+    <div>
+      <div class="pt" id="page-title">Mes démarches</div>
+      <div class="psub" id="page-sub">22 démarches disponibles — spécifications finalisées</div>
+    </div>
+    <button class="add-btn" id="add-btn" onclick="onAddBtn()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      <span id="add-btn-label">+ Démarrer une démarche</span>
+    </button>
+  </div>
+
+  <div id="admin-filters" style="display:none">
+    <div class="admin-filters">
+      <div class="admin-filters-row">
+        <div class="search-wrap">
+          <span class="search-ic">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="text" class="search-input" id="search-input" placeholder="Rechercher un client (nom, email, SIREN...)" oninput="onSearch()">
+        </div>
+        <select class="filter-select" id="filter-expert" onchange="render()">
+          <option value="">Tous les experts</option>
+        </select>
+        <select class="filter-select" id="filter-client" onchange="render()">
+          <option value="">Tous les clients</option>
+        </select>
+        <select class="filter-select" id="filter-type" onchange="render()">
+          <option value="">Tous les types</option>
+        </select>
+        <button class="filter-clear" onclick="clearFilters()">Réinitialiser</button>
+      </div>
+      <div class="filter-active-count" id="filter-count"></div>
+    </div>
+  </div>
+
+  <div class="filter-bar" id="filter-bar"></div>
+  <div id="cards"></div>
+</div>
+
+</div>
+
+<script>
+var CHK='<svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+
+var CATEGORIES = {
+  'Démarrer mon activité': ['nda','creation_of','creation_formation','edof','qualiopi','opco','france_travail'],
+  'Niches spécialisées': ['controle','uai','centre_examen','agrement_prefectoral','formation_elus','habilitation','centre_certifie'],
+  'Packs': ['pack_presence','pack_digital','pack_premium','pack_enterprise'],
+  'Développer mon organisme': ['site','app','lms','agent_ia']
+};
+
+var STEPS = {
+  nda:['Configuration','Dépôt dossier','Réception courrier','Terminée'],
+  creation_of:['Configuration','Kbis','NDA','Qualiopi','Options annexes','Terminée'],
+  creation_formation:['Configuration','Création formation','Vérif formateur','Validation client','Terminée'],
+  edof:['Configuration','Formulaire','Dépôt','Webinaire','Terminée'],
+  qualiopi:['Configuration','Préparation','Audit','Terminée'],
+  opco:['Configuration','RDV expert','Terminée'],
+  france_travail:['Configuration','RDV expert','Terminée'],
+  controle:['Configuration','RDV + diag','Conformité','Terminée'],
+  uai:['Configuration','Dépôt','Terminée'],
+  centre_examen:['Configuration','Audit locaux','Dépôt','Inspection','Terminée'],
+  agrement_prefectoral:['Configuration','Dépôt','Inspection préf.','Terminée'],
+  formation_elus:['Configuration','Préparation','Dépôt préf.','Commission CNFEL','Terminée'],
+  habilitation:['Configuration','Analyse + recherche','Paiement comp.','Constitution','Terminée'],
+  centre_certifie:['Configuration','Cadrage','Constitution','Dépôt FC','Commission'],
+  pack_presence:['Configuration','Production','Révision','Terminée'],
+  pack_digital:['Configuration','Production','Révision','Terminée'],
+  pack_premium:['Configuration','Production','Révision','Terminée'],
+  pack_enterprise:['Configuration','Production','Révision','Terminée'],
+  site:['Configuration','Design','Production','Sécurité','Terminée'],
+  app:['Configuration','Design','Production','Sécurité','Terminée'],
+  lms:['Configuration','Design','Production','Sécurité','Terminée'],
+  agent_ia:['Configuration','RDV expert','Production','Terminée']
+};
+
+var NAMES = {
+  nda:'NDA',creation_of:'Création OF',creation_formation:'Création formation',
+  edof:'EDOF',qualiopi:'Qualiopi',opco:'OPCO',france_travail:'France Travail',
+  controle:'Contrôle',uai:'UAI',centre_examen:'Centre examen',
+  agrement_prefectoral:'Agrément préfectoral',formation_elus:'Formation élus',
+  habilitation:'Habilitation',centre_certifie:'Centre certifié',
+  pack_presence:'Pack Présence',pack_digital:'Pack Digital',
+  pack_premium:'Pack Premium',pack_enterprise:'Pack Enterprise',
+  site:'Site internet',app:'App mobile',lms:'LMS',agent_ia:'Agent IA'
+};
+
+var DESCS = {
+  nda:'Déclaration d\'activité auprès de la DREETS pour démarrer votre activité de formateur.',
+  creation_of:'Création complète d\'organisme de formation : statuts, NDA, Qualiopi en un parcours.',
+  creation_formation:'Création d\'une formation complète avec programme, supports, quiz et évaluations.',
+  edof:'Référencement Mon Compte Formation pour proposer des formations CPF aux apprenants.',
+  qualiopi:'Certification Qualiopi obligatoire pour accéder aux fonds publics de formation.',
+  opco:'Référencement auprès des OPCO pour faire financer vos formations en entreprises.',
+  france_travail:'Référencement KAIROS auprès de France Travail pour les demandeurs d\'emploi.',
+  controle:'Mise en conformité suite à un contrôle DREETS ou préventif.',
+  uai:'Numéro UAI attribué par le rectorat pour intervenir en formation initiale ou apprentissage.',
+  centre_examen:'Devenez centre d\'examen agréé pour les certifications (TOEIC, TOSA, PCIE, etc.).',
+  agrement_prefectoral:'Agrément préfectoral pour activités réglementées (auto-école, SSIAP, CACES...).',
+  formation_elus:'Agrément formation élus locaux (CNFEL) - obligatoire pour intervenir auprès des élus.',
+  habilitation:'Habilitation par un certificateur pour délivrer une certification RS/RNCP existante.',
+  centre_certifie:'Devenez certificateur officiel France Compétences avec votre propre certification.',
+  pack_presence:'Site vitrine + documents légaux + livret d\'accueil. L\'essentiel pour démarrer.',
+  pack_digital:'Pack Présence + LMS + 3 formations + quiz + émargement. Tout pour digitaliser.',
+  pack_premium:'Pack Digital + 1 agent IA configuré pour automatiser votre quotidien.',
+  pack_enterprise:'Pack Premium + app mobile + agents IA multiples. La solution complète.',
+  site:'Site internet professionnel pour votre organisme de formation.',
+  app:'Application mobile native iOS et Android pour vos apprenants.',
+  lms:'Plateforme LMS sur-mesure pour héberger vos formations en ligne.',
+  agent_ia:'Agents IA pour automatiser réseaux sociaux, support, comptabilité, etc.'
+};
+
+var PRICES = {
+  nda:290,creation_of:1490,creation_formation:990,edof:490,qualiopi:990,
+  opco:290,france_travail:290,controle:890,uai:149,centre_examen:1990,
+  agrement_prefectoral:690,formation_elus:1500,habilitation:490,centre_certifie:5990,
+  pack_presence:990,pack_digital:2990,pack_premium:4990,pack_enterprise:7990,
+  site:990,app:4990,lms:2900,agent_ia:390
+};
+
+var PAYMENT_MODES = {
+  nda:['comptant','2x'],creation_of:['comptant','3x'],creation_formation:['comptant','3x'],
+  edof:['comptant','2x'],qualiopi:['comptant','3x'],opco:['comptant','2x'],
+  france_travail:['comptant','2x'],controle:['comptant','3x'],uai:['comptant'],
+  centre_examen:['comptant','3x'],agrement_prefectoral:['comptant','3x'],
+  formation_elus:['comptant','3x'],habilitation:['comptant','2x'],centre_certifie:['3x'],
+  pack_presence:['comptant','3x'],pack_digital:['comptant','3x'],pack_premium:['comptant','3x'],
+  pack_enterprise:['comptant','3x'],site:['comptant','3x'],app:['comptant','3x'],
+  lms:['comptant','3x'],agent_ia:['comptant','2x']
+};
+
+var COLORS = {
+  nda:{bar:'#7F77DD',bg:'#EEEDFE',tx:'#3C3489'},
+  creation_of:{bar:'#D85A30',bg:'#FAECE7',tx:'#993C1D'},
+  creation_formation:{bar:'#7F77DD',bg:'#EEEDFE',tx:'#3C3489'},
+  edof:{bar:'#378ADD',bg:'#E6F1FB',tx:'#0C447C'},
+  qualiopi:{bar:'#1D9E75',bg:'#E1F5EE',tx:'#085041'},
+  opco:{bar:'#1D9E75',bg:'#E1F5EE',tx:'#085041'},
+  france_travail:{bar:'#378ADD',bg:'#E6F1FB',tx:'#0C447C'},
+  controle:{bar:'#E24B4A',bg:'#FCEBEB',tx:'#791F1F'},
+  uai:{bar:'#378ADD',bg:'#E6F1FB',tx:'#0C447C'},
+  centre_examen:{bar:'#E24B4A',bg:'#FCEBEB',tx:'#791F1F'},
+  agrement_prefectoral:{bar:'#BA7517',bg:'#FAEEDA',tx:'#633806'},
+  formation_elus:{bar:'#E24B4A',bg:'#FCEBEB',tx:'#791F1F'},
+  habilitation:{bar:'#7F77DD',bg:'#EEEDFE',tx:'#3C3489'},
+  centre_certifie:{bar:'#D85A30',bg:'#FAECE7',tx:'#993C1D'},
+  pack_presence:{bar:'#1D9E75',bg:'#E1F5EE',tx:'#085041'},
+  pack_digital:{bar:'#378ADD',bg:'#E6F1FB',tx:'#0C447C'},
+  pack_premium:{bar:'#7F77DD',bg:'#EEEDFE',tx:'#3C3489'},
+  pack_enterprise:{bar:'#1a1a1a',bg:'#F1EFE8',tx:'#444441'},
+  site:{bar:'#D85A30',bg:'#FAECE7',tx:'#993C1D'},
+  app:{bar:'#7F77DD',bg:'#EEEDFE',tx:'#3C3489'},
+  lms:{bar:'#1D9E75',bg:'#E1F5EE',tx:'#085041'},
+  agent_ia:{bar:'#378ADD',bg:'#E6F1FB',tx:'#0C447C'}
+};
+
+var OPTIONS = {
+  nda:[{k:'formateur',n:'Formateur habilité LFO',p:220,d:'Si pas de formateur'}],
+  creation_of:[
+    {k:'bilan',n:'Bilan de compétences',p:490,d:'Ajoute formation bilan'},
+    {k:'vae',n:'VAE',p:490,d:'Ajoute accompagnement VAE'},
+    {k:'formateur',n:'Formateur LFO',p:220}
+  ],
+  creation_formation:[
+    {k:'video_pro',n:'Vidéos complètes (tournage pro)',p:8000,d:'Tournage professionnel'},
+    {k:'formateur',n:'Formateur LFO',p:220}
+  ],
+  edof:[{k:'site',n:'Site internet',p:990,d:'Cross-sell site vitrine'}],
+  qualiopi:[
+    {k:'referent_audit',n:'Référent qualité jour audit',p:490,d:'LFO présent le jour J'},
+    {k:'formateur',n:'Formateur LFO',p:220}
+  ],
+  controle:[{k:'formateur',n:'Formateur LFO',p:220}],
+  centre_examen:[
+    {k:'expert_inspection',n:'Expert LFO présent inspection',p:490,d:'Jour de l\'inspection terrain'},
+    {k:'formateur',n:'Formateur LFO',p:220}
+  ],
+  agrement_prefectoral:[
+    {k:'formateurs_spe',n:'Formateurs spécifiques LFO',p:450,d:'Auto-école/SSIAP/CACES...'},
+    {k:'expert_inspection',n:'Expert présent inspection',p:490}
+  ],
+  formation_elus:[{k:'formateur',n:'Formateur LFO',p:220}],
+  habilitation:[{k:'formateur',n:'Formateur LFO',p:220}],
+  site:[
+    {k:'blog_seo',n:'Blog + SEO',p:490},
+    {k:'ecommerce',n:'E-commerce',p:1500},
+    {k:'multilingue',n:'Multilingue',p:490}
+  ],
+  app:[
+    {k:'ios_android',n:'iOS + Android',p:2000},
+    {k:'stores',n:'Publication stores',p:490},
+    {k:'push',n:'Push + messagerie',p:990}
+  ],
+  lms:[
+    {k:'scale_500',n:'50-500 apprenants',p:1500},
+    {k:'scale_500p',n:'500+ apprenants',p:3000},
+    {k:'cpf_edof',n:'Intégration CPF/EDOF',p:990},
+    {k:'app_app',n:'App mobile apprenant',p:1990}
+  ]
+};
+
+var HAS_CHATBOT_IA = ['edof','nda','qualiopi','uai','centre_examen','agrement_prefectoral','habilitation','centre_certifie','formation_elus'];
+var CROSSSELL = {
+  formation_elus: [{miss:'qualiopi',to:'qualiopi',msg:'Qualiopi obligatoire depuis 2024 pour agrément élus'}],
+  centre_examen: [{miss:'qualiopi',to:'qualiopi',msg:'Qualiopi requis avant Centre examen'}],
+  centre_certifie: [{miss:'qualiopi',to:'qualiopi',msg:'Qualiopi requis pour devenir certificateur'}],
+  habilitation: [{miss:'qualiopi',to:'qualiopi',msg:'Qualiopi requis pour habilitation'}]
+};
+
+var ORGANISME = {siren:'881279392',raison_sociale:'PAM OI',qualiopi:true,nda:true,edof:false};
+
+// ============ DEMARCHES DEMO ENRICHIES (multi-clients pour vue Admin) ============
+
+var EXPERTS = ['Marie D.', 'Sophie B.', 'Thomas L.', 'Élise M.', 'Karim R.'];
+var CLIENTS_DEMO = [
+  {name:'Pamela Maillot', email:'pamelamaillot@pamoi.re', siren:'881279392'},
+  {name:'Sylvie Planchard', email:'mediacoach974@gmail.com', siren:'951175595'},
+  {name:'Jean Dupont', email:'j.dupont@formacademy.fr', siren:'432567891'},
+  {name:'Aïcha Benali', email:'aicha@digital-formation.com', siren:'789456123'},
+  {name:'Laurent Petit', email:'l.petit@elearningplus.fr', siren:'654321987'},
+  {name:'Marie Lefèvre', email:'marie@ofelia-conseil.fr', siren:'123789456'},
+  {name:'Mohammed Kebir', email:'m.kebir@institut-pro.fr', siren:'852741963'}
+];
+
+var TYPES_ALL = Object.keys(NAMES);
+
+var DEMARCHES = [];
+var stateCycle = [
+  {step:1,status:'nouveau',paid:false,payment_mode:null,inst_paid:0,inst_total:1},
+  {step:1,status:'en_attente_paiement',paid:false,payment_mode:'3x',inst_paid:0,inst_total:3},
+  {step:2,status:'en_cours',paid:true,payment_mode:'comptant',inst_paid:1,inst_total:1},
+  {step:3,status:'en_cours',paid:true,payment_mode:'3x',inst_paid:2,inst_total:3},
+  {step:2,status:'en_cours',paid:true,payment_mode:'2x',inst_paid:1,inst_total:2}
+];
+
+// Pamela Maillot (le user actuel) a beaucoup de démarches
+TYPES_ALL.forEach(function(type,idx){
+  var s = stateCycle[idx % stateCycle.length];
+  var total = STEPS[type].length;
+  var step = Math.min(s.step, total);
+  if(idx % 8 === 0 && idx > 0){step = total; s = Object.assign({}, s, {step:total,status:'termine',paid:true,inst_paid:s.inst_total})}
+  DEMARCHES.push({
+    id: 'd-pam-' + (idx+1),
+    type: type,
+    user: CLIENTS_DEMO[0].name,
+    email: CLIENTS_DEMO[0].email,
+    siren: CLIENTS_DEMO[0].siren,
+    step: step,
+    status: s.status,
+    paid: s.paid,
+    payment_mode: s.payment_mode,
+    installments_paid: s.inst_paid,
+    installments_total: s.inst_total,
+    expert: step > 1 ? EXPERTS[idx % EXPERTS.length] : null,
+    created: '0' + ((idx % 28) + 1) + '/04/2026',
+    options: [],
+    parent_id: null
+  });
+});
+
+// Autres clients (vue Admin) — 4 démarches par client
+for(var ci=1; ci<CLIENTS_DEMO.length; ci++){
+  var client = CLIENTS_DEMO[ci];
+  var typesForClient = TYPES_ALL.slice(ci*2, ci*2+4); // 4 types différents par client
+  if(typesForClient.length < 4) typesForClient = TYPES_ALL.slice(0, 4);
+  typesForClient.forEach(function(type, ti){
+    var s = stateCycle[(ci+ti) % stateCycle.length];
+    var total = STEPS[type].length;
+    var step = Math.min(s.step, total);
+    DEMARCHES.push({
+      id: 'd-c'+ci+'-'+ti,
+      type: type,
+      user: client.name,
+      email: client.email,
+      siren: client.siren,
+      step: step,
+      status: s.status,
+      paid: s.paid,
+      payment_mode: s.payment_mode,
+      installments_paid: s.inst_paid,
+      installments_total: s.inst_total,
+      expert: step > 1 ? EXPERTS[(ci+ti) % EXPERTS.length] : null,
+      created: ((ti+ci) % 28 + 1).toString().padStart(2, '0') + '/04/2026',
+      options: [],
+      parent_id: null
+    });
+  });
+}
+
+// ============ APP STATE ============
+
+var CURRENT_VIEW='user';
+var CURRENT_USER={name:'Pamela Maillot',email:'pamelamaillot@pamoi.re'};
+var CURRENT_FILTER='all';
+var CATALOGUE_FILTER='all';
+var MODE='list';
+var SEARCH_QUERY='';
+var ADMIN_FILTER_EXPERT='';
+var ADMIN_FILTER_CLIENT='';
+var ADMIN_FILTER_TYPE='';
+
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},1800)}
+function tog(id){
+  var c=document.getElementById('c-'+id);
+  if(!c)return;
+  var willOpen = !c.classList.contains('op');
+  // Mode accordéon : ferme toutes les autres
+  document.querySelectorAll('.cc.op').forEach(function(other){
+    if(other.id !== 'c-'+id) other.classList.remove('op');
+  });
+  c.classList.toggle('op');
+  if(willOpen){
+    setTimeout(function(){c.scrollIntoView({behavior:'smooth',block:'nearest'})},120);
+  }
+}
+function getCategoryOf(type){for(var c in CATEGORIES){if(CATEGORIES[c].indexOf(type)>=0)return c}return'Autre'}
+
+function statusBadge(d){
+  if(d.status==='termine')return '<span class="ts tg">Terminée</span>';
+  if(d.status==='en_attente_paiement')return '<span class="ts tw">À payer</span>';
+  if(d.status==='nouveau')return '<span class="ts tp">Nouveau</span>';
+  return '<span class="ts tb">En cours</span>';
+}
+
+function paymentBadge(d){
+  if(d.paid && d.installments_paid >= d.installments_total){
+    return '<span class="pay-info">✓ Payé '+d.installments_total+'/'+d.installments_total+'</span>';
+  }
+  if(d.payment_mode && d.installments_paid > 0){
+    return '<span class="pay-info pending">⏳ '+d.installments_paid+'/'+d.installments_total+' (blocage étape '+(d.installments_paid+1)+' si non payé)</span>';
+  }
+  if(!d.paid){
+    return '<span class="pay-info unpaid">✗ Non payé</span>';
+  }
+  return '';
+}
+
+function visibleDemarches(){
+  var list=DEMARCHES.slice();
+
+  // Filtrer selon vue
+  if(CURRENT_VIEW==='user'){
+    list = list.filter(function(d){return d.user === CURRENT_USER.name});
+  }else if(CURRENT_VIEW==='expert'){
+    list = list.filter(function(d){return d.expert === 'Marie D.'});
+  }
+  // Admin voit tout
+
+  // Filtre catégorie (top bar)
+  if(CURRENT_FILTER!=='all'){
+    list = list.filter(function(d){return getCategoryOf(d.type)===CURRENT_FILTER});
+  }
+
+  // Filtres admin
+  if(CURRENT_VIEW==='admin'){
+    if(ADMIN_FILTER_EXPERT){
+      list = list.filter(function(d){return d.expert === ADMIN_FILTER_EXPERT});
+    }
+    if(ADMIN_FILTER_CLIENT){
+      list = list.filter(function(d){return d.user === ADMIN_FILTER_CLIENT});
+    }
+    if(ADMIN_FILTER_TYPE){
+      list = list.filter(function(d){return d.type === ADMIN_FILTER_TYPE});
+    }
+    if(SEARCH_QUERY){
+      var q = SEARCH_QUERY.toLowerCase();
+      list = list.filter(function(d){
+        return d.user.toLowerCase().indexOf(q)>=0
+          || d.email.toLowerCase().indexOf(q)>=0
+          || d.siren.indexOf(q)>=0
+          || NAMES[d.type].toLowerCase().indexOf(q)>=0;
+      });
+    }
+  }
+
+  return list;
+}
+
+function setView(v){
+  CURRENT_VIEW=v;
+  CURRENT_FILTER='all';
+  MODE='list';
+  SEARCH_QUERY='';
+  ADMIN_FILTER_EXPERT='';
+  ADMIN_FILTER_CLIENT='';
+  ADMIN_FILTER_TYPE='';
+
+  document.body.className='view-'+v;
+  document.querySelectorAll('.sw-btn').forEach(function(b){
+    b.classList.remove('a','e','u');
+    if(b.dataset.view===v)b.classList.add(v==='admin'?'a':(v==='expert'?'e':'u'));
+  });
+
+  document.getElementById('catalogue-mode').style.display='none';
+  document.getElementById('list-mode').style.display='block';
+
+  var t=document.getElementById('page-title'),s=document.getElementById('page-sub'),a=document.getElementById('add-btn'),u=document.getElementById('ctx-user'),lbl=document.getElementById('add-btn-label');
+  var adminFilters=document.getElementById('admin-filters');
+
+  if(v==='admin'){
+    t.textContent='Toutes les démarches';
+    s.textContent=DEMARCHES.length+' démarches au total · Filtrer par expert, client ou type';
+    a.style.display='flex';
+    lbl.textContent='+ Créer une démarche';
+    u.textContent='Admin LFO';
+    adminFilters.style.display='block';
+    populateAdminFilters();
+  }else if(v==='expert'){
+    t.textContent='Démarches assignées';
+    s.textContent='Vos démarches en tant qu\'expert (Marie D.)';
+    a.style.display='none';
+    u.textContent='Marie D.';
+    adminFilters.style.display='none';
+  }else{
+    t.textContent='Mes démarches';
+    s.textContent='Vos démarches en cours et démarches disponibles';
+    a.style.display='flex';
+    lbl.textContent='+ Démarrer une démarche';
+    u.textContent=CURRENT_USER.name;
+    adminFilters.style.display='none';
+  }
+  renderFilters();render();
+}
+
+function populateAdminFilters(){
+  // Experts
+  var experts={};
+  DEMARCHES.forEach(function(d){if(d.expert)experts[d.expert]=true});
+  var expertSel=document.getElementById('filter-expert');
+  expertSel.innerHTML='<option value="">Tous les experts ('+Object.keys(experts).length+')</option>';
+  Object.keys(experts).sort().forEach(function(e){
+    var count=DEMARCHES.filter(function(d){return d.expert===e}).length;
+    expertSel.innerHTML+='<option value="'+e+'">'+e+' ('+count+')</option>';
+  });
+
+  // Clients
+  var clients={};
+  DEMARCHES.forEach(function(d){clients[d.user]=true});
+  var clientSel=document.getElementById('filter-client');
+  clientSel.innerHTML='<option value="">Tous les clients ('+Object.keys(clients).length+')</option>';
+  Object.keys(clients).sort().forEach(function(c){
+    var count=DEMARCHES.filter(function(d){return d.user===c}).length;
+    clientSel.innerHTML+='<option value="'+c+'">'+c+' ('+count+')</option>';
+  });
+
+  // Types
+  var types={};
+  DEMARCHES.forEach(function(d){types[d.type]=true});
+  var typeSel=document.getElementById('filter-type');
+  typeSel.innerHTML='<option value="">Tous les types ('+Object.keys(types).length+')</option>';
+  Object.keys(types).sort().forEach(function(t){
+    var count=DEMARCHES.filter(function(d){return d.type===t}).length;
+    typeSel.innerHTML+='<option value="'+t+'">'+NAMES[t]+' ('+count+')</option>';
+  });
+}
+
+function onSearch(){
+  SEARCH_QUERY=document.getElementById('search-input').value;
+  render();
+}
+
+function clearFilters(){
+  ADMIN_FILTER_EXPERT='';
+  ADMIN_FILTER_CLIENT='';
+  ADMIN_FILTER_TYPE='';
+  SEARCH_QUERY='';
+  document.getElementById('filter-expert').value='';
+  document.getElementById('filter-client').value='';
+  document.getElementById('filter-type').value='';
+  document.getElementById('search-input').value='';
+  render();
+}
+
+function setFilter(cat){
+  CURRENT_FILTER=cat;
+  document.querySelectorAll('#filter-bar .fb-btn').forEach(function(b){b.classList.toggle('act',b.dataset.cat===cat)});
+  render();
+}
+
+function renderFilters(){
+  var list=visibleDemarches();
+  var counts={all:list.length};
+  Object.keys(CATEGORIES).forEach(function(c){counts[c]=0});
+  // Recompter avec filtres admin/vue mais sans le filtre de catégorie (pour montrer la totale)
+  var listForCount = DEMARCHES.slice();
+  if(CURRENT_VIEW==='user')listForCount=listForCount.filter(function(d){return d.user===CURRENT_USER.name});
+  else if(CURRENT_VIEW==='expert')listForCount=listForCount.filter(function(d){return d.expert==='Marie D.'});
+  if(ADMIN_FILTER_EXPERT)listForCount=listForCount.filter(function(d){return d.expert===ADMIN_FILTER_EXPERT});
+  if(ADMIN_FILTER_CLIENT)listForCount=listForCount.filter(function(d){return d.user===ADMIN_FILTER_CLIENT});
+  if(ADMIN_FILTER_TYPE)listForCount=listForCount.filter(function(d){return d.type===ADMIN_FILTER_TYPE});
+  if(SEARCH_QUERY){
+    var q=SEARCH_QUERY.toLowerCase();
+    listForCount=listForCount.filter(function(d){
+      return d.user.toLowerCase().indexOf(q)>=0||d.email.toLowerCase().indexOf(q)>=0||d.siren.indexOf(q)>=0||NAMES[d.type].toLowerCase().indexOf(q)>=0;
+    });
+  }
+  counts.all=listForCount.length;
+  listForCount.forEach(function(d){var c=getCategoryOf(d.type);if(counts[c]!==undefined)counts[c]++});
+
+  var h='<button class="fb-btn'+(CURRENT_FILTER==='all'?' act':'')+'" data-cat="all" onclick="setFilter(\'all\')">Toutes ('+counts.all+')</button>';
+  Object.keys(CATEGORIES).forEach(function(c){
+    if(counts[c]>0)h+='<button class="fb-btn'+(CURRENT_FILTER===c?' act':'')+'" data-cat="'+c+'" onclick="setFilter(\''+c+'\')">'+c+' ('+counts[c]+')</button>';
+  });
+  document.getElementById('filter-bar').innerHTML=h;
+
+  // Update filter count display
+  if(CURRENT_VIEW==='admin'){
+    var fc=document.getElementById('filter-count');
+    var activeCount=0;
+    if(ADMIN_FILTER_EXPERT)activeCount++;
+    if(ADMIN_FILTER_CLIENT)activeCount++;
+    if(ADMIN_FILTER_TYPE)activeCount++;
+    if(SEARCH_QUERY)activeCount++;
+    if(CURRENT_FILTER!=='all')activeCount++;
+    if(activeCount>0){
+      fc.innerHTML='<b>'+listForCount.length+'</b> démarche(s) trouvée(s) avec '+activeCount+' filtre(s) actif(s)';
+    }else{
+      fc.innerHTML='Affichage de toutes les démarches';
+    }
+
+    // Sync admin filter dropdowns
+    var es=document.getElementById('filter-expert');
+    var cs=document.getElementById('filter-client');
+    var ts=document.getElementById('filter-type');
+    if(es)es.addEventListener('change', function(){ADMIN_FILTER_EXPERT=this.value;render()});
+    if(cs)cs.addEventListener('change', function(){ADMIN_FILTER_CLIENT=this.value;render()});
+    if(ts)ts.addEventListener('change', function(){ADMIN_FILTER_TYPE=this.value;render()});
+    es.value=ADMIN_FILTER_EXPERT;
+    cs.value=ADMIN_FILTER_CLIENT;
+    ts.value=ADMIN_FILTER_TYPE;
+  }
+}
+
+function stepNext(id,ev){
+  ev.stopPropagation();
+  var d=DEMARCHES.find(function(x){return x.id===id});
+  if(d.payment_mode && d.payment_mode !== 'comptant' && d.installments_paid < d.step){
+    toast('🚫 Bloqué : payez la tranche '+d.step+' avant de continuer');
+    return;
+  }
+  if(d.step<STEPS[d.type].length){d.step++;toast('→ '+STEPS[d.type][d.step-1])}
+  if(d.step===STEPS[d.type].length)d.status='termine';
+  render();
+}
+
+function stepSet(id,n,ev){
+  ev.stopPropagation();
+  var d=DEMARCHES.find(function(x){return x.id===id});
+  if(CURRENT_VIEW==='user'){
+    if(n < d.step){
+      toast('🚫 Le client ne peut pas revenir à une étape précédente');
+      return;
+    }
+    // Étapes futures non cliquables côté user
+    if(n > d.step){
+      toast('🚫 Cette étape n\'est pas encore accessible');
+      return;
+    }
+  }
+  d.step=n;toast(STEPS[d.type][n-1]);
+  if(n===STEPS[d.type].length)d.status='termine';
+  render();
+}
+
+function actTxt(m,ev){if(ev)ev.stopPropagation();toast(m)}
+
+var EXPERTS_LFO = [
+  {id:'yohann',name:'Yohann',role:'Founder LFO',spe:'Stratégie OF, EDOF, Qualiopi',color:'#D85A30',init:'Y'},
+  {id:'laurent',name:'Laurent',role:'Expert formation',spe:'Création OF, NDA, OPCO, France Travail',color:'#7F77DD',init:'L'},
+  {id:'karim',name:'Karim',role:'Expert tech',spe:'Site, App, LMS, Agent IA',color:'#378ADD',init:'K'},
+  {id:'marie',name:'Marie',role:'Expert certifications',spe:'Centre certifié, RNCP, RS, France Compétences',color:'#1D9E75',init:'M'}
+];
+
+function openRdvModal(ev){
+  if(ev)ev.stopPropagation();
+  var m=document.getElementById('rdv-modal');
+  if(!m){
+    m=document.createElement('div');
+    m.id='rdv-modal';
+    m.className='modal-overlay';
+    m.onclick=function(e){if(e.target===m)closeRdvModal()};
+    var h='<div class="modal-card"><div class="modal-head"><div><h2>Prendre rendez-vous</h2><p>Choisissez l\'expert qui vous accompagnera</p></div><button class="modal-close" onclick="closeRdvModal()">×</button></div><div class="rdv-grid">';
+    EXPERTS_LFO.forEach(function(e){
+      h+='<div class="rdv-card" onclick="bookRdv(\''+e.id+'\')">';
+      h+='<div class="rdv-avatar" style="background:'+e.color+'">'+e.init+'</div>';
+      h+='<div class="rdv-info"><b>'+e.name+'</b><span>'+e.role+'</span><div class="rdv-spe">🎯 '+e.spe+'</div></div>';
+      h+='<button class="rdv-btn" style="background:'+e.color+'">Réserver →</button>';
+      h+='</div>';
+    });
+    h+='</div></div>';
+    m.innerHTML=h;
+    document.body.appendChild(m);
+  }
+  m.style.display='flex';
+}
+
+function closeRdvModal(){
+  var m=document.getElementById('rdv-modal');
+  if(m)m.style.display='none';
+}
+
+function bookRdv(id){
+  var e=EXPERTS_LFO.find(function(x){return x.id===id});
+  closeRdvModal();
+  toast('📅 Redirection Cal.com vers '+e.name+' ('+e.role+')');
+}
+
+function toggleOption(id,key,ev){
+  ev.stopPropagation();
+  var d=DEMARCHES.find(function(x){return x.id===id});
+  var idx=d.options.indexOf(key);
+  if(idx>=0)d.options.splice(idx,1);else d.options.push(key);
+  render();
+  setTimeout(function(){var c=document.getElementById('c-'+id);if(c)c.classList.add('op')},20);
+}
+
+function calcPrice(d){
+  var base=PRICES[d.type];
+  var opts=OPTIONS[d.type]||[];
+  var extra=0;
+  (d.options||[]).forEach(function(k){
+    var opt=opts.find(function(o){return o.k===k});
+    if(opt)extra+=opt.p;
+  });
+  return base + extra;
+}
+
+function setPaymentMode(id,mode,ev){
+  if(ev)ev.stopPropagation();
+  var d=DEMARCHES.find(function(x){return x.id===id});
+  d.payment_mode=mode;
+  d.installments_total=mode==='2x'?2:mode==='3x'?3:1;
+  render();
+  setTimeout(function(){var c=document.getElementById('c-'+id);if(c)c.classList.add('op')},20);
+  toast('Mode paiement : '+mode);
+}
+
+function openDetails(id,ev){
+  ev.stopPropagation();
+  var c=document.getElementById('c-'+id);
+  if(!c)return;
+  c.classList.add('op');
+  c.scrollIntoView({behavior:'smooth', block:'start'});
+  toast('📂 Détails ouverts');
+}
+
+function render(){
+  if(MODE==='catalogue'){renderCatalogue();return}
+  // Mémoriser quelles cards sont ouvertes avant re-render
+  var openIds = [];
+  document.querySelectorAll('.cc.op').forEach(function(c){
+    if(c.id && c.id.indexOf('c-')===0) openIds.push(c.id);
+  });
+  var list=visibleDemarches();
+  if(list.length===0){
+    document.getElementById('cards').innerHTML='<div class="empty">Aucune démarche ne correspond aux filtres</div>';
+    renderFilters();
+    return;
+  }
+  var groups={};
+  list.forEach(function(d){var c=getCategoryOf(d.type);if(!groups[c])groups[c]=[];groups[c].push(d)});
+  var ordered=Object.keys(CATEGORIES).filter(function(c){return groups[c]});
+  var h='';
+  ordered.forEach(function(c){
+    h+='<div class="cl">'+c+' ('+groups[c].length+')</div>';
+    groups[c].forEach(function(d){h+=renderCard(d)});
+  });
+  document.getElementById('cards').innerHTML=h;
+  // Restaurer l'état ouvert
+  openIds.forEach(function(id){
+    var el=document.getElementById(id);
+    if(el)el.classList.add('op');
+  });
+  renderFilters();
+}
+
+function renderCard(d){
+  var steps=STEPS[d.type],total=steps.length;
+  var col=COLORS[d.type];
+  var currentLabel=steps[d.step-1];
+  var pct=Math.round((d.step-1)/(total-1)*100);
+  if(d.status==='termine')pct=100;
+
+  var h='';
+  h+='<div class="cc" id="c-'+d.id+'" onclick="tog(\''+d.id+'\')"><div class="ci">';
+  h+='<div class="cb2" style="background:'+col.bar+'"></div>';
+  h+='<span class="ct" style="background:'+col.bg+';color:'+col.tx+'">'+NAMES[d.type]+'</span>';
+  h+='<div class="cn">';
+  if(CURRENT_VIEW==='user'){
+    h+='<div class="cnn">'+NAMES[d.type]+' '+statusBadge(d)+'</div>';
+    h+='<div class="cm">'+d.created+(d.expert?' · Expert '+d.expert:'')+'</div>';
+  }else{
+    h+='<div class="cnn">'+d.user+' '+statusBadge(d)+'</div>';
+    h+='<div class="cm">'+d.email+(d.expert?' · '+d.expert:'')+' · '+d.created+'</div>';
+  }
+  h+='</div>';
+  if(CURRENT_VIEW==='user'){
+    h+='<div class="prg"><div class="prg-t"><span>Étape '+d.step+'/'+total+'</span><b>'+pct+'%</b></div><div class="prg-bar"><div class="prg-fill" style="width:'+pct+'%"></div></div></div>';
+  }else{
+    var bg=(d.status==='termine')?'#E9F7F1':(d.status==='en_attente_paiement'?'#FFF9E6':'#EDF3F9');
+    var fg=(d.status==='termine')?'#1D9E75':(d.status==='en_attente_paiement'?'#BA7517':'#2B5F8A');
+    var tc=(d.status==='termine')?'#0F6E56':(d.status==='en_attente_paiement'?'#854F0B':'#234E70');
+    h+='<div class="sb" style="background:'+bg+'"><div class="sn" style="background:'+fg+'">'+d.step+'</div><div class="sl" style="color:'+tc+'">'+currentLabel+'</div></div>';
+  }
+  h+='<button class="details-btn" onclick="openDetails(\''+d.id+'\',event)">Détails</button>';
+  h+='<div class="ca"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>';
+  h+='</div></div>';
+
+  h+='<div class="ce">';
+  h+='<div class="cs">';
+  steps.forEach(function(nm,i){
+    var sn=i+1;
+    var cls=sn<d.step?'d':(sn===d.step?'c':'p');
+    var dot=sn<d.step?CHK:sn;
+    var isLocked = (CURRENT_VIEW==='user' && sn>d.step);
+    var lockStyle = isLocked ? ' style="cursor:not-allowed;opacity:.45" title="Étape verrouillée"' : '';
+    var lockIcon = isLocked ? ' 🔒' : '';
+    h+='<div class="'+cls+'"'+lockStyle+' onclick="stepSet(\''+d.id+'\','+sn+',event)"><div class="sd">'+dot+'</div><span class="sn3">'+nm+lockIcon+'</span></div>';
+  });
+  h+='</div>';
+
+  h+='<div class="eb">';
+  h+='<div class="eh"><span class="ecb">Étape en cours</span><span class="ect'+(d.status==='termine'?' dt':'')+'">'+currentLabel+'</span>'+paymentBadge(d)+'</div>';
+
+  if(d.step===1){
+    h+=renderConfigStep(d);
+  }else{
+    h+='<div class="cfg"><div class="cfg-t">Documents de l\'étape '+d.step+' : '+currentLabel+'</div><div class="cfg-h">Les documents nécessaires à cette étape s\'affichent ici. Voir le catalogue complet pour la liste détaillée des docs requis par étape.</div></div>';
+  }
+
+  h+='<div class="ep"><div class="ept">Résumé</div>';
+  h+='<div class="epr"><span class="epk">Type</span><span class="epv">'+NAMES[d.type]+'</span></div>';
+  if(CURRENT_VIEW==='admin'){
+    h+='<div class="epr"><span class="epk">Client</span><span class="epv">'+d.user+'</span></div>';
+    h+='<div class="epr"><span class="epk">Expert</span><span class="epv">'+(d.expert||'Non assigné')+'</span></div>';
+  }
+  if(CURRENT_VIEW!=='expert'){
+    var total_price=calcPrice(d);
+    h+='<div class="epr"><span class="epk">Prix total</span><span class="epv">'+total_price.toLocaleString('fr-FR')+' €</span></div>';
+    h+='<div class="epr"><span class="epk">Mode paiement</span><span class="epv">'+(d.payment_mode||'Non défini')+'</span></div>';
+    if(d.payment_mode && d.payment_mode!=='comptant'){
+      h+='<div class="epr"><span class="epk">Tranches</span><span class="epv">'+d.installments_paid+'/'+d.installments_total+'</span></div>';
+    }
+  }
+  h+='<div class="epr"><span class="epk">Étape</span><span class="epv">'+d.step+'/'+total+'</span></div>';
+  h+='</div></div>';
+
+  h+='<div class="ea">';
+  if(CURRENT_VIEW==='admin'){
+    h+='<button class="eb4 pr2" onclick="stepNext(\''+d.id+'\',event)">Étape suivante</button>';
+    h+='<button class="eb4 sc3" onclick="actTxt(\'Mise en attente\',event)">En attente</button>';
+    h+='<button class="eb4 sc3" onclick="actTxt(\'Modal d\\\'assignation expert\',event)">Assigner expert</button>';
+    h+='<button class="eb4 sc3" onclick="actTxt(\'Voir messages\',event)">💬 Messages</button>';
+    h+='<button class="eb4 dan" onclick="actTxt(\'Démarche annulée (action admin)\',event)">Annuler</button>';
+    h+='<button class="eb4 dan" onclick="actTxt(\'Confirmation suppression\',event)">Supprimer</button>';
+  }else if(CURRENT_VIEW==='expert'){
+    h+='<button class="eb4 pr2" onclick="stepNext(\''+d.id+'\',event)">Valider et passer</button>';
+    h+='<button class="eb4 sc3" onclick="actTxt(\'Note interne\',event)">📝 Note interne</button>';
+    h+='<button class="eb4 sc3" onclick="actTxt(\'Message au client\',event)">💬 Message client</button>';
+    h+='<button class="eb4 sc3" onclick="actTxt(\'Signaler à l\\\'admin\',event)">⚠ Signaler</button>';
+  }else{
+    if(!d.paid || d.installments_paid < d.installments_total){
+      var toPay = d.installments_paid < d.installments_total ? Math.round(calcPrice(d)/d.installments_total) : calcPrice(d);
+      h+='<button class="eb4 pr2" onclick="actTxt(\'Stripe Checkout : '+toPay+' €\',event)">Payer '+toPay+' €</button>';
+    }
+    h+='<button class="eb4 sc3" onclick="actTxt(\'💬 Messagerie ouverte\',event)">💬 Messagerie</button>';
+    h+='<button class="eb4 sc3" onclick="actTxt(\'📄 Documents\',event)">📄 Documents</button>';
+    h+='<button class="eb4 sc3" onclick="openRdvModal(event)">📅 Prendre RDV expert</button>';
+    if(d.status!=='termine'){
+      if(d.step <= 2){
+        h+='<button class="eb4 dan" onclick="actTxt(\'Annulation demandée\',event)">Annuler</button>';
+      }else{
+        h+='<button class="eb4 sc3" onclick="actTxt(\'Annulation impossible après l\\\'étape 2 — contactez l\\\'admin via la messagerie\',event)" title="Annulation possible uniquement par l\'admin après l\'étape 2" style="opacity:.6;cursor:help">🔒 Annulation admin</button>';
+      }
+    }
+  }
+  h+='</div>';
+
+  h+='</div>';
+  return h;
+}
+
+function renderConfigStep(d){
+  var h='<div class="cfg">';
+  h+='<div class="cfg-t">Configuration</div>';
+
+  if(CROSSSELL[d.type]){
+    var blockers=CROSSSELL[d.type].filter(function(c){return !ORGANISME[c.miss]});
+    if(blockers.length>0){
+      h+='<div class="crosssell-block"><p>⚠ <b>Prérequis manquant</b> : '+blockers[0].msg+'</p>';
+      h+='<button class="crosssell-btn" onclick="event.stopPropagation();toast(\'Redirection vers '+blockers[0].to+'\')">→ Commencer la démarche '+NAMES[blockers[0].to]+'</button></div>';
+    }
+  }
+
+  if(HAS_CHATBOT_IA.indexOf(d.type)>=0){
+    h+='<div class="cfg-h">💬 Cette démarche utilise un chatbot IA à l\'étape 2 pour générer automatiquement votre dossier.</div>';
+  }
+
+  h+='<div class="cfg-h">Organisme : <b>'+ORGANISME.raison_sociale+'</b> (SIREN '+ORGANISME.siren+')</div>';
+
+  var options=OPTIONS[d.type]||[];
+  var base=PRICES[d.type];
+  var total=calcPrice(d);
+  var modes=PAYMENT_MODES[d.type]||[];
+
+  if(options.length > 0){
+    h+='<div class="cfg-t" style="margin-top:14px;margin-bottom:6px">Options</div>';
+    h+='<div class="opt-list">';
+    options.forEach(function(opt){
+      var sel=d.options.indexOf(opt.k)>=0;
+      h+='<div class="opt-item'+(sel?' sel':'')+'" onclick="toggleOption(\''+d.id+'\',\''+opt.k+'\',event)">';
+      h+='<div class="opt-chk">'+(sel?CHK:'')+'</div>';
+      h+='<div class="opt-info"><b>'+opt.n+'</b>'+(opt.d?'<span>'+opt.d+'</span>':'')+'</div>';
+      h+='<div class="opt-price">+'+opt.p+' €</div>';
+      h+='</div>';
+    });
+    h+='</div>';
+  }
+
+  h+='<div class="pricing-box" style="margin-top:14px">';
+  h+='<div class="pricing-row"><span>Prix de base</span><span>'+base.toLocaleString('fr-FR')+' €</span></div>';
+  if(d.options.length>0){
+    d.options.forEach(function(k){
+      var opt=options.find(function(o){return o.k===k});
+      if(opt)h+='<div class="pricing-row"><span>+ '+opt.n+'</span><span>+'+opt.p+' €</span></div>';
+    });
+  }
+  h+='<div class="pricing-total"><span>Total</span><span>'+total.toLocaleString('fr-FR')+' €</span></div>';
+  h+='<div class="pricing-installments">';
+  modes.forEach(function(m){
+    var label=m==='comptant'?'Comptant '+total+' €':m==='2x'?'2× '+Math.round(total/2)+' €':'3× '+Math.round(total/3)+' €';
+    var sel=(d.payment_mode===m);
+    h+='<div class="install-pill'+(sel?' sel':'')+'" onclick="setPaymentMode(\''+d.id+'\',\''+m+'\',event)">'+label+'</div>';
+  });
+  h+='</div></div>';
+
+  h+='</div>';
+  return h;
+}
+
+// =============== CATALOGUE MODE ===============
+
+function onAddBtn(){
+  if(CURRENT_VIEW==='admin'){
+    toast('🛠 Modal admin : créer démarche pour un client (paiement hors-site)');
+    return;
+  }
+  enterCatalogue();
+}
+
+function enterCatalogue(){
+  MODE='catalogue';
+  CATALOGUE_FILTER='all';
+  document.getElementById('catalogue-mode').style.display='block';
+  document.getElementById('list-mode').style.display='none';
+  renderCatalogue();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function exitCatalogue(){
+  MODE='list';
+  document.getElementById('catalogue-mode').style.display='none';
+  document.getElementById('list-mode').style.display='block';
+  render();
+}
+
+function setCatFilter(cat){
+  CATALOGUE_FILTER=cat;
+  renderCatalogue();
+}
+
+function renderCatalogue(){
+  // Filter bar
+  var counts={all:TYPES_ALL.length};
+  Object.keys(CATEGORIES).forEach(function(c){counts[c]=CATEGORIES[c].length});
+  var fb='<button class="fb-btn'+(CATALOGUE_FILTER==='all'?' act':'')+'" onclick="setCatFilter(\'all\')">Toutes ('+counts.all+')</button>';
+  Object.keys(CATEGORIES).forEach(function(c){
+    fb+='<button class="fb-btn'+(CATALOGUE_FILTER===c?' act':'')+'" onclick="setCatFilter(\''+c+'\')">'+c+' ('+counts[c]+')</button>';
+  });
+  document.getElementById('cat-filter-bar').innerHTML=fb;
+
+  // Catalogue
+  var typesToShow=TYPES_ALL;
+  if(CATALOGUE_FILTER!=='all')typesToShow=CATEGORIES[CATALOGUE_FILTER]||[];
+
+  var groups={};
+  typesToShow.forEach(function(t){
+    var c=getCategoryOf(t);
+    if(!groups[c])groups[c]=[];
+    groups[c].push(t);
+  });
+
+  var h='';
+  Object.keys(CATEGORIES).forEach(function(c){
+    if(!groups[c])return;
+    h+='<div class="cl">'+c+' ('+groups[c].length+')</div>';
+    h+='<div class="catalogue-grid">';
+    groups[c].forEach(function(type){
+      var col=COLORS[type];
+      var price=PRICES[type];
+      var modes=PAYMENT_MODES[type]||[];
+      var modeLabel=modes.length===1?modes[0]:modes.join(' / ');
+      h+='<div class="cat-card" onclick="startDemarche(\''+type+'\')">';
+      h+='<div class="cat-card-bar" style="background:'+col.bar+'"></div>';
+      h+='<div class="cat-card-head"><span class="cat-tag" style="background:'+col.bg+';color:'+col.tx+'">'+NAMES[type]+'</span></div>';
+      h+='<div class="cat-card-title">'+NAMES[type]+'</div>';
+      h+='<div class="cat-card-desc">'+(DESCS[type]||'')+'</div>';
+      h+='<div class="cat-card-meta">';
+      h+='<div><div class="cat-price" style="color:'+col.bar+'">'+price.toLocaleString('fr-FR')+' €</div><div class="cat-pay">'+modeLabel+'</div></div>';
+      h+='<button class="cat-start-btn" style="background:'+col.bar+'" onclick="event.stopPropagation();startDemarche(\''+type+'\')">';
+      h+='Démarrer →</button>';
+      h+='</div>';
+      h+='</div>';
+    });
+    h+='</div>';
+  });
+
+  document.getElementById('catalogue-grid').innerHTML=h;
+}
+
+function startDemarche(type){
+  // Créer une nouvelle démarche pour le user actuel
+  var newId='d-pam-new-'+Date.now();
+  DEMARCHES.unshift({
+    id:newId,
+    type:type,
+    user:CURRENT_USER.name,
+    email:CURRENT_USER.email,
+    siren:'881279392',
+    step:1,
+    status:'nouveau',
+    paid:false,
+    payment_mode:null,
+    installments_paid:0,
+    installments_total:1,
+    expert:null,
+    created:'17/04/2026',
+    options:[],
+    parent_id:null
+  });
+
+  exitCatalogue();
+  toast('✓ Démarche '+NAMES[type]+' créée — Configuration en cours');
+
+  // Auto-ouvrir la nouvelle card
+  setTimeout(function(){
+    var c=document.getElementById('c-'+newId);
+    if(c){
+      c.classList.add('op');
+      c.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  },150);
+}
+
+setView('user');
+</script>
+</body>
+</html>

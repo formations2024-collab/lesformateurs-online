@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habilitation RS/RNCP — lesformateurs.online</title>
+<link rel="canonical" href="https://lesformateurs.online/recherche-habilitation">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--o:#D85A30;--o-bg:#FFF8F3;--o-lt:#FAECE7;--g:#1D9E75;--g-bg:#E1F5EE;--v:#534AB7;--v-bg:#EEEDFE;--gd:#C9A84C;--gd-bg:#FAEEDA;--dk:#1a1a1a;--gy:#6B7280;--lgy:#9CA3AF;--bd:#E5E7EB;--bg:#FAFAFA;--blue:#378ADD;--blue-bg:#E6F1FB;--red:#E24B4A;--red-bg:#FCEBEB}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dk);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+.page{max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+.nav{max-width:1100px;margin:0 auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:16px;font-weight:600}.logo span{color:var(--o)}
+.nav-r{display:flex;gap:10px;align-items:center}
+.nav-r a{font-size:12px;color:var(--gy);padding:8px 12px}
+.nb{padding:8px 16px;border-radius:6px;font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:inherit}
+.nb.g{background:var(--g-bg);color:var(--g);border:1px solid var(--g)}
+.nb.d{background:var(--dk);color:white}
+
+/* COUNTDOWN */
+.cd{background:var(--dk);border-radius:12px;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+.cd-left{display:flex;align-items:center;gap:10px}
+.cd-dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.cd-text{font-size:12px;color:white;font-weight:500}
+.cd-text b{color:var(--gd)}
+.cd-timer{display:flex;gap:6px}
+.cd-u{background:rgba(255,255,255,.08);border-radius:6px;padding:4px 8px;text-align:center;min-width:42px}
+.cd-n{font-size:16px;font-weight:500;color:white;font-variant-numeric:tabular-nums}
+.cd-l{font-size:8px;color:rgba(255,255,255,.4);letter-spacing:1px;text-transform:uppercase}
+
+/* HERO 2 COL */
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;margin-bottom:48px}
+.hero-left{padding-right:16px}
+.hero-tag{font-size:10px;font-weight:600;letter-spacing:3px;color:var(--o);margin-bottom:10px}
+.hero-title{font-size:clamp(26px,3.5vw,38px);font-weight:800;line-height:1.15;margin-bottom:14px;letter-spacing:-0.5px}
+.hero-title em{font-style:normal;color:var(--o)}
+.hero-desc{font-size:14px;color:var(--gy);line-height:1.7;margin-bottom:20px}
+.hero-btns{display:flex;gap:8px}
+.hero-btn{padding:10px 20px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;border:none}
+.hero-btn.p{background:var(--o);color:white}
+.hero-btn.s{background:white;color:var(--dk);border:1px solid var(--bd)}
+
+/* SEARCH BOX */
+.sbox{background:white;border:1px solid var(--bd);border-radius:14px;padding:24px}
+.sbox-title{font-size:13px;font-weight:600;margin-bottom:12px}
+.sbar{display:flex;border:2px solid var(--o);border-radius:10px;overflow:hidden;margin-bottom:10px}
+.sbar select{border:none;padding:10px 12px;font-size:11px;font-weight:500;font-family:inherit;background:var(--bg);border-right:1px solid var(--bd);cursor:pointer;color:var(--gy);outline:none}
+.sbar input{flex:1;border:none;padding:10px 14px;font-size:13px;font-family:inherit;outline:none}
+.sbar button{padding:10px 20px;background:var(--o);color:white;border:none;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.sia{display:flex;align-items:center;gap:6px;margin-bottom:12px}
+.sia-toggle{width:32px;height:18px;border-radius:9px;background:var(--o);position:relative;cursor:pointer;flex-shrink:0}
+.sia-toggle::after{content:'';width:14px;height:14px;border-radius:50%;background:white;position:absolute;top:2px;left:16px}
+.sia-text{font-size:11px;color:var(--o);font-weight:500}
+.sia-sub{font-size:10px;color:var(--lgy)}
+.stags{display:flex;gap:4px;flex-wrap:wrap}
+.stag{padding:4px 10px;border-radius:14px;font-size:10px;border:1px solid var(--bd);color:var(--gy);cursor:pointer;transition:all .15s}
+.stag:hover{border-color:var(--o);color:var(--o)}
+
+/* FINANCEMENTS PILLS */
+.fins{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:48px}
+.fin{display:flex;align-items:center;gap:6px;padding:8px 14px;background:white;border:1px solid var(--bd);border-radius:30px;font-size:11px;font-weight:500;transition:all .15s}
+.fin:hover{border-color:var(--g);background:var(--g-bg)}
+.fin-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* SECTION LABEL */
+.slabel{font-size:10px;font-weight:600;letter-spacing:3px;color:var(--lgy);margin-bottom:14px}
+
+/* PACKS ASYMÉTRIQUES */
+.packs{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:14px;margin-bottom:48px}
+.pack{background:white;border:1px solid var(--bd);border-radius:14px;padding:24px;display:flex;flex-direction:column;transition:all .2s;position:relative;overflow:hidden}
+.pack:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.pack.feat{border:2px solid var(--o);box-shadow:0 8px 24px rgba(216,90,48,.1)}
+.pack-top-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);padding:3px 14px;font-size:8px;font-weight:600;letter-spacing:1.5px;border-radius:0 0 8px 8px}
+.pack-tag{font-size:9px;font-weight:600;letter-spacing:2px;margin-bottom:8px}
+.pack-name{font-size:16px;font-weight:700;margin-bottom:6px}
+.pack-desc{font-size:11px;color:var(--gy);line-height:1.6;margin-bottom:16px}
+.pack-list{list-style:none;margin-bottom:auto;padding-bottom:16px}
+.pack-list li{font-size:11px;padding:3px 0;display:flex;align-items:flex-start;gap:6px;color:var(--dk)}
+.pack-list li::before{content:'—';color:var(--lgy);flex-shrink:0}
+.pack-old{font-size:12px;color:var(--lgy);text-decoration:line-through}
+.pack-price{font-size:26px;font-weight:800;margin:2px 0}
+.pack-eco{font-size:10px;font-weight:600;margin-bottom:14px;display:inline-block;padding:2px 10px;border-radius:10px}
+.pack-btn{display:block;width:100%;padding:10px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;border:none;text-align:center;transition:all .15s}
+.pack-btn.p{background:var(--o);color:white}
+.pack-btn.p:hover{background:#c04e28}
+.pack-btn.o{background:white;color:var(--dk);border:1px solid var(--bd)}
+.pack-btn.o:hover{border-color:var(--o);color:var(--o)}
+.pack-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:14px}
+.pack-tags span{font-size:8px;padding:2px 7px;border-radius:5px}
+
+/* CERTIFICATIONS LISTE */
+.certs{margin-bottom:48px}
+.cert{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:white;border:1px solid var(--bd);border-radius:10px;margin-bottom:8px;cursor:pointer;transition:all .15s}
+.cert:hover{border-color:var(--o);background:var(--o-bg)}
+.cert-left{display:flex;align-items:center;gap:14px}
+.cert-icon{width:46px;height:46px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+.cert-type{font-size:8px;font-weight:600}
+.cert-num{font-size:13px;font-weight:600}
+.cert-name{font-size:14px;font-weight:600;margin-bottom:2px}
+.cert-sub{font-size:11px;color:var(--lgy)}
+.cert-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.cert-ftags{display:flex;gap:3px}
+.cert-ftag{font-size:8px;padding:2px 6px;border-radius:4px}
+.cert-price{font-size:16px;font-weight:700;color:var(--o)}
+.cert-btn{padding:7px 14px;background:var(--o);color:white;border:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit}
+.cert-edof{position:absolute;top:10px;right:12px;font-size:8px;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--g-bg);color:var(--g)}
+
+/* CTA */
+.cta{background:white;border:2px solid var(--o);border-radius:14px;padding:40px;text-align:center;margin-bottom:48px;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--o),var(--gd),var(--g))}
+.cta h2{font-size:22px;font-weight:800;margin-bottom:6px}
+.cta p{font-size:13px;color:var(--gy);margin-bottom:20px}
+.cta-btn{display:inline-block;padding:14px 40px;background:var(--o);color:white;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.cta-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(216,90,48,.2)}
+.cta-edof{display:flex;align-items:center;gap:6px;justify-content:center;margin-top:14px;font-size:12px;color:var(--g);font-weight:500}
+.cta-edof .cross{text-decoration:line-through;color:var(--lgy);font-weight:400}
+
+/* FOOTER */
+.footer{text-align:center;padding:24px 0;border-top:1px solid var(--bd)}
+.footer p{font-size:11px;color:var(--lgy)}
+
+/* OFFRE BANNER */
+.offre{background:linear-gradient(135deg,#1a4a32,#0d2b1e);border-radius:14px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;position:relative;overflow:hidden}
+.offre::after{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:rgba(29,158,117,.1);border-radius:50%}
+.offre-left{flex:1;position:relative;z-index:1}
+.offre-badge{display:inline-block;padding:3px 10px;background:var(--gd);border-radius:5px;font-size:9px;font-weight:700;color:white;letter-spacing:1px;margin-bottom:8px}
+.offre h3{font-size:16px;font-weight:700;color:white;margin-bottom:4px}
+.offre p{font-size:12px;color:rgba(255,255,255,.6);line-height:1.5}
+.offre-right{flex-shrink:0;text-align:center;position:relative;z-index:1}
+.offre-old{font-size:12px;color:rgba(255,255,255,.4);text-decoration:line-through}
+.offre-free{font-size:22px;font-weight:800;color:var(--g)}
+.offre-sub{font-size:10px;color:rgba(255,255,255,.4)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:24px}
+  .packs{grid-template-columns:1fr}
+  .cert-ftags{display:none}
+}
+@media(max-width:720px){
+  .nav{flex-wrap:wrap;gap:10px;padding:14px 16px}
+  .nav-r{flex-wrap:wrap;justify-content:flex-end;gap:4px;width:100%}
+  .nav-r a{padding:6px 8px;font-size:11px}
+  .nb{padding:6px 12px;font-size:11px}
+}
+@media(max-width:600px){
+  .page{padding:0 14px}
+  .hero-left{padding-right:0}
+  .hero-title{font-size:24px}
+  .hero-btns{flex-wrap:wrap;gap:6px}
+  .hero-btn{flex:1 1 140px;text-align:center}
+  .cd{flex-direction:column;gap:10px;text-align:center;padding:12px 14px}
+  .cd-timer{gap:4px;flex-wrap:wrap;justify-content:center}
+  .cd-u{min-width:38px;padding:4px 6px}
+  .fins{justify-content:center}
+  .sbox{padding:18px}
+  .sbar{flex-wrap:wrap}
+  .sbar select{flex:1 1 110px;border-right:none;border-bottom:1px solid var(--bd)}
+  .sbar input{flex:1 1 100%;min-width:0;border-bottom:1px solid var(--bd)}
+  .sbar button{flex:1 1 100%}
+  .stags{justify-content:center}
+  .offre{flex-direction:column;align-items:flex-start;gap:14px;padding:18px}
+  .offre-right{align-self:stretch;text-align:left}
+  .pack{padding:20px}
+  .cert{flex-direction:column;align-items:flex-start;gap:12px;padding:14px}
+  .cert-left{width:100%;gap:12px}
+  .cert-name{font-size:13px;line-height:1.3}
+  .cert-right{width:100%;justify-content:space-between;gap:10px}
+  .cta{padding:28px 20px}
+  .cta h2{font-size:18px}
+  .cta-btn{width:100%;padding:14px 18px;font-size:13px}
+  .cta-edof{flex-wrap:wrap;text-align:center}
+}
+@media(max-width:380px){
+  .hero-title{font-size:22px}
+  .cd-timer{gap:3px}
+  .cd-u{min-width:34px;padding:3px 5px}
+  .cd-n{font-size:14px}
+}
+
+/* POPUP RECHERCHE */
+.rhp-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;animation:rhpFade .2s ease-out;}
+.rhp-modal{background:white;border-radius:18px;max-width:640px;width:100%;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.18);overflow:hidden;animation:rhpRise .25s ease-out;}
+.rhp-head{padding:20px 24px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-shrink:0;}
+.rhp-searchbar{padding:0 24px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--bd);background:#fff;flex-shrink:0;position:relative;}
+.rhp-search-ic{position:absolute;left:38px;top:50%;transform:translateY(-50%);color:var(--lgy);pointer-events:none;display:flex;}
+.rhp-searchbar input{flex:1;padding:12px 14px 12px 42px;border:1.5px solid var(--bd);border-radius:10px;font-size:14px;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s;background:#fff;color:var(--dk);}
+.rhp-searchbar input:focus{border-color:var(--o);box-shadow:0 0 0 3px rgba(216,90,48,.1);}
+.rhp-search-btn{padding:12px 18px;background:var(--o);color:white;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;display:inline-flex;align-items:center;transition:background .15s;}
+.rhp-search-btn:hover{background:#c04e28;}
+@media(max-width:520px){.rhp-search-btn{padding:12px 12px;font-size:0;}.rhp-search-btn svg{margin-right:0!important;}}
+.rhp-head h3{font-size:18px;font-weight:800;margin:0 0 2px;}
+.rhp-head-sub{font-size:11px;color:var(--gy);margin:0;}
+.rhp-close{background:#F3F4F6;border:none;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;color:#666;font-family:inherit;flex-shrink:0;}
+.rhp-close:hover{background:var(--bd);}
+.rhp-body{padding:0 24px 24px;overflow-y:auto;flex:1;}
+.rhp-results-head{font-size:12px;color:var(--gy);padding:14px 0 10px;}
+.rhp-results-head b{color:var(--dk);}
+.rhp-ai-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:5px;background:linear-gradient(90deg,#534AB7,#D85A30);color:white;letter-spacing:.5px;margin-right:6px;}
+.rhp-list{display:flex;flex-direction:column;gap:6px;}
+.rhp-row{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--bd);border-radius:10px;background:white;cursor:pointer;transition:all .12s;}
+.rhp-row:hover{border-color:var(--o);background:var(--o-bg);}
+.rhp-row-icon{width:42px;height:42px;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;}
+.rhp-row-main{flex:1;min-width:0;}
+.rhp-row-name{font-size:13px;font-weight:600;color:var(--dk);line-height:1.25;}
+.rhp-row-sub{font-size:11px;color:var(--lgy);margin-top:2px;}
+.rhp-row-price{font-size:14px;font-weight:700;color:var(--o);white-space:nowrap;}
+.rhp-row-btn{padding:7px 14px;background:var(--o);color:white;border:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;flex-shrink:0;}
+.rhp-row-btn:hover{background:#c04e28;}
+.rhp-loading{padding:60px 20px;text-align:center;}
+.rhp-spinner{display:inline-block;width:32px;height:32px;border:3px solid var(--bd);border-top-color:var(--o);border-radius:50%;animation:rhSpin .8s linear infinite;}
+.rhp-loading-txt{font-size:13px;color:var(--gy);margin-top:14px;}
+.rhp-noresult{text-align:center;padding:18px 14px 8px;}
+.rhp-noresult-icon{font-size:36px;margin-bottom:8px;}
+.rhp-noresult-title{font-size:14px;font-weight:600;margin:0 0 4px;}
+.rhp-noresult-sub{font-size:12px;color:var(--gy);margin:0 0 18px;}
+.rhp-domains{display:flex;flex-direction:column;gap:6px;}
+.rhp-domain{border:1px solid var(--bd);border-radius:10px;overflow:hidden;background:white;}
+.rhp-domain-head{width:100%;display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:white;border:none;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;color:var(--dk);text-align:left;}
+.rhp-domain-head:hover{background:var(--o-bg);}
+.rhp-domain-meta{font-size:11px;color:var(--lgy);font-weight:500;display:flex;align-items:center;gap:6px;}
+.rhp-chev{display:inline-block;transition:transform .15s;font-size:14px;}
+.rhp-domain.open .rhp-chev{transform:rotate(90deg);}
+.rhp-domain-body{display:none;padding:6px 12px 12px;flex-direction:column;gap:5px;border-top:1px solid var(--bd);}
+.rhp-domain.open .rhp-domain-body{display:flex;}
+.rhp-more{font-size:11px;color:var(--lgy);text-align:center;padding:8px;font-style:italic;}
+.rhp-pop-pill{display:inline-block;font-size:9px;font-weight:700;padding:2px 8px;border-radius:5px;background:linear-gradient(90deg,#D85A30,#C9A84C);color:white;letter-spacing:.5px;margin-right:8px;vertical-align:middle;}
+@keyframes rhpFade{from{opacity:0}to{opacity:1}}
+@keyframes rhpRise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes rhSpin{to{transform:rotate(360deg)}}
+@media(max-width:600px){.rhp-modal{max-height:92vh;}.rhp-row{flex-wrap:wrap;}.rhp-row-price{order:3;}.rhp-row-btn{order:4;margin-left:auto;}}
+
+/* MODAL CONFIRMATION AJOUT PANIER */
+.rhp-confirm-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:11000;display:flex;align-items:center;justify-content:center;padding:20px;animation:rhpFade .2s ease-out;}
+.rhp-confirm{background:#fff;border-radius:18px;max-width:440px;width:100%;padding:32px 28px 28px;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.2);animation:rhpRise .25s ease-out;}
+.rhp-confirm-icon{width:64px;height:64px;border-radius:50%;background:var(--g-bg);display:inline-flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.rhp-confirm h3{font-size:19px;font-weight:800;margin:0 0 6px;letter-spacing:-.02em;}
+.rhp-confirm-name{font-size:14px;color:var(--dk);font-weight:500;margin:0 0 8px;font-style:italic;}
+.rhp-confirm-q{font-size:13px;color:var(--gy);margin:0 0 4px;line-height:1.5;}
+.rhp-confirm-actions{display:flex;flex-direction:column;gap:8px;margin-top:22px;}
+.rhp-confirm-btn{padding:13px 18px;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;}
+.rhp-confirm-btn.p{background:var(--o);color:#fff;}
+.rhp-confirm-btn.p:hover{background:#c04e28;transform:translateY(-1px);box-shadow:0 6px 18px rgba(216,90,48,.25);}
+.rhp-confirm-btn.s{background:#f5f5f5;color:var(--dk);}
+.rhp-confirm-btn.s:hover{background:#eee;}
+
+/* ANIM */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.cd,.hero,.offre,.pack,.cert,.cta,.sbox{animation:fadeUp .5s ease-out both}
+.pack:nth-child(2){animation-delay:.08s}.pack:nth-child(3){animation-delay:.16s}
+.cert:nth-child(2){animation-delay:.04s}.cert:nth-child(3){animation-delay:.08s}.cert:nth-child(4){animation-delay:.12s}.cert:nth-child(5){animation-delay:.16s}.cert:nth-child(6){animation-delay:.2s}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+<div class="logo">les<span>formateurs</span>.online</div>
+<div class="nav-r">
+<a href="/formation">Services</a>
+<a href="/creer-of">Créer mon OF</a>
+<a href="/recherche-habilitation" style="color:#1D9E75;font-weight:600;">Habilitation</a>
+<a href="/se-former">Se former</a>
+<a href="/devenir-expert" style="color:#D85A30;font-weight:600;">Recrutement</a>
+<button class="nb d" onclick="location.href='/dashboard'">Mon compte</button>
+</div>
+</nav>
+
+<div class="page">
+
+<!-- COUNTDOWN -->
+<div class="cd">
+<div class="cd-left"><div class="cd-dot"></div><div class="cd-text">Offre limitee — <b>EDOF offert</b> avec chaque habilitation</div></div>
+<div class="cd-timer">
+<div class="cd-u"><div class="cd-n" id="cd-d">02</div><div class="cd-l">Jours</div></div>
+<div class="cd-u"><div class="cd-n" id="cd-h">14</div><div class="cd-l">H</div></div>
+<div class="cd-u"><div class="cd-n" id="cd-m">37</div><div class="cd-l">Min</div></div>
+<div class="cd-u"><div class="cd-n" id="cd-s">52</div><div class="cd-l">Sec</div></div>
+</div>
+</div>
+
+<!-- HERO 2 COLONNES -->
+<div class="hero">
+<div class="hero-left">
+<div class="hero-tag">HABILITATION RS / RNCP</div>
+<h1 class="hero-title">Debloquez <em>tous les financements</em> pour vos formations</h1>
+<p class="hero-desc">EDOF, OPCO, France Travail, FIFPL, financements Region — une seule cle ouvre toutes les portes. Trouvez votre certification et commencez a vendre des formations financees.</p>
+<div class="hero-btns">
+<button class="hero-btn p" onclick="rhOpenSearchPopup()">Trouver mon habilitation</button>
+<button class="hero-btn s" onclick="document.getElementById('packs-section').scrollIntoView({behavior:'smooth'})">Voir les packs</button>
+</div>
+</div>
+<div class="sbox">
+<div class="sbox-title">Cherchez votre habilitation par code, intitulé ou activité</div>
+<div class="sbar">
+<input id="rh-q" type="text" placeholder="Ex: RS6054, coaching, massage, Excel..." onkeydown="if(event.key==='Enter'){rhSearch()}">
+<button onclick="rhSearch()" id="rh-btn-search">Rechercher</button>
+</div>
+<div class="stags">
+<span class="stag" onclick="rhQuickSearch('coaching')">Coaching</span>
+<span class="stag" onclick="rhQuickSearch('Excel TOSA bureautique')">Excel / TOSA</span>
+<span class="stag" onclick="rhQuickSearch('management')">Management</span>
+<span class="stag" onclick="rhQuickSearch('langues anglais')">Langues</span>
+<span class="stag" onclick="rhQuickSearch('sécurité SST SSIAP')">Sécurité</span>
+<span class="stag" onclick="rhQuickSearch('digital data')">Digital</span>
+</div>
+</div>
+</div>
+
+<!-- FINANCEMENTS -->
+<div class="fins">
+<div class="fin"><div class="fin-dot" style="background:var(--g)"></div>EDOF / Mon Compte Formation</div>
+<div class="fin"><div class="fin-dot" style="background:var(--v)"></div>11 OPCO</div>
+<div class="fin"><div class="fin-dot" style="background:var(--o)"></div>France Travail</div>
+<div class="fin"><div class="fin-dot" style="background:var(--gd)"></div>FIFPL</div>
+<div class="fin"><div class="fin-dot" style="background:var(--blue)"></div>Regions</div>
+<div class="fin"><div class="fin-dot" style="background:var(--red)"></div>Agefiph</div>
+</div>
+
+<!-- OFFRE EDOF -->
+<div class="offre">
+<div class="offre-left">
+<div class="offre-badge">OFFRE SPECIALE</div>
+<h3>Pour tout achat d'une habilitation, nous vous offrons l'ouverture EDOF</h3>
+<p>Votre acces Mon Compte Formation configure et pret a recevoir des inscriptions. Valeur de 490 EUR.</p>
+</div>
+<div class="offre-right">
+<div class="offre-old">490 EUR</div>
+<div class="offre-free">OFFERT</div>
+<div class="offre-sub">Ouverture EDOF incluse</div>
+</div>
+</div>
+
+<!-- PACKS -->
+<div id="packs-section">
+<div class="slabel">PACKS HABILITATION</div>
+</div>
+<div class="packs">
+
+<!-- Essentiel -->
+<div class="pack">
+<div class="pack-tag" style="color:var(--g)">ESSENTIEL</div>
+<div class="pack-name">Habilitation + EDOF</div>
+<div class="pack-desc">Constitution du dossier complet, convention avec le certificateur, ouverture de votre espace EDOF offerte.</div>
+<ul class="pack-list">
+<li>Habilitation RS ou RNCP au choix</li>
+<li>Dossier constitue par un expert</li>
+<li>Convention certificateur negociee</li>
+<li>Ouverture EDOF offerte (valeur 490 EUR)</li>
+</ul>
+<div class="pack-old">1 480 EUR</div>
+<div class="pack-price" style="color:var(--o)">990 EUR</div>
+<div class="pack-eco" style="background:var(--g-bg);color:var(--g)">-490 EUR</div>
+<button class="pack-btn o" onclick="rhPickPack('essentiel','Pack Essentiel — Habilitation + EDOF',990,1480,['Habilitation RS/RNCP','Dossier expert','Convention certificateur','EDOF offert'])">Choisir ce pack</button>
+</div>
+
+<!-- Pro IA -->
+<div class="pack feat">
+<div class="pack-top-badge" style="background:var(--o);color:white">MEILLEURE OFFRE</div>
+<div class="pack-tag" style="color:var(--o);margin-top:10px">PRO IA</div>
+<div class="pack-name">Habilitation + Site + EDOF</div>
+<div class="pack-desc">Votre organisme pret a vendre en ligne. Site professionnel avec agent IA integre, programme genere, EDOF ouvert.</div>
+<div class="pack-tags">
+<span style="background:var(--g-bg);color:#0F6E56">Habilitation RS/RNCP</span>
+<span style="background:var(--o-lt);color:#993C1D">Site internet pro</span>
+<span style="background:var(--blue-bg);color:#0C447C">Agent IA</span>
+<span style="background:var(--v-bg);color:var(--v)">Programme IA</span>
+<span style="background:var(--g-bg);color:#0F6E56">EDOF offert</span>
+</div>
+<ul class="pack-list">
+<li>Tout le pack Essentiel inclus</li>
+<li>Site internet professionnel avec SEO</li>
+<li>Agent IA integre au site</li>
+<li>Programme de formation genere par IA</li>
+<li>Accompagnement personnalise</li>
+</ul>
+<div class="pack-old">3 780 EUR</div>
+<div class="pack-price" style="color:var(--o)">1 990 EUR</div>
+<div class="pack-eco" style="background:var(--g-bg);color:var(--g)">Economisez 1 790 EUR</div>
+<button class="pack-btn p" onclick="rhPickPack('pro_ia','Pack Pro IA — Habilitation + Site + EDOF',1990,3780,['Habilitation RS/RNCP','Site internet pro','Agent IA','Programme IA','EDOF offert'])">Choisir ce pack</button>
+</div>
+
+<!-- Complet -->
+<div class="pack">
+<div class="pack-tag" style="color:var(--v)">COMPLET</div>
+<div class="pack-name">Tout inclus</div>
+<div class="pack-desc">Habilitation, site, LMS e-learning, Qualiopi accompagnee, formateur diplome, agent IA et chatbot. 100% operationnel.</div>
+<ul class="pack-list">
+<li>Tout le pack Pro IA inclus</li>
+<li>LMS plateforme e-learning</li>
+<li>Certification Qualiopi accompagnee</li>
+<li>Formateur diplome inclus</li>
+<li>Chatbot intelligent</li>
+</ul>
+<div class="pack-old">8 360 EUR</div>
+<div class="pack-price" style="color:var(--o)">4 990 EUR</div>
+<div class="pack-eco" style="background:var(--g-bg);color:var(--g)">-3 370 EUR</div>
+<button class="pack-btn o" onclick="rhPickPack('complet','Pack Complet — Tout inclus',4990,8360,['Habilitation RS/RNCP','Site internet pro','LMS e-learning','Qualiopi accompagnée','Formateur diplômé','Agent IA + Chatbot','EDOF offert'])">Choisir ce pack</button>
+</div>
+
+</div>
+
+<!-- CERTIFICATIONS POPULAIRES -->
+<div id="search-section">
+<div class="slabel">CERTIFICATIONS POPULAIRES</div>
+</div>
+
+<!-- Header résultats + indicateur recherche -->
+<div id="rh-results-head" style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+<div id="rh-results-info" style="font-size:11px;color:var(--gy);"><b id="rh-results-count">Sélection populaire</b> · 6575 certifications dans la base</div>
+<button id="rh-clear" onclick="rhClear()" style="display:none;padding:6px 12px;background:white;border:1px solid var(--bd);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--gy);">Effacer la recherche</button>
+</div>
+
+<div class="certs" id="rh-results">
+<!-- Résultats injectés en JS -->
+</div>
+
+<!-- Spinner / état chargement -->
+<div id="rh-loader" style="display:none;text-align:center;padding:40px 20px;color:var(--gy);font-size:13px;">
+<div style="display:inline-block;width:28px;height:28px;border:3px solid var(--bd);border-top-color:var(--o);border-radius:50%;animation:rhSpin 0.8s linear infinite;margin-bottom:12px;"></div>
+<div id="rh-loader-text">Recherche en cours...</div>
+</div>
+
+<style>@keyframes rhSpin{to{transform:rotate(360deg)}}.cert-ai-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:5px;background:linear-gradient(90deg,#534AB7,#D85A30);color:white;letter-spacing:.5px;margin-right:6px;vertical-align:middle;}</style>
+
+<!-- Bloc orig: certifs hardcodées (gardées en réserve, masquées) -->
+<div style="display:none;" data-rh-legacy>
+
+<div class="cert" style="position:relative">
+<div class="cert-left">
+<div class="cert-icon" style="background:var(--v-bg)"><div class="cert-type" style="color:var(--v)">RS</div><div class="cert-num" style="color:#3C3489">6054</div></div>
+<div><div class="cert-name">Accompagner les transitions professionnelles</div><div class="cert-sub">ICPF & PSI — Coaching — Formation continue</div></div>
+</div>
+<div class="cert-right">
+<div class="cert-ftags">
+<span class="cert-ftag" style="background:var(--g-bg);color:#0F6E56">CPF</span>
+<span class="cert-ftag" style="background:var(--blue-bg);color:#0C447C">OPCO</span>
+<span class="cert-ftag" style="background:var(--o-lt);color:var(--o)">FT</span>
+</div>
+<div class="cert-price">990 EUR</div>
+<button class="cert-btn" onclick="location.href='/acces-habilitation'">Choisir</button>
+</div>
+</div>
+
+<div class="cert">
+<div class="cert-left">
+<div class="cert-icon" style="background:var(--g-bg)"><div class="cert-type" style="color:#0F6E56">RNCP</div><div class="cert-num" style="color:#085041">37275</div></div>
+<div><div class="cert-name">Coach professionnel</div><div class="cert-sub">Linkup Coaching — Niveau 6 — Management</div></div>
+</div>
+<div class="cert-right">
+<div class="cert-ftags">
+<span class="cert-ftag" style="background:var(--g-bg);color:#0F6E56">CPF</span>
+<span class="cert-ftag" style="background:var(--blue-bg);color:#0C447C">OPCO</span>
+</div>
+<div class="cert-price">990 EUR</div>
+<button class="cert-btn" onclick="location.href='/acces-habilitation'">Choisir</button>
+</div>
+</div>
+
+<div class="cert">
+<div class="cert-left">
+<div class="cert-icon" style="background:var(--v-bg)"><div class="cert-type" style="color:var(--v)">RS</div><div class="cert-num" style="color:#3C3489">6198</div></div>
+<div><div class="cert-name">Excel avance — Analyse de donnees</div><div class="cert-sub">ICDL — Bureautique</div></div>
+</div>
+<div class="cert-right">
+<div class="cert-ftags">
+<span class="cert-ftag" style="background:var(--g-bg);color:#0F6E56">CPF</span>
+<span class="cert-ftag" style="background:var(--gd-bg);color:#633806">FIFPL</span>
+<span class="cert-ftag" style="background:var(--blue-bg);color:#0C447C">Regions</span>
+</div>
+<div class="cert-price">990 EUR</div>
+<button class="cert-btn" onclick="location.href='/acces-habilitation'">Choisir</button>
+</div>
+</div>
+
+<div class="cert">
+<div class="cert-left">
+<div class="cert-icon" style="background:var(--v-bg)"><div class="cert-type" style="color:var(--v)">RS</div><div class="cert-num" style="color:#3C3489">5252</div></div>
+<div><div class="cert-name">Maitrise des outils bureautiques (TOSA)</div><div class="cert-sub">TOSA — Bureautique</div></div>
+</div>
+<div class="cert-right">
+<div class="cert-ftags">
+<span class="cert-ftag" style="background:var(--g-bg);color:#0F6E56">CPF</span>
+<span class="cert-ftag" style="background:var(--blue-bg);color:#0C447C">OPCO</span>
+</div>
+<div class="cert-price">990 EUR</div>
+<button class="cert-btn" onclick="location.href='/acces-habilitation'">Choisir</button>
+</div>
+</div>
+
+<div class="cert">
+<div class="cert-left">
+<div class="cert-icon" style="background:var(--g-bg)"><div class="cert-type" style="color:#0F6E56">RNCP</div><div class="cert-num" style="color:#085041">34030</div></div>
+<div><div class="cert-name">Manager d'equipe operationnel</div><div class="cert-sub">Sup de Vente — Niveau 5 — Management</div></div>
+</div>
+<div class="cert-right">
+<div class="cert-ftags">
+<span class="cert-ftag" style="background:var(--g-bg);color:#0F6E56">CPF</span>
+<span class="cert-ftag" style="background:var(--blue-bg);color:#0C447C">OPCO</span>
+<span class="cert-ftag" style="background:var(--o-lt);color:var(--o)">FT</span>
+</div>
+<div class="cert-price">990 EUR</div>
+<button class="cert-btn" onclick="location.href='/acces-habilitation'">Choisir</button>
+</div>
+</div>
+
+<div class="cert">
+<div class="cert-left">
+<div class="cert-icon" style="background:var(--v-bg)"><div class="cert-type" style="color:var(--v)">RS</div><div class="cert-num" style="color:#3C3489">6159</div></div>
+<div><div class="cert-name">Power BI — Data visualisation</div><div class="cert-sub">Certiport — Digital</div></div>
+</div>
+<div class="cert-right">
+<div class="cert-ftags">
+<span class="cert-ftag" style="background:var(--g-bg);color:#0F6E56">CPF</span>
+<span class="cert-ftag" style="background:var(--gd-bg);color:#633806">FIFPL</span>
+</div>
+<div class="cert-price">990 EUR</div>
+<button class="cert-btn" onclick="location.href='/acces-habilitation'">Choisir</button>
+</div>
+</div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta">
+<h2>Lancez-vous maintenant</h2>
+<p>Notre expert trouve la certification ideale, constitue votre dossier et negocie avec le certificateur.</p>
+<button class="cta-btn" onclick="location.href='/acces-habilitation'">Obtenir mon habilitation — a partir de 990 EUR</button>
+<div class="cta-edof">Ouverture EDOF offerte <span class="cross">(490 EUR)</span> avec chaque habilitation</div>
+</div>
+
+</div>
+
+<footer class="footer"><p>lesformateurs.online — Experience Prod SASU — SIREN 982 828 774 — 2026</p></footer>
+
+<script src="js/cart.js" defer></script>
+<script src="js/certifications-data.js" defer></script>
+<script src="js/rh-search.js?v=9" defer></script>
+<script>
+(function(){
+var end=new Date();end.setDate(end.getDate()+3);end.setHours(23,59,59,0);
+function u(){
+var n=new Date(),df=Math.max(0,end-n);
+var d=Math.floor(df/864e5),h=Math.floor((df%864e5)/36e5),m=Math.floor((df%36e5)/6e4),s=Math.floor((df%6e4)/1e3);
+var p=function(v){return String(v).padStart(2,'0')};
+document.getElementById('cd-d').textContent=p(d);
+document.getElementById('cd-h').textContent=p(h);
+document.getElementById('cd-m').textContent=p(m);
+document.getElementById('cd-s').textContent=p(s);
+}
+u();setInterval(u,1000);
+})();
+</script>
+
+<script src="js/cart-nav.js" defer></script>
+</body>
+</html>

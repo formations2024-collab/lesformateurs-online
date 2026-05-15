@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketplace — Achat / Revente d'organismes de formation — lesformateurs.online</title>
+<meta name="description" content="Achetez ou vendez un organisme de formation. OF, CFA, auto-école, centre d'examen — transaction sécurisée avec contrat de cession et séquestre inclus.">
+<link rel="canonical" href="https://lesformateurs.online/marketplace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B6XVYRVT9D');</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/mono-light.css">
+<style>
+:root{--orange:#D85A30;--orange-light:#FFF8F3;--green:#1D9E75;--green-light:#E1F5EE;--violet:#534AB7;--violet-light:#EEEDFE;--yellow:#BA7517;--red:#E24B4A;--red-light:#FCEBEB;--blue:#378ADD;--blue-light:#E6F1FB;--text:#1a1a1a;--muted:#6B7280;--faded:#9CA3AF;--border:#E5E7EB;--bg:#FAFAFA;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',-apple-system,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;}
+.hero{background:linear-gradient(135deg,#1a1a1a 0%,#2D1810 60%,#1a1a1a 100%);color:white;padding:64px 24px 48px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(216,90,48,.12) 0%,transparent 60%);}
+.hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+.hero-badge{display:inline-block;background:rgba(216,90,48,.15);color:#FF8C42;font-size:11px;font-weight:700;padding:6px 16px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;border:1px solid rgba(216,90,48,.25);}
+.hero h1{font-size:38px;font-weight:800;line-height:1.1;letter-spacing:-.5px;margin-bottom:14px;}
+.hero p{font-size:14px;color:#999;line-height:1.6;max-width:500px;margin:0 auto 28px;}
+.hero-ctas{display:flex;gap:12px;justify-content:center;margin-bottom:32px;}
+.hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;}
+.hero-stat-value{font-size:28px;font-weight:800;}
+.hero-stat-label{font-size:10px;color:#888;}
+@media(max-width:520px){.hero-stats{gap:18px 28px;}.hero-stat-value{font-size:22px;}}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:all .15s;}
+.btn:hover{transform:translateY(-1px);}
+.btn-orange{background:var(--orange);color:white;}
+.btn-orange:hover{box-shadow:0 4px 12px rgba(216,90,48,.25);}
+.btn-green{background:var(--green);color:white;}
+.btn-green:hover{box-shadow:0 4px 12px rgba(29,158,117,.25);}
+.btn-outline{background:transparent;color:var(--orange);border:1.5px solid var(--orange);}
+.btn-outline:hover{background:var(--orange-light);}
+.btn-outline-white{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.3);}
+.btn-sm{padding:8px 14px;font-size:11px;}
+.btn-full{width:100%;}
+.badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;letter-spacing:.3px;white-space:nowrap;display:inline-block;}
+.commission-banner{max-width:1100px;margin:32px auto 0;padding:0 24px;}
+.commission-inner{background:linear-gradient(135deg,#1a1a1a,#2D1810);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;color:white;margin-bottom:20px;}
+.commission-left{display:flex;align-items:center;gap:16px;}
+.commission-left svg{width:28px;flex-shrink:0;}
+.commission-title{font-size:13px;font-weight:700;}
+.commission-sub{font-size:11px;color:#888;}
+.commission-right{display:flex;gap:20px;align-items:center;}
+.commission-val{text-align:center;}
+.commission-val .num{font-size:22px;font-weight:800;}
+.commission-val .label{font-size:9px;color:#888;}
+.commission-sep{width:1px;height:32px;background:#333;}
+.content{max-width:1100px;margin:0 auto;padding:32px 24px;}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px;}
+.tab{padding:14px 24px;cursor:pointer;font-size:14px;font-weight:500;color:var(--muted);border-bottom:2.5px solid transparent;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;}
+.tab:hover{color:var(--text);}
+.tab.active-vente{font-weight:700;color:var(--orange);border-bottom-color:var(--orange);}
+.tab.active-achat{font-weight:700;color:var(--green);border-bottom-color:var(--green);}
+.tab .count{font-size:11px;opacity:.6;margin-left:4px;}
+.vente-list{display:flex;flex-direction:column;gap:16px;}
+.vente-card{background:white;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1fr 280px;cursor:pointer;transition:all .2s;}
+.vente-card:hover{border-color:var(--orange);box-shadow:0 8px 30px rgba(216,90,48,.06);}
+.vente-left{padding:24px 28px;}
+.vente-badges{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
+.vente-title{font-size:18px;font-weight:700;margin-bottom:6px;}
+.vente-desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.6;}
+.vente-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.vente-meta-label{font-size:9px;color:var(--faded);text-transform:uppercase;}
+.vente-meta-value{font-size:12px;font-weight:600;}
+.vente-right{background:var(--orange-light);padding:24px;display:flex;flex-direction:column;justify-content:space-between;border-left:1px solid rgba(216,90,48,.12);}
+.vente-price-label{font-size:10px;color:var(--faded);margin-bottom:4px;}
+.vente-price{font-size:30px;font-weight:800;color:var(--orange);margin-bottom:4px;}
+.vente-offres{font-size:11px;color:var(--muted);}
+.vente-actions{display:flex;flex-direction:column;gap:8px;}
+.achat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.achat-card{background:white;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .2s;}
+.achat-card:hover{border-color:var(--green);}
+.achat-bar{height:4px;background:var(--green);}
+.achat-inner{padding:20px;}
+.achat-top{display:flex;justify-content:space-between;margin-bottom:10px;}
+.achat-title{font-size:15px;font-weight:700;margin-bottom:6px;}
+.achat-region{font-size:12px;color:var(--muted);margin-bottom:12px;}
+.achat-criteres{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:14px;}
+.achat-critere{font-size:9px;background:#F3F4F6;color:var(--muted);padding:3px 8px;border-radius:6px;}
+.achat-budget{font-size:20px;font-weight:800;color:var(--green);margin-bottom:12px;}
+.cta-final{background:linear-gradient(135deg,#1a1a1a,#2D1810);border-radius:16px;padding:40px 32px;color:white;text-align:center;margin-top:40px;}
+.cta-final h2{font-size:24px;font-weight:800;margin-bottom:8px;}
+.cta-final p{font-size:13px;color:#999;max-width:450px;margin:0 auto 24px;}
+.cta-final-btns{display:flex;gap:12px;justify-content:center;}
+.hidden{display:none !important;}
+@media(max-width:768px){.hero h1{font-size:26px;}.hero-ctas{flex-direction:column;gap:8px;}.hero-stats{gap:20px;}.hero-stat-value{font-size:22px;}.commission-inner{flex-direction:column;gap:16px;text-align:center;}.vente-card{grid-template-columns:1fr;}.vente-meta{grid-template-columns:repeat(2,1fr);}.achat-grid{grid-template-columns:1fr;}.cta-final-btns{flex-direction:column;}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="ml-nav">
+  <a href="index.html" class="ml-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="ml-nav-links" id="navLinks">
+    <a href="formation.html">Services</a>
+    <a href="creer-of.html">Créer mon OF</a>
+    <a href="recherche-habilitation.html" style="color:#1D9E75;font-weight:600;">Habilitation</a>
+    <a href="se-former.html">Se former</a>
+    <a href="marketplace.html" style="color:#D85A30;font-weight:600;">Marketplace</a>
+    <a href="devenir-expert.html">Recrutement</a>
+    <a href="#" id="lfo-btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;">Connexion</a>
+    <a href="dashboard.html" id="lfo-btn-compte" style="display:none;background:#1a1a1a;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;">Mon compte</a>
+  </div>
+  <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Marketplace LFO</div>
+    <h1>Achetez ou vendez un organisme<br>de formation</h1>
+    <p>OF, CFA, auto-école, centre d'examen — transaction sécurisée avec contrat de cession et séquestre inclus.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-green" onclick="showPopupAcheteur()">Je cherche un organisme</button>
+      <button class="btn btn-orange" onclick="showPopupVendeur()">Vendre mon organisme</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-value" style="color:var(--orange);" id="mp-stat-ventes">145</div><div class="hero-stat-label">Organismes à vendre</div></div>
+      <div><div class="hero-stat-value" style="color:var(--green);" id="mp-stat-achats">32</div><div class="hero-stat-label">Acheteurs actifs</div></div>
+      <div><div class="hero-stat-value" style="color:var(--violet);">312k €</div><div class="hero-stat-label">Vente la plus élevée</div></div>
+      <div><div class="hero-stat-value" style="color:var(--blue);">1-2 sem.</div><div class="hero-stat-label">Délai de vente moyen</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMISSION BANNER -->
+<div class="commission-banner">
+  <div class="commission-inner">
+    <div class="commission-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="1.5"><rect x="2" y="6" width="20" height="14" rx="3"/><circle cx="12" cy="13" r="3"/><path d="M6 10h.01M18 10h.01"/></svg>
+      <div><div class="commission-title">Commission sur chaque transaction</div><div class="commission-sub">Contrat de cession, séquestre, accompagnement juridique et administratif inclus</div></div>
+    </div>
+    <div class="commission-right">
+      <div class="commission-val"><div class="num" style="color:var(--orange);">10%</div><div class="label">Non-membre</div></div>
+      <div class="commission-sep"></div>
+      <div class="commission-val"><div class="num" style="color:var(--green);">7%</div><div class="label">Membre LFO</div></div>
+      <div class="commission-sep"></div>
+      <div class="commission-val"><div class="label">Min.</div><div class="num" style="font-size:14px;font-weight:700;">800 €</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CENTRES VENDUS 2026 -->
+<div class="content">
+  <section id="mp-vendus"></section>
+</div>
+<script src="js/marketplace-vendus.js" defer></script>
+
+<!-- FOOTER -->
+<footer class="ml-footer">
+  <div class="ml-footer-inner">
+    <div><div class="ml-footer-brand">les<span class="accent">formateurs</span>.online</div><p>La plateforme des professionnels de la formation.</p><p class="siren">Experience Prod SASU · SIREN 982 828 774</p></div>
+    <div class="ml-footer-col"><h4>Services</h4><a href="formation.html">Services</a><a href="creer-of.html">Créer mon OF</a><a href="recherche-habilitation.html" style="color:#1D9E75;font-weight:600;">Habilitation</a><a href="se-former.html">Se former</a><a href="marketplace.html">Marketplace</a><a href="devenir-expert.html">Recrutement</a></div>
+    <div class="ml-footer-col"><h4>Légal</h4><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a><a href="politique-confidentialite.html">Confidentialité</a></div>
+  </div>
+  <div class="ml-footer-bottom">© 2026 lesformateurs.online</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/auth-modal.js"></script>
+<script src="js/marketplace-popups.js"></script>
+<script>
+function switchTab(tab){
+  var tv=document.getElementById('tab-vente'),ta=document.getElementById('tab-achat');
+  var lv=document.getElementById('list-vente'),la=document.getElementById('list-achat');
+  if(tab==='vente'){tv.className='tab active-vente';ta.className='tab';lv.classList.remove('hidden');la.classList.add('hidden');}
+  else{tv.className='tab';ta.className='tab active-achat';lv.classList.add('hidden');la.classList.remove('hidden');}
+}
+
+function _esc(s){ var d=document.createElement('div');d.textContent=s;return d.innerHTML; }
+function _fmtPrice(cents){ return cents?(cents/100).toLocaleString('fr-FR')+' €':'—'; }
+function _fmtDate(iso){ if(!iso)return''; var d=new Date(iso); return d.toLocaleDateString('fr-FR',{day:'numeric',month:'short'}); }
+
+async function mpLoadAnnonces(){
+  try{
+    var { data, error } = await sb.from('marketplace_requests').select('*').eq('status','active').order('created_at',{ascending:false});
+    if(error||!data) data=[];
+    // Store for popup access + get current user
+    window._mpAnnonces={};data.forEach(function(a){window._mpAnnonces[a.id]=a;});
+    var _curUid=null;try{var _s=await sb.auth.getSession();if(_s.data&&_s.data.session)_curUid=_s.data.session.user.id;}catch(e){}
+    var ventes = data.filter(function(a){return a.type==='vente';});
+    var achats = data.filter(function(a){return a.type==='achat';});
+
+    // Stats hero — valeurs marketing fixes (cf. hero-stats), on ne surcharge plus depuis la BDD
+    // document.getElementById('mp-stat-ventes').textContent = ventes.length;
+    // document.getElementById('mp-stat-achats').textContent = achats.length;
+
+    // Tab counts
+    document.getElementById('tab-vente').innerHTML = 'Organismes à vendre <span class="count">'+ventes.length+'</span>';
+    document.getElementById('tab-achat').innerHTML = 'Recherches d\'achat <span class="count">'+achats.length+'</span>';
+
+    // Render ventes
+    var lv = document.getElementById('list-vente');
+    if(!ventes.length){ lv.innerHTML='<div style="text-align:center;padding:40px;color:#9CA3AF;">Aucune annonce de vente. <button class="btn btn-orange btn-sm" onclick="showPopupVendeur()" style="margin-top:8px;">Publier la première</button></div>'; }
+    else {
+      lv.innerHTML = ventes.map(function(a){
+        var certs=a.certifications||[];if(typeof certs==='string'){try{certs=JSON.parse(certs);}catch(e){certs=[];}}
+        var typeLabel=a.organisme_type||'OF';if(typeof typeLabel==='string'&&typeLabel.charAt(0)==='['){try{typeLabel=JSON.parse(typeLabel).join(', ');}catch(e){}}
+        var neufBadge=a.is_neuf?'<svg viewBox="0 0 60 24" style="width:60px;vertical-align:middle;"><rect width="60" height="24" rx="6" fill="#1D9E75"/><text x="30" y="16" text-anchor="middle" fill="white" font-size="11" font-weight="700" font-family="DM Sans,sans-serif">NEUF</text></svg>':'';
+        var badges='<span class="badge" style="color:var(--orange);background:var(--orange-light)">'+_esc(typeLabel)+'</span>'+certs.map(function(c){return '<span class="badge" style="color:var(--green);background:var(--green-light)">'+_esc(c)+'</span>';}).join('')+neufBadge;
+        var price=a.listing_price_cents?_fmtPrice(a.listing_price_cents):'—';
+        // Extract city from address
+        var ville=a.region||'—';
+        if(a.adresse){var m=a.adresse.match(/\d{5}\s+(.+)/);if(m)ville=m[1].replace(/^(.)/,function(c){return c.toUpperCase();}).toLowerCase().replace(/(?:^|\s|-)\S/g,function(c){return c.toUpperCase();});}
+        var desc=(a.description||'').substring(0,150);if(desc.length>=150)desc+='...';
+        return '<div class="vente-card" style="cursor:pointer;" onclick="showAnnonceDetail(\''+a.id+'\')"><div class="vente-left"><div class="vente-badges">'+badges+'</div>'
+          +'<div class="vente-title">'+_esc(a.title||'Organisme à vendre')+'</div>'
+          +'<div class="vente-desc" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">'+_esc(desc)+'</div>'
+          +'<div class="vente-meta"><div><div class="vente-meta-label">Ville</div><div class="vente-meta-value">'+_esc(ville)+'</div></div>'
+          +'<div><div class="vente-meta-label">CA</div><div class="vente-meta-value">'+_esc(a.ca_annual||'—')+'</div></div>'
+          +'<div><div class="vente-meta-label">Formateurs</div><div class="vente-meta-value">'+(a.nb_formateurs||'—')+'</div></div>'
+          +'<div><div class="vente-meta-label">Publié</div><div class="vente-meta-value">'+_fmtDate(a.created_at)+'</div></div></div>'
+          +(a.nb_apprenants||a.nb_formations?'<div style="display:flex;gap:12px;margin-top:6px;font-size:11px;color:var(--muted);">'+(a.nb_apprenants?'<span>'+a.nb_apprenants+' apprenants</span>':'')+(a.nb_formations?'<span>'+a.nb_formations+' formations</span>':'')+'</div>':'')
+          +'</div>'
+          +'<div class="vente-right"><div><div class="vente-price-label">Prix demandé</div><div class="vente-price">'+price+'</div>'
+          +(a.is_negotiable?'<div class="vente-offres">Prix négociable</div>':'')+'</div>'
+          +'<div class="vente-actions">'+(_curUid&&a.user_id===_curUid?'<span class="btn btn-full" style="background:#F3F4F6;color:#9CA3AF;cursor:not-allowed;" onclick="event.stopPropagation()">Mon annonce</span>':'<button onclick="event.stopPropagation();showOffrePopup(window._mpAnnonces[\''+a.id+'\'],\'offre\')" class="btn btn-orange btn-full">Faire une offre</button>')+'</div></div></div>';
+      }).join('');
+    }
+
+    // Render achats
+    var la=document.getElementById('list-achat');
+    if(!achats.length){la.innerHTML='<div style="text-align:center;padding:40px;color:#9CA3AF;">Aucune recherche d\'achat. <button class="btn btn-green btn-sm" onclick="showPopupAcheteur()" style="margin-top:8px;">Publier la première</button></div>';}
+    else {
+      la.innerHTML=achats.map(function(a){
+        var certs=a.certifications||[];if(typeof certs==='string'){try{certs=JSON.parse(certs);}catch(e){certs=[];}}
+        var fins=a.financements||[];if(typeof fins==='string'){try{fins=JSON.parse(fins);}catch(e){fins=[];}}
+        var svcs=a.services_inclus||[];if(typeof svcs==='string'){try{svcs=JSON.parse(svcs);}catch(e){svcs=[];}}
+        var typeLabel=a.organisme_type||'OF';if(typeof typeLabel==='string'&&typeLabel.charAt(0)==='['){try{typeLabel=JSON.parse(typeLabel).join(', ');}catch(e){}}
+        var urgBadge=a.urgency==='urgent'?'<span class="badge" style="color:var(--red);background:var(--red-light)">Urgent</span>':(a.urgency==='1mois'?'<span class="badge" style="color:var(--yellow);background:#FFF9E6">Sous 1 mois</span>':'');
+        var neufBadge=a.is_neuf?'<svg viewBox="0 0 60 24" style="width:60px;vertical-align:middle;"><rect width="60" height="24" rx="6" fill="#1D9E75"/><text x="30" y="16" text-anchor="middle" fill="white" font-size="11" font-weight="700" font-family="DM Sans,sans-serif">NEUF</text></svg>':'';
+        var certChips=certs.map(function(c){return '<span class="achat-critere">'+_esc(c)+'</span>';}).join('');
+        var finChips=fins.map(function(f){return '<span class="achat-critere" style="background:#E6F1FB;color:#378ADD;">'+_esc(f)+'</span>';}).join('');
+        var svcChips=svcs.map(function(s){return '<span class="achat-critere" style="background:#EEEDFE;color:#534AB7;">'+_esc(s)+'</span>';}).join('');
+        var budget=(a.budget_min||a.budget_max)?_fmtPrice(a.budget_min)+' — '+_fmtPrice(a.budget_max):'—';
+        var desc=(a.description||'').substring(0,100);if(desc.length>=100)desc+='...';
+        var extras=[];
+        if(a.accept_dettes)extras.push('Accepte les centres avec dettes');
+        if(a.wants_escrow)extras.push('Séquestre souhaité');
+        return '<div class="achat-card" style="cursor:pointer;" onclick="showAnnonceDetail(\''+a.id+'\')"><div class="achat-bar"></div><div class="achat-inner">'
+          +'<div class="achat-top"><div style="display:flex;gap:4px;flex-wrap:wrap;">'+('<span class="badge" style="color:var(--green);background:var(--green-light)">'+_esc(typeLabel)+'</span>')+urgBadge+neufBadge+'</div><span style="font-size:10px;color:var(--faded)">'+_fmtDate(a.created_at)+'</span></div>'
+          +'<div class="achat-title">'+_esc(a.title||'Recherche')+'</div>'
+          +'<div class="achat-region">'+_esc(a.region||'Toute France')+'</div>'
+          +(desc?'<div style="font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.5;">'+_esc(desc)+'</div>':'')
+          +'<div class="achat-criteres">'+certChips+finChips+svcChips+'</div>'
+          +'<div class="achat-budget">'+budget+'</div>'
+          +(extras.length?'<div style="font-size:10px;color:var(--faded);margin-bottom:8px;">'+extras.join(' · ')+'</div>':'')
+          +(_curUid&&a.user_id===_curUid?'<span class="btn btn-sm btn-full" style="background:#F3F4F6;color:#9CA3AF;cursor:not-allowed;" onclick="event.stopPropagation()">Mon annonce</span>':'<button onclick="event.stopPropagation();showOffrePopup(window._mpAnnonces[\''+a.id+'\'],\'proposition\')" class="btn btn-orange btn-sm btn-full">Proposer un organisme</button>')+'</div></div>';
+      }).join('');
+    }
+  }catch(e){ console.warn('mpLoadAnnonces err',e); }
+}
+
+// Auth state — annonces dynamiques désactivées (remplacées par section "Centres vendus 2026")
+(async function(){
+  try{
+    var user=await getUser();
+    if(user){
+      document.getElementById('lfo-btn-login').style.display='none';
+      document.getElementById('lfo-btn-compte').style.display='inline-block';
+    }
+  }catch(e){}
+})();
+</script>
+<script src="js/cart.js" defer></script>
+<script src="js/cart-nav.js" defer></script>
+</body>
+</html>

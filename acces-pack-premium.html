@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pack Premium — lesformateurs.online</title>
 <meta name="description" content="Digital + 1 agent IA configuré et opérationnel">
-<link rel="canonical" href="https://lesformateurs.online/funnel-pack-premium">
+<link rel="canonical" href="https://lesformateurs.online/acces-pack-premium">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B6XVYRVT9D');</script>
@@ -19,6 +19,8 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .logo{font-size:18px;font-weight:700;text-decoration:none;color:var(--text);}
 .logo span{color:var(--orange);font-weight:600;}
 .badge-top{background:#D1FAE5;color:#065F46;font-size:11px;font-weight:600;padding:6px 12px;border-radius:20px;}
+.btn-connexion{background:#FF8C42;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;font-family:inherit;transition:background .15s;}
+.btn-connexion:hover{background:#e07830;}
 .container{max-width:860px;margin:0 auto;padding:32px 24px 80px;}
 .page-intro{text-align:center;margin-bottom:32px;}
 .page-intro h1{font-size:28px;font-weight:700;margin-bottom:8px;letter-spacing:-.3px;}
@@ -100,7 +102,58 @@ textarea{resize:vertical;min-height:80px;}
 .virement-info .iban{font-family:'SF Mono',Monaco,Consolas,monospace;font-size:12.5px;background:white;padding:8px 10px;border-radius:6px;margin-top:6px;border:1px solid #BFDBFE;}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:white;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .3s;z-index:200;}
 .toast.show{opacity:1;}
-@media(max-width:640px){.input-group{grid-template-columns:1fr;}.container{padding:20px 16px 60px;}.page-intro h1{font-size:22px;}.summary-total .amount{font-size:22px;}.org-card .detail-grid{grid-template-columns:1fr;}.ms-grid{grid-template-columns:1fr;}}
+.steps-nav{display:flex;gap:6px;flex-wrap:wrap;max-width:860px;margin:0 auto;padding:0 24px 16px;border-bottom:1px solid var(--border);}
+.step-pill{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:white;color:var(--text-muted);transition:all .2s;font-family:inherit;white-space:nowrap;}
+.step-pill.active{background:var(--orange);color:white;border-color:var(--orange);}
+.step-pill .step-num{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;}
+.step-pill.active .step-num{background:rgba(255,255,255,.25);color:white;}
+.step-pill:not(.active):not(.completed) .step-num{background:var(--border-light);color:var(--text-faded);}
+.step-pill.completed{background:#F3F4F6;color:#9CA3AF;border-color:#F3F4F6;opacity:.5;cursor:default;pointer-events:none;}
+.step-pill.completed .step-num{background:#E5E7EB;color:#9CA3AF;}
+.step-content{display:none;}
+.step-content.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.step-placeholder{padding:60px 24px;text-align:center;max-width:860px;margin:0 auto;}
+.step-placeholder .sph-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px;font-weight:800;}
+.step-placeholder h3{font-size:22px;font-weight:800;margin-bottom:8px;letter-spacing:-.3px;}
+.step-placeholder p{font-size:14px;color:var(--text-muted);max-width:440px;margin:0 auto;line-height:1.6;}
+.step-placeholder .sph-badge{display:inline-block;margin-top:20px;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600;background:#FEF3C7;color:#92400E;}
+@keyframes sphPulse{0%,100%{opacity:.4}50%{opacity:1}}
+.sph-dots{display:flex;gap:6px;justify-content:center;margin-top:20px;}
+.sph-dots span{width:8px;height:8px;border-radius:50%;background:var(--orange);animation:sphPulse 1.4s infinite;}
+.sph-dots span:nth-child(2){animation-delay:.2s;}
+.sph-dots span:nth-child(3){animation-delay:.4s;}
+.premium-block{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:16px;color:#fff;position:relative;overflow:hidden;}
+.premium-block::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(255,215,0,.15) 0%,transparent 70%);border-radius:50%;}
+.premium-block .pm-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+.premium-block h4{font-size:16px;font-weight:700;margin-bottom:4px;}
+.premium-block .pm-sub{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:14px;}
+.premium-block .pm-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.premium-block .pm-saving{font-size:22px;font-weight:800;color:#FFD700;}
+.premium-block .pm-saving small{font-size:12px;font-weight:500;color:rgba(255,255,255,.6);display:block;}
+.premium-block .pm-btn{background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;border:none;padding:10px 20px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s;}
+.premium-block .pm-btn:hover{opacity:.9;}
+.premium-block.is-member{background:linear-gradient(135deg,#0f3d0f 0%,#1a4a1a 100%);}
+.premium-block.is-member .pm-badge{background:linear-gradient(135deg,#10B981,#059669);color:#fff;}
+.avail-grid{display:grid;grid-template-columns:auto repeat(5,1fr);gap:4px;font-size:12px;}
+.avail-header{font-weight:700;text-align:center;padding:8px 4px;color:var(--text);font-size:11px;}
+.avail-label{display:flex;align-items:center;font-weight:600;color:var(--text-muted);padding:0 6px;font-size:11px;}
+.avail-slot{border:1px solid var(--border);border-radius:6px;padding:10px 4px;text-align:center;cursor:pointer;transition:all .15s;background:#fff;font-size:11px;color:var(--text-muted);}
+.avail-slot:hover{border-color:var(--orange);background:var(--orange-light);}
+.avail-slot.selected{background:var(--orange);color:#fff;border-color:var(--orange);font-weight:600;}
+@media(max-width:640px){.input-group{grid-template-columns:1fr;}.container{padding:20px 16px 60px;}.page-intro h1{font-size:22px;}.summary-total .amount{font-size:22px;}.org-card .detail-grid{grid-template-columns:1fr;}.ms-grid{grid-template-columns:1fr;}.premium-block .pm-row{flex-direction:column;align-items:flex-start;}.avail-grid{grid-template-columns:auto repeat(5,1fr);font-size:10px;}}
+.substep{display:none;}
+.substep.active{display:block;}
+.substep-nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);}
+.substep-btn{padding:12px 28px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;border:none;transition:all .15s;}
+.substep-btn-next{background:var(--orange);color:white;}
+.substep-btn-next:hover{opacity:.9;}
+.substep-btn-prev{background:white;color:var(--text-muted);border:1px solid var(--border);}
+.substep-btn-prev:hover{border-color:var(--orange);color:var(--orange);}
+.substep-progress{display:flex;gap:6px;justify-content:center;margin-bottom:16px;}
+.substep-dot{width:8px;height:8px;border-radius:50%;background:var(--border-light);transition:all .2s;}
+.substep-dot.active{background:var(--orange);width:24px;border-radius:4px;}
+.substep-dot.done{background:#1D9E75;}
 </style>
 </head>
 <body>
@@ -108,7 +161,11 @@ textarea{resize:vertical;min-height:80px;}
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">les<span>formateurs</span>.online</a>
-    <span class="badge-top">Pack Premium</span>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="badge-top">Pack Premium</span>
+      <a href="#" class="btn-connexion" id="btn-login" style="display:none;" onclick="return false;">Connexion</a>
+      <a href="dashboard.html" class="btn-connexion" id="btn-compte" style="display:none;background:#1a1a1a;">Mon compte</a>
+    </div>
   </div>
 </header>
 
@@ -118,79 +175,363 @@ textarea{resize:vertical;min-height:80px;}
     <p>Digital + 1 agent IA configuré et opérationnel — a partir de <span class="price-highlight">4 990 EUR</span> — 5 semaines</p>
   </div>
 
-  <!-- STEP 1 — Identification -->
-  <div class="card">
-    <div class="card-head"><div class="card-num">1</div><div class="card-title"><h3>Identification</h3><p>Votre email et le SIRET suffisent — on recupere le reste automatiquement</p></div></div>
-    <div class="field">
-      <label class="label-required">Votre email</label>
-      <input type="email" id="client-email" placeholder="votre@email.com" oninput="STATE.email=this.value;document.getElementById('email').value=this.value">
-      <div class="hint">Utilisez l'email lie a votre compte</div>
+  <!-- Stepper pills -->
+  <div class="steps-nav">
+    <div class="step-pill active" onclick="switchStep(0)"><span class="step-num">1</span> Configuration</div>
+    <div class="step-pill" onclick="switchStep(1)"><span class="step-num">2</span> Production</div>
+    <div class="step-pill" onclick="switchStep(2)"><span class="step-num">3</span> Révision</div>
+    <div class="step-pill" onclick="switchStep(3)"><span class="step-num">4</span> Terminée</div>
+  </div>
+
+  <!-- Step 0: Configuration -->
+  <div class="step-content active" id="step-0">
+
+  <!-- Substep progress dots -->
+  <div id="substep-progress" class="substep-progress"></div>
+
+  <!-- Substep 0: Identification + Admin -->
+  <div class="substep active" data-substep="0">
+
+  <!-- BLOC 0 — Admin only -->
+  <div class="card admin-block" id="admin-block" style="display:none;border:2px solid #7F77DD;">
+    <div class="card-head"><div class="card-num" style="background:#7F77DD;">0</div><div class="card-title"><h3>Gestion admin</h3><p>Visible uniquement pour les administrateurs</p></div></div>
+
+    <div id="admin-premium-toggle" style="display:none;margin-bottom:14px;padding:10px 14px;background:#FAEEDA;border:1px solid rgba(201,168,76,.2);border-radius:8px;">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;font-weight:600;color:#854F0B;">
+        <input type="checkbox" checked onchange="STATE.isPremium=this.checked;renderPremiumBlock();refreshSummary();" style="accent-color:#C9A84C;width:16px;height:16px;">
+        Appliquer la reduction Premium (-10%)
+      </label>
     </div>
-    <div class="field">
-      <label class="label-required">SIRET de votre organisme</label>
-      <div class="siret-row">
-        <input type="text" id="siret-input" placeholder="14 chiffres" maxlength="14">
-        <button class="btn-search" id="btn-search" onclick="searchSiret()">Rechercher</button>
+
+    <div style="margin-bottom:18px;">
+      <label style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:10px;">Statut du paiement</label>
+      <div class="ms-grid" style="grid-template-columns:1fr 1fr 1fr;">
+        <div class="action-card" data-radio-group="admin_payment" data-value="en_attente" onclick="selectRadio(this,'admin_payment');refreshSummary()"><div class="cb"></div><div><b>En attente de paiement</b></div></div>
+        <div class="action-card" data-radio-group="admin_payment" data-value="paid_offline" onclick="selectRadio(this,'admin_payment');refreshSummary()"><div class="cb"></div><div><b>Paye hors plate-forme</b></div></div>
+        <div class="action-card" data-radio-group="admin_payment" data-value="offert" onclick="selectRadio(this,'admin_payment');refreshSummary()"><div class="cb"></div><div><b>Prestation offerte</b></div></div>
       </div>
     </div>
-    <div class="org-card" id="org-card">
-      <div class="found">Organisme trouve</div>
-      <div class="org-name" id="o-name"></div>
-      <div class="org-meta" id="o-meta"></div>
-      <div class="attrs" id="o-attrs"></div>
-      <div class="sep"></div>
-      <div class="detail-grid" id="o-details"></div>
+
+    <div style="margin-bottom:18px;">
+      <label style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:10px;">Compte client</label>
+      <div class="ms-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="action-card selected" data-radio-group="admin_account" data-value="existing" onclick="selectRadio(this,'admin_account');toggleAdminAccount()"><div class="cb"></div><div><b>Compte existant</b></div></div>
+        <div class="action-card" data-radio-group="admin_account" data-value="new" onclick="selectRadio(this,'admin_account');toggleAdminAccount()"><div class="cb"></div><div><b>Nouveau compte</b></div></div>
+      </div>
+    </div>
+
+    <!-- Compte existant : recherche email -->
+    <div id="admin-existing" style="margin-top:14px;">
+      <div class="field">
+        <label class="label-required">Rechercher le client par email</label>
+        <div class="siret-row">
+          <input type="email" id="admin-search-email" placeholder="client@email.com">
+          <button class="btn-search" onclick="adminSearchUser()">Rechercher</button>
+        </div>
+      </div>
+      <div id="admin-user-found" style="display:none;border:1px solid #c0dd97;border-radius:12px;padding:14px;background:#f8fdf6;margin-top:10px;">
+        <div style="font-size:11px;color:#1D9E75;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Client trouve</div>
+        <div id="admin-user-info" style="font-size:14px;font-weight:600;"></div>
+      </div>
+      <div id="admin-user-notfound" style="display:none;border:1px solid #FCD34D;border-radius:12px;padding:14px;background:#FEF3C7;margin-top:10px;font-size:13px;color:#92400E;">Aucun compte trouve avec cet email.</div>
+    </div>
+
+    <!-- Nouveau compte -->
+    <div id="admin-new" style="display:none;margin-top:14px;">
+      <div class="input-group"><div><label class="label-required">Prenom</label><input type="text" id="admin-fn" placeholder="Jean"></div><div><label class="label-required">Nom</label><input type="text" id="admin-ln" placeholder="Dupont"></div></div>
+      <div class="field"><label class="label-required">Email</label><input type="email" id="admin-email" placeholder="client@email.com"></div>
+      <div class="field"><label>Telephone</label><input type="tel" id="admin-phone" placeholder="06 12 34 56 78"></div>
+      <div class="field"><label class="label-required">Mot de passe</label><input type="password" id="admin-password" placeholder="Minimum 8 caracteres" minlength="8"></div>
+      <div class="field">
+        <label class="label-required">Profil</label>
+        <select id="admin-profil">
+          <option value="">— Choisir —</option>
+          <option value="formateur_independant">Formateur independant</option>
+          <option value="organisme_formation">Organisme de formation</option>
+          <option value="porteur_projet">Porteur de projet</option>
+          <option value="demandeur_emploi">Demandeur d'emploi</option>
+          <option value="association">Association</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+    </div>
+  </div>
+    <div class="card" id="step-identification">
+      <div class="card-head"><div class="card-num">1</div><div class="card-title"><h3>Votre compte</h3><p>Saisissez votre email pour vous identifier</p></div></div>
+
+      <!-- Not logged in -->
+      <div id="auth-not-connected">
+        <div class="field">
+          <label class="label-required">Votre adresse email</label>
+          <div class="siret-row">
+            <input type="email" id="auth-email-input" placeholder="votre@email.fr" style="flex:1;">
+            <button class="btn-search" onclick="checkEmailAndAuth()">Continuer</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logged in -->
+      <div id="auth-connected" style="display:none;">
+        <div style="border:1px solid #c0dd97;border-radius:12px;padding:16px;background:#f8fdf6;margin-bottom:16px;">
+          <div style="font-size:11px;color:#1D9E75;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Connecte</div>
+          <div style="font-size:16px;font-weight:600;" id="auth-user-name"></div>
+          <div style="font-size:13px;color:#666;margin-top:2px;" id="auth-user-email"></div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="substep-nav"><div></div><button class="substep-btn substep-btn-next" onclick="goSubstep(1)">Suivant &rarr;</button></div>
+  </div>
+
+  <!-- Substep: Configuration -->
+  <div class="substep" data-substep="1">
+    <div class="card">
+      <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Brief du Pack Premium</h3><p>3 formations + choix de votre agent IA</p></div></div>
+      <div class="field"><label class="label-required">Thème formation 1</label><input type="text" id="ef-theme1" data-key="theme1"></div>
+<div class="field"><label class="label-required">Thème formation 2</label><input type="text" id="ef-theme2" data-key="theme2"></div>
+<div class="field"><label class="label-required">Thème formation 3</label><input type="text" id="ef-theme3" data-key="theme3"></div>
+<div class="field"><label class="label-required">Agent IA souhaité</label><select id="ef-agent_ia" data-key="agent_ia" onchange="refreshSummary()"><option value="">— Choisir —</option><option value="Réseaux sociaux">Réseaux sociaux</option><option value="Dossiers administratifs">Dossiers administratifs</option><option value="Répondre aux candidats">Répondre aux candidats</option><option value="Support client">Support client</option><option value="Gérer les apprenants">Gérer les apprenants</option><option value="Comptabilité">Comptabilité</option><option value="Veille réglementaire">Veille réglementaire</option><option value="Marketing &amp; prospection">Marketing &amp; prospection</option></select></div>
+
+    </div>
+    <div class="substep-nav"><button class="substep-btn substep-btn-prev" onclick="goSubstep(-1)">&larr; Pr&eacute;c&eacute;dent</button><button class="substep-btn substep-btn-next" onclick="goSubstep(1)">Suivant &rarr;</button></div>
+  </div>
+
+  
+
+  <!-- Substep: Recap + Payment -->
+  <div class="substep" data-substep="3">
+    <!-- Bloc Premium -->
+    <div class="premium-block" id="premium-block" style="display:none;">
+      <div id="premium-content"></div>
+    </div>
+
+    <!-- Recapitulatif -->
+    <div class="summary">
+      <h3>Recapitulatif de votre commande</h3>
+      <div class="summary-lines" id="summary-lines"></div>
+      <div class="summary-total"><span class="label">Total a payer</span><span class="amount" id="total-amount">0 EUR</span></div>
+    </div>
+
+    <!-- Paiement -->
+    <div class="card" id="payment-card">
+      <div class="card-head"><div class="card-num">3</div><div class="card-title"><h3>Mode de paiement</h3><p>Securise par Stripe — paiement echelonne disponible</p></div></div>
+      <div class="payment-modes" id="payment-modes"></div>
+      <div class="virement-info" id="virement-info"><b>Paiement par virement bancaire</b>Apres validation, vous recevrez les informations bancaires par email.<div class="iban"><b>Beneficiaire :</b> Experience Prod SASU<br><b>IBAN :</b> FR76 1695 8000 0120 5470 6950 597</div></div>
+    </div>
+
+    <!-- Reassurance -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin:16px 0;flex-wrap:wrap;">
+      <span style="font-size:11px;color:#6B7280;display:flex;align-items:center;gap:4px;"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#1D9E75" stroke-width="1.5"><path d="M8 1L2 4v4c0 3.3 2.6 6.4 6 7 3.4-.6 6-3.7 6-7V4L8 1z"/><path d="M5.5 8l2 2 3-4"/></svg> Paiement s&eacute;curis&eacute;</span>
+      <span style="font-size:11px;color:#6B7280;display:flex;align-items:center;gap:4px;"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#1D9E75" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M6 8l2 2 3-3"/></svg> Expert d&eacute;di&eacute; sous 24h</span>
+      <span style="font-size:11px;color:#6B7280;display:flex;align-items:center;gap:4px;"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#1D9E75" stroke-width="1.5"><path d="M1 8a7 7 0 1114 0A7 7 0 011 8z"/><path d="M8 5v4M6 11h4"/></svg> Satisfait ou rembours&eacute;</span>
+    </div>
+
+    <button class="btn-submit" id="submit-btn" onclick="submitForm()">Finaliser la commande</button>
+    <div class="substep-nav" style="border-top:none;"><button class="substep-btn substep-btn-prev" onclick="goSubstep(-1)">&larr; Pr&eacute;c&eacute;dent</button><div></div></div>
+  </div>
+
+  <!-- Popups (OUTSIDE substeps) -->
+  <!-- Popup Login -->
+  <div id="popup-login" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#fff;border-radius:14px;padding:32px 28px;max-width:420px;width:90%;position:relative;">
+      <button onclick="document.getElementById('popup-login').style.display='none'" style="position:absolute;top:12px;right:12px;border:none;background:none;font-size:18px;cursor:pointer;color:#888;">&#x2715;</button>
+      <h3 style="font-size:20px;font-weight:800;margin-bottom:4px;">Connectez-vous</h3>
+      <p style="font-size:13px;color:#6B7280;margin-bottom:16px;">Un compte existe pour <b id="popup-login-email"></b></p>
+      <div class="field"><label>Mot de passe</label><input type="password" id="popup-login-pwd" placeholder="Votre mot de passe" style="width:100%;padding:12px;border:1px solid #E5E7EB;border-radius:8px;font-size:14px;"></div>
+      <div id="popup-login-err" style="display:none;color:#e94560;font-size:12px;margin:8px 0;"></div>
+      <button onclick="doPopupLogin()" style="width:100%;padding:14px;background:#D85A30;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;">Se connecter</button>
+      <p style="text-align:center;margin-top:12px;font-size:12px;"><a href="#" onclick="doPopupForgot();return false;" style="color:#6B7280;">Mot de passe oublie ?</a></p>
     </div>
   </div>
 
-  <!-- STEP 2 — Configuration -->
-  <div class="card">
-    <div class="card-head"><div class="card-num">2</div><div class="card-title"><h3>Brief du Pack Premium</h3><p>3 formations + choix de votre agent IA</p></div></div>
-    <div class="field"><label class="label-required">Thème formation 1</label><input type="text" id="ef-theme1" data-key="theme1"></div>
-<div class="field"><label class="label-required">Thème formation 2</label><input type="text" id="ef-theme2" data-key="theme2"></div>
-<div class="field"><label class="label-required">Thème formation 3</label><input type="text" id="ef-theme3" data-key="theme3"></div>
-<div class="field"><label class="label-required">Agent IA souhaité</label><select id="ef-agent_ia" data-key="agent_ia"><option value="">— Choisir —</option><option value="Réseaux sociaux">Réseaux sociaux</option><option value="Dossiers administratifs">Dossiers administratifs</option><option value="Répondre aux candidats">Répondre aux candidats</option><option value="Support client">Support client</option><option value="Gérer les apprenants">Gérer les apprenants</option><option value="Comptabilité">Comptabilité</option><option value="Veille réglementaire">Veille réglementaire</option><option value="Marketing &amp; prospection">Marketing &amp; prospection</option></select></div>
-
-    
+  <!-- Popup Signup -->
+  <div id="popup-signup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#fff;border-radius:14px;padding:32px 28px;max-width:420px;width:90%;position:relative;">
+      <button onclick="document.getElementById('popup-signup').style.display='none'" style="position:absolute;top:12px;right:12px;border:none;background:none;font-size:18px;cursor:pointer;color:#888;">&#x2715;</button>
+      <h3 style="font-size:20px;font-weight:800;margin-bottom:4px;">Creer un compte</h3>
+      <p style="font-size:13px;color:#6B7280;margin-bottom:16px;">Completez vos informations pour <b id="popup-signup-email"></b></p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="field"><label>Prenom</label><input type="text" id="popup-signup-fn" placeholder="Prenom" style="width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;font-size:14px;"></div>
+        <div class="field"><label>Nom</label><input type="text" id="popup-signup-ln" placeholder="Nom" style="width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;font-size:14px;"></div>
+      </div>
+      <div class="field"><label>Telephone</label><input type="tel" id="popup-signup-phone" placeholder="06 12 34 56 78" style="width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;font-size:14px;"></div>
+      <div class="field"><label>Type d&#x2019;organisme</label>
+        <select id="popup-signup-type" style="width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;font-size:14px;">
+          <option value="formateur">Formateur independant</option>
+          <option value="gerant_of">Organisme de formation</option>
+          <option value="association">Association</option>
+          <option value="creation_of">Porteur de projet</option>
+          <option value="demandeur_emploi">Demandeur d&#x2019;emploi</option>
+        </select>
+      </div>
+      <div class="field"><label>Mot de passe</label><input type="password" id="popup-signup-pwd" placeholder="Minimum 8 caracteres" minlength="8" style="width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;font-size:14px;"></div>
+      <div id="popup-signup-err" style="display:none;color:#e94560;font-size:12px;margin:8px 0;"></div>
+      <button onclick="doPopupSignup()" style="width:100%;padding:14px;background:#D85A30;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;">Creer mon compte</button>
+    </div>
   </div>
 
-  <!-- STEP 3 — Compte -->
-  <div class="card">
-    <div class="card-head"><div class="card-num">3</div><div class="card-title"><h3>Creer votre compte</h3><p>Suivez chaque etape et dialoguez avec votre expert</p></div></div>
-    <div class="input-group"><div><label class="label-required">Prenom</label><input type="text" id="first-name" placeholder="Jean"></div><div><label class="label-required">Nom</label><input type="text" id="last-name" placeholder="Dupont"></div></div>
-    <div class="field"><label>Email</label><input type="email" id="email" readonly style="background:#FAFAFA;color:#888;"></div>
-    <div class="field"><label>Telephone</label><input type="tel" id="phone" placeholder="06 12 34 56 78"></div>
-    <div class="field"><label class="label-required">Mot de passe</label><input type="password" id="password" placeholder="Minimum 8 caracteres" minlength="8"></div>
+  <!-- Popup Premium -->
+  <div id="popup-premium" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:14px;padding:32px 28px;max-width:480px;width:90%;position:relative;color:#fff;">
+      <button onclick="document.getElementById('popup-premium').style.display='none'" style="position:absolute;top:12px;right:12px;border:none;background:none;font-size:18px;cursor:pointer;color:rgba(255,255,255,.6);">&#x2715;</button>
+      <div style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;">&#x2605; Premium</div>
+      <h3 style="font-size:22px;font-weight:800;margin-bottom:6px;">Devenez membre Premium</h3>
+      <p style="font-size:13px;color:rgba(255,255,255,.7);margin-bottom:20px;">-10% sur toutes vos commandes.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;" id="premium-plans">
+        <div onclick="selectPremiumPlan('monthly')" id="plan-monthly" style="flex:1;min-width:180px;border:2px solid rgba(255,255,255,.2);border-radius:12px;padding:20px;cursor:pointer;text-align:center;transition:border-color .2s;">
+          <div style="font-size:28px;font-weight:800;color:#FFD700;">29&euro;</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.7);">par mois</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:4px;">Sans engagement</div>
+        </div>
+        <div onclick="selectPremiumPlan('yearly')" id="plan-yearly" style="flex:1;min-width:180px;border:2px solid #FFD700;border-radius:12px;padding:20px;cursor:pointer;text-align:center;position:relative;transition:border-color .2s;">
+          <div style="position:absolute;top:-10px;right:10px;background:#10B981;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">RECOMMANDE</div>
+          <div style="font-size:28px;font-weight:800;color:#FFD700;">290&euro;</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.7);">par an</div>
+          <div style="font-size:11px;color:#10B981;margin-top:4px;">2 mois offerts</div>
+        </div>
+      </div>
+      <button onclick="openPremiumStripe()" id="premium-pay-btn" style="width:100%;padding:14px;background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:16px;">Souscrire — 290&euro;/an</button>
+      <p style="text-align:center;font-size:11px;color:rgba(255,255,255,.4);margin-top:10px;">Paiement securise par Stripe. Annulable a tout moment.</p>
+    </div>
   </div>
 
-  <!-- Recapitulatif -->
-  <div class="summary">
-    <h3>Recapitulatif de votre commande</h3>
-    <div class="summary-lines" id="summary-lines"></div>
-    <div class="summary-total"><span class="label">Total a payer</span><span class="amount" id="total-amount">0 EUR</span></div>
+  <!-- Hidden fields for auth data (OUTSIDE substeps) -->
+  <input type="hidden" id="first-name"><input type="hidden" id="last-name"><input type="hidden" id="email"><input type="hidden" id="phone"><input type="hidden" id="password"><input type="hidden" id="client-email">
+
+  </div><!-- /step-0 -->
+
+  <div class="step-content" id="step-1">
+    <div class="step-placeholder">
+      <div class="sph-icon" style="background:#EEEDFE;color:#7F77DD;">2</div>
+      <h3>Production</h3>
+      <p>Réalisation de tous les livrables</p>
+      <div class="sph-dots"><span></span><span></span><span></span></div>
+      <div class="sph-badge">En cours de d&eacute;ploiement</div>
+    </div>
+  </div>
+  <div class="step-content" id="step-2">
+    <div class="step-placeholder">
+      <div class="sph-icon" style="background:#FFF8F3;color:#D85A30;">3</div>
+      <h3>Révision</h3>
+      <p>Revue qualité et ajustements</p>
+      <div class="sph-dots"><span></span><span></span><span></span></div>
+      <div class="sph-badge">En cours de d&eacute;ploiement</div>
+    </div>
+  </div>
+  <div class="step-content" id="step-3">
+    <div style="max-width:700px;margin:0 auto;padding:50px 20px;text-align:center;">
+      <div style="margin-bottom:28px;">
+        <svg viewBox="0 0 240 200" fill="none" style="width:240px;margin:0 auto;">
+          <rect x="30" y="20" width="8" height="8" rx="1" fill="#D85A30" opacity="0.6" transform="rotate(25 34 24)"/><rect x="55" y="10" width="6" height="6" rx="1" fill="#1D9E75" opacity="0.5" transform="rotate(-15 58 13)"/><rect x="180" y="15" width="7" height="7" rx="1" fill="#C9A84C" opacity="0.6" transform="rotate(40 183 18)"/><rect x="200" y="35" width="5" height="5" rx="1" fill="#534AB7" opacity="0.5" transform="rotate(-30 202 37)"/><rect x="20" y="55" width="5" height="5" rx="1" fill="#378ADD" opacity="0.4" transform="rotate(50 22 57)"/><rect x="215" y="70" width="6" height="6" rx="1" fill="#D85A30" opacity="0.4" transform="rotate(20 218 73)"/>
+          <circle cx="45" cy="40" r="3" fill="#1D9E75" opacity="0.3"/><circle cx="195" cy="25" r="2.5" fill="#D85A30" opacity="0.4"/><circle cx="210" cy="55" r="2" fill="#C9A84C" opacity="0.5"/><circle cx="25" cy="80" r="2" fill="#534AB7" opacity="0.3"/>
+          <circle cx="120" cy="95" r="55" fill="#E1F5EE" stroke="#1D9E75" stroke-width="2" opacity="0.3"/><circle cx="120" cy="95" r="42" fill="#E1F5EE"/><circle cx="120" cy="95" r="42" stroke="#1D9E75" stroke-width="2.5"/>
+          <path d="M100 95l12 12 25-28" stroke="#1D9E75" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="80" y="148" width="80" height="26" rx="13" fill="#D85A30"/><text x="120" y="165" text-anchor="middle" font-size="11" fill="white" font-weight="600" font-family="sans-serif">TERMIN&Eacute;E</text>
+          <g transform="translate(30, 100) rotate(-10)"><rect width="32" height="42" rx="3" fill="white" stroke="#E5E7EB" stroke-width="1"/><rect x="5" y="6" width="15" height="2" rx="1" fill="#1D9E75" opacity="0.5"/><rect x="5" y="12" width="22" height="1.5" rx="0.75" fill="#E5E7EB"/><rect x="5" y="16" width="18" height="1.5" rx="0.75" fill="#E5E7EB"/><circle cx="24" cy="34" r="5" fill="#1D9E75"/><path d="M21.5 34l1.5 1.5 3-3" stroke="white" stroke-width="1.2" stroke-linecap="round"/></g>
+          <g transform="translate(185, 95) rotate(8)"><rect width="32" height="42" rx="3" fill="white" stroke="#E5E7EB" stroke-width="1"/><rect x="5" y="6" width="15" height="2" rx="1" fill="#378ADD" opacity="0.5"/><rect x="5" y="12" width="22" height="1.5" rx="0.75" fill="#E5E7EB"/><rect x="5" y="16" width="18" height="1.5" rx="0.75" fill="#E5E7EB"/><circle cx="24" cy="34" r="5" fill="#1D9E75"/><path d="M21.5 34l1.5 1.5 3-3" stroke="white" stroke-width="1.2" stroke-linecap="round"/></g>
+        </svg>
+      </div>
+      <h3 style="font-size:26px;font-weight:800;margin-bottom:8px;">F&eacute;licitations !</h3>
+      <p style="font-size:18px;font-weight:600;color:#1D9E75;margin-bottom:16px;">Votre d&eacute;marche est termin&eacute;e</p>
+      <p style="font-size:14px;color:#6B7280;line-height:1.7;max-width:480px;margin:0 auto 32px;">Pack premium livré</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button onclick="if(typeof showExpertPopup==='function')showExpertPopup();else window.location.href='/dashboard.html#messagerie'" style="display:flex;align-items:center;gap:8px;padding:14px 24px;background:white;border:1px solid #E5E7EB;border-radius:10px;font-size:14px;font-weight:600;color:#6B7280;cursor:pointer;font-family:inherit;">
+          <svg viewBox="0 0 18 18" fill="none" style="width:16px;"><circle cx="9" cy="9" r="7.5" stroke="#6B7280" stroke-width="1.3"/><path d="M9 6v4M9 12.5v.5" stroke="#6B7280" stroke-width="1.3" stroke-linecap="round"/></svg>
+          Signaler un probl&egrave;me
+        </button>
+      </div>
+      <div style="margin-top:32px;padding:16px;background:#FFF8F3;border-radius:10px;border:1px solid rgba(216,90,48,0.1);">
+        <p style="font-size:13px;color:#993C1D;line-height:1.6;">Merci d'avoir choisi <strong>lesformateurs.online</strong>. N'h&eacute;sitez pas &agrave; nous laisser un avis ou &agrave; nous recommander aupr&egrave;s de vos confr&egrave;res.</p>
+      </div>
+    </div>
   </div>
 
-  <!-- STEP 4 — Paiement -->
-  <div class="card">
-    <div class="card-head"><div class="card-num">4</div><div class="card-title"><h3>Mode de paiement</h3><p>Securise par Stripe — paiement echelonne disponible</p></div></div>
-    <div class="payment-modes" id="payment-modes"></div>
-    <div class="virement-info" id="virement-info"><b>Paiement par virement bancaire</b>Apres validation, vous recevrez les informations bancaires par email.<div class="iban"><b>Beneficiaire :</b> Experience Prod SASU<br><b>IBAN :</b> FR76 1695 8000 0120 5470 6950 597</div></div>
-  </div>
 
-  <button class="btn-submit" id="submit-btn" onclick="submitForm()">Creer mon compte et finaliser la commande</button>
 </div>
 
 <div class="toast" id="toast"></div>
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src="js/auth-modal.js"></script>
 <script>
-var FUNNEL = {"id":"pack_premium","demType":"pack_premium","basePrice":4990,"totalSteps":4,"title":"Pack Premium","paymentRule":"3x","options":[],"dynamicPricing":null,"extraFields":[{"key":"theme1","label":"Thème formation 1","type":"text","required":true},{"key":"theme2","label":"Thème formation 2","type":"text","required":true},{"key":"theme3","label":"Thème formation 3","type":"text","required":true},{"key":"agent_ia","label":"Agent IA souhaité","type":"select","options":["Réseaux sociaux","Dossiers administratifs","Répondre aux candidats","Support client","Gérer les apprenants","Comptabilité","Veille réglementaire","Marketing & prospection"],"required":true}]};
+var FUNNEL = {"id":"pack_premium","demType":"pack_premium","basePrice":4990,"totalSteps":4,"title":"Pack Premium","paymentRule":"3x","options":[],"dynamicPricing":null,"extraFields":[{"key":"theme1","label":"Thème formation 1","type":"text","required":true},{"key":"theme2","label":"Thème formation 2","type":"text","required":true},{"key":"theme3","label":"Thème formation 3","type":"text","required":true},{"key":"agent_ia","label":"Agent IA souhaité","type":"select","options":["Réseaux sociaux","Dossiers administratifs","Répondre aux candidats","Support client","Gérer les apprenants","Comptabilité","Veille réglementaire","Marketing & prospection"],"required":true}],"needsSiret":false,"customCalcTotal":false};
 
-var STATE = { email: '', organisme: null, paymentMode: null, selectedOptions: {}, radioValues: {}, msValues: {} };
+var STATE = { email: '', organisme: null, paymentMode: null, selectedOptions: {}, radioValues: {}, msValues: {}, isPremium: false, certSelectorTotal: 0 };
 
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+function initSteps(){
+  // All pills clickable, step 0 active by default
+  document.querySelectorAll('.step-pill').forEach(function(pill,i){
+    if(i===0) pill.classList.add('active');
+  });
+  // Grey out content of all steps except 0
+  document.querySelectorAll('.step-content').forEach(function(c,i){
+    if(i>0 && c.id!=='step-0'){
+      c.style.opacity='.35';
+      c.style.pointerEvents='none';
+      c.style.userSelect='none';
+    }
+  });
+}
+
+function switchStep(idx){
+  // Pills are always clickable — switch visual active state
+  document.querySelectorAll('.step-pill').forEach(function(p,i){p.classList.toggle('active',i===idx);});
+  document.querySelectorAll('.step-content').forEach(function(c){c.classList.remove('active');});
+  var el=document.getElementById('step-'+idx);
+  if(el) el.classList.add('active');
+}
 function showToast(msg,dur){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},dur||3000);}
+
+var _currentSubstep = 0;
+var _totalSubsteps = 0;
+
+function initSubsteps() {
+  var subs = document.querySelectorAll('#step-0 .substep');
+  _totalSubsteps = subs.length;
+  if (_totalSubsteps === 0) return;
+  subs.forEach(function(s, i) { s.style.display = i === 0 ? 'block' : 'none'; s.classList.toggle('active', i === 0); });
+  _currentSubstep = 0;
+  renderSubstepProgress();
+}
+
+function goSubstep(delta) {
+  var subs = document.querySelectorAll('#step-0 .substep');
+  if (!subs.length) return;
+  var next = _currentSubstep + delta;
+  if (next < 0 || next >= subs.length) return;
+
+  // Validation before going forward
+  if (delta > 0) {
+    // substep 0: must be logged in
+    if (_currentSubstep === 0 && !STATE.authUser && !ADMIN_STATE.isAdmin) {
+      showToast('Veuillez vous connecter d\'abord');
+      return;
+    }
+  }
+
+  subs[_currentSubstep].style.display = 'none';
+  subs[_currentSubstep].classList.remove('active');
+  subs[next].style.display = 'block';
+  subs[next].classList.add('active');
+  _currentSubstep = next;
+  renderSubstepProgress();
+  window.scrollTo({ top: document.querySelector('.steps-nav').offsetTop - 10, behavior: 'smooth' });
+}
+
+function renderSubstepProgress() {
+  var host = document.getElementById('substep-progress');
+  if (!host) return;
+  var html = '';
+  for (var i = 0; i < _totalSubsteps; i++) {
+    var cls = i === _currentSubstep ? 'active' : i < _currentSubstep ? 'done' : '';
+    html += '<div class="substep-dot ' + cls + '"></div>';
+  }
+  host.innerHTML = html;
+}
 
 /* ========== SIRET ========== */
 async function dgefpSearch(siret){
@@ -230,13 +571,77 @@ async function searchSiret(){
 }
 
 /* ========== OPTIONS ========== */
+var _qtyValues = {};
+var FORMATEUR_KEYS = ['formateur_diplome','formateur_enregistre'];
 function toggleOption(el){
-  el.classList.toggle('selected');
   var key=el.getAttribute('data-option');var price=parseInt(el.getAttribute('data-price'));
+  var isFormateur = FORMATEUR_KEYS.indexOf(key) >= 0;
+
+  // If selecting a formateur, deselect the other one first
+  if (isFormateur && !el.classList.contains('selected')) {
+    FORMATEUR_KEYS.forEach(function(fk){
+      if (fk !== key) {
+        var other = document.querySelector('[data-option="'+fk+'"]');
+        if (other && other.classList.contains('selected')) {
+          other.classList.remove('selected');
+          delete STATE.selectedOptions[fk];
+        }
+      }
+    });
+  }
+
+  el.classList.toggle('selected');
   if(el.classList.contains('selected'))STATE.selectedOptions[key]=price;
   else delete STATE.selectedOptions[key];
   refreshSummary();
 }
+function changeQty(key, delta){
+  if(!_qtyValues[key]) _qtyValues[key]=0;
+  _qtyValues[key]=Math.max(0, _qtyValues[key]+delta);
+  var el=document.getElementById('qty-'+key);
+  if(el) el.textContent=_qtyValues[key];
+  var card=document.querySelector('[data-option="'+key+'"][data-qty]');
+  var price=card?parseInt(card.getAttribute('data-price')):0;
+  if(_qtyValues[key]>0) STATE.selectedOptions[key]=price*_qtyValues[key];
+  else delete STATE.selectedOptions[key];
+  refreshSummary();
+}
+/* ========== AVAILABILITY GRID ========== */
+function buildAvailGrid(key){
+  var grid = document.getElementById('avail-grid-'+key);
+  if(!grid) return;
+  var today = new Date();
+  var nextMonday = new Date(today);
+  nextMonday.setDate(today.getDate() + ((8 - today.getDay()) % 7 || 7));
+  var days = [];
+  var dayNames = ['Lun','Mar','Mer','Jeu','Ven'];
+  for(var i=0;i<5;i++){
+    var d = new Date(nextMonday);
+    d.setDate(nextMonday.getDate()+i);
+    days.push({name:dayNames[i],date:d.getDate()+'/'+(d.getMonth()+1)});
+  }
+  var html = '<div class="avail-header"></div>';
+  days.forEach(function(d){html+='<div class="avail-header">'+d.name+'<br>'+d.date+'</div>';});
+  var slots = ['Matin','Apres-midi'];
+  slots.forEach(function(s){
+    html+='<div class="avail-label">'+s+'</div>';
+    days.forEach(function(d){
+      var val=d.name+' '+d.date+' '+s;
+      html+='<div class="avail-slot" data-avail-key="'+key+'" data-avail-val="'+val+'" onclick="toggleAvail(this,\''+key+'\')">Dispo</div>';
+    });
+  });
+  grid.innerHTML=html;
+  if(!STATE.msValues[key]) STATE.msValues[key]=[];
+}
+function toggleAvail(el,key){
+  el.classList.toggle('selected');
+  var val=el.getAttribute('data-avail-val');
+  if(!STATE.msValues[key]) STATE.msValues[key]=[];
+  var idx=STATE.msValues[key].indexOf(val);
+  if(idx>=0) STATE.msValues[key].splice(idx,1);
+  else STATE.msValues[key].push(val);
+}
+
 function selectRadio(el,group){
   document.querySelectorAll('[data-radio-group="'+group+'"]').forEach(function(c){c.classList.remove('selected');});
   el.classList.add('selected');
@@ -256,17 +661,35 @@ function toggleMs(el,group){
 /* ========== PRICING ========== */
 function calcTotal(){
   var t=FUNNEL.basePrice;
+
+  // Centre certifié: prix dynamique selon type/niveau
+  if(FUNNEL.customCalcTotal){
+    var typeVal=document.getElementById('ef-type_certif')?document.getElementById('ef-type_certif').value:'';
+    t=7790;
+    if(typeVal.indexOf('3-4')>=0) t=9750;
+    else if(typeVal.indexOf('5-6')>=0) t=12990;
+    else if(typeVal.indexOf('7-8')>=0) t=16250;
+    if(STATE.radioValues['renouvellement']==='Renouvellement (-30%)') t=Math.round(t*0.7);
+  }
   // Dynamic pricing (OPCO, Agent IA)
-  if(FUNNEL.dynamicPricing){
+  else if(FUNNEL.dynamicPricing){
     var items=STATE.msValues[FUNNEL.dynamicPricing.unitKey]||[];
     t=FUNNEL.dynamicPricing.perUnit*Math.max(1,items.length);
   }
+
+  // Habilitation: use CertSelector total from STATE
+  if(FUNNEL.id==='habilitation' && STATE.certSelectorTotal > 0){
+    t = STATE.certSelectorTotal;
+  }
+
   // Options
   Object.values(STATE.selectedOptions).forEach(function(p){t+=p;});
-  // Discounts from radio fields
-  FUNNEL.extraFields.forEach(function(ef){
-    if(ef.discount&&STATE.radioValues[ef.key]===ef.discount.value)t+=ef.discount.amount;
-  });
+  // Discounts from radio fields (except custom calc which handles its own)
+  if(!FUNNEL.customCalcTotal){
+    FUNNEL.extraFields.forEach(function(ef){
+      if(ef.discount&&STATE.radioValues[ef.key]===ef.discount.value)t+=ef.discount.amount;
+    });
+  }
   if(t<0)t=0;
   return t;
 }
@@ -277,6 +700,11 @@ function refreshSummary(){
     var items=STATE.msValues[FUNNEL.dynamicPricing.unitKey]||[];
     var count=Math.max(1,items.length);
     lines.push('<div class="summary-line"><span class="label">'+esc(FUNNEL.title)+' <span class="count">(x'+count+')</span></span><span class="amount">'+(FUNNEL.dynamicPricing.perUnit*count).toLocaleString('fr-FR')+' EUR</span></div>');
+  }else if(FUNNEL.id==='habilitation' && STATE.certSelectorTotal > 0){
+    lines.push('<div class="summary-line"><span class="label">'+esc(FUNNEL.title)+' <span class="count">('+((STATE.msValues['certifications_habil']||[]).length)+' cert.)</span></span><span class="amount">'+STATE.certSelectorTotal.toLocaleString('fr-FR')+' EUR</span></div>');
+  }else if(FUNNEL.customCalcTotal){
+    var ctotal=calcTotal()-Object.values(STATE.selectedOptions).reduce(function(a,b){return a+b;},0);
+    lines.push('<div class="summary-line"><span class="label">'+esc(FUNNEL.title)+'</span><span class="amount">'+ctotal.toLocaleString('fr-FR')+' EUR</span></div>');
   }else{
     lines.push('<div class="summary-line"><span class="label">'+esc(FUNNEL.title)+'</span><span class="amount">'+FUNNEL.basePrice.toLocaleString('fr-FR')+' EUR</span></div>');
   }
@@ -289,42 +717,102 @@ function refreshSummary(){
       lines.push('<div class="summary-line"><span class="label">'+esc(ef.discount.value)+'</span><span class="amount">'+(ef.discount.amount>0?'+':'')+ef.discount.amount.toLocaleString('fr-FR')+' EUR</span></div>');
     }
   });
+  // Premium -10%
+  var premiumDiscount = 0;
+  if(STATE.isPremium){
+    var subtotal = calcTotal();
+    premiumDiscount = Math.round(subtotal * 0.10);
+    lines.push('<div class="summary-line" style="color:#10B981;"><span class="label">&#x2605; Reduction Premium -10%</span><span class="amount" style="color:#10B981;font-weight:700;">-'+premiumDiscount.toLocaleString('fr-FR')+' EUR</span></div>');
+  }
   document.getElementById('summary-lines').innerHTML=lines.join('');
   var total=calcTotal();
-  document.getElementById('total-amount').textContent=total.toLocaleString('fr-FR')+' EUR';
-  renderPaymentModes();
+  if(STATE.isPremium) total = Math.max(0, total - premiumDiscount);
+  renderPremiumBlock();
+
+  // Admin override: paid_offline or offert
+  var ap=ADMIN_STATE.isAdmin?STATE.radioValues['admin_payment']:null;
+  var paymentCard=document.getElementById('payment-card');
+
+  var submitBtn=document.getElementById('submit-btn');
+  if(ap==='paid_offline'){
+    document.getElementById('total-amount').innerHTML='<span style="text-decoration:line-through;color:#9CA3AF;font-size:18px;">'+total.toLocaleString('fr-FR')+' EUR</span> <span style="color:#1D9E75;font-size:28px;font-weight:700;">Paye</span>';
+    if(paymentCard)paymentCard.style.display='none';
+    document.getElementById('virement-info').classList.remove('show');
+    if(submitBtn)submitBtn.textContent='Creer la demarche';
+  } else if(ap==='offert'){
+    document.getElementById('total-amount').innerHTML='<span style="text-decoration:line-through;color:#9CA3AF;font-size:18px;">'+total.toLocaleString('fr-FR')+' EUR</span> <span style="color:#1D9E75;font-size:28px;font-weight:700;">Offert</span>';
+    if(paymentCard)paymentCard.style.display='none';
+    document.getElementById('virement-info').classList.remove('show');
+    if(submitBtn)submitBtn.textContent='Creer la demarche';
+  } else {
+    document.getElementById('total-amount').textContent=total.toLocaleString('fr-FR')+' EUR';
+    if(paymentCard)paymentCard.style.display='block';
+    if(submitBtn)submitBtn.textContent='Finaliser la commande';
+    renderPaymentModes();
+  }
+}
+
+function getFinalTotal(){
+  var t = calcTotal();
+  if(STATE.isPremium) t = Math.max(0, t - Math.round(calcTotal() * 0.10));
+  return t;
 }
 
 function renderPaymentModes(){
-  var total=calcTotal();
+  var total=getFinalTotal();
   var rule=FUNNEL.paymentRule;
-  var modes=[
-    {id:'comptant',title:'Comptant',sub:'Paiement unique par carte bancaire',amount:total.toLocaleString('fr-FR')+' EUR',enabled:true},
-    {id:'2x',title:'2 x '+Math.ceil(total/2).toLocaleString('fr-FR')+' EUR',sub:'Sans frais',amount:Math.ceil(total/2).toLocaleString('fr-FR')+' EUR puis 1 mois',enabled:rule==='comptant_2x'||rule==='2x'},
-    {id:'3x',title:'3 x '+Math.ceil(total/3).toLocaleString('fr-FR')+' EUR',sub:'Sans frais',amount:Math.ceil(total/3).toLocaleString('fr-FR')+' EUR/mois x 3',enabled:rule==='comptant_3x'||rule==='3x'},
-    {id:'virement',title:'Virement bancaire',sub:'Vous recevrez l\'IBAN par email',amount:total.toLocaleString('fr-FR')+' EUR',enabled:true}
-  ];
+  // CB 2x : disponible si rule le permet
+  var cb2x = rule==='comptant_2x'||rule==='2x';
+  // CB 3x : disponible si rule le permet
+  var cb3x = rule==='comptant_3x'||rule==='3x';
+  // Virement en plusieurs fois : toujours dispo si CB en plusieurs fois est dispo
+  var vir2x = cb2x;
+  var vir3x = cb3x;
+
+  var modes=[];
+  // CB comptant (toujours)
+  modes.push({id:'comptant',title:'CB — Comptant',sub:'Paiement unique par carte bancaire',amount:total.toLocaleString('fr-FR')+' EUR'});
+  // CB 2x (seulement si disponible)
+  if(cb2x) modes.push({id:'2x',title:'CB — 2 x '+Math.ceil(total/2).toLocaleString('fr-FR')+' EUR',sub:'Sans frais — carte bancaire',amount:Math.ceil(total/2).toLocaleString('fr-FR')+' EUR puis 1 mois'});
+  // CB 3x (seulement si disponible)
+  if(cb3x) modes.push({id:'3x',title:'CB — 3 x '+Math.ceil(total/3).toLocaleString('fr-FR')+' EUR',sub:'Sans frais — carte bancaire',amount:Math.ceil(total/3).toLocaleString('fr-FR')+' EUR/mois x 3'});
+  // Virement comptant (toujours)
+  modes.push({id:'virement',title:'Virement bancaire — Comptant',sub:'Vous recevrez l\'IBAN par email',amount:total.toLocaleString('fr-FR')+' EUR'});
+  // Virement 2x (si >= 2000)
+  if(vir2x) modes.push({id:'virement_2x',title:'Virement — 2 x '+Math.ceil(total/2).toLocaleString('fr-FR')+' EUR',sub:'2 virements a 30 jours d\'intervalle',amount:Math.ceil(total/2).toLocaleString('fr-FR')+' EUR x 2'});
+  // Virement 3x (si >= 10000)
+  if(vir3x) modes.push({id:'virement_3x',title:'Virement — 3 x '+Math.ceil(total/3).toLocaleString('fr-FR')+' EUR',sub:'3 virements mensuels',amount:Math.ceil(total/3).toLocaleString('fr-FR')+' EUR x 3'});
+
   var cur=modes.find(function(m){return m.id===STATE.paymentMode;});
-  if(cur&&!cur.enabled)STATE.paymentMode=null;
+  if(!cur) STATE.paymentMode=null;
   var el=document.getElementById('payment-modes');
   el.innerHTML=modes.map(function(m){
-    return '<div class="payment-option '+(m.enabled?'':'disabled ')+(STATE.paymentMode===m.id?'selected':'')+'" onclick="'+(m.enabled?"setPaymentMode('"+m.id+"')":'')+'">'+'<div class="payment-option-left"><div class="rb"></div><div><div class="payment-option-title">'+m.title+'</div><div class="payment-option-sub">'+m.sub+'</div></div></div>'+'<div class="payment-option-amount">'+m.amount+'</div></div>';
+    return '<div class="payment-option '+(STATE.paymentMode===m.id?'selected':'')+'" onclick="setPaymentMode(\''+m.id+'\')"><div class="payment-option-left"><div class="rb"></div><div><div class="payment-option-title">'+m.title+'</div><div class="payment-option-sub">'+m.sub+'</div></div></div><div class="payment-option-amount">'+m.amount+'</div></div>';
   }).join('');
-  document.getElementById('virement-info').classList.toggle('show',STATE.paymentMode==='virement');
+  var isVir=STATE.paymentMode&&STATE.paymentMode.indexOf('virement')===0;
+  document.getElementById('virement-info').classList.toggle('show',isVir);
 }
 function setPaymentMode(mode){STATE.paymentMode=mode;renderPaymentModes();}
 
 /* ========== SUBMIT ========== */
 async function submitForm(){
-  if(!STATE.email||STATE.email.indexOf('@')<0)return showToast('Email invalide');
-  if(!STATE.organisme)return showToast('Veuillez rechercher votre SIRET');
+  if(!ADMIN_STATE.isAdmin && !STATE.authUser) return showToast('Veuillez vous connecter d\'abord');
+  if(!STATE.email||STATE.email.indexOf('@')<0) STATE.email = STATE.authUser ? STATE.authUser.email : '';
+  if(FUNNEL.needsSiret && !STATE.organisme && !ADMIN_STATE.isAdmin) return showToast('Veuillez rechercher votre SIRET');
   var fn=document.getElementById('first-name').value.trim();
   var ln=document.getElementById('last-name').value.trim();
   var phone=document.getElementById('phone').value.trim();
   var pw=document.getElementById('password').value;
-  if(!fn||!ln)return showToast('Prenom et nom obligatoires');
-  if(!pw||pw.length<8)return showToast('Mot de passe : 8 caracteres minimum');
-  if(!STATE.paymentMode)return showToast('Choisissez un mode de paiement');
+  // Admin with existing account: skip name/password validation
+  if(!ADMIN_STATE.isAdmin || ADMIN_STATE.accountMode!=='existing'){
+    if(!fn||!ln)return showToast('Prenom et nom obligatoires');
+    if(!pw||pw.length<8)return showToast('Mot de passe : 8 caracteres minimum');
+  }
+  // Admin: skip payment mode if paid_offline or offert
+  var adminPaymentCheck=STATE.radioValues['admin_payment'];
+  if(!ADMIN_STATE.isAdmin || (adminPaymentCheck!=='paid_offline'&&adminPaymentCheck!=='offert')){
+    if(!STATE.paymentMode)return showToast('Choisissez un mode de paiement');
+  }
 
   // Collect extra fields
   var config={organisme:STATE.organisme,radioValues:STATE.radioValues,msValues:STATE.msValues};
@@ -334,45 +822,98 @@ async function submitForm(){
   });
 
   var btn=document.getElementById('submit-btn');
-  btn.disabled=true;btn.textContent='Creation du compte en cours...';
+  btn.disabled=true;btn.textContent='Creation en cours...';
 
   try{
-    var authRes=await sb.auth.signUp({email:STATE.email,password:pw,options:{data:{first_name:fn,last_name:ln}}});
-    if(authRes.error){
-      if(authRes.error.message&&authRes.error.message.indexOf('already')>=0){
-        showToast('Compte existant, connexion...');
-        var si=await sb.auth.signInWithPassword({email:STATE.email,password:pw});
-        if(si.error)throw new Error('Mot de passe incorrect : '+si.error.message);
-        authRes=si;
-      }else throw authRes.error;
+    var userId=null;
+    var targetEmail=STATE.email;
+
+    // ADMIN MODE: use found user or create new account via admin
+    if(ADMIN_STATE.isAdmin && ADMIN_STATE.accountMode==='existing' && ADMIN_STATE.foundUser){
+      userId=ADMIN_STATE.foundUser.id;
+      targetEmail=ADMIN_STATE.foundUser.email;
+    } else if(ADMIN_STATE.isAdmin && ADMIN_STATE.accountMode==='new'){
+      var aFn=document.getElementById('admin-fn').value.trim();
+      var aLn=document.getElementById('admin-ln').value.trim();
+      var aEmail=document.getElementById('admin-email').value.trim();
+      var aPhone=document.getElementById('admin-phone').value.trim();
+      var aPw=document.getElementById('admin-password').value;
+      var aProfil=document.getElementById('admin-profil').value;
+      if(!aFn||!aLn||!aEmail)return showToast('Remplissez prenom, nom et email du client');
+      if(!aPw||aPw.length<8)return showToast('Mot de passe client : 8 caracteres minimum');
+      // Create account via admin (using service role would be ideal, but we use signUp)
+      var adminAuth=await sb.auth.getUser();
+      var adminSession=adminAuth.data;
+      var signRes=await sb.auth.signUp({email:aEmail,password:aPw,options:{data:{first_name:aFn,last_name:aLn}}});
+      if(signRes.error){
+        if(signRes.error.message&&signRes.error.message.indexOf('already')>=0){
+          var look=await sb.from('profiles').select('id').eq('email',aEmail).single();
+          if(look.data) userId=look.data.id;
+          else throw new Error('Compte existant mais profil introuvable');
+        }else throw signRes.error;
+      }else{
+        userId=(signRes.data&&signRes.data.user)?signRes.data.user.id:null;
+      }
+      if(!userId)throw new Error('Impossible de creer le compte client');
+      await sb.from('profiles').upsert({id:userId,first_name:aFn,last_name:aLn,email:aEmail,phone:aPhone||null,role:'user',profil:aProfil||null});
+      // Re-sign as admin
+      if(adminSession&&adminSession.user){
+        // We can't easily re-auth as admin here without storing the password
+        // The demarche will be created, admin can manage from dashboard
+      }
+      targetEmail=aEmail;fn=aFn;ln=aLn;phone=aPhone;
+    } else {
+      // Normal user flow — user should already be connected
+      if(STATE.authUser){
+        userId = STATE.authUser.id;
+      } else {
+        return showToast('Veuillez vous connecter d\'abord');
+      }
     }
-    var userId=(authRes.data&&authRes.data.user)?authRes.data.user.id:null;
-    if(!userId)throw new Error('Verifiez votre email si confirmation requise');
 
-    await sb.from('profiles').upsert({id:userId,first_name:fn,last_name:ln,email:STATE.email,phone:phone||null});
+    var orgId=null;
+    if(STATE.organisme&&STATE.organisme.siret){
+      var orgRes=await sb.from('user_organismes').insert({user_id:userId,siren:STATE.organisme.siren,siret:STATE.organisme.siret,raison_sociale:STATE.organisme.raison_sociale,forme_juridique:STATE.organisme.forme_juridique||null,adresse:STATE.organisme.adresse}).select().single();
+      orgId=(orgRes.data&&orgRes.data.id)||null;
+    }
 
-    var orgRes=await sb.from('user_organismes').insert({user_id:userId,siren:STATE.organisme.siren,siret:STATE.organisme.siret,raison_sociale:STATE.organisme.raison_sociale,forme_juridique:STATE.organisme.forme_juridique||null,adresse:STATE.organisme.adresse}).select().single();
-    var orgId=(orgRes.data&&orgRes.data.id)||null;
-
-    var totalCents=calcTotal()*100;
+    var totalCents=getFinalTotal()*100;
     var pm=STATE.paymentMode;
-    var installTotal=(pm==='3x')?3:((pm==='2x')?2:1);
+    var installTotal=(pm==='3x'||pm==='virement_3x')?3:((pm==='2x'||pm==='virement_2x')?2:1);
     var installCents=Math.round(totalCents/installTotal);
+
+    // Admin payment status override
+    var demStatus='en_attente_paiement';
+    var demPaid=false;
+    var adminPayment=STATE.radioValues['admin_payment'];
+    if(ADMIN_STATE.isAdmin && adminPayment){
+      if(adminPayment==='paid_offline'){demStatus='en_cours';demPaid=true;}
+      else if(adminPayment==='offert'){demStatus='en_cours';demPaid=true;totalCents=0;}
+    }
 
     var demRes=await sb.from('demarches').insert({
       user_id:userId,organisme_id:orgId,
       type:FUNNEL.demType,category:'demarche',
-      status:'en_attente_paiement',current_step:1,total_steps:FUNNEL.totalSteps,
-      amount_cents:totalCents,payment_mode:pm==='virement'?'comptant':pm,
+      status:demStatus,current_step:1,total_steps:FUNNEL.totalSteps,
+      amount_cents:totalCents,payment_mode:pm.indexOf('virement')===0?'virement':pm,
       installment_amount_cents:installCents,installments_paid:0,installments_total:installTotal,
-      paid:false,
+      paid:demPaid,
       config:config,
       options:Object.keys(STATE.selectedOptions).map(function(k){return{k:k,price:STATE.selectedOptions[k]};})
     }).select().single();
     if(demRes.error)throw demRes.error;
     var dem=demRes.data;
 
-    if(pm==='virement'){
+    // Admin: skip payment if paid_offline or offert
+    if(ADMIN_STATE.isAdmin && (adminPayment==='paid_offline'||adminPayment==='offert')){
+      // Notify admin
+      fetch('https://webhook.lesformateurs.online/notify-admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'demarche_paid',demarche_type:FUNNEL.title,amount:(totalCents/100)+' EUR',client_email:STATE.email,payment_mode:adminPayment})}).catch(function(){});
+      showToast('Demarche creee avec succes !',3000);
+      setTimeout(function(){window.location.href='dashboard.html?demarche_created='+dem.id;},1500);
+      return;
+    }
+
+    if(pm.indexOf('virement')===0){
       try{await fetch('https://webhook.lesformateurs.online/send-new-user-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_email:STATE.email,first_name:fn,last_name:ln,password:pw,demarche_type:FUNNEL.title,demarche_amount:totalCents,demarche_status:'en_attente_paiement'})});}catch(e){}
       showToast('Compte cree ! Informations par email.',5000);
       setTimeout(function(){window.location.href='dashboard.html?demarche_created='+dem.id;},2000);
@@ -388,11 +929,495 @@ async function submitForm(){
   }catch(e){
     console.error('Submit error:',e);
     showToast('Erreur : '+(e.message||e));
-    btn.disabled=false;btn.textContent='Creer mon compte et finaliser la commande';
+    btn.disabled=false;btn.textContent='Finaliser la commande';
   }
 }
 
-document.addEventListener('DOMContentLoaded',function(){refreshSummary();});
+/* ========== EMAIL-FIRST AUTH ========== */
+var _selectedPremiumPlan = 'yearly';
+
+async function checkEmailAndAuth(){
+  var email = (document.getElementById('auth-email-input').value||'').trim().toLowerCase();
+  if(!email || email.indexOf('@') < 0){ showToast('Saisissez un email valide'); return; }
+  // Check if account exists via signInWithPassword with dummy pw to detect
+  try{
+    var { data } = await sb.from('profiles').select('id,email').ilike('email', email).maybeSingle();
+    if(data){
+      // Account exists — show login popup
+      document.getElementById('popup-login-email').textContent = email;
+      document.getElementById('popup-login-pwd').value = '';
+      document.getElementById('popup-login-err').style.display = 'none';
+      document.getElementById('popup-login').style.display = 'flex';
+      document.getElementById('popup-login')._email = email;
+    } else {
+      // No account — show signup popup
+      document.getElementById('popup-signup-email').textContent = email;
+      document.getElementById('popup-signup-fn').value = '';
+      document.getElementById('popup-signup-ln').value = '';
+      document.getElementById('popup-signup-phone').value = '';
+      document.getElementById('popup-signup-pwd').value = '';
+      document.getElementById('popup-signup-err').style.display = 'none';
+      document.getElementById('popup-signup').style.display = 'flex';
+      document.getElementById('popup-signup')._email = email;
+    }
+  }catch(e){
+    // Fallback: assume new account
+    document.getElementById('popup-signup-email').textContent = email;
+    document.getElementById('popup-signup').style.display = 'flex';
+    document.getElementById('popup-signup')._email = email;
+  }
+}
+
+async function doPopupLogin(){
+  var email = document.getElementById('popup-login')._email;
+  var pwd = document.getElementById('popup-login-pwd').value;
+  var errDiv = document.getElementById('popup-login-err');
+  if(!pwd){ errDiv.textContent='Saisissez votre mot de passe'; errDiv.style.display='block'; return; }
+  errDiv.style.display='none';
+  try{
+    var res = await sb.auth.signInWithPassword({email:email,password:pwd});
+    if(res.error){
+      errDiv.textContent = res.error.message === 'Invalid login credentials' ? 'Mot de passe incorrect.' : res.error.message;
+      errDiv.style.display='block';
+      return;
+    }
+    location.reload();
+  }catch(e){ errDiv.textContent='Erreur de connexion'; errDiv.style.display='block'; }
+}
+
+async function doPopupForgot(){
+  var email = document.getElementById('popup-login')._email;
+  if(!email) return;
+  await sb.auth.resetPasswordForEmail(email, {redirectTo: window.location.origin + '/dashboard.html'});
+  document.getElementById('popup-login-err').textContent = 'Un email de reinitialisation a ete envoye.';
+  document.getElementById('popup-login-err').style.display = 'block';
+  document.getElementById('popup-login-err').style.color = '#10B981';
+}
+
+async function doPopupSignup(){
+  var email = document.getElementById('popup-signup')._email;
+  var fn = document.getElementById('popup-signup-fn').value.trim();
+  var ln = document.getElementById('popup-signup-ln').value.trim();
+  var phone = document.getElementById('popup-signup-phone').value.trim();
+  var type = document.getElementById('popup-signup-type').value;
+  var pwd = document.getElementById('popup-signup-pwd').value;
+  var errDiv = document.getElementById('popup-signup-err');
+  if(!fn||!ln){ errDiv.textContent='Saisissez votre nom et prenom'; errDiv.style.display='block'; return; }
+  if(!pwd||pwd.length<8){ errDiv.textContent='Le mot de passe doit contenir au moins 8 caracteres'; errDiv.style.display='block'; return; }
+  errDiv.style.display='none';
+  try{
+    var res = await sb.auth.signUp({email:email,password:pwd,options:{data:{first_name:fn,last_name:ln,phone:phone,profile_type:type}}});
+    if(res.error){
+      var msg=res.error.message;
+      if(msg.includes('already registered')) msg='Cet email est deja utilise. Essayez de vous connecter.';
+      errDiv.textContent=msg; errDiv.style.display='block';
+      return;
+    }
+    location.reload();
+  }catch(e){ errDiv.textContent='Erreur lors de la creation du compte'; errDiv.style.display='block'; }
+}
+
+function selectPremiumPlan(plan){
+  _selectedPremiumPlan = plan;
+  var m = document.getElementById('plan-monthly');
+  var y = document.getElementById('plan-yearly');
+  m.style.borderColor = plan==='monthly' ? '#FFD700' : 'rgba(255,255,255,.2)';
+  y.style.borderColor = plan==='yearly' ? '#FFD700' : 'rgba(255,255,255,.2)';
+  var btn = document.getElementById('premium-pay-btn');
+  btn.textContent = plan==='monthly' ? 'Souscrire — 29€/mois' : 'Souscrire — 290€/an';
+}
+
+function openPremiumPopup(){
+  document.getElementById('popup-premium').style.display='flex';
+  selectPremiumPlan('yearly');
+}
+
+async function openPremiumStripe(){
+  var btn = document.getElementById('premium-pay-btn');
+  btn.textContent = 'Chargement...';
+  btn.disabled = true;
+  try{
+    var res = await fetch('https://webhook.lesformateurs.online/premium-checkout',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        plan: _selectedPremiumPlan,
+        email: STATE.email || '',
+        user_id: (STATE.authUser && STATE.authUser.id) || '',
+        return_url: window.location.href.split('?')[0]
+      })
+    });
+    var data = await res.json();
+    if(data.url){
+      window.location.href = data.url;
+    } else {
+      showToast(data.error || 'Erreur lors de la creation du paiement');
+      btn.disabled = false;
+      selectPremiumPlan(_selectedPremiumPlan);
+    }
+  }catch(e){
+    showToast('Erreur de connexion au serveur');
+    btn.disabled = false;
+    selectPremiumPlan(_selectedPremiumPlan);
+  }
+}
+
+/* ========== ADMIN BLOC 0 ========== */
+var ADMIN_STATE = { userId: null, isAdmin: false, accountMode: 'existing', foundUser: null };
+
+function toggleAdminAccount(){
+  var mode = STATE.radioValues['admin_account'] || 'existing';
+  ADMIN_STATE.accountMode = mode;
+  document.getElementById('admin-existing').style.display = mode === 'existing' ? 'block' : 'none';
+  document.getElementById('admin-new').style.display = mode === 'new' ? 'block' : 'none';
+}
+
+async function adminSearchUser(){
+  var email = document.getElementById('admin-search-email').value.trim().toLowerCase();
+  if(!email || email.indexOf('@') < 0){ showToast('Email invalide'); return; }
+  document.getElementById('admin-user-found').style.display = 'none';
+  document.getElementById('admin-user-notfound').style.display = 'none';
+  try{
+    var r = await sb.from('profiles').select('*').ilike('email', email).maybeSingle();
+    if(r.data){
+      ADMIN_STATE.foundUser = r.data;
+      document.getElementById('admin-user-info').textContent = (r.data.first_name||'') + ' ' + (r.data.last_name||'') + ' — ' + r.data.email + (r.data.role ? ' (' + r.data.role + ')' : '');
+      document.getElementById('admin-user-found').style.display = 'block';
+      // Pre-fill step 1 email + step 3
+      STATE.email = r.data.email;
+      document.getElementById('client-email').value = r.data.email;
+      document.getElementById('email').value = r.data.email;
+      document.getElementById('first-name').value = r.data.first_name || '';
+      document.getElementById('last-name').value = r.data.last_name || '';
+      document.getElementById('phone').value = r.data.phone || '';
+    } else {
+      ADMIN_STATE.foundUser = null;
+      document.getElementById('admin-user-notfound').style.display = 'block';
+    }
+  }catch(e){
+    ADMIN_STATE.foundUser = null;
+    document.getElementById('admin-user-notfound').style.display = 'block';
+  }
+}
+
+async function getAuthUser(){
+  // Try getSession first (reads localStorage, no network call)
+  try{
+    var sess = await sb.auth.getSession();
+    if(sess.data && sess.data.session && sess.data.session.user) return sess.data.session.user;
+  }catch(e){ console.warn('[AUTH] getSession failed:', e); }
+  // Fallback to getUser (network call)
+  try{
+    var r = await sb.auth.getUser();
+    if(r.data && r.data.user) return r.data.user;
+  }catch(e){ console.warn('[AUTH] getUser failed:', e); }
+  return null;
+}
+
+async function checkAdmin(){
+  try{
+    if(typeof sb==='undefined'||!sb){ console.warn('[ADMIN] sb not defined'); return; }
+    var user = await getAuthUser();
+    console.log('[ADMIN] user found:', user ? user.email : 'null');
+    if(!user) return;
+    ADMIN_STATE.userId = user.id;
+    var isAdmin = false;
+    // Method 1: check profiles table (is_admin flag — same as dashboard)
+    try{
+      var p = await sb.from('profiles').select('*').eq('id', user.id).maybeSingle();
+      console.log('[ADMIN] profile:', p.data ? 'found, is_admin=' + p.data.is_admin + ', role=' + p.data.role : 'not found');
+      if(p.data && (p.data.is_admin === true || p.data.role === 'admin')) isAdmin = true;
+    }catch(e){ console.warn('[ADMIN] profile check error:', e); }
+    // Method 2: check user_metadata
+    if(!isAdmin){
+      var meta = user.user_metadata || {};
+      if(meta.role === 'admin') isAdmin = true;
+    }
+    // Method 3: check app_metadata
+    if(!isAdmin){
+      var app = user.app_metadata || {};
+      if(app.role === 'admin') isAdmin = true;
+    }
+    // Method 4: hardcoded admin emails
+    if(!isAdmin){
+      var adminEmails = ['lfoadmin@gmail.com','formations2024@gmail.com'];
+      if(adminEmails.indexOf(user.email) >= 0) isAdmin = true;
+    }
+    console.log('[ADMIN] final isAdmin:', isAdmin);
+    if(isAdmin){
+      ADMIN_STATE.isAdmin = true;
+      document.getElementById('admin-block').style.display = 'block';
+      var firstCard = document.querySelector('[data-radio-group="admin_payment"][data-value="en_attente"]');
+      if(firstCard){ firstCard.classList.add('selected'); STATE.radioValues['admin_payment'] = 'en_attente'; }
+      STATE.radioValues['admin_account'] = 'existing';
+    }
+  }catch(e){ console.error('[ADMIN] error:', e); }
+}
+
+async function initAuth(){
+  try{
+    if(typeof sb==='undefined'||!sb) return;
+    var user = await getAuthUser();
+    console.log('[AUTH] initAuth user:', user ? user.email : 'null');
+    if(user){
+      STATE.email = user.email;
+      STATE.authUser = user;
+      // Fill user info from profile
+      var meta = user.user_metadata || {};
+      var fn = meta.first_name || '';
+      var ln = meta.last_name || '';
+      try{
+        var p = await sb.from('profiles').select('*').eq('id', user.id).maybeSingle();
+        if(p.data){
+          fn = p.data.first_name || fn;
+          ln = p.data.last_name || ln;
+          STATE.phone = p.data.phone || '';
+          if(p.data.is_premium === true || (p.data.premium_plan && p.data.premium_since)){
+            STATE.isPremium = true;
+            var apt=document.getElementById('admin-premium-toggle');
+            if(apt) apt.style.display='block';
+          }
+        }
+      }catch(e){}
+      document.getElementById('first-name').value = fn;
+      document.getElementById('last-name').value = ln;
+      document.getElementById('email').value = user.email;
+      document.getElementById('client-email').value = user.email;
+      if(STATE.phone) document.getElementById('phone').value = STATE.phone;
+      // Header: Connexion → Mon compte
+      var l=document.getElementById('btn-login');
+      var c=document.getElementById('btn-compte');
+      if(l)l.style.display='none';
+      if(c)c.style.display='inline-block';
+      // Bloc identification
+      document.getElementById('auth-not-connected').style.display = 'none';
+      if(ADMIN_STATE.isAdmin){
+        // Admin : masquer les infos utilisateur (géré par bloc 0) mais garder le SIRET
+        document.getElementById('auth-connected').style.display = FUNNEL.needsSiret ? 'block' : 'none';
+        // Masquer le badge "Connecté" + nom/email (l'admin gère le client dans le bloc 0)
+        var userInfoBlock = document.querySelector('#auth-connected > div:first-child');
+        if(userInfoBlock) userInfoBlock.style.display = 'none';
+      } else {
+        // User normal → afficher nom/prénom/email + SIRET
+        document.getElementById('auth-connected').style.display = 'block';
+        document.getElementById('auth-user-name').textContent = fn + ' ' + ln;
+        document.getElementById('auth-user-email').textContent = user.email;
+      }
+    }
+  }catch(e){ console.warn('initAuth err', e); }
+}
+
+function renderPremiumBlock(){
+  var block = document.getElementById('premium-block');
+  var content = document.getElementById('premium-content');
+  if(!block||!content) return;
+  var total = calcTotal();
+  if(total <= 0){ block.style.display='none'; return; }
+  block.style.display='block';
+  var saving = Math.round(total * 0.10);
+  if(STATE.isPremium){
+    block.className = 'premium-block is-member';
+    content.innerHTML = '<div class="pm-badge">&#x2605; Membre Premium</div><h4>Votre reduction de -10% est appliquee</h4><p class="pm-sub">Merci pour votre fidelite. La reduction est automatiquement incluse dans votre total.</p><div class="pm-row"><div class="pm-saving">-' + saving.toLocaleString('fr-FR') + ' EUR<small>economise sur cette commande</small></div></div>';
+  } else {
+    block.className = 'premium-block';
+    content.innerHTML = '<div class="pm-badge">&#x2605; Premium</div><h4>Devenez membre Premium et economisez 10%</h4><p class="pm-sub">Souscrivez a l&#x2019;abonnement Premium (29 EUR/mois ou 290 EUR/an) et beneficiez de -10% sur toutes vos commandes.</p><div class="pm-row"><div class="pm-saving">-' + saving.toLocaleString('fr-FR') + ' EUR<small>d&#x2019;economie sur cette commande</small></div><button class="pm-btn" onclick="openPremiumPopup()">Souscrire au Premium</button></div>';
+  }
+}
+
+// Listen for auth modal success (user just logged in or signed up)
+window.addEventListener('lfo-auth-success', function(){ location.reload(); });
+
+document.addEventListener('DOMContentLoaded',async function(){
+  refreshSummary();
+  // Build availability grids if any
+  document.querySelectorAll('[id^="avail-grid-"]').forEach(function(el){
+    var key=el.id.replace('avail-grid-','');
+    buildAvailGrid(key);
+  });
+  await checkAdmin();
+  await initAuth();
+  // Init CertSelector if any
+  document.querySelectorAll('[id^="cert-container-"]').forEach(function(el){
+    var key=el.id.replace('cert-container-','');
+    var ef=FUNNEL.extraFields.find(function(e){return e.key===key;});
+    var mode=(ef&&ef.mode)||'uai';
+    var withPricing = (mode === 'habilitation');
+    if(typeof CertSelector!=='undefined'){
+      CertSelector.init(el.id,{
+        mode:mode,
+        multi:true,
+        showPricing:withPricing,
+        pricingType:'habil',
+        onUpdate:function(certs, totalPrice){
+          STATE.msValues[key]=certs.map(function(c){return c.code+' — '+c.name;});
+          if(withPricing) STATE.certSelectorTotal = totalPrice || 0;
+          refreshSummary();
+        }
+      });
+    }
+  });
+  renderPremiumBlock();
+  refreshSummary();
+  initSteps();
+  initSubsteps();
+
+  // ── POST-PAYMENT MODE ──
+  // If URL has ?demarche=xxx, load existing demarche and switch to edit mode
+  var urlParams = new URLSearchParams(window.location.search);
+  var demId = urlParams.get('demarche');
+  if (demId) {
+    loadExistingDemarche(demId);
+  }
+});
+
+async function loadExistingDemarche(demId) {
+  try {
+    var { data: dem, error } = await sb.from('demarches').select('*').eq('id', demId).maybeSingle();
+    if (!dem) return;
+
+    STATE._editMode = true;
+    STATE._demId = demId;
+    STATE._dem = dem;
+
+    var isPaid = dem.paid === true;
+    var isOffert = (dem.config && dem.config.admin_payment === 'offert') || dem.payment_mode === 'offert';
+
+    // Show status banner at top of step-0
+    var banner = document.createElement('div');
+    banner.style.cssText = 'padding:14px 18px;border-radius:12px;margin-bottom:16px;display:flex;align-items:center;gap:10px;';
+    if (isOffert) {
+      banner.style.background = '#EEEDFE';
+      banner.style.border = '1px solid #DDD6FE';
+      banner.innerHTML = '<span style="font-size:18px;">🎁</span><div><div style="font-size:14px;font-weight:700;color:#534AB7;">Prestation offerte par LFO</div><div style="font-size:12px;color:#6B7280;">Completez les informations manquantes ci-dessous.</div></div>';
+    } else if (isPaid) {
+      banner.style.background = '#E1F5EE';
+      banner.style.border = '1px solid #D1FAE5';
+      banner.innerHTML = '<span style="font-size:18px;">✓</span><div><div style="font-size:14px;font-weight:700;color:#1D9E75;">Paiement confirme — Demarche en cours</div><div style="font-size:12px;color:#6B7280;">Completez les informations manquantes ci-dessous.</div></div>';
+    }
+
+    var step0 = document.getElementById('step-0');
+    if (step0 && (isPaid || isOffert)) {
+      step0.insertBefore(banner, step0.firstChild);
+    }
+
+    // Pre-fill from demarche data
+    if (dem.org_name) {
+      // If SIRET is known, trigger search
+      if (dem.siren) {
+        var siretInput = document.getElementById('siret-input');
+        if (siretInput) { siretInput.value = dem.siren + '00000'; }
+      }
+    }
+
+    // Pre-fill config fields
+    var cfg = dem.config || {};
+    if (cfg.organisme) STATE.organisme = cfg.organisme;
+    if (cfg.radioValues) {
+      Object.keys(cfg.radioValues).forEach(function(k) {
+        STATE.radioValues[k] = cfg.radioValues[k];
+        var card = document.querySelector('[data-radio-group="' + k + '"][data-value="' + cfg.radioValues[k] + '"]');
+        if (card) { card.classList.add('selected'); }
+      });
+    }
+    if (cfg.msValues) {
+      Object.keys(cfg.msValues).forEach(function(k) {
+        STATE.msValues[k] = cfg.msValues[k];
+        cfg.msValues[k].forEach(function(v) {
+          var card = document.querySelector('[data-ms-group="' + k + '"][data-value="' + v + '"]');
+          if (card) { card.classList.add('selected'); }
+        });
+      });
+    }
+
+    // Pre-fill extra fields from config
+    Object.keys(cfg).forEach(function(k) {
+      if (k === 'organisme' || k === 'radioValues' || k === 'msValues' || k === 'admin_payment') return;
+      var el = document.getElementById('ef-' + k);
+      if (el) el.value = cfg[k];
+    });
+
+    // If paid: hide payment substep + change submit to save
+    if (isPaid || isOffert) {
+      // Find and hide the payment substep (last one)
+      var subs = document.querySelectorAll('#step-0 .substep');
+      var lastSub = subs[subs.length - 1];
+      if (lastSub) {
+        // Remove the payment substep entirely
+        lastSub.style.display = 'none';
+        lastSub.remove();
+      }
+
+      // Update substeps count
+      _totalSubsteps = document.querySelectorAll('#step-0 .substep').length;
+      renderSubstepProgress();
+
+      // Change the last visible substep's "Suivant" button to "Valider l'étape"
+      var remainingSubs = document.querySelectorAll('#step-0 .substep');
+      var newLast = remainingSubs[remainingSubs.length - 1];
+      if (newLast) {
+        var nextBtns = newLast.querySelectorAll('.substep-btn-next');
+        nextBtns.forEach(function(btn) {
+          btn.textContent = 'Valider l\'étape \u2192';
+          btn.style.background = '#1D9E75';
+          btn.onclick = function() { saveDemarcheEdits(); };
+        });
+        // Also add a save-only button before
+        var nav = newLast.querySelector('.substep-nav');
+        if (nav) {
+          var saveBtn = document.createElement('button');
+          saveBtn.className = 'substep-btn';
+          saveBtn.style.cssText = 'background:white;color:#6B7280;border:1px solid #E5E7EB;margin-right:8px;';
+          saveBtn.textContent = 'Sauvegarder sans valider';
+          saveBtn.onclick = function() { saveDemarcheEdits(false); };
+          nav.insertBefore(saveBtn, nav.lastElementChild);
+        }
+      }
+
+      // Hide admin block in edit mode (not needed)
+      var adminBlock = document.getElementById('admin-block');
+      if (adminBlock) adminBlock.style.display = 'none';
+
+      // Auto-show connected state if user is logged in
+      var authNC = document.getElementById('auth-not-connected');
+      if (authNC && STATE.authUser) authNC.style.display = 'none';
+    }
+
+    refreshSummary();
+  } catch(e) { console.warn('loadExistingDemarche error:', e); }
+}
+
+async function saveDemarcheEdits(validate) {
+  if (validate === undefined) validate = true;
+  if (!STATE._demId) return;
+  var config = { organisme: STATE.organisme, radioValues: STATE.radioValues, msValues: STATE.msValues };
+  FUNNEL.extraFields.forEach(function(ef) {
+    var el = document.getElementById('ef-' + ef.key);
+    if (el) config[ef.key] = el.value;
+  });
+
+  var updates = { config: config, status: 'en_cours' };
+  if (STATE.organisme) {
+    updates.org_name = STATE.organisme.raison_sociale || null;
+    updates.siren = STATE.organisme.siren || null;
+  }
+  // Validate = advance to next step
+  if (validate && STATE._dem) {
+    var nextStep = (STATE._dem.current_step || 1) + 1;
+    var totalSteps = STATE._dem.total_steps || FUNNEL.totalSteps || 5;
+    if (nextStep > totalSteps) nextStep = totalSteps;
+    updates.current_step = nextStep;
+  }
+
+  var btn = document.querySelector('.substep-btn-next[style*="1D9E75"]') || document.querySelector('.substep-btn-next');
+  if (btn) { btn.disabled = true; btn.textContent = validate ? 'Validation en cours...' : 'Sauvegarde...'; }
+
+  try {
+    var { error } = await sb.from('demarches').update(updates).eq('id', STATE._demId);
+    if (error) { showToast('Erreur: ' + error.message); if(btn){btn.disabled=false;btn.textContent=validate?'Valider l\'\u00e9tape \u2192':'Sauvegarder';} return; }
+    showToast(validate ? '\u00c9tape valid\u00e9e ! Redirection...' : 'Sauvegard\u00e9 !');
+    setTimeout(function() { window.location.href = 'dashboard.html'; }, 1500);
+  } catch(e) { showToast('Erreur: ' + e.message); if(btn){btn.disabled=false;} }
+}
 </script>
 </body>
 </html>

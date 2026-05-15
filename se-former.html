@@ -1,358 +1,539 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://bxijjjbxsevnudienvbv.supabase.co https://webhook.lesformateurs.online https://*.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://bxijjjbxsevnudienvbv.supabase.co https://recherche-entreprises.api.gouv.fr https://dgefp.opendatasoft.com https://opendata.caissedesdepots.fr https://webhook.lesformateurs.online https://generativelanguage.googleapis.com https://*.google-analytics.com;">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6XVYRVT9D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B6XVYRVT9D');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-<title>Devenir Formateur - lesformateurs.online</title>
-<meta name="description" content="Devenez formateur professionnel. Formation complète 7 modules, 42 leçons, 2 modules bonus par des experts.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<style>
-.guarantee-box{
-  background:linear-gradient(135deg,var(--primary),var(--accent2));
-  border-radius:14px;padding:40px;color:#fff;text-align:center;margin:48px 0;
-}
-.guarantee-box h2{font-size:28px;font-weight:900;margin-bottom:12px;}
-.guarantee-box p{font-size:15px;color:rgba(255,255,255,.7);max-width:500px;margin:0 auto;}
-
-.comparison{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:48px 0;}
-@media(max-width:600px){.comparison{grid-template-columns:1fr;gap:16px;}}
-.compare-card{
-  border-radius:14px;padding:32px;text-align:center;
-}
-.compare-card.without{background:var(--light);border:2px solid var(--border);}
-.compare-card.with{background:var(--primary);color:#fff;border:2px solid var(--accent);}
-.compare-card h3{font-size:18px;font-weight:800;margin-bottom:16px;}
-.compare-stat{font-size:48px;font-weight:900;margin:16px 0 8px;}
-.compare-card.with .compare-stat{color:var(--accent);}
-.compare-card.without .compare-stat{color:var(--muted);}
-.compare-label{font-size:13px;color:var(--muted);}
-.compare-card.with .compare-label{color:rgba(255,255,255,.6);}
-
-.timeline{max-width:600px;margin:0 auto;}
-.timeline-item{
-  display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border);
-}
-.timeline-num{
-  width:44px;height:44px;min-width:44px;border-radius:50%;
-  background:var(--accent);color:#fff;display:flex;align-items:center;
-  justify-content:center;font-size:18px;font-weight:900;
-}
-.timeline-content h4{font-size:16px;font-weight:700;margin-bottom:4px;}
-.timeline-content p{font-size:13px;color:var(--muted);}
-
-.big-price{
-  text-align:center;margin:48px 0;
-}
-.big-price .old{font-size:20px;color:var(--muted);text-decoration:line-through;margin-bottom:4px;}
-.big-price .new{font-size:56px;font-weight:900;color:var(--accent);}
-.big-price .sub{font-size:15px;color:var(--muted);margin-top:4px;}
-</style>
-<style>html,body{overflow-x:hidden;max-width:100%;} img,video,iframe{max-width:100%;}</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Devenir Formateur — lesformateurs.online</title>
+<meta name="description" content="Formation Formateur RS 36h, finançable CPF / FIFPL. Création d'OF offerte.">
+<link rel="stylesheet" href="css/mono-light.css">
+<script src="js/pricing.js"></script>
 </head>
 <body>
 
-<nav class="navbar">
-  <a href="index.html" class="nav-logo">les<span class="accent">formateurs</span>.online</a>
-  <div class="nav-links" id="navLinks">
-    <a href="index.html">Accueil</a>
-    <a href="missions.html">Missions</a>
-    <a href="conformite.html">Conformité</a>
+<nav class="ml-nav">
+  <a href="index.html" class="ml-logo">les<span class="accent">formateurs</span>.online</a>
+  <div class="ml-nav-links" id="navLinks">
+    <a href="formation.html">Services</a>
     <a href="creer-of.html">Créer mon OF</a>
-    <a href="se-former.html" style="color:#fff;background:rgba(255,255,255,.1);">Se former</a>
-    <a href="#" class="nav-cta btn-login" onclick="openAuthModal();return false;">Connexion</a>
-    <a href="dashboard.html" class="nav-cta btn-dashboard" style="display:none;">Mon compte</a>
+    <a href="recherche-habilitation.html" style="color:#1D9E75;font-weight:600;">Habilitation</a>
+    <a href="se-former.html" class="active">Se former</a>
+    <a href="devenir-expert.html" style="color:#D85A30;font-weight:600;">Recrutement</a>
+
+    <a href="#" class="ml-nav-cta btn-login" onclick="openAuthModal();return false;" style="background:#FF8C42;color:#fff;">Connexion</a>
+    <a href="dashboard.html" class="ml-nav-cta btn-dashboard hidden">Mon espace</a>
   </div>
-  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+  <button class="ml-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="page-header" style="padding-bottom:32px;">
-  <div style="display:inline-block;background:var(--accent);color:#fff;font-size:14px;font-weight:800;padding:6px 20px;border-radius:20px;margin-bottom:20px;">100% REMBOURSÉ</div>
-  <h1>Devenez formateur professionnel</h1>
-  <p>Formation complète + placement garanti + agents IA pour trouver vos missions.</p>
-</div>
+<section style="max-width:760px;margin:0 auto;padding:64px 28px 60px;">
 
-<div class="trust-bar">
-  <div class="trust-item">🎓 Formation certifiante 21h</div>
-  <div class="trust-item">🤖 Agents IA pour vos missions</div>
-  <div class="trust-item">💰 100% remboursé via FIF PL</div>
-  <div class="trust-item">✅ Satisfait ou remboursé 3 mois</div>
-</div>
+  <div style="text-align:center;">
+    <span class="ml-eyebrow">Formation certifiante RS — 36h</span>
+    <h1 class="ml-h1">Devenez formateur professionnel</h1>
+    <p class="ml-sub">36h de formation hybride. Finançable CPF (0€ demandeurs d'emploi / 150€ salariés) ou FIFPL.<br>Et votre organisme de formation créé gratuitement.</p>
+  </div>
 
-<!-- COMMENT CA MARCHE -->
-<section>
-  <div class="container">
-    <span class="section-label">Comment ça marche</span>
-    <h2 class="section-title">3 étapes pour devenir formateur</h2>
+  <!-- OFFRE PRINCIPALE -->
+  <div style="background:#fff;border:2px solid var(--accent);border-radius:var(--radius-section);padding:28px;margin:36px 0 28px;position:relative;">
+    <span class="ml-card-tag" style="left:50%;transform:translateX(-50%);">Offre exclusive</span>
 
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-num">1</div>
-        <div class="timeline-content">
-          <h4>On vous forme</h4>
-          <p>Formation "Formateur Professionnel" — 21h en ligne, à votre rythme. Conception pédagogique, animation, gestion administrative, techniques de vente. Certification à la clé.</p>
-        </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:0.5px solid var(--border);margin-bottom:16px;">
+      <div>
+        <h3 style="font-size:17px;font-weight:600;">Formation Formateur — 36h</h3>
+        <p style="font-size:13px;color:var(--muted);">Concevoir, animer, vendre vos formations + IA</p>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-num">2</div>
-        <div class="timeline-content">
-          <h4>On vous fait passer des entretiens</h4>
-          <p>Notre équipe vous met en relation avec des centres de formation et des entreprises qui recherchent des formateurs. Entretiens organisés pour vous.</p>
-        </div>
+      <div style="font-size:22px;font-weight:600;">1 490€</div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:0.5px solid var(--border);margin-bottom:16px;">
+      <div>
+        <h3 style="font-size:17px;font-weight:600;">Création de votre OF</h3>
+        <p style="font-size:13px;color:var(--muted);">Statuts + SIRET + NDA + prépa Qualiopi</p>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-num">3</div>
-        <div class="timeline-content">
-          <h4>Agents IA — 1 mission par jour</h4>
-          <p>Nos agents IA recherchent des missions pour vous chaque jour. Vous recevez des opportunités ciblées directement dans votre espace — sans effort.</p>
-        </div>
+      <div style="text-align:right;">
+        <div style="font-size:14px;color:var(--faint);text-decoration:line-through;">990€</div>
+        <div style="font-size:18px;font-weight:600;color:var(--success);">OFFERT</div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <p style="font-size:12px;color:var(--muted);">Valeur totale</p>
+        <p style="font-size:14px;color:var(--faint);text-decoration:line-through;">2 480€</p>
+      </div>
+      <div style="text-align:right;">
+        <p style="font-size:12px;color:var(--muted);">Vous payez</p>
+        <p style="font-size:32px;font-weight:300;color:var(--accent);letter-spacing:-1px;line-height:1;">1 490€</p>
+        <p style="font-size:11px;color:var(--muted);">ou 0€ avec le CPF (RS)</p>
       </div>
     </div>
   </div>
+
+  <!-- MODES DE PAIEMENT -->
+  <p style="font-size:15px;font-weight:500;margin-bottom:14px;text-align:center;">Choisissez votre mode de paiement</p>
+
+  <div style="display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;">
+    <div class="ml-pay-opt" style="flex:1;min-width:160px;padding:18px;position:relative;" onclick="selectPay(this,'cpf')">
+      <span class="ml-card-tag" style="left:50%;transform:translateX(-50%);">Recommandé</span>
+      <p style="font-size:11px;color:var(--muted);margin-top:4px;">Mon Compte Formation</p>
+      <div style="font-size:22px;font-weight:600;color:var(--accent);margin:6px 0 4px;">1 500€</div>
+      <p>Certification RS · CPF</p>
+      <p style="font-weight:600;color:var(--success);margin-top:4px;font-size:13px;">0€ reste à charge — demandeurs d'emploi</p>
+      <p style="color:#888;margin-top:4px;font-size:12px;">150€ reste à charge — salariés / autres</p>
+    </div>
+    <div class="ml-pay-opt" style="flex:1;min-width:160px;padding:18px;" onclick="selectPay(this,'comptant')">
+      <p style="font-size:11px;color:var(--muted);">Comptant</p>
+      <div style="font-size:22px;font-weight:600;color:var(--accent);margin:6px 0 4px;">1 490€</div>
+      <p>Carte bancaire</p>
+      <p style="font-weight:600;color:var(--accent);margin-top:4px;">Meilleur prix</p>
+    </div>
+    <div class="ml-pay-opt" style="flex:1;min-width:160px;padding:18px;" onclick="selectPay(this,'3x')">
+      <p style="font-size:11px;color:var(--muted);">En 3x</p>
+      <div style="font-size:22px;font-weight:600;color:var(--accent);margin:6px 0 4px;">497€<small style="font-size:13px;color:var(--muted);font-weight:400;"> x3</small></div>
+      <p>Sans frais</p>
+      <p style="font-weight:600;margin-top:4px;">Total 1 491€</p>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:0.5px solid var(--border);border-radius:var(--radius-card);padding:14px 18px;margin-bottom:28px;text-align:center;">
+    <p style="font-size:13px;color:var(--muted);">Auto-entrepreneur ? Le FIFPL rembourse jusqu'à <strong style="color:var(--accent);">900€</strong> sur cette formation.</p>
+  </div>
+
+  <a id="btn-inscription" href="#" onclick="showExpertPopup();return false;" class="ml-btn ml-btn-lg ml-btn-block" style="margin-bottom:36px;">
+    <span>Prendre rendez-vous avec un expert</span>
+  </a>
+
+  <!-- STATS -->
+  <div class="ml-stats" style="margin:0 0 36px;">
+    <div class="ml-stat"><div class="num">36<span class="unit">h</span></div><div class="lbl">Formation</div></div>
+    <div class="ml-stat"><div class="num">6<span class="unit">j</span></div><div class="lbl">Hybride</div></div>
+    <div class="ml-stat"><div class="num">990<span class="unit">€</span></div><div class="lbl">OF offert</div></div>
+    <div class="ml-stat"><div class="num">100<span class="unit">%</span></div><div class="lbl">Finançable</div></div>
+  </div>
+
+  <!-- PROGRAMME -->
+  <p style="font-size:18px;font-weight:500;margin-bottom:14px;text-align:center;">Programme</p>
+
+  <div style="margin-bottom:36px;">
+    <div class="ml-prog">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="ml-prog-tag">J1-J2</span>
+        <div><h4>Concevoir sa formation</h4><p>Ingénierie pédagogique, objectifs, évaluations, supports</p></div>
+      </div>
+      <span class="ml-prog-dur">12h</span>
+    </div>
+    <div class="ml-prog">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="ml-prog-tag">J3-J4</span>
+        <div><h4>Animer et évaluer</h4><p>Animation présentiel et distanciel, gestion de groupe</p></div>
+      </div>
+      <span class="ml-prog-dur">12h</span>
+    </div>
+    <div class="ml-prog">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="ml-prog-tag">J5</span>
+        <div><h4>Vendre et créer son OF</h4><p>14 façons de vendre, pricing, CPF, OPCO, France Travail</p></div>
+      </div>
+      <span class="ml-prog-dur">6h</span>
+    </div>
+    <div class="ml-prog">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="ml-prog-tag">J6</span>
+        <div><h4>Utiliser l'IA pour accélérer</h4><p>Créer des formations avec l'IA, automatiser la gestion</p></div>
+      </div>
+      <span class="ml-prog-dur">6h</span>
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div style="background:#fff;border:2px solid var(--success);border-radius:var(--radius-section);padding:24px;margin-bottom:36px;position:relative;">
+    <span style="position:absolute;top:-10px;left:16px;background:var(--success);color:#fff;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px;">Bonus inclus</span>
+    <h3 style="font-size:16px;font-weight:600;margin:8px 0 6px;">Création de votre organisme de formation — offerte</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px;">Vous terminez la formation avec votre OF créé : statuts juridiques, greffe, SIRET, NDA, prépa Qualiopi.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);">
+      <span>✓ Statuts</span><span>✓ SIRET</span><span>✓ NDA</span><span>✓ Qualiopi</span><span>✓ Expert dédié</span>
+    </div>
+    <p style="font-size:14px;font-weight:600;color:var(--accent);margin-top:12px;">Valeur 990€ → Offert avec la formation</p>
+  </div>
+
+  <!-- FINANCEMENT -->
+  <p style="font-size:18px;font-weight:500;margin-bottom:14px;text-align:center;">Financement</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:36px;">
+    <div style="background:#fff;border:0.5px solid var(--border);border-radius:var(--radius-card);padding:18px;">
+      <p class="ml-eyebrow" style="text-align:left;margin-bottom:8px;">CPF</p>
+      <p style="font-size:20px;font-weight:600;">1 500€</p>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Éligible CPF</p>
+      <p style="font-size:13px;font-weight:600;color:var(--success);">→ 0€ reste à charge (demandeurs d'emploi)</p>
+      <p style="font-size:12px;color:#888;margin-top:4px;">→ 150€ reste à charge (salariés / autres)</p>
+    </div>
+    <div style="background:#fff;border:0.5px solid var(--border);border-radius:var(--radius-card);padding:18px;">
+      <p class="ml-eyebrow" style="text-align:left;margin-bottom:8px;">FIFPL</p>
+      <p style="font-size:20px;font-weight:600;">900€</p>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Auto-entrepreneurs</p>
+      <p style="font-size:13px;font-weight:600;color:var(--accent);">→ 590€ reste à charge</p>
+    </div>
+    <div style="background:#fff;border:0.5px solid var(--border);border-radius:var(--radius-card);padding:18px;">
+      <p class="ml-eyebrow" style="text-align:left;margin-bottom:8px;">Comptant</p>
+      <p style="font-size:20px;font-weight:600;">1 490€</p>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">CB ou virement · 1x ou 3x</p>
+      <p style="font-size:13px;font-weight:600;">→ Meilleur prix</p>
+    </div>
+  </div>
+
+  <!-- CTA FINAL -->
+  <div style="background:#fff;border:0.5px solid var(--border);border-radius:var(--radius-section);padding:28px;text-align:center;">
+    <p style="font-size:18px;font-weight:500;margin-bottom:6px;">Prêt à devenir formateur ?</p>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:18px;">Formation 36h + création d'OF offerte (990€) — prochaine session : mai 2026</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <a href="#" onclick="showExpertPopup();return false;" class="ml-btn ml-btn-lg">
+        <span>Prendre rendez-vous avec un expert</span>
+      </a>
+    </div>
+  </div>
+
 </section>
 
-<!-- COMPARAISON -->
-<section class="bg-light">
-  <div class="container">
-    <span class="section-label">Résultats</span>
-    <h2 class="section-title" style="text-align:center;">Avec ou sans lesformateurs.online</h2>
-
-    <div class="comparison">
-      <div class="compare-card without">
-        <h3>Sans notre accompagnement</h3>
-        <div class="compare-stat">2</div>
-        <div class="compare-label">rendez-vous / mois en moyenne</div>
-        <div class="compare-stat" style="font-size:32px;margin-top:24px;">18 000€</div>
-        <div class="compare-label">CA annuel moyen</div>
-      </div>
-      <div class="compare-card with">
-        <h3>Avec lesformateurs.online</h3>
-        <div class="compare-stat">8</div>
-        <div class="compare-label">rendez-vous / mois en moyenne</div>
-        <div class="compare-stat" style="font-size:32px;margin-top:24px;">42 000€</div>
-        <div class="compare-label">CA annuel moyen</div>
-      </div>
-    </div>
-    <p style="text-align:center;font-size:13px;color:var(--muted);">Données basées sur les formateurs membres de notre réseau.</p>
+<!-- TEAM BAND (copie de /qui-sommes-nous.html) -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+.qsn-team-band{max-width:1100px;margin:60px auto 80px;padding:0 20px;}
+.qsn-team-band h2{font-family:'Lora',serif;font-weight:600;font-size:38px;color:#1a1a1a;text-align:center;margin:0 0 40px;}
+.qsn-team-band .qsn-team-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:20px;}
+.qsn-team-band .qsn-member{text-align:center;}
+.qsn-team-band .qsn-member-photo{width:80px;height:80px;border-radius:50%;object-fit:cover;background:#f5f5f5;margin:0 auto 14px;display:block;}
+.qsn-team-band .qsn-member-name{font-size:12px;font-weight:700;color:#1a1a1a;margin:0 0 2px;}
+.qsn-team-band .qsn-member-role{font-size:11px;color:#D85A30;font-weight:500;margin:0;line-height:1.3;}
+@media (max-width:1024px){.qsn-team-band .qsn-team-grid{grid-template-columns:repeat(4,1fr);gap:24px;}.qsn-team-band .qsn-member-photo{width:90px;height:90px;}.qsn-team-band .qsn-member-name{font-size:13px;}.qsn-team-band .qsn-member-role{font-size:12px;}}@media (max-width:600px){.qsn-team-band .qsn-team-grid{grid-template-columns:repeat(2,1fr);gap:20px;}.qsn-team-band h2{font-size:30px;}.qsn-team-band .qsn-member-photo{width:100px;height:100px;}}
+.btn-with-avatar{display:inline-flex;align-items:center;gap:12px;justify-content:center;}
+.btn-avatar{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,0.4);flex-shrink:0;}
+</style>
+<section class="qsn-team-band">
+  <h2>Notre équipe</h2>
+  <div id="team-container" style="display:flex;gap:24px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px;-webkit-overflow-scrolling:touch;justify-content:center;">
   </div>
 </section>
 
-<!-- GARANTIE -->
-<section>
-  <div class="container">
-    <div class="guarantee-box">
-      <h2>✅ Satisfait ou 100% remboursé</h2>
-      <p>Si vous ne trouvez pas de mission dans les 3 mois suivant votre formation, nous vous remboursons intégralement. Sans condition.</p>
+<footer class="ml-footer">
+  <div class="ml-footer-inner">
+    <div>
+      <div class="ml-footer-brand">les<span class="accent">formateurs</span>.online</div>
+      <p>La plateforme des professionnels de la formation.</p>
+      <p class="siren">Experience Prod SASU · SIREN 982 828 774</p>
     </div>
-  </div>
-</section>
-
-<!-- PRIX -->
-<section class="bg-light">
-  <div class="container">
-    <span class="section-label">Tarif</span>
-    <h2 class="section-title" style="text-align:center;">Investissez dans votre carrière</h2>
-
-    <div class="big-price">
-      <div class="old">1 490€ prix habituel </div>
-      <div class="new">100% remboursé</div>
-      <div class="sub">via FIF PL pour les travailleurs indépendants *</div>
+    <div class="ml-footer-col">
+      <h4>Services</h4>
+      <a href="formation.html">Services</a>
+      <a href="creer-of.html">Créer mon OF</a>
+      <a href="recherche-habilitation.html" style="color:#1D9E75;font-weight:600;">Habilitation</a>
+      <a href="se-former.html">Se former</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="devenir-expert.html">Recrutement</a>
     </div>
-    <div class="premium-ribbon" style="max-width:500px;margin:12px auto;">👑 <strong>-10%</strong> pour les membres Premium</div>
-
-    <div style="max-width:500px;margin:0 auto;">
-      <ul style="list-style:none;margin-bottom:32px;">
-        <li style="padding:10px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
-          <span style="color:var(--success);font-weight:700;">✓</span> Formation certifiante 21h
-        </li>
-        <li style="padding:10px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
-          <span style="color:var(--success);font-weight:700;">✓</span> Accès au réseau de missions
-        </li>
-        <li style="padding:10px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
-          <span style="color:var(--success);font-weight:700;">✓</span> Entretiens organisés pour vous
-        </li>
-        <li style="padding:10px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
-          <span style="color:var(--success);font-weight:700;">✓</span> Agents IA — recherche quotidienne de missions
-        </li>
-        <li style="padding:10px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
-          <span style="color:var(--success);font-weight:700;">✓</span> Garantie satisfait ou remboursé 3 mois
-        </li>
-        <li style="padding:10px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
-          <span style="color:var(--success);font-weight:700;">✓</span> Dossier FIF PL constitué à votre place
-        </li>
-      </ul>
-    </div>
-
-    <!-- FORMULAIRE INSCRIPTION -->
-    <div style="max-width:500px;margin:0 auto;background:#fff;padding:32px;border-radius:14px;border:2px solid var(--accent);">
-      <h3 style="font-size:20px;font-weight:800;margin-bottom:16px;text-align:center;">Je m'inscris</h3>
-
-      <!-- SÉLECTEUR POUR QUI -->
-      <div style="background:var(--light);padding:14px;border-radius:8px;margin-bottom:16px;">
-        <label style="font-weight:700;font-size:13px;display:block;margin-bottom:6px;">Cette formation est pour :</label>
-        <select id="f-pour" onchange="toggleFormationFields()">
-          <option value="moi">Moi-même</option>
-          <option value="autre">Quelqu'un d'autre</option>
-        </select>
-      </div>
-
-      <!-- INFOS POUR MOI (pré-remplies, masquées si connecté) -->
-      <div id="f-fields-moi">
-        <div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:12px;margin-bottom:16px;font-size:13px;color:var(--success);text-align:center;">
-          ✅ Vos informations de profil seront utilisées automatiquement.
-        </div>
-      </div>
-
-      <!-- INFOS POUR QUELQU'UN D'AUTRE -->
-      <div id="f-fields-autre" style="display:none;">
-        <div class="form-group"><label>Prénom et nom du candidat</label><input type="text" id="f-nom" placeholder="Jean Dupont"></div>
-        <div class="form-group"><label>Email du candidat</label><input type="email" id="f-email" placeholder="jean@email.fr"></div>
-        <div class="form-group"><label>Téléphone du candidat</label><input type="tel" id="f-phone" placeholder="06 12 34 56 78"></div>
-        <div class="form-group"><label>Statut actuel du candidat</label>
-          <select id="f-statut">
-            <option value="">Choisissez...</option>
-            <option>Travailleur indépendant (éligible FIF PL)</option>
-            <option>Salarié en reconversion</option>
-            <option>Demandeur d'emploi</option>
-            <option>Autre</option>
-          </select>
-        </div>
-        <div style="background:rgba(233,69,96,.05);border:1px solid rgba(233,69,96,.15);border-radius:8px;padding:12px;margin-bottom:16px;font-size:12px;">
-          📩 <strong>Un lien de paiement sera envoyé au candidat</strong> pour qu'il règle directement. Vous serez notifié dès son inscription.
-        </div>
-      </div>
-
-      <!-- BOUTON PAIEMENT -->
-      <div id="btn-moi">
-        <button class="btn btn-primary btn-block btn-lg" onclick="payerFormationMoi()">Payer et commencer ma formation →</button>
-      </div>
-      <div id="btn-autre" style="display:none;">
-        <button class="btn btn-primary btn-block btn-lg" onclick="envoyerLienFormation()">Envoyer le lien de paiement au candidat →</button>
-      </div>
-
-      <!-- GARANTIES -->
-      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
-        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;">
-          <span style="font-size:18px;">💰</span>
-          <div>
-            <strong style="font-size:13px;">100% remboursé par le FIF PL</strong>
-            <p style="font-size:11px;color:var(--muted);margin-top:2px;">Le Fonds Interprofessionnel de Formation des Professionnels Libéraux prend en charge l'intégralité de la formation. Vous ne payez rien au final.</p>
-          </div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;">
-          <span style="font-size:18px;">✅</span>
-          <div>
-            <strong style="font-size:13px;">Satisfait ou remboursé</strong>
-            <p style="font-size:11px;color:var(--muted);margin-top:2px;">Si vous ne trouvez pas de mission dans les 3 mois, nous vous remboursons intégralement. Sans condition.</p>
-          </div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:8px;">
-          <span style="font-size:18px;">🎁</span>
-          <div>
-            <strong style="font-size:13px;">Double remboursement</strong>
-            <p style="font-size:11px;color:var(--muted);margin-top:2px;">Même si vous êtes satisfait, le FIF PL rembourse votre formation. Vous êtes gagnant dans tous les cas.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-inner">
-    <div><div class="footer-brand">lesformateurs.online</div><div>La plateforme des professionnels de la formation</div></div>
-    <div class="footer-links">
-    <div class="footer-links" style="margin-top:8px;font-size:11px;opacity:.6;">
+    <div class="ml-footer-col">
+      <h4>Légal</h4>
       <a href="mentions-legales.html">Mentions légales</a>
       <a href="cgv.html">CGV</a>
-      <a href="politique-confidentialite.html">Politique de confidentialité</a>
-    </div>
-    <a href="missions.html">Missions</a><a href="conformite.html">Conformité</a>
-      <a href="creer-of.html">Créer mon OF</a><a href="se-former.html">Se former</a>
+      <a href="politique-confidentialite.html">Confidentialité</a>
     </div>
   </div>
+  <div class="ml-partners" style="text-align:left;padding:16px 0 12px;">
+    <div style="font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Partenaires certifiés</div>
+    <div style="display:flex;justify-content:flex-start;align-items:center;gap:24px;flex-wrap:wrap;">
+      <img src="img/logo-qualiopi.png" alt="Qualiopi" style="height:72px;background:transparent;">
+    </div>
+  </div>
+  <div class="ml-footer-bottom">© 2026 lesformateurs.online · <span style="color:#6C5CE7;font-weight:500;">Membres : -10% sur tous nos services</span></div>
 </footer>
 
 <script>
-function toggleFormationFields(){
-  var pour = document.getElementById('f-pour').value;
-  document.getElementById('f-fields-moi').style.display = pour === 'moi' ? '' : 'none';
-  document.getElementById('f-fields-autre').style.display = pour === 'autre' ? '' : 'none';
-  document.getElementById('btn-moi').style.display = pour === 'moi' ? '' : 'none';
-  document.getElementById('btn-autre').style.display = pour === 'autre' ? '' : 'none';
-}
-
-async function payerFormationMoi(){
-  var user = await getUser();
-  if(!user){ openAuthModal(); return; }
-
-  try {
-    var { data: formation, error } = await sb.from('formations').insert({
-      user_id: user.id,
-      status: 'inscrit',
-      progress_percent: 0,
-      current_module: 1,
-      amount_cents: 149000,
-      paid: false,
-      professional_status: 'independant'
-    }).select().single();
-
-    if(error){
-      alert('❌ Erreur : ' + error.message);
-      return;
-    }
-
-    localStorage.setItem('lfo_pending_order', JSON.stringify({
-      order_id: formation.id,
-      table: 'formations',
-      type: 'formation',
-      product_type: 'formation',
-      amount: 1490,
-      timestamp: Date.now()
-    }));
-  } catch(e){
-    alert('❌ Erreur de connexion.');
-    return;
-  }
-
-  // Check if premium user for -10%
-  var formationLink = 'https://buy.stripe.com/8x2eVd3fc6j3c6y0JQffy0Y';
-  try { var p = await getProfile(); if(p && p.is_premium) formationLink = 'https://buy.stripe.com/3cIdR93fc8rb4E63W2ffy1N'; } catch(e){}
-  window.location.href = formationLink;
-}
-
-async function envoyerLienFormation(){
-  var email = document.getElementById('f-email').value.trim();
-  var nom = document.getElementById('f-nom').value.trim();
-  var phone = document.getElementById('f-phone').value.trim();
-  var statut = document.getElementById('f-statut').value;
-  if(!nom || !email){ alert('Veuillez remplir le nom et l\'email du candidat.'); return; }
-
-  var user = await getUser();
-  if(!user){ openAuthModal(); return; }
-
-  // Sauvegarder l'inscription en base (sera complétée quand le candidat paie)
-  try {
-    var { error } = await sb.from('formations').insert({
-      user_id: user.id,
-      status: 'inscrit',
-      progress_percent: 0,
-      current_module: 1,
-      amount_cents: 149000,
-      paid: false,
-      professional_status: statut || 'autre',
-      metadata: { for_other: true, candidate_name: nom, candidate_email: email, candidate_phone: phone }
-    });
-
-    if(error){ console.log('Erreur:', error); }
-  } catch(e){}
-
-  alert('✅ Inscription enregistrée pour ' + nom + ' (' + email + ').\n\n📩 Le lien de paiement sera envoyé par email.\n💰 Rappel : la formation est 100% remboursée par le FIF PL.');
+function selectPay(el, mode){
+  document.querySelectorAll('.ml-pay-opt').forEach(function(c){ c.classList.remove('selected'); });
+  el.classList.add('selected');
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src="js/referral.js"></script>
+<script src="js/analytics.js" defer></script>
+<script src="js/maintenance-check.js" defer></script>
 <script src="js/auth-modal.js"></script>
+
+<!-- MODAL INSCRIPTION -->
+<div id="modal-inscription" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;border-radius:var(--radius-section);max-width:520px;width:100%;max-height:90vh;overflow-y:auto;padding:32px;position:relative;">
+    <button onclick="closeInscription()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);">✕</button>
+
+    <div id="insc-step-auth" style="display:none;text-align:center;">
+      <h3 style="font-size:20px;font-weight:500;margin-bottom:6px;">Connectez-vous pour vous inscrire</h3>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Créez un compte ou connectez-vous pour accéder à la formation.</p>
+      <button onclick="closeInscription();openAuthModal();" class="ml-btn ml-btn-lg ml-btn-block">Se connecter / Créer un compte</button>
+    </div>
+
+    <div id="insc-step-form" style="display:none;">
+      <h3 style="font-size:20px;font-weight:500;margin-bottom:4px;">Inscription à la formation</h3>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Formation Formateur RS — 36h · OF offert (990€)</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+        <div>
+          <label class="ml-label">Prénom</label>
+          <input type="text" id="insc-first-name" class="ml-input" placeholder="Prénom">
+        </div>
+        <div>
+          <label class="ml-label">Nom</label>
+          <input type="text" id="insc-last-name" class="ml-input" placeholder="Nom">
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label class="ml-label">Email</label>
+        <input type="email" id="insc-email" class="ml-input" placeholder="vous@email.com">
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label class="ml-label">Quel est votre statut ?</label>
+        <select id="insc-statut" class="ml-select">
+          <option value="">— Sélectionnez —</option>
+          <option value="independant">Indépendant / Auto-entrepreneur</option>
+          <option value="salarie">Salarié</option>
+          <option value="demandeur_emploi">Demandeur d'emploi</option>
+          <option value="formateur">Formateur en activité</option>
+          <option value="dirigeant">Dirigeant d'entreprise</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label class="ml-label">Avez-vous déjà votre organisme de formation ?</label>
+        <div style="display:flex;gap:8px;">
+          <label style="flex:1;padding:12px;border:0.5px solid var(--border);border-radius:8px;cursor:pointer;text-align:center;font-size:14px;" id="has-of-oui" onclick="selectHasOF(true)">
+            <input type="radio" name="has-of" value="oui" style="display:none;"> ✓ Oui
+          </label>
+          <label style="flex:1;padding:12px;border:0.5px solid var(--border);border-radius:8px;cursor:pointer;text-align:center;font-size:14px;" id="has-of-non" onclick="selectHasOF(false)">
+            <input type="radio" name="has-of" value="non" style="display:none;"> Non
+          </label>
+        </div>
+        <p id="has-of-info" style="font-size:11px;color:var(--accent);margin-top:6px;display:none;">La création de votre OF (990€) est offerte avec la formation.</p>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label class="ml-label">Mode de financement souhaité</label>
+        <select id="inscr-financement" required class="ml-select">
+          <option value="">— Sélectionnez —</option>
+          <optgroup label="CPF — Mon Compte Formation">
+            <option value="cpf_demandeur">Mon Compte Formation (CPF) — 0€ reste à charge (demandeur d'emploi)</option>
+            <option value="cpf_autre">Mon Compte Formation (CPF) — 150€ reste à charge (salarié / indépendant)</option>
+          </optgroup>
+          <option value="fifpl">FIFPL — 900€ remboursés (auto-entrepreneurs)</option>
+          <option value="comptant">Paiement comptant — 1 490€</option>
+          <option value="3x">Paiement en 3x — 497€ x3</option>
+          <option value="opco">OPCO / Employeur</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label class="ml-label">Choisissez votre session</label>
+        <div id="sessions-list" style="display:flex;flex-direction:column;gap:6px;"></div>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label class="ml-label">Téléphone</label>
+        <input type="tel" id="insc-phone" placeholder="06 12 34 56 78" class="ml-input">
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label class="ml-label">Commentaire (optionnel)</label>
+        <textarea id="insc-comment" rows="2" placeholder="Questions, besoins spécifiques..." class="ml-textarea"></textarea>
+      </div>
+
+      <button onclick="submitInscription()" class="ml-btn ml-btn-lg ml-btn-block">Valider mon inscription</button>
+      <p style="text-align:center;margin-top:8px;font-size:11px;color:var(--muted);">Données sécurisées · Aucun paiement immédiat</p>
+    </div>
+
+    <div id="insc-step-done" style="display:none;text-align:center;">
+      <div style="font-size:48px;margin-bottom:12px;color:var(--success);">✓</div>
+      <h3 style="font-size:20px;font-weight:500;margin-bottom:6px;">Inscription enregistrée</h3>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Nous vous recontactons sous 24h pour finaliser votre inscription et votre financement.</p>
+      <button onclick="closeInscription()" class="ml-btn">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function getNextSessions(count){
+  var sessions=[]; var now=new Date(); var month=now.getMonth(); var year=now.getFullYear();
+  for(var i=0;i<count;i++){
+    month++; if(month>11){month=0;year++;}
+    var d=new Date(year,month,1);
+    while(d.getDay()!==6) d.setDate(d.getDate()+1);
+    var label=d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    sessions.push({date:d.toISOString().split('T')[0],label:'Session du '+label});
+  }
+  return sessions;
+}
+
+function renderSessions(){
+  var sessions=getNextSessions(4); var h='';
+  sessions.forEach(function(s,i){
+    var sel = i===0 ? 'border-color:var(--accent);background:var(--accent-soft);' : '';
+    var dot = i===0 ? '<div style="width:10px;height:10px;border-radius:50%;background:var(--accent);"></div>' : '';
+    h+='<label style="padding:12px 14px;border:0.5px solid var(--border);border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:13px;'+sel+'" onclick="selectSession(this)">';
+    h+='<div style="width:18px;height:18px;border-radius:50%;border:0.5px solid var(--border);display:flex;align-items:center;justify-content:center;" class="session-radio">'+dot+'</div>';
+    h+='<input type="radio" name="session" value="'+s.date+'" style="display:none;"'+(i===0?' checked':'')+'>'+s.label;
+    if(i===0) h+=' <span style="font-size:10px;padding:2px 8px;background:var(--accent);color:#fff;border-radius:20px;margin-left:auto;">Prochaine</span>';
+    h+='</label>';
+  });
+  document.getElementById('sessions-list').innerHTML=h;
+}
+
+function selectSession(el){
+  document.querySelectorAll('#sessions-list label').forEach(function(l){l.style.borderColor='var(--border)';l.style.background='';l.querySelector('.session-radio').innerHTML='';});
+  el.style.borderColor='var(--accent)'; el.style.background='var(--accent-soft)';
+  el.querySelector('.session-radio').innerHTML='<div style="width:10px;height:10px;border-radius:50%;background:var(--accent);"></div>';
+  el.querySelector('input').checked=true;
+}
+
+var inscHasOF=null;
+function selectHasOF(has){
+  inscHasOF=has;
+  document.getElementById('has-of-oui').style.borderColor=has?'var(--accent)':'var(--border)';
+  document.getElementById('has-of-oui').style.background=has?'var(--accent-soft)':'';
+  document.getElementById('has-of-non').style.borderColor=!has?'var(--accent)':'var(--border)';
+  document.getElementById('has-of-non').style.background=!has?'var(--accent-soft)':'';
+  document.getElementById('has-of-info').style.display=has?'none':'block';
+}
+
+async function openInscription(){
+  var modal=document.getElementById('modal-inscription');
+  modal.style.display='flex';
+  var user=await getUser();
+  if(!user){
+    document.getElementById('insc-step-auth').style.display='block';
+    document.getElementById('insc-step-form').style.display='none';
+    document.getElementById('insc-step-done').style.display='none';
+  } else {
+    document.getElementById('insc-step-auth').style.display='none';
+    document.getElementById('insc-step-form').style.display='block';
+    document.getElementById('insc-step-done').style.display='none';
+    renderSessions();
+    var profile=await getProfile();
+    if(profile){
+      if(profile.phone) document.getElementById('insc-phone').value=profile.phone;
+      if(profile.first_name) document.getElementById('insc-first-name').value=profile.first_name;
+      if(profile.last_name) document.getElementById('insc-last-name').value=profile.last_name;
+    }
+    if(user && user.email) document.getElementById('insc-email').value=user.email;
+  }
+}
+
+function closeInscription(){ document.getElementById('modal-inscription').style.display='none'; }
+
+function _inscShowToast(msg, type){
+  var id='insc-toast-'+Date.now();
+  var bg = type==='error' ? '#E24B4A' : '#1D9E75';
+  var el=document.createElement('div');
+  el.id=id;
+  el.style.cssText='position:fixed;top:24px;left:50%;transform:translateX(-50%);background:'+bg+';color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;z-index:10001;box-shadow:0 4px 12px rgba(0,0,0,.15);font-family:inherit;';
+  el.textContent=msg;
+  document.body.appendChild(el);
+  setTimeout(function(){ try{ el.remove(); }catch(e){} }, 3800);
+}
+
+async function submitInscription(){
+  var firstName=(document.getElementById('insc-first-name').value||'').trim();
+  var lastName=(document.getElementById('insc-last-name').value||'').trim();
+  var email=(document.getElementById('insc-email').value||'').trim();
+  var statut=document.getElementById('insc-statut').value;
+  var financement=document.getElementById('inscr-financement').value;
+  var phone=(document.getElementById('insc-phone').value||'').trim();
+  var comment=(document.getElementById('insc-comment').value||'').trim();
+  var sessionInput=document.querySelector('input[name="session"]:checked');
+  var sessionLabelEl=sessionInput ? sessionInput.parentElement : null;
+  var sessionLabel='';
+  if(sessionLabelEl){
+    // Extract label text (strip the "Prochaine" badge if any)
+    sessionLabel=(sessionLabelEl.textContent||'').replace('Prochaine','').trim();
+  }
+  if(!firstName || !lastName){_inscShowToast('Indiquez votre prénom et nom','error');return;}
+  if(!email || email.indexOf('@')===-1){_inscShowToast('Email invalide','error');return;}
+  if(!statut){_inscShowToast('Sélectionnez votre statut','error');return;}
+  if(inscHasOF===null){_inscShowToast('Indiquez si vous avez un OF','error');return;}
+  if(!financement){_inscShowToast('Sélectionnez un mode de financement','error');return;}
+  if(!sessionInput){_inscShowToast('Choisissez une session','error');return;}
+  if(!phone){_inscShowToast('Renseignez votre téléphone','error');return;}
+
+  var btn=document.querySelector('#insc-step-form button.ml-btn-block');
+  if(btn){btn.disabled=true;btn.textContent='Envoi en cours…';}
+
+  try{
+    var user=null;
+    try{ user=await getUser(); }catch(e){}
+    var payload={
+      first_name:firstName,
+      last_name:lastName,
+      email:email,
+      phone:phone,
+      formation_slug:'formateur-rs',
+      formation_title:'Formation Formateur RS',
+      statut:statut,
+      has_of:inscHasOF,
+      financement_type:financement,
+      session_date:sessionInput.value,
+      session_label:sessionLabel,
+      comment:comment,
+      status:'nouveau'
+    };
+    if(user && user.id) payload.user_id=user.id;
+
+    var res=await sb.from('formation_inscriptions').insert(payload);
+    if(res.error) throw res.error;
+
+    // Fire-and-forget confirmation mail
+    try{
+      fetch('https://webhook.lesformateurs.online/send-formation-inscription-mail',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          email:email, first_name:firstName,
+          financement_type:financement, session_label:sessionLabel
+        })
+      }).catch(function(){});
+    }catch(e){}
+
+    document.getElementById('insc-step-form').style.display='none';
+    document.getElementById('insc-step-done').style.display='block';
+  }catch(e){
+    console.error('inscription err', e);
+    _inscShowToast('Erreur, contactez-nous','error');
+    if(btn){btn.disabled=false;btn.textContent='Valider mon inscription';}
+  }
+}
+
+(async function(){
+  try {
+    var user = await getUser();
+    if(user){
+      var loginBtn = document.querySelector('.btn-login');
+      var dashBtn = document.querySelector('.btn-dashboard');
+      if(loginBtn) loginBtn.classList.add('hidden');
+      if(dashBtn) dashBtn.classList.remove('hidden');
+    }
+  } catch(e){}
+})();
+</script>
+<script src="/expert-popup.js"></script>
+<script src="js/team-loader.js"></script>
+<script src="js/cart.js" defer></script>
+<script src="js/cart-nav.js" defer></script>
 </body>
 </html>
